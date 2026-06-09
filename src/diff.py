@@ -1,21 +1,69 @@
-"""Diff two snapshots of a dataset's SCD-2 store into added / removed / modified."""
+"""Diff two snapshots of a dataset's SCD-2 store into added / removed / modified.
+
+Provides both a one-line console summary (report_latest) and the detailed,
+field-level diff + per-identity history that the HTML reports consume.
+"""
+
+import json
+import re
 
 from src import db
 
-_FIELDS = ("identity_key", "number", "street", "unit", "full",
-           "longitude", "latitude", "payload_hash")
+_FULL_COLS = ("identity_key", "number", "street", "unit", "full",
+              "longitude", "latitude", "props", "payload_hash")
 
+_CANONICAL_DISPLAY = {
+    "number": "Address Number", "street": "Street", "unit": "Unit",
+    "full": "Full Address", "longitude": "Location (longitude)",
+    "latitude": "Location (latitude)", "location": "Location",
+}
+
+_DATE_RE = re.compile(r"(\d{4}-\d{2}-\d{2})")
+
+
+# ---- snapshot helpers ----
+
+def nonskipped(ds):
+    return [s for s in db.get_snapshots(ds) if not s["skipped"]]
+
+
+def snap_date(s):
+    m = _DATE_RE.search(s["filename"] or "")
+    return m.group(1) if m else (s["downloaded"] or "")[:10]
+
+
+# ---- active set ----
 
 def _active(conn, snapshot_id):
-    """Rows valid at a given snapshot id, keyed by identity_key."""
     rows = conn.execute(
-        f"SELECT {', '.join(_FIELDS)} FROM addresses "
+        f"SELECT {', '.join(_FULL_COLS)} FROM addresses "
         "WHERE min_snapshot_id <= ? AND max_snapshot_id >= ?",
         (snapshot_id, snapshot_id)).fetchall()
     return {r["identity_key"]: dict(r) for r in rows}
 
 
+# ---- field-level change detection ----
+
+def field_changes(old, new):
+    """List of {field, old, new, display_field} between two row dicts."""
+    out = []
+    for f in ("number", "street", "unit", "full", "latitude", "longitude"):
+        if (old.get(f) if old.get(f) != "" else None) != (new.get(f) if new.get(f) != "" else None):
+            out.append({"field": f, "old": old.get(f), "new": new.get(f),
+                        "display_field": _CANONICAL_DISPLAY.get(f, f)})
+    oldp = json.loads(old.get("props") or "{}")
+    newp = json.loads(new.get("props") or "{}")
+    for k in sorted(set(oldp) | set(newp)):
+        if oldp.get(k) != newp.get(k):
+            out.append({"field": k, "old": oldp.get(k), "new": newp.get(k),
+                        "display_field": k})
+    return out
+
+
+# ---- diffs ----
+
 def compute_diff(ds, old_id, new_id):
+    """Detailed diff: added / removed / modified (with per-row `changes`)."""
     conn = db.init_db(ds)
     old = _active(conn, old_id)
     new = _active(conn, new_id)
@@ -23,36 +71,70 @@ def compute_diff(ds, old_id, new_id):
 
     added = [new[k] for k in new.keys() - old.keys()]
     removed = [old[k] for k in old.keys() - new.keys()]
-    modified = [{"old": old[k], "new": new[k]} for k in old.keys() & new.keys()
-                if old[k]["payload_hash"] != new[k]["payload_hash"]]
+    modified = []
+    for k in old.keys() & new.keys():
+        if old[k]["payload_hash"] != new[k]["payload_hash"]:
+            ch = field_changes(old[k], new[k])
+            if ch:
+                m = dict(new[k])
+                m["changes"] = ch
+                modified.append(m)
     return {"added": added, "removed": removed, "modified": modified}
 
 
-def latest_two(ds):
-    """The two most recent non-skipped snapshot rows (old, new), or None."""
-    snaps = [s for s in db.get_snapshots(ds) if not s["skipped"]]
-    if len(snaps) < 2:
-        return None
-    return snaps[-2], snaps[-1]
+def compute_baseline(ds, snapshot_id):
+    """First snapshot: every active row counts as added."""
+    conn = db.init_db(ds)
+    new = _active(conn, snapshot_id)
+    conn.close()
+    return {"added": list(new.values()), "removed": [], "modified": []}
 
 
-def report_latest_silent(ds):
-    """Latest-pair diff dict, or None if fewer than two snapshots. No output."""
-    pair = latest_two(ds)
-    if pair is None:
-        return None
-    old, new = pair
-    return compute_diff(ds, old["id"], new["id"])
+# ---- history ----
 
+def compute_histories(ds, keys, before_id):
+    """For each identity_key, prior add/remove events at snapshots before `before_id`.
+
+    Returns {key: [{date, kind}]} ordered by snapshot. Empty list => first appearance.
+    """
+    if not keys:
+        return {}
+    snaps = nonskipped(ds)
+    order = [s["id"] for s in snaps]
+    date_of = {s["id"]: snap_date(s) for s in snaps}
+
+    conn = db.init_db(ds)
+    placeholders = ",".join("?" * len(keys))
+    rows = conn.execute(
+        f"SELECT identity_key, min_snapshot_id, max_snapshot_id FROM addresses "
+        f"WHERE identity_key IN ({placeholders})", tuple(keys)).fetchall()
+    conn.close()
+
+    hist = {k: [] for k in keys}
+    for r in rows:
+        k = r["identity_key"]
+        mn, mx = r["min_snapshot_id"], r["max_snapshot_id"]
+        if mn < before_id:
+            hist[k].append((mn, date_of.get(mn, ""), "added"))
+        # removed event: the snapshot following max (if the point then disappeared)
+        if mx in order:
+            i = order.index(mx)
+            if i + 1 < len(order):
+                succ = order[i + 1]
+                if succ < before_id:
+                    hist[k].append((succ, date_of.get(succ, ""), "removed"))
+    return {k: [{"date": d, "kind": kind}
+                for _, d, kind in sorted(v)] for k, v in hist.items()}
+
+
+# ---- console summary (CLI) ----
 
 def report_latest(ds):
-    """Print a one-line delta for the latest pair; returns the diff dict or None."""
-    pair = latest_two(ds)
-    if pair is None:
-        n = len([s for s in db.get_snapshots(ds) if not s["skipped"]])
-        print(f"  only {n} snapshot(s) — need 2 to diff")
+    snaps = nonskipped(ds)
+    if len(snaps) < 2:
+        print(f"  only {len(snaps)} snapshot(s) — need 2 to diff")
         return None
-    old, new = pair
+    old, new = snaps[-2], snaps[-1]
     d = compute_diff(ds, old["id"], new["id"])
     print(f"  diff {old['id']}->{new['id']}: "
           f"+{len(d['added']):,} added, -{len(d['removed']):,} removed, "

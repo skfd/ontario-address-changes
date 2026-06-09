@@ -28,9 +28,13 @@ of many datasets. Adding a city is a config file, not code.
 - **Store** (`src/db.py`) — one SQLite DB per dataset at `data/<slug>/<slug>.db`.
   An address row is valid for `[min_snapshot_id, max_snapshot_id]`. Re-importing
   identical content is detected by content hash and recorded as a skip.
-- **Diff + report** (`src/diff.py`, `src/report.py`) — diff the latest two
-  snapshots into added/removed/modified and render per-city HTML plus a
-  cross-city `reports/index.html`.
+- **Diff + report** (`src/diff.py`, `src/report.py`) — diff consecutive
+  snapshots into added/removed/modified (with field-level changes and
+  per-address history) and render a static site into `docs/` for GitHub Pages:
+  a cross-city landing (`docs/index.html`), a per-city report list
+  (`docs/<slug>/index.html`), and a dated report per snapshot
+  (`docs/<slug>/report-<date>.html`). The first snapshot renders as a
+  "baseline" report where every address is listed as new.
 
 ## Identity (the important part)
 

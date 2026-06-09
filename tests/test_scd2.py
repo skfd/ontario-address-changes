@@ -75,10 +75,13 @@ def main():
     assert oak == [(1, 1)], f"Oak Ave last seen at snapshot 1, got {oak}"
 
     # 4. diff between the two real snapshots (1 and 3): +1 added, -1 removed, 1 modified
-    d = diff.report_latest_silent(ds)
+    snaps = diff.nonskipped(ds)
+    d = diff.compute_diff(ds, snaps[0]["id"], snaps[-1]["id"])
     assert sorted(r["full"] for r in d["added"]) == ["4 Elm Rd"], d["added"]
     assert sorted(r["full"] for r in d["removed"]) == ["3 Oak Ave"], d["removed"]
-    assert sorted(m["new"]["full"] for m in d["modified"]) == ["2 Main St"], d["modified"]
+    assert sorted(m["full"] for m in d["modified"]) == ["2 Main St"], d["modified"]
+    # the modification carries a field-level change (the added NOTE prop)
+    assert any(c["field"] == "NOTE" for m in d["modified"] for c in m["changes"]), d["modified"]
 
     shutil.rmtree(ds.data_dir)
     print("\nALL ASSERTIONS PASSED")

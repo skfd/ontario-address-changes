@@ -50,65 +50,30 @@
         list to spot new buildings, retired addresses, and corrections over time.</p>
     </div>
 
-    <div class="section-header">4 datasets</div>
+    <div class="section-header">{{ cities|length }} dataset{{ 's' if cities|length != 1 else '' }}</div>
     <div class="cities">
-      
-      <a class="city-link" href="hamilton/index.html">
+      {% for c in cities %}
+      <a class="city-link" href="{{ c.slug }}/index.html">
         <div class="city-main">
-          <div class="city-name">City of Hamilton</div>
-          <div class="city-sub">Open Data Licence – Hamilton · last snapshot 2026-06-09</div>
+          <div class="city-name">{{ c.provider }}</div>
+          <div class="city-sub">{{ c.license_name }} · last snapshot {{ c.last_date }}</div>
         </div>
         <div class="city-right">
-          <div class="city-count">273,082</div>
+          <div class="city-count">{{ "{:,}".format(c.row_count) }}</div>
           <div class="city-delta">
-            <span style="color:var(--text-dim)">baseline</span>
+            {% if c.has_changes %}
+            <span class="delta-add">+{{ "{:,}".format(c.added) }}</span>
+            <span class="delta-rem">−{{ "{:,}".format(c.removed) }}</span>
+            <span class="delta-mod">~{{ "{:,}".format(c.modified) }}</span>
+            {% else %}<span style="color:var(--text-dim)">baseline</span>{% endif %}
           </div>
         </div>
       </a>
-      
-      <a class="city-link" href="ottawa/index.html">
-        <div class="city-main">
-          <div class="city-name">City of Ottawa</div>
-          <div class="city-sub">Open Government Licence – City of Ottawa 2.0 · last snapshot 2026-06-09</div>
-        </div>
-        <div class="city-right">
-          <div class="city-count">402,796</div>
-          <div class="city-delta">
-            <span style="color:var(--text-dim)">baseline</span>
-          </div>
-        </div>
-      </a>
-      
-      <a class="city-link" href="waterloo/index.html">
-        <div class="city-main">
-          <div class="city-name">City of Waterloo</div>
-          <div class="city-sub">Open Government Licence – City of Waterloo · last snapshot 2026-06-09</div>
-        </div>
-        <div class="city-right">
-          <div class="city-count">55,541</div>
-          <div class="city-delta">
-            <span style="color:var(--text-dim)">baseline</span>
-          </div>
-        </div>
-      </a>
-      
-      <a class="city-link" href="renfrew/index.html">
-        <div class="city-main">
-          <div class="city-name">Renfrew</div>
-          <div class="city-sub">Not identified · last snapshot 2026-06-09</div>
-        </div>
-        <div class="city-right">
-          <div class="city-count">54,029</div>
-          <div class="city-delta">
-            <span style="color:var(--text-dim)">baseline</span>
-          </div>
-        </div>
-      </a>
-      
+      {% endfor %}
     </div>
 
     <footer>
-      Generated Jun 09, 2026 at 01:38 PM ·
+      Generated {{ generated }} ·
       <a href="https://github.com/skfd/ontario-address-changes">Source on GitHub</a>
     </footer>
   </main>
