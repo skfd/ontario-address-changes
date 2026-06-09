@@ -1,0 +1,17 @@
+slug = "ottawa"
+provider = "City of Ottawa"
+data_url = "https://maps.ottawa.ca/arcgis/rest/services/Municipal_Address/MapServer/0"
+access = "arcgis"          # arcgis | static
+format = "geojson"         # geojson | shapefile (static only)
+license_name = "Open Government Licence – City of Ottawa 2.0"
+osm_compatible = "green-lwg"
+
+[identity]
+key_field = "PI_MUNICIPAL_ADDRESS_ID"  # stable municipal address id (OBJECTID is sequential, untrusted)
+synth_fields = ["full"]                # fallback when key_field is null on a row
+
+[fields]                   # source property -> canonical name; unmapped kept in props blob
+number = "ADDRNUM"
+street = "FULLNAME"
+unit   = "UNITID"
+full   = "FULLADDR"

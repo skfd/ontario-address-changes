@@ -1,0 +1,16 @@
+slug = "waterloo"
+provider = "City of Waterloo"
+# ArcGIS Open Data shapefile export, already reprojected to EPSG:4326 by the server.
+data_url = "https://opendata.arcgis.com/api/v3/datasets/fb1ce9625c634b2dbe1d2be36d419711_0/downloads/data?format=shp&spatialRefId=4326&where=1%3D1"
+access = "static"
+format = "shapefile"
+license_name = "Open Government Licence – City of Waterloo"
+osm_compatible = "green-lwg"
+
+[identity]
+key_field = "ADDRESS_ID"       # stable address id (OBJECTID_1 is sequential, untrusted)
+synth_fields = ["full"]
+
+[fields]
+street = "STREET_NM"
+full   = "CIVIC_ADDR"

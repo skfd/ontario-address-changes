@@ -1,0 +1,18 @@
+slug = "renfrew"
+provider = "Renfrew"
+# NOTE: this is an OpenAddresses cache export, not a live City of Renfrew endpoint.
+# Update cadence is OpenAddresses', not the municipality's.
+data_url = "https://data.openaddresses.io/cache/uploads/trescube/cc2c02/ca-on-renfrew.geojson.zip"
+access = "static"
+format = "geojson"
+license_name = "Not identified"
+osm_compatible = "unknown"
+
+# Data is parcel polygons (Renfrew County) with address attributes; tracker uses ring centroids.
+[identity]
+key_field = "PROPNUM"          # stable parcel number (OBJECTID is sequential, untrusted)
+synth_fields = ["number", "street"]   # fallback when PROPNUM is null
+
+[fields]
+number = "Street_Num"
+street = "Street_Name"

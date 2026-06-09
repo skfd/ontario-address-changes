@@ -1,0 +1,16 @@
+slug = "hamilton"
+provider = "City of Hamilton"
+data_url = "https://services.arcgis.com/rYz782eMbySr2srL/arcgis/rest/services/Addresses/FeatureServer/1"
+access = "arcgis"
+format = "geojson"
+license_name = "Open Data Licence – Hamilton"
+osm_compatible = "green-lwg"
+
+[identity]
+key_field = ""                                # only a sequential OBJECTID exists; synthesize instead
+synth_fields = ["number", "street", "unit"]   # unit needed: multi-unit buildings share number+street+location
+
+[fields]
+number = "NUMBER_COMPLETE"
+street = "FULL_STREET_NAME"
+unit   = "UNIT_NUMBER_COMPLETE"
