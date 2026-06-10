@@ -106,6 +106,25 @@
     .history .r { color: var(--red); font-weight: 500; }
     .history .dot { color: var(--text-dim); margin: 0 4px; }
     .history-none { color: var(--text-dim); font-style: italic; font-size: 12.5px; }
+    .info-wrap { position: relative; display: inline-flex; vertical-align: middle; }
+    .info-btn { display: inline-flex; align-items: center; justify-content: center;
+      width: 16px; height: 16px; border-radius: 999px; border: 1px solid var(--border-strong);
+      color: var(--text-dim); background: var(--surface); cursor: help; font-size: 11px;
+      font-weight: 700; font-style: italic; font-family: Georgia, 'Times New Roman', serif; line-height: 1; }
+    .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn,
+    .info-wrap:focus .info-btn { color: var(--accent); border-color: var(--accent); }
+    .info-pop { display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 20;
+      width: 320px; max-width: 80vw; padding: 12px 14px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-8);
+      font-size: 12.5px; font-weight: 400; color: var(--text-secondary); line-height: 1.5; }
+    .info-wrap:hover .info-pop, .info-wrap:focus-within .info-pop,
+    .info-wrap:focus .info-pop { display: block; }
+    .info-pop strong { display: block; color: var(--text); font-size: 12px; margin-bottom: 4px; }
+    .info-pop ul { list-style: none; margin: 0 0 10px; padding: 0; }
+    .info-pop li { padding: 1px 0 1px 14px; position: relative; }
+    .info-pop li::before { content: "·"; position: absolute; left: 4px; color: var(--text-dim); }
+    .info-pop .note { color: var(--text-dim); font-size: 11.5px; margin: 0 0 10px; }
+    .info-pop .muted { color: var(--text-dim); font-style: italic; }
   </style>
 </head>
 
@@ -186,7 +205,20 @@
   </div>
 
   <div class="section">
-    <h2>Updated Addresses <span class="badge badge-yellow">0</span></h2>
+    <h2>Updated Addresses <span class="badge badge-yellow">0</span>
+      <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+        <span class="info-btn" aria-hidden="true">i</span>
+        <span class="info-pop">
+          <strong>Compared for changes</strong>
+          <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (LINEAR_NAME_FULL)</li><li>Full address (ADDRESS_FULL)</li><li>Coordinates (latitude, longitude)</li></ul>
+          <p class="note">…plus all other source attributes, except those ignored below.</p>
+          <strong>Ignored (changes here are not counted)</strong>
+          
+          <ul><li>ADDRESS_CLASS</li><li>ADDRESS_CLASS_DESC</li><li>ADDRESS_ID</li><li>ADDRESS_ID_LINK</li><li>ADDRESS_POINT_ID_LINK</li><li>CENTRELINE_ID</li><li>CENTRELINE_MEASURE</li><li>CENTRELINE_OFFSET</li><li>CLASS_FAMILY</li><li>CLASS_FAMILY_DESC</li></ul>
+          
+        </span>
+      </span>
+    </h2>
     <p class="empty">No addresses updated.</p>
   </div>
 
@@ -205,67 +237,19 @@
           
         </tr>
         
+        <tr><td>74 Fraser Ave</td>
+          
+          <td class="old-val">43.63827, -79.42465</td>
+          <td class="arrow-val">↑ 29.1m</td>
+          <td class="new-val">43.63853, -79.42469</td>
+          
+        </tr>
+        
         <tr><td>74A Fraser Ave</td>
           
           <td class="old-val">43.63830, -79.42479</td>
           <td class="arrow-val">↑ 32.6m</td>
           <td class="new-val">43.63859, -79.42473</td>
-          
-        </tr>
-        
-        <tr><td>76 Fraser Ave</td>
-          
-          <td class="old-val">43.63836, -79.42468</td>
-          <td class="arrow-val">↑ 35.0m</td>
-          <td class="new-val">43.63867, -79.42475</td>
-          
-        </tr>
-        
-        <tr><td>763 Royal York Rd</td>
-          
-          <td class="old-val">43.63729, -79.50685</td>
-          <td class="arrow-val">→ 24.8m</td>
-          <td class="new-val">43.63734, -79.50655</td>
-          
-        </tr>
-        
-        <tr><td>4201 Bloor St W</td>
-          
-          <td class="old-val">43.63526, -79.56288</td>
-          <td class="arrow-val">← 39.7m</td>
-          <td class="new-val">43.63518, -79.56336</td>
-          
-        </tr>
-        
-        <tr><td>120 The Queensway</td>
-          
-          <td class="old-val">43.63290, -79.47711</td>
-          <td class="arrow-val">↗ 83.7m</td>
-          <td class="new-val">43.63338, -79.47631</td>
-          
-        </tr>
-        
-        <tr><td>69 Fraser Ave</td>
-          
-          <td class="old-val">43.63836, -79.42415</td>
-          <td class="arrow-val">→ 38.3m</td>
-          <td class="new-val">43.63849, -79.42371</td>
-          
-        </tr>
-        
-        <tr><td>767 Royal York Rd</td>
-          
-          <td class="old-val">43.63768, -79.50708</td>
-          <td class="arrow-val">→ 29.0m</td>
-          <td class="new-val">43.63774, -79.50673</td>
-          
-        </tr>
-        
-        <tr><td>1179 King St W</td>
-          
-          <td class="old-val">43.63911, -79.42519</td>
-          <td class="arrow-val">↑ 12.5m</td>
-          <td class="new-val">43.63922, -79.42522</td>
           
         </tr>
         
@@ -277,11 +261,43 @@
           
         </tr>
         
+        <tr><td>4201 Bloor St W</td>
+          
+          <td class="old-val">43.63526, -79.56288</td>
+          <td class="arrow-val">← 39.7m</td>
+          <td class="new-val">43.63518, -79.56336</td>
+          
+        </tr>
+        
+        <tr><td>76 Fraser Ave</td>
+          
+          <td class="old-val">43.63836, -79.42468</td>
+          <td class="arrow-val">↑ 35.0m</td>
+          <td class="new-val">43.63867, -79.42475</td>
+          
+        </tr>
+        
+        <tr><td>1179 King St W</td>
+          
+          <td class="old-val">43.63911, -79.42519</td>
+          <td class="arrow-val">↑ 12.5m</td>
+          <td class="new-val">43.63922, -79.42522</td>
+          
+        </tr>
+        
         <tr><td>290 The West Mall</td>
           
           <td class="old-val">43.63465, -79.56180</td>
           <td class="arrow-val">← 28.0m</td>
           <td class="new-val">43.63460, -79.56214</td>
+          
+        </tr>
+        
+        <tr><td>69 Fraser Ave</td>
+          
+          <td class="old-val">43.63836, -79.42415</td>
+          <td class="arrow-val">→ 38.3m</td>
+          <td class="new-val">43.63849, -79.42371</td>
           
         </tr>
         
@@ -293,11 +309,27 @@
           
         </tr>
         
-        <tr><td>74 Fraser Ave</td>
+        <tr><td>763 Royal York Rd</td>
           
-          <td class="old-val">43.63827, -79.42465</td>
-          <td class="arrow-val">↑ 29.1m</td>
-          <td class="new-val">43.63853, -79.42469</td>
+          <td class="old-val">43.63729, -79.50685</td>
+          <td class="arrow-val">→ 24.8m</td>
+          <td class="new-val">43.63734, -79.50655</td>
+          
+        </tr>
+        
+        <tr><td>120 The Queensway</td>
+          
+          <td class="old-val">43.63290, -79.47711</td>
+          <td class="arrow-val">↗ 83.7m</td>
+          <td class="new-val">43.63338, -79.47631</td>
+          
+        </tr>
+        
+        <tr><td>767 Royal York Rd</td>
+          
+          <td class="old-val">43.63768, -79.50708</td>
+          <td class="arrow-val">→ 29.0m</td>
+          <td class="new-val">43.63774, -79.50673</td>
           
         </tr>
         
@@ -306,7 +338,7 @@
     
   </div>
 
-  <div class="generated-at">Report generated Jun 09, 2026 at 05:22 PM · source licence: Open Government Licence – Toronto</div>
+  <div class="generated-at">Report generated Jun 10, 2026 at 03:42 PM · source licence: Open Government Licence – Toronto</div>
 
   <script>
     function sortTable(tbodyId, col) {

@@ -44,8 +44,13 @@ def _active(conn, snapshot_id):
 
 # ---- field-level change detection ----
 
-def field_changes(old, new):
-    """List of {field, old, new, display_field} between two row dicts."""
+def field_changes(old, new, ignore=()):
+    """List of {field, old, new, display_field} between two row dicts.
+
+    `ignore` is a set of source prop names (case-insensitive) whose changes are
+    not counted — used to silence per-dataset noise fields (see Dataset.ignore_fields).
+    """
+    ignore = {k.lower() for k in ignore}
     out = []
     for f in ("number", "street", "unit", "full", "latitude", "longitude"):
         if (old.get(f) if old.get(f) != "" else None) != (new.get(f) if new.get(f) != "" else None):
@@ -54,6 +59,8 @@ def field_changes(old, new):
     oldp = json.loads(old.get("props") or "{}")
     newp = json.loads(new.get("props") or "{}")
     for k in sorted(set(oldp) | set(newp)):
+        if k.lower() in ignore:
+            continue
         if oldp.get(k) != newp.get(k):
             out.append({"field": k, "old": oldp.get(k), "new": newp.get(k),
                         "display_field": k})
@@ -74,7 +81,7 @@ def compute_diff(ds, old_id, new_id):
     modified = []
     for k in old.keys() & new.keys():
         if old[k]["payload_hash"] != new[k]["payload_hash"]:
-            ch = field_changes(old[k], new[k])
+            ch = field_changes(old[k], new[k], ds.ignore_fields)
             if ch:
                 m = dict(new[k])
                 m["changes"] = ch

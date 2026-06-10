@@ -106,6 +106,25 @@
     .history .r { color: var(--red); font-weight: 500; }
     .history .dot { color: var(--text-dim); margin: 0 4px; }
     .history-none { color: var(--text-dim); font-style: italic; font-size: 12.5px; }
+    .info-wrap { position: relative; display: inline-flex; vertical-align: middle; }
+    .info-btn { display: inline-flex; align-items: center; justify-content: center;
+      width: 16px; height: 16px; border-radius: 999px; border: 1px solid var(--border-strong);
+      color: var(--text-dim); background: var(--surface); cursor: help; font-size: 11px;
+      font-weight: 700; font-style: italic; font-family: Georgia, 'Times New Roman', serif; line-height: 1; }
+    .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn,
+    .info-wrap:focus .info-btn { color: var(--accent); border-color: var(--accent); }
+    .info-pop { display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 20;
+      width: 320px; max-width: 80vw; padding: 12px 14px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-8);
+      font-size: 12.5px; font-weight: 400; color: var(--text-secondary); line-height: 1.5; }
+    .info-wrap:hover .info-pop, .info-wrap:focus-within .info-pop,
+    .info-wrap:focus .info-pop { display: block; }
+    .info-pop strong { display: block; color: var(--text); font-size: 12px; margin-bottom: 4px; }
+    .info-pop ul { list-style: none; margin: 0 0 10px; padding: 0; }
+    .info-pop li { padding: 1px 0 1px 14px; position: relative; }
+    .info-pop li::before { content: "·"; position: absolute; left: 4px; color: var(--text-dim); }
+    .info-pop .note { color: var(--text-dim); font-size: 11.5px; margin: 0 0 10px; }
+    .info-pop .muted { color: var(--text-dim); font-style: italic; }
   </style>
 </head>
 
@@ -181,23 +200,23 @@
         <tr><td>172 Sandown Lane</td><td>Sandown Lane</td><td></td>
           <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70650&mlon=-79.25213#map=18/43.70650/-79.25213" target="_blank" rel="noopener">View ↗</a></td></tr>
         
-        <tr><td>170 Sandown Lane</td><td>Sandown Lane</td><td></td>
-          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70645&mlon=-79.25218#map=18/43.70645/-79.25218" target="_blank" rel="noopener">View ↗</a></td></tr>
-        
         <tr><td>170 Croft St</td><td>Croft St</td><td></td>
           <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66100&mlon=-79.40758#map=18/43.66100/-79.40758" target="_blank" rel="noopener">View ↗</a></td></tr>
         
         <tr><td>436 Pacific Ave</td><td>Pacific Ave</td><td></td>
           <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66610&mlon=-79.46885#map=18/43.66610/-79.46885" target="_blank" rel="noopener">View ↗</a></td></tr>
         
+        <tr><td>170 Sandown Lane</td><td>Sandown Lane</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70645&mlon=-79.25218#map=18/43.70645/-79.25218" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
         <tr><td>485 Parliament St</td><td>Parliament St</td><td></td>
           <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66421&mlon=-79.36775#map=18/43.66421/-79.36775" target="_blank" rel="noopener">View ↗</a></td></tr>
         
-        <tr><td>438 Pacific Ave</td><td>Pacific Ave</td><td></td>
-          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66615&mlon=-79.46886#map=18/43.66615/-79.46886" target="_blank" rel="noopener">View ↗</a></td></tr>
-        
         <tr><td>61 Brawley Ave</td><td>Brawley Ave</td><td></td>
           <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.62564&mlon=-79.52326#map=18/43.62564/-79.52326" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>438 Pacific Ave</td><td>Pacific Ave</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66615&mlon=-79.46886#map=18/43.66615/-79.46886" target="_blank" rel="noopener">View ↗</a></td></tr>
         
       </tbody>
     </table>
@@ -213,50 +232,8 @@
         <th onclick="sortTable('t-removed',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
       <tbody id="t-removed">
         
-        <tr><td>18 Secord Ave</td><td>Secord Ave</td><td></td>
-          <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69346&mlon=-79.30078#map=18/43.69346/-79.30078" target="_blank" rel="noopener">View ↗</a></td></tr>
-        
-        <tr><td>32 Bazalgette Dr</td><td>Bazalgette Dr</td><td></td>
-          <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.79670&mlon=-79.17456#map=18/43.79670/-79.17456" target="_blank" rel="noopener">View ↗</a></td></tr>
-        
-        <tr><td>11R Willowlea Dr</td><td>Willowlea Dr</td><td></td>
-          <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.79678&mlon=-79.17485#map=18/43.79678/-79.17485" target="_blank" rel="noopener">View ↗</a></td></tr>
-        
-        <tr><td>44 Secord Ave</td><td>Secord Ave</td><td></td>
-          <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69340&mlon=-79.30051#map=18/43.69340/-79.30051" target="_blank" rel="noopener">View ↗</a></td></tr>
-        
-        <tr><td>16 Secord Ave</td><td>Secord Ave</td><td></td>
-          <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69340&mlon=-79.30078#map=18/43.69340/-79.30078" target="_blank" rel="noopener">View ↗</a></td></tr>
-        
-        <tr><td>12 Secord Ave</td><td>Secord Ave</td><td></td>
-          <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69329&mlon=-79.30075#map=18/43.69329/-79.30075" target="_blank" rel="noopener">View ↗</a></td></tr>
-        
-        <tr><td>29 Bazalgette Dr</td><td>Bazalgette Dr</td><td></td>
-          <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.79649&mlon=-79.17500#map=18/43.79649/-79.17500" target="_blank" rel="noopener">View ↗</a></td></tr>
-        
-        <tr><td>14 Secord Ave</td><td>Secord Ave</td><td></td>
-          <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69334&mlon=-79.30076#map=18/43.69334/-79.30076" target="_blank" rel="noopener">View ↗</a></td></tr>
-        
-        <tr><td>10 Secord Ave</td><td>Secord Ave</td><td></td>
-          <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69323&mlon=-79.30074#map=18/43.69323/-79.30074" target="_blank" rel="noopener">View ↗</a></td></tr>
-        
         <tr><td>50 Secord Ave</td><td>Secord Ave</td><td></td>
           <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69326&mlon=-79.30042#map=18/43.69326/-79.30042" target="_blank" rel="noopener">View ↗</a></td></tr>
-        
-        <tr><td>187 Harbord St</td><td>Harbord St</td><td></td>
-          <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66169&mlon=-79.40820#map=18/43.66169/-79.40820" target="_blank" rel="noopener">View ↗</a></td></tr>
-        
-        <tr><td>30 Bazalgette Dr</td><td>Bazalgette Dr</td><td></td>
-          <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.79657&mlon=-79.17451#map=18/43.79657/-79.17451" target="_blank" rel="noopener">View ↗</a></td></tr>
-        
-        <tr><td>40 Secord Ave</td><td>Secord Ave</td><td></td>
-          <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69350&mlon=-79.30059#map=18/43.69350/-79.30059" target="_blank" rel="noopener">View ↗</a></td></tr>
-        
-        <tr><td>46 Secord Ave</td><td>Secord Ave</td><td></td>
-          <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69335&mlon=-79.30048#map=18/43.69335/-79.30048" target="_blank" rel="noopener">View ↗</a></td></tr>
-        
-        <tr><td>48 Secord Ave</td><td>Secord Ave</td><td></td>
-          <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69330&mlon=-79.30045#map=18/43.69330/-79.30045" target="_blank" rel="noopener">View ↗</a></td></tr>
         
         <tr><td>11 Willowlea Dr</td><td>Willowlea Dr</td><td></td>
           <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.79706&mlon=-79.17501#map=18/43.79706/-79.17501" target="_blank" rel="noopener">View ↗</a></td></tr>
@@ -264,8 +241,50 @@
         <tr><td>185 Harbord St</td><td>Harbord St</td><td></td>
           <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66170&mlon=-79.40815#map=18/43.66170/-79.40815" target="_blank" rel="noopener">View ↗</a></td></tr>
         
+        <tr><td>18 Secord Ave</td><td>Secord Ave</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69346&mlon=-79.30078#map=18/43.69346/-79.30078" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>32 Bazalgette Dr</td><td>Bazalgette Dr</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.79670&mlon=-79.17456#map=18/43.79670/-79.17456" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>44 Secord Ave</td><td>Secord Ave</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69340&mlon=-79.30051#map=18/43.69340/-79.30051" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
         <tr><td>42 Secord Ave</td><td>Secord Ave</td><td></td>
           <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69346&mlon=-79.30055#map=18/43.69346/-79.30055" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>16 Secord Ave</td><td>Secord Ave</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69340&mlon=-79.30078#map=18/43.69340/-79.30078" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>30 Bazalgette Dr</td><td>Bazalgette Dr</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.79657&mlon=-79.17451#map=18/43.79657/-79.17451" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>12 Secord Ave</td><td>Secord Ave</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69329&mlon=-79.30075#map=18/43.69329/-79.30075" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>187 Harbord St</td><td>Harbord St</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66169&mlon=-79.40820#map=18/43.66169/-79.40820" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>46 Secord Ave</td><td>Secord Ave</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69335&mlon=-79.30048#map=18/43.69335/-79.30048" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>11R Willowlea Dr</td><td>Willowlea Dr</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.79678&mlon=-79.17485#map=18/43.79678/-79.17485" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>48 Secord Ave</td><td>Secord Ave</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69330&mlon=-79.30045#map=18/43.69330/-79.30045" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>29 Bazalgette Dr</td><td>Bazalgette Dr</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.79649&mlon=-79.17500#map=18/43.79649/-79.17500" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>40 Secord Ave</td><td>Secord Ave</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69350&mlon=-79.30059#map=18/43.69350/-79.30059" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>14 Secord Ave</td><td>Secord Ave</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69334&mlon=-79.30076#map=18/43.69334/-79.30076" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 Secord Ave</td><td>Secord Ave</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69323&mlon=-79.30074#map=18/43.69323/-79.30074" target="_blank" rel="noopener">View ↗</a></td></tr>
         
       </tbody>
     </table>
@@ -274,7 +293,20 @@
   </div>
 
   <div class="section">
-    <h2>Updated Addresses <span class="badge badge-yellow">0</span></h2>
+    <h2>Updated Addresses <span class="badge badge-yellow">0</span>
+      <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+        <span class="info-btn" aria-hidden="true">i</span>
+        <span class="info-pop">
+          <strong>Compared for changes</strong>
+          <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (LINEAR_NAME_FULL)</li><li>Full address (ADDRESS_FULL)</li><li>Coordinates (latitude, longitude)</li></ul>
+          <p class="note">…plus all other source attributes, except those ignored below.</p>
+          <strong>Ignored (changes here are not counted)</strong>
+          
+          <ul><li>ADDRESS_CLASS</li><li>ADDRESS_CLASS_DESC</li><li>ADDRESS_ID</li><li>ADDRESS_ID_LINK</li><li>ADDRESS_POINT_ID_LINK</li><li>CENTRELINE_ID</li><li>CENTRELINE_MEASURE</li><li>CENTRELINE_OFFSET</li><li>CLASS_FAMILY</li><li>CLASS_FAMILY_DESC</li></ul>
+          
+        </span>
+      </span>
+    </h2>
     <p class="empty">No addresses updated.</p>
   </div>
 
@@ -285,19 +317,11 @@
       <thead><tr><th>Address</th><th>Before</th><th></th><th>After</th></tr></thead>
       <tbody>
         
-        <tr><td>38 Jackson Pl</td>
+        <tr><td>12 Dermott Pl</td>
           
-          <td class="old-val">43.66613, -79.46750</td>
-          <td class="arrow-val">↑ 4.5m</td>
-          <td class="new-val">43.66617, -79.46750</td>
-          
-        </tr>
-        
-        <tr><td>35B Spruce St</td>
-          
-          <td class="old-val">43.66327, -79.36584</td>
-          <td class="arrow-val">↓ 35.4m</td>
-          <td class="new-val">43.66296, -79.36594</td>
+          <td class="old-val">43.66427, -79.36649</td>
+          <td class="arrow-val">↘ 1.4m</td>
+          <td class="new-val">43.66426, -79.36648</td>
           
         </tr>
         
@@ -309,22 +333,6 @@
           
         </tr>
         
-        <tr><td>405 Spadina Ave</td>
-          
-          <td class="old-val">43.65679, -79.39926</td>
-          <td class="arrow-val">↓ 2.4m</td>
-          <td class="new-val">43.65677, -79.39925</td>
-          
-        </tr>
-        
-        <tr><td>20 Glasgow St</td>
-          
-          <td class="old-val">43.65698, -79.39877</td>
-          <td class="arrow-val">↗ 2.7m</td>
-          <td class="new-val">43.65700, -79.39875</td>
-          
-        </tr>
-        
         <tr><td>408 Pacific Ave</td>
           
           <td class="old-val">43.66571, -79.46883</td>
@@ -333,43 +341,27 @@
           
         </tr>
         
-        <tr><td>487 Parliament St</td>
+        <tr><td>477 Parliament St</td>
           
-          <td class="old-val">43.66428, -79.36766</td>
-          <td class="arrow-val">← 10.5m</td>
-          <td class="new-val">43.66428, -79.36779</td>
-          
-        </tr>
-        
-        <tr><td>415 Spadina Ave</td>
-          
-          <td class="old-val">43.65701, -79.39935</td>
-          <td class="arrow-val">↓ 2.2m</td>
-          <td class="new-val">43.65699, -79.39935</td>
+          <td class="old-val">43.66414, -79.36764</td>
+          <td class="arrow-val">← 4.8m</td>
+          <td class="new-val">43.66414, -79.36770</td>
           
         </tr>
         
-        <tr><td>35C Spruce St</td>
+        <tr><td>489 Parliament St</td>
           
-          <td class="old-val">43.66338, -79.36587</td>
-          <td class="arrow-val">↓ 45.7m</td>
-          <td class="new-val">43.66297, -79.36589</td>
-          
-        </tr>
-        
-        <tr><td>10 Dermott Pl</td>
-          
-          <td class="old-val">43.66423, -79.36647</td>
-          <td class="arrow-val">↓ 2.4m</td>
-          <td class="new-val">43.66421, -79.36646</td>
+          <td class="old-val">43.66439, -79.36762</td>
+          <td class="arrow-val">← 15.9m</td>
+          <td class="new-val">43.66435, -79.36781</td>
           
         </tr>
         
-        <tr><td>23 Spruce St</td>
+        <tr><td>479 Parliament St</td>
           
-          <td class="old-val">43.66328, -79.36640</td>
-          <td class="arrow-val">↑ 4.5m</td>
-          <td class="new-val">43.66332, -79.36639</td>
+          <td class="old-val">43.66417, -79.36769</td>
+          <td class="arrow-val">↓ 1.1m</td>
+          <td class="new-val">43.66416, -79.36769</td>
           
         </tr>
         
@@ -381,43 +373,19 @@
           
         </tr>
         
-        <tr><td>54 Cecil St</td>
-          
-          <td class="old-val">43.65653, -79.39833</td>
-          <td class="arrow-val">↘ 4.6m</td>
-          <td class="new-val">43.65651, -79.39828</td>
-          
-        </tr>
-        
-        <tr><td>475 Parliament St</td>
-          
-          <td class="old-val">43.66413, -79.36760</td>
-          <td class="arrow-val">← 7.6m</td>
-          <td class="new-val">43.66411, -79.36769</td>
-          
-        </tr>
-        
-        <tr><td>35F Spruce St</td>
-          
-          <td class="old-val">43.66339, -79.36583</td>
-          <td class="arrow-val">↓ 43.8m</td>
-          <td class="new-val">43.66301, -79.36569</td>
-          
-        </tr>
-        
-        <tr><td>34 Jackson Pl</td>
-          
-          <td class="old-val">43.66613, -79.46736</td>
-          <td class="arrow-val">↑ 5.6m</td>
-          <td class="new-val">43.66618, -79.46736</td>
-          
-        </tr>
-        
         <tr><td>42 Jackson Pl</td>
           
           <td class="old-val">43.66613, -79.46764</td>
           <td class="arrow-val">↑ 6.7m</td>
           <td class="new-val">43.66619, -79.46764</td>
+          
+        </tr>
+        
+        <tr><td>38 Jackson Pl</td>
+          
+          <td class="old-val">43.66613, -79.46750</td>
+          <td class="arrow-val">↑ 4.5m</td>
+          <td class="new-val">43.66617, -79.46750</td>
           
         </tr>
         
@@ -429,59 +397,11 @@
           
         </tr>
         
-        <tr><td>242 Carlton St</td>
+        <tr><td>35F Spruce St</td>
           
-          <td class="old-val">43.66446, -79.36854</td>
-          <td class="arrow-val">↓ 14.8m</td>
-          <td class="new-val">43.66433, -79.36850</td>
-          
-        </tr>
-        
-        <tr><td>35D Spruce St</td>
-          
-          <td class="old-val">43.66338, -79.36586</td>
-          <td class="arrow-val">↓ 44.6m</td>
-          <td class="new-val">43.66298, -79.36583</td>
-          
-        </tr>
-        
-        <tr><td>491 Parliament St</td>
-          
-          <td class="old-val">43.66438, -79.36777</td>
-          <td class="arrow-val">← 5.0m</td>
-          <td class="new-val">43.66439, -79.36783</td>
-          
-        </tr>
-        
-        <tr><td>36 Jackson Pl</td>
-          
-          <td class="old-val">43.66613, -79.46743</td>
-          <td class="arrow-val">↑ 4.5m</td>
-          <td class="new-val">43.66617, -79.46743</td>
-          
-        </tr>
-        
-        <tr><td>473 Parliament St</td>
-          
-          <td class="old-val">43.66410, -79.36766</td>
-          <td class="arrow-val">↙ 2.7m</td>
-          <td class="new-val">43.66408, -79.36768</td>
-          
-        </tr>
-        
-        <tr><td>189 Harbord St</td>
-          
-          <td class="old-val">43.66168, -79.40825</td>
-          <td class="arrow-val">← 6.1m</td>
-          <td class="new-val">43.66170, -79.40832</td>
-          
-        </tr>
-        
-        <tr><td>2982 Dundas St W</td>
-          
-          <td class="old-val">43.66570, -79.46892</td>
-          <td class="arrow-val">↓ 12.2m</td>
-          <td class="new-val">43.66559, -79.46892</td>
+          <td class="old-val">43.66339, -79.36583</td>
+          <td class="arrow-val">↓ 43.8m</td>
+          <td class="new-val">43.66301, -79.36569</td>
           
         </tr>
         
@@ -493,11 +413,27 @@
           
         </tr>
         
-        <tr><td>479 Parliament St</td>
+        <tr><td>35A Spruce St</td>
           
-          <td class="old-val">43.66417, -79.36769</td>
-          <td class="arrow-val">↓ 1.1m</td>
-          <td class="new-val">43.66416, -79.36769</td>
+          <td class="old-val">43.66334, -79.36588</td>
+          <td class="arrow-val">↓ 44.5m</td>
+          <td class="new-val">43.66295, -79.36600</td>
+          
+        </tr>
+        
+        <tr><td>34 Jackson Pl</td>
+          
+          <td class="old-val">43.66613, -79.46736</td>
+          <td class="arrow-val">↑ 5.6m</td>
+          <td class="new-val">43.66618, -79.46736</td>
+          
+        </tr>
+        
+        <tr><td>31 Spruce St</td>
+          
+          <td class="old-val">43.66331, -79.36610</td>
+          <td class="arrow-val">↗ 2.7m</td>
+          <td class="new-val">43.66333, -79.36608</td>
           
         </tr>
         
@@ -517,59 +453,11 @@
           
         </tr>
         
-        <tr><td>477 Parliament St</td>
+        <tr><td>2982 Dundas St W</td>
           
-          <td class="old-val">43.66414, -79.36764</td>
-          <td class="arrow-val">← 4.8m</td>
-          <td class="new-val">43.66414, -79.36770</td>
-          
-        </tr>
-        
-        <tr><td>40 Jackson Pl</td>
-          
-          <td class="old-val">43.66613, -79.46757</td>
-          <td class="arrow-val">↑ 6.7m</td>
-          <td class="new-val">43.66619, -79.46757</td>
-          
-        </tr>
-        
-        <tr><td>35A Spruce St</td>
-          
-          <td class="old-val">43.66334, -79.36588</td>
-          <td class="arrow-val">↓ 44.5m</td>
-          <td class="new-val">43.66295, -79.36600</td>
-          
-        </tr>
-        
-        <tr><td>26 1/2 Glasgow St</td>
-          
-          <td class="old-val">43.65716, -79.39886</td>
-          <td class="arrow-val">↗ 2.0m</td>
-          <td class="new-val">43.65717, -79.39884</td>
-          
-        </tr>
-        
-        <tr><td>12 Dermott Pl</td>
-          
-          <td class="old-val">43.66427, -79.36649</td>
-          <td class="arrow-val">↘ 1.4m</td>
-          <td class="new-val">43.66426, -79.36648</td>
-          
-        </tr>
-        
-        <tr><td>14 Dermott Pl</td>
-          
-          <td class="old-val">43.66431, -79.36651</td>
-          <td class="arrow-val">↘ 2.7m</td>
-          <td class="new-val">43.66430, -79.36648</td>
-          
-        </tr>
-        
-        <tr><td>31 Spruce St</td>
-          
-          <td class="old-val">43.66331, -79.36610</td>
-          <td class="arrow-val">↗ 2.7m</td>
-          <td class="new-val">43.66333, -79.36608</td>
+          <td class="old-val">43.66570, -79.46892</td>
+          <td class="arrow-val">↓ 12.2m</td>
+          <td class="new-val">43.66559, -79.46892</td>
           
         </tr>
         
@@ -581,19 +469,83 @@
           
         </tr>
         
-        <tr><td>486 Parliament St</td>
+        <tr><td>473 Parliament St</td>
           
-          <td class="old-val">43.66477, -79.36845</td>
-          <td class="arrow-val">↘ 3.9m</td>
-          <td class="new-val">43.66475, -79.36841</td>
+          <td class="old-val">43.66410, -79.36766</td>
+          <td class="arrow-val">↙ 2.7m</td>
+          <td class="new-val">43.66408, -79.36768</td>
           
         </tr>
         
-        <tr><td>44 Jackson Pl</td>
+        <tr><td>475 Parliament St</td>
           
-          <td class="old-val">43.66613, -79.46771</td>
-          <td class="arrow-val">↑ 5.6m</td>
-          <td class="new-val">43.66618, -79.46770</td>
+          <td class="old-val">43.66413, -79.36760</td>
+          <td class="arrow-val">← 7.6m</td>
+          <td class="new-val">43.66411, -79.36769</td>
+          
+        </tr>
+        
+        <tr><td>487 Parliament St</td>
+          
+          <td class="old-val">43.66428, -79.36766</td>
+          <td class="arrow-val">← 10.5m</td>
+          <td class="new-val">43.66428, -79.36779</td>
+          
+        </tr>
+        
+        <tr><td>26 1/2 Glasgow St</td>
+          
+          <td class="old-val">43.65716, -79.39886</td>
+          <td class="arrow-val">↗ 2.0m</td>
+          <td class="new-val">43.65717, -79.39884</td>
+          
+        </tr>
+        
+        <tr><td>249 Lippincott St</td>
+          
+          <td class="old-val">43.66165, -79.40823</td>
+          <td class="arrow-val">← 5.7m</td>
+          <td class="new-val">43.66164, -79.40830</td>
+          
+        </tr>
+        
+        <tr><td>23 Spruce St</td>
+          
+          <td class="old-val">43.66328, -79.36640</td>
+          <td class="arrow-val">↑ 4.5m</td>
+          <td class="new-val">43.66332, -79.36639</td>
+          
+        </tr>
+        
+        <tr><td>35B Spruce St</td>
+          
+          <td class="old-val">43.66327, -79.36584</td>
+          <td class="arrow-val">↓ 35.4m</td>
+          <td class="new-val">43.66296, -79.36594</td>
+          
+        </tr>
+        
+        <tr><td>415 Spadina Ave</td>
+          
+          <td class="old-val">43.65701, -79.39935</td>
+          <td class="arrow-val">↓ 2.2m</td>
+          <td class="new-val">43.65699, -79.39935</td>
+          
+        </tr>
+        
+        <tr><td>35C Spruce St</td>
+          
+          <td class="old-val">43.66338, -79.36587</td>
+          <td class="arrow-val">↓ 45.7m</td>
+          <td class="new-val">43.66297, -79.36589</td>
+          
+        </tr>
+        
+        <tr><td>405 Spadina Ave</td>
+          
+          <td class="old-val">43.65679, -79.39926</td>
+          <td class="arrow-val">↓ 2.4m</td>
+          <td class="new-val">43.65677, -79.39925</td>
           
         </tr>
         
@@ -613,6 +565,30 @@
           
         </tr>
         
+        <tr><td>20 Glasgow St</td>
+          
+          <td class="old-val">43.65698, -79.39877</td>
+          <td class="arrow-val">↗ 2.7m</td>
+          <td class="new-val">43.65700, -79.39875</td>
+          
+        </tr>
+        
+        <tr><td>40 Jackson Pl</td>
+          
+          <td class="old-val">43.66613, -79.46757</td>
+          <td class="arrow-val">↑ 6.7m</td>
+          <td class="new-val">43.66619, -79.46757</td>
+          
+        </tr>
+        
+        <tr><td>491 Parliament St</td>
+          
+          <td class="old-val">43.66438, -79.36777</td>
+          <td class="arrow-val">← 5.0m</td>
+          <td class="new-val">43.66439, -79.36783</td>
+          
+        </tr>
+        
         <tr><td>2980 Dundas St W</td>
           
           <td class="old-val">43.66567, -79.46889</td>
@@ -621,19 +597,75 @@
           
         </tr>
         
-        <tr><td>489 Parliament St</td>
+        <tr><td>14 Dermott Pl</td>
           
-          <td class="old-val">43.66439, -79.36762</td>
-          <td class="arrow-val">← 15.9m</td>
-          <td class="new-val">43.66435, -79.36781</td>
+          <td class="old-val">43.66431, -79.36651</td>
+          <td class="arrow-val">↘ 2.7m</td>
+          <td class="new-val">43.66430, -79.36648</td>
           
         </tr>
         
-        <tr><td>249 Lippincott St</td>
+        <tr><td>242 Carlton St</td>
           
-          <td class="old-val">43.66165, -79.40823</td>
-          <td class="arrow-val">← 5.7m</td>
-          <td class="new-val">43.66164, -79.40830</td>
+          <td class="old-val">43.66446, -79.36854</td>
+          <td class="arrow-val">↓ 14.8m</td>
+          <td class="new-val">43.66433, -79.36850</td>
+          
+        </tr>
+        
+        <tr><td>189 Harbord St</td>
+          
+          <td class="old-val">43.66168, -79.40825</td>
+          <td class="arrow-val">← 6.1m</td>
+          <td class="new-val">43.66170, -79.40832</td>
+          
+        </tr>
+        
+        <tr><td>10 Dermott Pl</td>
+          
+          <td class="old-val">43.66423, -79.36647</td>
+          <td class="arrow-val">↓ 2.4m</td>
+          <td class="new-val">43.66421, -79.36646</td>
+          
+        </tr>
+        
+        <tr><td>44 Jackson Pl</td>
+          
+          <td class="old-val">43.66613, -79.46771</td>
+          <td class="arrow-val">↑ 5.6m</td>
+          <td class="new-val">43.66618, -79.46770</td>
+          
+        </tr>
+        
+        <tr><td>486 Parliament St</td>
+          
+          <td class="old-val">43.66477, -79.36845</td>
+          <td class="arrow-val">↘ 3.9m</td>
+          <td class="new-val">43.66475, -79.36841</td>
+          
+        </tr>
+        
+        <tr><td>54 Cecil St</td>
+          
+          <td class="old-val">43.65653, -79.39833</td>
+          <td class="arrow-val">↘ 4.6m</td>
+          <td class="new-val">43.65651, -79.39828</td>
+          
+        </tr>
+        
+        <tr><td>35D Spruce St</td>
+          
+          <td class="old-val">43.66338, -79.36586</td>
+          <td class="arrow-val">↓ 44.6m</td>
+          <td class="new-val">43.66298, -79.36583</td>
+          
+        </tr>
+        
+        <tr><td>36 Jackson Pl</td>
+          
+          <td class="old-val">43.66613, -79.46743</td>
+          <td class="arrow-val">↑ 4.5m</td>
+          <td class="new-val">43.66617, -79.46743</td>
           
         </tr>
         
@@ -642,7 +674,7 @@
     
   </div>
 
-  <div class="generated-at">Report generated Jun 09, 2026 at 05:22 PM · source licence: Open Government Licence – Toronto</div>
+  <div class="generated-at">Report generated Jun 10, 2026 at 03:42 PM · source licence: Open Government Licence – Toronto</div>
 
   <script>
     function sortTable(tbodyId, col) {

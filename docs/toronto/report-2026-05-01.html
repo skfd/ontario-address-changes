@@ -106,6 +106,25 @@
     .history .r { color: var(--red); font-weight: 500; }
     .history .dot { color: var(--text-dim); margin: 0 4px; }
     .history-none { color: var(--text-dim); font-style: italic; font-size: 12.5px; }
+    .info-wrap { position: relative; display: inline-flex; vertical-align: middle; }
+    .info-btn { display: inline-flex; align-items: center; justify-content: center;
+      width: 16px; height: 16px; border-radius: 999px; border: 1px solid var(--border-strong);
+      color: var(--text-dim); background: var(--surface); cursor: help; font-size: 11px;
+      font-weight: 700; font-style: italic; font-family: Georgia, 'Times New Roman', serif; line-height: 1; }
+    .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn,
+    .info-wrap:focus .info-btn { color: var(--accent); border-color: var(--accent); }
+    .info-pop { display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 20;
+      width: 320px; max-width: 80vw; padding: 12px 14px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-8);
+      font-size: 12.5px; font-weight: 400; color: var(--text-secondary); line-height: 1.5; }
+    .info-wrap:hover .info-pop, .info-wrap:focus-within .info-pop,
+    .info-wrap:focus .info-pop { display: block; }
+    .info-pop strong { display: block; color: var(--text); font-size: 12px; margin-bottom: 4px; }
+    .info-pop ul { list-style: none; margin: 0 0 10px; padding: 0; }
+    .info-pop li { padding: 1px 0 1px 14px; position: relative; }
+    .info-pop li::before { content: "·"; position: absolute; left: 4px; color: var(--text-dim); }
+    .info-pop .note { color: var(--text-dim); font-size: 11.5px; margin: 0 0 10px; }
+    .info-pop .muted { color: var(--text-dim); font-style: italic; }
   </style>
 </head>
 
@@ -188,11 +207,11 @@
         <tr><td>107 Wilton St</td><td>Wilton St</td><td></td>
           <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64798&mlon=-79.36936#map=18/43.64798/-79.36936" target="_blank" rel="noopener">View ↗</a></td></tr>
         
-        <tr><td>50 Henry Lane Ter</td><td>Henry Lane Ter</td><td></td>
-          <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64742&mlon=-79.36957#map=18/43.64742/-79.36957" target="_blank" rel="noopener">View ↗</a></td></tr>
-        
         <tr><td>131 Wilton St</td><td>Wilton St</td><td></td>
           <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64807&mlon=-79.36893#map=18/43.64807/-79.36893" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>50 Henry Lane Ter</td><td>Henry Lane Ter</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64742&mlon=-79.36957#map=18/43.64742/-79.36957" target="_blank" rel="noopener">View ↗</a></td></tr>
         
       </tbody>
     </table>
@@ -201,7 +220,20 @@
   </div>
 
   <div class="section">
-    <h2>Updated Addresses <span class="badge badge-yellow">0</span></h2>
+    <h2>Updated Addresses <span class="badge badge-yellow">0</span>
+      <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+        <span class="info-btn" aria-hidden="true">i</span>
+        <span class="info-pop">
+          <strong>Compared for changes</strong>
+          <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (LINEAR_NAME_FULL)</li><li>Full address (ADDRESS_FULL)</li><li>Coordinates (latitude, longitude)</li></ul>
+          <p class="note">…plus all other source attributes, except those ignored below.</p>
+          <strong>Ignored (changes here are not counted)</strong>
+          
+          <ul><li>ADDRESS_CLASS</li><li>ADDRESS_CLASS_DESC</li><li>ADDRESS_ID</li><li>ADDRESS_ID_LINK</li><li>ADDRESS_POINT_ID_LINK</li><li>CENTRELINE_ID</li><li>CENTRELINE_MEASURE</li><li>CENTRELINE_OFFSET</li><li>CLASS_FAMILY</li><li>CLASS_FAMILY_DESC</li></ul>
+          
+        </span>
+      </span>
+    </h2>
     <p class="empty">No addresses updated.</p>
   </div>
 
@@ -212,491 +244,11 @@
       <thead><tr><th>Address</th><th>Before</th><th></th><th>After</th></tr></thead>
       <tbody>
         
-        <tr><td>52 Frederick St</td>
+        <tr><td>36 Frederick St</td>
           
-          <td class="old-val">43.64810, -79.36841</td>
-          <td class="arrow-val">↗ 13.5m</td>
-          <td class="new-val">43.64821, -79.36834</td>
-          
-        </tr>
-        
-        <tr><td>188 Eglinton Ave E</td>
-          
-          <td class="old-val">43.70831, -79.39262</td>
-          <td class="arrow-val">↓ 2.2m</td>
-          <td class="new-val">43.70829, -79.39262</td>
-          
-        </tr>
-        
-        <tr><td>155 Wilton St</td>
-          
-          <td class="old-val">43.64817, -79.36845</td>
-          <td class="arrow-val">↑ 6.7m</td>
-          <td class="new-val">43.64823, -79.36846</td>
-          
-        </tr>
-        
-        <tr><td>25 Albert Franck Pl</td>
-          
-          <td class="old-val">43.64790, -79.36859</td>
-          <td class="arrow-val">↖ 1.4m</td>
-          <td class="new-val">43.64791, -79.36860</td>
-          
-        </tr>
-        
-        <tr><td>3 Henry Lane Ter</td>
-          
-          <td class="old-val">43.64779, -79.36965</td>
-          <td class="arrow-val">↘ 2.7m</td>
-          <td class="new-val">43.64778, -79.36962</td>
-          
-        </tr>
-        
-        <tr><td>49 Lower Jarvis St</td>
-          
-          <td class="old-val">43.64727, -79.37027</td>
-          <td class="arrow-val">↖ 7.9m</td>
-          <td class="new-val">43.64732, -79.37034</td>
-          
-        </tr>
-        
-        <tr><td>139 Wilton St</td>
-          
-          <td class="old-val">43.64811, -79.36873</td>
-          <td class="arrow-val">↑ 8.2m</td>
-          <td class="new-val">43.64818, -79.36870</td>
-          
-        </tr>
-        
-        <tr><td>145 Wilton St</td>
-          
-          <td class="old-val">43.64813, -79.36862</td>
-          <td class="arrow-val">↑ 7.8m</td>
-          <td class="new-val">43.64820, -79.36861</td>
-          
-        </tr>
-        
-        <tr><td>28 Frederick St</td>
-          
-          <td class="old-val">43.64777, -79.36819</td>
-          <td class="arrow-val">↑ 2.4m</td>
-          <td class="new-val">43.64779, -79.36820</td>
-          
-        </tr>
-        
-        <tr><td>47 Lower Jarvis St</td>
-          
-          <td class="old-val">43.64720, -79.37025</td>
-          <td class="arrow-val">↖ 4.6m</td>
-          <td class="new-val">43.64722, -79.37030</td>
-          
-        </tr>
-        
-        <tr><td>40 Frederick St</td>
-          
-          <td class="old-val">43.64789, -79.36825</td>
-          <td class="arrow-val">↑ 5.6m</td>
-          <td class="new-val">43.64794, -79.36825</td>
-          
-        </tr>
-        
-        <tr><td>23 Albert Franck Pl</td>
-          
-          <td class="old-val">43.64786, -79.36859</td>
-          <td class="arrow-val">↑ 1.1m</td>
-          <td class="new-val">43.64787, -79.36859</td>
-          
-        </tr>
-        
-        <tr><td>9 Albert Franck Pl</td>
-          
-          <td class="old-val">43.64761, -79.36850</td>
-          <td class="arrow-val">↘ 4.6m</td>
-          <td class="new-val">43.64758, -79.36846</td>
-          
-        </tr>
-        
-        <tr><td>8 George St S</td>
-          
-          <td class="old-val">43.64729, -79.36939</td>
-          <td class="arrow-val">↑ 2.2m</td>
-          <td class="new-val">43.64731, -79.36939</td>
-          
-        </tr>
-        
-        <tr><td>125 Wilton St</td>
-          
-          <td class="old-val">43.64805, -79.36904</td>
-          <td class="arrow-val">↑ 3.3m</td>
-          <td class="new-val">43.64808, -79.36904</td>
-          
-        </tr>
-        
-        <tr><td>5 Henry Lane Ter</td>
-          
-          <td class="old-val">43.64778, -79.36969</td>
-          <td class="arrow-val">↘ 2.0m</td>
-          <td class="new-val">43.64777, -79.36967</td>
-          
-        </tr>
-        
-        <tr><td>7 Henry Lane Ter</td>
-          
-          <td class="old-val">43.64777, -79.36974</td>
-          <td class="arrow-val">↘ 2.7m</td>
-          <td class="new-val">43.64776, -79.36971</td>
-          
-        </tr>
-        
-        <tr><td>137 Wilton St</td>
-          
-          <td class="old-val">43.64810, -79.36876</td>
-          <td class="arrow-val">↑ 8.2m</td>
-          <td class="new-val">43.64817, -79.36873</td>
-          
-        </tr>
-        
-        <tr><td>12 Frederick St</td>
-          
-          <td class="old-val">43.64761, -79.36812</td>
-          <td class="arrow-val">↓ 2.4m</td>
-          <td class="new-val">43.64759, -79.36811</td>
-          
-        </tr>
-        
-        <tr><td>42 Frederick St</td>
-          
-          <td class="old-val">43.64791, -79.36826</td>
-          <td class="arrow-val">↑ 5.6m</td>
-          <td class="new-val">43.64796, -79.36826</td>
-          
-        </tr>
-        
-        <tr><td>14 George St S</td>
-          
-          <td class="old-val">43.64738, -79.36943</td>
-          <td class="arrow-val">↑ 3.3m</td>
-          <td class="new-val">43.64741, -79.36943</td>
-          
-        </tr>
-        
-        <tr><td>151 Wilton St</td>
-          
-          <td class="old-val">43.64816, -79.36852</td>
-          <td class="arrow-val">↑ 6.7m</td>
-          <td class="new-val">43.64822, -79.36852</td>
-          
-        </tr>
-        
-        <tr><td>15 Albert Franck Pl</td>
-          
-          <td class="old-val">43.64772, -79.36854</td>
-          <td class="arrow-val">↘ 2.7m</td>
-          <td class="new-val">43.64771, -79.36851</td>
-          
-        </tr>
-        
-        <tr><td>11 Henry Lane Ter</td>
-          
-          <td class="old-val">43.64775, -79.36983</td>
-          <td class="arrow-val">↓ 2.4m</td>
-          <td class="new-val">43.64773, -79.36982</td>
-          
-        </tr>
-        
-        <tr><td>153 Wilton St</td>
-          
-          <td class="old-val">43.64817, -79.36848</td>
-          <td class="arrow-val">↑ 6.7m</td>
-          <td class="new-val">43.64823, -79.36849</td>
-          
-        </tr>
-        
-        <tr><td>113 Wilton St</td>
-          
-          <td class="old-val">43.64800, -79.36925</td>
+          <td class="old-val">43.64785, -79.36823</td>
           <td class="arrow-val">↑ 4.5m</td>
-          <td class="new-val">43.64804, -79.36926</td>
-          
-        </tr>
-        
-        <tr><td>9 Henry Lane Ter</td>
-          
-          <td class="old-val">43.64776, -79.36978</td>
-          <td class="arrow-val">↓ 2.4m</td>
-          <td class="new-val">43.64774, -79.36977</td>
-          
-        </tr>
-        
-        <tr><td>6 George St S</td>
-          
-          <td class="old-val">43.64726, -79.36938</td>
-          <td class="arrow-val">↗ 1.4m</td>
-          <td class="new-val">43.64727, -79.36937</td>
-          
-        </tr>
-        
-        <tr><td>730 Mount Pleasant Rd</td>
-          
-          <td class="old-val">43.70667, -79.38985</td>
-          <td class="arrow-val">↗ 12.1m</td>
-          <td class="new-val">43.70677, -79.38979</td>
-          
-        </tr>
-        
-        <tr><td>21A Henry Lane Ter</td>
-          
-          <td class="old-val">43.64764, -79.37012</td>
-          <td class="arrow-val">↑ 3.4m</td>
-          <td class="new-val">43.64767, -79.37013</td>
-          
-        </tr>
-        
-        <tr><td>1751 Queen St E</td>
-          
-          <td class="old-val">43.66770, -79.30993</td>
-          <td class="arrow-val">↙ 5.3m</td>
-          <td class="new-val">43.66768, -79.30999</td>
-          
-        </tr>
-        
-        <tr><td>4 Frederick St</td>
-          
-          <td class="old-val">43.64754, -79.36809</td>
-          <td class="arrow-val">↘ 5.5m</td>
-          <td class="new-val">43.64750, -79.36805</td>
-          
-        </tr>
-        
-        <tr><td>115 Wilton St</td>
-          
-          <td class="old-val">43.64801, -79.36921</td>
-          <td class="arrow-val">↑ 4.5m</td>
-          <td class="new-val">43.64805, -79.36921</td>
-          
-        </tr>
-        
-        <tr><td>27 Lower Jarvis St</td>
-          
-          <td class="old-val">43.64753, -79.37017</td>
-          <td class="arrow-val">↓ 1.1m</td>
-          <td class="new-val">43.64752, -79.37017</td>
-          
-        </tr>
-        
-        <tr><td>16 Frederick St</td>
-          
-          <td class="old-val">43.64765, -79.36814</td>
-          <td class="arrow-val">↘ 1.4m</td>
-          <td class="new-val">43.64764, -79.36813</td>
-          
-        </tr>
-        
-        <tr><td>1765 Queen St E</td>
-          
-          <td class="old-val">43.66779, -79.30955</td>
-          <td class="arrow-val">↙ 16.0m</td>
-          <td class="new-val">43.66773, -79.30973</td>
-          
-        </tr>
-        
-        <tr><td>2 George St S</td>
-          
-          <td class="old-val">43.64721, -79.36936</td>
-          <td class="arrow-val">↘ 2.0m</td>
-          <td class="new-val">43.64720, -79.36934</td>
-          
-        </tr>
-        
-        <tr><td>25 Henry Lane Ter</td>
-          
-          <td class="old-val">43.64756, -79.37021</td>
-          <td class="arrow-val">← 6.8m</td>
-          <td class="new-val">43.64754, -79.37029</td>
-          
-        </tr>
-        
-        <tr><td>18 Frederick St</td>
-          
-          <td class="old-val">43.64767, -79.36815</td>
-          <td class="arrow-val">↓ 1.1m</td>
-          <td class="new-val">43.64766, -79.36815</td>
-          
-        </tr>
-        
-        <tr><td>123 Wilton St</td>
-          
-          <td class="old-val">43.64804, -79.36907</td>
-          <td class="arrow-val">↑ 4.5m</td>
-          <td class="new-val">43.64808, -79.36908</td>
-          
-        </tr>
-        
-        <tr><td>21 Henry Lane Ter</td>
-          
-          <td class="old-val">43.64766, -79.37009</td>
-          <td class="arrow-val">↗ 1.4m</td>
-          <td class="new-val">43.64767, -79.37008</td>
-          
-        </tr>
-        
-        <tr><td>21B Henry Lane Ter</td>
-          
-          <td class="old-val">43.64762, -79.37015</td>
-          <td class="arrow-val">↑ 6.7m</td>
-          <td class="new-val">43.64768, -79.37015</td>
-          
-        </tr>
-        
-        <tr><td>722 Mount Pleasant Rd</td>
-          
-          <td class="old-val">43.70660, -79.38983</td>
-          <td class="arrow-val">↗ 9.8m</td>
-          <td class="new-val">43.70665, -79.38973</td>
-          
-        </tr>
-        
-        <tr><td>32 Frederick St</td>
-          
-          <td class="old-val">43.64781, -79.36821</td>
-          <td class="arrow-val">↑ 3.4m</td>
-          <td class="new-val">43.64784, -79.36822</td>
-          
-        </tr>
-        
-        <tr><td>53 Lower Jarvis St</td>
-          
-          <td class="old-val">43.64737, -79.37031</td>
-          <td class="arrow-val">↖ 10.1m</td>
-          <td class="new-val">43.64744, -79.37039</td>
-          
-        </tr>
-        
-        <tr><td>159 Wilton St</td>
-          
-          <td class="old-val">43.64816, -79.36833</td>
-          <td class="arrow-val">↖ 11.5m</td>
-          <td class="new-val">43.64825, -79.36840</td>
-          
-        </tr>
-        
-        <tr><td>149 Wilton St</td>
-          
-          <td class="old-val">43.64815, -79.36855</td>
-          <td class="arrow-val">↑ 6.7m</td>
-          <td class="new-val">43.64821, -79.36854</td>
-          
-        </tr>
-        
-        <tr><td>1747 Queen St E</td>
-          
-          <td class="old-val">43.66767, -79.31008</td>
-          <td class="arrow-val">← 4.2m</td>
-          <td class="new-val">43.66766, -79.31013</td>
-          
-        </tr>
-        
-        <tr><td>2 Frederick St</td>
-          
-          <td class="old-val">43.64753, -79.36816</td>
-          <td class="arrow-val">↘ 12.4m</td>
-          <td class="new-val">43.64747, -79.36803</td>
-          
-        </tr>
-        
-        <tr><td>6 Frederick St</td>
-          
-          <td class="old-val">43.64756, -79.36810</td>
-          <td class="arrow-val">↘ 4.1m</td>
-          <td class="new-val">43.64753, -79.36807</td>
-          
-        </tr>
-        
-        <tr><td>3 Albert Franck Pl</td>
-          
-          <td class="old-val">43.64751, -79.36846</td>
-          <td class="arrow-val">↓ 8.4m</td>
-          <td class="new-val">43.64744, -79.36842</td>
-          
-        </tr>
-        
-        <tr><td>11 Albert Franck Pl</td>
-          
-          <td class="old-val">43.64765, -79.36851</td>
-          <td class="arrow-val">↘ 4.1m</td>
-          <td class="new-val">43.64762, -79.36848</td>
-          
-        </tr>
-        
-        <tr><td>17 Henry Lane Ter</td>
-          
-          <td class="old-val">43.64771, -79.36997</td>
-          <td class="arrow-val">↓ 1.1m</td>
-          <td class="new-val">43.64770, -79.36997</td>
-          
-        </tr>
-        
-        <tr><td>143 Wilton St</td>
-          
-          <td class="old-val">43.64812, -79.36866</td>
-          <td class="arrow-val">↑ 8.0m</td>
-          <td class="new-val">43.64819, -79.36864</td>
-          
-        </tr>
-        
-        <tr><td>157 Wilton St</td>
-          
-          <td class="old-val">43.64815, -79.36836</td>
-          <td class="arrow-val">↖ 11.5m</td>
-          <td class="new-val">43.64824, -79.36843</td>
-          
-        </tr>
-        
-        <tr><td>16 George St S</td>
-          
-          <td class="old-val">43.64741, -79.36944</td>
-          <td class="arrow-val">↑ 4.5m</td>
-          <td class="new-val">43.64745, -79.36944</td>
-          
-        </tr>
-        
-        <tr><td>34 Frederick St</td>
-          
-          <td class="old-val">43.64783, -79.36822</td>
-          <td class="arrow-val">↑ 3.4m</td>
-          <td class="new-val">43.64786, -79.36823</td>
-          
-        </tr>
-        
-        <tr><td>129 Wilton St</td>
-          
-          <td class="old-val">43.64806, -79.36897</td>
-          <td class="arrow-val">↑ 3.4m</td>
-          <td class="new-val">43.64809, -79.36898</td>
-          
-        </tr>
-        
-        <tr><td>14 Frederick St</td>
-          
-          <td class="old-val">43.64763, -79.36813</td>
-          <td class="arrow-val">↘ 1.4m</td>
-          <td class="new-val">43.64762, -79.36812</td>
-          
-        </tr>
-        
-        <tr><td>10 George St S</td>
-          
-          <td class="old-val">43.64732, -79.36940</td>
-          <td class="arrow-val">↑ 2.2m</td>
-          <td class="new-val">43.64734, -79.36940</td>
-          
-        </tr>
-        
-        <tr><td>133 Redpath Ave</td>
-          
-          <td class="old-val">43.70808, -79.39261</td>
-          <td class="arrow-val">↖ 39.1m</td>
-          <td class="new-val">43.70840, -79.39281</td>
+          <td class="new-val">43.64789, -79.36824</td>
           
         </tr>
         
@@ -708,203 +260,11 @@
           
         </tr>
         
-        <tr><td>30 Frederick St</td>
-          
-          <td class="old-val">43.64779, -79.36820</td>
-          <td class="arrow-val">↑ 2.4m</td>
-          <td class="new-val">43.64781, -79.36821</td>
-          
-        </tr>
-        
-        <tr><td>17 Albert Franck Pl</td>
-          
-          <td class="old-val">43.64776, -79.36855</td>
-          <td class="arrow-val">↘ 2.0m</td>
-          <td class="new-val">43.64775, -79.36853</td>
-          
-        </tr>
-        
-        <tr><td>4 George St S</td>
-          
-          <td class="old-val">43.64723, -79.36936</td>
-          <td class="arrow-val">→ 0.8m</td>
-          <td class="new-val">43.64723, -79.36935</td>
-          
-        </tr>
-        
-        <tr><td>36 Frederick St</td>
-          
-          <td class="old-val">43.64785, -79.36823</td>
-          <td class="arrow-val">↑ 4.5m</td>
-          <td class="new-val">43.64789, -79.36824</td>
-          
-        </tr>
-        
-        <tr><td>51 George St S</td>
-          
-          <td class="old-val">43.64793, -79.36934</td>
-          <td class="arrow-val">↖ 5.5m</td>
-          <td class="new-val">43.64797, -79.36938</td>
-          
-        </tr>
-        
-        <tr><td>1 Henry Lane Ter</td>
-          
-          <td class="old-val">43.64780, -79.36961</td>
-          <td class="arrow-val">→ 3.4m</td>
-          <td class="new-val">43.64779, -79.36957</td>
-          
-        </tr>
-        
-        <tr><td>38 Frederick St</td>
-          
-          <td class="old-val">43.64787, -79.36824</td>
-          <td class="arrow-val">↑ 4.5m</td>
-          <td class="new-val">43.64791, -79.36825</td>
-          
-        </tr>
-        
-        <tr><td>26 Frederick St</td>
-          
-          <td class="old-val">43.64775, -79.36819</td>
-          <td class="arrow-val">↑ 1.1m</td>
-          <td class="new-val">43.64776, -79.36819</td>
-          
-        </tr>
-        
-        <tr><td>13 Henry Lane Ter</td>
-          
-          <td class="old-val">43.64773, -79.36987</td>
-          <td class="arrow-val">↓ 1.1m</td>
-          <td class="new-val">43.64772, -79.36987</td>
-          
-        </tr>
-        
-        <tr><td>121 Wilton St</td>
-          
-          <td class="old-val">43.64803, -79.36910</td>
-          <td class="arrow-val">↑ 4.5m</td>
-          <td class="new-val">43.64807, -79.36911</td>
-          
-        </tr>
-        
-        <tr><td>5 Albert Franck Pl</td>
-          
-          <td class="old-val">43.64754, -79.36847</td>
-          <td class="arrow-val">↘ 6.4m</td>
-          <td class="new-val">43.64749, -79.36843</td>
-          
-        </tr>
-        
-        <tr><td>13 Albert Franck Pl</td>
-          
-          <td class="old-val">43.64769, -79.36852</td>
-          <td class="arrow-val">↘ 4.1m</td>
-          <td class="new-val">43.64766, -79.36849</td>
-          
-        </tr>
-        
         <tr><td>111 Wilton St</td>
           
           <td class="old-val">43.64799, -79.36928</td>
           <td class="arrow-val">↑ 4.5m</td>
           <td class="new-val">43.64803, -79.36929</td>
-          
-        </tr>
-        
-        <tr><td>700 Mount Pleasant Rd</td>
-          
-          <td class="old-val">43.70625, -79.38971</td>
-          <td class="arrow-val">↘ 13.5m</td>
-          <td class="new-val">43.70614, -79.38964</td>
-          
-        </tr>
-        
-        <tr><td>119 Wilton St</td>
-          
-          <td class="old-val">43.64802, -79.36914</td>
-          <td class="arrow-val">↑ 4.5m</td>
-          <td class="new-val">43.64806, -79.36914</td>
-          
-        </tr>
-        
-        <tr><td>135 Wilton St</td>
-          
-          <td class="old-val">43.64809, -79.36880</td>
-          <td class="arrow-val">↑ 8.4m</td>
-          <td class="new-val">43.64816, -79.36876</td>
-          
-        </tr>
-        
-        <tr><td>10 Frederick St</td>
-          
-          <td class="old-val">43.64760, -79.36811</td>
-          <td class="arrow-val">↓ 3.4m</td>
-          <td class="new-val">43.64757, -79.36810</td>
-          
-        </tr>
-        
-        <tr><td>1755 Queen St E</td>
-          
-          <td class="old-val">43.66774, -79.30976</td>
-          <td class="arrow-val">← 6.8m</td>
-          <td class="new-val">43.66772, -79.30984</td>
-          
-        </tr>
-        
-        <tr><td>7 Albert Franck Pl</td>
-          
-          <td class="old-val">43.64758, -79.36849</td>
-          <td class="arrow-val">↘ 6.4m</td>
-          <td class="new-val">43.64753, -79.36845</td>
-          
-        </tr>
-        
-        <tr><td>127 Wilton St</td>
-          
-          <td class="old-val">43.64805, -79.36900</td>
-          <td class="arrow-val">↑ 4.5m</td>
-          <td class="new-val">43.64809, -79.36901</td>
-          
-        </tr>
-        
-        <tr><td>44 Frederick St</td>
-          
-          <td class="old-val">43.64793, -79.36827</td>
-          <td class="arrow-val">↑ 5.6m</td>
-          <td class="new-val">43.64798, -79.36827</td>
-          
-        </tr>
-        
-        <tr><td>141 Wilton St</td>
-          
-          <td class="old-val">43.64812, -79.36869</td>
-          <td class="arrow-val">↑ 6.9m</td>
-          <td class="new-val">43.64818, -79.36867</td>
-          
-        </tr>
-        
-        <tr><td>133 Wilton St</td>
-          
-          <td class="old-val">43.64808, -79.36887</td>
-          <td class="arrow-val">← 40.0m</td>
-          <td class="new-val">43.64802, -79.36936</td>
-          
-        </tr>
-        
-        <tr><td>47 Henry Lane Ter</td>
-          
-          <td class="old-val">43.64695, -79.36989</td>
-          <td class="arrow-val">← 3.4m</td>
-          <td class="new-val">43.64696, -79.36993</td>
-          
-        </tr>
-        
-        <tr><td>23 Henry Lane Ter</td>
-          
-          <td class="old-val">43.64760, -79.37016</td>
-          <td class="arrow-val">← 5.6m</td>
-          <td class="new-val">43.64760, -79.37023</td>
           
         </tr>
         
@@ -916,43 +276,35 @@
           
         </tr>
         
-        <tr><td>77 Lower Jarvis St</td>
+        <tr><td>17 Henry Lane Ter</td>
           
-          <td class="old-val">43.64764, -79.37039</td>
-          <td class="arrow-val">← 5.7m</td>
-          <td class="new-val">43.64765, -79.37046</td>
-          
-        </tr>
-        
-        <tr><td>1753 Queen St E</td>
-          
-          <td class="old-val">43.66772, -79.30985</td>
-          <td class="arrow-val">↙ 5.3m</td>
-          <td class="new-val">43.66770, -79.30991</td>
+          <td class="old-val">43.64771, -79.36997</td>
+          <td class="arrow-val">↓ 1.1m</td>
+          <td class="new-val">43.64770, -79.36997</td>
           
         </tr>
         
-        <tr><td>109 Wilton St</td>
+        <tr><td>133 Wilton St</td>
           
-          <td class="old-val">43.64798, -79.36932</td>
-          <td class="arrow-val">↑ 4.5m</td>
-          <td class="new-val">43.64802, -79.36932</td>
-          
-        </tr>
-        
-        <tr><td>147 Wilton St</td>
-          
-          <td class="old-val">43.64814, -79.36859</td>
-          <td class="arrow-val">↑ 7.8m</td>
-          <td class="new-val">43.64821, -79.36858</td>
+          <td class="old-val">43.64808, -79.36887</td>
+          <td class="arrow-val">← 40.0m</td>
+          <td class="new-val">43.64802, -79.36936</td>
           
         </tr>
         
-        <tr><td>1749 Queen St E</td>
+        <tr><td>42 Frederick St</td>
           
-          <td class="old-val">43.66769, -79.31001</td>
-          <td class="arrow-val">↙ 5.3m</td>
-          <td class="new-val">43.66767, -79.31007</td>
+          <td class="old-val">43.64791, -79.36826</td>
+          <td class="arrow-val">↑ 5.6m</td>
+          <td class="new-val">43.64796, -79.36826</td>
+          
+        </tr>
+        
+        <tr><td>17 Albert Franck Pl</td>
+          
+          <td class="old-val">43.64776, -79.36855</td>
+          <td class="arrow-val">↘ 2.0m</td>
+          <td class="new-val">43.64775, -79.36853</td>
           
         </tr>
         
@@ -964,11 +316,75 @@
           
         </tr>
         
-        <tr><td>117 Wilton St</td>
+        <tr><td>10 George St S</td>
           
-          <td class="old-val">43.64802, -79.36918</td>
-          <td class="arrow-val">↑ 3.3m</td>
-          <td class="new-val">43.64805, -79.36918</td>
+          <td class="old-val">43.64732, -79.36940</td>
+          <td class="arrow-val">↑ 2.2m</td>
+          <td class="new-val">43.64734, -79.36940</td>
+          
+        </tr>
+        
+        <tr><td>149 Wilton St</td>
+          
+          <td class="old-val">43.64815, -79.36855</td>
+          <td class="arrow-val">↑ 6.7m</td>
+          <td class="new-val">43.64821, -79.36854</td>
+          
+        </tr>
+        
+        <tr><td>8 George St S</td>
+          
+          <td class="old-val">43.64729, -79.36939</td>
+          <td class="arrow-val">↑ 2.2m</td>
+          <td class="new-val">43.64731, -79.36939</td>
+          
+        </tr>
+        
+        <tr><td>25 Albert Franck Pl</td>
+          
+          <td class="old-val">43.64790, -79.36859</td>
+          <td class="arrow-val">↖ 1.4m</td>
+          <td class="new-val">43.64791, -79.36860</td>
+          
+        </tr>
+        
+        <tr><td>143 Wilton St</td>
+          
+          <td class="old-val">43.64812, -79.36866</td>
+          <td class="arrow-val">↑ 8.0m</td>
+          <td class="new-val">43.64819, -79.36864</td>
+          
+        </tr>
+        
+        <tr><td>139 Wilton St</td>
+          
+          <td class="old-val">43.64811, -79.36873</td>
+          <td class="arrow-val">↑ 8.2m</td>
+          <td class="new-val">43.64818, -79.36870</td>
+          
+        </tr>
+        
+        <tr><td>15 Albert Franck Pl</td>
+          
+          <td class="old-val">43.64772, -79.36854</td>
+          <td class="arrow-val">↘ 2.7m</td>
+          <td class="new-val">43.64771, -79.36851</td>
+          
+        </tr>
+        
+        <tr><td>11 Albert Franck Pl</td>
+          
+          <td class="old-val">43.64765, -79.36851</td>
+          <td class="arrow-val">↘ 4.1m</td>
+          <td class="new-val">43.64762, -79.36848</td>
+          
+        </tr>
+        
+        <tr><td>1747 Queen St E</td>
+          
+          <td class="old-val">43.66767, -79.31008</td>
+          <td class="arrow-val">← 4.2m</td>
+          <td class="new-val">43.66766, -79.31013</td>
           
         </tr>
         
@@ -980,11 +396,235 @@
           
         </tr>
         
+        <tr><td>26 Frederick St</td>
+          
+          <td class="old-val">43.64775, -79.36819</td>
+          <td class="arrow-val">↑ 1.1m</td>
+          <td class="new-val">43.64776, -79.36819</td>
+          
+        </tr>
+        
+        <tr><td>4 George St S</td>
+          
+          <td class="old-val">43.64723, -79.36936</td>
+          <td class="arrow-val">→ 0.8m</td>
+          <td class="new-val">43.64723, -79.36935</td>
+          
+        </tr>
+        
+        <tr><td>21B Henry Lane Ter</td>
+          
+          <td class="old-val">43.64762, -79.37015</td>
+          <td class="arrow-val">↑ 6.7m</td>
+          <td class="new-val">43.64768, -79.37015</td>
+          
+        </tr>
+        
         <tr><td>19 Henry Lane Ter</td>
           
           <td class="old-val">43.64770, -79.37002</td>
           <td class="arrow-val">↘ 1.4m</td>
           <td class="new-val">43.64769, -79.37001</td>
+          
+        </tr>
+        
+        <tr><td>123 Wilton St</td>
+          
+          <td class="old-val">43.64804, -79.36907</td>
+          <td class="arrow-val">↑ 4.5m</td>
+          <td class="new-val">43.64808, -79.36908</td>
+          
+        </tr>
+        
+        <tr><td>2 Frederick St</td>
+          
+          <td class="old-val">43.64753, -79.36816</td>
+          <td class="arrow-val">↘ 12.4m</td>
+          <td class="new-val">43.64747, -79.36803</td>
+          
+        </tr>
+        
+        <tr><td>115 Wilton St</td>
+          
+          <td class="old-val">43.64801, -79.36921</td>
+          <td class="arrow-val">↑ 4.5m</td>
+          <td class="new-val">43.64805, -79.36921</td>
+          
+        </tr>
+        
+        <tr><td>7 Henry Lane Ter</td>
+          
+          <td class="old-val">43.64777, -79.36974</td>
+          <td class="arrow-val">↘ 2.7m</td>
+          <td class="new-val">43.64776, -79.36971</td>
+          
+        </tr>
+        
+        <tr><td>121 Wilton St</td>
+          
+          <td class="old-val">43.64803, -79.36910</td>
+          <td class="arrow-val">↑ 4.5m</td>
+          <td class="new-val">43.64807, -79.36911</td>
+          
+        </tr>
+        
+        <tr><td>47 Lower Jarvis St</td>
+          
+          <td class="old-val">43.64720, -79.37025</td>
+          <td class="arrow-val">↖ 4.6m</td>
+          <td class="new-val">43.64722, -79.37030</td>
+          
+        </tr>
+        
+        <tr><td>21A Henry Lane Ter</td>
+          
+          <td class="old-val">43.64764, -79.37012</td>
+          <td class="arrow-val">↑ 3.4m</td>
+          <td class="new-val">43.64767, -79.37013</td>
+          
+        </tr>
+        
+        <tr><td>5 Henry Lane Ter</td>
+          
+          <td class="old-val">43.64778, -79.36969</td>
+          <td class="arrow-val">↘ 2.0m</td>
+          <td class="new-val">43.64777, -79.36967</td>
+          
+        </tr>
+        
+        <tr><td>11 Henry Lane Ter</td>
+          
+          <td class="old-val">43.64775, -79.36983</td>
+          <td class="arrow-val">↓ 2.4m</td>
+          <td class="new-val">43.64773, -79.36982</td>
+          
+        </tr>
+        
+        <tr><td>25 Henry Lane Ter</td>
+          
+          <td class="old-val">43.64756, -79.37021</td>
+          <td class="arrow-val">← 6.8m</td>
+          <td class="new-val">43.64754, -79.37029</td>
+          
+        </tr>
+        
+        <tr><td>10 Frederick St</td>
+          
+          <td class="old-val">43.64760, -79.36811</td>
+          <td class="arrow-val">↓ 3.4m</td>
+          <td class="new-val">43.64757, -79.36810</td>
+          
+        </tr>
+        
+        <tr><td>3 Albert Franck Pl</td>
+          
+          <td class="old-val">43.64751, -79.36846</td>
+          <td class="arrow-val">↓ 8.4m</td>
+          <td class="new-val">43.64744, -79.36842</td>
+          
+        </tr>
+        
+        <tr><td>1755 Queen St E</td>
+          
+          <td class="old-val">43.66774, -79.30976</td>
+          <td class="arrow-val">← 6.8m</td>
+          <td class="new-val">43.66772, -79.30984</td>
+          
+        </tr>
+        
+        <tr><td>147 Wilton St</td>
+          
+          <td class="old-val">43.64814, -79.36859</td>
+          <td class="arrow-val">↑ 7.8m</td>
+          <td class="new-val">43.64821, -79.36858</td>
+          
+        </tr>
+        
+        <tr><td>1751 Queen St E</td>
+          
+          <td class="old-val">43.66770, -79.30993</td>
+          <td class="arrow-val">↙ 5.3m</td>
+          <td class="new-val">43.66768, -79.30999</td>
+          
+        </tr>
+        
+        <tr><td>13 Albert Franck Pl</td>
+          
+          <td class="old-val">43.64769, -79.36852</td>
+          <td class="arrow-val">↘ 4.1m</td>
+          <td class="new-val">43.64766, -79.36849</td>
+          
+        </tr>
+        
+        <tr><td>27 Lower Jarvis St</td>
+          
+          <td class="old-val">43.64753, -79.37017</td>
+          <td class="arrow-val">↓ 1.1m</td>
+          <td class="new-val">43.64752, -79.37017</td>
+          
+        </tr>
+        
+        <tr><td>113 Wilton St</td>
+          
+          <td class="old-val">43.64800, -79.36925</td>
+          <td class="arrow-val">↑ 4.5m</td>
+          <td class="new-val">43.64804, -79.36926</td>
+          
+        </tr>
+        
+        <tr><td>6 Frederick St</td>
+          
+          <td class="old-val">43.64756, -79.36810</td>
+          <td class="arrow-val">↘ 4.1m</td>
+          <td class="new-val">43.64753, -79.36807</td>
+          
+        </tr>
+        
+        <tr><td>722 Mount Pleasant Rd</td>
+          
+          <td class="old-val">43.70660, -79.38983</td>
+          <td class="arrow-val">↗ 9.8m</td>
+          <td class="new-val">43.70665, -79.38973</td>
+          
+        </tr>
+        
+        <tr><td>109 Wilton St</td>
+          
+          <td class="old-val">43.64798, -79.36932</td>
+          <td class="arrow-val">↑ 4.5m</td>
+          <td class="new-val">43.64802, -79.36932</td>
+          
+        </tr>
+        
+        <tr><td>18 Frederick St</td>
+          
+          <td class="old-val">43.64767, -79.36815</td>
+          <td class="arrow-val">↓ 1.1m</td>
+          <td class="new-val">43.64766, -79.36815</td>
+          
+        </tr>
+        
+        <tr><td>730 Mount Pleasant Rd</td>
+          
+          <td class="old-val">43.70667, -79.38985</td>
+          <td class="arrow-val">↗ 12.1m</td>
+          <td class="new-val">43.70677, -79.38979</td>
+          
+        </tr>
+        
+        <tr><td>1765 Queen St E</td>
+          
+          <td class="old-val">43.66779, -79.30955</td>
+          <td class="arrow-val">↙ 16.0m</td>
+          <td class="new-val">43.66773, -79.30973</td>
+          
+        </tr>
+        
+        <tr><td>23 Henry Lane Ter</td>
+          
+          <td class="old-val">43.64760, -79.37016</td>
+          <td class="arrow-val">← 5.6m</td>
+          <td class="new-val">43.64760, -79.37023</td>
           
         </tr>
         
@@ -996,12 +636,404 @@
           
         </tr>
         
+        <tr><td>2 George St S</td>
+          
+          <td class="old-val">43.64721, -79.36936</td>
+          <td class="arrow-val">↘ 2.0m</td>
+          <td class="new-val">43.64720, -79.36934</td>
+          
+        </tr>
+        
+        <tr><td>117 Wilton St</td>
+          
+          <td class="old-val">43.64802, -79.36918</td>
+          <td class="arrow-val">↑ 3.3m</td>
+          <td class="new-val">43.64805, -79.36918</td>
+          
+        </tr>
+        
+        <tr><td>153 Wilton St</td>
+          
+          <td class="old-val">43.64817, -79.36848</td>
+          <td class="arrow-val">↑ 6.7m</td>
+          <td class="new-val">43.64823, -79.36849</td>
+          
+        </tr>
+        
+        <tr><td>21 Henry Lane Ter</td>
+          
+          <td class="old-val">43.64766, -79.37009</td>
+          <td class="arrow-val">↗ 1.4m</td>
+          <td class="new-val">43.64767, -79.37008</td>
+          
+        </tr>
+        
+        <tr><td>125 Wilton St</td>
+          
+          <td class="old-val">43.64805, -79.36904</td>
+          <td class="arrow-val">↑ 3.3m</td>
+          <td class="new-val">43.64808, -79.36904</td>
+          
+        </tr>
+        
+        <tr><td>53 Lower Jarvis St</td>
+          
+          <td class="old-val">43.64737, -79.37031</td>
+          <td class="arrow-val">↖ 10.1m</td>
+          <td class="new-val">43.64744, -79.37039</td>
+          
+        </tr>
+        
+        <tr><td>7 Albert Franck Pl</td>
+          
+          <td class="old-val">43.64758, -79.36849</td>
+          <td class="arrow-val">↘ 6.4m</td>
+          <td class="new-val">43.64753, -79.36845</td>
+          
+        </tr>
+        
+        <tr><td>151 Wilton St</td>
+          
+          <td class="old-val">43.64816, -79.36852</td>
+          <td class="arrow-val">↑ 6.7m</td>
+          <td class="new-val">43.64822, -79.36852</td>
+          
+        </tr>
+        
+        <tr><td>4 Frederick St</td>
+          
+          <td class="old-val">43.64754, -79.36809</td>
+          <td class="arrow-val">↘ 5.5m</td>
+          <td class="new-val">43.64750, -79.36805</td>
+          
+        </tr>
+        
+        <tr><td>13 Henry Lane Ter</td>
+          
+          <td class="old-val">43.64773, -79.36987</td>
+          <td class="arrow-val">↓ 1.1m</td>
+          <td class="new-val">43.64772, -79.36987</td>
+          
+        </tr>
+        
+        <tr><td>38 Frederick St</td>
+          
+          <td class="old-val">43.64787, -79.36824</td>
+          <td class="arrow-val">↑ 4.5m</td>
+          <td class="new-val">43.64791, -79.36825</td>
+          
+        </tr>
+        
+        <tr><td>145 Wilton St</td>
+          
+          <td class="old-val">43.64813, -79.36862</td>
+          <td class="arrow-val">↑ 7.8m</td>
+          <td class="new-val">43.64820, -79.36861</td>
+          
+        </tr>
+        
+        <tr><td>700 Mount Pleasant Rd</td>
+          
+          <td class="old-val">43.70625, -79.38971</td>
+          <td class="arrow-val">↘ 13.5m</td>
+          <td class="new-val">43.70614, -79.38964</td>
+          
+        </tr>
+        
+        <tr><td>3 Henry Lane Ter</td>
+          
+          <td class="old-val">43.64779, -79.36965</td>
+          <td class="arrow-val">↘ 2.7m</td>
+          <td class="new-val">43.64778, -79.36962</td>
+          
+        </tr>
+        
+        <tr><td>1753 Queen St E</td>
+          
+          <td class="old-val">43.66772, -79.30985</td>
+          <td class="arrow-val">↙ 5.3m</td>
+          <td class="new-val">43.66770, -79.30991</td>
+          
+        </tr>
+        
+        <tr><td>40 Frederick St</td>
+          
+          <td class="old-val">43.64789, -79.36825</td>
+          <td class="arrow-val">↑ 5.6m</td>
+          <td class="new-val">43.64794, -79.36825</td>
+          
+        </tr>
+        
+        <tr><td>141 Wilton St</td>
+          
+          <td class="old-val">43.64812, -79.36869</td>
+          <td class="arrow-val">↑ 6.9m</td>
+          <td class="new-val">43.64818, -79.36867</td>
+          
+        </tr>
+        
+        <tr><td>5 Albert Franck Pl</td>
+          
+          <td class="old-val">43.64754, -79.36847</td>
+          <td class="arrow-val">↘ 6.4m</td>
+          <td class="new-val">43.64749, -79.36843</td>
+          
+        </tr>
+        
+        <tr><td>52 Frederick St</td>
+          
+          <td class="old-val">43.64810, -79.36841</td>
+          <td class="arrow-val">↗ 13.5m</td>
+          <td class="new-val">43.64821, -79.36834</td>
+          
+        </tr>
+        
+        <tr><td>155 Wilton St</td>
+          
+          <td class="old-val">43.64817, -79.36845</td>
+          <td class="arrow-val">↑ 6.7m</td>
+          <td class="new-val">43.64823, -79.36846</td>
+          
+        </tr>
+        
+        <tr><td>34 Frederick St</td>
+          
+          <td class="old-val">43.64783, -79.36822</td>
+          <td class="arrow-val">↑ 3.4m</td>
+          <td class="new-val">43.64786, -79.36823</td>
+          
+        </tr>
+        
+        <tr><td>1 Henry Lane Ter</td>
+          
+          <td class="old-val">43.64780, -79.36961</td>
+          <td class="arrow-val">→ 3.4m</td>
+          <td class="new-val">43.64779, -79.36957</td>
+          
+        </tr>
+        
+        <tr><td>14 George St S</td>
+          
+          <td class="old-val">43.64738, -79.36943</td>
+          <td class="arrow-val">↑ 3.3m</td>
+          <td class="new-val">43.64741, -79.36943</td>
+          
+        </tr>
+        
+        <tr><td>47 Henry Lane Ter</td>
+          
+          <td class="old-val">43.64695, -79.36989</td>
+          <td class="arrow-val">← 3.4m</td>
+          <td class="new-val">43.64696, -79.36993</td>
+          
+        </tr>
+        
+        <tr><td>129 Wilton St</td>
+          
+          <td class="old-val">43.64806, -79.36897</td>
+          <td class="arrow-val">↑ 3.4m</td>
+          <td class="new-val">43.64809, -79.36898</td>
+          
+        </tr>
+        
+        <tr><td>16 George St S</td>
+          
+          <td class="old-val">43.64741, -79.36944</td>
+          <td class="arrow-val">↑ 4.5m</td>
+          <td class="new-val">43.64745, -79.36944</td>
+          
+        </tr>
+        
+        <tr><td>188 Eglinton Ave E</td>
+          
+          <td class="old-val">43.70831, -79.39262</td>
+          <td class="arrow-val">↓ 2.2m</td>
+          <td class="new-val">43.70829, -79.39262</td>
+          
+        </tr>
+        
+        <tr><td>133 Redpath Ave</td>
+          
+          <td class="old-val">43.70808, -79.39261</td>
+          <td class="arrow-val">↖ 39.1m</td>
+          <td class="new-val">43.70840, -79.39281</td>
+          
+        </tr>
+        
+        <tr><td>44 Frederick St</td>
+          
+          <td class="old-val">43.64793, -79.36827</td>
+          <td class="arrow-val">↑ 5.6m</td>
+          <td class="new-val">43.64798, -79.36827</td>
+          
+        </tr>
+        
+        <tr><td>23 Albert Franck Pl</td>
+          
+          <td class="old-val">43.64786, -79.36859</td>
+          <td class="arrow-val">↑ 1.1m</td>
+          <td class="new-val">43.64787, -79.36859</td>
+          
+        </tr>
+        
+        <tr><td>6 George St S</td>
+          
+          <td class="old-val">43.64726, -79.36938</td>
+          <td class="arrow-val">↗ 1.4m</td>
+          <td class="new-val">43.64727, -79.36937</td>
+          
+        </tr>
+        
+        <tr><td>14 Frederick St</td>
+          
+          <td class="old-val">43.64763, -79.36813</td>
+          <td class="arrow-val">↘ 1.4m</td>
+          <td class="new-val">43.64762, -79.36812</td>
+          
+        </tr>
+        
+        <tr><td>159 Wilton St</td>
+          
+          <td class="old-val">43.64816, -79.36833</td>
+          <td class="arrow-val">↖ 11.5m</td>
+          <td class="new-val">43.64825, -79.36840</td>
+          
+        </tr>
+        
+        <tr><td>49 Lower Jarvis St</td>
+          
+          <td class="old-val">43.64727, -79.37027</td>
+          <td class="arrow-val">↖ 7.9m</td>
+          <td class="new-val">43.64732, -79.37034</td>
+          
+        </tr>
+        
+        <tr><td>9 Henry Lane Ter</td>
+          
+          <td class="old-val">43.64776, -79.36978</td>
+          <td class="arrow-val">↓ 2.4m</td>
+          <td class="new-val">43.64774, -79.36977</td>
+          
+        </tr>
+        
+        <tr><td>77 Lower Jarvis St</td>
+          
+          <td class="old-val">43.64764, -79.37039</td>
+          <td class="arrow-val">← 5.7m</td>
+          <td class="new-val">43.64765, -79.37046</td>
+          
+        </tr>
+        
+        <tr><td>9 Albert Franck Pl</td>
+          
+          <td class="old-val">43.64761, -79.36850</td>
+          <td class="arrow-val">↘ 4.6m</td>
+          <td class="new-val">43.64758, -79.36846</td>
+          
+        </tr>
+        
+        <tr><td>127 Wilton St</td>
+          
+          <td class="old-val">43.64805, -79.36900</td>
+          <td class="arrow-val">↑ 4.5m</td>
+          <td class="new-val">43.64809, -79.36901</td>
+          
+        </tr>
+        
+        <tr><td>135 Wilton St</td>
+          
+          <td class="old-val">43.64809, -79.36880</td>
+          <td class="arrow-val">↑ 8.4m</td>
+          <td class="new-val">43.64816, -79.36876</td>
+          
+        </tr>
+        
+        <tr><td>12 Frederick St</td>
+          
+          <td class="old-val">43.64761, -79.36812</td>
+          <td class="arrow-val">↓ 2.4m</td>
+          <td class="new-val">43.64759, -79.36811</td>
+          
+        </tr>
+        
+        <tr><td>119 Wilton St</td>
+          
+          <td class="old-val">43.64802, -79.36914</td>
+          <td class="arrow-val">↑ 4.5m</td>
+          <td class="new-val">43.64806, -79.36914</td>
+          
+        </tr>
+        
+        <tr><td>32 Frederick St</td>
+          
+          <td class="old-val">43.64781, -79.36821</td>
+          <td class="arrow-val">↑ 3.4m</td>
+          <td class="new-val">43.64784, -79.36822</td>
+          
+        </tr>
+        
+        <tr><td>30 Frederick St</td>
+          
+          <td class="old-val">43.64779, -79.36820</td>
+          <td class="arrow-val">↑ 2.4m</td>
+          <td class="new-val">43.64781, -79.36821</td>
+          
+        </tr>
+        
+        <tr><td>157 Wilton St</td>
+          
+          <td class="old-val">43.64815, -79.36836</td>
+          <td class="arrow-val">↖ 11.5m</td>
+          <td class="new-val">43.64824, -79.36843</td>
+          
+        </tr>
+        
+        <tr><td>137 Wilton St</td>
+          
+          <td class="old-val">43.64810, -79.36876</td>
+          <td class="arrow-val">↑ 8.2m</td>
+          <td class="new-val">43.64817, -79.36873</td>
+          
+        </tr>
+        
+        <tr><td>51 George St S</td>
+          
+          <td class="old-val">43.64793, -79.36934</td>
+          <td class="arrow-val">↖ 5.5m</td>
+          <td class="new-val">43.64797, -79.36938</td>
+          
+        </tr>
+        
+        <tr><td>16 Frederick St</td>
+          
+          <td class="old-val">43.64765, -79.36814</td>
+          <td class="arrow-val">↘ 1.4m</td>
+          <td class="new-val">43.64764, -79.36813</td>
+          
+        </tr>
+        
+        <tr><td>1749 Queen St E</td>
+          
+          <td class="old-val">43.66769, -79.31001</td>
+          <td class="arrow-val">↙ 5.3m</td>
+          <td class="new-val">43.66767, -79.31007</td>
+          
+        </tr>
+        
+        <tr><td>28 Frederick St</td>
+          
+          <td class="old-val">43.64777, -79.36819</td>
+          <td class="arrow-val">↑ 2.4m</td>
+          <td class="new-val">43.64779, -79.36820</td>
+          
+        </tr>
+        
       </tbody>
     </table>
     
   </div>
 
-  <div class="generated-at">Report generated Jun 09, 2026 at 05:22 PM · source licence: Open Government Licence – Toronto</div>
+  <div class="generated-at">Report generated Jun 10, 2026 at 03:42 PM · source licence: Open Government Licence – Toronto</div>
 
   <script>
     function sortTable(tbodyId, col) {

@@ -146,11 +146,24 @@ def _prepare(ds, d, new_id):
     return added, removed, modified, location_only, counts
 
 
+_CANON_LABEL = {"number": "Street number", "street": "Street name",
+                "unit": "Unit", "full": "Full address"}
+
+
+def _compared_fields(ds):
+    """Human-readable list of the fields change detection compares, for the info popup."""
+    out = [f"{_CANON_LABEL[k]} ({src})"
+           for k in ("number", "street", "unit", "full") if (src := ds.fields.get(k))]
+    out.append("Coordinates (latitude, longitude)")
+    return out
+
+
 def _render_report(ds, snap, d, is_baseline, spark, source_url):
     new_id = snap["id"]
     added, removed, modified, location_only, counts = _prepare(ds, d, new_id)
     date = diff.snap_date(snap)
     ctx = {
+        "compared_fields": _compared_fields(ds), "ignored_fields": sorted(ds.ignore_fields),
         "provider": ds.provider, "license_name": ds.license_name,
         "generated": datetime.now().strftime("%b %d, %Y at %I:%M %p"),
         "new_snapshot": snap, "new_date_friendly": _friendly_date(date),

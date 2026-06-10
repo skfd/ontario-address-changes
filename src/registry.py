@@ -23,6 +23,7 @@ class Dataset:
     key_field: str = ""
     synth_fields: list = field(default_factory=lambda: ["full"])
     fields: dict = field(default_factory=dict)
+    ignore_fields: list = field(default_factory=list)  # source props excluded from change detection
 
     @property
     def data_dir(self):
@@ -58,6 +59,7 @@ def _parse(path):
         key_field=identity.get("key_field", ""),
         synth_fields=identity.get("synth_fields", ["full"]),
         fields=raw.get("fields", {}),
+        ignore_fields=raw.get("ignore_fields", []),
     )
 
 

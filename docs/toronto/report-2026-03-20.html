@@ -106,6 +106,25 @@
     .history .r { color: var(--red); font-weight: 500; }
     .history .dot { color: var(--text-dim); margin: 0 4px; }
     .history-none { color: var(--text-dim); font-style: italic; font-size: 12.5px; }
+    .info-wrap { position: relative; display: inline-flex; vertical-align: middle; }
+    .info-btn { display: inline-flex; align-items: center; justify-content: center;
+      width: 16px; height: 16px; border-radius: 999px; border: 1px solid var(--border-strong);
+      color: var(--text-dim); background: var(--surface); cursor: help; font-size: 11px;
+      font-weight: 700; font-style: italic; font-family: Georgia, 'Times New Roman', serif; line-height: 1; }
+    .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn,
+    .info-wrap:focus .info-btn { color: var(--accent); border-color: var(--accent); }
+    .info-pop { display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 20;
+      width: 320px; max-width: 80vw; padding: 12px 14px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-8);
+      font-size: 12.5px; font-weight: 400; color: var(--text-secondary); line-height: 1.5; }
+    .info-wrap:hover .info-pop, .info-wrap:focus-within .info-pop,
+    .info-wrap:focus .info-pop { display: block; }
+    .info-pop strong { display: block; color: var(--text); font-size: 12px; margin-bottom: 4px; }
+    .info-pop ul { list-style: none; margin: 0 0 10px; padding: 0; }
+    .info-pop li { padding: 1px 0 1px 14px; position: relative; }
+    .info-pop li::before { content: "·"; position: absolute; left: 4px; color: var(--text-dim); }
+    .info-pop .note { color: var(--text-dim); font-size: 11.5px; margin: 0 0 10px; }
+    .info-pop .muted { color: var(--text-dim); font-style: italic; }
   </style>
 </head>
 
@@ -136,10 +155,10 @@
       <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#c50f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,2.0 19.7,18.0 37.3,16.5 55.0,18.0 72.7,16.5 90.3,13.6 108.0,13.6"/><circle cx="108.0" cy="13.6" r="2" fill="#c50f1f"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
     <div class="card"><div class="label">Updated Addresses</div>
       <div class="value yellow">0</div>
-      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,17.9 19.7,17.9 37.3,17.8 55.0,17.9 72.7,17.8 90.3,2.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,17.9 90.3,2.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
     <div class="card"><div class="label">Location Adjustments</div>
       <div class="value" style="color: var(--text-dim)">0</div>
-      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#808080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,17.9 90.3,2.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#808080"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#808080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,17.6 19.7,17.9 37.3,17.8 55.0,17.9 72.7,17.6 90.3,2.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#808080"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
   </div>
 
   
@@ -168,11 +187,11 @@
         <th onclick="sortTable('t-added',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
       <tbody id="t-added">
         
-        <tr><td>250 High Park Ave</td><td>High Park Ave</td><td></td>
-          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66227&mlon=-79.46940#map=18/43.66227/-79.46940" target="_blank" rel="noopener">View ↗</a></td></tr>
+        <tr><td>10 Maynard Ave</td><td>Maynard Ave</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.63715&mlon=-79.43754#map=18/43.63715/-79.43754" target="_blank" rel="noopener">View ↗</a></td></tr>
         
-        <tr><td>1456 King St W</td><td>King St W</td><td></td>
-          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.63702&mlon=-79.43781#map=18/43.63702/-79.43781" target="_blank" rel="noopener">View ↗</a></td></tr>
+        <tr><td>13 Graystone Gdns</td><td>Graystone Gdns</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64003&mlon=-79.52290#map=18/43.64003/-79.52290" target="_blank" rel="noopener">View ↗</a></td></tr>
         
         <tr><td>1452 King St W</td><td>King St W</td><td></td>
           <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.63705&mlon=-79.43759#map=18/43.63705/-79.43759" target="_blank" rel="noopener">View ↗</a></td></tr>
@@ -180,17 +199,17 @@
         <tr><td>1458 King St W</td><td>King St W</td><td></td>
           <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.63714&mlon=-79.43791#map=18/43.63714/-79.43791" target="_blank" rel="noopener">View ↗</a></td></tr>
         
-        <tr><td>1454 King St W</td><td>King St W</td><td></td>
-          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.63704&mlon=-79.43770#map=18/43.63704/-79.43770" target="_blank" rel="noopener">View ↗</a></td></tr>
-        
-        <tr><td>13 Graystone Gdns</td><td>Graystone Gdns</td><td></td>
-          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64003&mlon=-79.52290#map=18/43.64003/-79.52290" target="_blank" rel="noopener">View ↗</a></td></tr>
+        <tr><td>1456 King St W</td><td>King St W</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.63702&mlon=-79.43781#map=18/43.63702/-79.43781" target="_blank" rel="noopener">View ↗</a></td></tr>
         
         <tr><td>11 Graystone Gdns</td><td>Graystone Gdns</td><td></td>
           <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64003&mlon=-79.52282#map=18/43.64003/-79.52282" target="_blank" rel="noopener">View ↗</a></td></tr>
         
-        <tr><td>10 Maynard Ave</td><td>Maynard Ave</td><td></td>
-          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.63715&mlon=-79.43754#map=18/43.63715/-79.43754" target="_blank" rel="noopener">View ↗</a></td></tr>
+        <tr><td>1454 King St W</td><td>King St W</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.63704&mlon=-79.43770#map=18/43.63704/-79.43770" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>250 High Park Ave</td><td>High Park Ave</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66227&mlon=-79.46940#map=18/43.66227/-79.46940" target="_blank" rel="noopener">View ↗</a></td></tr>
         
       </tbody>
     </table>
@@ -206,11 +225,11 @@
         <th onclick="sortTable('t-removed',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
       <tbody id="t-removed">
         
-        <tr><td>325 Gerrard St E</td><td>Gerrard St E</td><td></td>
-          <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66194&mlon=-79.36534#map=18/43.66194/-79.36534" target="_blank" rel="noopener">View ↗</a></td></tr>
-        
         <tr><td>274 Sackville St</td><td>Sackville St</td><td></td>
           <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66156&mlon=-79.36413#map=18/43.66156/-79.36413" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>325 Gerrard St E</td><td>Gerrard St E</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66194&mlon=-79.36534#map=18/43.66194/-79.36534" target="_blank" rel="noopener">View ↗</a></td></tr>
         
         <tr><td>355 Gerrard St E</td><td>Gerrard St E</td><td></td>
           <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66212&mlon=-79.36473#map=18/43.66212/-79.36473" target="_blank" rel="noopener">View ↗</a></td></tr>
@@ -222,7 +241,20 @@
   </div>
 
   <div class="section">
-    <h2>Updated Addresses <span class="badge badge-yellow">0</span></h2>
+    <h2>Updated Addresses <span class="badge badge-yellow">0</span>
+      <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+        <span class="info-btn" aria-hidden="true">i</span>
+        <span class="info-pop">
+          <strong>Compared for changes</strong>
+          <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (LINEAR_NAME_FULL)</li><li>Full address (ADDRESS_FULL)</li><li>Coordinates (latitude, longitude)</li></ul>
+          <p class="note">…plus all other source attributes, except those ignored below.</p>
+          <strong>Ignored (changes here are not counted)</strong>
+          
+          <ul><li>ADDRESS_CLASS</li><li>ADDRESS_CLASS_DESC</li><li>ADDRESS_ID</li><li>ADDRESS_ID_LINK</li><li>ADDRESS_POINT_ID_LINK</li><li>CENTRELINE_ID</li><li>CENTRELINE_MEASURE</li><li>CENTRELINE_OFFSET</li><li>CLASS_FAMILY</li><li>CLASS_FAMILY_DESC</li></ul>
+          
+        </span>
+      </span>
+    </h2>
     <p class="empty">No addresses updated.</p>
   </div>
 
@@ -231,7 +263,7 @@
     <p class="empty">No location adjustments.</p>
   </div>
 
-  <div class="generated-at">Report generated Jun 09, 2026 at 05:22 PM · source licence: Open Government Licence – Toronto</div>
+  <div class="generated-at">Report generated Jun 10, 2026 at 03:42 PM · source licence: Open Government Licence – Toronto</div>
 
   <script>
     function sortTable(tbodyId, col) {

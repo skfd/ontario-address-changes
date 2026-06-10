@@ -106,6 +106,25 @@
     .history .r { color: var(--red); font-weight: 500; }
     .history .dot { color: var(--text-dim); margin: 0 4px; }
     .history-none { color: var(--text-dim); font-style: italic; font-size: 12.5px; }
+    .info-wrap { position: relative; display: inline-flex; vertical-align: middle; }
+    .info-btn { display: inline-flex; align-items: center; justify-content: center;
+      width: 16px; height: 16px; border-radius: 999px; border: 1px solid var(--border-strong);
+      color: var(--text-dim); background: var(--surface); cursor: help; font-size: 11px;
+      font-weight: 700; font-style: italic; font-family: Georgia, 'Times New Roman', serif; line-height: 1; }
+    .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn,
+    .info-wrap:focus .info-btn { color: var(--accent); border-color: var(--accent); }
+    .info-pop { display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 20;
+      width: 320px; max-width: 80vw; padding: 12px 14px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-8);
+      font-size: 12.5px; font-weight: 400; color: var(--text-secondary); line-height: 1.5; }
+    .info-wrap:hover .info-pop, .info-wrap:focus-within .info-pop,
+    .info-wrap:focus .info-pop { display: block; }
+    .info-pop strong { display: block; color: var(--text); font-size: 12px; margin-bottom: 4px; }
+    .info-pop ul { list-style: none; margin: 0 0 10px; padding: 0; }
+    .info-pop li { padding: 1px 0 1px 14px; position: relative; }
+    .info-pop li::before { content: "·"; position: absolute; left: 4px; color: var(--text-dim); }
+    .info-pop .note { color: var(--text-dim); font-size: 11.5px; margin: 0 0 10px; }
+    .info-pop .muted { color: var(--text-dim); font-style: italic; }
   </style>
 </head>
 
@@ -175,20 +194,26 @@
         <th onclick="sortTable('t-added',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
       <tbody id="t-added">
         
-        <tr><td>30 Bazalgette Dr</td><td>Bazalgette Dr</td><td></td>
-          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.79657&mlon=-79.17450#map=18/43.79657/-79.17450" target="_blank" rel="noopener">View ↗</a></td></tr>
-        
         <tr><td>155A Poyntz Ave</td><td>Poyntz Ave</td><td></td>
           <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75819&mlon=-79.41762#map=18/43.75819/-79.41762" target="_blank" rel="noopener">View ↗</a></td></tr>
         
         <tr><td>27 Bazalgette Dr</td><td>Bazalgette Dr</td><td></td>
           <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.79645&mlon=-79.17499#map=18/43.79645/-79.17499" target="_blank" rel="noopener">View ↗</a></td></tr>
         
-        <tr><td>11 Willowlea Dr</td><td>Willowlea Dr</td><td></td>
-          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.79709&mlon=-79.17503#map=18/43.79709/-79.17503" target="_blank" rel="noopener">View ↗</a></td></tr>
+        <tr><td>34 Bazalgette Dr</td><td>Bazalgette Dr</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.79677&mlon=-79.17486#map=18/43.79677/-79.17486" target="_blank" rel="noopener">View ↗</a></td></tr>
         
-        <tr><td>32 Bazalgette Dr</td><td>Bazalgette Dr</td><td></td>
-          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.79670&mlon=-79.17456#map=18/43.79670/-79.17456" target="_blank" rel="noopener">View ↗</a></td></tr>
+        <tr><td>30 Norwood Rd</td><td>Norwood Rd</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68390&mlon=-79.30335#map=18/43.68390/-79.30335" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>30A Norwood Rd</td><td>Norwood Rd</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68384&mlon=-79.30333#map=18/43.68384/-79.30333" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>29 Bazalgette Dr</td><td>Bazalgette Dr</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.79659&mlon=-79.17505#map=18/43.79659/-79.17505" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>30 Bazalgette Dr</td><td>Bazalgette Dr</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.79657&mlon=-79.17450#map=18/43.79657/-79.17450" target="_blank" rel="noopener">View ↗</a></td></tr>
         
         <tr><td>155B Poyntz Ave</td><td>Poyntz Ave</td><td></td>
           <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75817&mlon=-79.41768#map=18/43.75817/-79.41768" target="_blank" rel="noopener">View ↗</a></td></tr>
@@ -196,20 +221,14 @@
         <tr><td>885R Caledonia Rd</td><td>Caledonia Rd</td><td></td>
           <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70424&mlon=-79.46366#map=18/43.70424/-79.46366" target="_blank" rel="noopener">View ↗</a></td></tr>
         
-        <tr><td>34 Bazalgette Dr</td><td>Bazalgette Dr</td><td></td>
-          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.79677&mlon=-79.17486#map=18/43.79677/-79.17486" target="_blank" rel="noopener">View ↗</a></td></tr>
-        
-        <tr><td>30A Norwood Rd</td><td>Norwood Rd</td><td></td>
-          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68384&mlon=-79.30333#map=18/43.68384/-79.30333" target="_blank" rel="noopener">View ↗</a></td></tr>
-        
-        <tr><td>30 Norwood Rd</td><td>Norwood Rd</td><td></td>
-          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68390&mlon=-79.30335#map=18/43.68390/-79.30335" target="_blank" rel="noopener">View ↗</a></td></tr>
-        
-        <tr><td>29 Bazalgette Dr</td><td>Bazalgette Dr</td><td></td>
-          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.79659&mlon=-79.17505#map=18/43.79659/-79.17505" target="_blank" rel="noopener">View ↗</a></td></tr>
+        <tr><td>11 Willowlea Dr</td><td>Willowlea Dr</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.79709&mlon=-79.17503#map=18/43.79709/-79.17503" target="_blank" rel="noopener">View ↗</a></td></tr>
         
         <tr><td>42 Album Lane</td><td>Album Lane</td><td></td>
           <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66786&mlon=-79.44014#map=18/43.66786/-79.44014" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>32 Bazalgette Dr</td><td>Bazalgette Dr</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.79670&mlon=-79.17456#map=18/43.79670/-79.17456" target="_blank" rel="noopener">View ↗</a></td></tr>
         
       </tbody>
     </table>
@@ -223,7 +242,20 @@
   </div>
 
   <div class="section">
-    <h2>Updated Addresses <span class="badge badge-yellow">0</span></h2>
+    <h2>Updated Addresses <span class="badge badge-yellow">0</span>
+      <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+        <span class="info-btn" aria-hidden="true">i</span>
+        <span class="info-pop">
+          <strong>Compared for changes</strong>
+          <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (LINEAR_NAME_FULL)</li><li>Full address (ADDRESS_FULL)</li><li>Coordinates (latitude, longitude)</li></ul>
+          <p class="note">…plus all other source attributes, except those ignored below.</p>
+          <strong>Ignored (changes here are not counted)</strong>
+          
+          <ul><li>ADDRESS_CLASS</li><li>ADDRESS_CLASS_DESC</li><li>ADDRESS_ID</li><li>ADDRESS_ID_LINK</li><li>ADDRESS_POINT_ID_LINK</li><li>CENTRELINE_ID</li><li>CENTRELINE_MEASURE</li><li>CENTRELINE_OFFSET</li><li>CLASS_FAMILY</li><li>CLASS_FAMILY_DESC</li></ul>
+          
+        </span>
+      </span>
+    </h2>
     <p class="empty">No addresses updated.</p>
   </div>
 
@@ -234,59 +266,19 @@
       <thead><tr><th>Address</th><th>Before</th><th></th><th>After</th></tr></thead>
       <tbody>
         
-        <tr><td>93 Cleanside Rd</td>
+        <tr><td>89 Cleanside Rd</td>
           
-          <td class="old-val">43.71782, -79.27909</td>
-          <td class="arrow-val">↓ 2.4m</td>
-          <td class="new-val">43.71780, -79.27908</td>
-          
-        </tr>
-        
-        <tr><td>94 Howe Ave</td>
-          
-          <td class="old-val">43.71717, -79.28064</td>
-          <td class="arrow-val">↓ 5.6m</td>
-          <td class="new-val">43.71712, -79.28063</td>
+          <td class="old-val">43.71778, -79.27927</td>
+          <td class="arrow-val">↙ 2.0m</td>
+          <td class="new-val">43.71777, -79.27929</td>
           
         </tr>
         
-        <tr><td>53 Gerigs St</td>
+        <tr><td>18 Fusilier Dr</td>
           
-          <td class="old-val">43.71698, -79.28070</td>
-          <td class="arrow-val">↑ 4.7m</td>
-          <td class="new-val">43.71702, -79.28072</td>
-          
-        </tr>
-        
-        <tr><td>48 Fusilier Dr</td>
-          
-          <td class="old-val">43.71782, -79.27847</td>
+          <td class="old-val">43.71753, -79.27972</td>
           <td class="arrow-val">↑ 2.4m</td>
-          <td class="new-val">43.71784, -79.27848</td>
-          
-        </tr>
-        
-        <tr><td>7 Cosens St</td>
-          
-          <td class="old-val">43.79495, -79.17279</td>
-          <td class="arrow-val">↖ 8.0m</td>
-          <td class="new-val">43.79498, -79.17288</td>
-          
-        </tr>
-        
-        <tr><td>55 Gerigs St</td>
-          
-          <td class="old-val">43.71703, -79.28072</td>
-          <td class="arrow-val">↑ 8.2m</td>
-          <td class="new-val">43.71710, -79.28075</td>
-          
-        </tr>
-        
-        <tr><td>65 Gerigs St</td>
-          
-          <td class="old-val">43.71734, -79.28085</td>
-          <td class="arrow-val">↖ 6.1m</td>
-          <td class="new-val">43.71739, -79.28088</td>
+          <td class="new-val">43.71755, -79.27973</td>
           
         </tr>
         
@@ -298,11 +290,107 @@
           
         </tr>
         
-        <tr><td>24 Fusilier Dr</td>
+        <tr><td>57 Cleanside Rd</td>
           
-          <td class="old-val">43.71759, -79.27945</td>
-          <td class="arrow-val">↖ 2.7m</td>
-          <td class="new-val">43.71761, -79.27947</td>
+          <td class="old-val">43.71746, -79.28089</td>
+          <td class="arrow-val">→ 10.2m</td>
+          <td class="new-val">43.71749, -79.28077</td>
+          
+        </tr>
+        
+        <tr><td>65 Gerigs St</td>
+          
+          <td class="old-val">43.71734, -79.28085</td>
+          <td class="arrow-val">↖ 6.1m</td>
+          <td class="new-val">43.71739, -79.28088</td>
+          
+        </tr>
+        
+        <tr><td>98 Howe Ave</td>
+          
+          <td class="old-val">43.71731, -79.28070</td>
+          <td class="arrow-val">↘ 6.1m</td>
+          <td class="new-val">43.71726, -79.28067</td>
+          
+        </tr>
+        
+        <tr><td>30 Fusilier Dr</td>
+          
+          <td class="old-val">43.71764, -79.27920</td>
+          <td class="arrow-val">↖ 3.9m</td>
+          <td class="new-val">43.71766, -79.27924</td>
+          
+        </tr>
+        
+        <tr><td>57 Gerigs St</td>
+          
+          <td class="old-val">43.71709, -79.28075</td>
+          <td class="arrow-val">↑ 4.7m</td>
+          <td class="new-val">43.71713, -79.28077</td>
+          
+        </tr>
+        
+        <tr><td>52 Deans Dr</td>
+          
+          <td class="old-val">43.71694, -79.28055</td>
+          <td class="arrow-val">← 9.9m</td>
+          <td class="new-val">43.71692, -79.28067</td>
+          
+        </tr>
+        
+        <tr><td>55 Gerigs St</td>
+          
+          <td class="old-val">43.71703, -79.28072</td>
+          <td class="arrow-val">↑ 8.2m</td>
+          <td class="new-val">43.71710, -79.28075</td>
+          
+        </tr>
+        
+        <tr><td>100 Howe Ave</td>
+          
+          <td class="old-val">43.71736, -79.28072</td>
+          <td class="arrow-val">↓ 7.1m</td>
+          <td class="new-val">43.71730, -79.28069</td>
+          
+        </tr>
+        
+        <tr><td>14 Fusilier Dr</td>
+          
+          <td class="old-val">43.71749, -79.27987</td>
+          <td class="arrow-val">↖ 3.7m</td>
+          <td class="new-val">43.71752, -79.27989</td>
+          
+        </tr>
+        
+        <tr><td>93 Cleanside Rd</td>
+          
+          <td class="old-val">43.71782, -79.27909</td>
+          <td class="arrow-val">↓ 2.4m</td>
+          <td class="new-val">43.71780, -79.27908</td>
+          
+        </tr>
+        
+        <tr><td>8 Fusilier Dr</td>
+          
+          <td class="old-val">43.71743, -79.28013</td>
+          <td class="arrow-val">↑ 4.7m</td>
+          <td class="new-val">43.71747, -79.28015</td>
+          
+        </tr>
+        
+        <tr><td>54 Deans Dr</td>
+          
+          <td class="old-val">43.71701, -79.28057</td>
+          <td class="arrow-val">↓ 7.8m</td>
+          <td class="new-val">43.71694, -79.28056</td>
+          
+        </tr>
+        
+        <tr><td>92 Howe Ave</td>
+          
+          <td class="old-val">43.71711, -79.28061</td>
+          <td class="arrow-val">↓ 6.9m</td>
+          <td class="new-val">43.71705, -79.28059</td>
           
         </tr>
         
@@ -314,11 +402,75 @@
           
         </tr>
         
+        <tr><td>67 Cleanside Rd</td>
+          
+          <td class="old-val">43.71758, -79.28020</td>
+          <td class="arrow-val">↘ 3.7m</td>
+          <td class="new-val">43.71755, -79.28018</td>
+          
+        </tr>
+        
+        <tr><td>79 Cleanside Rd</td>
+          
+          <td class="old-val">43.71769, -79.27969</td>
+          <td class="arrow-val">↓ 2.4m</td>
+          <td class="new-val">43.71767, -79.27970</td>
+          
+        </tr>
+        
+        <tr><td>63 Gerigs St</td>
+          
+          <td class="old-val">43.71728, -79.28082</td>
+          <td class="arrow-val">↑ 7.1m</td>
+          <td class="new-val">43.71734, -79.28085</td>
+          
+        </tr>
+        
+        <tr><td>102 Howe Ave</td>
+          
+          <td class="old-val">43.71742, -79.28075</td>
+          <td class="arrow-val">↘ 6.1m</td>
+          <td class="new-val">43.71737, -79.28072</td>
+          
+        </tr>
+        
+        <tr><td>55 Cleanside Rd</td>
+          
+          <td class="old-val">43.71739, -79.28088</td>
+          <td class="arrow-val">↑ 6.9m</td>
+          <td class="new-val">43.71745, -79.28090</td>
+          
+        </tr>
+        
         <tr><td>51 Gerigs St</td>
           
           <td class="old-val">43.71692, -79.28068</td>
           <td class="arrow-val">↑ 5.6m</td>
           <td class="new-val">43.71697, -79.28069</td>
+          
+        </tr>
+        
+        <tr><td>53 Gerigs St</td>
+          
+          <td class="old-val">43.71698, -79.28070</td>
+          <td class="arrow-val">↑ 4.7m</td>
+          <td class="new-val">43.71702, -79.28072</td>
+          
+        </tr>
+        
+        <tr><td>24 Fusilier Dr</td>
+          
+          <td class="old-val">43.71759, -79.27945</td>
+          <td class="arrow-val">↖ 2.7m</td>
+          <td class="new-val">43.71761, -79.27947</td>
+          
+        </tr>
+        
+        <tr><td>73 Cleanside Rd</td>
+          
+          <td class="old-val">43.71764, -79.27993</td>
+          <td class="arrow-val">↓ 2.2m</td>
+          <td class="new-val">43.71762, -79.27993</td>
           
         </tr>
         
@@ -338,51 +490,11 @@
           
         </tr>
         
-        <tr><td>52 Deans Dr</td>
+        <tr><td>7 Cosens St</td>
           
-          <td class="old-val">43.71694, -79.28055</td>
-          <td class="arrow-val">← 9.9m</td>
-          <td class="new-val">43.71692, -79.28067</td>
-          
-        </tr>
-        
-        <tr><td>34 Fusilier Dr</td>
-          
-          <td class="old-val">43.71768, -79.27903</td>
-          <td class="arrow-val">↖ 3.7m</td>
-          <td class="new-val">43.71771, -79.27905</td>
-          
-        </tr>
-        
-        <tr><td>57 Cleanside Rd</td>
-          
-          <td class="old-val">43.71746, -79.28089</td>
-          <td class="arrow-val">→ 10.2m</td>
-          <td class="new-val">43.71749, -79.28077</td>
-          
-        </tr>
-        
-        <tr><td>54 Deans Dr</td>
-          
-          <td class="old-val">43.71701, -79.28057</td>
-          <td class="arrow-val">↓ 7.8m</td>
-          <td class="new-val">43.71694, -79.28056</td>
-          
-        </tr>
-        
-        <tr><td>18 Fusilier Dr</td>
-          
-          <td class="old-val">43.71753, -79.27972</td>
-          <td class="arrow-val">↑ 2.4m</td>
-          <td class="new-val">43.71755, -79.27973</td>
-          
-        </tr>
-        
-        <tr><td>92 Howe Ave</td>
-          
-          <td class="old-val">43.71711, -79.28061</td>
-          <td class="arrow-val">↓ 6.9m</td>
-          <td class="new-val">43.71705, -79.28059</td>
+          <td class="old-val">43.79495, -79.17279</td>
+          <td class="arrow-val">↖ 8.0m</td>
+          <td class="new-val">43.79498, -79.17288</td>
           
         </tr>
         
@@ -394,14 +506,6 @@
           
         </tr>
         
-        <tr><td>73 Cleanside Rd</td>
-          
-          <td class="old-val">43.71764, -79.27993</td>
-          <td class="arrow-val">↓ 2.2m</td>
-          <td class="new-val">43.71762, -79.27993</td>
-          
-        </tr>
-        
         <tr><td>104 Howe Ave</td>
           
           <td class="old-val">43.71748, -79.28077</td>
@@ -410,35 +514,19 @@
           
         </tr>
         
-        <tr><td>55 Cleanside Rd</td>
+        <tr><td>34 Fusilier Dr</td>
           
-          <td class="old-val">43.71739, -79.28088</td>
-          <td class="arrow-val">↑ 6.9m</td>
-          <td class="new-val">43.71745, -79.28090</td>
-          
-        </tr>
-        
-        <tr><td>100 Howe Ave</td>
-          
-          <td class="old-val">43.71736, -79.28072</td>
-          <td class="arrow-val">↓ 7.1m</td>
-          <td class="new-val">43.71730, -79.28069</td>
+          <td class="old-val">43.71768, -79.27903</td>
+          <td class="arrow-val">↖ 3.7m</td>
+          <td class="new-val">43.71771, -79.27905</td>
           
         </tr>
         
-        <tr><td>67 Cleanside Rd</td>
+        <tr><td>48 Fusilier Dr</td>
           
-          <td class="old-val">43.71758, -79.28020</td>
-          <td class="arrow-val">↘ 3.7m</td>
-          <td class="new-val">43.71755, -79.28018</td>
-          
-        </tr>
-        
-        <tr><td>102 Howe Ave</td>
-          
-          <td class="old-val">43.71742, -79.28075</td>
-          <td class="arrow-val">↘ 6.1m</td>
-          <td class="new-val">43.71737, -79.28072</td>
+          <td class="old-val">43.71782, -79.27847</td>
+          <td class="arrow-val">↑ 2.4m</td>
+          <td class="new-val">43.71784, -79.27848</td>
           
         </tr>
         
@@ -450,67 +538,11 @@
           
         </tr>
         
-        <tr><td>30 Fusilier Dr</td>
+        <tr><td>94 Howe Ave</td>
           
-          <td class="old-val">43.71764, -79.27920</td>
-          <td class="arrow-val">↖ 3.9m</td>
-          <td class="new-val">43.71766, -79.27924</td>
-          
-        </tr>
-        
-        <tr><td>63 Gerigs St</td>
-          
-          <td class="old-val">43.71728, -79.28082</td>
-          <td class="arrow-val">↑ 7.1m</td>
-          <td class="new-val">43.71734, -79.28085</td>
-          
-        </tr>
-        
-        <tr><td>98 Howe Ave</td>
-          
-          <td class="old-val">43.71731, -79.28070</td>
-          <td class="arrow-val">↘ 6.1m</td>
-          <td class="new-val">43.71726, -79.28067</td>
-          
-        </tr>
-        
-        <tr><td>79 Cleanside Rd</td>
-          
-          <td class="old-val">43.71769, -79.27969</td>
-          <td class="arrow-val">↓ 2.4m</td>
-          <td class="new-val">43.71767, -79.27970</td>
-          
-        </tr>
-        
-        <tr><td>8 Fusilier Dr</td>
-          
-          <td class="old-val">43.71743, -79.28013</td>
-          <td class="arrow-val">↑ 4.7m</td>
-          <td class="new-val">43.71747, -79.28015</td>
-          
-        </tr>
-        
-        <tr><td>57 Gerigs St</td>
-          
-          <td class="old-val">43.71709, -79.28075</td>
-          <td class="arrow-val">↑ 4.7m</td>
-          <td class="new-val">43.71713, -79.28077</td>
-          
-        </tr>
-        
-        <tr><td>89 Cleanside Rd</td>
-          
-          <td class="old-val">43.71778, -79.27927</td>
-          <td class="arrow-val">↙ 2.0m</td>
-          <td class="new-val">43.71777, -79.27929</td>
-          
-        </tr>
-        
-        <tr><td>14 Fusilier Dr</td>
-          
-          <td class="old-val">43.71749, -79.27987</td>
-          <td class="arrow-val">↖ 3.7m</td>
-          <td class="new-val">43.71752, -79.27989</td>
+          <td class="old-val">43.71717, -79.28064</td>
+          <td class="arrow-val">↓ 5.6m</td>
+          <td class="new-val">43.71712, -79.28063</td>
           
         </tr>
         
@@ -519,7 +551,7 @@
     
   </div>
 
-  <div class="generated-at">Report generated Jun 09, 2026 at 05:22 PM · source licence: Open Government Licence – Toronto</div>
+  <div class="generated-at">Report generated Jun 10, 2026 at 03:42 PM · source licence: Open Government Licence – Toronto</div>
 
   <script>
     function sortTable(tbodyId, col) {
