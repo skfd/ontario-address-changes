@@ -1,0 +1,1535 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>City of Toronto Address Changes — Wednesday, Mar 04, 2026</title>
+  <style>
+    :root {
+      --bg: #fafafa; --surface: #ffffff; --surface2: #f5f5f5; --surface3: #ebebeb;
+      --border: #e0e0e0; --border-strong: #d1d1d1; --text: #242424;
+      --text-secondary: #424242; --text-dim: #616161; --accent: #0078d4;
+      --accent-hover: #106ebe; --accent-bg: #eff6fc; --green: #107c10;
+      --green-bg: #f1faf1; --green-tint: #9fd89f; --red: #c50f1f; --red-bg: #fdf3f4;
+      --red-tint: #eeacb2; --yellow: #eaa300; --yellow-bg: #fefbf4; --yellow-tint: #f9e2ae;
+      --shadow-4: 0 2px 4px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --shadow-8: 0 4px 8px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --card-bg: #ffffff; --card-hover: #f5f5f5; color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1f1f1f; --surface: #292929; --surface2: #333333; --surface3: #3d3d3d;
+        --border: #525252; --border-strong: #666666; --text: #ffffff;
+        --text-secondary: #d6d6d6; --text-dim: #adadad; --accent: #2899f5;
+        --accent-hover: #3aa0f3; --accent-bg: #002848; --green: #54b054;
+        --green-bg: #052505; --green-tint: #107c10; --red: #dc626d; --red-bg: #3b0509;
+        --red-tint: #c50f1f; --yellow: #f2c661; --yellow-bg: #463100; --yellow-tint: #eaa300;
+        --shadow-4: 0 2px 4px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --shadow-8: 0 4px 8px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --card-bg: #333333; --card-hover: #3d3d3d; color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI Variable','Segoe UI',system-ui,-apple-system,sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.5; padding: 2rem;
+      max-width: 1100px; margin: 0 auto; font-size: 14px; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; color: var(--accent-hover); }
+    .back-link { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 12px;
+      color: var(--text-dim); margin-bottom: 1.5rem; transition: color 0.1s; }
+    .back-link:hover { color: var(--accent); text-decoration: none; }
+    h1 { font-size: 24px; font-weight: 600; margin-bottom: 4px; }
+    .subtitle { color: var(--text-secondary); font-size: 14px; margin-bottom: 12px; }
+    .explainer { color: var(--text-secondary); font-size: 13px; line-height: 1.5;
+      margin-bottom: 24px; padding: 12px 16px; background: var(--surface);
+      border-radius: 8px; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px; margin-bottom: 24px; }
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px;
+      padding: 16px; box-shadow: var(--shadow-4); transition: box-shadow 0.1s; }
+    .card:hover { box-shadow: var(--shadow-8); }
+    .card .label { font-size: 12px; color: var(--text-dim); font-weight: 400; }
+    .card .value { font-size: 28px; font-weight: 600; margin-top: 4px; }
+    .card .value.green { color: var(--green); } .card .value.red { color: var(--red); }
+    .card .value.yellow { color: var(--yellow); } .card .value.accent { color: var(--accent); }
+    .sparkline { display: block; margin-top: 6px; overflow: visible; opacity: 0.9; }
+    .sparkline-label { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+    .section { margin-bottom: 24px; }
+    .section h2 { font-size: 16px; font-weight: 600; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px; }
+    .badge { font-size: 12px; padding: 2px 8px; border-radius: 999px; font-weight: 600; }
+    .badge-green { background: var(--green-bg); color: var(--green); }
+    .badge-red { background: var(--red-bg); color: var(--red); }
+    .badge-yellow { background: var(--yellow-bg); color: var(--yellow); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface);
+      border-radius: 8px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    thead { background: var(--surface2); }
+    th { text-align: left; padding: 8px 12px; font-weight: 600; color: var(--text-dim);
+      font-size: 12px; cursor: pointer; user-select: none; border-bottom: 1px solid var(--border); }
+    th:hover { color: var(--accent); }
+    td { padding: 8px 12px; border-top: 1px solid var(--border); }
+    tr:hover td { background: var(--surface2); }
+    .old-val { color: var(--red); text-decoration: line-through; }
+    .new-val { color: var(--green); }
+    .arrow-val { color: var(--text-dim); text-align: center; white-space: nowrap; }
+    .map-link { display: inline-flex; align-items: center; margin-left: 0.4em;
+      color: var(--accent); vertical-align: middle; white-space: nowrap; font-size: 12px; }
+    .map-link:hover { color: var(--accent-hover); }
+    .map-link svg { width: 14px; height: 14px; }
+    .change-field { color: var(--yellow); font-weight: 600; }
+    .bar-chart { margin-top: 8px; }
+    .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 12px; }
+    .bar-label { width: 180px; text-align: right; color: var(--text-secondary); flex-shrink: 0;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .bar-track { flex: 1; height: 8px; background: var(--surface2); border-radius: 4px;
+      overflow: hidden; position: relative; }
+    .bar-fill { height: 100%; border-radius: 4px; transition: width 0.15s ease; }
+    .bar-fill.green { background: var(--green); } .bar-fill.red { background: var(--red); }
+    .bar-count { width: 40px; font-size: 12px; color: var(--text-dim); }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+    .empty { color: var(--text-dim); font-style: italic; padding: 16px; }
+    .truncated { color: var(--text-dim); font-size: 12px; margin-top: 8px; }
+    .collapsible-toggle { background: transparent; border: 1px solid var(--border);
+      color: var(--accent); padding: 5px 12px; border-radius: 4px; cursor: pointer;
+      font-size: 12px; font-family: inherit; margin-bottom: 12px; transition: background 0.1s; }
+    .collapsible-toggle:hover { background: var(--surface2); }
+    .no-changes-banner { background: var(--green-bg); border: 1px solid var(--green-tint);
+      color: var(--green); padding: 16px; border-radius: 8px; margin-bottom: 24px;
+      text-align: center; font-weight: 600; font-size: 14px; }
+    .baseline-banner { background: var(--accent-bg); border: 1px solid var(--accent);
+      color: var(--accent); padding: 16px; border-radius: 8px; margin-bottom: 24px; font-size: 13px; }
+    .generated-at { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-dim); }
+    .history { font-size: 12.5px; color: var(--text-secondary); white-space: nowrap; }
+    .history .a { color: var(--green); font-weight: 500; }
+    .history .r { color: var(--red); font-weight: 500; }
+    .history .dot { color: var(--text-dim); margin: 0 4px; }
+    .history-none { color: var(--text-dim); font-style: italic; font-size: 12.5px; }
+  </style>
+</head>
+
+
+
+
+
+<body>
+
+  <a class="back-link" href="index.html">← Back to City of Toronto reports</a>
+
+  <h1>City of Toronto — Address Changes</h1>
+  <p class="subtitle">
+    Changes between  and Wednesday, Mar 04, 2026
+    · 525,378 total addresses
+  </p>
+
+  
+
+  <div class="cards">
+    <div class="card"><div class="label">Total Addresses</div>
+      <div class="value accent">525,378</div></div>
+    <div class="card"><div class="label">New Addresses</div>
+      <div class="value green">+0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#107c10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,16.4 19.7,14.8 37.3,16.4 55.0,18.0 72.7,8.4 90.3,2.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#107c10"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Retired Addresses</div>
+      <div class="value red">−0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#c50f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,14.8 19.7,2.0 37.3,16.9 55.0,18.0 72.7,18.0 90.3,16.9 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#c50f1f"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Updated Addresses</div>
+      <div class="value yellow">97</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,9.3 19.7,2.0 37.3,12.9 55.0,13.8 72.7,16.3 90.3,7.8 108.0,17.3"/><circle cx="108.0" cy="17.3" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Location Adjustments</div>
+      <div class="value" style="color: var(--text-dim)">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#808080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,2.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#808080"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+  </div>
+
+  
+  <div class="section">
+    <h2>Change Breakdown</h2>
+    <div class="stats-grid">
+      
+      
+      
+      <div class="card"><div class="label">Most Frequently Updated Fields</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">CENTRELINE_MEASURE</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">93</span></div>
+        <div class="bar-row"><span class="bar-label">CENTRELINE_OFFSET</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:98.0%"></div></div>
+          <span class="bar-count">91</span></div>
+        <div class="bar-row"><span class="bar-label">Location</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:25.0%"></div></div>
+          <span class="bar-count">23</span></div>
+        <div class="bar-row"><span class="bar-label">CENTRELINE_ID</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:2.0%"></div></div>
+          <span class="bar-count">2</span></div>
+        <div class="bar-row"><span class="bar-label">ADDRESS_CLASS</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:1.0%"></div></div>
+          <span class="bar-count">1</span></div>
+        <div class="bar-row"><span class="bar-label">ADDRESS_CLASS_DESC</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:1.0%"></div></div>
+          <span class="bar-count">1</span></div>
+        <div class="bar-row"><span class="bar-label">ADDRESS_ID</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:1.0%"></div></div>
+          <span class="bar-count">1</span></div>
+        <div class="bar-row"><span class="bar-label">ADDRESS_ID_LINK</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:1.0%"></div></div>
+          <span class="bar-count">1</span></div>
+        <div class="bar-row"><span class="bar-label">ADDRESS_POINT_ID_LINK</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:1.0%"></div></div>
+          <span class="bar-count">1</span></div>
+        <div class="bar-row"><span class="bar-label">CLASS_FAMILY</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:1.0%"></div></div>
+          <span class="bar-count">1</span></div>
+      </div></div>
+    </div>
+  </div>
+  
+
+  <div class="section">
+    <h2>New Addresses <span class="badge badge-green">0</span></h2>
+    <p class="empty">No new addresses.</p>
+  </div>
+
+  <div class="section">
+    <h2>Retired Addresses <span class="badge badge-red">0</span></h2>
+    <p class="empty">No addresses retired.</p>
+  </div>
+
+  <div class="section">
+    <h2>Updated Addresses <span class="badge badge-yellow">97</span></h2>
+    
+    <table>
+      <thead><tr><th>Address</th><th>What Changed</th><th>Before</th><th></th><th>After</th></tr></thead>
+      <tbody>
+        
+        <tr><td rowspan="2">30 Mayall Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">34.95</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">34.48</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">29.8</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">29.61</td></tr>
+        
+        <tr><td rowspan="1">68 Mayall Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">72.91</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">71.16</td></tr>
+        
+        <tr><td rowspan="2">46 Mayall Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">145.96</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">147.23</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">22.62</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">23.1</td></tr>
+        
+        <tr><td rowspan="3">1561 Midland Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">105.44</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">102.92</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">23.14</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">23.15</td></tr>
+        
+        <tr>
+          <td class="change-field">Location</td>
+          <td class="old-val">43.75491, -79.26597</td>
+          <td class="arrow-val">↓ 2.2m</td>
+          <td class="new-val">43.75489, -79.26597</td></tr>
+        
+        <tr><td rowspan="2">32 Mayall Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">50.06</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">49.49</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">27.02</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">26.36</td></tr>
+        
+        <tr><td rowspan="3">25 Foxrun Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">96.51</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">98.18</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">27.55</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">28.39</td></tr>
+        
+        <tr>
+          <td class="change-field">Location</td>
+          <td class="old-val">43.73021, -79.51150</td>
+          <td class="arrow-val">↖ 2.7m</td>
+          <td class="new-val">43.73023, -79.51152</td></tr>
+        
+        <tr><td rowspan="2">33 Mayall Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">61.52</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">64.08</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">21.5</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">21.13</td></tr>
+        
+        <tr><td rowspan="3">1571 Midland Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">18.56</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">20.01</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">20.72</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">22.82</td></tr>
+        
+        <tr>
+          <td class="change-field">Location</td>
+          <td class="old-val">43.75529, -79.26615</td>
+          <td class="arrow-val">↗ 2.7m</td>
+          <td class="new-val">43.75531, -79.26613</td></tr>
+        
+        <tr><td rowspan="2">51 Mayall Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">183.04</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">183.65</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">24.49</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">23.29</td></tr>
+        
+        <tr><td rowspan="3">57 Akil Thomas Gdns</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">53.24</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">54.92</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">15.72</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">15.92</td></tr>
+        
+        <tr>
+          <td class="change-field">Location</td>
+          <td class="old-val">43.75467, -79.26539</td>
+          <td class="arrow-val">↓ 2.4m</td>
+          <td class="new-val">43.75465, -79.26538</td></tr>
+        
+        <tr><td rowspan="3">1559 Midland Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">100.46</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">98.92</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">23.34</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">23.25</td></tr>
+        
+        <tr>
+          <td class="change-field">Location</td>
+          <td class="old-val">43.75487, -79.26595</td>
+          <td class="arrow-val">↓ 2.2m</td>
+          <td class="new-val">43.75485, -79.26595</td></tr>
+        
+        <tr><td rowspan="2">4 Dunreo Dr</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">28.56</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">31.69</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">21.28</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">20.1</td></tr>
+        
+        <tr><td rowspan="2">1 Chalkfarm Dr</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">30.84</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">31.36</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">23.84</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">23.09</td></tr>
+        
+        <tr><td rowspan="2">18 Desmont Rd</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">143.38</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">144.44</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">21.17</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">21.28</td></tr>
+        
+        <tr><td rowspan="1">196 Exbury Rd</td>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">100.43</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">100.44</td></tr>
+        
+        <tr><td rowspan="2">53 Mayall Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">196.76</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">198.19</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">23.96</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">22.37</td></tr>
+        
+        <tr><td rowspan="2">11 Dunreo Dr</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">82.47</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">86.4</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">22.35</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">22.52</td></tr>
+        
+        <tr><td rowspan="3">2415 Jane St</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">443736</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60058112</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">-29.77</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">149.7</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">73.33</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">72.88</td></tr>
+        
+        <tr><td rowspan="2">2259 Jane St</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">198.93</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">199.02</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">41.25</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">40.86</td></tr>
+        
+        <tr><td rowspan="2">39 Mayall Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">94.6</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">95.15</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">25.0</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">23.29</td></tr>
+        
+        <tr><td rowspan="3">1563 Midland Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">109.44</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">107.4</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">23.29</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">23.14</td></tr>
+        
+        <tr>
+          <td class="change-field">Location</td>
+          <td class="old-val">43.75494, -79.26599</td>
+          <td class="arrow-val">↘ 1.4m</td>
+          <td class="new-val">43.75493, -79.26598</td></tr>
+        
+        <tr><td rowspan="1">66 Mayall Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">51.57</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">49.82</td></tr>
+        
+        <tr><td rowspan="2">37 Mayall Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">85.2</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">88.51</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">24.5</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">23.74</td></tr>
+        
+        <tr><td rowspan="2">22 Mayall Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">23.01</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">22.57</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">23.26</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">23.7</td></tr>
+        
+        <tr><td rowspan="2">14 Desmont Rd</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">113.28</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">114.34</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">22.07</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">22.45</td></tr>
+        
+        <tr><td rowspan="3">1549 Midland Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">75.38</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">73.72</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">22.53</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">22.5</td></tr>
+        
+        <tr>
+          <td class="change-field">Location</td>
+          <td class="old-val">43.75465, -79.26588</td>
+          <td class="arrow-val">↓ 2.4m</td>
+          <td class="new-val">43.75463, -79.26587</td></tr>
+        
+        <tr><td rowspan="2">47 Mayall Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">152.89</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">151.5</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">24.03</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">23.87</td></tr>
+        
+        <tr><td rowspan="2">44 Mayall Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">132.9</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">135.4</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">22.17</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">23.27</td></tr>
+        
+        <tr><td rowspan="2">12 Desmont Rd</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">98.77</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">99.82</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">21.33</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">21.85</td></tr>
+        
+        <tr><td rowspan="2">29 Foxrun Ave</td>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">26.09</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">26.32</td></tr>
+        
+        <tr>
+          <td class="change-field">Location</td>
+          <td class="old-val">43.73028, -79.51172</td>
+          <td class="arrow-val">← 3.4m</td>
+          <td class="new-val">43.73029, -79.51176</td></tr>
+        
+        <tr><td rowspan="2">54 Mayall Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">208.31</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">210.03</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">22.61</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">24.05</td></tr>
+        
+        <tr><td rowspan="2">49 Mayall Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">164.25</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">164.88</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">21.73</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">20.83</td></tr>
+        
+        <tr><td rowspan="2">6 Desmont Rd</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">54.89</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">55.96</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">22.45</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">23.38</td></tr>
+        
+        <tr><td rowspan="3">10 Liam Foudy Crt</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">48.92</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">46.29</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">16.0</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">16.46</td></tr>
+        
+        <tr>
+          <td class="change-field">Location</td>
+          <td class="old-val">43.75555, -79.26573</td>
+          <td class="arrow-val">↓ 2.2m</td>
+          <td class="new-val">43.75553, -79.26573</td></tr>
+        
+        <tr><td rowspan="2">2257 Jane St</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">129.27</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">129.34</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">31.65</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">31.4</td></tr>
+        
+        <tr><td rowspan="2">2253 Jane St</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">78.87</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">78.93</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">32.12</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">31.97</td></tr>
+        
+        <tr><td rowspan="2">48 Mayall Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">163.94</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">163.04</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">26.06</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">26.93</td></tr>
+        
+        <tr><td rowspan="2">10 Dunreo Dr</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">89.76</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">92.8</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">25.56</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">25.51</td></tr>
+        
+        <tr><td rowspan="2">8 Dunreo Dr</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">75.5</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">78.51</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">27.32</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">27.01</td></tr>
+        
+        <tr><td rowspan="2">31 Mayall Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">50.49</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">48.42</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">20.21</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">20.87</td></tr>
+        
+        <tr><td rowspan="1">65 Mayall Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">60.79</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">59.05</td></tr>
+        
+        <tr><td rowspan="2">7 Desmont Rd</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">71.99</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">72.65</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">21.33</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">20.56</td></tr>
+        
+        <tr><td rowspan="2">11 Desmont Rd</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">100.22</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">100.88</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">21.35</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">20.84</td></tr>
+        
+        <tr><td rowspan="3">1565 Midland Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">114.39</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">111.46</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">23.2</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">23.24</td></tr>
+        
+        <tr>
+          <td class="change-field">Location</td>
+          <td class="old-val">43.75499, -79.26600</td>
+          <td class="arrow-val">↓ 3.4m</td>
+          <td class="new-val">43.75496, -79.26599</td></tr>
+        
+        <tr><td rowspan="2">52 Mayall Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">194.5</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">192.82</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">22.07</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">23.41</td></tr>
+        
+        <tr><td rowspan="2">8 Desmont Rd</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">69.61</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">70.66</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">20.52</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">21.31</td></tr>
+        
+        <tr><td rowspan="2">7 Chalkfarm Dr</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">51.27</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">51.73</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">26.33</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">25.98</td></tr>
+        
+        <tr><td rowspan="1">63 Mayall Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">31.6</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">29.86</td></tr>
+        
+        <tr><td rowspan="3">1573 Midland Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">22.69</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">24.37</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">20.42</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">22.6</td></tr>
+        
+        <tr>
+          <td class="change-field">Location</td>
+          <td class="old-val">43.75533, -79.26617</td>
+          <td class="arrow-val">↗ 2.7m</td>
+          <td class="new-val">43.75535, -79.26615</td></tr>
+        
+        <tr><td rowspan="3">59 Akil Thomas Gdns</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">49.75</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">50.64</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">16.56</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">16.32</td></tr>
+        
+        <tr>
+          <td class="change-field">Location</td>
+          <td class="old-val">43.75470, -79.26541</td>
+          <td class="arrow-val">↘ 1.4m</td>
+          <td class="new-val">43.75469, -79.26540</td></tr>
+        
+        <tr><td rowspan="2">55 Mayall Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">217.08</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">217.36</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">24.28</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">23.07</td></tr>
+        
+        <tr><td rowspan="2">28 Mayall Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">21.4</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">21.03</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">33.05</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">33.29</td></tr>
+        
+        <tr><td rowspan="2">29 Mayall Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">36.79</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">34.63</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">23.1</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">23.33</td></tr>
+        
+        <tr><td rowspan="2">25 Mayall Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">4.95</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">2.82</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">22.94</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">22.16</td></tr>
+        
+        <tr><td rowspan="3">55 Akil Thomas Gdns</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">57.83</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">59.44</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">15.43</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">15.21</td></tr>
+        
+        <tr>
+          <td class="change-field">Location</td>
+          <td class="old-val">43.75463, -79.26537</td>
+          <td class="arrow-val">↘ 1.4m</td>
+          <td class="new-val">43.75462, -79.26536</td></tr>
+        
+        <tr><td rowspan="2">50 Mayall Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">182.68</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">181.74</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">25.08</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">26.24</td></tr>
+        
+        <tr><td rowspan="2">10 Desmont Rd</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">82.9</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">83.95</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">20.5</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">21.17</td></tr>
+        
+        <tr><td rowspan="2">5 Desmont Rd</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">56.5</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">57.14</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">23.03</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">22.11</td></tr>
+        
+        <tr><td rowspan="2">5 Chalkfarm Dr</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">45.09</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">45.54</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">27.02</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">26.54</td></tr>
+        
+        <tr><td rowspan="3">1543 Midland Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">62.8</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60.59</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">21.93</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">22.06</td></tr>
+        
+        <tr>
+          <td class="change-field">Location</td>
+          <td class="old-val">43.75454, -79.26584</td>
+          <td class="arrow-val">↓ 2.4m</td>
+          <td class="new-val">43.75452, -79.26583</td></tr>
+        
+        <tr><td rowspan="2">56 Mayall Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">233.32</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">230.21</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">19.74</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">21.02</td></tr>
+        
+        <tr><td rowspan="2">34 Mayall Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">66.44</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">61.96</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">24.03</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">24.69</td></tr>
+        
+        <tr><td rowspan="2">2255 Jane St</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">105.75</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">105.81</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">32.52</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">32.31</td></tr>
+        
+        <tr><td rowspan="2">15 Desmont Rd</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">118.25</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">118.92</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">20.08</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">19.73</td></tr>
+        
+        <tr><td rowspan="2">27 Mayall Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">18.37</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">16.15</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">25.37</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">25.01</td></tr>
+        
+        <tr><td rowspan="2">9 Dunreo Dr</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">66.11</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">70.07</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">24.29</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">24.76</td></tr>
+        
+        <tr><td rowspan="2">31 Foxrun Ave</td>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">28.32</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">25.8</td></tr>
+        
+        <tr>
+          <td class="change-field">Location</td>
+          <td class="old-val">43.73029, -79.51197</td>
+          <td class="arrow-val">↘ 3.9m</td>
+          <td class="new-val">43.73027, -79.51193</td></tr>
+        
+        <tr><td rowspan="2">36 Mayall Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">104.83</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">98.43</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">18.04</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">20.46</td></tr>
+        
+        <tr><td rowspan="2">59 Mayall Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">239.07</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">241.62</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">27.84</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">25.07</td></tr>
+        
+        <tr><td rowspan="1">190 Exbury Rd</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">94.35</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">94.34</td></tr>
+        
+        <tr><td rowspan="3">19 Foxrun Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">87.32</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">88.99</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">21.68</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">28.74</td></tr>
+        
+        <tr>
+          <td class="change-field">Location</td>
+          <td class="old-val">43.72999, -79.51145</td>
+          <td class="arrow-val">↗ 8.0m</td>
+          <td class="new-val">43.73002, -79.51136</td></tr>
+        
+        <tr><td rowspan="2">200 Exbury Rd</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">145.97</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">145.96</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">112.26</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">112.27</td></tr>
+        
+        <tr><td rowspan="10">567 Dupont St</td>
+          <td class="change-field">ADDRESS_CLASS</td>
+          <td class="old-val">L</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">S</td></tr>
+        
+        <tr>
+          <td class="change-field">ADDRESS_CLASS_DESC</td>
+          <td class="old-val">Land</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">Structure</td></tr>
+        
+        <tr>
+          <td class="change-field">ADDRESS_ID</td>
+          <td class="old-val">131868</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">618068</td></tr>
+        
+        <tr>
+          <td class="change-field">ADDRESS_ID_LINK</td>
+          <td class="old-val">—</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">131869</td></tr>
+        
+        <tr>
+          <td class="change-field">ADDRESS_POINT_ID_LINK</td>
+          <td class="old-val">—</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">837724</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">16.39</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">11.05</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">13.47</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">14.05</td></tr>
+        
+        <tr>
+          <td class="change-field">CLASS_FAMILY</td>
+          <td class="old-val">11011</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">10011</td></tr>
+        
+        <tr>
+          <td class="change-field">CLASS_FAMILY_DESC</td>
+          <td class="old-val">Land, Structure, Structure Entrance</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">Structure, Structure Entrance</td></tr>
+        
+        <tr>
+          <td class="change-field">Location</td>
+          <td class="old-val">43.67208, -79.41870</td>
+          <td class="arrow-val">→ 4.8m</td>
+          <td class="new-val">43.67208, -79.41864</td></tr>
+        
+        <tr><td rowspan="2">2265 Jane St</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">300.75</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">300.9</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">62.64</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">62.03</td></tr>
+        
+        <tr><td rowspan="2">45 Mayall Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">135.67</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">134.43</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">24.7</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">23.72</td></tr>
+        
+        <tr><td rowspan="2">20 Mayall Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">7.81</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">7.37</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">23.75</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">23.9</td></tr>
+        
+        <tr><td rowspan="2">9 Desmont Rd</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">87.75</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">88.4</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">22.45</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">21.82</td></tr>
+        
+        <tr><td rowspan="2">6 Dunreo Dr</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">60.48</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">63.45</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">30.13</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">29.54</td></tr>
+        
+        <tr><td rowspan="3">2425 Jane St</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">443736</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60058112</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">44.31</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">223.79</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">69.47</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">69.27</td></tr>
+        
+        <tr><td rowspan="3">1557 Midland Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">95.38</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">94.16</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">23.01</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">23.06</td></tr>
+        
+        <tr>
+          <td class="change-field">Location</td>
+          <td class="old-val">43.75482, -79.26594</td>
+          <td class="arrow-val">↓ 1.1m</td>
+          <td class="new-val">43.75481, -79.26594</td></tr>
+        
+        <tr><td rowspan="3">1539 Midland Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">53.42</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">51.88</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">21.62</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">22.15</td></tr>
+        
+        <tr>
+          <td class="change-field">Location</td>
+          <td class="old-val">43.75445, -79.26581</td>
+          <td class="arrow-val">↘ 1.4m</td>
+          <td class="new-val">43.75444, -79.26580</td></tr>
+        
+        <tr><td rowspan="3">1547 Midland Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">71.61</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">69.32</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">22.45</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">22.25</td></tr>
+        
+        <tr>
+          <td class="change-field">Location</td>
+          <td class="old-val">43.75461, -79.26587</td>
+          <td class="arrow-val">↓ 2.4m</td>
+          <td class="new-val">43.75459, -79.26586</td></tr>
+        
+        <tr><td rowspan="2">11 Chalkfarm Dr</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">68.91</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">69.42</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">24.12</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">24.11</td></tr>
+        
+        <tr><td rowspan="3">1545 Midland Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">67.65</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">65.12</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">22.19</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">22.06</td></tr>
+        
+        <tr>
+          <td class="change-field">Location</td>
+          <td class="old-val">43.75458, -79.26586</td>
+          <td class="arrow-val">↓ 2.4m</td>
+          <td class="new-val">43.75456, -79.26585</td></tr>
+        
+        <tr><td rowspan="2">43 Mayall Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">116.54</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">117.02</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">25.83</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">23.13</td></tr>
+        
+        <tr><td rowspan="2">41 Mayall Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">104.88</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">105.61</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">28.4</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">25.75</td></tr>
+        
+        <tr><td rowspan="3">1541 Midland Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">58.12</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">56.11</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">21.96</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">21.67</td></tr>
+        
+        <tr>
+          <td class="change-field">Location</td>
+          <td class="old-val">43.75450, -79.26583</td>
+          <td class="arrow-val">↓ 2.4m</td>
+          <td class="new-val">43.75448, -79.26582</td></tr>
+        
+        <tr><td rowspan="2">9 Chalkfarm Dr</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">61.82</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">62.31</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">24.84</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">24.69</td></tr>
+        
+        <tr><td rowspan="2">24 Mayall Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">36.05</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">35.62</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">22.98</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">23.66</td></tr>
+        
+        <tr><td rowspan="2">57 Mayall Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">228.07</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">230.94</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">26.1</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">25.14</td></tr>
+        
+        <tr><td rowspan="2">23 Foxrun Ave</td>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">22.78</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">27.81</td></tr>
+        
+        <tr>
+          <td class="change-field">Location</td>
+          <td class="old-val">43.73013, -79.51149</td>
+          <td class="arrow-val">↗ 6.1m</td>
+          <td class="new-val">43.73018, -79.51146</td></tr>
+        
+        <tr><td rowspan="2">35 Mayall Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">78.83</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">77.29</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">23.7</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">23.36</td></tr>
+        
+        <tr><td rowspan="2">17 Desmont Rd</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">130.27</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">130.96</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">17.85</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">17.62</td></tr>
+        
+        <tr><td rowspan="1">63-65 Mayall Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">45.78</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">44.03</td></tr>
+        
+        <tr><td rowspan="2">19 Desmont Rd</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">147.08</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">147.73</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">21.6</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">21.53</td></tr>
+        
+        <tr><td rowspan="2">16 Desmont Rd</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">128.23</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">129.28</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">20.44</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">20.69</td></tr>
+        
+        <tr><td rowspan="2">2251 Jane St</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">56.36</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">56.42</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">32.95</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">32.84</td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Location Adjustments <span class="badge" style="background: var(--surface2); color: var(--text-dim)">0</span></h2>
+    <p class="empty">No location adjustments.</p>
+  </div>
+
+  <div class="generated-at">Report generated Jun 09, 2026 at 05:22 PM · source licence: Open Government Licence – Toronto</div>
+
+  <script>
+    function sortTable(tbodyId, col) {
+      const tbody = document.getElementById(tbodyId);
+      if (!tbody) return;
+      const rows = Array.from(tbody.rows);
+      const dir = tbody.dataset.sortDir === 'asc' ? 'desc' : 'asc';
+      tbody.dataset.sortDir = dir;
+      rows.sort((a, b) => {
+        const av = a.cells[col]?.textContent.trim() || '';
+        const bv = b.cells[col]?.textContent.trim() || '';
+        const an = parseFloat(av), bn = parseFloat(bv);
+        if (!isNaN(an) && !isNaN(bn)) return dir === 'asc' ? an - bn : bn - an;
+        return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+      });
+      rows.forEach(r => tbody.appendChild(r));
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>City of Toronto Address Changes — Friday, Apr 03, 2026</title>
+  <style>
+    :root {
+      --bg: #fafafa; --surface: #ffffff; --surface2: #f5f5f5; --surface3: #ebebeb;
+      --border: #e0e0e0; --border-strong: #d1d1d1; --text: #242424;
+      --text-secondary: #424242; --text-dim: #616161; --accent: #0078d4;
+      --accent-hover: #106ebe; --accent-bg: #eff6fc; --green: #107c10;
+      --green-bg: #f1faf1; --green-tint: #9fd89f; --red: #c50f1f; --red-bg: #fdf3f4;
+      --red-tint: #eeacb2; --yellow: #eaa300; --yellow-bg: #fefbf4; --yellow-tint: #f9e2ae;
+      --shadow-4: 0 2px 4px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --shadow-8: 0 4px 8px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --card-bg: #ffffff; --card-hover: #f5f5f5; color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1f1f1f; --surface: #292929; --surface2: #333333; --surface3: #3d3d3d;
+        --border: #525252; --border-strong: #666666; --text: #ffffff;
+        --text-secondary: #d6d6d6; --text-dim: #adadad; --accent: #2899f5;
+        --accent-hover: #3aa0f3; --accent-bg: #002848; --green: #54b054;
+        --green-bg: #052505; --green-tint: #107c10; --red: #dc626d; --red-bg: #3b0509;
+        --red-tint: #c50f1f; --yellow: #f2c661; --yellow-bg: #463100; --yellow-tint: #eaa300;
+        --shadow-4: 0 2px 4px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --shadow-8: 0 4px 8px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --card-bg: #333333; --card-hover: #3d3d3d; color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI Variable','Segoe UI',system-ui,-apple-system,sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.5; padding: 2rem;
+      max-width: 1100px; margin: 0 auto; font-size: 14px; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; color: var(--accent-hover); }
+    .back-link { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 12px;
+      color: var(--text-dim); margin-bottom: 1.5rem; transition: color 0.1s; }
+    .back-link:hover { color: var(--accent); text-decoration: none; }
+    h1 { font-size: 24px; font-weight: 600; margin-bottom: 4px; }
+    .subtitle { color: var(--text-secondary); font-size: 14px; margin-bottom: 12px; }
+    .explainer { color: var(--text-secondary); font-size: 13px; line-height: 1.5;
+      margin-bottom: 24px; padding: 12px 16px; background: var(--surface);
+      border-radius: 8px; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px; margin-bottom: 24px; }
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px;
+      padding: 16px; box-shadow: var(--shadow-4); transition: box-shadow 0.1s; }
+    .card:hover { box-shadow: var(--shadow-8); }
+    .card .label { font-size: 12px; color: var(--text-dim); font-weight: 400; }
+    .card .value { font-size: 28px; font-weight: 600; margin-top: 4px; }
+    .card .value.green { color: var(--green); } .card .value.red { color: var(--red); }
+    .card .value.yellow { color: var(--yellow); } .card .value.accent { color: var(--accent); }
+    .sparkline { display: block; margin-top: 6px; overflow: visible; opacity: 0.9; }
+    .sparkline-label { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+    .section { margin-bottom: 24px; }
+    .section h2 { font-size: 16px; font-weight: 600; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px; }
+    .badge { font-size: 12px; padding: 2px 8px; border-radius: 999px; font-weight: 600; }
+    .badge-green { background: var(--green-bg); color: var(--green); }
+    .badge-red { background: var(--red-bg); color: var(--red); }
+    .badge-yellow { background: var(--yellow-bg); color: var(--yellow); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface);
+      border-radius: 8px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    thead { background: var(--surface2); }
+    th { text-align: left; padding: 8px 12px; font-weight: 600; color: var(--text-dim);
+      font-size: 12px; cursor: pointer; user-select: none; border-bottom: 1px solid var(--border); }
+    th:hover { color: var(--accent); }
+    td { padding: 8px 12px; border-top: 1px solid var(--border); }
+    tr:hover td { background: var(--surface2); }
+    .old-val { color: var(--red); text-decoration: line-through; }
+    .new-val { color: var(--green); }
+    .arrow-val { color: var(--text-dim); text-align: center; white-space: nowrap; }
+    .map-link { display: inline-flex; align-items: center; margin-left: 0.4em;
+      color: var(--accent); vertical-align: middle; white-space: nowrap; font-size: 12px; }
+    .map-link:hover { color: var(--accent-hover); }
+    .map-link svg { width: 14px; height: 14px; }
+    .change-field { color: var(--yellow); font-weight: 600; }
+    .bar-chart { margin-top: 8px; }
+    .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 12px; }
+    .bar-label { width: 180px; text-align: right; color: var(--text-secondary); flex-shrink: 0;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .bar-track { flex: 1; height: 8px; background: var(--surface2); border-radius: 4px;
+      overflow: hidden; position: relative; }
+    .bar-fill { height: 100%; border-radius: 4px; transition: width 0.15s ease; }
+    .bar-fill.green { background: var(--green); } .bar-fill.red { background: var(--red); }
+    .bar-count { width: 40px; font-size: 12px; color: var(--text-dim); }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+    .empty { color: var(--text-dim); font-style: italic; padding: 16px; }
+    .truncated { color: var(--text-dim); font-size: 12px; margin-top: 8px; }
+    .collapsible-toggle { background: transparent; border: 1px solid var(--border);
+      color: var(--accent); padding: 5px 12px; border-radius: 4px; cursor: pointer;
+      font-size: 12px; font-family: inherit; margin-bottom: 12px; transition: background 0.1s; }
+    .collapsible-toggle:hover { background: var(--surface2); }
+    .no-changes-banner { background: var(--green-bg); border: 1px solid var(--green-tint);
+      color: var(--green); padding: 16px; border-radius: 8px; margin-bottom: 24px;
+      text-align: center; font-weight: 600; font-size: 14px; }
+    .baseline-banner { background: var(--accent-bg); border: 1px solid var(--accent);
+      color: var(--accent); padding: 16px; border-radius: 8px; margin-bottom: 24px; font-size: 13px; }
+    .generated-at { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-dim); }
+    .history { font-size: 12.5px; color: var(--text-secondary); white-space: nowrap; }
+    .history .a { color: var(--green); font-weight: 500; }
+    .history .r { color: var(--red); font-weight: 500; }
+    .history .dot { color: var(--text-dim); margin: 0 4px; }
+    .history-none { color: var(--text-dim); font-style: italic; font-size: 12.5px; }
+  </style>
+</head>
+
+
+
+
+
+<body>
+
+  <a class="back-link" href="index.html">← Back to City of Toronto reports</a>
+
+  <h1>City of Toronto — Address Changes</h1>
+  <p class="subtitle">
+    Changes between  and Friday, Apr 03, 2026
+    · 525,388 total addresses
+  </p>
+
+  
+
+  <div class="cards">
+    <div class="card"><div class="label">Total Addresses</div>
+      <div class="value accent">525,388</div></div>
+    <div class="card"><div class="label">New Addresses</div>
+      <div class="value green">+12</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#107c10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,12.7 55.0,10.0 72.7,18.0 90.3,8.7 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#107c10"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Retired Addresses</div>
+      <div class="value red">−0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#c50f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,16.2 55.0,18.0 72.7,18.0 90.3,2.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#c50f1f"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Updated Addresses</div>
+      <div class="value yellow">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Location Adjustments</div>
+      <div class="value" style="color: var(--text-dim)">35</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#808080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,15.5 19.7,16.9 37.3,14.4 55.0,16.2 72.7,17.6 90.3,2.0 108.0,5.3"/><circle cx="108.0" cy="5.3" r="2" fill="#808080"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+  </div>
+
+  
+  <div class="section">
+    <h2>Change Breakdown</h2>
+    <div class="stats-grid">
+      
+      <div class="card"><div class="label">Top Streets by New Addresses</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">Bazalgette Dr</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">5</span></div>
+      </div></div>
+      
+      
+      <div class="card"><div class="label">Most Frequently Updated Fields</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">Location</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">35</span></div>
+      </div></div>
+    </div>
+  </div>
+  
+
+  <div class="section">
+    <h2>New Addresses <span class="badge badge-green">12</span></h2>
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-added',0)">Address</th><th onclick="sortTable('t-added',1)">Street</th>
+        <th onclick="sortTable('t-added',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-added">
+        
+        <tr><td>30 Bazalgette Dr</td><td>Bazalgette Dr</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.79657&mlon=-79.17450#map=18/43.79657/-79.17450" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>155A Poyntz Ave</td><td>Poyntz Ave</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75819&mlon=-79.41762#map=18/43.75819/-79.41762" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>27 Bazalgette Dr</td><td>Bazalgette Dr</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.79645&mlon=-79.17499#map=18/43.79645/-79.17499" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>11 Willowlea Dr</td><td>Willowlea Dr</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.79709&mlon=-79.17503#map=18/43.79709/-79.17503" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>32 Bazalgette Dr</td><td>Bazalgette Dr</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.79670&mlon=-79.17456#map=18/43.79670/-79.17456" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>155B Poyntz Ave</td><td>Poyntz Ave</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75817&mlon=-79.41768#map=18/43.75817/-79.41768" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>885R Caledonia Rd</td><td>Caledonia Rd</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70424&mlon=-79.46366#map=18/43.70424/-79.46366" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>34 Bazalgette Dr</td><td>Bazalgette Dr</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.79677&mlon=-79.17486#map=18/43.79677/-79.17486" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>30A Norwood Rd</td><td>Norwood Rd</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68384&mlon=-79.30333#map=18/43.68384/-79.30333" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>30 Norwood Rd</td><td>Norwood Rd</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68390&mlon=-79.30335#map=18/43.68390/-79.30335" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>29 Bazalgette Dr</td><td>Bazalgette Dr</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.79659&mlon=-79.17505#map=18/43.79659/-79.17505" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>42 Album Lane</td><td>Album Lane</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66786&mlon=-79.44014#map=18/43.66786/-79.44014" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Retired Addresses <span class="badge badge-red">0</span></h2>
+    <p class="empty">No addresses retired.</p>
+  </div>
+
+  <div class="section">
+    <h2>Updated Addresses <span class="badge badge-yellow">0</span></h2>
+    <p class="empty">No addresses updated.</p>
+  </div>
+
+  <div class="section">
+    <h2>Location Adjustments <span class="badge" style="background: var(--surface2); color: var(--text-dim)">35</span></h2>
+    
+    <table>
+      <thead><tr><th>Address</th><th>Before</th><th></th><th>After</th></tr></thead>
+      <tbody>
+        
+        <tr><td>93 Cleanside Rd</td>
+          
+          <td class="old-val">43.71782, -79.27909</td>
+          <td class="arrow-val">↓ 2.4m</td>
+          <td class="new-val">43.71780, -79.27908</td>
+          
+        </tr>
+        
+        <tr><td>94 Howe Ave</td>
+          
+          <td class="old-val">43.71717, -79.28064</td>
+          <td class="arrow-val">↓ 5.6m</td>
+          <td class="new-val">43.71712, -79.28063</td>
+          
+        </tr>
+        
+        <tr><td>53 Gerigs St</td>
+          
+          <td class="old-val">43.71698, -79.28070</td>
+          <td class="arrow-val">↑ 4.7m</td>
+          <td class="new-val">43.71702, -79.28072</td>
+          
+        </tr>
+        
+        <tr><td>48 Fusilier Dr</td>
+          
+          <td class="old-val">43.71782, -79.27847</td>
+          <td class="arrow-val">↑ 2.4m</td>
+          <td class="new-val">43.71784, -79.27848</td>
+          
+        </tr>
+        
+        <tr><td>7 Cosens St</td>
+          
+          <td class="old-val">43.79495, -79.17279</td>
+          <td class="arrow-val">↖ 8.0m</td>
+          <td class="new-val">43.79498, -79.17288</td>
+          
+        </tr>
+        
+        <tr><td>55 Gerigs St</td>
+          
+          <td class="old-val">43.71703, -79.28072</td>
+          <td class="arrow-val">↑ 8.2m</td>
+          <td class="new-val">43.71710, -79.28075</td>
+          
+        </tr>
+        
+        <tr><td>65 Gerigs St</td>
+          
+          <td class="old-val">43.71734, -79.28085</td>
+          <td class="arrow-val">↖ 6.1m</td>
+          <td class="new-val">43.71739, -79.28088</td>
+          
+        </tr>
+        
+        <tr><td>59 Gerigs St</td>
+          
+          <td class="old-val">43.71715, -79.28077</td>
+          <td class="arrow-val">↑ 9.5m</td>
+          <td class="new-val">43.71723, -79.28081</td>
+          
+        </tr>
+        
+        <tr><td>24 Fusilier Dr</td>
+          
+          <td class="old-val">43.71759, -79.27945</td>
+          <td class="arrow-val">↖ 2.7m</td>
+          <td class="new-val">43.71761, -79.27947</td>
+          
+        </tr>
+        
+        <tr><td>61 Gerigs St</td>
+          
+          <td class="old-val">43.71721, -79.28080</td>
+          <td class="arrow-val">↑ 7.1m</td>
+          <td class="new-val">43.71727, -79.28083</td>
+          
+        </tr>
+        
+        <tr><td>51 Gerigs St</td>
+          
+          <td class="old-val">43.71692, -79.28068</td>
+          <td class="arrow-val">↑ 5.6m</td>
+          <td class="new-val">43.71697, -79.28069</td>
+          
+        </tr>
+        
+        <tr><td>90 Howe Ave</td>
+          
+          <td class="old-val">43.71706, -79.28059</td>
+          <td class="arrow-val">↓ 5.6m</td>
+          <td class="new-val">43.71701, -79.28059</td>
+          
+        </tr>
+        
+        <tr><td>96 Howe Ave</td>
+          
+          <td class="old-val">43.71725, -79.28067</td>
+          <td class="arrow-val">↓ 10.3m</td>
+          <td class="new-val">43.71716, -79.28064</td>
+          
+        </tr>
+        
+        <tr><td>52 Deans Dr</td>
+          
+          <td class="old-val">43.71694, -79.28055</td>
+          <td class="arrow-val">← 9.9m</td>
+          <td class="new-val">43.71692, -79.28067</td>
+          
+        </tr>
+        
+        <tr><td>34 Fusilier Dr</td>
+          
+          <td class="old-val">43.71768, -79.27903</td>
+          <td class="arrow-val">↖ 3.7m</td>
+          <td class="new-val">43.71771, -79.27905</td>
+          
+        </tr>
+        
+        <tr><td>57 Cleanside Rd</td>
+          
+          <td class="old-val">43.71746, -79.28089</td>
+          <td class="arrow-val">→ 10.2m</td>
+          <td class="new-val">43.71749, -79.28077</td>
+          
+        </tr>
+        
+        <tr><td>54 Deans Dr</td>
+          
+          <td class="old-val">43.71701, -79.28057</td>
+          <td class="arrow-val">↓ 7.8m</td>
+          <td class="new-val">43.71694, -79.28056</td>
+          
+        </tr>
+        
+        <tr><td>18 Fusilier Dr</td>
+          
+          <td class="old-val">43.71753, -79.27972</td>
+          <td class="arrow-val">↑ 2.4m</td>
+          <td class="new-val">43.71755, -79.27973</td>
+          
+        </tr>
+        
+        <tr><td>92 Howe Ave</td>
+          
+          <td class="old-val">43.71711, -79.28061</td>
+          <td class="arrow-val">↓ 6.9m</td>
+          <td class="new-val">43.71705, -79.28059</td>
+          
+        </tr>
+        
+        <tr><td>28 Fusilier Dr</td>
+          
+          <td class="old-val">43.71762, -79.27930</td>
+          <td class="arrow-val">↖ 2.7m</td>
+          <td class="new-val">43.71764, -79.27932</td>
+          
+        </tr>
+        
+        <tr><td>73 Cleanside Rd</td>
+          
+          <td class="old-val">43.71764, -79.27993</td>
+          <td class="arrow-val">↓ 2.2m</td>
+          <td class="new-val">43.71762, -79.27993</td>
+          
+        </tr>
+        
+        <tr><td>104 Howe Ave</td>
+          
+          <td class="old-val">43.71748, -79.28077</td>
+          <td class="arrow-val">↓ 7.1m</td>
+          <td class="new-val">43.71742, -79.28074</td>
+          
+        </tr>
+        
+        <tr><td>55 Cleanside Rd</td>
+          
+          <td class="old-val">43.71739, -79.28088</td>
+          <td class="arrow-val">↑ 6.9m</td>
+          <td class="new-val">43.71745, -79.28090</td>
+          
+        </tr>
+        
+        <tr><td>100 Howe Ave</td>
+          
+          <td class="old-val">43.71736, -79.28072</td>
+          <td class="arrow-val">↓ 7.1m</td>
+          <td class="new-val">43.71730, -79.28069</td>
+          
+        </tr>
+        
+        <tr><td>67 Cleanside Rd</td>
+          
+          <td class="old-val">43.71758, -79.28020</td>
+          <td class="arrow-val">↘ 3.7m</td>
+          <td class="new-val">43.71755, -79.28018</td>
+          
+        </tr>
+        
+        <tr><td>102 Howe Ave</td>
+          
+          <td class="old-val">43.71742, -79.28075</td>
+          <td class="arrow-val">↘ 6.1m</td>
+          <td class="new-val">43.71737, -79.28072</td>
+          
+        </tr>
+        
+        <tr><td>20 Fusilier Dr</td>
+          
+          <td class="old-val">43.71755, -79.27963</td>
+          <td class="arrow-val">↖ 2.7m</td>
+          <td class="new-val">43.71757, -79.27965</td>
+          
+        </tr>
+        
+        <tr><td>30 Fusilier Dr</td>
+          
+          <td class="old-val">43.71764, -79.27920</td>
+          <td class="arrow-val">↖ 3.9m</td>
+          <td class="new-val">43.71766, -79.27924</td>
+          
+        </tr>
+        
+        <tr><td>63 Gerigs St</td>
+          
+          <td class="old-val">43.71728, -79.28082</td>
+          <td class="arrow-val">↑ 7.1m</td>
+          <td class="new-val">43.71734, -79.28085</td>
+          
+        </tr>
+        
+        <tr><td>98 Howe Ave</td>
+          
+          <td class="old-val">43.71731, -79.28070</td>
+          <td class="arrow-val">↘ 6.1m</td>
+          <td class="new-val">43.71726, -79.28067</td>
+          
+        </tr>
+        
+        <tr><td>79 Cleanside Rd</td>
+          
+          <td class="old-val">43.71769, -79.27969</td>
+          <td class="arrow-val">↓ 2.4m</td>
+          <td class="new-val">43.71767, -79.27970</td>
+          
+        </tr>
+        
+        <tr><td>8 Fusilier Dr</td>
+          
+          <td class="old-val">43.71743, -79.28013</td>
+          <td class="arrow-val">↑ 4.7m</td>
+          <td class="new-val">43.71747, -79.28015</td>
+          
+        </tr>
+        
+        <tr><td>57 Gerigs St</td>
+          
+          <td class="old-val">43.71709, -79.28075</td>
+          <td class="arrow-val">↑ 4.7m</td>
+          <td class="new-val">43.71713, -79.28077</td>
+          
+        </tr>
+        
+        <tr><td>89 Cleanside Rd</td>
+          
+          <td class="old-val">43.71778, -79.27927</td>
+          <td class="arrow-val">↙ 2.0m</td>
+          <td class="new-val">43.71777, -79.27929</td>
+          
+        </tr>
+        
+        <tr><td>14 Fusilier Dr</td>
+          
+          <td class="old-val">43.71749, -79.27987</td>
+          <td class="arrow-val">↖ 3.7m</td>
+          <td class="new-val">43.71752, -79.27989</td>
+          
+        </tr>
+        
+      </tbody>
+    </table>
+    
+  </div>
+
+  <div class="generated-at">Report generated Jun 09, 2026 at 05:22 PM · source licence: Open Government Licence – Toronto</div>
+
+  <script>
+    function sortTable(tbodyId, col) {
+      const tbody = document.getElementById(tbodyId);
+      if (!tbody) return;
+      const rows = Array.from(tbody.rows);
+      const dir = tbody.dataset.sortDir === 'asc' ? 'desc' : 'asc';
+      tbody.dataset.sortDir = dir;
+      rows.sort((a, b) => {
+        const av = a.cells[col]?.textContent.trim() || '';
+        const bv = b.cells[col]?.textContent.trim() || '';
+        const an = parseFloat(av), bn = parseFloat(bv);
+        if (!isNaN(an) && !isNaN(bn)) return dir === 'asc' ? an - bn : bn - an;
+        return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+      });
+      rows.forEach(r => tbody.appendChild(r));
+    }
+  </script>
+</body>
+
+</html>

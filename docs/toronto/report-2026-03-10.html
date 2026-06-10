@@ -1,0 +1,4367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>City of Toronto Address Changes — Tuesday, Mar 10, 2026</title>
+  <style>
+    :root {
+      --bg: #fafafa; --surface: #ffffff; --surface2: #f5f5f5; --surface3: #ebebeb;
+      --border: #e0e0e0; --border-strong: #d1d1d1; --text: #242424;
+      --text-secondary: #424242; --text-dim: #616161; --accent: #0078d4;
+      --accent-hover: #106ebe; --accent-bg: #eff6fc; --green: #107c10;
+      --green-bg: #f1faf1; --green-tint: #9fd89f; --red: #c50f1f; --red-bg: #fdf3f4;
+      --red-tint: #eeacb2; --yellow: #eaa300; --yellow-bg: #fefbf4; --yellow-tint: #f9e2ae;
+      --shadow-4: 0 2px 4px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --shadow-8: 0 4px 8px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --card-bg: #ffffff; --card-hover: #f5f5f5; color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1f1f1f; --surface: #292929; --surface2: #333333; --surface3: #3d3d3d;
+        --border: #525252; --border-strong: #666666; --text: #ffffff;
+        --text-secondary: #d6d6d6; --text-dim: #adadad; --accent: #2899f5;
+        --accent-hover: #3aa0f3; --accent-bg: #002848; --green: #54b054;
+        --green-bg: #052505; --green-tint: #107c10; --red: #dc626d; --red-bg: #3b0509;
+        --red-tint: #c50f1f; --yellow: #f2c661; --yellow-bg: #463100; --yellow-tint: #eaa300;
+        --shadow-4: 0 2px 4px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --shadow-8: 0 4px 8px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --card-bg: #333333; --card-hover: #3d3d3d; color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI Variable','Segoe UI',system-ui,-apple-system,sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.5; padding: 2rem;
+      max-width: 1100px; margin: 0 auto; font-size: 14px; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; color: var(--accent-hover); }
+    .back-link { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 12px;
+      color: var(--text-dim); margin-bottom: 1.5rem; transition: color 0.1s; }
+    .back-link:hover { color: var(--accent); text-decoration: none; }
+    h1 { font-size: 24px; font-weight: 600; margin-bottom: 4px; }
+    .subtitle { color: var(--text-secondary); font-size: 14px; margin-bottom: 12px; }
+    .explainer { color: var(--text-secondary); font-size: 13px; line-height: 1.5;
+      margin-bottom: 24px; padding: 12px 16px; background: var(--surface);
+      border-radius: 8px; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px; margin-bottom: 24px; }
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px;
+      padding: 16px; box-shadow: var(--shadow-4); transition: box-shadow 0.1s; }
+    .card:hover { box-shadow: var(--shadow-8); }
+    .card .label { font-size: 12px; color: var(--text-dim); font-weight: 400; }
+    .card .value { font-size: 28px; font-weight: 600; margin-top: 4px; }
+    .card .value.green { color: var(--green); } .card .value.red { color: var(--red); }
+    .card .value.yellow { color: var(--yellow); } .card .value.accent { color: var(--accent); }
+    .sparkline { display: block; margin-top: 6px; overflow: visible; opacity: 0.9; }
+    .sparkline-label { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+    .section { margin-bottom: 24px; }
+    .section h2 { font-size: 16px; font-weight: 600; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px; }
+    .badge { font-size: 12px; padding: 2px 8px; border-radius: 999px; font-weight: 600; }
+    .badge-green { background: var(--green-bg); color: var(--green); }
+    .badge-red { background: var(--red-bg); color: var(--red); }
+    .badge-yellow { background: var(--yellow-bg); color: var(--yellow); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface);
+      border-radius: 8px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    thead { background: var(--surface2); }
+    th { text-align: left; padding: 8px 12px; font-weight: 600; color: var(--text-dim);
+      font-size: 12px; cursor: pointer; user-select: none; border-bottom: 1px solid var(--border); }
+    th:hover { color: var(--accent); }
+    td { padding: 8px 12px; border-top: 1px solid var(--border); }
+    tr:hover td { background: var(--surface2); }
+    .old-val { color: var(--red); text-decoration: line-through; }
+    .new-val { color: var(--green); }
+    .arrow-val { color: var(--text-dim); text-align: center; white-space: nowrap; }
+    .map-link { display: inline-flex; align-items: center; margin-left: 0.4em;
+      color: var(--accent); vertical-align: middle; white-space: nowrap; font-size: 12px; }
+    .map-link:hover { color: var(--accent-hover); }
+    .map-link svg { width: 14px; height: 14px; }
+    .change-field { color: var(--yellow); font-weight: 600; }
+    .bar-chart { margin-top: 8px; }
+    .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 12px; }
+    .bar-label { width: 180px; text-align: right; color: var(--text-secondary); flex-shrink: 0;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .bar-track { flex: 1; height: 8px; background: var(--surface2); border-radius: 4px;
+      overflow: hidden; position: relative; }
+    .bar-fill { height: 100%; border-radius: 4px; transition: width 0.15s ease; }
+    .bar-fill.green { background: var(--green); } .bar-fill.red { background: var(--red); }
+    .bar-count { width: 40px; font-size: 12px; color: var(--text-dim); }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+    .empty { color: var(--text-dim); font-style: italic; padding: 16px; }
+    .truncated { color: var(--text-dim); font-size: 12px; margin-top: 8px; }
+    .collapsible-toggle { background: transparent; border: 1px solid var(--border);
+      color: var(--accent); padding: 5px 12px; border-radius: 4px; cursor: pointer;
+      font-size: 12px; font-family: inherit; margin-bottom: 12px; transition: background 0.1s; }
+    .collapsible-toggle:hover { background: var(--surface2); }
+    .no-changes-banner { background: var(--green-bg); border: 1px solid var(--green-tint);
+      color: var(--green); padding: 16px; border-radius: 8px; margin-bottom: 24px;
+      text-align: center; font-weight: 600; font-size: 14px; }
+    .baseline-banner { background: var(--accent-bg); border: 1px solid var(--accent);
+      color: var(--accent); padding: 16px; border-radius: 8px; margin-bottom: 24px; font-size: 13px; }
+    .generated-at { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-dim); }
+    .history { font-size: 12.5px; color: var(--text-secondary); white-space: nowrap; }
+    .history .a { color: var(--green); font-weight: 500; }
+    .history .r { color: var(--red); font-weight: 500; }
+    .history .dot { color: var(--text-dim); margin: 0 4px; }
+    .history-none { color: var(--text-dim); font-style: italic; font-size: 12.5px; }
+  </style>
+</head>
+
+
+
+
+
+<body>
+
+  <a class="back-link" href="index.html">← Back to City of Toronto reports</a>
+
+  <h1>City of Toronto — Address Changes</h1>
+  <p class="subtitle">
+    Changes between  and Tuesday, Mar 10, 2026
+    · 525,366 total addresses
+  </p>
+
+  
+
+  <div class="cards">
+    <div class="card"><div class="label">Total Addresses</div>
+      <div class="value accent">525,366</div></div>
+    <div class="card"><div class="label">New Addresses</div>
+      <div class="value green">+0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#107c10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,8.4 19.7,2.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#107c10"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Retired Addresses</div>
+      <div class="value red">−0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#c50f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,16.5 37.3,18.0 55.0,2.0 72.7,18.0 90.3,16.5 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#c50f1f"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Updated Addresses</div>
+      <div class="value yellow">344</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,15.3 19.7,2.0 37.3,16.9 55.0,15.0 72.7,13.5 90.3,4.3 108.0,14.0"/><circle cx="108.0" cy="14.0" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Location Adjustments</div>
+      <div class="value" style="color: var(--text-dim)">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#808080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,2.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#808080"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+  </div>
+
+  
+  <div class="section">
+    <h2>Change Breakdown</h2>
+    <div class="stats-grid">
+      
+      
+      
+      <div class="card"><div class="label">Most Frequently Updated Fields</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">CENTRELINE_MEASURE</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">303</span></div>
+        <div class="bar-row"><span class="bar-label">CENTRELINE_OFFSET</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:82.0%"></div></div>
+          <span class="bar-count">247</span></div>
+        <div class="bar-row"><span class="bar-label">CENTRELINE_ID</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:23.0%"></div></div>
+          <span class="bar-count">69</span></div>
+        <div class="bar-row"><span class="bar-label">ADDRESS_CLASS</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:3.0%"></div></div>
+          <span class="bar-count">10</span></div>
+        <div class="bar-row"><span class="bar-label">ADDRESS_CLASS_DESC</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:3.0%"></div></div>
+          <span class="bar-count">10</span></div>
+        <div class="bar-row"><span class="bar-label">ADDRESS_ID</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:3.0%"></div></div>
+          <span class="bar-count">10</span></div>
+        <div class="bar-row"><span class="bar-label">ADDRESS_ID_LINK</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:3.0%"></div></div>
+          <span class="bar-count">10</span></div>
+        <div class="bar-row"><span class="bar-label">CLASS_FAMILY</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:3.0%"></div></div>
+          <span class="bar-count">10</span></div>
+        <div class="bar-row"><span class="bar-label">CLASS_FAMILY_DESC</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:3.0%"></div></div>
+          <span class="bar-count">10</span></div>
+        <div class="bar-row"><span class="bar-label">Location</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:2.0%"></div></div>
+          <span class="bar-count">5</span></div>
+      </div></div>
+    </div>
+  </div>
+  
+
+  <div class="section">
+    <h2>New Addresses <span class="badge badge-green">0</span></h2>
+    <p class="empty">No new addresses.</p>
+  </div>
+
+  <div class="section">
+    <h2>Retired Addresses <span class="badge badge-red">0</span></h2>
+    <p class="empty">No addresses retired.</p>
+  </div>
+
+  <div class="section">
+    <h2>Updated Addresses <span class="badge badge-yellow">344</span></h2>
+    
+    <table>
+      <thead><tr><th>Address</th><th>What Changed</th><th>Before</th><th></th><th>After</th></tr></thead>
+      <tbody>
+        
+        <tr><td rowspan="2">116 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">37.73</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">39.21</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">21.11</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">24.24</td></tr>
+        
+        <tr><td rowspan="2">379 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">42.7</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">42.54</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">14.77</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">15.23</td></tr>
+        
+        <tr><td rowspan="2">4 Glen Gannon Dr</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">674</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060783</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">-18.24</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">-18.23</td></tr>
+        
+        <tr><td rowspan="3">438 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">30126666</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060697</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">56.09</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">64.42</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">85.58</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">84.45</td></tr>
+        
+        <tr><td rowspan="3">441 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">30126666</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060697</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">89.01</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">97.41</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">41.97</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">43.07</td></tr>
+        
+        <tr><td rowspan="2">21 London Green Crt</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">169.24</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">168.95</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">37.44</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">33.3</td></tr>
+        
+        <tr><td rowspan="2">144 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">97.87</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">97.75</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">20.17</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">20.74</td></tr>
+        
+        <tr><td rowspan="2">139 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">109.25</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">107.2</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">28.24</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">24.17</td></tr>
+        
+        <tr><td rowspan="1">92 Futura Dr</td>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">25.06</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">25.05</td></tr>
+        
+        <tr><td rowspan="1">40 Venetian Cres</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">108.45</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">112.9</td></tr>
+        
+        <tr><td rowspan="2">175 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">166.88</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">167.12</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">40.93</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">39.96</td></tr>
+        
+        <tr><td rowspan="2">391 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">91.98</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">91.75</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">20.28</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">21.27</td></tr>
+        
+        <tr><td rowspan="2">73 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">84.18</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">85.21</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">30.79</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">27.31</td></tr>
+        
+        <tr><td rowspan="1">61 Futura Dr</td>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">26.04</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">26.03</td></tr>
+        
+        <tr><td rowspan="2">61 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">34.35</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">33.47</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">26.89</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">22.96</td></tr>
+        
+        <tr><td rowspan="2">381 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">49.27</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">48.99</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">25.56</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">26.09</td></tr>
+        
+        <tr><td rowspan="2">92 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">18.45</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">21.45</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">23.54</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">27.44</td></tr>
+        
+        <tr><td rowspan="2">389 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">80.37</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">80.11</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">24.21</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">25.07</td></tr>
+        
+        <tr><td rowspan="2">392 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">95.49</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">95.71</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">20.9</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">19.87</td></tr>
+        
+        <tr><td rowspan="2">115 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">31.04</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">31.87</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">27.47</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">23.93</td></tr>
+        
+        <tr><td rowspan="2">10 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">-51.26</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">-48.17</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">24.59</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">25.83</td></tr>
+        
+        <tr><td rowspan="1">31 Futura Dr</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">134.63</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">134.64</td></tr>
+        
+        <tr><td rowspan="2">19 London Green Crt</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">186.34</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">186.02</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">51.02</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">46.92</td></tr>
+        
+        <tr><td rowspan="2">18 Langdale Crt</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">86.94</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">85.07</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">32.12</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">32.09</td></tr>
+        
+        <tr><td rowspan="2">11 Langdale Crt</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">127.99</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">104.35</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">21.09</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">34.33</td></tr>
+        
+        <tr><td rowspan="2">68 Yellowstone St</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">52.91</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">49.52</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">24.5</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">25.23</td></tr>
+        
+        <tr><td rowspan="3">445 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">30126666</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060697</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">91.19</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">99.58</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">27.36</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">28.46</td></tr>
+        
+        <tr><td rowspan="2">195 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">250.17</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">250.36</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">32.85</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">31.4</td></tr>
+        
+        <tr><td rowspan="3">429 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">30126666</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060697</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">69.48</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">77.87</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">19.1</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">20.21</td></tr>
+        
+        <tr><td rowspan="2">188 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">238.23</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">238.1</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">20.36</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">21.75</td></tr>
+        
+        <tr><td rowspan="3">442 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">30126666</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060697</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">63.74</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">72.08</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">81.41</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">80.29</td></tr>
+        
+        <tr><td rowspan="2">8 Langdale Crt</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">42.03</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">43.12</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">22.68</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">26.26</td></tr>
+        
+        <tr><td rowspan="1">50 Venetian Cres</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">154.12</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">158.58</td></tr>
+        
+        <tr><td rowspan="2">10-44 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">-65.55</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">-62.46</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">25.03</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">26.16</td></tr>
+        
+        <tr><td rowspan="2">71 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">35.41</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">36.3</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">28.26</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">24.57</td></tr>
+        
+        <tr><td rowspan="1">628 Fleet St</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">20054539</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060828</td></tr>
+        
+        <tr><td rowspan="2">117 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">41.69</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">42.51</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">23.85</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">20.83</td></tr>
+        
+        <tr><td rowspan="1">16 Glen Gannon Dr</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">674</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060783</td></tr>
+        
+        <tr><td rowspan="2">126 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">29.86</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">29.74</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">21.18</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">21.35</td></tr>
+        
+        <tr><td rowspan="1">52 Futura Dr</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">232.68</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">232.69</td></tr>
+        
+        <tr><td rowspan="3">435 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">30126666</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060697</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">73.85</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">82.25</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">40.84</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">41.95</td></tr>
+        
+        <tr><td rowspan="9">11 London Green Crt</td>
+          <td class="change-field">ADDRESS_CLASS</td>
+          <td class="old-val">SE</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">LE</td></tr>
+        
+        <tr>
+          <td class="change-field">ADDRESS_CLASS_DESC</td>
+          <td class="old-val">Structure Entrance</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">Land Entrance</td></tr>
+        
+        <tr>
+          <td class="change-field">ADDRESS_ID</td>
+          <td class="old-val">1485071</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60007419</td></tr>
+        
+        <tr>
+          <td class="change-field">ADDRESS_ID_LINK</td>
+          <td class="old-val">936753</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">450553</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">82.59</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">41.05</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">167.17</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">24.57</td></tr>
+        
+        <tr>
+          <td class="change-field">CLASS_FAMILY</td>
+          <td class="old-val">10001</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">10100</td></tr>
+        
+        <tr>
+          <td class="change-field">CLASS_FAMILY_DESC</td>
+          <td class="old-val">Structure Entrance</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">Land Entrance</td></tr>
+        
+        <tr>
+          <td class="change-field">Location</td>
+          <td class="old-val">43.75437, -79.50908</td>
+          <td class="arrow-val">↙ 151.1m</td>
+          <td class="new-val">43.75384, -79.51081</td></tr>
+        
+        <tr><td rowspan="2">133 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">79.34</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">76.2</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">22.35</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">18.29</td></tr>
+        
+        <tr><td rowspan="2">22 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">19.87</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">22.66</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">62.16</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">63.96</td></tr>
+        
+        <tr><td rowspan="2">25 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">71.02</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">71.37</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">26.83</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">25.87</td></tr>
+        
+        <tr><td rowspan="2">138 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">76.56</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">76.45</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">18.26</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">18.7</td></tr>
+        
+        <tr><td rowspan="1">58 Venetian Cres</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">190.32</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">194.78</td></tr>
+        
+        <tr><td rowspan="2">119 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">-11.85</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">-0.61</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">22.14</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">25.1</td></tr>
+        
+        <tr><td rowspan="2">23 Glen Gannon Dr</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">674</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060783</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">22.23</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">22.22</td></tr>
+        
+        <tr><td rowspan="2">141 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">82.32</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">82.45</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">22.06</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">21.58</td></tr>
+        
+        <tr><td rowspan="2">113 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">15.45</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">16.52</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">24.2</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">20.81</td></tr>
+        
+        <tr><td rowspan="2">377 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">34.83</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">34.65</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">16.13</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">16.5</td></tr>
+        
+        <tr><td rowspan="1">616 Fleet St</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">20054539</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060828</td></tr>
+        
+        <tr><td rowspan="2">145 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">94.08</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">94.2</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">21.94</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">21.39</td></tr>
+        
+        <tr><td rowspan="2">137 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">100.35</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">95.53</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">22.86</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">18.35</td></tr>
+        
+        <tr><td rowspan="1">53 Futura Dr</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">231.37</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">231.38</td></tr>
+        
+        <tr><td rowspan="2">134 Topcliff Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">56.56</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60.24</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">19.01</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">18.68</td></tr>
+        
+        <tr><td rowspan="2">159 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">86.81</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">87.25</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">76.58</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">76.07</td></tr>
+        
+        <tr><td rowspan="2">390 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">86.67</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">86.88</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">20.58</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">19.65</td></tr>
+        
+        <tr><td rowspan="2">108 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">2.33</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">2.74</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">23.86</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">27.09</td></tr>
+        
+        <tr><td rowspan="2">132 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">55.64</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">55.52</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">21.02</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">21.34</td></tr>
+        
+        <tr><td rowspan="2">98 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">50.53</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">53.54</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">24.47</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">27.65</td></tr>
+        
+        <tr><td rowspan="1">21 Glen Gannon Dr</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">674</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060783</td></tr>
+        
+        <tr><td rowspan="2">382 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">57.53</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">57.71</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">17.15</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">16.53</td></tr>
+        
+        <tr><td rowspan="2">24 Langdale Crt</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">105.29</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">109.36</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">26.5</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">24.62</td></tr>
+        
+        <tr><td rowspan="1">43 Venetian Cres</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">127.76</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">132.22</td></tr>
+        
+        <tr><td rowspan="2">26 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">46.13</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">48.62</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">101.39</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">103.39</td></tr>
+        
+        <tr><td rowspan="1">12 Glen Gannon Dr</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">674</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060783</td></tr>
+        
+        <tr><td rowspan="2">147 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">99.63</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">99.76</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">22.49</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">21.9</td></tr>
+        
+        <tr><td rowspan="1">42 Venetian Cres</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">120.72</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">125.17</td></tr>
+        
+        <tr><td rowspan="6">94 Booth Ave</td>
+          <td class="change-field">ADDRESS_CLASS</td>
+          <td class="old-val">SE</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">S</td></tr>
+        
+        <tr>
+          <td class="change-field">ADDRESS_CLASS_DESC</td>
+          <td class="old-val">Structure Entrance</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">Structure</td></tr>
+        
+        <tr>
+          <td class="change-field">ADDRESS_ID</td>
+          <td class="old-val">1481137</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60007410</td></tr>
+        
+        <tr>
+          <td class="change-field">ADDRESS_ID_LINK</td>
+          <td class="old-val">722927</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">236727</td></tr>
+        
+        <tr>
+          <td class="change-field">CLASS_FAMILY</td>
+          <td class="old-val">10001</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">10011</td></tr>
+        
+        <tr>
+          <td class="change-field">CLASS_FAMILY_DESC</td>
+          <td class="old-val">Structure Entrance</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">Structure, Structure Entrance</td></tr>
+        
+        <tr><td rowspan="3">22 Glen Gannon Dr</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">674</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060783</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">107.94</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">106.56</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">21.94</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">21.98</td></tr>
+        
+        <tr><td rowspan="2">167 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">160.45</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">160.59</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">24.76</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">23.83</td></tr>
+        
+        <tr><td rowspan="1">10 Glen Gannon Dr</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">674</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060783</td></tr>
+        
+        <tr><td rowspan="1">8 Glen Gannon Dr</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">674</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060783</td></tr>
+        
+        <tr><td rowspan="3">440 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">30126666</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060697</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">59.78</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">68.12</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">83.54</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">82.41</td></tr>
+        
+        <tr><td rowspan="3">406 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">30126666</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060697</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">18.23</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">26.59</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">27.6</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">26.46</td></tr>
+        
+        <tr><td rowspan="3">402 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">30126666</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060697</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">17.1</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">25.46</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">21.61</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">20.47</td></tr>
+        
+        <tr><td rowspan="1">18 Glen Gannon Dr</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">674</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060783</td></tr>
+        
+        <tr><td rowspan="2">187 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">200.49</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">200.73</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">42.96</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">41.79</td></tr>
+        
+        <tr><td rowspan="2">169 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">166.41</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">166.55</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">24.57</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">23.6</td></tr>
+        
+        <tr><td rowspan="2">373 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">20.93</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">20.76</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">15.48</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">15.7</td></tr>
+        
+        <tr><td rowspan="2">174 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">187.23</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">187.11</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">19.63</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">20.72</td></tr>
+        
+        <tr><td rowspan="3">433 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">30126666</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060697</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">72.06</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">80.46</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">31.9</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">33.01</td></tr>
+        
+        <tr><td rowspan="2">155 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">87.63</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">88.0</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">64.58</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">64.07</td></tr>
+        
+        <tr><td rowspan="2">165 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">123.15</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">123.27</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">22.6</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">21.88</td></tr>
+        
+        <tr><td rowspan="3">430 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">30126666</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060697</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">32.04</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">40.37</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">86.19</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">85.05</td></tr>
+        
+        <tr><td rowspan="1">60 Venetian Cres</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">197.11</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">201.57</td></tr>
+        
+        <tr><td rowspan="1">9 Glen Gannon Dr</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">674</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060783</td></tr>
+        
+        <tr><td rowspan="1">113 Topcliff Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">229.88</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">229.87</td></tr>
+        
+        <tr><td rowspan="2">59 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">-8.43</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">-11.66</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">54.88</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">46.9</td></tr>
+        
+        <tr><td rowspan="2">15 Glen Gannon Dr</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">674</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060783</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">22.6</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">22.59</td></tr>
+        
+        <tr><td rowspan="1">116 Topcliff Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">237.73</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">237.72</td></tr>
+        
+        <tr><td rowspan="2">121 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">-4.8</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">4.88</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">20.36</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">20.34</td></tr>
+        
+        <tr><td rowspan="1">30 Venetian Cres</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">73.02</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">77.48</td></tr>
+        
+        <tr><td rowspan="2">189 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">200.23</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">200.51</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">49.3</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">48.14</td></tr>
+        
+        <tr><td rowspan="2">172 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">182.34</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">182.24</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">16.11</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">17.17</td></tr>
+        
+        <tr><td rowspan="2">21 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">53.28</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">53.67</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">29.57</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">28.85</td></tr>
+        
+        <tr><td rowspan="1">16 Futura Dr</td>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">20.23</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">20.22</td></tr>
+        
+        <tr><td rowspan="2">166 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">167.63</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">167.51</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">19.8</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">20.78</td></tr>
+        
+        <tr><td rowspan="2">70 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">185.46</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">188.17</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">29.53</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">31.02</td></tr>
+        
+        <tr><td rowspan="1">58 Futura Dr</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">256.44</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">256.45</td></tr>
+        
+        <tr><td rowspan="6">578 Finch Ave W</td>
+          <td class="change-field">ADDRESS_CLASS</td>
+          <td class="old-val">SE</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">S</td></tr>
+        
+        <tr>
+          <td class="change-field">ADDRESS_CLASS_DESC</td>
+          <td class="old-val">Structure Entrance</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">Structure</td></tr>
+        
+        <tr>
+          <td class="change-field">ADDRESS_ID</td>
+          <td class="old-val">1485794</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60007417</td></tr>
+        
+        <tr>
+          <td class="change-field">ADDRESS_ID_LINK</td>
+          <td class="old-val">964524</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">478324</td></tr>
+        
+        <tr>
+          <td class="change-field">CLASS_FAMILY</td>
+          <td class="old-val">10001</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">10011</td></tr>
+        
+        <tr>
+          <td class="change-field">CLASS_FAMILY_DESC</td>
+          <td class="old-val">Structure Entrance</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">Structure, Structure Entrance</td></tr>
+        
+        <tr><td rowspan="1">54 Venetian Cres</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">174.46</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">178.92</td></tr>
+        
+        <tr><td rowspan="2">38 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">128.33</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">130.97</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">81.18</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">83.81</td></tr>
+        
+        <tr><td rowspan="2">398 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">108.15</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">108.48</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">31.56</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">30.39</td></tr>
+        
+        <tr><td rowspan="3">426 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">30126666</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060697</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">20.56</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">28.9</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">86.06</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">84.92</td></tr>
+        
+        <tr><td rowspan="2">178 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">199.53</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">199.42</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">16.76</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">17.92</td></tr>
+        
+        <tr><td rowspan="1">17 Futura Dr</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">66.25</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">66.26</td></tr>
+        
+        <tr><td rowspan="2">6 Langdale Crt</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">34.55</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">35.64</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">23.39</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">27.02</td></tr>
+        
+        <tr><td rowspan="2">12 London Green Crt</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">214.08</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">214.02</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">72.95</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">76.99</td></tr>
+        
+        <tr><td rowspan="1">624B Fleet St</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">20054539</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060828</td></tr>
+        
+        <tr><td rowspan="1">41 Venetian Cres</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">120.4</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">124.85</td></tr>
+        
+        <tr><td rowspan="1">20 Glen Gannon Dr</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">674</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060783</td></tr>
+        
+        <tr><td rowspan="2">22 Langdale Crt</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">96.48</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">101.13</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">27.99</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">28.1</td></tr>
+        
+        <tr><td rowspan="2">30 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">42.92</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">46.03</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">20.97</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">22.94</td></tr>
+        
+        <tr><td rowspan="2">387 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">73.19</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">72.99</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">18.08</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">18.86</td></tr>
+        
+        <tr><td rowspan="1">102 Topcliff Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">149.25</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">149.24</td></tr>
+        
+        <tr><td rowspan="2">7 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">-0.83</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">-0.44</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">28.57</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">28.58</td></tr>
+        
+        <tr><td rowspan="9">56 Edith Dr</td>
+          <td class="change-field">ADDRESS_CLASS</td>
+          <td class="old-val">SE</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">S</td></tr>
+        
+        <tr>
+          <td class="change-field">ADDRESS_CLASS_DESC</td>
+          <td class="old-val">Structure Entrance</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">Structure</td></tr>
+        
+        <tr>
+          <td class="change-field">ADDRESS_ID</td>
+          <td class="old-val">1471913</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60007416</td></tr>
+        
+        <tr>
+          <td class="change-field">ADDRESS_ID_LINK</td>
+          <td class="old-val">591754</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">105554</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">11.53</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">16.1</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">23.22</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">16.66</td></tr>
+        
+        <tr>
+          <td class="change-field">CLASS_FAMILY</td>
+          <td class="old-val">10001</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">10011</td></tr>
+        
+        <tr>
+          <td class="change-field">CLASS_FAMILY_DESC</td>
+          <td class="old-val">Structure Entrance</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">Structure, Structure Entrance</td></tr>
+        
+        <tr>
+          <td class="change-field">Location</td>
+          <td class="old-val">43.70728, -79.40363</td>
+          <td class="arrow-val">↗ 8.2m</td>
+          <td class="new-val">43.70734, -79.40357</td></tr>
+        
+        <tr><td rowspan="1">48 Venetian Cres</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">145.0</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">149.46</td></tr>
+        
+        <tr><td rowspan="2">14 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">-42.23</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">-39.52</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">73.95</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">75.26</td></tr>
+        
+        <tr><td rowspan="2">150 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">113.96</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">113.83</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">21.67</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">22.34</td></tr>
+        
+        <tr><td rowspan="1">61 Venetian Cres</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">209.75</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">214.21</td></tr>
+        
+        <tr><td rowspan="3">412 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">30126666</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060697</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">18.13</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">26.49</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">46.23</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">45.09</td></tr>
+        
+        <tr><td rowspan="1">3 Glen Gannon Dr</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">674</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060783</td></tr>
+        
+        <tr><td rowspan="6">447A Eastern Ave</td>
+          <td class="change-field">ADDRESS_CLASS</td>
+          <td class="old-val">SE</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">S</td></tr>
+        
+        <tr>
+          <td class="change-field">ADDRESS_CLASS_DESC</td>
+          <td class="old-val">Structure Entrance</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">Structure</td></tr>
+        
+        <tr>
+          <td class="change-field">ADDRESS_ID</td>
+          <td class="old-val">1481135</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60007411</td></tr>
+        
+        <tr>
+          <td class="change-field">ADDRESS_ID_LINK</td>
+          <td class="old-val">722927</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">236727</td></tr>
+        
+        <tr>
+          <td class="change-field">CLASS_FAMILY</td>
+          <td class="old-val">10001</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">10011</td></tr>
+        
+        <tr>
+          <td class="change-field">CLASS_FAMILY_DESC</td>
+          <td class="old-val">Structure Entrance</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">Structure, Structure Entrance</td></tr>
+        
+        <tr><td rowspan="2">371 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">13.12</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">12.84</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">26.24</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">26.38</td></tr>
+        
+        <tr><td rowspan="2">123 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">22.4</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">21.48</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">29.4</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">25.79</td></tr>
+        
+        <tr><td rowspan="1">75 Futura Dr</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">340.43</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">340.44</td></tr>
+        
+        <tr><td rowspan="2">87 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">217.43</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">221.84</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">32.28</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">28.54</td></tr>
+        
+        <tr><td rowspan="6">282 Davisville Ave</td>
+          <td class="change-field">ADDRESS_CLASS</td>
+          <td class="old-val">SE</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">S</td></tr>
+        
+        <tr>
+          <td class="change-field">ADDRESS_CLASS_DESC</td>
+          <td class="old-val">Structure Entrance</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">Structure</td></tr>
+        
+        <tr>
+          <td class="change-field">ADDRESS_ID</td>
+          <td class="old-val">1483477</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60007414</td></tr>
+        
+        <tr>
+          <td class="change-field">ADDRESS_ID_LINK</td>
+          <td class="old-val">597408</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">111208</td></tr>
+        
+        <tr>
+          <td class="change-field">CLASS_FAMILY</td>
+          <td class="old-val">10001</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">10011</td></tr>
+        
+        <tr>
+          <td class="change-field">CLASS_FAMILY_DESC</td>
+          <td class="old-val">Structure Entrance</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">Structure, Structure Entrance</td></tr>
+        
+        <tr><td rowspan="1">624A Fleet St</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">20054539</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060828</td></tr>
+        
+        <tr><td rowspan="2">42 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">143.49</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">146.34</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">53.1</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">55.85</td></tr>
+        
+        <tr><td rowspan="6">455 Glebeholme Blvd</td>
+          <td class="change-field">ADDRESS_CLASS</td>
+          <td class="old-val">SE</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">S</td></tr>
+        
+        <tr>
+          <td class="change-field">ADDRESS_CLASS_DESC</td>
+          <td class="old-val">Structure Entrance</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">Structure</td></tr>
+        
+        <tr>
+          <td class="change-field">ADDRESS_ID</td>
+          <td class="old-val">1480279</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60007413</td></tr>
+        
+        <tr>
+          <td class="change-field">ADDRESS_ID_LINK</td>
+          <td class="old-val">707182</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">220982</td></tr>
+        
+        <tr>
+          <td class="change-field">CLASS_FAMILY</td>
+          <td class="old-val">10001</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">10011</td></tr>
+        
+        <tr>
+          <td class="change-field">CLASS_FAMILY_DESC</td>
+          <td class="old-val">Structure Entrance</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">Structure, Structure Entrance</td></tr>
+        
+        <tr><td rowspan="2">28 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">63.56</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">66.47</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">45.76</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">47.89</td></tr>
+        
+        <tr><td rowspan="2">384 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">65.49</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">65.75</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">24.44</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">23.73</td></tr>
+        
+        <tr><td rowspan="2">136 Topcliff Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">66.7</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">70.35</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">21.62</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">21.39</td></tr>
+        
+        <tr><td rowspan="2">5 Glen Gannon Dr</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">674</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060783</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">3.8</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">3.79</td></tr>
+        
+        <tr><td rowspan="2">378 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">42.73</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">42.91</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">17.36</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">16.9</td></tr>
+        
+        <tr><td rowspan="2">16 London Green Crt</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">153.67</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">153.54</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">41.46</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">45.63</td></tr>
+        
+        <tr><td rowspan="1">45 Venetian Cres</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">138.84</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">143.29</td></tr>
+        
+        <tr><td rowspan="2">101 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">23.22</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">24.72</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">43.63</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">39.81</td></tr>
+        
+        <tr><td rowspan="2">156 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">135.34</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">135.15</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">30.12</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">30.91</td></tr>
+        
+        <tr><td rowspan="3">434 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">30126666</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060697</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">43.82</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">52.15</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">86.14</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">85.01</td></tr>
+        
+        <tr><td rowspan="3">402-444 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">30126666</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060697</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">11.41</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">19.78</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">23.77</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">22.63</td></tr>
+        
+        <tr><td rowspan="3">418 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">30126666</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060697</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">18.58</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">26.92</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">63.61</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">62.46</td></tr>
+        
+        <tr><td rowspan="1">39 Futura Dr</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">171.02</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">171.03</td></tr>
+        
+        <tr><td rowspan="2">5 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">-5.79</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">-5.4</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">29.05</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">29.12</td></tr>
+        
+        <tr><td rowspan="1">57 Venetian Cres</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">194.88</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">199.34</td></tr>
+        
+        <tr><td rowspan="2">185 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">203.25</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">203.4</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">25.34</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">24.15</td></tr>
+        
+        <tr><td rowspan="3">432 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">30126666</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060697</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">37.62</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">45.96</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">86.01</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">84.87</td></tr>
+        
+        <tr><td rowspan="1">93 Futura Dr</td>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">23.57</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">23.56</td></tr>
+        
+        <tr><td rowspan="2">37 Venetian Cres</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">66.46</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">71.42</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">16.79</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">16.98</td></tr>
+        
+        <tr><td rowspan="1">97 Futura Dr</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">413.69</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">413.35</td></tr>
+        
+        <tr><td rowspan="2">27 London Green Crt</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">54.51</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">53.27</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">49.33</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">47.6</td></tr>
+        
+        <tr><td rowspan="1">70 Futura Dr</td>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">23.15</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">23.16</td></tr>
+        
+        <tr><td rowspan="2">3 Langdale Crt</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">22.73</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">23.49</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">27.46</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">23.74</td></tr>
+        
+        <tr><td rowspan="2">5 Langdale Crt</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">41.14</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">41.87</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">31.34</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">27.75</td></tr>
+        
+        <tr><td rowspan="1">68 Futura Dr</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">306.08</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">306.09</td></tr>
+        
+        <tr><td rowspan="2">20 Langdale Crt</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">92.72</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">85.88</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">24.52</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">25.71</td></tr>
+        
+        <tr><td rowspan="1">21 Futura Dr</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">85.82</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">85.83</td></tr>
+        
+        <tr><td rowspan="2">79 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">173.87</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">173.59</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">63.41</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">61.49</td></tr>
+        
+        <tr><td rowspan="2">94 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">31.71</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">34.62</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">19.5</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">23.11</td></tr>
+        
+        <tr><td rowspan="2">15 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">29.12</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">29.46</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">25.69</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">25.29</td></tr>
+        
+        <tr><td rowspan="2">10 Yorkwoods Gt</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">38.14</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">45.75</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">33.48</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">34.37</td></tr>
+        
+        <tr><td rowspan="2">24 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">32.64</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">35.27</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">82.83</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">84.73</td></tr>
+        
+        <tr><td rowspan="3">410 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">30126666</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060697</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">18.14</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">26.5</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">39.64</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">38.5</td></tr>
+        
+        <tr><td rowspan="2">131 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">76.79</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">70.48</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">29.66</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">25.21</td></tr>
+        
+        <tr><td rowspan="2">20 London Green Crt</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">86.43</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">85.43</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">24.2</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">27.82</td></tr>
+        
+        <tr><td rowspan="1">618B Fleet St</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">20054539</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060828</td></tr>
+        
+        <tr><td rowspan="2">64 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">108.21</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">111.9</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">78.97</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">82.93</td></tr>
+        
+        <tr><td rowspan="2">81 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">175.95</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">176.77</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">29.04</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">27.21</td></tr>
+        
+        <tr><td rowspan="2">157 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">87.12</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">87.53</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">71.25</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">70.75</td></tr>
+        
+        <tr><td rowspan="2">162 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">151.07</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">150.96</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">18.19</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">19.07</td></tr>
+        
+        <tr><td rowspan="6">174 Orchard View Blvd</td>
+          <td class="change-field">ADDRESS_CLASS</td>
+          <td class="old-val">SE</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">S</td></tr>
+        
+        <tr>
+          <td class="change-field">ADDRESS_CLASS_DESC</td>
+          <td class="old-val">Structure Entrance</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">Structure</td></tr>
+        
+        <tr>
+          <td class="change-field">ADDRESS_ID</td>
+          <td class="old-val">1471914</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60007415</td></tr>
+        
+        <tr>
+          <td class="change-field">ADDRESS_ID_LINK</td>
+          <td class="old-val">591306</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">105106</td></tr>
+        
+        <tr>
+          <td class="change-field">CLASS_FAMILY</td>
+          <td class="old-val">10001</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">10011</td></tr>
+        
+        <tr>
+          <td class="change-field">CLASS_FAMILY_DESC</td>
+          <td class="old-val">Structure Entrance</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">Structure, Structure Entrance</td></tr>
+        
+        <tr><td rowspan="1">53 Venetian Cres</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">173.49</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">177.95</td></tr>
+        
+        <tr><td rowspan="2">3 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">-17.61</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">-17.15</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">33.74</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">33.97</td></tr>
+        
+        <tr><td rowspan="2">23 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">65.69</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">66.03</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">25.62</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">24.73</td></tr>
+        
+        <tr><td rowspan="2">388 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">79.97</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">80.19</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">20.68</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">19.82</td></tr>
+        
+        <tr><td rowspan="2">170 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">176.58</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">176.46</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">18.61</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">19.64</td></tr>
+        
+        <tr><td rowspan="1">59 Venetian Cres</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">201.76</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">206.22</td></tr>
+        
+        <tr><td rowspan="6">80 Thyra Ave</td>
+          <td class="change-field">ADDRESS_CLASS</td>
+          <td class="old-val">SE</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">LE</td></tr>
+        
+        <tr>
+          <td class="change-field">ADDRESS_CLASS_DESC</td>
+          <td class="old-val">Structure Entrance</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">Land Entrance</td></tr>
+        
+        <tr>
+          <td class="change-field">ADDRESS_ID</td>
+          <td class="old-val">1473726</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60007418</td></tr>
+        
+        <tr>
+          <td class="change-field">ADDRESS_ID_LINK</td>
+          <td class="old-val">967065</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">480865</td></tr>
+        
+        <tr>
+          <td class="change-field">CLASS_FAMILY</td>
+          <td class="old-val">10001</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">10100</td></tr>
+        
+        <tr>
+          <td class="change-field">CLASS_FAMILY_DESC</td>
+          <td class="old-val">Structure Entrance</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">Land Entrance</td></tr>
+        
+        <tr><td rowspan="1">14 Glen Gannon Dr</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">674</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060783</td></tr>
+        
+        <tr><td rowspan="1">7 Glen Gannon Dr</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">674</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060783</td></tr>
+        
+        <tr><td rowspan="2">177 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">166.45</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">166.74</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">50.03</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">49.06</td></tr>
+        
+        <tr><td rowspan="1">7 Futura Dr</td>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">25.11</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">25.1</td></tr>
+        
+        <tr><td rowspan="1">622B Fleet St</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">20054539</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060828</td></tr>
+        
+        <tr><td rowspan="2">180 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">207.66</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">207.54</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">18.65</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">19.85</td></tr>
+        
+        <tr><td rowspan="1">51 Futura Dr</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">225.69</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">225.7</td></tr>
+        
+        <tr><td rowspan="2">75 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">125.4</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">126.28</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">28.22</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">24.75</td></tr>
+        
+        <tr><td rowspan="2">83 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">204.31</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">215.11</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">101.82</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">98.99</td></tr>
+        
+        <tr><td rowspan="1">17 Glen Gannon Dr</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">674</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060783</td></tr>
+        
+        <tr><td rowspan="2">23 London Green Crt</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">111.27</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">110.94</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">55.55</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">51.3</td></tr>
+        
+        <tr><td rowspan="2">19 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">47.41</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">47.75</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">25.65</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">25.01</td></tr>
+        
+        <tr><td rowspan="2">152 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">123.64</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">123.5</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">22.8</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">23.52</td></tr>
+        
+        <tr><td rowspan="2">135 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">93.0</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">88.35</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">30.28</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">25.9</td></tr>
+        
+        <tr><td rowspan="1">36 Venetian Cres</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">91.26</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">95.71</td></tr>
+        
+        <tr><td rowspan="2">127 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">49.78</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">46.21</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">32.22</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">28.48</td></tr>
+        
+        <tr><td rowspan="2">20 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">-2.13</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">0.54</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">78.3</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">79.92</td></tr>
+        
+        <tr><td rowspan="2">136 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">70.48</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">70.36</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">20.27</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">20.68</td></tr>
+        
+        <tr><td rowspan="1">90 Topcliff Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">93.17</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">93.16</td></tr>
+        
+        <tr><td rowspan="2">143 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">88.02</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">88.15</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">22.49</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">21.98</td></tr>
+        
+        <tr><td rowspan="3">444 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">30126666</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060697</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">96.55</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">104.92</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">24.68</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">23.59</td></tr>
+        
+        <tr><td rowspan="1">62 Venetian Cres</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">208.55</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">213.01</td></tr>
+        
+        <tr><td rowspan="2">118 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">1.53</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">1.41</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">21.0</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">21.01</td></tr>
+        
+        <tr><td rowspan="1">60 Futura Dr</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">269.27</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">269.28</td></tr>
+        
+        <tr><td rowspan="2">10 Langdale Crt</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">53.03</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">54.13</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">23.63</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">27.13</td></tr>
+        
+        <tr><td rowspan="2">184 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">224.84</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">224.72</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">18.65</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">19.96</td></tr>
+        
+        <tr><td rowspan="2">160 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">146.22</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">146.11</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">17.13</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">17.98</td></tr>
+        
+        <tr><td rowspan="2">181 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">191.89</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">192.03</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">24.39</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">23.27</td></tr>
+        
+        <tr><td rowspan="1">51 Venetian Cres</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">164.36</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">168.81</td></tr>
+        
+        <tr><td rowspan="1">59 Futura Dr</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">262.27</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">262.28</td></tr>
+        
+        <tr><td rowspan="1">618A Fleet St</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">20054539</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060828</td></tr>
+        
+        <tr><td rowspan="2">106 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">34.24</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">35.17</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">19.58</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">22.84</td></tr>
+        
+        <tr><td rowspan="2">176 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">190.54</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">190.44</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">16.32</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">17.43</td></tr>
+        
+        <tr><td rowspan="2">111 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">4.09</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">3.72</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">26.83</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">23.62</td></tr>
+        
+        <tr><td rowspan="3">1 Glen Gannon Dr</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">674</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060783</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">-25.12</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">-25.13</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">11.74</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">11.73</td></tr>
+        
+        <tr><td rowspan="1">38 Venetian Cres</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">102.44</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">106.9</td></tr>
+        
+        <tr><td rowspan="1">30 Futura Dr</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">129.62</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">129.63</td></tr>
+        
+        <tr><td rowspan="2">17 Langdale Crt</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">101.95</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">120.74</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">26.09</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">13.48</td></tr>
+        
+        <tr><td rowspan="2">383 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">58.14</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">57.97</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">15.52</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">16.15</td></tr>
+        
+        <tr><td rowspan="2">6 Glen Gannon Dr</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">674</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060783</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">-3.55</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">-3.54</td></tr>
+        
+        <tr><td rowspan="2">18 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">-18.83</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">-15.79</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">30.15</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">31.64</td></tr>
+        
+        <tr><td rowspan="2">120 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">10.65</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">10.52</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">21.58</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">21.64</td></tr>
+        
+        <tr><td rowspan="2">4 Langdale Crt</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">21.09</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">22.17</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">22.27</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">26.0</td></tr>
+        
+        <tr><td rowspan="1">64 Venetian Cres</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">213.58</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">218.04</td></tr>
+        
+        <tr><td rowspan="3">420 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">30126666</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060697</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">18.63</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">26.97</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">69.23</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">68.09</td></tr>
+        
+        <tr><td rowspan="2">85 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">214.91</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">222.69</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">69.17</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">65.51</td></tr>
+        
+        <tr><td rowspan="1">620B Fleet St</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">20054539</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060828</td></tr>
+        
+        <tr><td rowspan="3">146 Orchard View Blvd</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">20.66</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">20.7</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">16.64</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">13.25</td></tr>
+        
+        <tr>
+          <td class="change-field">Location</td>
+          <td class="old-val">43.70733, -79.40362</td>
+          <td class="arrow-val">↓ 2.4m</td>
+          <td class="new-val">43.70731, -79.40361</td></tr>
+        
+        <tr><td rowspan="2">168 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">173.32</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">173.19</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">19.85</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">20.86</td></tr>
+        
+        <tr><td rowspan="2">129 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">58.2</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">53.59</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">22.65</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">18.44</td></tr>
+        
+        <tr><td rowspan="2">164 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">161.4</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">161.28</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">18.99</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">19.93</td></tr>
+        
+        <tr><td rowspan="2">1 Langdale Crt</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">15.98</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">16.77</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">22.51</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">18.75</td></tr>
+        
+        <tr><td rowspan="3">408 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">30126666</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060697</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">17.74</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">26.1</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">34.27</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">33.13</td></tr>
+        
+        <tr><td rowspan="3">427 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">30126666</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060697</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">67.5</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">75.88</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">13.99</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">15.11</td></tr>
+        
+        <tr><td rowspan="2">17 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">34.72</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">35.1</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">28.83</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">28.36</td></tr>
+        
+        <tr><td rowspan="2">134 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">62.09</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">61.97</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">19.02</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">19.38</td></tr>
+        
+        <tr><td rowspan="2">96 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">37.49</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">40.49</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">23.71</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">27.19</td></tr>
+        
+        <tr><td rowspan="1">77 Futura Dr</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">343.48</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">343.49</td></tr>
+        
+        <tr><td rowspan="3">416 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">30126666</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060697</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">18.49</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">26.84</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">57.41</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">56.26</td></tr>
+        
+        <tr><td rowspan="5">651 Fleet St</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">35.58</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">46.51</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">18.08</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">20.84</td></tr>
+        
+        <tr>
+          <td class="change-field">PLACE_NAME</td>
+          <td class="old-val">None</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">Queen&#39;s Wharf Lighthouse</td></tr>
+        
+        <tr>
+          <td class="change-field">PLACE_NAME_ALL</td>
+          <td class="old-val">None</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">Queen&#39;s Wharf Lighthouse</td></tr>
+        
+        <tr>
+          <td class="change-field">Location</td>
+          <td class="old-val">43.63589, -79.40478</td>
+          <td class="arrow-val">← 11.3m</td>
+          <td class="new-val">43.63589, -79.40492</td></tr>
+        
+        <tr><td rowspan="1">34 Futura Dr</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">145.78</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">145.79</td></tr>
+        
+        <tr><td rowspan="2">386 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">71.36</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">71.62</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">24.88</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">24.11</td></tr>
+        
+        <tr><td rowspan="2">15 London Green Crt</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">90.61</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">81.57</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">78.03</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">80.66</td></tr>
+        
+        <tr><td rowspan="2">90 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">13.75</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">16.66</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">19.7</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">23.71</td></tr>
+        
+        <tr><td rowspan="1">620A Fleet St</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">20054539</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060828</td></tr>
+        
+        <tr><td rowspan="2">34 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">90.31</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">93.24</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">43.95</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">46.29</td></tr>
+        
+        <tr><td rowspan="1">91 Futura Dr</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">391.58</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">391.59</td></tr>
+        
+        <tr><td rowspan="2">186 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">230.99</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">230.86</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">20.35</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">21.69</td></tr>
+        
+        <tr><td rowspan="2">141 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">123.33</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">112.55</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">23.31</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">19.92</td></tr>
+        
+        <tr><td rowspan="2">1501 Woodbine Ave</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">30143180</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060475</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">40.68</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">47.41</td></tr>
+        
+        <tr><td rowspan="1">46 Venetian Cres</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">139.51</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">143.97</td></tr>
+        
+        <tr><td rowspan="2">40 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">154.41</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">157.1</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">74.41</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">77.25</td></tr>
+        
+        <tr><td rowspan="3">443 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">30126666</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060697</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">89.95</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">98.34</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">34.47</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">35.57</td></tr>
+        
+        <tr><td rowspan="3">422 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">30126666</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060697</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">17.89</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">26.23</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">75.12</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">73.97</td></tr>
+        
+        <tr><td rowspan="2">68 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">155.19</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">159.76</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">86.61</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">89.05</td></tr>
+        
+        <tr><td rowspan="1">622A Fleet St</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">20054539</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060828</td></tr>
+        
+        <tr><td rowspan="1">711 Lake Shore Blvd W</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">60008806</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060795</td></tr>
+        
+        <tr><td rowspan="1">55 Venetian Cres</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">177.82</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">182.27</td></tr>
+        
+        <tr><td rowspan="6">433A Eastern Ave</td>
+          <td class="change-field">ADDRESS_CLASS</td>
+          <td class="old-val">SE</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">S</td></tr>
+        
+        <tr>
+          <td class="change-field">ADDRESS_CLASS_DESC</td>
+          <td class="old-val">Structure Entrance</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">Structure</td></tr>
+        
+        <tr>
+          <td class="change-field">ADDRESS_ID</td>
+          <td class="old-val">1481136</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60007412</td></tr>
+        
+        <tr>
+          <td class="change-field">ADDRESS_ID_LINK</td>
+          <td class="old-val">722927</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">236727</td></tr>
+        
+        <tr>
+          <td class="change-field">CLASS_FAMILY</td>
+          <td class="old-val">10001</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">10011</td></tr>
+        
+        <tr>
+          <td class="change-field">CLASS_FAMILY_DESC</td>
+          <td class="old-val">Structure Entrance</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">Structure, Structure Entrance</td></tr>
+        
+        <tr><td rowspan="2">130 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">46.69</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">46.56</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">20.44</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">20.71</td></tr>
+        
+        <tr><td rowspan="3">449 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">30126666</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060697</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">94.07</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">102.46</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">14.45</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">15.55</td></tr>
+        
+        <tr><td rowspan="2">25 London Green Crt</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">103.52</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">103.25</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">25.98</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">21.71</td></tr>
+        
+        <tr><td rowspan="2">140 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">83.72</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">83.59</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">20.41</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">20.9</td></tr>
+        
+        <tr><td rowspan="2">153 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">89.11</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">89.42</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">54.21</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">53.69</td></tr>
+        
+        <tr><td rowspan="1">81 Futura Dr</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">360.12</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">360.13</td></tr>
+        
+        <tr><td rowspan="2">12 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">-66.49</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">-63.81</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">76.97</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">78.09</td></tr>
+        
+        <tr><td rowspan="2">149 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">90.07</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">90.31</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">41.79</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">41.26</td></tr>
+        
+        <tr><td rowspan="2">60 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">72.2</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">74.52</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">21.03</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">24.66</td></tr>
+        
+        <tr><td rowspan="2">385 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">66.32</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">66.16</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">14.54</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">15.25</td></tr>
+        
+        <tr><td rowspan="2">45 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">92.71</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">96.46</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">62.63</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60.26</td></tr>
+        
+        <tr><td rowspan="1">64 Futura Dr</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">286.47</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">286.48</td></tr>
+        
+        <tr><td rowspan="2">66 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">118.01</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">121.1</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">40.01</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">43.67</td></tr>
+        
+        <tr><td rowspan="5">110 Eastdale Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">137.81</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">125.62</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">42.81</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">31.15</td></tr>
+        
+        <tr>
+          <td class="change-field">PLACE_NAME</td>
+          <td class="old-val">Eastdale Parkette</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">None</td></tr>
+        
+        <tr>
+          <td class="change-field">PLACE_NAME_ALL</td>
+          <td class="old-val">Eastdale Parkette</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">None</td></tr>
+        
+        <tr>
+          <td class="change-field">Location</td>
+          <td class="old-val">43.69536, -79.30159</td>
+          <td class="arrow-val">→ 11.3m</td>
+          <td class="new-val">43.69537, -79.30145</td></tr>
+        
+        <tr><td rowspan="2">98 Futura Dr</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">411.71</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">417.12</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">27.93</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">27.72</td></tr>
+        
+        <tr><td rowspan="3">414 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">30126666</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060697</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">17.92</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">26.27</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">51.95</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">50.8</td></tr>
+        
+        <tr><td rowspan="2">36 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">119.94</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">122.79</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">54.0</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">56.57</td></tr>
+        
+        <tr><td rowspan="2">171 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">172.79</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">172.93</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">24.52</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">23.51</td></tr>
+        
+        <tr><td rowspan="1">63 Venetian Cres</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">218.86</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">223.32</td></tr>
+        
+        <tr><td rowspan="3">424 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">30126666</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060697</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">15.08</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">23.42</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">87.73</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">86.58</td></tr>
+        
+        <tr><td rowspan="2">16 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">-27.3</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">-24.87</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">108.61</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">110.03</td></tr>
+        
+        <tr><td rowspan="2">182 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">215.25</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">215.13</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">19.4</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">20.65</td></tr>
+        
+        <tr><td rowspan="2">112 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">21.96</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">20.07</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">26.27</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">29.76</td></tr>
+        
+        <tr><td rowspan="2">25 Glen Gannon Dr</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">642</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060783</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">20.35</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">126.91</td></tr>
+        
+        <tr><td rowspan="2">32 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">104.03</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">107.15</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">20.1</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">22.55</td></tr>
+        
+        <tr><td rowspan="2">14 Langdale Crt</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">66.21</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">67.91</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">25.63</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">29.99</td></tr>
+        
+        <tr><td rowspan="2">1 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">-26.12</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">-25.81</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">22.83</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">23.18</td></tr>
+        
+        <tr><td rowspan="3">437 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">30126666</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060697</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">75.34</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">83.74</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">47.52</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">48.63</td></tr>
+        
+        <tr><td rowspan="2">102 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">15.95</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">16.88</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">19.58</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">22.79</td></tr>
+        
+        <tr><td rowspan="2">124 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">23.45</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">23.33</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">20.24</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">20.38</td></tr>
+        
+        <tr><td rowspan="2">183 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">197.56</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">197.7</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">25.04</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">23.89</td></tr>
+        
+        <tr><td rowspan="2">122 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">17.86</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">17.74</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">20.81</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">20.91</td></tr>
+        
+        <tr><td rowspan="3">404 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">30126666</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060697</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">17.5</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">25.87</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">23.71</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">22.56</td></tr>
+        
+        <tr><td rowspan="1">56 Venetian Cres</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">181.56</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">186.01</td></tr>
+        
+        <tr><td rowspan="2">100 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">6.24</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">7.15</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">24.53</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">27.71</td></tr>
+        
+        <tr><td rowspan="1">44 Venetian Cres</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">126.72</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">131.18</td></tr>
+        
+        <tr><td rowspan="2">15 Langdale Crt</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">107.12</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">119.94</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">27.86</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">18.89</td></tr>
+        
+        <tr><td rowspan="2">151 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">89.34</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">89.62</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">48.39</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">47.87</td></tr>
+        
+        <tr><td rowspan="3">428 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">30126666</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060697</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">26.1</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">34.44</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">86.19</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">85.05</td></tr>
+        
+        <tr><td rowspan="2">107 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">15.52</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">16.58</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">24.1</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">20.89</td></tr>
+        
+        <tr><td rowspan="2">16 Langdale Crt</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">72.96</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">77.14</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">30.14</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">32.29</td></tr>
+        
+        <tr><td rowspan="2">128 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">39.18</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">39.05</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">22.38</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">22.61</td></tr>
+        
+        <tr><td rowspan="2">11 Glen Gannon Dr</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">674</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060783</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">39.5</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">39.49</td></tr>
+        
+        <tr><td rowspan="2">125 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">34.77</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">32.59</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">23.16</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">18.92</td></tr>
+        
+        <tr><td rowspan="2">62 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">64.25</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">65.5</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">49.79</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">53.67</td></tr>
+        
+        <tr><td rowspan="1">47 Venetian Cres</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">146.04</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">150.5</td></tr>
+        
+        <tr><td rowspan="2">11 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">16.21</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">16.58</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">27.72</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">27.5</td></tr>
+        
+        <tr><td rowspan="1">49 Venetian Cres</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">158.47</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">162.93</td></tr>
+        
+        <tr><td rowspan="1">42 Futura Dr</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">182.94</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">182.95</td></tr>
+        
+        <tr><td rowspan="2">173 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">178.47</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">178.6</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">24.47</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">23.43</td></tr>
+        
+        <tr><td rowspan="2">163 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">86.53</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">87.03</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">86.16</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">85.65</td></tr>
+        
+        <tr><td rowspan="2">161 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">86.56</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">87.04</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">81.69</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">81.18</td></tr>
+        
+        <tr><td rowspan="1">2 Glen Gannon Dr</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">674</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060783</td></tr>
+        
+        <tr><td rowspan="1">94 Futura Dr</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">397.63</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">397.64</td></tr>
+        
+        <tr><td rowspan="1">38 Futura Dr</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">165.05</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">165.06</td></tr>
+        
+        <tr><td rowspan="2">50 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">93.1</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">95.89</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">55.89</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">58.32</td></tr>
+        
+        <tr><td rowspan="2">148 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">108.79</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">108.67</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">19.9</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">20.53</td></tr>
+        
+        <tr><td rowspan="2">375 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">27.55</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">27.38</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">15.17</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">15.46</td></tr>
+        
+        <tr><td rowspan="2">380 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">51.24</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">51.5</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">24.26</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">23.7</td></tr>
+        
+        <tr><td rowspan="2">18 London Green Crt</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">119.85</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">119.68</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">22.51</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">26.75</td></tr>
+        
+        <tr><td rowspan="2">9 Langdale Crt</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">56.3</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">64.94</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">25.27</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">21.68</td></tr>
+        
+        <tr><td rowspan="2">110 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">11.96</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">10.62</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">23.0</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">26.15</td></tr>
+        
+        <tr><td rowspan="2">104 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">20.08</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">21.0</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">24.9</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">28.12</td></tr>
+        
+        <tr><td rowspan="3">439 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">30126666</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060697</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">87.88</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">96.29</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">48.25</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">49.35</td></tr>
+        
+        <tr><td rowspan="2">9 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">12.54</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">12.86</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">23.71</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">23.54</td></tr>
+        
+        <tr><td rowspan="2">12 Langdale Crt</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">62.56</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60.73</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">20.59</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">24.2</td></tr>
+        
+        <tr><td rowspan="2">142 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">92.83</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">92.72</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">17.48</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">18.02</td></tr>
+        
+        <tr><td rowspan="1">55 Futura Dr</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">243.98</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">243.99</td></tr>
+        
+        <tr><td rowspan="2">7 Langdale Crt</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">47.51</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">48.3</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">21.82</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">18.28</td></tr>
+        
+        <tr><td rowspan="2">39 Venetian Cres</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">58.12</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">63.24</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">21.77</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">22.2</td></tr>
+        
+        <tr><td rowspan="1">96 Futura Dr</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">406.9</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">406.91</td></tr>
+        
+        <tr><td rowspan="1">3 Futura Dr</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">18.82</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">18.81</td></tr>
+        
+        <tr><td rowspan="2">114 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">33.75</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">32.24</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">24.05</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">27.67</td></tr>
+        
+        <tr><td rowspan="2">14 London Green Crt</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">199.03</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">198.89</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">40.31</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">44.39</td></tr>
+        
+        <tr><td rowspan="1">19 Glen Gannon Dr</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">674</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060783</td></tr>
+        
+        <tr><td rowspan="2">2 Langdale Crt</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">16.28</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">17.35</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">20.56</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">24.31</td></tr>
+        
+        <tr><td rowspan="1">34 Venetian Cres</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">79.34</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">83.8</td></tr>
+        
+        <tr><td rowspan="2">146 Barrington Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">104.96</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">104.84</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">19.1</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">19.71</td></tr>
+        
+        <tr><td rowspan="1">52 Venetian Cres</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">158.82</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">163.28</td></tr>
+        
+        <tr><td rowspan="3">436 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">30126666</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060697</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">49.93</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">58.27</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">85.79</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">84.67</td></tr>
+        
+        <tr><td rowspan="2">44 Driftwood Ave</td>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">173.12</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">171.14</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">32.66</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">36.55</td></tr>
+        
+        <tr><td rowspan="3">447 Lumsden Ave</td>
+          <td class="change-field">CENTRELINE_ID</td>
+          <td class="old-val">30126666</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">60060697</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_MEASURE</td>
+          <td class="old-val">92.45</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">100.84</td></tr>
+        
+        <tr>
+          <td class="change-field">CENTRELINE_OFFSET</td>
+          <td class="old-val">21.11</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">22.21</td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Location Adjustments <span class="badge" style="background: var(--surface2); color: var(--text-dim)">0</span></h2>
+    <p class="empty">No location adjustments.</p>
+  </div>
+
+  <div class="generated-at">Report generated Jun 09, 2026 at 05:22 PM · source licence: Open Government Licence – Toronto</div>
+
+  <script>
+    function sortTable(tbodyId, col) {
+      const tbody = document.getElementById(tbodyId);
+      if (!tbody) return;
+      const rows = Array.from(tbody.rows);
+      const dir = tbody.dataset.sortDir === 'asc' ? 'desc' : 'asc';
+      tbody.dataset.sortDir = dir;
+      rows.sort((a, b) => {
+        const av = a.cells[col]?.textContent.trim() || '';
+        const bv = b.cells[col]?.textContent.trim() || '';
+        const an = parseFloat(av), bn = parseFloat(bv);
+        if (!isNaN(an) && !isNaN(bn)) return dir === 'asc' ? an - bn : bn - an;
+        return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+      });
+      rows.forEach(r => tbody.appendChild(r));
+    }
+  </script>
+</body>
+
+</html>

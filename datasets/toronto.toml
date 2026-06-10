@@ -1,0 +1,17 @@
+slug = "toronto"
+provider = "City of Toronto"
+data_url = "https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/abedd8bc-e3dd-4d45-8e69-79165a76e4fa/resource/b1c2ab72-dfe7-4b29-8550-6d1cfaa61733/download/address-points-4326.geojson"
+access = "static"          # arcgis | static
+format = "geojson"         # geojson | shapefile (static only)
+license_name = "Open Government Licence – Toronto"
+osm_compatible = "green-lwg"
+
+[identity]
+key_field = "ADDRESS_POINT_ID"  # stable municipal point id (OBJECTID is sequential, untrusted)
+synth_fields = ["full"]         # fallback when key_field is null on a row
+
+[fields]                   # source property -> canonical name; unmapped kept in props blob
+number = "ADDRESS_NUMBER"
+street = "LINEAR_NAME_FULL"
+full   = "ADDRESS_FULL"
+# Toronto address points carry no unit field

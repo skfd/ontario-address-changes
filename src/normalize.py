@@ -17,6 +17,7 @@ _VOLATILE_KEYS = {
     "objectid", "object_id", "fid", "oid", "globalid", "global_id",
     "shape", "shape_length", "shape_area", "shape__length", "shape__area",
     "se_anno_cad_data",
+    "_id",  # CKAN row-sequence id (Toronto), reassigned on every republish
 }
 
 _CANONICAL = ("number", "street", "unit", "full")
