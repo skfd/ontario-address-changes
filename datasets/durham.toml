@@ -1,0 +1,19 @@
+slug = "durham"
+provider = "Regional Municipality of Durham"
+data_url = "https://maps.durham.ca/arcgis/rest/services/Open_Data/Durham_OpenData/MapServer/0"
+access = "arcgis"
+format = "geojson"
+# Catalogued under "Oshawa" but the layer is region-wide (Ajax, Whitby, Pickering...).
+# Licence below is the City of Oshawa OGL the catalogue verified; the region-wide
+# licence is unconfirmed — fine for change-tracking, recheck before any redistribution.
+license_name = "Open Government Licence – City of Oshawa"
+osm_compatible = "green-lwg"
+
+[identity]
+key_field = "MXADDRESSCODE"       # Maximo asset id, 100% populated, one per unit (untrusted OBJECTID is sequential)
+synth_fields = ["number", "street", "unit"]   # fallback only if a row ever lacks MXADDRESSCODE
+
+[fields]                          # source property -> canonical name; unmapped props kept in the tracked blob
+number = "CIVIC_NUM"
+street = "ROAD_NAME"              # ROAD_TYPE/ROAD_DIR are separate source fields, tracked via the props blob
+unit   = "UNIT_NUM"              # real suite value (e.g. "2-61"); UNIT is just a Y/N has-unit flag
