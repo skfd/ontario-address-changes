@@ -1,0 +1,20 @@
+slug = "cambridge"
+provider = "City of Cambridge"
+# Catalogued maps.cambridge.ca/arcgispub path was dead; resolved via ArcGIS Online search to the
+# official org (owner cambridge.ca) OpenData1 service on the arcgispub03 path, layer 13.
+data_url = "https://maps.cambridge.ca/arcgispub03/rest/services/OpenData1/FeatureServer/13"
+access = "arcgis"
+format = "geojson"
+license_name = "Open Government Licence - City of Cambridge"
+osm_compatible = "green-lwg"
+
+[identity]
+# ADDRESS_POINT_ID values span a narrower range than the row count (not unique), so synthesize.
+key_field = ""                                 # synthesize from address + rounded lon/lat
+synth_fields = ["number", "street", "unit"]
+
+[fields]                                        # source property -> canonical name
+number = "HOUSE_NUMBER"
+street = "STREET_NAME"                          # WARD_ID/STATUS tracked via the props blob
+unit   = "UNIT_NUMBER"
+full   = "ADDRESS_LABEL"
