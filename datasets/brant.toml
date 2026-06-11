@@ -1,0 +1,21 @@
+slug = "brant"
+provider = "County of Brant"
+# Official OpenData_Brant AGO layer (clean parsed fields), distinct from the brantford city dataset.
+# Resolved via ArcGIS Online search; the catalogued maps.brant.ca layer 71 is an address/popdensity
+# overlay with no parsed components.
+data_url = "https://services1.arcgis.com/ZG34JIhRAfwP1ItJ/arcgis/rest/services/Civic_Addressing_Open_Data_view/FeatureServer/0"
+access = "arcgis"
+format = "geojson"
+license_name = "Not identified"
+osm_compatible = "unknown-review"
+
+[identity]
+# No stable source id (OBJECTID sequential; GLOBALID may be regenerated on republish for view layers).
+key_field = ""                                 # synthesize from address + rounded lon/lat
+synth_fields = ["number", "street", "unit"]
+
+[fields]                                        # source property -> canonical name
+number = "STREET_NUMBER"
+street = "STREET_NAME"                          # STREET_TYPE/DIRECTION/PLACE_NAME tracked via the props blob
+unit   = "STREET_UNIT_NUMBER"
+full   = "FULL_ADDRESS"
