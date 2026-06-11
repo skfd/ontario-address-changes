@@ -1,0 +1,20 @@
+slug = "frontenac"
+provider = "County of Frontenac"
+# Off-catalogue; found via ArcGIS Online search. Official org owner FrontenacGIS, open data view.
+# Region-wide (Frontenac townships in Municipality; Kingston is separated and tracked separately).
+data_url = "https://services2.arcgis.com/vJlmDE1PmdTcJF0N/arcgis/rest/services/Civic_Address_Points_View_2/FeatureServer/0"
+access = "arcgis"
+format = "geojson"
+license_name = "Not identified"
+osm_compatible = "unknown-review"
+
+[identity]
+# No stable source id (OBJECTID sequential; GlobalID may regenerate on republish).
+key_field = ""                                 # synthesize from address + rounded lon/lat
+synth_fields = ["number", "street", "unit"]
+
+[fields]                                        # source property -> canonical name
+number = "StreetNumber"
+street = "StreetName"                           # Qualifier/UpperNumber/Municipality tracked via the props blob
+unit   = "UnitNumber"
+full   = "Location"
