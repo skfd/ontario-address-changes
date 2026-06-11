@@ -1,0 +1,15 @@
+{# Shared UI macros. Imported by report.html, city_index.html, cities.html.
+   The .info-* CSS lives in each page's <style> block (pages are self-contained). #}
+
+{% macro field_info(compared, ignored, align='left') -%}
+  <span class="info-wrap{{ ' right' if align == 'right' else '' }}" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul>{% for f in compared %}<li>{{ f }}</li>{% endfor %}</ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      {% if ignored %}<ul>{% for f in ignored %}<li>{{ f }}</li>{% endfor %}</ul>
+      {% else %}<p class="muted">None — every source field is compared.</p>{% endif %}
+    </span>
+  </span>
+{%- endmacro %}

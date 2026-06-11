@@ -58,8 +58,28 @@
     .indicator.neutral { background:var(--text-dim); opacity:0.4; }
     footer { margin-top:32px; padding-top:16px; border-top:1px solid var(--border); font-size:12px; color:var(--text-dim); }
     footer a { color:var(--text-dim); } footer a:hover { color:var(--accent); }
+    .info-wrap { position:relative; display:inline-flex; vertical-align:middle; }
+    .info-btn { display:inline-flex; align-items:center; justify-content:center; gap:4px;
+      height:18px; padding:0 8px 0 7px; border-radius:999px; border:none; color:#fff;
+      background:var(--accent); cursor:help; font-size:11px; font-weight:600; line-height:1; white-space:nowrap; }
+    .info-btn .glyph { font-style:italic; font-weight:700; font-family:Georgia,'Times New Roman',serif; }
+    .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn, .info-wrap:focus .info-btn { background:var(--accent-hover); }
+    .info-pop { display:none; position:absolute; top:calc(100% + 8px); left:0; z-index:20; width:320px;
+      max-width:80vw; padding:12px 14px; background:var(--surface); border:1px solid var(--border);
+      border-radius:8px; box-shadow:var(--shadow-8); font-size:12.5px; font-weight:400;
+      color:var(--text-secondary); line-height:1.5; text-align:left; white-space:normal; }
+    .info-wrap.right .info-pop { left:auto; right:0; }
+    .info-wrap:hover .info-pop, .info-wrap:focus-within .info-pop, .info-wrap:focus .info-pop { display:block; }
+    .info-pop strong { display:block; color:var(--text); font-size:12px; margin-bottom:4px; }
+    .info-pop ul { list-style:none; margin:0 0 10px; padding:0; }
+    .info-pop li { padding:1px 0 1px 14px; position:relative; }
+    .info-pop li::before { content:"·"; position:absolute; left:4px; color:var(--text-dim); }
+    .info-pop .note { color:var(--text-dim); font-size:11.5px; margin:0 0 10px; }
+    .info-pop .muted { color:var(--text-dim); font-style:italic; }
   </style>
 </head>
+
+{% import "_macros.html" as ui %}
 
 <body>
   <main>
@@ -86,7 +106,7 @@
     </div>
     {% endif %}
 
-    <div class="section-header">Reports · {{ license_name }}</div>
+    <div class="section-header">Reports · {{ license_name }} {{ ui.field_info(compared_fields, ignored_fields) }}</div>
     <div class="reports">
       {% for report in reports %}
       {% if report.added == 0 and report.removed == 0 and report.modified == 0 and not report.is_baseline %}

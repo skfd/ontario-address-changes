@@ -150,20 +150,27 @@ _CANON_LABEL = {"number": "Street number", "street": "Street name",
                 "unit": "Unit", "full": "Full address"}
 
 
-def _compared_fields(ds):
-    """Human-readable list of the fields change detection compares, for the info popup."""
+def _compared_fields(ds, prop_keys):
+    """Exact list of the fields change detection compares, for the info popup.
+
+    Canonical mapped fields first (labelled, with source name), then every
+    remaining source prop key seen in the latest snapshot, minus ignored.
+    """
     out = [f"{_CANON_LABEL[k]} ({src})"
            for k in ("number", "street", "unit", "full") if (src := ds.fields.get(k))]
     out.append("Coordinates (latitude, longitude)")
+    seen = {src.lower() for src in ds.fields.values() if src}
+    seen |= {f.lower() for f in ds.ignore_fields}
+    out += [k for k in prop_keys if k.lower() not in seen]
     return out
 
 
-def _render_report(ds, snap, d, is_baseline, spark, source_url):
+def _render_report(ds, snap, d, is_baseline, spark, source_url, compared, ignored):
     new_id = snap["id"]
     added, removed, modified, location_only, counts = _prepare(ds, d, new_id)
     date = diff.snap_date(snap)
     ctx = {
-        "compared_fields": _compared_fields(ds), "ignored_fields": sorted(ds.ignore_fields),
+        "compared_fields": compared, "ignored_fields": ignored,
         "provider": ds.provider, "license_name": ds.license_name,
         "generated": datetime.now().strftime("%b %d, %Y at %I:%M %p"),
         "new_snapshot": snap, "new_date_friendly": _friendly_date(date),
@@ -206,6 +213,8 @@ def generate_all(datasets):
                           diff.compute_diff(ds, snaps[i]["id"], snaps[i + 1]["id"]), False))
 
         new_by_snap = diff.new_streets_by_snapshot(ds)
+        compared = _compared_fields(ds, diff.prop_keys(ds, snaps[-1]["id"]))
+        ignored = sorted(ds.ignore_fields)
 
         series = {k: [] for k in SPARK_KEYS}  # filled as we render, for sparklines
         meta = []
@@ -218,7 +227,8 @@ def generate_all(datasets):
             series["modified_location"].append(loc)
 
         for idx, (snap, d, is_base) in enumerate(diffs):
-            counts = _render_report(ds, snap, d, is_base, _spark_series(series, idx), source_url)
+            counts = _render_report(ds, snap, d, is_base, _spark_series(series, idx), source_url,
+                                    compared, ignored)
             date = diff.snap_date(snap)
             meta.append({
                 "date": date, "friendly_date": _friendly_date(date),
@@ -243,7 +253,8 @@ def generate_all(datasets):
             f.write(_env.get_template("city_index.html").render(
                 provider=ds.provider, license_name=ds.license_name,
                 source_url=source_url, reports=meta,
-                recent_new_streets=recent_new_streets))
+                recent_new_streets=recent_new_streets,
+                compared_fields=compared, ignored_fields=ignored))
 
         latest = meta[0]
         cities.append({
@@ -251,6 +262,7 @@ def generate_all(datasets):
             "row_count": snaps[-1]["row_count"], "last_date": diff.snap_date(snaps[-1]),
             "added": latest["added"], "removed": latest["removed"], "modified": latest["modified"],
             "has_changes": not latest["is_baseline"],
+            "compared_fields": compared, "ignored_fields": ignored,
         })
 
     cities.sort(key=lambda c: c["provider"])

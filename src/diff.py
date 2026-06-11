@@ -42,6 +42,17 @@ def _active(conn, snapshot_id):
     return {r["identity_key"]: dict(r) for r in rows}
 
 
+def prop_keys(ds, snapshot_id):
+    """Sorted distinct source-prop keys across the active rows of a snapshot."""
+    conn = db.init_db(ds)
+    rows = conn.execute(
+        "SELECT DISTINCT je.key FROM addresses, json_each(addresses.props) AS je "
+        "WHERE min_snapshot_id <= ? AND max_snapshot_id >= ?",
+        (snapshot_id, snapshot_id)).fetchall()
+    conn.close()
+    return sorted(r[0] for r in rows)
+
+
 # ---- field-level change detection ----
 
 def field_changes(old, new, ignore=()):

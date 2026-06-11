@@ -26,7 +26,8 @@
     .hero .tagline { color:var(--text-secondary); font-size:14px; }
     .section-header { font-size:12px; font-weight:600; margin-bottom:12px; color:var(--text-dim); }
     .cities { display:flex; flex-direction:column; gap:8px; }
-    .city-link { display:flex; align-items:center; gap:12px; background:var(--surface);
+    .city-row { display:flex; align-items:center; gap:8px; }
+    .city-link { flex:1; min-width:0; display:flex; align-items:center; gap:12px; background:var(--surface);
       border:1px solid var(--border); border-radius:8px; padding:14px 16px; color:var(--text);
       box-shadow:var(--shadow-4); transition:box-shadow 0.1s, border-color 0.1s; }
     .city-link:hover { border-color:var(--accent); text-decoration:none; box-shadow:var(--shadow-8); }
@@ -39,8 +40,28 @@
     .delta-add { color:var(--green); } .delta-rem { color:var(--red); } .delta-mod { color:var(--yellow); }
     footer { margin-top:32px; padding-top:16px; border-top:1px solid var(--border); font-size:12px; color:var(--text-dim); }
     footer a { color:var(--text-dim); } footer a:hover { color:var(--accent); }
+    .info-wrap { position:relative; display:inline-flex; vertical-align:middle; }
+    .info-btn { display:inline-flex; align-items:center; justify-content:center; gap:4px;
+      height:18px; padding:0 8px 0 7px; border-radius:999px; border:none; color:#fff;
+      background:var(--accent); cursor:help; font-size:11px; font-weight:600; line-height:1; white-space:nowrap; }
+    .info-btn .glyph { font-style:italic; font-weight:700; font-family:Georgia,'Times New Roman',serif; }
+    .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn, .info-wrap:focus .info-btn { background:var(--accent-hover); }
+    .info-pop { display:none; position:absolute; top:calc(100% + 8px); left:0; z-index:20; width:320px;
+      max-width:80vw; padding:12px 14px; background:var(--surface); border:1px solid var(--border);
+      border-radius:8px; box-shadow:var(--shadow-8); font-size:12.5px; font-weight:400;
+      color:var(--text-secondary); line-height:1.5; text-align:left; white-space:normal; }
+    .info-wrap.right .info-pop { left:auto; right:0; }
+    .info-wrap:hover .info-pop, .info-wrap:focus-within .info-pop, .info-wrap:focus .info-pop { display:block; }
+    .info-pop strong { display:block; color:var(--text); font-size:12px; margin-bottom:4px; }
+    .info-pop ul { list-style:none; margin:0 0 10px; padding:0; }
+    .info-pop li { padding:1px 0 1px 14px; position:relative; }
+    .info-pop li::before { content:"·"; position:absolute; left:4px; color:var(--text-dim); }
+    .info-pop .note { color:var(--text-dim); font-size:11.5px; margin:0 0 10px; }
+    .info-pop .muted { color:var(--text-dim); font-style:italic; }
   </style>
 </head>
+
+{% import "_macros.html" as ui %}
 
 <body>
   <main>
@@ -53,22 +74,25 @@
     <div class="section-header">{{ cities|length }} dataset{{ 's' if cities|length != 1 else '' }}</div>
     <div class="cities">
       {% for c in cities %}
-      <a class="city-link" href="{{ c.slug }}/index.html">
-        <div class="city-main">
-          <div class="city-name">{{ c.provider }}</div>
-          <div class="city-sub">{{ c.license_name }} · last snapshot {{ c.last_date }}</div>
-        </div>
-        <div class="city-right">
-          <div class="city-count">{{ "{:,}".format(c.row_count) }}</div>
-          <div class="city-delta">
-            {% if c.has_changes %}
-            <span class="delta-add">+{{ "{:,}".format(c.added) }}</span>
-            <span class="delta-rem">−{{ "{:,}".format(c.removed) }}</span>
-            <span class="delta-mod">~{{ "{:,}".format(c.modified) }}</span>
-            {% else %}<span style="color:var(--text-dim)">baseline</span>{% endif %}
+      <div class="city-row">
+        <a class="city-link" href="{{ c.slug }}/index.html">
+          <div class="city-main">
+            <div class="city-name">{{ c.provider }}</div>
+            <div class="city-sub">{{ c.license_name }} · last snapshot {{ c.last_date }}</div>
           </div>
-        </div>
-      </a>
+          <div class="city-right">
+            <div class="city-count">{{ "{:,}".format(c.row_count) }}</div>
+            <div class="city-delta">
+              {% if c.has_changes %}
+              <span class="delta-add">+{{ "{:,}".format(c.added) }}</span>
+              <span class="delta-rem">−{{ "{:,}".format(c.removed) }}</span>
+              <span class="delta-mod">~{{ "{:,}".format(c.modified) }}</span>
+              {% else %}<span style="color:var(--text-dim)">baseline</span>{% endif %}
+            </div>
+          </div>
+        </a>
+        {{ ui.field_info(c.compared_fields, c.ignored_fields, 'right') }}
+      </div>
       {% endfor %}
     </div>
 

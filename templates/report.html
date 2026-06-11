@@ -150,19 +150,7 @@
   {%- endif -%}
 {%- endmacro %}
 
-{% macro field_info(compared, ignored) -%}
-  <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
-    <span class="info-btn"><span class="glyph">i</span> Fields</span>
-    <span class="info-pop">
-      <strong>Compared for changes</strong>
-      <ul>{% for f in compared %}<li>{{ f }}</li>{% endfor %}</ul>
-      <p class="note">…plus all other source attributes, except those ignored below.</p>
-      <strong>Ignored (changes here are not counted)</strong>
-      {% if ignored %}<ul>{% for f in ignored %}<li>{{ f }}</li>{% endfor %}</ul>
-      {% else %}<p class="muted">None — every source field is compared.</p>{% endif %}
-    </span>
-  </span>
-{%- endmacro %}
+{% import "_macros.html" as ui %}
 
 <body>
 
@@ -192,7 +180,7 @@
     <div class="card"><div class="label">Retired Addresses</div>
       <div class="value red">−{{ "{:,}".format(removed_count) }}</div>
       {% if sparklines and sparklines.removed %}{{ sparkline_svg(sparklines.removed, '#c50f1f')|safe }}<div class="sparkline-label">7-snapshot trend</div>{% endif %}</div>
-    <div class="card"><div class="label">Updated Addresses {{ field_info(compared_fields, ignored_fields) }}</div>
+    <div class="card"><div class="label">Updated Addresses {{ ui.field_info(compared_fields, ignored_fields) }}</div>
       <div class="value yellow">{{ "{:,}".format(modified_count) }}</div>
       {% if sparklines and sparklines.modified %}{{ sparkline_svg(sparklines.modified, '#eaa300')|safe }}<div class="sparkline-label">7-snapshot trend</div>{% endif %}</div>
     <div class="card"><div class="label">Location Adjustments</div>
@@ -268,7 +256,7 @@
 
   <div class="section">
     <h2>Updated Addresses <span class="badge badge-yellow">{{ "{:,}".format(modified_count) }}</span>
-      {{ field_info(compared_fields, ignored_fields) }}
+      {{ ui.field_info(compared_fields, ignored_fields) }}
     {% if modified %}
     <table>
       <thead><tr><th>Address</th><th>What Changed</th><th>Before</th><th></th><th>After</th></tr></thead>
