@@ -1,0 +1,19 @@
+slug = "sarnia"
+provider = "City of Sarnia"
+# Found via ArcGIS Online search (not a separate catalogue note; Sarnia is a lower-tier muni in
+# Lambton County but publishes its own official address open data, owner richard.jackson_Sarnia).
+data_url = "https://services1.arcgis.com/ICybsLmBXrZCZV3x/arcgis/rest/services/Addresses_Open_Data/FeatureServer/0"
+access = "arcgis"
+format = "geojson"
+license_name = "Not identified"
+osm_compatible = "unknown-review"
+
+[identity]
+# No stable source id (OBJECTID_1 sequential, GlobalID may regenerate); no unit field published.
+key_field = ""                                 # synthesize from address + rounded lon/lat
+synth_fields = ["number", "street"]
+
+[fields]                                        # source property -> canonical name
+number = "STNUM"
+street = "STNAME"                               # STTYPE/STDIR components tracked via the props blob
+full   = "ADDRESS"
