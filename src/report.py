@@ -88,10 +88,16 @@ def _stats(d):
         for ch in m["changes"]:
             field_changes[ch.get("display_field") or ch["field"]] += 1
     MIN = 3
+
+    def top(counter, min_count=1):
+        # count desc, then name A-Z so ties are deterministic across runs
+        items = sorted(counter.items(), key=lambda kv: (-kv[1], kv[0]))[:10]
+        return {k: v for k, v in items if v >= min_count}
+
     return {
-        "top_streets_added": dict((s, n) for s, n in street_added.most_common(10) if n >= MIN),
-        "top_streets_removed": dict((s, n) for s, n in street_removed.most_common(10) if n >= MIN),
-        "field_changes": dict(field_changes.most_common(10)),
+        "top_streets_added": top(street_added, MIN),
+        "top_streets_removed": top(street_removed, MIN),
+        "field_changes": top(field_changes),
     }
 
 

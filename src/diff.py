@@ -80,6 +80,18 @@ def field_changes(old, new, ignore=()):
 
 # ---- diffs ----
 
+def addr_sort_key(r):
+    """Canonical row order: street A-Z, number numerically, unit, identity_key.
+
+    Every list of address rows we present (added/removed/modified/baseline) is
+    sorted with this key so output is deterministic across runs.
+    """
+    num = str(r.get("number") or "")
+    m = re.match(r"\d+", num)
+    return (r.get("street") or "", int(m.group()) if m else 0, num,
+            r.get("unit") or "", r["identity_key"])
+
+
 def compute_diff(ds, old_id, new_id):
     """Detailed diff: added / removed / modified (with per-row `changes`)."""
     conn = db.init_db(ds)
@@ -87,8 +99,8 @@ def compute_diff(ds, old_id, new_id):
     new = _active(conn, new_id)
     conn.close()
 
-    added = [new[k] for k in new.keys() - old.keys()]
-    removed = [old[k] for k in old.keys() - new.keys()]
+    added = sorted((new[k] for k in new.keys() - old.keys()), key=addr_sort_key)
+    removed = sorted((old[k] for k in old.keys() - new.keys()), key=addr_sort_key)
     modified = []
     for k in old.keys() & new.keys():
         if old[k]["payload_hash"] != new[k]["payload_hash"]:
@@ -97,6 +109,7 @@ def compute_diff(ds, old_id, new_id):
                 m = dict(new[k])
                 m["changes"] = ch
                 modified.append(m)
+    modified.sort(key=addr_sort_key)
     return {"added": added, "removed": removed, "modified": modified}
 
 
@@ -105,7 +118,7 @@ def compute_baseline(ds, snapshot_id):
     conn = db.init_db(ds)
     new = _active(conn, snapshot_id)
     conn.close()
-    return {"added": list(new.values()), "removed": [], "modified": []}
+    return {"added": sorted(new.values(), key=addr_sort_key), "removed": [], "modified": []}
 
 
 # ---- history ----
