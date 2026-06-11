@@ -1,0 +1,19 @@
+slug = "wellington"
+provider = "County of Wellington"
+# Off-catalogue; found via ArcGIS Online search (official org, owner WellingtonPlanning). Region-wide
+# (Wellington townships in Municipality; Guelph is a separated city, tracked separately/not here).
+data_url = "https://services8.arcgis.com/qu8yojONWhklwVA3/arcgis/rest/services/Wellington_County_Base_Data_view/FeatureServer/0"
+access = "arcgis"
+format = "geojson"
+license_name = "Not identified"
+osm_compatible = "unknown-review"
+
+[identity]
+# No stable source id (OBJECTID sequential). No combined full-address field in this layer.
+key_field = ""                                 # synthesize from address + rounded lon/lat
+synth_fields = ["number", "street", "unit"]
+
+[fields]                                        # source property -> canonical name
+number = "Address"
+street = "WC_FullNam"                           # WC_Name/Suffix/Dir/Municipality/UrbanCentre tracked via the props blob
+unit   = "Unit"
