@@ -64,6 +64,7 @@ def cmd_update(args):
     from src import db, diff, fetch, report
     datasets = _resolve(args)
     done = []
+    failed = []
     for ds in datasets:
         print(f"\n=== {ds.slug} ===")
         try:
@@ -73,8 +74,11 @@ def cmd_update(args):
             done.append(ds)
         except Exception as e:
             print(f"  ERROR ({ds.slug}): {e}")
+            failed.append(ds.slug)
     if done:
         report.generate_all(done)
+    if failed:
+        sys.exit(f"update failed for: {', '.join(failed)}")
 
 
 def main():

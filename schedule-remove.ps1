@@ -1,8 +1,17 @@
-$taskName = "OntarioAddressChanges"
+# Removes all per-city tasks (kk-*) plus the legacy OntarioAddressChanges task.
 
-if (Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue) {
-    Unregister-ScheduledTask -TaskName $taskName -Confirm:$false
-    Write-Host "Removed scheduled task '$taskName'."
-} else {
-    Write-Host "No scheduled task named '$taskName' found."
+$prefix = "kk"
+
+$tasks = Get-ScheduledTask | Where-Object {
+    $_.TaskName -like "$prefix-*" -or $_.TaskName -eq "OntarioAddressChanges"
+}
+
+if (-not $tasks) {
+    Write-Host "No matching scheduled tasks found."
+    return
+}
+
+foreach ($t in $tasks) {
+    Unregister-ScheduledTask -TaskName $t.TaskName -Confirm:$false
+    Write-Host "Removed '$($t.TaskName)'."
 }
