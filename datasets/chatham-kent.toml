@@ -1,0 +1,20 @@
+slug = "chatham-kent"
+provider = "Municipality of Chatham-Kent"
+# Catalogued OpenAddresses cache zip is dead; resolved via ArcGIS Online search to the official
+# org (services1.arcgis.com/BlSm9A1poQIGIz9S, owner ChathamKentGIS). Address layer is index 9.
+data_url = "https://services1.arcgis.com/BlSm9A1poQIGIz9S/arcgis/rest/services/Municipality_of_Chatham_Kent_Addesses/FeatureServer/9"
+access = "arcgis"
+format = "geojson"
+license_name = "Not identified"
+osm_compatible = "unknown-review"
+
+[identity]
+# ADDRESS_ID has a 0/null "no-id" sentinel on ~1,588 rows (would collapse them), so synthesize.
+# No unit field published in this layer (cf. brantford/lambton).
+key_field = ""                                 # synthesize from address + rounded lon/lat
+synth_fields = ["number", "street"]
+
+[fields]                                        # source property -> canonical name
+number = "ADDRESS_NUMBER"
+street = "STREET_NAME"                          # STREET_DIR/COMMUNITY_NAME tracked via the props blob
+full   = "BASE_ADDRESS"

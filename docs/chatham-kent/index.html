@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Ontario Address Change Tracker</title>
+  <title>Municipality of Chatham-Kent — Address Change Tracker</title>
   <style>
     :root { --bg:#fafafa; --surface:#ffffff; --surface2:#f5f5f5; --border:#e0e0e0;
       --text:#242424; --text-secondary:#424242; --text-dim:#616161; --accent:#0078d4;
@@ -20,24 +20,42 @@
     body { font-family:'Segoe UI Variable','Segoe UI',system-ui,-apple-system,sans-serif;
       background:var(--bg); color:var(--text); line-height:1.5; display:flex; justify-content:center;
       padding:48px 24px; font-size:14px; -webkit-font-smoothing:antialiased; }
-    main { max-width:760px; width:100%; }
-    a { color:var(--accent); text-decoration:none; } a:hover { text-decoration:underline; color:var(--accent-hover); }
+    main { max-width:680px; width:100%; }
+    a { color:var(--accent); text-decoration:none; }
+    a:hover { text-decoration:underline; color:var(--accent-hover); }
+    .back-link { display:inline-flex; gap:.35rem; font-size:12px; color:var(--text-dim); margin-bottom:1.25rem; }
     .hero { margin-bottom:32px; } .hero h1 { font-size:28px; font-weight:600; margin-bottom:8px; }
-    .hero .tagline { color:var(--text-secondary); font-size:14px; }
+    .hero .tagline { color:var(--text-secondary); font-size:14px; margin-bottom:12px; }
+    .hero .dataset-link { font-size:12px; color:var(--accent); }
     .section-header { font-size:12px; font-weight:600; margin-bottom:12px; color:var(--text-dim); }
-    .cities { display:flex; flex-direction:column; gap:8px; }
-    .city-row { display:flex; align-items:center; gap:8px; }
-    .city-link { flex:1; min-width:0; display:flex; align-items:center; gap:12px; background:var(--surface);
-      border:1px solid var(--border); border-radius:8px; padding:14px 16px; color:var(--text);
-      box-shadow:var(--shadow-4); transition:box-shadow 0.1s, border-color 0.1s; }
-    .city-link:hover { border-color:var(--accent); text-decoration:none; box-shadow:var(--shadow-8); }
-    .city-main { flex:1; min-width:0; }
-    .city-name { font-weight:600; font-size:15px; }
-    .city-sub { font-size:12px; color:var(--text-dim); margin-top:2px; }
-    .city-right { text-align:right; white-space:nowrap; }
-    .city-count { font-weight:600; font-variant-numeric:tabular-nums; }
-    .city-delta { font-size:12px; margin-top:2px; }
-    .delta-add { color:var(--green); } .delta-rem { color:var(--red); } .delta-mod { color:var(--yellow); }
+    .reports { display:flex; flex-direction:column; gap:8px; }
+    .report-link { display:block; background:var(--surface); border:1px solid var(--border);
+      border-radius:8px; padding:14px 16px; color:var(--text); box-shadow:var(--shadow-4);
+      transition:box-shadow 0.1s, border-color 0.1s; }
+    .report-link:hover { border-color:var(--accent); text-decoration:none; box-shadow:var(--shadow-8); }
+    .report-link .date-row { display:flex; align-items:center; gap:8px; }
+    .report-link .date { font-weight:600; font-size:14px; }
+    .badge-latest { font-size:10px; padding:2px 8px; border-radius:999px; font-weight:600;
+      background:var(--accent-bg); color:var(--accent); text-transform:uppercase; letter-spacing:0.04em; }
+    .new-streets-pill { display:inline-flex; align-items:center; font-size:11px; font-weight:600;
+      padding:1px 8px; border-radius:999px; background:var(--accent-bg); color:var(--accent);
+      margin-left:auto; white-space:nowrap; }
+    .recent-streets { background:var(--surface); border:1px solid var(--border); border-radius:8px;
+      padding:14px 16px; margin-bottom:32px; box-shadow:var(--shadow-4); }
+    .recent-streets .title { font-size:12px; font-weight:600; color:var(--text-dim); margin-bottom:10px;
+      text-transform:uppercase; letter-spacing:0.04em; }
+    .recent-streets ul { list-style:none; display:flex; flex-direction:column; gap:6px; }
+    .recent-streets li { display:flex; align-items:baseline; gap:8px; font-size:13px; }
+    .recent-streets .street-name { font-weight:600; color:var(--text); }
+    .recent-streets .street-count { color:var(--text-dim); font-size:12px; }
+    .recent-streets a.street-date { color:var(--accent); font-size:12px; margin-left:auto; white-space:nowrap; }
+    .recent-streets a.street-date:hover { text-decoration:underline; }
+    .report-link .summary { font-size:12px; color:var(--text-dim); margin-top:4px;
+      display:flex; align-items:center; gap:8px; }
+    .indicator { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+    .indicator.green { background:var(--green); } .indicator.red { background:var(--red); }
+    .indicator.yellow { background:var(--yellow); }
+    .indicator.neutral { background:var(--text-dim); opacity:0.4; }
     footer { margin-top:32px; padding-top:16px; border-top:1px solid var(--border); font-size:12px; color:var(--text-dim); }
     footer a { color:var(--text-dim); } footer a:hover { color:var(--accent); }
     .info-wrap { position:relative; display:inline-flex; vertical-align:middle; }
@@ -65,29 +83,17 @@
 
 <body>
   <main>
+    <a class="back-link" href="../index.html">← All Ontario datasets</a>
     <div class="hero">
-      <h1>Ontario Address Change Tracker</h1>
-      <p class="tagline">We periodically compare each municipality's official open address
-        list to spot new buildings, retired addresses, and corrections over time.</p>
+      <h1>Municipality of Chatham-Kent</h1>
+      <p class="tagline">Tracking additions, removals, and corrections to this municipality's
+        open civic-address data over time.</p>
+      <a class="dataset-link" href="https://services1.arcgis.com/BlSm9A1poQIGIz9S/arcgis/rest/services/Municipality_of_Chatham_Kent_Addesses/FeatureServer/9">View the source dataset →</a>
     </div>
 
-    <div class="section-header">1 dataset</div>
-    <div class="cities">
-      
-      <div class="city-row">
-        <a class="city-link" href="chatham-kent/index.html">
-          <div class="city-main">
-            <div class="city-name">Municipality of Chatham-Kent</div>
-            <div class="city-sub">Not identified · last snapshot 2026-06-11 · 1 report</div>
-          </div>
-          <div class="city-right">
-            <div class="city-count">59,210</div>
-            <div class="city-delta">
-              <span style="color:var(--text-dim)">baseline</span>
-            </div>
-          </div>
-        </a>
-        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    
+
+    <div class="section-header">Reports · Not identified <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
     <span class="info-btn"><span class="glyph">i</span> Fields</span>
     <span class="info-pop">
       <strong>Compared for changes</strong>
@@ -95,15 +101,27 @@
       <strong>Ignored (changes here are not counted)</strong>
       <p class="muted">None — every source field is compared.</p>
     </span>
-  </span>
-      </div>
+  </span></div>
+    <div class="reports">
+      
+      
+      <a class="report-link" href="report-2026-06-11.html">
+        <div class="date-row"><span class="date">Thursday, Jun 11, 2026</span>
+          
+          <span class="badge-latest" style="background:var(--surface2);color:var(--text-dim)">Baseline</span>
+          
+        </div>
+        <div class="summary">
+          <span class="indicator green"></span>
+          
+          59,210 new · 0 removed · 0 updated
+        </div>
+      </a>
+      
       
     </div>
 
-    <footer>
-      Generated Jun 11, 2026 at 01:48 AM ·
-      <a href="https://github.com/skfd/ontario-address-changes">Source on GitHub</a>
-    </footer>
+    <footer>Source licence: Not identified · <a href="https://github.com/skfd/ontario-address-changes">Source on GitHub</a></footer>
   </main>
 </body>
 
