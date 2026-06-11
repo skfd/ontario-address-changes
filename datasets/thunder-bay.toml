@@ -1,0 +1,20 @@
+slug = "thunder-bay"
+provider = "City of Thunder Bay"
+# Catalogued self-hosted webapps.thunderbay.ca was 404; resolved via ArcGIS Online search to the
+# official org (owner opendata_Thunderbay, services5.arcgis.com/h9xShea49ZANgOtx).
+data_url = "https://services5.arcgis.com/h9xShea49ZANgOtx/arcgis/rest/services/Municipal_Address_Feature_Layer/FeatureServer/0"
+access = "arcgis"
+format = "geojson"
+license_name = "City of Thunder Bay Open Data Licence"
+osm_compatible = "green-lwg"
+
+[identity]
+# RSN carries a 0/null sentinel on ~378 rows (would collapse if keyed); ADDRESS_NUMBER is clean
+# (only 17 missing). No unit field published. Synthesize from address components + lon/lat.
+key_field = ""                                 # synthesize
+synth_fields = ["number", "street"]
+
+[fields]                                        # source property -> canonical name
+number = "ADDRESS_NUMBER"
+street = "STREET"                               # ROWTYPE/ROOT/TYPE/PCL_PIN tracked via the props blob
+full   = "COMPLETE"
