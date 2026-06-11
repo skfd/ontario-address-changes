@@ -1,0 +1,17 @@
+slug = "brampton"
+provider = "City of Brampton"
+data_url = "https://maps1.brampton.ca/arcgis/rest/services/COB/OpenData_Address_Points/MapServer/14"
+access = "arcgis"
+format = "geojson"
+license_name = "Creative Commons Attribution 4.0 (CC BY 4.0)"
+osm_compatible = "orange-ccby-waiver"
+
+[identity]
+key_field = "ADDRESS_ID"                       # stable municipal address id, 100% populated (GIS_ID/OBJECTID are sequential)
+synth_fields = ["number", "street", "unit"]    # fallback only if a row ever lacks ADDRESS_ID
+
+[fields]                                        # source property -> canonical name
+number = "CIVIC_NUMBER"
+street = "STREET_NAME"                          # STREET_TYPE/STREET_DIRECTION tracked via the props blob
+unit   = "UNIT_NO"
+full   = "FULL_ADDRESS"
