@@ -1,0 +1,19 @@
+slug = "elgin"
+provider = "County of Elgin"
+data_url = "https://gisdata.elginmapping.ca/arcgis/rest/services/Public/MapServer/1"
+access = "arcgis"
+format = "geojson"
+license_name = "Not identified"
+osm_compatible = "unknown-review"
+
+[identity]
+# Region-wide (all Elgin lower-tier munis in MUNI). ARN is an assessment roll number that can be
+# 1:many with civic addresses, so synthesize from the (clean) address components instead.
+key_field = ""                                 # synthesize from address + rounded lon/lat
+synth_fields = ["number", "street", "unit"]
+
+[fields]                                        # source property -> canonical name
+number = "StrNUM"
+street = "StrFULL"                              # ARN/MUNI/Condition tracked via the props blob
+unit   = "StrUNIT"
+full   = "StrNUM_StrFULL"
