@@ -1,0 +1,18 @@
+slug = "leeds-grenville"
+provider = "United Counties of Leeds and Grenville"
+data_url = "https://services3.arcgis.com/KQcdsE7S72bcD7R8/ArcGIS/rest/services/CivicAddress/FeatureServer/0"
+access = "arcgis"
+format = "geojson"
+license_name = "Not identified"
+osm_compatible = "unknown-review"
+
+[identity]
+# Region-wide (United Counties; member townships incl. Rideau Lakes in the MUN field).
+key_field = "Id"                               # stable id, 100% populated and order-independent (OBJECTID/OBJECTID_1 are sequential)
+synth_fields = ["number", "street", "unit"]    # fallback only
+
+[fields]                                        # source property -> canonical name
+number = "CIVICNUM"
+street = "STREET"                               # REFORMLOC/GEOTOWNSHP/ARN tracked via the props blob
+unit   = "UNITNUM"
+full   = "ADDRESSAGOL"
