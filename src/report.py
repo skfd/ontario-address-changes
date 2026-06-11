@@ -205,6 +205,8 @@ def generate_all(datasets):
             diffs.append((snaps[i + 1],
                           diff.compute_diff(ds, snaps[i]["id"], snaps[i + 1]["id"]), False))
 
+        new_by_snap = diff.new_streets_by_snapshot(ds)
+
         series = {k: [] for k in SPARK_KEYS}  # filled as we render, for sparklines
         meta = []
         for idx, (snap, d, is_base) in enumerate(diffs):
@@ -223,15 +225,25 @@ def generate_all(datasets):
                 "filename": f"report-{date}.html", "is_baseline": is_base,
                 "added": counts["added"], "removed": counts["removed"],
                 "modified": counts["modified"] + counts["modified_location"],
+                "new_streets": new_by_snap.get(snap["id"], []),
             })
 
         meta.reverse()                       # newest first
         if meta:
             meta[0]["is_latest"] = not meta[0]["is_baseline"]
+
+        # flatten new-street debuts across reports, newest first, cap at 15
+        recent_new_streets = [
+            {"street": s["street"], "count": s["count"],
+             "filename": m["filename"], "friendly_date": m["friendly_date"]}
+            for m in meta for s in m["new_streets"]
+        ][:15]
+
         with open(os.path.join(DOCS_DIR, ds.slug, "index.html"), "w", encoding="utf-8") as f:
             f.write(_env.get_template("city_index.html").render(
                 provider=ds.provider, license_name=ds.license_name,
-                source_url=source_url, reports=meta))
+                source_url=source_url, reports=meta,
+                recent_new_streets=recent_new_streets))
 
         latest = meta[0]
         cities.append({

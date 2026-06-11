@@ -134,6 +134,45 @@ def compute_histories(ds, keys, before_id):
                 for _, d, kind in sorted(v)] for k, v in hist.items()}
 
 
+# ---- new streets ----
+
+def new_streets_by_snapshot(ds):
+    """{snapshot_id: [{street, count}]} of streets debuting at each snapshot.
+
+    A street "debuts" at the earliest non-skipped snapshot in which any address
+    on it appears; `count` is how many addresses it debuts with. The baseline
+    snapshot is excluded (every street is "new" on first import). Lists are
+    ordered by count desc, then street asc.
+    """
+    snaps = nonskipped(ds)
+    if len(snaps) < 2:
+        return {}
+    baseline_id = snaps[0]["id"]
+
+    conn = db.init_db(ds)
+    rows = conn.execute("""
+        WITH first_seen AS (
+            SELECT street, MIN(min_snapshot_id) AS first_sid
+            FROM addresses
+            WHERE street IS NOT NULL AND street != ''
+            GROUP BY street
+        )
+        SELECT f.street AS street, f.first_sid AS sid, COUNT(*) AS count
+        FROM first_seen f
+        JOIN addresses a ON a.street = f.street AND a.min_snapshot_id = f.first_sid
+        GROUP BY f.street, f.first_sid
+        ORDER BY count DESC, street ASC
+    """).fetchall()
+    conn.close()
+
+    out = {}
+    for r in rows:
+        if r["sid"] == baseline_id:
+            continue
+        out.setdefault(r["sid"], []).append({"street": r["street"], "count": r["count"]})
+    return out
+
+
 # ---- console summary (CLI) ----
 
 def report_latest(ds):

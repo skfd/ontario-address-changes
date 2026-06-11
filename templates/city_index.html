@@ -37,6 +37,19 @@
     .report-link .date { font-weight:600; font-size:14px; }
     .badge-latest { font-size:10px; padding:2px 8px; border-radius:999px; font-weight:600;
       background:var(--accent-bg); color:var(--accent); text-transform:uppercase; letter-spacing:0.04em; }
+    .new-streets-pill { display:inline-flex; align-items:center; font-size:11px; font-weight:600;
+      padding:1px 8px; border-radius:999px; background:var(--accent-bg); color:var(--accent);
+      margin-left:auto; white-space:nowrap; }
+    .recent-streets { background:var(--surface); border:1px solid var(--border); border-radius:8px;
+      padding:14px 16px; margin-bottom:32px; box-shadow:var(--shadow-4); }
+    .recent-streets .title { font-size:12px; font-weight:600; color:var(--text-dim); margin-bottom:10px;
+      text-transform:uppercase; letter-spacing:0.04em; }
+    .recent-streets ul { list-style:none; display:flex; flex-direction:column; gap:6px; }
+    .recent-streets li { display:flex; align-items:baseline; gap:8px; font-size:13px; }
+    .recent-streets .street-name { font-weight:600; color:var(--text); }
+    .recent-streets .street-count { color:var(--text-dim); font-size:12px; }
+    .recent-streets a.street-date { color:var(--accent); font-size:12px; margin-left:auto; white-space:nowrap; }
+    .recent-streets a.street-date:hover { text-decoration:underline; }
     .report-link .summary { font-size:12px; color:var(--text-dim); margin-top:4px;
       display:flex; align-items:center; gap:8px; }
     .indicator { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
@@ -58,6 +71,21 @@
       {% if source_url %}<a class="dataset-link" href="{{ source_url }}">View the source dataset →</a>{% endif %}
     </div>
 
+    {% if recent_new_streets %}
+    <div class="recent-streets">
+      <div class="title">Recent new streets</div>
+      <ul>
+        {% for s in recent_new_streets %}
+        <li>
+          <span class="street-name">{{ s.street }}</span>
+          <span class="street-count">· {{ s.count }} address{% if s.count != 1 %}es{% endif %}</span>
+          <a class="street-date" href="{{ s.filename }}">{{ s.friendly_date }}</a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
     <div class="section-header">Reports · {{ license_name }}</div>
     <div class="reports">
       {% for report in reports %}
@@ -71,6 +99,7 @@
         <div class="date-row"><span class="date">{{ report.friendly_date }}</span>
           {% if report.is_latest %}<span class="badge-latest">New</span>{% endif %}
           {% if report.is_baseline %}<span class="badge-latest" style="background:var(--surface2);color:var(--text-dim)">Baseline</span>{% endif %}
+          {% if report.new_streets %}<span class="new-streets-pill">+{{ report.new_streets|length }} new street{% if report.new_streets|length != 1 %}s{% endif %}</span>{% endif %}
         </div>
         <div class="summary">
           {% if report.added >= report.removed and report.added >= report.modified %}<span class="indicator green"></span>
