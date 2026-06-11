@@ -1,0 +1,17 @@
+slug = "milton"
+provider = "Town of Milton"
+data_url = "https://api.milton.ca/arcgis/rest/services/WebMaps/MGIS/MapServer/63"
+access = "arcgis"
+format = "geojson"
+license_name = "Not identified"
+osm_compatible = "unknown-review"
+
+[identity]
+key_field = "Address_ID"                       # persistent address id, 100% populated, has gaps (max 49246 > rowcount; OBJECTID is sequential)
+synth_fields = ["number", "street", "unit"]    # fallback only
+
+[fields]                                        # source property -> canonical name
+number = "ADDRESS_NUM"
+street = "STREET_NAME"                          # GEOSTNAME/STREET_TYPE/ST_DIR_SUFFIX components tracked via the props blob
+unit   = "UNIT_NUMBER"
+full   = "FULL_ADDRESS"
