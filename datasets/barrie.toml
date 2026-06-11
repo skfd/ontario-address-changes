@@ -1,0 +1,19 @@
+slug = "barrie"
+provider = "City of Barrie"
+# Catalogued self-hosted gisservices.barrie.ca refused connections; resolved via ArcGIS Online search
+# to the official org (owner BarrieGIS, services3.arcgis.com/C964zBpHgJUpj4d0), COB_ADDRESS_POINT.
+data_url = "https://services3.arcgis.com/C964zBpHgJUpj4d0/arcgis/rest/services/COB_ADDRESS_POINT/FeatureServer/0"
+access = "arcgis"
+format = "geojson"
+license_name = "Open Government Licence - Barrie"
+osm_compatible = "green-lwg"
+
+[identity]
+key_field = "ADDRESSID"                        # stable address id, 100% populated, order-independent (OBJECTID_1 is sequential)
+synth_fields = ["number", "street", "unit"]    # fallback only
+
+[fields]                                        # source property -> canonical name
+number = "ADDRNUMBER"
+street = "SSTRNAME"                             # SSTRSUFF/SSTRDIR/PARCELID tracked via the props blob
+unit   = "UNITNUMBER"
+full   = "FULLADDR"
