@@ -1,0 +1,19 @@
+slug = "kingston"
+provider = "City of Kingston"
+# Catalogued civic-address SHP zip (apps.cityofkingston.ca) is 404; resolved via the ArcGIS Online
+# search API to the official org's (owner kingstonarcgisadmin) live "Civic Address Points" service.
+data_url = "https://utility.arcgis.com/usrsvcs/servers/d76e1fe447e84cb1983c76e1cb9dadb4/rest/services/Planning/Civic_Address_Point_Public/FeatureServer/0"
+access = "arcgis"
+format = "geojson"
+license_name = "Open Data Licence - City of Kingston"
+osm_compatible = "green-lwg"
+
+[identity]
+key_field = "ADDRESS_ID"                       # persistent address id, 100% populated, has gaps (OBJECTID is sequential)
+synth_fields = ["number", "street", "unit"]    # fallback only
+
+[fields]                                        # source property -> canonical name
+number = "ADDRESS_NUMBER"
+street = "STREET"                               # STREET_BODY_NAME/TYPE_SUFFIX/DIRECTION components tracked via the props blob
+unit   = "UNIT"
+full   = "FULL_ADDRESS"
