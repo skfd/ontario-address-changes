@@ -1,0 +1,17 @@
+slug = "brantford"
+provider = "City of Brantford"
+data_url = "https://services.arcgis.com/aji2lCmjXt0KpGzI/arcgis/rest/services/OP_Site_Addresses2/FeatureServer/0"
+access = "arcgis"
+format = "geojson"
+license_name = "Open Government Licence - Brantford"
+osm_compatible = "yellow-ogl"
+
+[identity]
+# No stable source id (OBJECTID and OBJECTID_1 are both sequential); no unit field published.
+key_field = ""                                 # synthesize from address + rounded lon/lat
+synth_fields = ["number", "street"]            # no unit field in this layer (cf. lambton)
+
+[fields]                                        # source property -> canonical name
+number = "STREETNUM"
+street = "STREETNAME"                           # STREETTYPE/STNUMSUFF tracked via the props blob
+full   = "FULLADDRESS"
