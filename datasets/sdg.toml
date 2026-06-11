@@ -1,0 +1,19 @@
+slug = "sdg"
+provider = "United Counties of Stormont, Dundas and Glengarry"
+data_url = "https://services5.arcgis.com/zEv9BLFdYq38maPG/ArcGIS/rest/services/CivicAddress_Public/FeatureServer/0"
+access = "arcgis"
+format = "geojson"
+license_name = "Not identified"
+osm_compatible = "unknown-review"
+
+[identity]
+# Region-wide layer: all six SDG townships (North/South Dundas, Glengarry, Stormont).
+# The catalogue's separate "North Glengarry" entry is a subset of this layer.
+key_field = "Unique_ID"                        # municipality-prefixed stable id (e.g. SS_30001), populated on all but 1 row
+synth_fields = ["number", "street", "unit"]    # fallback for the lone null Unique_ID row
+
+[fields]                                        # source property -> canonical name
+number = "Address_Nu"
+street = "Street_Nam"                           # StrNamAlia/Unit_Type/Settlement tracked via the props blob
+unit   = "UnitNum"
+full   = "LabelFull"
