@@ -1,0 +1,21 @@
+slug = "hastings"
+provider = "County of Hastings"
+# Resolved via ArcGIS Online search to the official CountyofHastings org. NOTE: the catalogued
+# Hastings_County_911_Addresses layer on this same org is a dead service; CivicAddresses is the live one.
+data_url = "https://services1.arcgis.com/1xcPmb5WGexkkJ9w/arcgis/rest/services/CivicAddresses/FeatureServer/0"
+access = "arcgis"
+format = "geojson"
+license_name = "Open Government Licence - The Corporation of the County of Hastings"
+osm_compatible = "yellow-ogl"
+
+[identity]
+# Region-wide (Hastings munis in MUNICIPALI). UNIQUE_ID is "HC911_<n>", a contiguous reassigned
+# sequence (not stable), so synthesize.
+key_field = ""                                 # synthesize from address + rounded lon/lat
+synth_fields = ["number", "street", "unit"]
+
+[fields]                                        # source property -> canonical name
+number = "House_No"
+street = "Rd_Name"                              # Rd_Suf/Rd_Dir/MUNICIPALI/RnoTXT2 tracked via the props blob
+unit   = "Unit"
+full   = "Full_Add"
