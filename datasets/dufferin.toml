@@ -1,0 +1,16 @@
+slug = "dufferin"
+provider = "County of Dufferin"
+data_url = "https://services5.arcgis.com/C0BEdgagVaXzcw0W/arcgis/rest/services/Dufferin_County_Entrances/FeatureServer/0"
+access = "arcgis"
+format = "geojson"
+license_name = "Open Government Licence - County of Dufferin"
+osm_compatible = "yellow-ogl"
+
+[identity]
+key_field = "ID"                               # stable id, 100% populated and order-independent (FID/OBJECTID are sequential)
+synth_fields = ["number", "street"]            # fallback; no unit field in this layer
+
+[fields]                                        # source property -> canonical name
+number = "STREETNUM"
+street = "STREETNAME"
+full   = "FULLADDY"
