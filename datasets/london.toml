@@ -1,0 +1,19 @@
+slug = "london"
+provider = "City of London"
+# Catalogued maps.london.ca/arcgisa path is dead (404); resolved via the ArcGIS Hub v3 API
+# (opendata.london.ca item 24b16712...) to the live /server/ path.
+data_url = "https://maps.london.ca/server/rest/services/OpenData/OpenData_Community/MapServer/0"
+access = "arcgis"
+format = "geojson"
+license_name = "City of London Terms of Use"
+osm_compatible = "red-review"
+
+[identity]
+key_field = "GIS_ID"                           # stable address id, 100% populated, order-independent (OBJECTID is sequential)
+synth_fields = ["number", "street", "unit"]    # fallback only
+
+[fields]                                        # source property -> canonical name
+number = "MunicipalNumber"
+street = "FullStreetName"                       # StreetName/Type/Direction components tracked via the props blob
+unit   = "UnitNumber"
+full   = "FullAddress"
