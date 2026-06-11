@@ -38,6 +38,15 @@
     .city-count { font-weight:600; font-variant-numeric:tabular-nums; }
     .city-delta { font-size:12px; margin-top:2px; }
     .delta-add { color:var(--green); } .delta-rem { color:var(--red); } .delta-mod { color:var(--yellow); }
+    .skipped { margin-top:40px; }
+    .skip-row { display:flex; align-items:center; gap:12px; background:var(--surface2);
+      border:1px solid var(--border); border-radius:8px; padding:12px 16px; }
+    .skip-main { flex:1; min-width:0; }
+    .skip-name { font-weight:600; font-size:14px; color:var(--text-secondary); }
+    .skip-detail { font-size:12px; color:var(--text-dim); margin-top:2px; }
+    .skip-badge { flex-shrink:0; align-self:flex-start; white-space:nowrap; font-size:11px; font-weight:600;
+      padding:3px 9px; border-radius:999px; background:var(--accent-bg); color:var(--accent);
+      border:1px solid var(--border); }
     footer { margin-top:32px; padding-top:16px; border-top:1px solid var(--border); font-size:12px; color:var(--text-dim); }
     footer a { color:var(--text-dim); } footer a:hover { color:var(--accent); }
     .info-wrap { position:relative; display:inline-flex; vertical-align:middle; }
@@ -95,6 +104,23 @@
       </div>
       {% endfor %}
     </div>
+
+    {% if skipped %}
+    <div class="skipped">
+      <div class="section-header">{{ skipped|length }} source{{ 's' if skipped|length != 1 else '' }} probed but not added</div>
+      <div class="cities">
+        {% for s in skipped %}
+        <div class="skip-row">
+          <div class="skip-main">
+            <div class="skip-name">{{ s.name }}</div>
+            <div class="skip-detail">{{ s.detail }}</div>
+          </div>
+          <span class="skip-badge">{{ s.status }}</span>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
 
     <footer>
       Generated {{ generated }} ·

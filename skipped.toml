@@ -1,0 +1,122 @@
+# Sources probed during the rollout but NOT added, with the reason.
+# Rendered as a "probed but not added" section on the landing page (docs/index.html)
+# so coverage gaps are reviewable alongside the working datasets.
+#
+# status is a short badge; keep to the existing set where possible:
+#   "Dead endpoint", "Empty / secured", "Proprietary licence",
+#   "No address layer", "Untrusted copy", "Unstable URL", "Not found"
+
+[[skipped]]
+name = "City of London"
+status = "Dead endpoint"
+detail = "ArcGIS endpoint maps.london.ca/arcgisa 404s; open data sits on a bespoke portal under custom terms. Needs portal-specific access (~430k pop, biggest remaining gap)."
+
+[[skipped]]
+name = "City of Windsor"
+status = "Empty / secured"
+detail = "mappmycity.ca AllUniqueAddresses layer returns 0 features; no open address layer surfaced via search."
+
+[[skipped]]
+name = "City of Guelph"
+status = "Untrusted copy"
+detail = "Official GuelphGIS org has no address layer; the only address copies are third-party *_exchange uploads, which we don't trust."
+
+[[skipped]]
+name = "City of Peterborough"
+status = "Proprietary licence"
+detail = "Hosted layer is published 'Proprietary - All rights reserved' (OSM red); not republished. The surrounding County of Peterborough is added separately."
+
+[[skipped]]
+name = "City of Belleville"
+status = "Dead endpoint"
+detail = "gis.city.belleville.on.ca returns empty; no ArcGIS Online migration found."
+
+[[skipped]]
+name = "Norfolk County"
+status = "Empty / secured"
+detail = "services1.arcgis.com CivicAddresses layer is token-secured (HTTP 499)."
+
+[[skipped]]
+name = "Simcoe County"
+status = "Dead endpoint"
+detail = "maps.simcoe.ca Search_Layers_Dynamic/0 returns 404; no open address layer found via search."
+
+[[skipped]]
+name = "Grey County"
+status = "No address layer"
+detail = "Official service_grey org publishes only boundary/reference layers (no civic address points); self-hosted geo.grey.ca / restgeo.grey.ca are dead (502)."
+
+[[skipped]]
+name = "Oxford County"
+status = "Dead endpoint"
+detail = "public.oxfordcounty.ca 404s; an ArcGIS Online search for 'Oxford County Address Points' returns City of Oxford, MISSISSIPPI (wrong place) - not added."
+
+[[skipped]]
+name = "Northumberland County"
+status = "Dead endpoint"
+detail = "maps.northumberlandcounty.ca 404s; search returns Union/Snyder County, Pennsylvania (wrong place)."
+
+[[skipped]]
+name = "Haldimand County"
+status = "Dead endpoint"
+detail = "maps.haldimandcounty.on.ca redirects to a maintenance page."
+
+[[skipped]]
+name = "Prince Edward County"
+status = "No address layer"
+detail = "maps.thecounty.ca returns empty; the county's ArcGIS Online org exposes only a 'Property Info' layer, not clean civic addresses."
+
+[[skipped]]
+name = "Town of Amherstburg"
+status = "No address layer"
+detail = "mapamherstburg.ca is live but the only layer is parcel/assessment data (mailing addresses, no parsed civic address points)."
+
+[[skipped]]
+name = "Middlesex County (Lucan Biddulph, Newbury, North Middlesex, Southwest Middlesex, Strathroy-Caradoc, Thames Centre)"
+status = "Dead endpoint"
+detail = "The shared maps.middlesex.ca ArcGIS server is entirely unreachable, taking all six member-municipality address layers with it."
+
+[[skipped]]
+name = "Town of Cobourg"
+status = "Dead endpoint"
+detail = "maps.cobourg.ca returns empty."
+
+[[skipped]]
+name = "West Parry Sound District"
+status = "Dead endpoint"
+detail = "wpsgn.ca ArcGIS server returns an HTML error page, not a queryable layer."
+
+[[skipped]]
+name = "City of Sault Ste. Marie"
+status = "Unstable URL"
+detail = "SSMIC publishes only date-versioned layers (Collection_Addresses_<month>_<year>); the URL would 404 on the next republish, so it can't be tracked over time."
+
+[[skipped]]
+name = "Perth County"
+status = "Not found"
+detail = "No official ArcGIS Online open-data address service located; the catalogued OpenAddresses cache is also dead."
+
+[[skipped]]
+name = "Lanark County"
+status = "Not found"
+detail = "No official ArcGIS Online open-data address service located via search."
+
+[[skipped]]
+name = "Haliburton County"
+status = "Not found"
+detail = "No official ArcGIS Online open-data address service located via search."
+
+[[skipped]]
+name = "Halton Region (Halton Hills)"
+status = "Not found"
+detail = "No region-wide open address layer found; member towns Oakville, Milton and Burlington are tracked individually, leaving Halton Hills uncovered."
+
+[[skipped]]
+name = "Essex County"
+status = "Not found"
+detail = "OpenAddresses cache is deprecated (0 bytes); ArcGIS Online search returns US/untrusted date-versioned copies."
+
+[[skipped]]
+name = "North Bay, Timmins, Collingwood, Owen Sound, Innisfil, Kenora, Stratford"
+status = "Not found"
+detail = "Off-catalogue cities probed via ArcGIS Online search: no official municipal open-data address service surfaced (only US/student/unrelated results)."

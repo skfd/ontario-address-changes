@@ -7,8 +7,11 @@ Layout:
     docs/<slug>/report-<date>.html
 """
 
+import glob
+import json
 import math
 import os
+import tomllib
 from collections import Counter
 from datetime import datetime
 
@@ -16,8 +19,10 @@ from jinja2 import Environment, FileSystemLoader
 
 from src import diff
 
-TEMPLATES_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "templates")
-DOCS_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "docs")
+ROOT_DIR = os.path.dirname(os.path.dirname(__file__))
+TEMPLATES_DIR = os.path.join(ROOT_DIR, "templates")
+DOCS_DIR = os.path.join(ROOT_DIR, "docs")
+SKIPPED_PATH = os.path.join(ROOT_DIR, "skipped.toml")
 
 MAX_RENDER = 1000          # cap rows rendered per table (true counts still shown)
 SPARK_KEYS = ("added", "removed", "modified", "modified_location")
@@ -263,19 +268,41 @@ def generate_all(datasets):
                 compared_fields=compared, ignored_fields=ignored))
 
         latest = meta[0]
-        cities.append({
+        card = {
             "slug": ds.slug, "provider": ds.provider, "license_name": ds.license_name,
             "row_count": snaps[-1]["row_count"], "last_date": diff.snap_date(snaps[-1]),
             "added": latest["added"], "removed": latest["removed"], "modified": latest["modified"],
             "has_changes": not latest["is_baseline"], "report_count": len(meta),
             "compared_fields": compared, "ignored_fields": ignored,
-        })
+        }
+        cities.append(card)
+        # Persist the landing card so a single-city update still leaves the
+        # cross-city landing complete (it's rebuilt from every city's card below).
+        with open(os.path.join(DOCS_DIR, ds.slug, "_card.json"), "w", encoding="utf-8") as f:
+            json.dump(card, f)
+
+    # Landing lists every city that has a persisted card, not just the ones
+    # rendered this run, so `update --city X` doesn't clobber it to one city.
+    rendered = {c["slug"] for c in cities}
+    for path in glob.glob(os.path.join(DOCS_DIR, "*", "_card.json")):
+        if os.path.basename(os.path.dirname(path)) not in rendered:
+            with open(path, encoding="utf-8") as f:
+                cities.append(json.load(f))
 
     cities.sort(key=lambda c: c["provider"])
     with open(os.path.join(DOCS_DIR, "index.html"), "w", encoding="utf-8") as f:
         f.write(_env.get_template("cities.html").render(
-            cities=cities, generated=datetime.now().strftime("%b %d, %Y at %I:%M %p")))
+            cities=cities, skipped=_load_skipped(),
+            generated=datetime.now().strftime("%b %d, %Y at %I:%M %p")))
     print(f"\nwrote site for {len(cities)} dataset(s) to {DOCS_DIR}")
+
+
+def _load_skipped():
+    """Sources probed but not added, for the landing page. Empty if no file."""
+    if not os.path.exists(SKIPPED_PATH):
+        return []
+    with open(SKIPPED_PATH, "rb") as f:
+        return tomllib.load(f).get("skipped", [])
 
 
 def _is_location_only(m):
