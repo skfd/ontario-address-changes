@@ -1,0 +1,20 @@
+slug = "guelph"
+provider = "City of Guelph"
+# The catalogued services5.arcgis.com/k3dd78JyG9GFoZHG Addresses layer is gone, and ArcGIS Online
+# search only surfaces untrusted *_exchange copies; the OFFICIAL source is the city's self-hosted
+# open-data server (owner GuelphGIS_cityofguelph). OpenData1 layer 0 = Addresses.
+data_url = "https://gismaps.guelph.ca/hosting/rest/services/OpenData/OpenData1/FeatureServer/0"
+access = "arcgis"
+format = "geojson"
+license_name = "Open Government Licence - City of Guelph"
+osm_compatible = "green-lwg"
+
+[identity]
+key_field = "ADDID"                            # stable address id, 100% populated, range 2000-57588 over 53,889 rows (effectively unique; OBJECTID is sequential)
+synth_fields = ["number", "street", "unit"]    # fallback only
+
+[fields]                                        # source property -> canonical name
+number = "STREETNO"
+street = "FULLNAME"                             # STREETNAME/STSUF/STDIR components tracked via the props blob
+unit   = "UNIT_NO"
+full   = "ADDRESS"
