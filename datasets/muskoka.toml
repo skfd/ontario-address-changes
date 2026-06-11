@@ -1,0 +1,20 @@
+slug = "muskoka"
+provider = "District Municipality of Muskoka"
+# Catalogued map.muskoka.on.ca shapefile zip is 404; resolved via ArcGIS Online search to the official
+# org (owner dm.admin) live Addressing service. Region-wide (all Muskoka towns in Municipality field).
+data_url = "https://utility.arcgis.com/usrsvcs/servers/21293eed759e41848ccb92619633de03/rest/services/Addressing/Addressing_Service_Public/FeatureServer/0"
+access = "arcgis"
+format = "geojson"
+license_name = "Not identified"
+osm_compatible = "unknown-review"
+
+[identity]
+# PropertyNum is an assessment roll number (1:many with addresses), so synthesize.
+key_field = ""                                 # synthesize from address + rounded lon/lat
+synth_fields = ["number", "street", "unit"]
+
+[fields]                                        # source property -> canonical name
+number = "StreetNumber"
+street = "StreetName"                           # StreetQual/StreetAlias/Municipality tracked via the props blob
+unit   = "StreetUnit"
+full   = "Location"
