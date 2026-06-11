@@ -1,0 +1,19 @@
+slug = "lennox-addington"
+provider = "County of Lennox and Addington"
+# Catalogued LACivicAddress layer is token-secured; resolved via ArcGIS Online search to the official
+# org's open "Public View" (owner LA_County_RB). Region-wide (member munis in BELL_MUNIC).
+data_url = "https://services.arcgis.com/YmmKxwNVvLQW5zcm/arcgis/rest/services/L_and_A_County_Civic_Address_Point_%28Public%29/FeatureServer/0"
+access = "arcgis"
+format = "geojson"
+license_name = "Not identified"
+osm_compatible = "unknown-review"
+
+[identity]
+# No parsed street field (only Number + full ADDRESS) and no stable id; synthesize from the full
+# address string + lon/lat (cf. waterloo).
+key_field = ""                                 # synthesize
+synth_fields = ["full"]
+
+[fields]                                        # source property -> canonical name
+number = "Number"
+full   = "ADDRESS"                              # BELL_MUNIC tracked via the props blob
