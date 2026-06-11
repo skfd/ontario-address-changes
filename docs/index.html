@@ -26,7 +26,8 @@
     .hero .tagline { color:var(--text-secondary); font-size:14px; }
     .section-header { font-size:12px; font-weight:600; margin-bottom:12px; color:var(--text-dim); }
     .cities { display:flex; flex-direction:column; gap:8px; }
-    .city-link { display:flex; align-items:center; gap:12px; background:var(--surface);
+    .city-row { display:flex; align-items:center; gap:8px; }
+    .city-link { flex:1; min-width:0; display:flex; align-items:center; gap:12px; background:var(--surface);
       border:1px solid var(--border); border-radius:8px; padding:14px 16px; color:var(--text);
       box-shadow:var(--shadow-4); transition:box-shadow 0.1s, border-color 0.1s; }
     .city-link:hover { border-color:var(--accent); text-decoration:none; box-shadow:var(--shadow-8); }
@@ -39,8 +40,28 @@
     .delta-add { color:var(--green); } .delta-rem { color:var(--red); } .delta-mod { color:var(--yellow); }
     footer { margin-top:32px; padding-top:16px; border-top:1px solid var(--border); font-size:12px; color:var(--text-dim); }
     footer a { color:var(--text-dim); } footer a:hover { color:var(--accent); }
+    .info-wrap { position:relative; display:inline-flex; vertical-align:middle; }
+    .info-btn { display:inline-flex; align-items:center; justify-content:center; gap:4px;
+      height:18px; padding:0 8px 0 7px; border-radius:999px; border:none; color:#fff;
+      background:var(--accent); cursor:help; font-size:11px; font-weight:600; line-height:1; white-space:nowrap; }
+    .info-btn .glyph { font-style:italic; font-weight:700; font-family:Georgia,'Times New Roman',serif; }
+    .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn, .info-wrap:focus .info-btn { background:var(--accent-hover); }
+    .info-pop { display:none; position:absolute; top:calc(100% + 8px); left:0; z-index:20; width:320px;
+      max-width:80vw; padding:12px 14px; background:var(--surface); border:1px solid var(--border);
+      border-radius:8px; box-shadow:var(--shadow-8); font-size:12.5px; font-weight:400;
+      color:var(--text-secondary); line-height:1.5; text-align:left; white-space:normal; }
+    .info-wrap.right .info-pop { left:auto; right:0; }
+    .info-wrap:hover .info-pop, .info-wrap:focus-within .info-pop, .info-wrap:focus .info-pop { display:block; }
+    .info-pop strong { display:block; color:var(--text); font-size:12px; margin-bottom:4px; }
+    .info-pop ul { list-style:none; margin:0 0 10px; padding:0; }
+    .info-pop li { padding:1px 0 1px 14px; position:relative; }
+    .info-pop li::before { content:"·"; position:absolute; left:4px; color:var(--text-dim); }
+    .info-pop .note { color:var(--text-dim); font-size:11.5px; margin:0 0 10px; }
+    .info-pop .muted { color:var(--text-dim); font-style:italic; }
   </style>
 </head>
+
+
 
 <body>
   <main>
@@ -53,105 +74,195 @@
     <div class="section-header">7 datasets</div>
     <div class="cities">
       
-      <a class="city-link" href="hamilton/index.html">
-        <div class="city-main">
-          <div class="city-name">City of Hamilton</div>
-          <div class="city-sub">Open Data Licence – Hamilton · last snapshot 2026-06-09</div>
-        </div>
-        <div class="city-right">
-          <div class="city-count">273,082</div>
-          <div class="city-delta">
-            <span style="color:var(--text-dim)">baseline</span>
+      <div class="city-row">
+        <a class="city-link" href="hamilton/index.html">
+          <div class="city-main">
+            <div class="city-name">City of Hamilton</div>
+            <div class="city-sub">Open Data Licence – Hamilton · last snapshot 2026-06-09</div>
           </div>
-        </div>
-      </a>
+          <div class="city-right">
+            <div class="city-count">273,082</div>
+            <div class="city-delta">
+              <span style="color:var(--text-dim)">baseline</span>
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (NUMBER_COMPLETE)</li><li>Street name (FULL_STREET_NAME)</li><li>Unit (UNIT_NUMBER_COMPLETE)</li><li>Coordinates (latitude, longitude)</li><li>COMMUNITY</li><li>COUNTRY</li><li>MUNICIPALITY</li><li>POSTAL_CODE</li><li>PROVINCE</li><li>STREET_NAME</li><li>STREET_SUFFIX_DIRECTION</li><li>STREET_SUFFIX_TYPE</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span>
+      </div>
       
-      <a class="city-link" href="niagara-falls/index.html">
-        <div class="city-main">
-          <div class="city-name">City of Niagara Falls</div>
-          <div class="city-sub">Open Government Licence - Niagara Region · last snapshot 2026-06-09</div>
-        </div>
-        <div class="city-right">
-          <div class="city-count">207,155</div>
-          <div class="city-delta">
-            <span style="color:var(--text-dim)">baseline</span>
+      <div class="city-row">
+        <a class="city-link" href="niagara-falls/index.html">
+          <div class="city-main">
+            <div class="city-name">City of Niagara Falls</div>
+            <div class="city-sub">Open Government Licence - Niagara Region · last snapshot 2026-06-10</div>
           </div>
-        </div>
-      </a>
+          <div class="city-right">
+            <div class="city-count">207,845</div>
+            <div class="city-delta">
+              
+              <span class="delta-add">+704</span>
+              <span class="delta-rem">−14</span>
+              <span class="delta-mod">~175</span>
+              
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (Full_StreetNo)</li><li>Street name (StreetName)</li><li>Unit (Unit)</li><li>Coordinates (latitude, longitude)</li><li>CreateDate</li><li>GSmartID</li><li>LifeCycleStatus</li><li>Municipality</li><li>Qualifier</li><li>StreetDir</li><li>StreetNo</li><li>StreetType</li><li>Xcoord</li><li>Ycoord</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span>
+      </div>
       
-      <a class="city-link" href="ottawa/index.html">
-        <div class="city-main">
-          <div class="city-name">City of Ottawa</div>
-          <div class="city-sub">Open Government Licence – City of Ottawa 2.0 · last snapshot 2026-06-09</div>
-        </div>
-        <div class="city-right">
-          <div class="city-count">402,796</div>
-          <div class="city-delta">
-            <span style="color:var(--text-dim)">baseline</span>
+      <div class="city-row">
+        <a class="city-link" href="ottawa/index.html">
+          <div class="city-main">
+            <div class="city-name">City of Ottawa</div>
+            <div class="city-sub">Open Government Licence – City of Ottawa 2.0 · last snapshot 2026-06-10</div>
           </div>
-        </div>
-      </a>
+          <div class="city-right">
+            <div class="city-count">402,796</div>
+            <div class="city-delta">
+              
+              <span class="delta-add">+0</span>
+              <span class="delta-rem">−0</span>
+              <span class="delta-mod">~8</span>
+              
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRNUM)</li><li>Street name (FULLNAME)</li><li>Unit (UNITID)</li><li>Full address (FULLADDR)</li><li>Coordinates (latitude, longitude)</li><li>ADDRTYPE</li><li>CREATED_DATE</li><li>MODIFIED_DATE</li><li>PI_MUNICIPAL_ADDRESS_ID</li><li>QUALIFIER</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span>
+      </div>
       
-      <a class="city-link" href="toronto/index.html">
-        <div class="city-main">
-          <div class="city-name">City of Toronto</div>
-          <div class="city-sub">Open Government Licence – Toronto · last snapshot 2026-06-09</div>
-        </div>
-        <div class="city-right">
-          <div class="city-count">525,439</div>
-          <div class="city-delta">
-            
-            <span class="delta-add">+2</span>
-            <span class="delta-rem">−0</span>
-            <span class="delta-mod">~3</span>
-            
+      <div class="city-row">
+        <a class="city-link" href="toronto/index.html">
+          <div class="city-main">
+            <div class="city-name">City of Toronto</div>
+            <div class="city-sub">Open Government Licence – Toronto · last snapshot 2026-06-10</div>
           </div>
-        </div>
-      </a>
+          <div class="city-right">
+            <div class="city-count">525,438</div>
+            <div class="city-delta">
+              
+              <span class="delta-add">+0</span>
+              <span class="delta-rem">−1</span>
+              <span class="delta-mod">~5</span>
+              
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (LINEAR_NAME_FULL)</li><li>Full address (ADDRESS_FULL)</li><li>Coordinates (latitude, longitude)</li><li>ADDRESS_POINT_ID</li><li>ADDRESS_STATUS</li><li>ADDRESS_STRING_ID</li><li>CENTRELINE_SIDE</li><li>GENERAL_USE</li><li>GENERAL_USE_CODE</li><li>HI_NUM</li><li>HI_NUM_SUF</li><li>LINEAR_NAME</li><li>LINEAR_NAME_DESC</li><li>LINEAR_NAME_DIR</li><li>LINEAR_NAME_ID</li><li>LINEAR_NAME_TYPE</li><li>LO_NUM</li><li>LO_NUM_SUF</li><li>MAINT_STAGE</li><li>MUNICIPALITY</li><li>MUNICIPALITY_NAME</li><li>PLACE_NAME</li><li>PLACE_NAME_ALL</li><li>WARD</li><li>WARD_NAME</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>ADDRESS_CLASS</li><li>ADDRESS_CLASS_DESC</li><li>ADDRESS_ID</li><li>ADDRESS_ID_LINK</li><li>ADDRESS_POINT_ID_LINK</li><li>CENTRELINE_ID</li><li>CENTRELINE_MEASURE</li><li>CENTRELINE_OFFSET</li><li>CLASS_FAMILY</li><li>CLASS_FAMILY_DESC</li></ul>
       
-      <a class="city-link" href="waterloo/index.html">
-        <div class="city-main">
-          <div class="city-name">City of Waterloo</div>
-          <div class="city-sub">Open Government Licence – City of Waterloo · last snapshot 2026-06-09</div>
-        </div>
-        <div class="city-right">
-          <div class="city-count">55,541</div>
-          <div class="city-delta">
-            <span style="color:var(--text-dim)">baseline</span>
-          </div>
-        </div>
-      </a>
+    </span>
+  </span>
+      </div>
       
-      <a class="city-link" href="durham/index.html">
-        <div class="city-main">
-          <div class="city-name">Regional Municipality of Durham</div>
-          <div class="city-sub">Open Government Licence – City of Oshawa · last snapshot 2026-06-09</div>
-        </div>
-        <div class="city-right">
-          <div class="city-count">253,555</div>
-          <div class="city-delta">
-            <span style="color:var(--text-dim)">baseline</span>
+      <div class="city-row">
+        <a class="city-link" href="waterloo/index.html">
+          <div class="city-main">
+            <div class="city-name">City of Waterloo</div>
+            <div class="city-sub">Open Government Licence – City of Waterloo · last snapshot 2026-06-09</div>
           </div>
-        </div>
-      </a>
+          <div class="city-right">
+            <div class="city-count">55,541</div>
+            <div class="city-delta">
+              <span style="color:var(--text-dim)">baseline</span>
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street name (STREET_NM)</li><li>Full address (CIVIC_ADDR)</li><li>Coordinates (latitude, longitude)</li><li>ADDRESS_ID</li><li>LATITUDE</li><li>LONGITUDE</li><li>OBJECTID_1</li><li>SEGMENT_ID</li><li>WARD</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span>
+      </div>
       
-      <a class="city-link" href="renfrew/index.html">
-        <div class="city-main">
-          <div class="city-name">Renfrew</div>
-          <div class="city-sub">Not identified · last snapshot 2026-06-09</div>
-        </div>
-        <div class="city-right">
-          <div class="city-count">54,029</div>
-          <div class="city-delta">
-            <span style="color:var(--text-dim)">baseline</span>
+      <div class="city-row">
+        <a class="city-link" href="durham/index.html">
+          <div class="city-main">
+            <div class="city-name">Regional Municipality of Durham</div>
+            <div class="city-sub">Open Government Licence – City of Oshawa · last snapshot 2026-06-10</div>
           </div>
-        </div>
-      </a>
+          <div class="city-right">
+            <div class="city-count">253,555</div>
+            <div class="city-delta">
+              
+              <span class="delta-add">+0</span>
+              <span class="delta-rem">−0</span>
+              <span class="delta-mod">~3</span>
+              
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (CIVIC_NUM)</li><li>Street name (ROAD_NAME)</li><li>Unit (UNIT_NUM)</li><li>Coordinates (latitude, longitude)</li><li>CIVIC_SFX</li><li>DIR_SHORT</li><li>EDIT_DATE</li><li>MUNICIPALITY</li><li>MXADDRESSCODE</li><li>MXCREATIONSTATE</li><li>MXORGID</li><li>POSTAL_CODE</li><li>REGION_ID</li><li>ROAD_DIR</li><li>ROAD_TYPE</li><li>TOWN</li><li>TYPE_SHORT</li><li>UNIT</li><li>UNIT_RANGE</li><li>UNIT_TYPE</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span>
+      </div>
+      
+      <div class="city-row">
+        <a class="city-link" href="renfrew/index.html">
+          <div class="city-main">
+            <div class="city-name">Renfrew</div>
+            <div class="city-sub">Not identified · last snapshot 2026-06-09</div>
+          </div>
+          <div class="city-right">
+            <div class="city-count">54,029</div>
+            <div class="city-delta">
+              <span style="color:var(--text-dim)">baseline</span>
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (Street_Num)</li><li>Street name (Street_Name)</li><li>Coordinates (latitude, longitude)</li><li>PROPNUM</li><li>Qualifier</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span>
+      </div>
       
     </div>
 
     <footer>
-      Generated Jun 10, 2026 at 08:24 PM ·
+      Generated Jun 10, 2026 at 09:58 PM ·
       <a href="https://github.com/skfd/ontario-address-changes">Source on GitHub</a>
     </footer>
   </main>
