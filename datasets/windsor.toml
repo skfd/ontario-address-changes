@@ -1,0 +1,21 @@
+slug = "windsor"
+provider = "City of Windsor"
+# The catalogued layer (.../MapServer/1, AllUniqueAddresses) is empty; the populated layer is 0
+# (AllUniqueAddresses_Parcels, 133k rows). Parcel polygons -> normalize uses ring centroids (cf. renfrew).
+data_url = "https://mappmycity.ca/arcgis/rest/services/MappMyCity/AllUniqueAddresses_Parcels/MapServer/0"
+access = "arcgis"
+format = "geojson"
+license_name = "City of Windsor Terms of Use"
+osm_compatible = "red-review"
+
+[identity]
+# gisid/propertyrsn/RollNumber are parcel ids that repeat across multi-address parcels (not per-row
+# unique), so synthesize from the address.
+key_field = ""                                 # synthesize from address + rounded centroid lon/lat
+synth_fields = ["number", "street", "unit"]
+
+[fields]                                        # source property -> canonical name
+number = "street_address"
+street = "street_name"                          # street_suffix/street_direction/Ward tracked via the props blob
+unit   = "unit_number"
+full   = "Address"
