@@ -261,7 +261,7 @@ def generate_all(datasets):
             "slug": ds.slug, "provider": ds.provider, "license_name": ds.license_name,
             "row_count": snaps[-1]["row_count"], "last_date": diff.snap_date(snaps[-1]),
             "added": latest["added"], "removed": latest["removed"], "modified": latest["modified"],
-            "has_changes": not latest["is_baseline"],
+            "has_changes": not latest["is_baseline"], "report_count": len(meta),
             "compared_fields": compared, "ignored_fields": ignored,
         })
 

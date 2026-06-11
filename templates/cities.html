@@ -78,7 +78,7 @@
         <a class="city-link" href="{{ c.slug }}/index.html">
           <div class="city-main">
             <div class="city-name">{{ c.provider }}</div>
-            <div class="city-sub">{{ c.license_name }} · last snapshot {{ c.last_date }}</div>
+            <div class="city-sub">{{ c.license_name }} · last snapshot {{ c.last_date }} · {{ c.report_count }} report{{ 's' if c.report_count != 1 else '' }}</div>
           </div>
           <div class="city-right">
             <div class="city-count">{{ "{:,}".format(c.row_count) }}</div>
