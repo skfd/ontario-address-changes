@@ -1,0 +1,18 @@
+slug = "burlington"
+provider = "City of Burlington"
+data_url = "https://mapping.burlington.ca/arcgisweb/rest/services/COB/AddressPoints/MapServer/0"
+access = "arcgis"
+format = "geojson"
+license_name = "City of Burlington Terms of Use"
+osm_compatible = "red-review"
+
+[identity]
+# PROPERTYRSN tracks OBJECTID order too closely to trust as a stable id; synthesize instead.
+key_field = ""                                 # synthesize from address + rounded lon/lat
+synth_fields = ["number", "street", "unit"]
+
+[fields]                                        # source property -> canonical name
+number = "HOUSENUM"
+street = "STREET"                               # STRTYPE/STRDIR/UNITTYPE tracked via the props blob
+unit   = "UNIT"
+full   = "ADDRESS"
