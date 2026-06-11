@@ -1,0 +1,19 @@
+slug = "peel-region"
+provider = "Regional Municipality of Peel"
+data_url = "https://services6.arcgis.com/ONZht79c8QWuX759/arcgis/rest/services/Address_Points/FeatureServer/0"
+access = "arcgis"
+format = "geojson"
+license_name = "Not identified"
+osm_compatible = "unknown-review"
+
+[identity]
+# Region-wide: Mississauga (264k), Brampton (207k), Caledon (32k). NOTE: the Brampton points here
+# are the Region's own layer, a SEPARATE source from the City of Brampton dataset (brampton.toml);
+# both are tracked independently. No combined full-address field in this layer.
+key_field = "ROPADRID"                         # Region of Peel address id, 100% populated, order-independent (OBJECTID sequential)
+synth_fields = ["number", "street", "unit"]    # fallback only
+
+[fields]                                        # source property -> canonical name
+number = "STREETNUM"
+street = "STREETNAME"                           # STREETDIRECTION/STREETTYPE/MUNICIPALITY tracked via the props blob
+unit   = "UNIT_IDENTIFIER"
