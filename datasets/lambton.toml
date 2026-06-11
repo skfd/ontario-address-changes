@@ -1,0 +1,16 @@
+slug = "lambton"
+provider = "County of Lambton"
+data_url = "https://www.lambtongis.ca/arcgis_adaptor/rest/services/OpenData/AddressPoints/MapServer/0"
+access = "arcgis"
+format = "geojson"
+license_name = "Open Government Licence - County of Lambton"
+osm_compatible = "green-ogl"
+
+[identity]
+key_field = ""                          # only a sequential OBJECTID exists; synthesize
+synth_fields = ["number", "street"]     # no unit field is published
+
+[fields]                                # source property -> canonical name
+number = "STNUM"
+street = "STNAME"                        # STTYPE/STDIR (and abbreviations) tracked via the props blob
+full   = "ADDRESS"

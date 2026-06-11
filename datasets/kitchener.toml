@@ -1,0 +1,17 @@
+slug = "kitchener"
+provider = "City of Kitchener"
+data_url = "https://services1.arcgis.com/qAo1OsXi67t7XgmS/arcgis/rest/services/Addresses/FeatureServer/0"
+access = "arcgis"
+format = "geojson"
+license_name = "Open Government Licence - The Corporation of the City of Kitchener"
+osm_compatible = "yellow-ogl"
+
+[identity]
+key_field = "PROPERTY_UNIT_ID"                # stable municipal point id, 100% populated (OBJECTID is sequential)
+synth_fields = ["number", "street", "unit"]   # fallback only if a row ever lacks PROPERTY_UNIT_ID
+
+[fields]                                       # source property -> canonical name
+number = "CIVIC_NO"
+street = "STREET"                              # UNIT_TYPE/STATUS tracked via the props blob
+unit   = "UNIT"
+full   = "ADDRESS"

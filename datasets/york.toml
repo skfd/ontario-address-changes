@@ -1,0 +1,19 @@
+slug = "york"
+provider = "Regional Municipality of York"
+data_url = "https://ww3.yorkmaps.ca/arcgis/rest/services/Geocortex/OpenData/MapServer/6"
+access = "arcgis"
+format = "geojson"
+license_name = "York Region Open Data Licence"
+osm_compatible = "green-lwg"
+
+[identity]
+# Region-wide layer (431k rows, all nine York municipalities incl. Vaughan/Markham);
+# the catalogue's separate "Markham" entry (ww8.yorkmaps) is the same dataset.
+key_field = "PNT_GIS_ID"                       # stable municipal point id, 100% populated (OBJECTID is sequential)
+synth_fields = ["number", "street", "unit"]    # fallback only if a row ever lacks PNT_GIS_ID
+
+[fields]                                        # source property -> canonical name
+number = "ADDRESS_NUMBER"
+street = "FULL_STREET_NAME"                     # component street fields tracked via the props blob
+unit   = "SUITE_NUMBER"
+full   = "FULL_CIVIC_ADDR"

@@ -1,0 +1,17 @@
+slug = "oakville"
+provider = "Town of Oakville"
+data_url = "https://maps.oakville.ca/oakgis/rest/services/ArcGISOnline/AGO_Oakville_Misc_Layers/MapServer/15"
+access = "arcgis"
+format = "geojson"
+license_name = "Open Government Licence — Town of Oakville"
+osm_compatible = "yellow-ogl"
+
+[identity]
+key_field = ""                                 # only sequential OBJECTID / volatile GLOBALID exist; synthesize
+synth_fields = ["number", "street", "unit"]
+
+[fields]                                        # source property -> canonical name
+number = "STREET_NUM"
+street = "SNAME"                                # full street name incl. type/dir; components also tracked via the props blob
+unit   = "UNIT"
+full   = "ADDRESS"

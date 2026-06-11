@@ -1,0 +1,17 @@
+slug = "quinte-west"
+provider = "City of Quinte West"
+data_url = "https://services3.arcgis.com/cpi3xYswHz1VWunb/ArcGIS/rest/services/address_points_2020_public/FeatureServer/0"
+access = "arcgis"
+format = "geojson"
+license_name = "City of Quinte West Open Data Licence"
+osm_compatible = "green-lwg"
+
+[identity]
+key_field = ""                                # only sequential objectid/objectid_1 exist; GlobalID is volatile, so synthesize
+synth_fields = ["number", "street", "unit"]
+
+[fields]                                       # source property -> canonical name
+number = "address_nu"
+street = "street_nam"                          # unit_type tracked via the props blob
+unit   = "unit_num"
+full   = "address"
