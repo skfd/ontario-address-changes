@@ -1,0 +1,20 @@
+slug = "bruce"
+provider = "County of Bruce"
+# Catalogued maps.brucecounty.on.ca/arcgis/.../FeatureServer/3 path 404s; the working path is
+# /arcgisserver/ (found via ArcGIS Online search, official org brucecounty.on.ca). Layer 3.
+data_url = "https://maps.brucecounty.on.ca/arcgisserver/rest/services/public/bruce_open_data/FeatureServer/3"
+access = "arcgis"
+format = "geojson"
+license_name = "BGDISC Open Data Licence"
+osm_compatible = "yellow-review"
+
+[identity]
+# Region-wide (Bruce munis in Municipality). ARN is an assessment roll number (1:many), so synthesize.
+key_field = ""                                 # synthesize from address + rounded lon/lat
+synth_fields = ["number", "street", "unit"]
+
+[fields]                                        # source property -> canonical name
+number = "AddrNum"
+street = "RoadName"                             # ARN/Municipality tracked via the props blob
+unit   = "Unit"
+full   = "CivicAddress"
