@@ -107,12 +107,14 @@
     .history .dot { color: var(--text-dim); margin: 0 4px; }
     .history-none { color: var(--text-dim); font-style: italic; font-size: 12.5px; }
     .info-wrap { position: relative; display: inline-flex; vertical-align: middle; }
-    .info-btn { display: inline-flex; align-items: center; justify-content: center;
-      width: 16px; height: 16px; border-radius: 999px; border: 1px solid var(--border-strong);
-      color: var(--text-dim); background: var(--surface); cursor: help; font-size: 11px;
-      font-weight: 700; font-style: italic; font-family: Georgia, 'Times New Roman', serif; line-height: 1; }
+    .info-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+      height: 18px; padding: 0 8px 0 7px; border-radius: 999px; border: none;
+      color: #fff; background: var(--accent); cursor: help; font-size: 11px; font-weight: 600;
+      font-style: normal; font-family: inherit; line-height: 1; white-space: nowrap; }
+    .info-btn .glyph { font-style: italic; font-weight: 700;
+      font-family: Georgia, 'Times New Roman', serif; }
     .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn,
-    .info-wrap:focus .info-btn { color: var(--accent); border-color: var(--accent); }
+    .info-wrap:focus .info-btn { background: var(--accent-hover); }
     .info-pop { display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 20;
       width: 320px; max-width: 80vw; padding: 12px 14px; background: var(--surface);
       border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-8);
@@ -127,6 +129,8 @@
     .info-pop .muted { color: var(--text-dim); font-style: italic; }
   </style>
 </head>
+
+
 
 
 
@@ -153,7 +157,17 @@
     <div class="card"><div class="label">Retired Addresses</div>
       <div class="value red">−2</div>
       <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#c50f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,12.7 55.0,18.0 72.7,7.3 90.3,2.0 108.0,7.3"/><circle cx="108.0" cy="7.3" r="2" fill="#c50f1f"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
-    <div class="card"><div class="label">Updated Addresses</div>
+    <div class="card"><div class="label">Updated Addresses <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (LINEAR_NAME_FULL)</li><li>Full address (ADDRESS_FULL)</li><li>Coordinates (latitude, longitude)</li></ul>
+      <p class="note">…plus all other source attributes, except those ignored below.</p>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>ADDRESS_CLASS</li><li>ADDRESS_CLASS_DESC</li><li>ADDRESS_ID</li><li>ADDRESS_ID_LINK</li><li>ADDRESS_POINT_ID_LINK</li><li>CENTRELINE_ID</li><li>CENTRELINE_MEASURE</li><li>CENTRELINE_OFFSET</li><li>CLASS_FAMILY</li><li>CLASS_FAMILY_DESC</li></ul>
+      
+    </span>
+  </span></div>
       <div class="value yellow">3</div>
       <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,10.0 19.7,18.0 37.3,14.0 55.0,14.0 72.7,14.0 90.3,2.0 108.0,6.0"/><circle cx="108.0" cy="6.0" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
     <div class="card"><div class="label">Location Adjustments</div>
@@ -200,20 +214,32 @@
         <th onclick="sortTable('t-added',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
       <tbody id="t-added">
         
-        <tr><td>2252 Markham Rd</td><td>Markham Rd</td><td></td>
-          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.81109&mlon=-79.24501#map=18/43.81109/-79.24501" target="_blank" rel="noopener">View ↗</a></td></tr>
+        <tr><td>140 The Queensway</td><td>The Queensway</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.63069&mlon=-79.48358#map=18/43.63069/-79.48358" target="_blank" rel="noopener">View ↗</a></td></tr>
         
         <tr><td>63 Burnhamthorpe Cres</td><td>Burnhamthorpe Cres</td><td></td>
           <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64819&mlon=-79.53217#map=18/43.64819/-79.53217" target="_blank" rel="noopener">View ↗</a></td></tr>
         
-        <tr><td>2280 Markham Rd</td><td>Markham Rd</td><td></td>
-          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.81145&mlon=-79.24412#map=18/43.81145/-79.24412" target="_blank" rel="noopener">View ↗</a></td></tr>
+        <tr><td>102 Guestville Ave</td><td>Guestville Ave</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68528&mlon=-79.49029#map=18/43.68528/-79.49029" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>104 Guestville Ave</td><td>Guestville Ave</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68533&mlon=-79.49031#map=18/43.68533/-79.49031" target="_blank" rel="noopener">View ↗</a></td></tr>
         
         <tr><td>226 Simcoe St</td><td>Simcoe St</td><td></td>
           <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65313&mlon=-79.38885#map=18/43.65313/-79.38885" target="_blank" rel="noopener">View ↗</a></td></tr>
         
-        <tr><td>102 Guestville Ave</td><td>Guestville Ave</td><td></td>
-          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68528&mlon=-79.49029#map=18/43.68528/-79.49029" target="_blank" rel="noopener">View ↗</a></td></tr>
+        <tr><td>2280 Markham Rd</td><td>Markham Rd</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.81145&mlon=-79.24412#map=18/43.81145/-79.24412" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2250 Markham Rd</td><td>Markham Rd</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.81088&mlon=-79.24439#map=18/43.81088/-79.24439" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2256 Markham Rd</td><td>Markham Rd</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.81100&mlon=-79.24567#map=18/43.81100/-79.24567" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2252 Markham Rd</td><td>Markham Rd</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.81109&mlon=-79.24501#map=18/43.81109/-79.24501" target="_blank" rel="noopener">View ↗</a></td></tr>
         
         <tr><td>102R Guestville Ave</td><td>Guestville Ave</td><td></td>
           <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68525&mlon=-79.49048#map=18/43.68525/-79.49048" target="_blank" rel="noopener">View ↗</a></td></tr>
@@ -224,23 +250,11 @@
         <tr><td>33B Parliament St</td><td>Parliament St</td><td></td>
           <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64913&mlon=-79.36144#map=18/43.64913/-79.36144" target="_blank" rel="noopener">View ↗</a></td></tr>
         
-        <tr><td>2250 Markham Rd</td><td>Markham Rd</td><td></td>
-          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.81088&mlon=-79.24439#map=18/43.81088/-79.24439" target="_blank" rel="noopener">View ↗</a></td></tr>
-        
         <tr><td>61 Burnhamthorpe Cres</td><td>Burnhamthorpe Cres</td><td></td>
           <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64827&mlon=-79.53210#map=18/43.64827/-79.53210" target="_blank" rel="noopener">View ↗</a></td></tr>
         
-        <tr><td>2256 Markham Rd</td><td>Markham Rd</td><td></td>
-          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.81100&mlon=-79.24567#map=18/43.81100/-79.24567" target="_blank" rel="noopener">View ↗</a></td></tr>
-        
         <tr><td>2288 Markham Rd</td><td>Markham Rd</td><td></td>
           <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.81192&mlon=-79.24518#map=18/43.81192/-79.24518" target="_blank" rel="noopener">View ↗</a></td></tr>
-        
-        <tr><td>104 Guestville Ave</td><td>Guestville Ave</td><td></td>
-          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68533&mlon=-79.49031#map=18/43.68533/-79.49031" target="_blank" rel="noopener">View ↗</a></td></tr>
-        
-        <tr><td>140 The Queensway</td><td>The Queensway</td><td></td>
-          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.63069&mlon=-79.48358#map=18/43.63069/-79.48358" target="_blank" rel="noopener">View ↗</a></td></tr>
         
       </tbody>
     </table>
@@ -271,22 +285,32 @@
   <div class="section">
     <h2>Updated Addresses <span class="badge badge-yellow">3</span>
       <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
-        <span class="info-btn" aria-hidden="true">i</span>
-        <span class="info-pop">
-          <strong>Compared for changes</strong>
-          <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (LINEAR_NAME_FULL)</li><li>Full address (ADDRESS_FULL)</li><li>Coordinates (latitude, longitude)</li></ul>
-          <p class="note">…plus all other source attributes, except those ignored below.</p>
-          <strong>Ignored (changes here are not counted)</strong>
-          
-          <ul><li>ADDRESS_CLASS</li><li>ADDRESS_CLASS_DESC</li><li>ADDRESS_ID</li><li>ADDRESS_ID_LINK</li><li>ADDRESS_POINT_ID_LINK</li><li>CENTRELINE_ID</li><li>CENTRELINE_MEASURE</li><li>CENTRELINE_OFFSET</li><li>CLASS_FAMILY</li><li>CLASS_FAMILY_DESC</li></ul>
-          
-        </span>
-      </span>
-    </h2>
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (LINEAR_NAME_FULL)</li><li>Full address (ADDRESS_FULL)</li><li>Coordinates (latitude, longitude)</li></ul>
+      <p class="note">…plus all other source attributes, except those ignored below.</p>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>ADDRESS_CLASS</li><li>ADDRESS_CLASS_DESC</li><li>ADDRESS_ID</li><li>ADDRESS_ID_LINK</li><li>ADDRESS_POINT_ID_LINK</li><li>CENTRELINE_ID</li><li>CENTRELINE_MEASURE</li><li>CENTRELINE_OFFSET</li><li>CLASS_FAMILY</li><li>CLASS_FAMILY_DESC</li></ul>
+      
+    </span>
+  </span>
     
     <table>
       <thead><tr><th>Address</th><th>What Changed</th><th>Before</th><th></th><th>After</th></tr></thead>
       <tbody>
+        
+        <tr><td rowspan="2">160 Borough Dr</td>
+          <td class="change-field">PLACE_NAME</td>
+          <td class="old-val">None</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">Toronto Public Health</td></tr>
+        
+        <tr>
+          <td class="change-field">PLACE_NAME_ALL</td>
+          <td class="old-val">None</td>
+          <td class="arrow-val"></td>
+          <td class="new-val">Toronto Public Health</td></tr>
         
         <tr><td rowspan="2">15 Mallow Rd</td>
           <td class="change-field">PLACE_NAME</td>
@@ -312,18 +336,6 @@
           <td class="arrow-val"></td>
           <td class="new-val">Carpark 711</td></tr>
         
-        <tr><td rowspan="2">160 Borough Dr</td>
-          <td class="change-field">PLACE_NAME</td>
-          <td class="old-val">None</td>
-          <td class="arrow-val"></td>
-          <td class="new-val">Toronto Public Health</td></tr>
-        
-        <tr>
-          <td class="change-field">PLACE_NAME_ALL</td>
-          <td class="old-val">None</td>
-          <td class="arrow-val"></td>
-          <td class="new-val">Toronto Public Health</td></tr>
-        
       </tbody>
     </table>
     
@@ -335,7 +347,7 @@
     <p class="empty">No location adjustments.</p>
   </div>
 
-  <div class="generated-at">Report generated Jun 10, 2026 at 03:42 PM · source licence: Open Government Licence – Toronto</div>
+  <div class="generated-at">Report generated Jun 10, 2026 at 08:24 PM · source licence: Open Government Licence – Toronto</div>
 
   <script>
     function sortTable(tbodyId, col) {

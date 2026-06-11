@@ -107,12 +107,14 @@
     .history .dot { color: var(--text-dim); margin: 0 4px; }
     .history-none { color: var(--text-dim); font-style: italic; font-size: 12.5px; }
     .info-wrap { position: relative; display: inline-flex; vertical-align: middle; }
-    .info-btn { display: inline-flex; align-items: center; justify-content: center;
-      width: 16px; height: 16px; border-radius: 999px; border: 1px solid var(--border-strong);
-      color: var(--text-dim); background: var(--surface); cursor: help; font-size: 11px;
-      font-weight: 700; font-style: italic; font-family: Georgia, 'Times New Roman', serif; line-height: 1; }
+    .info-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+      height: 18px; padding: 0 8px 0 7px; border-radius: 999px; border: none;
+      color: #fff; background: var(--accent); cursor: help; font-size: 11px; font-weight: 600;
+      font-style: normal; font-family: inherit; line-height: 1; white-space: nowrap; }
+    .info-btn .glyph { font-style: italic; font-weight: 700;
+      font-family: Georgia, 'Times New Roman', serif; }
     .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn,
-    .info-wrap:focus .info-btn { color: var(--accent); border-color: var(--accent); }
+    .info-wrap:focus .info-btn { background: var(--accent-hover); }
     .info-pop { display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 20;
       width: 320px; max-width: 80vw; padding: 12px 14px; background: var(--surface);
       border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-8);
@@ -127,6 +129,8 @@
     .info-pop .muted { color: var(--text-dim); font-style: italic; }
   </style>
 </head>
+
+
 
 
 
@@ -153,7 +157,17 @@
     <div class="card"><div class="label">Retired Addresses</div>
       <div class="value red">−11</div>
       <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#c50f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,2.0 19.7,16.9 37.3,18.0 55.0,18.0 72.7,16.9 90.3,18.0 108.0,6.3"/><circle cx="108.0" cy="6.3" r="2" fill="#c50f1f"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
-    <div class="card"><div class="label">Updated Addresses</div>
+    <div class="card"><div class="label">Updated Addresses <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (LINEAR_NAME_FULL)</li><li>Full address (ADDRESS_FULL)</li><li>Coordinates (latitude, longitude)</li></ul>
+      <p class="note">…plus all other source attributes, except those ignored below.</p>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>ADDRESS_CLASS</li><li>ADDRESS_CLASS_DESC</li><li>ADDRESS_ID</li><li>ADDRESS_ID_LINK</li><li>ADDRESS_POINT_ID_LINK</li><li>CENTRELINE_ID</li><li>CENTRELINE_MEASURE</li><li>CENTRELINE_OFFSET</li><li>CLASS_FAMILY</li><li>CLASS_FAMILY_DESC</li></ul>
+      
+    </span>
+  </span></div>
       <div class="value yellow">0</div>
       <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,15.3 19.7,15.3 37.3,18.0 55.0,2.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
     <div class="card"><div class="label">Location Adjustments</div>
@@ -202,29 +216,29 @@
         <tr><td>1240 Queen St E</td><td>Queen St E</td><td></td>
           <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66359&mlon=-79.32966#map=18/43.66359/-79.32966" target="_blank" rel="noopener">View ↗</a></td></tr>
         
+        <tr><td>1250 Queen St E</td><td>Queen St E</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66366&mlon=-79.32936#map=18/43.66366/-79.32936" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
         <tr><td>1236 Queen St E</td><td>Queen St E</td><td></td>
           <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66356&mlon=-79.32980#map=18/43.66356/-79.32980" target="_blank" rel="noopener">View ↗</a></td></tr>
         
         <tr><td>1244 Queen St E</td><td>Queen St E</td><td></td>
           <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66362&mlon=-79.32954#map=18/43.66362/-79.32954" target="_blank" rel="noopener">View ↗</a></td></tr>
         
-        <tr><td>1230 Queen St E</td><td>Queen St E</td><td></td>
-          <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66351&mlon=-79.32999#map=18/43.66351/-79.32999" target="_blank" rel="noopener">View ↗</a></td></tr>
-        
         <tr><td>1228 Queen St E</td><td>Queen St E</td><td></td>
           <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66350&mlon=-79.33005#map=18/43.66350/-79.33005" target="_blank" rel="noopener">View ↗</a></td></tr>
         
-        <tr><td>1250 Queen St E</td><td>Queen St E</td><td></td>
-          <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66366&mlon=-79.32936#map=18/43.66366/-79.32936" target="_blank" rel="noopener">View ↗</a></td></tr>
+        <tr><td>1230 Queen St E</td><td>Queen St E</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66351&mlon=-79.32999#map=18/43.66351/-79.32999" target="_blank" rel="noopener">View ↗</a></td></tr>
         
         <tr><td>1248 Queen St E</td><td>Queen St E</td><td></td>
           <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66364&mlon=-79.32941#map=18/43.66364/-79.32941" target="_blank" rel="noopener">View ↗</a></td></tr>
         
-        <tr><td>1234 Queen St E</td><td>Queen St E</td><td></td>
-          <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66354&mlon=-79.32986#map=18/43.66354/-79.32986" target="_blank" rel="noopener">View ↗</a></td></tr>
-        
         <tr><td>1232 Queen St E</td><td>Queen St E</td><td></td>
           <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66353&mlon=-79.32993#map=18/43.66353/-79.32993" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1234 Queen St E</td><td>Queen St E</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66354&mlon=-79.32986#map=18/43.66354/-79.32986" target="_blank" rel="noopener">View ↗</a></td></tr>
         
         <tr><td>1246 Queen St E</td><td>Queen St E</td><td></td>
           <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66363&mlon=-79.32948#map=18/43.66363/-79.32948" target="_blank" rel="noopener">View ↗</a></td></tr>
@@ -241,18 +255,16 @@
   <div class="section">
     <h2>Updated Addresses <span class="badge badge-yellow">0</span>
       <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
-        <span class="info-btn" aria-hidden="true">i</span>
-        <span class="info-pop">
-          <strong>Compared for changes</strong>
-          <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (LINEAR_NAME_FULL)</li><li>Full address (ADDRESS_FULL)</li><li>Coordinates (latitude, longitude)</li></ul>
-          <p class="note">…plus all other source attributes, except those ignored below.</p>
-          <strong>Ignored (changes here are not counted)</strong>
-          
-          <ul><li>ADDRESS_CLASS</li><li>ADDRESS_CLASS_DESC</li><li>ADDRESS_ID</li><li>ADDRESS_ID_LINK</li><li>ADDRESS_POINT_ID_LINK</li><li>CENTRELINE_ID</li><li>CENTRELINE_MEASURE</li><li>CENTRELINE_OFFSET</li><li>CLASS_FAMILY</li><li>CLASS_FAMILY_DESC</li></ul>
-          
-        </span>
-      </span>
-    </h2>
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (LINEAR_NAME_FULL)</li><li>Full address (ADDRESS_FULL)</li><li>Coordinates (latitude, longitude)</li></ul>
+      <p class="note">…plus all other source attributes, except those ignored below.</p>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>ADDRESS_CLASS</li><li>ADDRESS_CLASS_DESC</li><li>ADDRESS_ID</li><li>ADDRESS_ID_LINK</li><li>ADDRESS_POINT_ID_LINK</li><li>CENTRELINE_ID</li><li>CENTRELINE_MEASURE</li><li>CENTRELINE_OFFSET</li><li>CLASS_FAMILY</li><li>CLASS_FAMILY_DESC</li></ul>
+      
+    </span>
+  </span>
     <p class="empty">No addresses updated.</p>
   </div>
 
@@ -263,123 +275,11 @@
       <thead><tr><th>Address</th><th>Before</th><th></th><th>After</th></tr></thead>
       <tbody>
         
-        <tr><td>1R Curzon St</td>
-          
-          <td class="old-val">43.66358, -79.33099</td>
-          <td class="arrow-val">↖ 4.1m</td>
-          <td class="new-val">43.66361, -79.33102</td>
-          
-        </tr>
-        
-        <tr><td>89 Leslie St</td>
-          
-          <td class="old-val">43.66384, -79.33006</td>
-          <td class="arrow-val">← 14.1m</td>
-          <td class="new-val">43.66381, -79.33023</td>
-          
-        </tr>
-        
-        <tr><td>101 Leslie St</td>
-          
-          <td class="old-val">43.66412, -79.33017</td>
-          <td class="arrow-val">← 13.6m</td>
-          <td class="new-val">43.66408, -79.33033</td>
-          
-        </tr>
-        
-        <tr><td>1270 Queen St E</td>
-          
-          <td class="old-val">43.66372, -79.32894</td>
-          <td class="arrow-val">↘ 6.4m</td>
-          <td class="new-val">43.66367, -79.32890</td>
-          
-        </tr>
-        
         <tr><td>122 Leslie St</td>
           
           <td class="old-val">43.66407, -79.33084</td>
           <td class="arrow-val">↘ 4.6m</td>
           <td class="new-val">43.66405, -79.33079</td>
-          
-        </tr>
-        
-        <tr><td>335 Riverview Dr</td>
-          
-          <td class="old-val">43.73205, -79.38896</td>
-          <td class="arrow-val">↘ 78.5m</td>
-          <td class="new-val">43.73144, -79.38847</td>
-          
-        </tr>
-        
-        <tr><td>99 Leslie St</td>
-          
-          <td class="old-val">43.66407, -79.33016</td>
-          <td class="arrow-val">← 14.1m</td>
-          <td class="new-val">43.66404, -79.33033</td>
-          
-        </tr>
-        
-        <tr><td>93 Leslie St</td>
-          
-          <td class="old-val">43.66392, -79.33009</td>
-          <td class="arrow-val">← 13.3m</td>
-          <td class="new-val">43.66389, -79.33025</td>
-          
-        </tr>
-        
-        <tr><td>105 Leslie St</td>
-          
-          <td class="old-val">43.66421, -79.33022</td>
-          <td class="arrow-val">← 13.6m</td>
-          <td class="new-val">43.66417, -79.33038</td>
-          
-        </tr>
-        
-        <tr><td>18 Hastings Ave</td>
-          
-          <td class="old-val">43.66404, -79.32958</td>
-          <td class="arrow-val">→ 9.5m</td>
-          <td class="new-val">43.66407, -79.32947</td>
-          
-        </tr>
-        
-        <tr><td>1278 Queen St E</td>
-          
-          <td class="old-val">43.66380, -79.32879</td>
-          <td class="arrow-val">↓ 11.2m</td>
-          <td class="new-val">43.66370, -79.32877</td>
-          
-        </tr>
-        
-        <tr><td>1272 Queen St E</td>
-          
-          <td class="old-val">43.66375, -79.32884</td>
-          <td class="arrow-val">↓ 7.8m</td>
-          <td class="new-val">43.66368, -79.32885</td>
-          
-        </tr>
-        
-        <tr><td>1276 Queen St E</td>
-          
-          <td class="old-val">43.66384, -79.32884</td>
-          <td class="arrow-val">↓ 15.9m</td>
-          <td class="new-val">43.66370, -79.32880</td>
-          
-        </tr>
-        
-        <tr><td>16 Hastings Ave</td>
-          
-          <td class="old-val">43.66403, -79.32948</td>
-          <td class="arrow-val">↘ 2.7m</td>
-          <td class="new-val">43.66402, -79.32945</td>
-          
-        </tr>
-        
-        <tr><td>3 Hastings Ave</td>
-          
-          <td class="old-val">43.66368, -79.32891</td>
-          <td class="arrow-val">↑ 5.8m</td>
-          <td class="new-val">43.66373, -79.32893</td>
           
         </tr>
         
@@ -391,6 +291,86 @@
           
         </tr>
         
+        <tr><td>1278 Queen St E</td>
+          
+          <td class="old-val">43.66380, -79.32879</td>
+          <td class="arrow-val">↓ 11.2m</td>
+          <td class="new-val">43.66370, -79.32877</td>
+          
+        </tr>
+        
+        <tr><td>1276 Queen St E</td>
+          
+          <td class="old-val">43.66384, -79.32884</td>
+          <td class="arrow-val">↓ 15.9m</td>
+          <td class="new-val">43.66370, -79.32880</td>
+          
+        </tr>
+        
+        <tr><td>93 Leslie St</td>
+          
+          <td class="old-val">43.66392, -79.33009</td>
+          <td class="arrow-val">← 13.3m</td>
+          <td class="new-val">43.66389, -79.33025</td>
+          
+        </tr>
+        
+        <tr><td>16 Hastings Ave</td>
+          
+          <td class="old-val">43.66403, -79.32948</td>
+          <td class="arrow-val">↘ 2.7m</td>
+          <td class="new-val">43.66402, -79.32945</td>
+          
+        </tr>
+        
+        <tr><td>89 Leslie St</td>
+          
+          <td class="old-val">43.66384, -79.33006</td>
+          <td class="arrow-val">← 14.1m</td>
+          <td class="new-val">43.66381, -79.33023</td>
+          
+        </tr>
+        
+        <tr><td>18 Hastings Ave</td>
+          
+          <td class="old-val">43.66404, -79.32958</td>
+          <td class="arrow-val">→ 9.5m</td>
+          <td class="new-val">43.66407, -79.32947</td>
+          
+        </tr>
+        
+        <tr><td>3 Hastings Ave</td>
+          
+          <td class="old-val">43.66368, -79.32891</td>
+          <td class="arrow-val">↑ 5.8m</td>
+          <td class="new-val">43.66373, -79.32893</td>
+          
+        </tr>
+        
+        <tr><td>99 Leslie St</td>
+          
+          <td class="old-val">43.66407, -79.33016</td>
+          <td class="arrow-val">← 14.1m</td>
+          <td class="new-val">43.66404, -79.33033</td>
+          
+        </tr>
+        
+        <tr><td>1272 Queen St E</td>
+          
+          <td class="old-val">43.66375, -79.32884</td>
+          <td class="arrow-val">↓ 7.8m</td>
+          <td class="new-val">43.66368, -79.32885</td>
+          
+        </tr>
+        
+        <tr><td>101 Leslie St</td>
+          
+          <td class="old-val">43.66412, -79.33017</td>
+          <td class="arrow-val">← 13.6m</td>
+          <td class="new-val">43.66408, -79.33033</td>
+          
+        </tr>
+        
         <tr><td>85 Leslie St</td>
           
           <td class="old-val">43.66376, -79.33002</td>
@@ -399,12 +379,44 @@
           
         </tr>
         
+        <tr><td>1270 Queen St E</td>
+          
+          <td class="old-val">43.66372, -79.32894</td>
+          <td class="arrow-val">↘ 6.4m</td>
+          <td class="new-val">43.66367, -79.32890</td>
+          
+        </tr>
+        
+        <tr><td>335 Riverview Dr</td>
+          
+          <td class="old-val">43.73205, -79.38896</td>
+          <td class="arrow-val">↘ 78.5m</td>
+          <td class="new-val">43.73144, -79.38847</td>
+          
+        </tr>
+        
+        <tr><td>105 Leslie St</td>
+          
+          <td class="old-val">43.66421, -79.33022</td>
+          <td class="arrow-val">← 13.6m</td>
+          <td class="new-val">43.66417, -79.33038</td>
+          
+        </tr>
+        
+        <tr><td>1R Curzon St</td>
+          
+          <td class="old-val">43.66358, -79.33099</td>
+          <td class="arrow-val">↖ 4.1m</td>
+          <td class="new-val">43.66361, -79.33102</td>
+          
+        </tr>
+        
       </tbody>
     </table>
     
   </div>
 
-  <div class="generated-at">Report generated Jun 10, 2026 at 03:42 PM · source licence: Open Government Licence – Toronto</div>
+  <div class="generated-at">Report generated Jun 10, 2026 at 08:24 PM · source licence: Open Government Licence – Toronto</div>
 
   <script>
     function sortTable(tbodyId, col) {

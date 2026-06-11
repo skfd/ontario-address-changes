@@ -107,12 +107,14 @@
     .history .dot { color: var(--text-dim); margin: 0 4px; }
     .history-none { color: var(--text-dim); font-style: italic; font-size: 12.5px; }
     .info-wrap { position: relative; display: inline-flex; vertical-align: middle; }
-    .info-btn { display: inline-flex; align-items: center; justify-content: center;
-      width: 16px; height: 16px; border-radius: 999px; border: 1px solid var(--border-strong);
-      color: var(--text-dim); background: var(--surface); cursor: help; font-size: 11px;
-      font-weight: 700; font-style: italic; font-family: Georgia, 'Times New Roman', serif; line-height: 1; }
+    .info-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+      height: 18px; padding: 0 8px 0 7px; border-radius: 999px; border: none;
+      color: #fff; background: var(--accent); cursor: help; font-size: 11px; font-weight: 600;
+      font-style: normal; font-family: inherit; line-height: 1; white-space: nowrap; }
+    .info-btn .glyph { font-style: italic; font-weight: 700;
+      font-family: Georgia, 'Times New Roman', serif; }
     .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn,
-    .info-wrap:focus .info-btn { color: var(--accent); border-color: var(--accent); }
+    .info-wrap:focus .info-btn { background: var(--accent-hover); }
     .info-pop { display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 20;
       width: 320px; max-width: 80vw; padding: 12px 14px; background: var(--surface);
       border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-8);
@@ -127,6 +129,8 @@
     .info-pop .muted { color: var(--text-dim); font-style: italic; }
   </style>
 </head>
+
+
 
 
 
@@ -153,7 +157,17 @@
     <div class="card"><div class="label">Retired Addresses</div>
       <div class="value red">−0</div>
       <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#c50f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,2.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#c50f1f"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
-    <div class="card"><div class="label">Updated Addresses</div>
+    <div class="card"><div class="label">Updated Addresses <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (LINEAR_NAME_FULL)</li><li>Full address (ADDRESS_FULL)</li><li>Coordinates (latitude, longitude)</li></ul>
+      <p class="note">…plus all other source attributes, except those ignored below.</p>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>ADDRESS_CLASS</li><li>ADDRESS_CLASS_DESC</li><li>ADDRESS_ID</li><li>ADDRESS_ID_LINK</li><li>ADDRESS_POINT_ID_LINK</li><li>CENTRELINE_ID</li><li>CENTRELINE_MEASURE</li><li>CENTRELINE_OFFSET</li><li>CLASS_FAMILY</li><li>CLASS_FAMILY_DESC</li></ul>
+      
+    </span>
+  </span></div>
       <div class="value yellow">0</div>
       <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
     <div class="card"><div class="label">Location Adjustments</div>
@@ -194,29 +208,29 @@
         <th onclick="sortTable('t-added',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
       <tbody id="t-added">
         
-        <tr><td>30 Commerce Trl</td><td>Commerce Trl</td><td></td>
-          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66734&mlon=-79.49555#map=18/43.66734/-79.49555" target="_blank" rel="noopener">View ↗</a></td></tr>
-        
-        <tr><td>35 Everwood Gdns</td><td>Everwood Gdns</td><td></td>
-          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66762&mlon=-79.49609#map=18/43.66762/-79.49609" target="_blank" rel="noopener">View ↗</a></td></tr>
-        
-        <tr><td>15 Everwood Gdns</td><td>Everwood Gdns</td><td></td>
-          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66772&mlon=-79.49560#map=18/43.66772/-79.49560" target="_blank" rel="noopener">View ↗</a></td></tr>
+        <tr><td>2650 St Clair Ave W</td><td>St Clair Ave W</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66695&mlon=-79.49578#map=18/43.66695/-79.49578" target="_blank" rel="noopener">View ↗</a></td></tr>
         
         <tr><td>25 Everwood Gdns</td><td>Everwood Gdns</td><td></td>
           <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66793&mlon=-79.49563#map=18/43.66793/-79.49563" target="_blank" rel="noopener">View ↗</a></td></tr>
         
-        <tr><td>2650 St Clair Ave W</td><td>St Clair Ave W</td><td></td>
-          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66695&mlon=-79.49578#map=18/43.66695/-79.49578" target="_blank" rel="noopener">View ↗</a></td></tr>
-        
-        <tr><td>152A Pinegrove Ave</td><td>Pinegrove Ave</td><td></td>
-          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70151&mlon=-79.25704#map=18/43.70151/-79.25704" target="_blank" rel="noopener">View ↗</a></td></tr>
+        <tr><td>152B Pinegrove Ave</td><td>Pinegrove Ave</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70156&mlon=-79.25700#map=18/43.70156/-79.25700" target="_blank" rel="noopener">View ↗</a></td></tr>
         
         <tr><td>50 Commerce Trl</td><td>Commerce Trl</td><td></td>
           <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66727&mlon=-79.49609#map=18/43.66727/-79.49609" target="_blank" rel="noopener">View ↗</a></td></tr>
         
-        <tr><td>152B Pinegrove Ave</td><td>Pinegrove Ave</td><td></td>
-          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70156&mlon=-79.25700#map=18/43.70156/-79.25700" target="_blank" rel="noopener">View ↗</a></td></tr>
+        <tr><td>15 Everwood Gdns</td><td>Everwood Gdns</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66772&mlon=-79.49560#map=18/43.66772/-79.49560" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>152A Pinegrove Ave</td><td>Pinegrove Ave</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70151&mlon=-79.25704#map=18/43.70151/-79.25704" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>35 Everwood Gdns</td><td>Everwood Gdns</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66762&mlon=-79.49609#map=18/43.66762/-79.49609" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>30 Commerce Trl</td><td>Commerce Trl</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66734&mlon=-79.49555#map=18/43.66734/-79.49555" target="_blank" rel="noopener">View ↗</a></td></tr>
         
       </tbody>
     </table>
@@ -232,18 +246,16 @@
   <div class="section">
     <h2>Updated Addresses <span class="badge badge-yellow">0</span>
       <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
-        <span class="info-btn" aria-hidden="true">i</span>
-        <span class="info-pop">
-          <strong>Compared for changes</strong>
-          <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (LINEAR_NAME_FULL)</li><li>Full address (ADDRESS_FULL)</li><li>Coordinates (latitude, longitude)</li></ul>
-          <p class="note">…plus all other source attributes, except those ignored below.</p>
-          <strong>Ignored (changes here are not counted)</strong>
-          
-          <ul><li>ADDRESS_CLASS</li><li>ADDRESS_CLASS_DESC</li><li>ADDRESS_ID</li><li>ADDRESS_ID_LINK</li><li>ADDRESS_POINT_ID_LINK</li><li>CENTRELINE_ID</li><li>CENTRELINE_MEASURE</li><li>CENTRELINE_OFFSET</li><li>CLASS_FAMILY</li><li>CLASS_FAMILY_DESC</li></ul>
-          
-        </span>
-      </span>
-    </h2>
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (LINEAR_NAME_FULL)</li><li>Full address (ADDRESS_FULL)</li><li>Coordinates (latitude, longitude)</li></ul>
+      <p class="note">…plus all other source attributes, except those ignored below.</p>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>ADDRESS_CLASS</li><li>ADDRESS_CLASS_DESC</li><li>ADDRESS_ID</li><li>ADDRESS_ID_LINK</li><li>ADDRESS_POINT_ID_LINK</li><li>CENTRELINE_ID</li><li>CENTRELINE_MEASURE</li><li>CENTRELINE_OFFSET</li><li>CLASS_FAMILY</li><li>CLASS_FAMILY_DESC</li></ul>
+      
+    </span>
+  </span>
     <p class="empty">No addresses updated.</p>
   </div>
 
@@ -253,6 +265,54 @@
     <table>
       <thead><tr><th>Address</th><th>Before</th><th></th><th>After</th></tr></thead>
       <tbody>
+        
+        <tr><td>144 Pritchard Ave</td>
+          
+          <td class="old-val">43.66936, -79.49403</td>
+          <td class="arrow-val">↘ 8.8m</td>
+          <td class="new-val">43.66929, -79.49398</td>
+          
+        </tr>
+        
+        <tr><td>65 Florence Cres</td>
+          
+          <td class="old-val">43.66724, -79.49424</td>
+          <td class="arrow-val">← 6.1m</td>
+          <td class="new-val">43.66722, -79.49431</td>
+          
+        </tr>
+        
+        <tr><td>19 Castlegrove Blvd</td>
+          
+          <td class="old-val">43.74567, -79.32276</td>
+          <td class="arrow-val">↑ 30.6m</td>
+          <td class="new-val">43.74594, -79.32283</td>
+          
+        </tr>
+        
+        <tr><td>23 White Ave</td>
+          
+          <td class="old-val">43.66742, -79.49348</td>
+          <td class="arrow-val">→ 1.6m</td>
+          <td class="new-val">43.66742, -79.49346</td>
+          
+        </tr>
+        
+        <tr><td>48 Florence Cres</td>
+          
+          <td class="old-val">43.66893, -79.49500</td>
+          <td class="arrow-val">→ 6.8m</td>
+          <td class="new-val">43.66895, -79.49492</td>
+          
+        </tr>
+        
+        <tr><td>36 Florence Cres</td>
+          
+          <td class="old-val">43.66932, -79.49480</td>
+          <td class="arrow-val">→ 6.8m</td>
+          <td class="new-val">43.66930, -79.49472</td>
+          
+        </tr>
         
         <tr><td>2628 St Clair Ave W</td>
           
@@ -270,43 +330,11 @@
           
         </tr>
         
-        <tr><td>13 Florence Cres</td>
+        <tr><td>712 Jane St</td>
           
-          <td class="old-val">43.66958, -79.49395</td>
-          <td class="arrow-val">← 7.3m</td>
-          <td class="new-val">43.66957, -79.49404</td>
-          
-        </tr>
-        
-        <tr><td>44 Florence Cres</td>
-          
-          <td class="old-val">43.66910, -79.49495</td>
-          <td class="arrow-val">→ 6.8m</td>
-          <td class="new-val">43.66908, -79.49487</td>
-          
-        </tr>
-        
-        <tr><td>36 Florence Cres</td>
-          
-          <td class="old-val">43.66932, -79.49480</td>
-          <td class="arrow-val">→ 6.8m</td>
-          <td class="new-val">43.66930, -79.49472</td>
-          
-        </tr>
-        
-        <tr><td>19 Castlegrove Blvd</td>
-          
-          <td class="old-val">43.74567, -79.32276</td>
-          <td class="arrow-val">↑ 30.6m</td>
-          <td class="new-val">43.74594, -79.32283</td>
-          
-        </tr>
-        
-        <tr><td>714 Jane St</td>
-          
-          <td class="old-val">43.66966, -79.49317</td>
-          <td class="arrow-val">↘ 3.3m</td>
-          <td class="new-val">43.66964, -79.49314</td>
+          <td class="old-val">43.66956, -79.49310</td>
+          <td class="arrow-val">↑ 4.5m</td>
+          <td class="new-val">43.66960, -79.49311</td>
           
         </tr>
         
@@ -318,51 +346,11 @@
           
         </tr>
         
-        <tr><td>37 Florence Cres</td>
+        <tr><td>44 Florence Cres</td>
           
-          <td class="old-val">43.66849, -79.49449</td>
-          <td class="arrow-val">↙ 5.9m</td>
-          <td class="new-val">43.66846, -79.49455</td>
-          
-        </tr>
-        
-        <tr><td>712 Jane St</td>
-          
-          <td class="old-val">43.66956, -79.49310</td>
-          <td class="arrow-val">↑ 4.5m</td>
-          <td class="new-val">43.66960, -79.49311</td>
-          
-        </tr>
-        
-        <tr><td>64 Florence Cres</td>
-          
-          <td class="old-val">43.66840, -79.49513</td>
-          <td class="arrow-val">→ 6.5m</td>
-          <td class="new-val">43.66839, -79.49505</td>
-          
-        </tr>
-        
-        <tr><td>144 Pritchard Ave</td>
-          
-          <td class="old-val">43.66936, -79.49403</td>
-          <td class="arrow-val">↘ 8.8m</td>
-          <td class="new-val">43.66929, -79.49398</td>
-          
-        </tr>
-        
-        <tr><td>27 Homeview Ave</td>
-          
-          <td class="old-val">43.66810, -79.49400</td>
-          <td class="arrow-val">↗ 2.7m</td>
-          <td class="new-val">43.66812, -79.49398</td>
-          
-        </tr>
-        
-        <tr><td>65 Underhill Dr</td>
-          
-          <td class="old-val">43.74593, -79.32285</td>
-          <td class="arrow-val">← 171.3m</td>
-          <td class="new-val">43.74538, -79.32484</td>
+          <td class="old-val">43.66910, -79.49495</td>
+          <td class="arrow-val">→ 6.8m</td>
+          <td class="new-val">43.66908, -79.49487</td>
           
         </tr>
         
@@ -374,11 +362,35 @@
           
         </tr>
         
-        <tr><td>23 White Ave</td>
+        <tr><td>714 Jane St</td>
           
-          <td class="old-val">43.66742, -79.49348</td>
-          <td class="arrow-val">→ 1.6m</td>
-          <td class="new-val">43.66742, -79.49346</td>
+          <td class="old-val">43.66966, -79.49317</td>
+          <td class="arrow-val">↘ 3.3m</td>
+          <td class="new-val">43.66964, -79.49314</td>
+          
+        </tr>
+        
+        <tr><td>37 Florence Cres</td>
+          
+          <td class="old-val">43.66849, -79.49449</td>
+          <td class="arrow-val">↙ 5.9m</td>
+          <td class="new-val">43.66846, -79.49455</td>
+          
+        </tr>
+        
+        <tr><td>27 Homeview Ave</td>
+          
+          <td class="old-val">43.66810, -79.49400</td>
+          <td class="arrow-val">↗ 2.7m</td>
+          <td class="new-val">43.66812, -79.49398</td>
+          
+        </tr>
+        
+        <tr><td>64 Florence Cres</td>
+          
+          <td class="old-val">43.66840, -79.49513</td>
+          <td class="arrow-val">→ 6.5m</td>
+          <td class="new-val">43.66839, -79.49505</td>
           
         </tr>
         
@@ -390,19 +402,19 @@
           
         </tr>
         
-        <tr><td>146 Pritchard Ave</td>
+        <tr><td>65 Underhill Dr</td>
           
-          <td class="old-val">43.66935, -79.49411</td>
-          <td class="arrow-val">↓ 9.5m</td>
-          <td class="new-val">43.66927, -79.49407</td>
+          <td class="old-val">43.74593, -79.32285</td>
+          <td class="arrow-val">← 171.3m</td>
+          <td class="new-val">43.74538, -79.32484</td>
           
         </tr>
         
-        <tr><td>48 Florence Cres</td>
+        <tr><td>13 Florence Cres</td>
           
-          <td class="old-val">43.66893, -79.49500</td>
-          <td class="arrow-val">→ 6.8m</td>
-          <td class="new-val">43.66895, -79.49492</td>
+          <td class="old-val">43.66958, -79.49395</td>
+          <td class="arrow-val">← 7.3m</td>
+          <td class="new-val">43.66957, -79.49404</td>
           
         </tr>
         
@@ -414,11 +426,11 @@
           
         </tr>
         
-        <tr><td>65 Florence Cres</td>
+        <tr><td>146 Pritchard Ave</td>
           
-          <td class="old-val">43.66724, -79.49424</td>
-          <td class="arrow-val">← 6.1m</td>
-          <td class="new-val">43.66722, -79.49431</td>
+          <td class="old-val">43.66935, -79.49411</td>
+          <td class="arrow-val">↓ 9.5m</td>
+          <td class="new-val">43.66927, -79.49407</td>
           
         </tr>
         
@@ -427,7 +439,7 @@
     
   </div>
 
-  <div class="generated-at">Report generated Jun 10, 2026 at 03:42 PM · source licence: Open Government Licence – Toronto</div>
+  <div class="generated-at">Report generated Jun 10, 2026 at 08:24 PM · source licence: Open Government Licence – Toronto</div>
 
   <script>
     function sortTable(tbodyId, col) {

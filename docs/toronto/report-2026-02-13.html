@@ -107,12 +107,14 @@
     .history .dot { color: var(--text-dim); margin: 0 4px; }
     .history-none { color: var(--text-dim); font-style: italic; font-size: 12.5px; }
     .info-wrap { position: relative; display: inline-flex; vertical-align: middle; }
-    .info-btn { display: inline-flex; align-items: center; justify-content: center;
-      width: 16px; height: 16px; border-radius: 999px; border: 1px solid var(--border-strong);
-      color: var(--text-dim); background: var(--surface); cursor: help; font-size: 11px;
-      font-weight: 700; font-style: italic; font-family: Georgia, 'Times New Roman', serif; line-height: 1; }
+    .info-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+      height: 18px; padding: 0 8px 0 7px; border-radius: 999px; border: none;
+      color: #fff; background: var(--accent); cursor: help; font-size: 11px; font-weight: 600;
+      font-style: normal; font-family: inherit; line-height: 1; white-space: nowrap; }
+    .info-btn .glyph { font-style: italic; font-weight: 700;
+      font-family: Georgia, 'Times New Roman', serif; }
     .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn,
-    .info-wrap:focus .info-btn { color: var(--accent); border-color: var(--accent); }
+    .info-wrap:focus .info-btn { background: var(--accent-hover); }
     .info-pop { display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 20;
       width: 320px; max-width: 80vw; padding: 12px 14px; background: var(--surface);
       border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-8);
@@ -127,6 +129,8 @@
     .info-pop .muted { color: var(--text-dim); font-style: italic; }
   </style>
 </head>
+
+
 
 
 
@@ -153,7 +157,17 @@
     <div class="card"><div class="label">Retired Addresses</div>
       <div class="value red">−3</div>
       <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#c50f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 37.3,2.0 72.7,6.3 108.0,17.9"/><circle cx="108.0" cy="17.9" r="2" fill="#c50f1f"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
-    <div class="card"><div class="label">Updated Addresses</div>
+    <div class="card"><div class="label">Updated Addresses <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (LINEAR_NAME_FULL)</li><li>Full address (ADDRESS_FULL)</li><li>Coordinates (latitude, longitude)</li></ul>
+      <p class="note">…plus all other source attributes, except those ignored below.</p>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>ADDRESS_CLASS</li><li>ADDRESS_CLASS_DESC</li><li>ADDRESS_ID</li><li>ADDRESS_ID_LINK</li><li>ADDRESS_POINT_ID_LINK</li><li>CENTRELINE_ID</li><li>CENTRELINE_MEASURE</li><li>CENTRELINE_OFFSET</li><li>CLASS_FAMILY</li><li>CLASS_FAMILY_DESC</li></ul>
+      
+    </span>
+  </span></div>
       <div class="value yellow">0</div>
       <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 37.3,2.0 72.7,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
     <div class="card"><div class="label">Location Adjustments</div>
@@ -207,14 +221,14 @@
         <th onclick="sortTable('t-removed',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
       <tbody id="t-removed">
         
-        <tr><td>88 La Rose Ave</td><td>La Rose Ave</td><td></td>
-          <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68598&mlon=-79.52018#map=18/43.68598/-79.52018" target="_blank" rel="noopener">View ↗</a></td></tr>
-        
         <tr><td>910-916 The East Mall</td><td>The East Mall</td><td></td>
           <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67018&mlon=-79.57188#map=18/43.67018/-79.57188" target="_blank" rel="noopener">View ↗</a></td></tr>
         
         <tr><td>86G Shendale Dr</td><td>Shendale Dr</td><td></td>
           <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72063&mlon=-79.55504#map=18/43.72063/-79.55504" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>88 La Rose Ave</td><td>La Rose Ave</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68598&mlon=-79.52018#map=18/43.68598/-79.52018" target="_blank" rel="noopener">View ↗</a></td></tr>
         
       </tbody>
     </table>
@@ -225,18 +239,16 @@
   <div class="section">
     <h2>Updated Addresses <span class="badge badge-yellow">0</span>
       <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
-        <span class="info-btn" aria-hidden="true">i</span>
-        <span class="info-pop">
-          <strong>Compared for changes</strong>
-          <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (LINEAR_NAME_FULL)</li><li>Full address (ADDRESS_FULL)</li><li>Coordinates (latitude, longitude)</li></ul>
-          <p class="note">…plus all other source attributes, except those ignored below.</p>
-          <strong>Ignored (changes here are not counted)</strong>
-          
-          <ul><li>ADDRESS_CLASS</li><li>ADDRESS_CLASS_DESC</li><li>ADDRESS_ID</li><li>ADDRESS_ID_LINK</li><li>ADDRESS_POINT_ID_LINK</li><li>CENTRELINE_ID</li><li>CENTRELINE_MEASURE</li><li>CENTRELINE_OFFSET</li><li>CLASS_FAMILY</li><li>CLASS_FAMILY_DESC</li></ul>
-          
-        </span>
-      </span>
-    </h2>
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (LINEAR_NAME_FULL)</li><li>Full address (ADDRESS_FULL)</li><li>Coordinates (latitude, longitude)</li></ul>
+      <p class="note">…plus all other source attributes, except those ignored below.</p>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>ADDRESS_CLASS</li><li>ADDRESS_CLASS_DESC</li><li>ADDRESS_ID</li><li>ADDRESS_ID_LINK</li><li>ADDRESS_POINT_ID_LINK</li><li>CENTRELINE_ID</li><li>CENTRELINE_MEASURE</li><li>CENTRELINE_OFFSET</li><li>CLASS_FAMILY</li><li>CLASS_FAMILY_DESC</li></ul>
+      
+    </span>
+  </span>
     <p class="empty">No addresses updated.</p>
   </div>
 
@@ -247,19 +259,19 @@
       <thead><tr><th>Address</th><th>Before</th><th></th><th>After</th></tr></thead>
       <tbody>
         
+        <tr><td>7 Government Rd</td>
+          
+          <td class="old-val">43.66020, -79.50395</td>
+          <td class="arrow-val">← 3.2m</td>
+          <td class="new-val">43.66020, -79.50399</td>
+          
+        </tr>
+        
         <tr><td>2665 Islington Ave</td>
           
           <td class="old-val">43.73891, -79.56568</td>
           <td class="arrow-val">→ 7.3m</td>
           <td class="new-val">43.73892, -79.56559</td>
-          
-        </tr>
-        
-        <tr><td>910 The East Mall</td>
-          
-          <td class="old-val">43.67024, -79.57189</td>
-          <td class="arrow-val">↓ 13.5m</td>
-          <td class="new-val">43.67012, -79.57187</td>
           
         </tr>
         
@@ -271,59 +283,11 @@
           
         </tr>
         
-        <tr><td>2669 Islington Ave</td>
+        <tr><td>2670 Islington Ave</td>
           
-          <td class="old-val">43.73907, -79.56589</td>
-          <td class="arrow-val">↗ 15.2m</td>
-          <td class="new-val">43.73913, -79.56572</td>
-          
-        </tr>
-        
-        <tr><td>87A Disco Rd</td>
-          
-          <td class="old-val">43.70068, -79.59665</td>
-          <td class="arrow-val">↙ 25.6m</td>
-          <td class="new-val">43.70049, -79.59683</td>
-          
-        </tr>
-        
-        <tr><td>7 Government Rd</td>
-          
-          <td class="old-val">43.66020, -79.50395</td>
-          <td class="arrow-val">← 3.2m</td>
-          <td class="new-val">43.66020, -79.50399</td>
-          
-        </tr>
-        
-        <tr><td>2672 Islington Ave</td>
-          
-          <td class="old-val">43.73915, -79.56668</td>
-          <td class="arrow-val">↗ 7.2m</td>
-          <td class="new-val">43.73918, -79.56660</td>
-          
-        </tr>
-        
-        <tr><td>899 Kipling Ave</td>
-          
-          <td class="old-val">43.63713, -79.53314</td>
-          <td class="arrow-val">→ 6.4m</td>
-          <td class="new-val">43.63713, -79.53306</td>
-          
-        </tr>
-        
-        <tr><td>9 Government Rd</td>
-          
-          <td class="old-val">43.66017, -79.50413</td>
-          <td class="arrow-val">→ 6.8m</td>
-          <td class="new-val">43.66019, -79.50405</td>
-          
-        </tr>
-        
-        <tr><td>14 Thorndale Ave</td>
-          
-          <td class="old-val">43.66123, -79.50565</td>
-          <td class="arrow-val">↑ 30.1m</td>
-          <td class="new-val">43.66150, -79.50565</td>
+          <td class="old-val">43.73908, -79.56649</td>
+          <td class="arrow-val">↓ 7.1m</td>
+          <td class="new-val">43.73902, -79.56652</td>
           
         </tr>
         
@@ -335,19 +299,11 @@
           
         </tr>
         
-        <tr><td>2 Thorndale Ave</td>
+        <tr><td>910 The East Mall</td>
           
-          <td class="old-val">43.66126, -79.50497</td>
-          <td class="arrow-val">↗ 18.6m</td>
-          <td class="new-val">43.66133, -79.50476</td>
-          
-        </tr>
-        
-        <tr><td>2670 Islington Ave</td>
-          
-          <td class="old-val">43.73908, -79.56649</td>
-          <td class="arrow-val">↓ 7.1m</td>
-          <td class="new-val">43.73902, -79.56652</td>
+          <td class="old-val">43.67024, -79.57189</td>
+          <td class="arrow-val">↓ 13.5m</td>
+          <td class="new-val">43.67012, -79.57187</td>
           
         </tr>
         
@@ -359,12 +315,68 @@
           
         </tr>
         
+        <tr><td>2669 Islington Ave</td>
+          
+          <td class="old-val">43.73907, -79.56589</td>
+          <td class="arrow-val">↗ 15.2m</td>
+          <td class="new-val">43.73913, -79.56572</td>
+          
+        </tr>
+        
+        <tr><td>9 Government Rd</td>
+          
+          <td class="old-val">43.66017, -79.50413</td>
+          <td class="arrow-val">→ 6.8m</td>
+          <td class="new-val">43.66019, -79.50405</td>
+          
+        </tr>
+        
+        <tr><td>87A Disco Rd</td>
+          
+          <td class="old-val">43.70068, -79.59665</td>
+          <td class="arrow-val">↙ 25.6m</td>
+          <td class="new-val">43.70049, -79.59683</td>
+          
+        </tr>
+        
+        <tr><td>899 Kipling Ave</td>
+          
+          <td class="old-val">43.63713, -79.53314</td>
+          <td class="arrow-val">→ 6.4m</td>
+          <td class="new-val">43.63713, -79.53306</td>
+          
+        </tr>
+        
+        <tr><td>2 Thorndale Ave</td>
+          
+          <td class="old-val">43.66126, -79.50497</td>
+          <td class="arrow-val">↗ 18.6m</td>
+          <td class="new-val">43.66133, -79.50476</td>
+          
+        </tr>
+        
+        <tr><td>2672 Islington Ave</td>
+          
+          <td class="old-val">43.73915, -79.56668</td>
+          <td class="arrow-val">↗ 7.2m</td>
+          <td class="new-val">43.73918, -79.56660</td>
+          
+        </tr>
+        
+        <tr><td>14 Thorndale Ave</td>
+          
+          <td class="old-val">43.66123, -79.50565</td>
+          <td class="arrow-val">↑ 30.1m</td>
+          <td class="new-val">43.66150, -79.50565</td>
+          
+        </tr>
+        
       </tbody>
     </table>
     
   </div>
 
-  <div class="generated-at">Report generated Jun 10, 2026 at 03:42 PM · source licence: Open Government Licence – Toronto</div>
+  <div class="generated-at">Report generated Jun 10, 2026 at 08:24 PM · source licence: Open Government Licence – Toronto</div>
 
   <script>
     function sortTable(tbodyId, col) {

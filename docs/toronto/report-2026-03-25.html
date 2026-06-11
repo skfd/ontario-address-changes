@@ -107,12 +107,14 @@
     .history .dot { color: var(--text-dim); margin: 0 4px; }
     .history-none { color: var(--text-dim); font-style: italic; font-size: 12.5px; }
     .info-wrap { position: relative; display: inline-flex; vertical-align: middle; }
-    .info-btn { display: inline-flex; align-items: center; justify-content: center;
-      width: 16px; height: 16px; border-radius: 999px; border: 1px solid var(--border-strong);
-      color: var(--text-dim); background: var(--surface); cursor: help; font-size: 11px;
-      font-weight: 700; font-style: italic; font-family: Georgia, 'Times New Roman', serif; line-height: 1; }
+    .info-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+      height: 18px; padding: 0 8px 0 7px; border-radius: 999px; border: none;
+      color: #fff; background: var(--accent); cursor: help; font-size: 11px; font-weight: 600;
+      font-style: normal; font-family: inherit; line-height: 1; white-space: nowrap; }
+    .info-btn .glyph { font-style: italic; font-weight: 700;
+      font-family: Georgia, 'Times New Roman', serif; }
     .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn,
-    .info-wrap:focus .info-btn { color: var(--accent); border-color: var(--accent); }
+    .info-wrap:focus .info-btn { background: var(--accent-hover); }
     .info-pop { display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 20;
       width: 320px; max-width: 80vw; padding: 12px 14px; background: var(--surface);
       border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-8);
@@ -127,6 +129,8 @@
     .info-pop .muted { color: var(--text-dim); font-style: italic; }
   </style>
 </head>
+
+
 
 
 
@@ -153,7 +157,17 @@
     <div class="card"><div class="label">Retired Addresses</div>
       <div class="value red">−2</div>
       <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#c50f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,12.7 37.3,2.0 55.0,2.0 72.7,18.0 90.3,18.0 108.0,7.3"/><circle cx="108.0" cy="7.3" r="2" fill="#c50f1f"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
-    <div class="card"><div class="label">Updated Addresses</div>
+    <div class="card"><div class="label">Updated Addresses <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (LINEAR_NAME_FULL)</li><li>Full address (ADDRESS_FULL)</li><li>Coordinates (latitude, longitude)</li></ul>
+      <p class="note">…plus all other source attributes, except those ignored below.</p>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>ADDRESS_CLASS</li><li>ADDRESS_CLASS_DESC</li><li>ADDRESS_ID</li><li>ADDRESS_ID_LINK</li><li>ADDRESS_POINT_ID_LINK</li><li>CENTRELINE_ID</li><li>CENTRELINE_MEASURE</li><li>CENTRELINE_OFFSET</li><li>CLASS_FAMILY</li><li>CLASS_FAMILY_DESC</li></ul>
+      
+    </span>
+  </span></div>
       <div class="value yellow">0</div>
       <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,17.9 37.3,2.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
     <div class="card"><div class="label">Location Adjustments</div>
@@ -187,17 +201,17 @@
         <th onclick="sortTable('t-added',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
       <tbody id="t-added">
         
-        <tr><td>1241 Shaw St</td><td>Shaw St</td><td></td>
-          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67445&mlon=-79.42804#map=18/43.67445/-79.42804" target="_blank" rel="noopener">View ↗</a></td></tr>
-        
-        <tr><td>476 Front St E</td><td>Front St E</td><td></td>
-          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65345&mlon=-79.35514#map=18/43.65345/-79.35514" target="_blank" rel="noopener">View ↗</a></td></tr>
-        
         <tr><td>1085A Davenport Rd</td><td>Davenport Rd</td><td></td>
           <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67460&mlon=-79.42806#map=18/43.67460/-79.42806" target="_blank" rel="noopener">View ↗</a></td></tr>
         
+        <tr><td>1241 Shaw St</td><td>Shaw St</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67445&mlon=-79.42804#map=18/43.67445/-79.42804" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
         <tr><td>1243 Shaw St</td><td>Shaw St</td><td></td>
           <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67447&mlon=-79.42805#map=18/43.67447/-79.42805" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>476 Front St E</td><td>Front St E</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65345&mlon=-79.35514#map=18/43.65345/-79.35514" target="_blank" rel="noopener">View ↗</a></td></tr>
         
       </tbody>
     </table>
@@ -213,11 +227,11 @@
         <th onclick="sortTable('t-removed',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
       <tbody id="t-removed">
         
-        <tr><td>232 Willowdale Ave</td><td>Willowdale Ave</td><td></td>
-          <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.76985&mlon=-79.40248#map=18/43.76985/-79.40248" target="_blank" rel="noopener">View ↗</a></td></tr>
-        
         <tr><td>1513 Albion Rd</td><td>Albion Rd</td><td></td>
           <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span><span class="dot">·</span><span class="a">+ 2026-02-12</span><span class="dot">·</span><span class="r">− 2026-02-12</span><span class="dot">·</span><span class="a">+ 2026-03-17</span><span class="dot">·</span><span class="r">− 2026-03-17</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73980&mlon=-79.58381#map=18/43.73980/-79.58381" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>232 Willowdale Ave</td><td>Willowdale Ave</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span><span class="dot">·</span><span class="a">+ 2025-09-09</span><span class="dot">·</span><span class="r">− 2025-09-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.76985&mlon=-79.40248#map=18/43.76985/-79.40248" target="_blank" rel="noopener">View ↗</a></td></tr>
         
       </tbody>
     </table>
@@ -228,18 +242,16 @@
   <div class="section">
     <h2>Updated Addresses <span class="badge badge-yellow">0</span>
       <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
-        <span class="info-btn" aria-hidden="true">i</span>
-        <span class="info-pop">
-          <strong>Compared for changes</strong>
-          <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (LINEAR_NAME_FULL)</li><li>Full address (ADDRESS_FULL)</li><li>Coordinates (latitude, longitude)</li></ul>
-          <p class="note">…plus all other source attributes, except those ignored below.</p>
-          <strong>Ignored (changes here are not counted)</strong>
-          
-          <ul><li>ADDRESS_CLASS</li><li>ADDRESS_CLASS_DESC</li><li>ADDRESS_ID</li><li>ADDRESS_ID_LINK</li><li>ADDRESS_POINT_ID_LINK</li><li>CENTRELINE_ID</li><li>CENTRELINE_MEASURE</li><li>CENTRELINE_OFFSET</li><li>CLASS_FAMILY</li><li>CLASS_FAMILY_DESC</li></ul>
-          
-        </span>
-      </span>
-    </h2>
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (LINEAR_NAME_FULL)</li><li>Full address (ADDRESS_FULL)</li><li>Coordinates (latitude, longitude)</li></ul>
+      <p class="note">…plus all other source attributes, except those ignored below.</p>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>ADDRESS_CLASS</li><li>ADDRESS_CLASS_DESC</li><li>ADDRESS_ID</li><li>ADDRESS_ID_LINK</li><li>ADDRESS_POINT_ID_LINK</li><li>CENTRELINE_ID</li><li>CENTRELINE_MEASURE</li><li>CENTRELINE_OFFSET</li><li>CLASS_FAMILY</li><li>CLASS_FAMILY_DESC</li></ul>
+      
+    </span>
+  </span>
     <p class="empty">No addresses updated.</p>
   </div>
 
@@ -250,11 +262,19 @@
       <thead><tr><th>Address</th><th>Before</th><th></th><th>After</th></tr></thead>
       <tbody>
         
-        <tr><td>1085 Davenport Rd</td>
+        <tr><td>1248 Pharmacy Ave</td>
           
-          <td class="old-val">43.67457, -79.42806</td>
-          <td class="arrow-val">↖ 4.6m</td>
-          <td class="new-val">43.67460, -79.42810</td>
+          <td class="old-val">43.74984, -79.30760</td>
+          <td class="arrow-val">↓ 26.8m</td>
+          <td class="new-val">43.74960, -79.30762</td>
+          
+        </tr>
+        
+        <tr><td>1239 Shaw St</td>
+          
+          <td class="old-val">43.67441, -79.42794</td>
+          <td class="arrow-val">↙ 2.7m</td>
+          <td class="new-val">43.67439, -79.42796</td>
           
         </tr>
         
@@ -266,22 +286,6 @@
           
         </tr>
         
-        <tr><td>1247 Pharmacy Ave</td>
-          
-          <td class="old-val">43.74963, -79.30669</td>
-          <td class="arrow-val">← 11.5m</td>
-          <td class="new-val">43.74965, -79.30683</td>
-          
-        </tr>
-        
-        <tr><td>1248 Pharmacy Ave</td>
-          
-          <td class="old-val">43.74984, -79.30760</td>
-          <td class="arrow-val">↓ 26.8m</td>
-          <td class="new-val">43.74960, -79.30762</td>
-          
-        </tr>
-        
         <tr><td>1237 Shaw St</td>
           
           <td class="old-val">43.67437, -79.42792</td>
@@ -290,19 +294,27 @@
           
         </tr>
         
+        <tr><td>1087 Davenport Rd</td>
+          
+          <td class="old-val">43.67463, -79.42858</td>
+          <td class="arrow-val">↘ 6.0m</td>
+          <td class="new-val">43.67459, -79.42853</td>
+          
+        </tr>
+        
+        <tr><td>1085 Davenport Rd</td>
+          
+          <td class="old-val">43.67457, -79.42806</td>
+          <td class="arrow-val">↖ 4.6m</td>
+          <td class="new-val">43.67460, -79.42810</td>
+          
+        </tr>
+        
         <tr><td>32 Lisgar St</td>
           
           <td class="old-val">43.64154, -79.42326</td>
           <td class="arrow-val">↗ 12.6m</td>
           <td class="new-val">43.64159, -79.42312</td>
-          
-        </tr>
-        
-        <tr><td>1239 Shaw St</td>
-          
-          <td class="old-val">43.67441, -79.42794</td>
-          <td class="arrow-val">↙ 2.7m</td>
-          <td class="new-val">43.67439, -79.42796</td>
           
         </tr>
         
@@ -322,11 +334,11 @@
           
         </tr>
         
-        <tr><td>1087 Davenport Rd</td>
+        <tr><td>1247 Pharmacy Ave</td>
           
-          <td class="old-val">43.67463, -79.42858</td>
-          <td class="arrow-val">↘ 6.0m</td>
-          <td class="new-val">43.67459, -79.42853</td>
+          <td class="old-val">43.74963, -79.30669</td>
+          <td class="arrow-val">← 11.5m</td>
+          <td class="new-val">43.74965, -79.30683</td>
           
         </tr>
         
@@ -335,7 +347,7 @@
     
   </div>
 
-  <div class="generated-at">Report generated Jun 10, 2026 at 03:42 PM · source licence: Open Government Licence – Toronto</div>
+  <div class="generated-at">Report generated Jun 10, 2026 at 08:24 PM · source licence: Open Government Licence – Toronto</div>
 
   <script>
     function sortTable(tbodyId, col) {

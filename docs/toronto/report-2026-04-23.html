@@ -107,12 +107,14 @@
     .history .dot { color: var(--text-dim); margin: 0 4px; }
     .history-none { color: var(--text-dim); font-style: italic; font-size: 12.5px; }
     .info-wrap { position: relative; display: inline-flex; vertical-align: middle; }
-    .info-btn { display: inline-flex; align-items: center; justify-content: center;
-      width: 16px; height: 16px; border-radius: 999px; border: 1px solid var(--border-strong);
-      color: var(--text-dim); background: var(--surface); cursor: help; font-size: 11px;
-      font-weight: 700; font-style: italic; font-family: Georgia, 'Times New Roman', serif; line-height: 1; }
+    .info-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+      height: 18px; padding: 0 8px 0 7px; border-radius: 999px; border: none;
+      color: #fff; background: var(--accent); cursor: help; font-size: 11px; font-weight: 600;
+      font-style: normal; font-family: inherit; line-height: 1; white-space: nowrap; }
+    .info-btn .glyph { font-style: italic; font-weight: 700;
+      font-family: Georgia, 'Times New Roman', serif; }
     .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn,
-    .info-wrap:focus .info-btn { color: var(--accent); border-color: var(--accent); }
+    .info-wrap:focus .info-btn { background: var(--accent-hover); }
     .info-pop { display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 20;
       width: 320px; max-width: 80vw; padding: 12px 14px; background: var(--surface);
       border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-8);
@@ -127,6 +129,8 @@
     .info-pop .muted { color: var(--text-dim); font-style: italic; }
   </style>
 </head>
+
+
 
 
 
@@ -153,7 +157,17 @@
     <div class="card"><div class="label">Retired Addresses</div>
       <div class="value red">−2</div>
       <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#c50f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#c50f1f"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
-    <div class="card"><div class="label">Updated Addresses</div>
+    <div class="card"><div class="label">Updated Addresses <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (LINEAR_NAME_FULL)</li><li>Full address (ADDRESS_FULL)</li><li>Coordinates (latitude, longitude)</li></ul>
+      <p class="note">…plus all other source attributes, except those ignored below.</p>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>ADDRESS_CLASS</li><li>ADDRESS_CLASS_DESC</li><li>ADDRESS_ID</li><li>ADDRESS_ID_LINK</li><li>ADDRESS_POINT_ID_LINK</li><li>CENTRELINE_ID</li><li>CENTRELINE_MEASURE</li><li>CENTRELINE_OFFSET</li><li>CLASS_FAMILY</li><li>CLASS_FAMILY_DESC</li></ul>
+      
+    </span>
+  </span></div>
       <div class="value yellow">0</div>
       <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
     <div class="card"><div class="label">Location Adjustments</div>
@@ -190,14 +204,11 @@
         <tr><td>1 Braeburn Blvd</td><td>Braeburn Blvd</td><td></td>
           <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74856&mlon=-79.23522#map=18/43.74856/-79.23522" target="_blank" rel="noopener">View ↗</a></td></tr>
         
-        <tr><td>31C Parliament St</td><td>Parliament St</td><td></td>
-          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64907&mlon=-79.36073#map=18/43.64907/-79.36073" target="_blank" rel="noopener">View ↗</a></td></tr>
+        <tr><td>59 Cedar Brae Blvd</td><td>Cedar Brae Blvd</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74829&mlon=-79.23513#map=18/43.74829/-79.23513" target="_blank" rel="noopener">View ↗</a></td></tr>
         
-        <tr><td>5238 Dundas St W</td><td>Dundas St W</td><td></td>
-          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.63892&mlon=-79.53808#map=18/43.63892/-79.53808" target="_blank" rel="noopener">View ↗</a></td></tr>
-        
-        <tr><td>1038 The Queensway</td><td>The Queensway</td><td></td>
-          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.62357&mlon=-79.51627#map=18/43.62357/-79.51627" target="_blank" rel="noopener">View ↗</a></td></tr>
+        <tr><td>5240 Dundas St W</td><td>Dundas St W</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.63886&mlon=-79.53812#map=18/43.63886/-79.53812" target="_blank" rel="noopener">View ↗</a></td></tr>
         
         <tr><td>316 Martin Grove Rd</td><td>Martin Grove Rd</td><td></td>
           <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65826&mlon=-79.55602#map=18/43.65826/-79.55602" target="_blank" rel="noopener">View ↗</a></td></tr>
@@ -205,11 +216,14 @@
         <tr><td>32 Jopling Ave S</td><td>Jopling Ave S</td><td></td>
           <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.63901&mlon=-79.53814#map=18/43.63901/-79.53814" target="_blank" rel="noopener">View ↗</a></td></tr>
         
-        <tr><td>5240 Dundas St W</td><td>Dundas St W</td><td></td>
-          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.63886&mlon=-79.53812#map=18/43.63886/-79.53812" target="_blank" rel="noopener">View ↗</a></td></tr>
+        <tr><td>1038 The Queensway</td><td>The Queensway</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.62357&mlon=-79.51627#map=18/43.62357/-79.51627" target="_blank" rel="noopener">View ↗</a></td></tr>
         
-        <tr><td>59 Cedar Brae Blvd</td><td>Cedar Brae Blvd</td><td></td>
-          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74829&mlon=-79.23513#map=18/43.74829/-79.23513" target="_blank" rel="noopener">View ↗</a></td></tr>
+        <tr><td>5238 Dundas St W</td><td>Dundas St W</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.63892&mlon=-79.53808#map=18/43.63892/-79.53808" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>31C Parliament St</td><td>Parliament St</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64907&mlon=-79.36073#map=18/43.64907/-79.36073" target="_blank" rel="noopener">View ↗</a></td></tr>
         
       </tbody>
     </table>
@@ -240,18 +254,16 @@
   <div class="section">
     <h2>Updated Addresses <span class="badge badge-yellow">0</span>
       <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
-        <span class="info-btn" aria-hidden="true">i</span>
-        <span class="info-pop">
-          <strong>Compared for changes</strong>
-          <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (LINEAR_NAME_FULL)</li><li>Full address (ADDRESS_FULL)</li><li>Coordinates (latitude, longitude)</li></ul>
-          <p class="note">…plus all other source attributes, except those ignored below.</p>
-          <strong>Ignored (changes here are not counted)</strong>
-          
-          <ul><li>ADDRESS_CLASS</li><li>ADDRESS_CLASS_DESC</li><li>ADDRESS_ID</li><li>ADDRESS_ID_LINK</li><li>ADDRESS_POINT_ID_LINK</li><li>CENTRELINE_ID</li><li>CENTRELINE_MEASURE</li><li>CENTRELINE_OFFSET</li><li>CLASS_FAMILY</li><li>CLASS_FAMILY_DESC</li></ul>
-          
-        </span>
-      </span>
-    </h2>
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (LINEAR_NAME_FULL)</li><li>Full address (ADDRESS_FULL)</li><li>Coordinates (latitude, longitude)</li></ul>
+      <p class="note">…plus all other source attributes, except those ignored below.</p>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>ADDRESS_CLASS</li><li>ADDRESS_CLASS_DESC</li><li>ADDRESS_ID</li><li>ADDRESS_ID_LINK</li><li>ADDRESS_POINT_ID_LINK</li><li>CENTRELINE_ID</li><li>CENTRELINE_MEASURE</li><li>CENTRELINE_OFFSET</li><li>CLASS_FAMILY</li><li>CLASS_FAMILY_DESC</li></ul>
+      
+    </span>
+  </span>
     <p class="empty">No addresses updated.</p>
   </div>
 
@@ -261,54 +273,6 @@
     <table>
       <thead><tr><th>Address</th><th>Before</th><th></th><th>After</th></tr></thead>
       <tbody>
-        
-        <tr><td>32 Hahn Pl</td>
-          
-          <td class="old-val">43.64885, -79.36316</td>
-          <td class="arrow-val">↑ 6.7m</td>
-          <td class="new-val">43.64891, -79.36315</td>
-          
-        </tr>
-        
-        <tr><td>2 Hahn Pl</td>
-          
-          <td class="old-val">43.64860, -79.36305</td>
-          <td class="arrow-val">↘ 4.6m</td>
-          <td class="new-val">43.64858, -79.36300</td>
-          
-        </tr>
-        
-        <tr><td>60C Cedar Brae Blvd</td>
-          
-          <td class="old-val">43.74763, -79.23551</td>
-          <td class="arrow-val">← 12.3m</td>
-          <td class="new-val">43.74761, -79.23566</td>
-          
-        </tr>
-        
-        <tr><td>40 Hahn Pl</td>
-          
-          <td class="old-val">43.64891, -79.36319</td>
-          <td class="arrow-val">↑ 10.0m</td>
-          <td class="new-val">43.64900, -79.36319</td>
-          
-        </tr>
-        
-        <tr><td>56 Cedar Brae Blvd</td>
-          
-          <td class="old-val">43.74697, -79.23518</td>
-          <td class="arrow-val">← 18.9m</td>
-          <td class="new-val">43.74691, -79.23540</td>
-          
-        </tr>
-        
-        <tr><td>48 Cedar Brae Blvd</td>
-          
-          <td class="old-val">43.74587, -79.23501</td>
-          <td class="arrow-val">↑ 7.8m</td>
-          <td class="new-val">43.74594, -79.23500</td>
-          
-        </tr>
         
         <tr><td>28 Hahn Pl</td>
           
@@ -326,59 +290,11 @@
           
         </tr>
         
-        <tr><td>12 Hahn Pl</td>
+        <tr><td>56A Cedar Brae Blvd</td>
           
-          <td class="old-val">43.64868, -79.36309</td>
-          <td class="arrow-val">→ 3.4m</td>
-          <td class="new-val">43.64869, -79.36305</td>
-          
-        </tr>
-        
-        <tr><td>34 Hahn Pl</td>
-          
-          <td class="old-val">43.64886, -79.36317</td>
-          <td class="arrow-val">↑ 10.1m</td>
-          <td class="new-val">43.64895, -79.36316</td>
-          
-        </tr>
-        
-        <tr><td>1050 The Queensway</td>
-          
-          <td class="old-val">43.62342, -79.51744</td>
-          <td class="arrow-val">→ 29.1m</td>
-          <td class="new-val">43.62340, -79.51708</td>
-          
-        </tr>
-        
-        <tr><td>38 Hahn Pl</td>
-          
-          <td class="old-val">43.64890, -79.36318</td>
-          <td class="arrow-val">↑ 8.9m</td>
-          <td class="new-val">43.64898, -79.36318</td>
-          
-        </tr>
-        
-        <tr><td>48A Cedar Brae Blvd</td>
-          
-          <td class="old-val">43.74587, -79.23471</td>
-          <td class="arrow-val">← 21.9m</td>
-          <td class="new-val">43.74581, -79.23497</td>
-          
-        </tr>
-        
-        <tr><td>18 Hahn Pl</td>
-          
-          <td class="old-val">43.64872, -79.36311</td>
-          <td class="arrow-val">↗ 5.1m</td>
-          <td class="new-val">43.64876, -79.36308</td>
-          
-        </tr>
-        
-        <tr><td>26 Hahn Pl</td>
-          
-          <td class="old-val">43.64879, -79.36314</td>
-          <td class="arrow-val">↑ 6.9m</td>
-          <td class="new-val">43.64885, -79.36312</td>
+          <td class="old-val">43.74711, -79.23523</td>
+          <td class="arrow-val">← 20.4m</td>
+          <td class="new-val">43.74705, -79.23547</td>
           
         </tr>
         
@@ -390,27 +306,11 @@
           
         </tr>
         
-        <tr><td>114 Longboat Ave</td>
+        <tr><td>15 Fifth St</td>
           
-          <td class="old-val">43.64874, -79.36271</td>
-          <td class="arrow-val">↓ 6.7m</td>
-          <td class="new-val">43.64868, -79.36271</td>
-          
-        </tr>
-        
-        <tr><td>44A Cedar Brae Blvd</td>
-          
-          <td class="old-val">43.74547, -79.23454</td>
-          <td class="arrow-val">← 10.2m</td>
-          <td class="new-val">43.74544, -79.23466</td>
-          
-        </tr>
-        
-        <tr><td>90 Longboat Ave</td>
-          
-          <td class="old-val">43.64868, -79.36305</td>
-          <td class="arrow-val">↓ 12.4m</td>
-          <td class="new-val">43.64857, -79.36303</td>
+          <td class="old-val">43.59692, -79.50096</td>
+          <td class="arrow-val">↑ 2.4m</td>
+          <td class="new-val">43.59694, -79.50097</td>
           
         </tr>
         
@@ -422,211 +322,11 @@
           
         </tr>
         
-        <tr><td>1000 The Queensway</td>
-          
-          <td class="old-val">43.62383, -79.51556</td>
-          <td class="arrow-val">↙ 16.0m</td>
-          <td class="new-val">43.62371, -79.51567</td>
-          
-        </tr>
-        
-        <tr><td>61 Fifth St</td>
-          
-          <td class="old-val">43.59837, -79.50159</td>
-          <td class="arrow-val">↑ 2.2m</td>
-          <td class="new-val">43.59839, -79.50159</td>
-          
-        </tr>
-        
-        <tr><td>60A Cedar Brae Blvd</td>
-          
-          <td class="old-val">43.74750, -79.23544</td>
-          <td class="arrow-val">← 14.9m</td>
-          <td class="new-val">43.74747, -79.23562</td>
-          
-        </tr>
-        
-        <tr><td>13 Hahn Pl</td>
-          
-          <td class="old-val">43.64900, -79.36281</td>
-          <td class="arrow-val">↓ 4.5m</td>
-          <td class="new-val">43.64896, -79.36281</td>
-          
-        </tr>
-        
-        <tr><td>46A Cedar Brae Blvd</td>
-          
-          <td class="old-val">43.74572, -79.23465</td>
-          <td class="arrow-val">← 20.9m</td>
-          <td class="new-val">43.74567, -79.23490</td>
-          
-        </tr>
-        
-        <tr><td>15 Hahn Pl</td>
-          
-          <td class="old-val">43.64903, -79.36282</td>
-          <td class="arrow-val">↓ 2.2m</td>
-          <td class="new-val">43.64901, -79.36282</td>
-          
-        </tr>
-        
-        <tr><td>14 Hahn Pl</td>
-          
-          <td class="old-val">43.64869, -79.36310</td>
-          <td class="arrow-val">↗ 3.9m</td>
-          <td class="new-val">43.64871, -79.36306</td>
-          
-        </tr>
-        
-        <tr><td>65 Fifth St</td>
-          
-          <td class="old-val">43.59849, -79.50164</td>
-          <td class="arrow-val">↑ 2.2m</td>
-          <td class="new-val">43.59851, -79.50164</td>
-          
-        </tr>
-        
-        <tr><td>51 Cedar Brae Blvd</td>
-          
-          <td class="old-val">43.74733, -79.23469</td>
-          <td class="arrow-val">↓ 5.8m</td>
-          <td class="new-val">43.74728, -79.23467</td>
-          
-        </tr>
-        
-        <tr><td>1040 The Queensway</td>
-          
-          <td class="old-val">43.62361, -79.51653</td>
-          <td class="arrow-val">↓ 16.6m</td>
-          <td class="new-val">43.62347, -79.51660</td>
-          
-        </tr>
-        
-        <tr><td>50 Cedar Brae Blvd</td>
-          
-          <td class="old-val">43.74628, -79.23487</td>
-          <td class="arrow-val">← 15.5m</td>
-          <td class="new-val">43.74623, -79.23505</td>
-          
-        </tr>
-        
         <tr><td>42 Hahn Pl</td>
           
           <td class="old-val">43.64893, -79.36319</td>
           <td class="arrow-val">↑ 10.1m</td>
           <td class="new-val">43.64902, -79.36321</td>
-          
-        </tr>
-        
-        <tr><td>44 Cedar Brae Blvd</td>
-          
-          <td class="old-val">43.74535, -79.23461</td>
-          <td class="arrow-val">↓ 7.1m</td>
-          <td class="new-val">43.74529, -79.23458</td>
-          
-        </tr>
-        
-        <tr><td>52A Cedar Brae Blvd</td>
-          
-          <td class="old-val">43.74656, -79.23500</td>
-          <td class="arrow-val">← 12.1m</td>
-          <td class="new-val">43.74652, -79.23514</td>
-          
-        </tr>
-        
-        <tr><td>34 Lake Shore Dr</td>
-          
-          <td class="old-val">43.59873, -79.50000</td>
-          <td class="arrow-val">↗ 3.9m</td>
-          <td class="new-val">43.59875, -79.49996</td>
-          
-        </tr>
-        
-        <tr><td>4 Hahn Pl</td>
-          
-          <td class="old-val">43.64861, -79.36303</td>
-          <td class="arrow-val">↘ 2.0m</td>
-          <td class="new-val">43.64860, -79.36301</td>
-          
-        </tr>
-        
-        <tr><td>16 Hahn Pl</td>
-          
-          <td class="old-val">43.64871, -79.36310</td>
-          <td class="arrow-val">↗ 2.7m</td>
-          <td class="new-val">43.64872, -79.36307</td>
-          
-        </tr>
-        
-        <tr><td>11 Hahn Pl</td>
-          
-          <td class="old-val">43.64897, -79.36279</td>
-          <td class="arrow-val">↓ 5.6m</td>
-          <td class="new-val">43.64892, -79.36279</td>
-          
-        </tr>
-        
-        <tr><td>320 Horner Ave</td>
-          
-          <td class="old-val">43.60627, -79.52672</td>
-          <td class="arrow-val">← 9.7m</td>
-          <td class="new-val">43.60627, -79.52684</td>
-          
-        </tr>
-        
-        <tr><td>144 Longboat Ave</td>
-          
-          <td class="old-val">43.64884, -79.36196</td>
-          <td class="arrow-val">← 14.5m</td>
-          <td class="new-val">43.64884, -79.36214</td>
-          
-        </tr>
-        
-        <tr><td>24 Hahn Pl</td>
-          
-          <td class="old-val">43.64877, -79.36313</td>
-          <td class="arrow-val">↗ 6.1m</td>
-          <td class="new-val">43.64882, -79.36310</td>
-          
-        </tr>
-        
-        <tr><td>10 Hahn Pl</td>
-          
-          <td class="old-val">43.64866, -79.36308</td>
-          <td class="arrow-val">→ 3.4m</td>
-          <td class="new-val">43.64867, -79.36304</td>
-          
-        </tr>
-        
-        <tr><td>50A Cedar Brae Blvd</td>
-          
-          <td class="old-val">43.74613, -79.23481</td>
-          <td class="arrow-val">← 18.5m</td>
-          <td class="new-val">43.74608, -79.23503</td>
-          
-        </tr>
-        
-        <tr><td>36 Hahn Pl</td>
-          
-          <td class="old-val">43.64888, -79.36317</td>
-          <td class="arrow-val">↑ 10.0m</td>
-          <td class="new-val">43.64897, -79.36317</td>
-          
-        </tr>
-        
-        <tr><td>5 Hahn Pl</td>
-          
-          <td class="old-val">43.64890, -79.36281</td>
-          <td class="arrow-val">↘ 15.8m</td>
-          <td class="new-val">43.64877, -79.36273</td>
-          
-        </tr>
-        
-        <tr><td>140 Longboat Ave</td>
-          
-          <td class="old-val">43.64883, -79.36220</td>
-          <td class="arrow-val">← 0.8m</td>
-          <td class="new-val">43.64883, -79.36221</td>
           
         </tr>
         
@@ -638,19 +338,187 @@
           
         </tr>
         
-        <tr><td>7 Hahn Pl</td>
+        <tr><td>52 Cedar Brae Blvd</td>
           
-          <td class="old-val">43.64891, -79.36278</td>
-          <td class="arrow-val">↓ 10.3m</td>
-          <td class="new-val">43.64882, -79.36275</td>
+          <td class="old-val">43.74642, -79.23494</td>
+          <td class="arrow-val">← 10.2m</td>
+          <td class="new-val">43.74639, -79.23506</td>
           
         </tr>
         
-        <tr><td>56A Cedar Brae Blvd</td>
+        <tr><td>48 Hahn Pl</td>
           
-          <td class="old-val">43.74711, -79.23523</td>
-          <td class="arrow-val">← 20.4m</td>
-          <td class="new-val">43.74705, -79.23547</td>
+          <td class="old-val">43.64898, -79.36324</td>
+          <td class="arrow-val">↑ 11.2m</td>
+          <td class="new-val">43.64908, -79.36323</td>
+          
+        </tr>
+        
+        <tr><td>60A Cedar Brae Blvd</td>
+          
+          <td class="old-val">43.74750, -79.23544</td>
+          <td class="arrow-val">← 14.9m</td>
+          <td class="new-val">43.74747, -79.23562</td>
+          
+        </tr>
+        
+        <tr><td>17 Hahn Pl</td>
+          
+          <td class="old-val">43.64907, -79.36283</td>
+          <td class="arrow-val">↓ 2.4m</td>
+          <td class="new-val">43.64905, -79.36284</td>
+          
+        </tr>
+        
+        <tr><td>32 Hahn Pl</td>
+          
+          <td class="old-val">43.64885, -79.36316</td>
+          <td class="arrow-val">↑ 6.7m</td>
+          <td class="new-val">43.64891, -79.36315</td>
+          
+        </tr>
+        
+        <tr><td>4 Hahn Pl</td>
+          
+          <td class="old-val">43.64861, -79.36303</td>
+          <td class="arrow-val">↘ 2.0m</td>
+          <td class="new-val">43.64860, -79.36301</td>
+          
+        </tr>
+        
+        <tr><td>44 Hahn Pl</td>
+          
+          <td class="old-val">43.64895, -79.36320</td>
+          <td class="arrow-val">↑ 10.1m</td>
+          <td class="new-val">43.64904, -79.36322</td>
+          
+        </tr>
+        
+        <tr><td>56 Cedar Brae Blvd</td>
+          
+          <td class="old-val">43.74697, -79.23518</td>
+          <td class="arrow-val">← 18.9m</td>
+          <td class="new-val">43.74691, -79.23540</td>
+          
+        </tr>
+        
+        <tr><td>1050 The Queensway</td>
+          
+          <td class="old-val">43.62342, -79.51744</td>
+          <td class="arrow-val">→ 29.1m</td>
+          <td class="new-val">43.62340, -79.51708</td>
+          
+        </tr>
+        
+        <tr><td>18 Hahn Pl</td>
+          
+          <td class="old-val">43.64872, -79.36311</td>
+          <td class="arrow-val">↗ 5.1m</td>
+          <td class="new-val">43.64876, -79.36308</td>
+          
+        </tr>
+        
+        <tr><td>48 Cedar Brae Blvd</td>
+          
+          <td class="old-val">43.74587, -79.23501</td>
+          <td class="arrow-val">↑ 7.8m</td>
+          <td class="new-val">43.74594, -79.23500</td>
+          
+        </tr>
+        
+        <tr><td>48A Cedar Brae Blvd</td>
+          
+          <td class="old-val">43.74587, -79.23471</td>
+          <td class="arrow-val">← 21.9m</td>
+          <td class="new-val">43.74581, -79.23497</td>
+          
+        </tr>
+        
+        <tr><td>2 Hahn Pl</td>
+          
+          <td class="old-val">43.64860, -79.36305</td>
+          <td class="arrow-val">↘ 4.6m</td>
+          <td class="new-val">43.64858, -79.36300</td>
+          
+        </tr>
+        
+        <tr><td>50 Cedar Brae Blvd</td>
+          
+          <td class="old-val">43.74628, -79.23487</td>
+          <td class="arrow-val">← 15.5m</td>
+          <td class="new-val">43.74623, -79.23505</td>
+          
+        </tr>
+        
+        <tr><td>26 Hahn Pl</td>
+          
+          <td class="old-val">43.64879, -79.36314</td>
+          <td class="arrow-val">↑ 6.9m</td>
+          <td class="new-val">43.64885, -79.36312</td>
+          
+        </tr>
+        
+        <tr><td>11 Hahn Pl</td>
+          
+          <td class="old-val">43.64897, -79.36279</td>
+          <td class="arrow-val">↓ 5.6m</td>
+          <td class="new-val">43.64892, -79.36279</td>
+          
+        </tr>
+        
+        <tr><td>10 Hahn Pl</td>
+          
+          <td class="old-val">43.64866, -79.36308</td>
+          <td class="arrow-val">→ 3.4m</td>
+          <td class="new-val">43.64867, -79.36304</td>
+          
+        </tr>
+        
+        <tr><td>1064 The Queensway</td>
+          
+          <td class="old-val">43.62332, -79.51746</td>
+          <td class="arrow-val">← 9.7m</td>
+          <td class="new-val">43.62331, -79.51758</td>
+          
+        </tr>
+        
+        <tr><td>16 Hahn Pl</td>
+          
+          <td class="old-val">43.64871, -79.36310</td>
+          <td class="arrow-val">↗ 2.7m</td>
+          <td class="new-val">43.64872, -79.36307</td>
+          
+        </tr>
+        
+        <tr><td>5 Hahn Pl</td>
+          
+          <td class="old-val">43.64890, -79.36281</td>
+          <td class="arrow-val">↘ 15.8m</td>
+          <td class="new-val">43.64877, -79.36273</td>
+          
+        </tr>
+        
+        <tr><td>1066 The Queensway</td>
+          
+          <td class="old-val">43.62330, -79.51758</td>
+          <td class="arrow-val">← 4.2m</td>
+          <td class="new-val">43.62329, -79.51763</td>
+          
+        </tr>
+        
+        <tr><td>1060 The Queensway</td>
+          
+          <td class="old-val">43.62337, -79.51721</td>
+          <td class="arrow-val">← 18.8m</td>
+          <td class="new-val">43.62334, -79.51744</td>
+          
+        </tr>
+        
+        <tr><td>1000 The Queensway</td>
+          
+          <td class="old-val">43.62383, -79.51556</td>
+          <td class="arrow-val">↙ 16.0m</td>
+          <td class="new-val">43.62371, -79.51567</td>
           
         </tr>
         
@@ -670,43 +538,83 @@
           
         </tr>
         
-        <tr><td>22 Hahn Pl</td>
+        <tr><td>51 Cedar Brae Blvd</td>
           
-          <td class="old-val">43.64876, -79.36312</td>
-          <td class="arrow-val">↑ 4.7m</td>
-          <td class="new-val">43.64880, -79.36310</td>
+          <td class="old-val">43.74733, -79.23469</td>
+          <td class="arrow-val">↓ 5.8m</td>
+          <td class="new-val">43.74728, -79.23467</td>
           
         </tr>
         
-        <tr><td>1064 The Queensway</td>
+        <tr><td>60C Cedar Brae Blvd</td>
           
-          <td class="old-val">43.62332, -79.51746</td>
+          <td class="old-val">43.74763, -79.23551</td>
+          <td class="arrow-val">← 12.3m</td>
+          <td class="new-val">43.74761, -79.23566</td>
+          
+        </tr>
+        
+        <tr><td>34 Hahn Pl</td>
+          
+          <td class="old-val">43.64886, -79.36317</td>
+          <td class="arrow-val">↑ 10.1m</td>
+          <td class="new-val">43.64895, -79.36316</td>
+          
+        </tr>
+        
+        <tr><td>320 Horner Ave</td>
+          
+          <td class="old-val">43.60627, -79.52672</td>
           <td class="arrow-val">← 9.7m</td>
-          <td class="new-val">43.62331, -79.51758</td>
+          <td class="new-val">43.60627, -79.52684</td>
           
         </tr>
         
-        <tr><td>17 Hahn Pl</td>
+        <tr><td>1040 The Queensway</td>
           
-          <td class="old-val">43.64907, -79.36283</td>
-          <td class="arrow-val">↓ 2.4m</td>
-          <td class="new-val">43.64905, -79.36284</td>
-          
-        </tr>
-        
-        <tr><td>52 Cedar Brae Blvd</td>
-          
-          <td class="old-val">43.74642, -79.23494</td>
-          <td class="arrow-val">← 10.2m</td>
-          <td class="new-val">43.74639, -79.23506</td>
+          <td class="old-val">43.62361, -79.51653</td>
+          <td class="arrow-val">↓ 16.6m</td>
+          <td class="new-val">43.62347, -79.51660</td>
           
         </tr>
         
-        <tr><td>1060 The Queensway</td>
+        <tr><td>34 Lake Shore Dr</td>
           
-          <td class="old-val">43.62337, -79.51721</td>
-          <td class="arrow-val">← 18.8m</td>
-          <td class="new-val">43.62334, -79.51744</td>
+          <td class="old-val">43.59873, -79.50000</td>
+          <td class="arrow-val">↗ 3.9m</td>
+          <td class="new-val">43.59875, -79.49996</td>
+          
+        </tr>
+        
+        <tr><td>65 Fifth St</td>
+          
+          <td class="old-val">43.59849, -79.50164</td>
+          <td class="arrow-val">↑ 2.2m</td>
+          <td class="new-val">43.59851, -79.50164</td>
+          
+        </tr>
+        
+        <tr><td>38 Hahn Pl</td>
+          
+          <td class="old-val">43.64890, -79.36318</td>
+          <td class="arrow-val">↑ 8.9m</td>
+          <td class="new-val">43.64898, -79.36318</td>
+          
+        </tr>
+        
+        <tr><td>12 Hahn Pl</td>
+          
+          <td class="old-val">43.64868, -79.36309</td>
+          <td class="arrow-val">→ 3.4m</td>
+          <td class="new-val">43.64869, -79.36305</td>
+          
+        </tr>
+        
+        <tr><td>50A Cedar Brae Blvd</td>
+          
+          <td class="old-val">43.74613, -79.23481</td>
+          <td class="arrow-val">← 18.5m</td>
+          <td class="new-val">43.74608, -79.23503</td>
           
         </tr>
         
@@ -718,19 +626,99 @@
           
         </tr>
         
-        <tr><td>19 Hahn Pl</td>
+        <tr><td>140 Longboat Ave</td>
           
-          <td class="old-val">43.64910, -79.36285</td>
-          <td class="arrow-val">↙ 1.4m</td>
-          <td class="new-val">43.64909, -79.36286</td>
+          <td class="old-val">43.64883, -79.36220</td>
+          <td class="arrow-val">← 0.8m</td>
+          <td class="new-val">43.64883, -79.36221</td>
           
         </tr>
         
-        <tr><td>48 Hahn Pl</td>
+        <tr><td>13 Hahn Pl</td>
           
-          <td class="old-val">43.64898, -79.36324</td>
-          <td class="arrow-val">↑ 11.2m</td>
-          <td class="new-val">43.64908, -79.36323</td>
+          <td class="old-val">43.64900, -79.36281</td>
+          <td class="arrow-val">↓ 4.5m</td>
+          <td class="new-val">43.64896, -79.36281</td>
+          
+        </tr>
+        
+        <tr><td>44A Cedar Brae Blvd</td>
+          
+          <td class="old-val">43.74547, -79.23454</td>
+          <td class="arrow-val">← 10.2m</td>
+          <td class="new-val">43.74544, -79.23466</td>
+          
+        </tr>
+        
+        <tr><td>22 Hahn Pl</td>
+          
+          <td class="old-val">43.64876, -79.36312</td>
+          <td class="arrow-val">↑ 4.7m</td>
+          <td class="new-val">43.64880, -79.36310</td>
+          
+        </tr>
+        
+        <tr><td>40 Hahn Pl</td>
+          
+          <td class="old-val">43.64891, -79.36319</td>
+          <td class="arrow-val">↑ 10.0m</td>
+          <td class="new-val">43.64900, -79.36319</td>
+          
+        </tr>
+        
+        <tr><td>52A Cedar Brae Blvd</td>
+          
+          <td class="old-val">43.74656, -79.23500</td>
+          <td class="arrow-val">← 12.1m</td>
+          <td class="new-val">43.74652, -79.23514</td>
+          
+        </tr>
+        
+        <tr><td>7 Hahn Pl</td>
+          
+          <td class="old-val">43.64891, -79.36278</td>
+          <td class="arrow-val">↓ 10.3m</td>
+          <td class="new-val">43.64882, -79.36275</td>
+          
+        </tr>
+        
+        <tr><td>14 Hahn Pl</td>
+          
+          <td class="old-val">43.64869, -79.36310</td>
+          <td class="arrow-val">↗ 3.9m</td>
+          <td class="new-val">43.64871, -79.36306</td>
+          
+        </tr>
+        
+        <tr><td>36 Hahn Pl</td>
+          
+          <td class="old-val">43.64888, -79.36317</td>
+          <td class="arrow-val">↑ 10.0m</td>
+          <td class="new-val">43.64897, -79.36317</td>
+          
+        </tr>
+        
+        <tr><td>44 Cedar Brae Blvd</td>
+          
+          <td class="old-val">43.74535, -79.23461</td>
+          <td class="arrow-val">↓ 7.1m</td>
+          <td class="new-val">43.74529, -79.23458</td>
+          
+        </tr>
+        
+        <tr><td>46A Cedar Brae Blvd</td>
+          
+          <td class="old-val">43.74572, -79.23465</td>
+          <td class="arrow-val">← 20.9m</td>
+          <td class="new-val">43.74567, -79.23490</td>
+          
+        </tr>
+        
+        <tr><td>90 Longboat Ave</td>
+          
+          <td class="old-val">43.64868, -79.36305</td>
+          <td class="arrow-val">↓ 12.4m</td>
+          <td class="new-val">43.64857, -79.36303</td>
           
         </tr>
         
@@ -742,19 +730,19 @@
           
         </tr>
         
-        <tr><td>1066 The Queensway</td>
+        <tr><td>19 Hahn Pl</td>
           
-          <td class="old-val">43.62330, -79.51758</td>
-          <td class="arrow-val">← 4.2m</td>
-          <td class="new-val">43.62329, -79.51763</td>
+          <td class="old-val">43.64910, -79.36285</td>
+          <td class="arrow-val">↙ 1.4m</td>
+          <td class="new-val">43.64909, -79.36286</td>
           
         </tr>
         
-        <tr><td>15 Fifth St</td>
+        <tr><td>15 Hahn Pl</td>
           
-          <td class="old-val">43.59692, -79.50096</td>
-          <td class="arrow-val">↑ 2.4m</td>
-          <td class="new-val">43.59694, -79.50097</td>
+          <td class="old-val">43.64903, -79.36282</td>
+          <td class="arrow-val">↓ 2.2m</td>
+          <td class="new-val">43.64901, -79.36282</td>
           
         </tr>
         
@@ -766,11 +754,35 @@
           
         </tr>
         
-        <tr><td>44 Hahn Pl</td>
+        <tr><td>61 Fifth St</td>
           
-          <td class="old-val">43.64895, -79.36320</td>
-          <td class="arrow-val">↑ 10.1m</td>
-          <td class="new-val">43.64904, -79.36322</td>
+          <td class="old-val">43.59837, -79.50159</td>
+          <td class="arrow-val">↑ 2.2m</td>
+          <td class="new-val">43.59839, -79.50159</td>
+          
+        </tr>
+        
+        <tr><td>24 Hahn Pl</td>
+          
+          <td class="old-val">43.64877, -79.36313</td>
+          <td class="arrow-val">↗ 6.1m</td>
+          <td class="new-val">43.64882, -79.36310</td>
+          
+        </tr>
+        
+        <tr><td>114 Longboat Ave</td>
+          
+          <td class="old-val">43.64874, -79.36271</td>
+          <td class="arrow-val">↓ 6.7m</td>
+          <td class="new-val">43.64868, -79.36271</td>
+          
+        </tr>
+        
+        <tr><td>144 Longboat Ave</td>
+          
+          <td class="old-val">43.64884, -79.36196</td>
+          <td class="arrow-val">← 14.5m</td>
+          <td class="new-val">43.64884, -79.36214</td>
           
         </tr>
         
@@ -779,7 +791,7 @@
     
   </div>
 
-  <div class="generated-at">Report generated Jun 10, 2026 at 03:42 PM · source licence: Open Government Licence – Toronto</div>
+  <div class="generated-at">Report generated Jun 10, 2026 at 08:24 PM · source licence: Open Government Licence – Toronto</div>
 
   <script>
     function sortTable(tbodyId, col) {

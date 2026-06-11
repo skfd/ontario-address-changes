@@ -107,12 +107,14 @@
     .history .dot { color: var(--text-dim); margin: 0 4px; }
     .history-none { color: var(--text-dim); font-style: italic; font-size: 12.5px; }
     .info-wrap { position: relative; display: inline-flex; vertical-align: middle; }
-    .info-btn { display: inline-flex; align-items: center; justify-content: center;
-      width: 16px; height: 16px; border-radius: 999px; border: 1px solid var(--border-strong);
-      color: var(--text-dim); background: var(--surface); cursor: help; font-size: 11px;
-      font-weight: 700; font-style: italic; font-family: Georgia, 'Times New Roman', serif; line-height: 1; }
+    .info-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+      height: 18px; padding: 0 8px 0 7px; border-radius: 999px; border: none;
+      color: #fff; background: var(--accent); cursor: help; font-size: 11px; font-weight: 600;
+      font-style: normal; font-family: inherit; line-height: 1; white-space: nowrap; }
+    .info-btn .glyph { font-style: italic; font-weight: 700;
+      font-family: Georgia, 'Times New Roman', serif; }
     .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn,
-    .info-wrap:focus .info-btn { color: var(--accent); border-color: var(--accent); }
+    .info-wrap:focus .info-btn { background: var(--accent-hover); }
     .info-pop { display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 20;
       width: 320px; max-width: 80vw; padding: 12px 14px; background: var(--surface);
       border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-8);
@@ -127,6 +129,8 @@
     .info-pop .muted { color: var(--text-dim); font-style: italic; }
   </style>
 </head>
+
+
 
 
 
@@ -153,7 +157,17 @@
     <div class="card"><div class="label">Retired Addresses</div>
       <div class="value red">−0</div>
       <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#c50f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,2.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,10.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#c50f1f"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
-    <div class="card"><div class="label">Updated Addresses</div>
+    <div class="card"><div class="label">Updated Addresses <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (LINEAR_NAME_FULL)</li><li>Full address (ADDRESS_FULL)</li><li>Coordinates (latitude, longitude)</li></ul>
+      <p class="note">…plus all other source attributes, except those ignored below.</p>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>ADDRESS_CLASS</li><li>ADDRESS_CLASS_DESC</li><li>ADDRESS_ID</li><li>ADDRESS_ID_LINK</li><li>ADDRESS_POINT_ID_LINK</li><li>CENTRELINE_ID</li><li>CENTRELINE_MEASURE</li><li>CENTRELINE_OFFSET</li><li>CLASS_FAMILY</li><li>CLASS_FAMILY_DESC</li></ul>
+      
+    </span>
+  </span></div>
       <div class="value yellow">0</div>
       <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
     <div class="card"><div class="label">Location Adjustments</div>
@@ -192,18 +206,16 @@
   <div class="section">
     <h2>Updated Addresses <span class="badge badge-yellow">0</span>
       <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
-        <span class="info-btn" aria-hidden="true">i</span>
-        <span class="info-pop">
-          <strong>Compared for changes</strong>
-          <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (LINEAR_NAME_FULL)</li><li>Full address (ADDRESS_FULL)</li><li>Coordinates (latitude, longitude)</li></ul>
-          <p class="note">…plus all other source attributes, except those ignored below.</p>
-          <strong>Ignored (changes here are not counted)</strong>
-          
-          <ul><li>ADDRESS_CLASS</li><li>ADDRESS_CLASS_DESC</li><li>ADDRESS_ID</li><li>ADDRESS_ID_LINK</li><li>ADDRESS_POINT_ID_LINK</li><li>CENTRELINE_ID</li><li>CENTRELINE_MEASURE</li><li>CENTRELINE_OFFSET</li><li>CLASS_FAMILY</li><li>CLASS_FAMILY_DESC</li></ul>
-          
-        </span>
-      </span>
-    </h2>
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (LINEAR_NAME_FULL)</li><li>Full address (ADDRESS_FULL)</li><li>Coordinates (latitude, longitude)</li></ul>
+      <p class="note">…plus all other source attributes, except those ignored below.</p>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>ADDRESS_CLASS</li><li>ADDRESS_CLASS_DESC</li><li>ADDRESS_ID</li><li>ADDRESS_ID_LINK</li><li>ADDRESS_POINT_ID_LINK</li><li>CENTRELINE_ID</li><li>CENTRELINE_MEASURE</li><li>CENTRELINE_OFFSET</li><li>CLASS_FAMILY</li><li>CLASS_FAMILY_DESC</li></ul>
+      
+    </span>
+  </span>
     <p class="empty">No addresses updated.</p>
   </div>
 
@@ -214,11 +226,179 @@
       <thead><tr><th>Address</th><th>Before</th><th></th><th>After</th></tr></thead>
       <tbody>
         
-        <tr><td>35 Scarboro Beach Blvd</td>
+        <tr><td>32 Wellesley St E</td>
           
-          <td class="old-val">43.66953, -79.29246</td>
-          <td class="arrow-val">↓ 5.6m</td>
-          <td class="new-val">43.66948, -79.29247</td>
+          <td class="old-val">43.66552, -79.38296</td>
+          <td class="arrow-val">↓ 10.5m</td>
+          <td class="new-val">43.66543, -79.38300</td>
+          
+        </tr>
+        
+        <tr><td>34 Henry Lane Ter</td>
+          
+          <td class="old-val">43.64735, -79.36975</td>
+          <td class="arrow-val">↙ 2.7m</td>
+          <td class="new-val">43.64734, -79.36978</td>
+          
+        </tr>
+        
+        <tr><td>24 George St S</td>
+          
+          <td class="old-val">43.64752, -79.36949</td>
+          <td class="arrow-val">↑ 9.1m</td>
+          <td class="new-val">43.64760, -79.36951</td>
+          
+        </tr>
+        
+        <tr><td>18 George St S</td>
+          
+          <td class="old-val">43.64743, -79.36945</td>
+          <td class="arrow-val">↑ 6.7m</td>
+          <td class="new-val">43.64749, -79.36946</td>
+          
+        </tr>
+        
+        <tr><td>2 Henry Lane Ter</td>
+          
+          <td class="old-val">43.64719, -79.36935</td>
+          <td class="arrow-val">↑ 51.8m</td>
+          <td class="new-val">43.64763, -79.36956</td>
+          
+        </tr>
+        
+        <tr><td>34 Wellesley St E</td>
+          
+          <td class="old-val">43.66554, -79.38290</td>
+          <td class="arrow-val">↓ 11.4m</td>
+          <td class="new-val">43.66544, -79.38293</td>
+          
+        </tr>
+        
+        <tr><td>42 Henry Lane Ter</td>
+          
+          <td class="old-val">43.64747, -79.36980</td>
+          <td class="arrow-val">↓ 30.7m</td>
+          <td class="new-val">43.64720, -79.36972</td>
+          
+        </tr>
+        
+        <tr><td>22 George St S</td>
+          
+          <td class="old-val">43.64749, -79.36948</td>
+          <td class="arrow-val">↑ 7.8m</td>
+          <td class="new-val">43.64756, -79.36949</td>
+          
+        </tr>
+        
+        <tr><td>46 Henry Lane Ter</td>
+          
+          <td class="old-val">43.64754, -79.36982</td>
+          <td class="arrow-val">↓ 48.1m</td>
+          <td class="new-val">43.64712, -79.36968</td>
+          
+        </tr>
+        
+        <tr><td>31 Scarboro Beach Blvd</td>
+          
+          <td class="old-val">43.66940, -79.29242</td>
+          <td class="arrow-val">↓ 4.5m</td>
+          <td class="new-val">43.66936, -79.29241</td>
+          
+        </tr>
+        
+        <tr><td>20 Henry Lane Ter</td>
+          
+          <td class="old-val">43.64713, -79.36966</td>
+          <td class="arrow-val">↑ 50.6m</td>
+          <td class="new-val">43.64757, -79.36982</td>
+          
+        </tr>
+        
+        <tr><td>32 Henry Lane Ter</td>
+          
+          <td class="old-val">43.64730, -79.36974</td>
+          <td class="arrow-val">↖ 12.1m</td>
+          <td class="new-val">43.64740, -79.36980</td>
+          
+        </tr>
+        
+        <tr><td>20 George St S</td>
+          
+          <td class="old-val">43.64746, -79.36947</td>
+          <td class="arrow-val">↑ 6.7m</td>
+          <td class="new-val">43.64752, -79.36947</td>
+          
+        </tr>
+        
+        <tr><td>30 Henry Lane Ter</td>
+          
+          <td class="old-val">43.64727, -79.36972</td>
+          <td class="arrow-val">↖ 20.6m</td>
+          <td class="new-val">43.64744, -79.36982</td>
+          
+        </tr>
+        
+        <tr><td>26 George St S</td>
+          
+          <td class="old-val">43.64756, -79.36951</td>
+          <td class="arrow-val">↑ 7.8m</td>
+          <td class="new-val">43.64763, -79.36952</td>
+          
+        </tr>
+        
+        <tr><td>26 Henry Lane Ter</td>
+          
+          <td class="old-val">43.64721, -79.36970</td>
+          <td class="arrow-val">↑ 34.2m</td>
+          <td class="new-val">43.64750, -79.36984</td>
+          
+        </tr>
+        
+        <tr><td>24 Henry Lane Ter</td>
+          
+          <td class="old-val">43.64718, -79.36969</td>
+          <td class="arrow-val">↑ 41.3m</td>
+          <td class="new-val">43.64753, -79.36986</td>
+          
+        </tr>
+        
+        <tr><td>34 Glen Manor Dr</td>
+          
+          <td class="old-val">43.66945, -79.29205</td>
+          <td class="arrow-val">→ 8.9m</td>
+          <td class="new-val">43.66945, -79.29194</td>
+          
+        </tr>
+        
+        <tr><td>28 Henry Lane Ter</td>
+          
+          <td class="old-val">43.64724, -79.36971</td>
+          <td class="arrow-val">↑ 27.4m</td>
+          <td class="new-val">43.64747, -79.36983</td>
+          
+        </tr>
+        
+        <tr><td>52 Henry Lane Ter</td>
+          
+          <td class="old-val">43.64763, -79.36955</td>
+          <td class="arrow-val">↓ 50.9m</td>
+          <td class="new-val">43.64719, -79.36938</td>
+          
+        </tr>
+        
+        <tr><td>33 Scarboro Beach Blvd</td>
+          
+          <td class="old-val">43.66945, -79.29231</td>
+          <td class="arrow-val">← 11.0m</td>
+          <td class="new-val">43.66942, -79.29244</td>
+          
+        </tr>
+        
+        <tr><td>32A Henry Lane Ter</td>
+          
+          <td class="old-val">43.64733, -79.36975</td>
+          <td class="arrow-val">↖ 5.5m</td>
+          <td class="new-val">43.64737, -79.36979</td>
           
         </tr>
         
@@ -230,19 +410,19 @@
           
         </tr>
         
-        <tr><td>48 Henry Lane Ter</td>
+        <tr><td>35 Scarboro Beach Blvd</td>
           
-          <td class="old-val">43.64756, -79.36983</td>
-          <td class="arrow-val">↓ 51.3m</td>
-          <td class="new-val">43.64712, -79.36964</td>
+          <td class="old-val">43.66953, -79.29246</td>
+          <td class="arrow-val">↓ 5.6m</td>
+          <td class="new-val">43.66948, -79.29247</td>
           
         </tr>
         
-        <tr><td>133 Wilton St</td>
+        <tr><td>475 Spadina Rd</td>
           
-          <td class="old-val">43.64810, -79.36897</td>
-          <td class="arrow-val">→ 8.4m</td>
-          <td class="new-val">43.64808, -79.36887</td>
+          <td class="old-val">43.69089, -79.41323</td>
+          <td class="arrow-val">↓ 4.5m</td>
+          <td class="new-val">43.69085, -79.41323</td>
           
         </tr>
         
@@ -262,147 +442,11 @@
           
         </tr>
         
-        <tr><td>26 George St S</td>
+        <tr><td>48 Henry Lane Ter</td>
           
-          <td class="old-val">43.64756, -79.36951</td>
-          <td class="arrow-val">↑ 7.8m</td>
-          <td class="new-val">43.64763, -79.36952</td>
-          
-        </tr>
-        
-        <tr><td>44 Henry Lane Ter</td>
-          
-          <td class="old-val">43.64750, -79.36981</td>
-          <td class="arrow-val">↓ 38.9m</td>
-          <td class="new-val">43.64716, -79.36970</td>
-          
-        </tr>
-        
-        <tr><td>30 Henry Lane Ter</td>
-          
-          <td class="old-val">43.64727, -79.36972</td>
-          <td class="arrow-val">↖ 20.6m</td>
-          <td class="new-val">43.64744, -79.36982</td>
-          
-        </tr>
-        
-        <tr><td>28 Wellesley St E</td>
-          
-          <td class="old-val">43.66551, -79.38302</td>
-          <td class="arrow-val">↙ 11.1m</td>
-          <td class="new-val">43.66542, -79.38308</td>
-          
-        </tr>
-        
-        <tr><td>22 George St S</td>
-          
-          <td class="old-val">43.64749, -79.36948</td>
-          <td class="arrow-val">↑ 7.8m</td>
-          <td class="new-val">43.64756, -79.36949</td>
-          
-        </tr>
-        
-        <tr><td>26 Henry Lane Ter</td>
-          
-          <td class="old-val">43.64721, -79.36970</td>
-          <td class="arrow-val">↑ 34.2m</td>
-          <td class="new-val">43.64750, -79.36984</td>
-          
-        </tr>
-        
-        <tr><td>20 George St S</td>
-          
-          <td class="old-val">43.64746, -79.36947</td>
-          <td class="arrow-val">↑ 6.7m</td>
-          <td class="new-val">43.64752, -79.36947</td>
-          
-        </tr>
-        
-        <tr><td>32A Henry Lane Ter</td>
-          
-          <td class="old-val">43.64733, -79.36975</td>
-          <td class="arrow-val">↖ 5.5m</td>
-          <td class="new-val">43.64737, -79.36979</td>
-          
-        </tr>
-        
-        <tr><td>34 Henry Lane Ter</td>
-          
-          <td class="old-val">43.64735, -79.36975</td>
-          <td class="arrow-val">↙ 2.7m</td>
-          <td class="new-val">43.64734, -79.36978</td>
-          
-        </tr>
-        
-        <tr><td>34 Glen Manor Dr</td>
-          
-          <td class="old-val">43.66945, -79.29205</td>
-          <td class="arrow-val">→ 8.9m</td>
-          <td class="new-val">43.66945, -79.29194</td>
-          
-        </tr>
-        
-        <tr><td>2 Henry Lane Ter</td>
-          
-          <td class="old-val">43.64719, -79.36935</td>
-          <td class="arrow-val">↑ 51.8m</td>
-          <td class="new-val">43.64763, -79.36956</td>
-          
-        </tr>
-        
-        <tr><td>42 Henry Lane Ter</td>
-          
-          <td class="old-val">43.64747, -79.36980</td>
-          <td class="arrow-val">↓ 30.7m</td>
-          <td class="new-val">43.64720, -79.36972</td>
-          
-        </tr>
-        
-        <tr><td>24 George St S</td>
-          
-          <td class="old-val">43.64752, -79.36949</td>
-          <td class="arrow-val">↑ 9.1m</td>
-          <td class="new-val">43.64760, -79.36951</td>
-          
-        </tr>
-        
-        <tr><td>20 Henry Lane Ter</td>
-          
-          <td class="old-val">43.64713, -79.36966</td>
-          <td class="arrow-val">↑ 50.6m</td>
-          <td class="new-val">43.64757, -79.36982</td>
-          
-        </tr>
-        
-        <tr><td>32 Wellesley St E</td>
-          
-          <td class="old-val">43.66552, -79.38296</td>
-          <td class="arrow-val">↓ 10.5m</td>
-          <td class="new-val">43.66543, -79.38300</td>
-          
-        </tr>
-        
-        <tr><td>24 Henry Lane Ter</td>
-          
-          <td class="old-val">43.64718, -79.36969</td>
-          <td class="arrow-val">↑ 41.3m</td>
-          <td class="new-val">43.64753, -79.36986</td>
-          
-        </tr>
-        
-        <tr><td>46 Henry Lane Ter</td>
-          
-          <td class="old-val">43.64754, -79.36982</td>
-          <td class="arrow-val">↓ 48.1m</td>
-          <td class="new-val">43.64712, -79.36968</td>
-          
-        </tr>
-        
-        <tr><td>475 Spadina Rd</td>
-          
-          <td class="old-val">43.69089, -79.41323</td>
-          <td class="arrow-val">↓ 4.5m</td>
-          <td class="new-val">43.69085, -79.41323</td>
+          <td class="old-val">43.64756, -79.36983</td>
+          <td class="arrow-val">↓ 51.3m</td>
+          <td class="new-val">43.64712, -79.36964</td>
           
         </tr>
         
@@ -411,46 +455,6 @@
           <td class="old-val">43.66959, -79.29234</td>
           <td class="arrow-val">↙ 15.2m</td>
           <td class="new-val">43.66953, -79.29251</td>
-          
-        </tr>
-        
-        <tr><td>31 Scarboro Beach Blvd</td>
-          
-          <td class="old-val">43.66940, -79.29242</td>
-          <td class="arrow-val">↓ 4.5m</td>
-          <td class="new-val">43.66936, -79.29241</td>
-          
-        </tr>
-        
-        <tr><td>34 Wellesley St E</td>
-          
-          <td class="old-val">43.66554, -79.38290</td>
-          <td class="arrow-val">↓ 11.4m</td>
-          <td class="new-val">43.66544, -79.38293</td>
-          
-        </tr>
-        
-        <tr><td>28 Henry Lane Ter</td>
-          
-          <td class="old-val">43.64724, -79.36971</td>
-          <td class="arrow-val">↑ 27.4m</td>
-          <td class="new-val">43.64747, -79.36983</td>
-          
-        </tr>
-        
-        <tr><td>18 George St S</td>
-          
-          <td class="old-val">43.64743, -79.36945</td>
-          <td class="arrow-val">↑ 6.7m</td>
-          <td class="new-val">43.64749, -79.36946</td>
-          
-        </tr>
-        
-        <tr><td>33 Scarboro Beach Blvd</td>
-          
-          <td class="old-val">43.66945, -79.29231</td>
-          <td class="arrow-val">← 11.0m</td>
-          <td class="new-val">43.66942, -79.29244</td>
           
         </tr>
         
@@ -470,19 +474,27 @@
           
         </tr>
         
-        <tr><td>32 Henry Lane Ter</td>
+        <tr><td>28 Wellesley St E</td>
           
-          <td class="old-val">43.64730, -79.36974</td>
-          <td class="arrow-val">↖ 12.1m</td>
-          <td class="new-val">43.64740, -79.36980</td>
+          <td class="old-val">43.66551, -79.38302</td>
+          <td class="arrow-val">↙ 11.1m</td>
+          <td class="new-val">43.66542, -79.38308</td>
           
         </tr>
         
-        <tr><td>52 Henry Lane Ter</td>
+        <tr><td>44 Henry Lane Ter</td>
           
-          <td class="old-val">43.64763, -79.36955</td>
-          <td class="arrow-val">↓ 50.9m</td>
-          <td class="new-val">43.64719, -79.36938</td>
+          <td class="old-val">43.64750, -79.36981</td>
+          <td class="arrow-val">↓ 38.9m</td>
+          <td class="new-val">43.64716, -79.36970</td>
+          
+        </tr>
+        
+        <tr><td>133 Wilton St</td>
+          
+          <td class="old-val">43.64810, -79.36897</td>
+          <td class="arrow-val">→ 8.4m</td>
+          <td class="new-val">43.64808, -79.36887</td>
           
         </tr>
         
@@ -491,7 +503,7 @@
     
   </div>
 
-  <div class="generated-at">Report generated Jun 10, 2026 at 03:42 PM · source licence: Open Government Licence – Toronto</div>
+  <div class="generated-at">Report generated Jun 10, 2026 at 08:24 PM · source licence: Open Government Licence – Toronto</div>
 
   <script>
     function sortTable(tbodyId, col) {
