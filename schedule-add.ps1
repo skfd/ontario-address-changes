@@ -1,49 +1,33 @@
-# Registers one scheduled task per dataset in datasets\*.toml.
-# Task names are prefixed with the terminal user (kk-<slug>).
-# Re-run after adding a new city; -Force replaces existing tasks.
+# Registers ONE scheduled task that runs daily-update.ps1 (parallel update of all
+# datasets, then commit + push docs). New cities in datasets\*.toml are picked up
+# automatically; no re-registration needed.
 
 $projectDir = $PSScriptRoot
-$prefix     = "kk"
-$baseTime   = Get-Date "12:00"
-$staggerMin = 5      # minutes between successive cities
+$taskName   = "kk-ontario-update"
+$runAt      = Get-Date "12:00"
 $logDir     = "$projectDir\logs"
+$logFile    = "$logDir\update.log"
 
 if (-not (Test-Path $logDir)) {
     New-Item -ItemType Directory -Path $logDir | Out-Null
 }
 
-$tomls = Get-ChildItem -Path "$projectDir\datasets\*.toml" | Sort-Object Name
-if (-not $tomls) {
-    Write-Host "No datasets found in $projectDir\datasets."
-    return
-}
+$action = New-ScheduledTaskAction `
+    -Execute "cmd.exe" `
+    -Argument "/c powershell -NoProfile -ExecutionPolicy Bypass -File `"$projectDir\daily-update.ps1`" >> `"$logFile`" 2>&1"
 
-$i = 0
-foreach ($toml in $tomls) {
-    $slug     = $toml.BaseName
-    $taskName = "$prefix-$slug"
-    $logFile  = "$logDir\$slug.log"
-    $runAt    = $baseTime.AddMinutes($i * $staggerMin)
+$trigger = New-ScheduledTaskTrigger -Daily -At $runAt
 
-    $action = New-ScheduledTaskAction `
-        -Execute "cmd.exe" `
-        -Argument "/c cd /d `"$projectDir`" && python run.py update --city $slug >> `"$logFile`" 2>&1"
+# run.py exits non-zero if any city failed, so RestartCount retries the whole run;
+# already-updated cities short-circuit (cached download + already-imported), making
+# a restart effectively a per-city retry.
+$settings = New-ScheduledTaskSettingsSet `
+    -ExecutionTimeLimit (New-TimeSpan -Hours 2) `
+    -StartWhenAvailable `
+    -RestartCount 3 `
+    -RestartInterval (New-TimeSpan -Minutes 30)
 
-    $trigger = New-ScheduledTaskTrigger -Daily -At $runAt
+Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Settings $settings -Force | Out-Null
 
-    # RestartCount/Interval retry only fires because run.py now exits non-zero on a failed city.
-    $settings = New-ScheduledTaskSettingsSet `
-        -ExecutionTimeLimit (New-TimeSpan -Hours 2) `
-        -StartWhenAvailable `
-        -RestartCount 3 `
-        -RestartInterval (New-TimeSpan -Minutes 30)
-
-    Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Settings $settings -Force | Out-Null
-
-    Write-Host ("Registered {0,-24} daily {1:HH:mm}  log: {2}" -f $taskName, $runAt, $logFile)
-    $i++
-}
-
-Write-Host ""
-Write-Host "$($tomls.Count) task(s) registered, staggered $staggerMin min apart starting $($baseTime.ToString('HH:mm'))."
-Write-Host "Retry: up to 3 restarts, 30 min apart, on per-city failure."
+Write-Host ("Registered {0}: daily {1:HH:mm} via daily-update.ps1, log: {2}" -f $taskName, $runAt, $logFile)
+Write-Host "Retry: up to 3 whole-run restarts, 30 min apart, when any city fails."

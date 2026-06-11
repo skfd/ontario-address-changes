@@ -59,10 +59,8 @@ def cmd_report(args):
     report.generate_all(_resolve(args))
 
 
-def cmd_update(args):
-    """Fetch -> import -> diff -> report, with per-city failure isolation."""
-    from src import db, diff, fetch, report
-    datasets = _resolve(args)
+def _update_serial(datasets, args):
+    from src import db, diff, fetch
     done = []
     failed = []
     for ds in datasets:
@@ -75,7 +73,56 @@ def cmd_update(args):
         except Exception as e:
             print(f"  ERROR ({ds.slug}): {e}")
             failed.append(ds.slug)
-    if done:
+    return done, failed
+
+
+def _update_parallel(datasets, args):
+    """Run each city as a worker subprocess (update --city X --no-report),
+    printing each city's output as a block when it finishes."""
+    import subprocess
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+
+    # Largest DBs first so the slow cities (ottawa, brampton) start immediately.
+    def db_size(ds):
+        return os.path.getsize(ds.db_path) if os.path.exists(ds.db_path) else 0
+
+    queue = sorted(datasets, key=db_size, reverse=True)
+    env = {**os.environ, "PYTHONIOENCODING": "utf-8"}
+
+    def worker(ds):
+        cmd = [sys.executable, os.path.abspath(__file__),
+               "update", "--city", ds.slug, "--no-report"]
+        if args.force:
+            cmd.append("--force")
+        return ds, subprocess.run(cmd, capture_output=True, text=True,
+                                  encoding="utf-8", errors="replace", env=env)
+
+    done = []
+    failed = []
+    with ThreadPoolExecutor(max_workers=args.jobs) as pool:
+        for future in as_completed([pool.submit(worker, ds) for ds in queue]):
+            ds, proc = future.result()
+            print(proc.stdout, end="")
+            if proc.returncode == 0:
+                done.append(ds)
+            else:
+                if proc.stderr:
+                    print(proc.stderr, end="")
+                failed.append(ds.slug)
+    done.sort(key=lambda ds: ds.slug)
+    failed.sort()
+    return done, failed
+
+
+def cmd_update(args):
+    """Fetch -> import -> diff -> report, with per-city failure isolation."""
+    datasets = _resolve(args)
+    if args.jobs > 1 and len(datasets) > 1:
+        done, failed = _update_parallel(datasets, args)
+    else:
+        done, failed = _update_serial(datasets, args)
+    if done and not args.no_report:
+        from src import report
         report.generate_all(done)
     if failed:
         sys.exit(f"update failed for: {', '.join(failed)}")
@@ -99,6 +146,10 @@ def main():
     add_target(sub.add_parser("diff", )); sub.choices["diff"].set_defaults(func=cmd_diff)
     add_target(sub.add_parser("report"), with_force=False); sub.choices["report"].set_defaults(func=cmd_report)
     add_target(sub.add_parser("update")); sub.choices["update"].set_defaults(func=cmd_update)
+    sub.choices["update"].add_argument("--jobs", type=int, default=1,
+                                       help="parallel city workers (subprocesses)")
+    sub.choices["update"].add_argument("--no-report", action="store_true",
+                                       help="skip site generation after updating")
 
     args = p.parse_args()
     args.func(args)
