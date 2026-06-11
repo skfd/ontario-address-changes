@@ -1,18 +1,22 @@
 slug = "renfrew"
-provider = "Renfrew"
-# NOTE: this is an OpenAddresses cache export, not a live City of Renfrew endpoint.
-# Update cadence is OpenAddresses', not the municipality's.
-data_url = "https://data.openaddresses.io/cache/uploads/trescube/cc2c02/ca-on-renfrew.geojson.zip"
-access = "static"
+provider = "County of Renfrew"
+# Upgraded 2026-06-11 from the OpenAddresses parcel-polygon cache to the County's OFFICIAL live
+# NENA Site/Structure Address Point layer (owner aschultz_CofR). Region-wide (member munis incl.
+# Arnprior, Pembroke, Petawawa, Renfrew, Whitewater Region in the A3 field). This re-baselined the
+# dataset (different source/identity than the old static cache).
+data_url = "https://services2.arcgis.com/vIya1nhxTJuEecY0/arcgis/rest/services/SiteStructureAddressPoint/FeatureServer/0"
+access = "arcgis"
 format = "geojson"
 license_name = "Not identified"
-osm_compatible = "unknown"
+osm_compatible = "unknown-review"
 
-# Data is parcel polygons (Renfrew County) with address attributes; tracker uses ring centroids.
 [identity]
-key_field = "PROPNUM"          # stable parcel number (OBJECTID is sequential, untrusted)
-synth_fields = ["number", "street"]   # fallback when PROPNUM is null
+# No integer stable id (OBJECTID sequential; GlobalID/NGUID are GUIDs that can regenerate). Synthesize.
+key_field = ""                                 # synthesize from address + rounded lon/lat
+synth_fields = ["number", "street", "unit"]
 
-[fields]
-number = "Street_Num"
-street = "Street_Name"
+[fields]                                        # source property -> canonical name
+number = "Add_Number"
+street = "St_Name"                              # St_PosTyp/St_PosDir/A3 (municipality)/STATUS tracked via the props blob
+unit   = "Unit"
+full   = "Full_Address"
