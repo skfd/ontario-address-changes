@@ -1,0 +1,17 @@
+slug = "kawartha-lakes"
+provider = "City of Kawartha Lakes"
+data_url = "https://services3.arcgis.com/RQBDTPtsbT0jebs7/arcgis/rest/services/CKL_Address_Point_View/FeatureServer/0"
+access = "arcgis"
+format = "geojson"
+license_name = "Not identified"
+osm_compatible = "unknown-review"
+
+[identity]
+key_field = "AddressID"                        # persistent address id, 100% populated, has gaps (not a contiguous OBJECTID-style row sequence)
+synth_fields = ["number", "street", "unit"]    # fallback only
+
+[fields]                                        # source property -> canonical name
+number = "StreetNumber"
+street = "StreetNameFull"                        # StreetType/Direction components tracked via the props blob
+unit   = "UnitNumber"
+full   = "FullAddress"
