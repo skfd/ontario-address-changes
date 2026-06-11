@@ -1,0 +1,19 @@
+slug = "huron"
+provider = "County of Huron"
+data_url = "https://services1.arcgis.com/Nl1VlZHemqspPW1n/arcgis/rest/services/Municipal_911_Address/FeatureServer/0"
+access = "arcgis"
+format = "geojson"
+license_name = "Open Government Licence - The County of Huron"
+osm_compatible = "yellow-ogl"
+
+[identity]
+# HuronID is 100% populated but contiguous from 1 (looks like a reassigned row sequence,
+# not a stable id), so synthesize instead. Unit field is published here.
+key_field = ""                                 # synthesize from address + rounded lon/lat
+synth_fields = ["number", "street", "unit"]
+
+[fields]                                        # source property -> canonical name
+number = "StreetNumber"
+street = "StreetName"                           # St_* component fields tracked via the props blob
+unit   = "Unit"
+full   = "FullAddress"
