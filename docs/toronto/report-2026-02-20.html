@@ -13,6 +13,7 @@
       --accent-hover: #106ebe; --accent-bg: #eff6fc; --green: #107c10;
       --green-bg: #f1faf1; --green-tint: #9fd89f; --red: #c50f1f; --red-bg: #fdf3f4;
       --red-tint: #eeacb2; --yellow: #eaa300; --yellow-bg: #fefbf4; --yellow-tint: #f9e2ae;
+      --purple: #881798; --purple-bg: #f9f3fb;
       --shadow-4: 0 2px 4px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
       --shadow-8: 0 4px 8px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
       --card-bg: #ffffff; --card-hover: #f5f5f5; color-scheme: light;
@@ -25,6 +26,7 @@
         --accent-hover: #3aa0f3; --accent-bg: #002848; --green: #54b054;
         --green-bg: #052505; --green-tint: #107c10; --red: #dc626d; --red-bg: #3b0509;
         --red-tint: #c50f1f; --yellow: #f2c661; --yellow-bg: #463100; --yellow-tint: #eaa300;
+        --purple: #d29ddb; --purple-bg: #3a1040;
         --shadow-4: 0 2px 4px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
         --shadow-8: 0 4px 8px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
         --card-bg: #333333; --card-hover: #3d3d3d; color-scheme: dark;
@@ -53,6 +55,7 @@
     .card .value { font-size: 28px; font-weight: 600; margin-top: 4px; }
     .card .value.green { color: var(--green); } .card .value.red { color: var(--red); }
     .card .value.yellow { color: var(--yellow); } .card .value.accent { color: var(--accent); }
+    .card .value.purple { color: var(--purple); }
     .sparkline { display: block; margin-top: 6px; overflow: visible; opacity: 0.9; }
     .sparkline-label { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
     .section { margin-bottom: 24px; }
@@ -62,6 +65,8 @@
     .badge-green { background: var(--green-bg); color: var(--green); }
     .badge-red { background: var(--red-bg); color: var(--red); }
     .badge-yellow { background: var(--yellow-bg); color: var(--yellow); }
+    .badge-accent { background: var(--accent-bg); color: var(--accent); }
+    .badge-purple { background: var(--purple-bg); color: var(--purple); }
     table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface);
       border-radius: 8px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
     thead { background: var(--surface2); }
@@ -94,6 +99,13 @@
       color: var(--accent); padding: 5px 12px; border-radius: 4px; cursor: pointer;
       font-size: 12px; font-family: inherit; margin-bottom: 12px; transition: background 0.1s; }
     .collapsible-toggle:hover { background: var(--surface2); }
+    details.rename-group { background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; margin-bottom: 8px; box-shadow: var(--shadow-4); }
+    details.rename-group summary { padding: 10px 14px; cursor: pointer; font-size: 13px; }
+    details.rename-group[open] summary { border-bottom: 1px solid var(--border); }
+    details.rename-group table { border: none; box-shadow: none; border-radius: 0; }
+    details.rename-group .truncated { padding: 0 14px 10px; margin-top: 0; }
+    .rename-count { color: var(--text-dim); font-size: 12px; margin-left: 6px; }
     .no-changes-banner { background: var(--green-bg); border: 1px solid var(--green-tint);
       color: var(--green); padding: 16px; border-radius: 8px; margin-bottom: 24px;
       text-align: center; font-weight: 600; font-size: 14px; }
@@ -136,6 +148,10 @@
 
 
 
+
+
+
+
 <body>
 
   <a class="back-link" href="index.html">← Back to City of Toronto reports</a>
@@ -161,17 +177,23 @@
     <span class="info-btn"><span class="glyph">i</span> Fields</span>
     <span class="info-pop">
       <strong>Compared for changes</strong>
-      <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (LINEAR_NAME_FULL)</li><li>Full address (ADDRESS_FULL)</li><li>Coordinates (latitude, longitude)</li><li>ADDRESS_POINT_ID</li><li>ADDRESS_STATUS</li><li>ADDRESS_STRING_ID</li><li>CENTRELINE_SIDE</li><li>GENERAL_USE</li><li>GENERAL_USE_CODE</li><li>HI_NUM</li><li>HI_NUM_SUF</li><li>LINEAR_NAME</li><li>LINEAR_NAME_DESC</li><li>LINEAR_NAME_DIR</li><li>LINEAR_NAME_ID</li><li>LINEAR_NAME_TYPE</li><li>LO_NUM</li><li>LO_NUM_SUF</li><li>MAINT_STAGE</li><li>MUNICIPALITY</li><li>MUNICIPALITY_NAME</li><li>PLACE_NAME</li><li>PLACE_NAME_ALL</li><li>WARD</li><li>WARD_NAME</li></ul>
+      <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (LINEAR_NAME_FULL)</li><li>Full address (ADDRESS_FULL)</li><li>Coordinates (latitude, longitude)</li><li>ADDRESS_POINT_ID</li><li>ADDRESS_STATUS</li><li>GENERAL_USE</li><li>GENERAL_USE_CODE</li><li>LINEAR_NAME_DESC</li><li>MAINT_STAGE</li><li>MUNICIPALITY</li><li>MUNICIPALITY_NAME</li><li>PLACE_NAME</li><li>PLACE_NAME_ALL</li><li>WARD</li><li>WARD_NAME</li></ul>
       <strong>Ignored (changes here are not counted)</strong>
-      <ul><li>ADDRESS_CLASS</li><li>ADDRESS_CLASS_DESC</li><li>ADDRESS_ID</li><li>ADDRESS_ID_LINK</li><li>ADDRESS_POINT_ID_LINK</li><li>CENTRELINE_ID</li><li>CENTRELINE_MEASURE</li><li>CENTRELINE_OFFSET</li><li>CLASS_FAMILY</li><li>CLASS_FAMILY_DESC</li></ul>
+      <ul><li>ADDRESS_CLASS</li><li>ADDRESS_CLASS_DESC</li><li>ADDRESS_ID</li><li>ADDRESS_ID_LINK</li><li>ADDRESS_POINT_ID_LINK</li><li>ADDRESS_STRING_ID</li><li>CENTRELINE_ID</li><li>CENTRELINE_MEASURE</li><li>CENTRELINE_OFFSET</li><li>CENTRELINE_SIDE</li><li>CLASS_FAMILY</li><li>CLASS_FAMILY_DESC</li><li>HI_NUM</li><li>HI_NUM_SUF</li><li>LINEAR_NAME</li><li>LINEAR_NAME_DIR</li><li>LINEAR_NAME_ID</li><li>LINEAR_NAME_TYPE</li><li>LO_NUM</li><li>LO_NUM_SUF</li></ul>
       
     </span>
   </span></div>
       <div class="value yellow">1</div>
-      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 28.5,2.0 55.0,18.0 81.5,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 28.5,2.0 55.0,8.7 81.5,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Renumbered</div>
+      <div class="value accent">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#0078d4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 28.5,18.0 55.0,2.0 81.5,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#0078d4"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Street Renames</div>
+      <div class="value purple">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#9141ac" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 28.5,18.0 55.0,18.0 81.5,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#9141ac"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
     <div class="card"><div class="label">Location Adjustments</div>
       <div class="value" style="color: var(--text-dim)">175</div>
-      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#808080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 28.5,6.1 55.0,2.0 81.5,17.9 108.0,16.7"/><circle cx="108.0" cy="16.7" r="2" fill="#808080"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#808080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 28.5,2.0 55.0,17.9 81.5,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#808080"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
   </div>
 
   
@@ -296,33 +318,43 @@
     <span class="info-btn"><span class="glyph">i</span> Fields</span>
     <span class="info-pop">
       <strong>Compared for changes</strong>
-      <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (LINEAR_NAME_FULL)</li><li>Full address (ADDRESS_FULL)</li><li>Coordinates (latitude, longitude)</li><li>ADDRESS_POINT_ID</li><li>ADDRESS_STATUS</li><li>ADDRESS_STRING_ID</li><li>CENTRELINE_SIDE</li><li>GENERAL_USE</li><li>GENERAL_USE_CODE</li><li>HI_NUM</li><li>HI_NUM_SUF</li><li>LINEAR_NAME</li><li>LINEAR_NAME_DESC</li><li>LINEAR_NAME_DIR</li><li>LINEAR_NAME_ID</li><li>LINEAR_NAME_TYPE</li><li>LO_NUM</li><li>LO_NUM_SUF</li><li>MAINT_STAGE</li><li>MUNICIPALITY</li><li>MUNICIPALITY_NAME</li><li>PLACE_NAME</li><li>PLACE_NAME_ALL</li><li>WARD</li><li>WARD_NAME</li></ul>
+      <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (LINEAR_NAME_FULL)</li><li>Full address (ADDRESS_FULL)</li><li>Coordinates (latitude, longitude)</li><li>ADDRESS_POINT_ID</li><li>ADDRESS_STATUS</li><li>GENERAL_USE</li><li>GENERAL_USE_CODE</li><li>LINEAR_NAME_DESC</li><li>MAINT_STAGE</li><li>MUNICIPALITY</li><li>MUNICIPALITY_NAME</li><li>PLACE_NAME</li><li>PLACE_NAME_ALL</li><li>WARD</li><li>WARD_NAME</li></ul>
       <strong>Ignored (changes here are not counted)</strong>
-      <ul><li>ADDRESS_CLASS</li><li>ADDRESS_CLASS_DESC</li><li>ADDRESS_ID</li><li>ADDRESS_ID_LINK</li><li>ADDRESS_POINT_ID_LINK</li><li>CENTRELINE_ID</li><li>CENTRELINE_MEASURE</li><li>CENTRELINE_OFFSET</li><li>CLASS_FAMILY</li><li>CLASS_FAMILY_DESC</li></ul>
+      <ul><li>ADDRESS_CLASS</li><li>ADDRESS_CLASS_DESC</li><li>ADDRESS_ID</li><li>ADDRESS_ID_LINK</li><li>ADDRESS_POINT_ID_LINK</li><li>ADDRESS_STRING_ID</li><li>CENTRELINE_ID</li><li>CENTRELINE_MEASURE</li><li>CENTRELINE_OFFSET</li><li>CENTRELINE_SIDE</li><li>CLASS_FAMILY</li><li>CLASS_FAMILY_DESC</li><li>HI_NUM</li><li>HI_NUM_SUF</li><li>LINEAR_NAME</li><li>LINEAR_NAME_DIR</li><li>LINEAR_NAME_ID</li><li>LINEAR_NAME_TYPE</li><li>LO_NUM</li><li>LO_NUM_SUF</li></ul>
       
     </span>
-  </span>
+  </span></h2>
     
     <table>
-      <thead><tr><th>Address</th><th>What Changed</th><th>Before</th><th></th><th>After</th></tr></thead>
+      <thead><tr><th>Address</th><th>What Changed</th><th>Before</th><th></th><th>After</th><th>Map</th></tr></thead>
       <tbody>
         
-        <tr><td rowspan="2">315 Royal York Rd</td>
-          <td class="change-field">PLACE_NAME</td>
-          <td class="old-val">None</td>
-          <td class="arrow-val"></td>
-          <td class="new-val">Mimico GO Station</td></tr>
-        
-        <tr>
-          <td class="change-field">PLACE_NAME_ALL</td>
-          <td class="old-val">None</td>
-          <td class="arrow-val"></td>
-          <td class="new-val">Mimico GO Station</td></tr>
-        
+  <tr><td rowspan="2">315 Royal York Rd</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Mimico GO Station</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.61641&mlon=-79.49777#map=18/43.61641/-79.49777" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Mimico GO Station</td>
+    </tr>
       </tbody>
     </table>
     
     
+  </div>
+
+  <div class="section">
+    <h2>Renumbered Addresses <span class="badge badge-accent">0</span></h2>
+    <p class="empty">No addresses renumbered.</p>
+  </div>
+
+  <div class="section">
+    <h2>Street Renames <span class="badge badge-purple">0</span></h2>
+    <p class="empty">No street renames.</p>
   </div>
 
   <div class="section">
@@ -334,1410 +366,1411 @@
         
         <tr><td>674 Adelaide St W</td>
           
-          <td class="old-val">43.64475, -79.40642</td>
+          <td class="old-val">43.64475, -79.40642<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64475&mlon=-79.40642#map=19/43.64475/-79.40642" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↗ 2.7m</td>
-          <td class="new-val">43.64476, -79.40639</td>
+          <td class="new-val">43.64476, -79.40639<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64476&mlon=-79.40639#map=19/43.64476/-79.40639" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>676 Adelaide St W</td>
           
-          <td class="old-val">43.64478, -79.40641</td>
+          <td class="old-val">43.64478, -79.40641<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64478&mlon=-79.40641#map=19/43.64478/-79.40641" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 6.7m</td>
-          <td class="new-val">43.64472, -79.40640</td>
+          <td class="new-val">43.64472, -79.40640<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64472&mlon=-79.40640#map=19/43.64472/-79.40640" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>678 Adelaide St W</td>
           
-          <td class="old-val">43.64473, -79.40652</td>
+          <td class="old-val">43.64473, -79.40652<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64473&mlon=-79.40652#map=19/43.64473/-79.40652" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↘ 6.6m</td>
-          <td class="new-val">43.64469, -79.40646</td>
+          <td class="new-val">43.64469, -79.40646<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64469&mlon=-79.40646#map=19/43.64469/-79.40646" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>680 Adelaide St W</td>
           
-          <td class="old-val">43.64476, -79.40654</td>
+          <td class="old-val">43.64476, -79.40654<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64476&mlon=-79.40654#map=19/43.64476/-79.40654" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↘ 9.8m</td>
-          <td class="new-val">43.64468, -79.40649</td>
+          <td class="new-val">43.64468, -79.40649<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64468&mlon=-79.40649#map=19/43.64468/-79.40649" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>682 Adelaide St W</td>
           
-          <td class="old-val">43.64476, -79.40656</td>
+          <td class="old-val">43.64476, -79.40656<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64476&mlon=-79.40656#map=19/43.64476/-79.40656" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 8.0m</td>
-          <td class="new-val">43.64469, -79.40654</td>
+          <td class="new-val">43.64469, -79.40654<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64469&mlon=-79.40654#map=19/43.64469/-79.40654" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>683 Adelaide St W</td>
           
-          <td class="old-val">43.64440, -79.40635</td>
+          <td class="old-val">43.64440, -79.40635<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64440&mlon=-79.40635#map=19/43.64440/-79.40635" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">→ 1.6m</td>
-          <td class="new-val">43.64440, -79.40633</td>
+          <td class="new-val">43.64440, -79.40633<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64440&mlon=-79.40633#map=19/43.64440/-79.40633" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>687 Adelaide St W</td>
           
-          <td class="old-val">43.64437, -79.40645</td>
+          <td class="old-val">43.64437, -79.40645<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64437&mlon=-79.40645#map=19/43.64437/-79.40645" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">→ 0.8m</td>
-          <td class="new-val">43.64437, -79.40644</td>
+          <td class="new-val">43.64437, -79.40644<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64437&mlon=-79.40644#map=19/43.64437/-79.40644" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>688 Adelaide St W</td>
           
-          <td class="old-val">43.64469, -79.40670</td>
+          <td class="old-val">43.64469, -79.40670<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64469&mlon=-79.40670#map=19/43.64469/-79.40670" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↘ 4.1m</td>
-          <td class="new-val">43.64466, -79.40667</td>
+          <td class="new-val">43.64466, -79.40667<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64466&mlon=-79.40667#map=19/43.64466/-79.40667" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>692 Adelaide St W</td>
           
-          <td class="old-val">43.64467, -79.40680</td>
+          <td class="old-val">43.64467, -79.40680<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64467&mlon=-79.40680#map=19/43.64467/-79.40680" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↘ 3.3m</td>
-          <td class="new-val">43.64465, -79.40677</td>
+          <td class="new-val">43.64465, -79.40677<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64465&mlon=-79.40677#map=19/43.64465/-79.40677" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>693 Adelaide St W</td>
           
-          <td class="old-val">43.64434, -79.40661</td>
+          <td class="old-val">43.64434, -79.40661<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64434&mlon=-79.40661#map=19/43.64434/-79.40661" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">→ 1.6m</td>
-          <td class="new-val">43.64434, -79.40659</td>
+          <td class="new-val">43.64434, -79.40659<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64434&mlon=-79.40659#map=19/43.64434/-79.40659" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>699 Adelaide St W</td>
           
-          <td class="old-val">43.64431, -79.40679</td>
+          <td class="old-val">43.64431, -79.40679<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64431&mlon=-79.40679#map=19/43.64431/-79.40679" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↗ 2.0m</td>
-          <td class="new-val">43.64432, -79.40677</td>
+          <td class="new-val">43.64432, -79.40677<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64432&mlon=-79.40677#map=19/43.64432/-79.40677" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>700 Adelaide St W</td>
           
-          <td class="old-val">43.64463, -79.40700</td>
+          <td class="old-val">43.64463, -79.40700<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64463&mlon=-79.40700#map=19/43.64463/-79.40700" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↘ 3.3m</td>
-          <td class="new-val">43.64461, -79.40697</td>
+          <td class="new-val">43.64461, -79.40697<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64461&mlon=-79.40697#map=19/43.64461/-79.40697" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>701 Adelaide St W</td>
           
-          <td class="old-val">43.64430, -79.40686</td>
+          <td class="old-val">43.64430, -79.40686<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64430&mlon=-79.40686#map=19/43.64430/-79.40686" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↗ 2.7m</td>
-          <td class="new-val">43.64431, -79.40683</td>
+          <td class="new-val">43.64431, -79.40683<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64431&mlon=-79.40683#map=19/43.64431/-79.40683" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>703 Adelaide St W</td>
           
-          <td class="old-val">43.64429, -79.40692</td>
+          <td class="old-val">43.64429, -79.40692<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64429&mlon=-79.40692#map=19/43.64429/-79.40692" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↗ 2.7m</td>
-          <td class="new-val">43.64430, -79.40689</td>
+          <td class="new-val">43.64430, -79.40689<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64430&mlon=-79.40689#map=19/43.64430/-79.40689" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>707 Adelaide St W</td>
           
-          <td class="old-val">43.64424, -79.40705</td>
+          <td class="old-val">43.64424, -79.40705<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64424&mlon=-79.40705#map=19/43.64424/-79.40705" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 3.4m</td>
-          <td class="new-val">43.64427, -79.40704</td>
+          <td class="new-val">43.64427, -79.40704<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64427&mlon=-79.40704#map=19/43.64427/-79.40704" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>714 Adelaide St W</td>
           
-          <td class="old-val">43.64453, -79.40739</td>
+          <td class="old-val">43.64453, -79.40739<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64453&mlon=-79.40739#map=19/43.64453/-79.40739" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">→ 1.6m</td>
-          <td class="new-val">43.64453, -79.40737</td>
+          <td class="new-val">43.64453, -79.40737<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64453&mlon=-79.40737#map=19/43.64453/-79.40737" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>716 Adelaide St W</td>
           
-          <td class="old-val">43.64452, -79.40744</td>
+          <td class="old-val">43.64452, -79.40744<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64452&mlon=-79.40744#map=19/43.64452/-79.40744" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">→ 1.6m</td>
-          <td class="new-val">43.64452, -79.40742</td>
+          <td class="new-val">43.64452, -79.40742<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64452&mlon=-79.40742#map=19/43.64452/-79.40742" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>718 Adelaide St W</td>
           
-          <td class="old-val">43.64451, -79.40750</td>
+          <td class="old-val">43.64451, -79.40750<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64451&mlon=-79.40750#map=19/43.64451/-79.40750" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">→ 1.6m</td>
-          <td class="new-val">43.64451, -79.40748</td>
+          <td class="new-val">43.64451, -79.40748<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64451&mlon=-79.40748#map=19/43.64451/-79.40748" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>732 Adelaide St W</td>
           
-          <td class="old-val">43.64444, -79.40783</td>
+          <td class="old-val">43.64444, -79.40783<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64444&mlon=-79.40783#map=19/43.64444/-79.40783" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 2.4m</td>
-          <td class="new-val">43.64442, -79.40782</td>
+          <td class="new-val">43.64442, -79.40782<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64442&mlon=-79.40782#map=19/43.64442/-79.40782" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>744 Adelaide St W</td>
           
-          <td class="old-val">43.64439, -79.40812</td>
+          <td class="old-val">43.64439, -79.40812<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64439&mlon=-79.40812#map=19/43.64439/-79.40812" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↙ 2.0m</td>
-          <td class="new-val">43.64438, -79.40814</td>
+          <td class="new-val">43.64438, -79.40814<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64438&mlon=-79.40814#map=19/43.64438/-79.40814" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>15 Atlee Ave</td>
           
-          <td class="old-val">43.71187, -79.25070</td>
+          <td class="old-val">43.71187, -79.25070<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71187&mlon=-79.25070#map=19/43.71187/-79.25070" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">← 7.3m</td>
-          <td class="new-val">43.71186, -79.25079</td>
+          <td class="new-val">43.71186, -79.25079<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71186&mlon=-79.25079#map=19/43.71186/-79.25079" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>19 Atlee Ave</td>
           
-          <td class="old-val">43.71201, -79.25085</td>
+          <td class="old-val">43.71201, -79.25085<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71201&mlon=-79.25085#map=19/43.71201/-79.25085" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 2.4m</td>
-          <td class="new-val">43.71199, -79.25084</td>
+          <td class="new-val">43.71199, -79.25084<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71199&mlon=-79.25084#map=19/43.71199/-79.25084" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>41 Florence Ave</td>
           
-          <td class="old-val">43.75757, -79.41216</td>
+          <td class="old-val">43.75757, -79.41216<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75757&mlon=-79.41216#map=19/43.75757/-79.41216" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">← 4.0m</td>
-          <td class="new-val">43.75757, -79.41221</td>
+          <td class="new-val">43.75757, -79.41221<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75757&mlon=-79.41221#map=19/43.75757/-79.41221" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>121 Heale Ave</td>
           
-          <td class="old-val">43.71595, -79.25116</td>
+          <td class="old-val">43.71595, -79.25116<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71595&mlon=-79.25116#map=19/43.71595/-79.25116" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">← 5.6m</td>
-          <td class="new-val">43.71595, -79.25123</td>
+          <td class="new-val">43.71595, -79.25123<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71595&mlon=-79.25123#map=19/43.71595/-79.25123" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>122 Heale Ave</td>
           
-          <td class="old-val">43.71605, -79.25182</td>
+          <td class="old-val">43.71605, -79.25182<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71605&mlon=-79.25182#map=19/43.71605/-79.25182" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↗ 3.7m</td>
-          <td class="new-val">43.71608, -79.25180</td>
+          <td class="new-val">43.71608, -79.25180<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71608&mlon=-79.25180#map=19/43.71608/-79.25180" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>123 Heale Ave</td>
           
-          <td class="old-val">43.71597, -79.25124</td>
+          <td class="old-val">43.71597, -79.25124<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71597&mlon=-79.25124#map=19/43.71597/-79.25124" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 3.4m</td>
-          <td class="new-val">43.71600, -79.25125</td>
+          <td class="new-val">43.71600, -79.25125<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71600&mlon=-79.25125#map=19/43.71600/-79.25125" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>125 Heale Ave</td>
           
-          <td class="old-val">43.71610, -79.25122</td>
+          <td class="old-val">43.71610, -79.25122<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71610&mlon=-79.25122#map=19/43.71610/-79.25122" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">← 6.5m</td>
-          <td class="new-val">43.71609, -79.25130</td>
+          <td class="new-val">43.71609, -79.25130<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71609&mlon=-79.25130#map=19/43.71609/-79.25130" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>126 Heale Ave</td>
           
-          <td class="old-val">43.71618, -79.25187</td>
+          <td class="old-val">43.71618, -79.25187<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71618&mlon=-79.25187#map=19/43.71618/-79.25187" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↗ 3.7m</td>
-          <td class="new-val">43.71621, -79.25185</td>
+          <td class="new-val">43.71621, -79.25185<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71621&mlon=-79.25185#map=19/43.71621/-79.25185" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>127 Heale Ave</td>
           
-          <td class="old-val">43.71611, -79.25131</td>
+          <td class="old-val">43.71611, -79.25131<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71611&mlon=-79.25131#map=19/43.71611/-79.25131" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 3.4m</td>
-          <td class="new-val">43.71614, -79.25132</td>
+          <td class="new-val">43.71614, -79.25132<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71614&mlon=-79.25132#map=19/43.71614/-79.25132" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>129 Heale Ave</td>
           
-          <td class="old-val">43.71624, -79.25127</td>
+          <td class="old-val">43.71624, -79.25127<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71624&mlon=-79.25127#map=19/43.71624/-79.25127" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">← 6.5m</td>
-          <td class="new-val">43.71623, -79.25135</td>
+          <td class="new-val">43.71623, -79.25135<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71623&mlon=-79.25135#map=19/43.71623/-79.25135" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>131 Heale Ave</td>
           
-          <td class="old-val">43.71631, -79.25139</td>
+          <td class="old-val">43.71631, -79.25139<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71631&mlon=-79.25139#map=19/43.71631/-79.25139" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 3.4m</td>
-          <td class="new-val">43.71628, -79.25138</td>
+          <td class="new-val">43.71628, -79.25138<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71628&mlon=-79.25138#map=19/43.71628/-79.25138" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>50 Irwin Rd</td>
           
-          <td class="old-val">43.72569, -79.55702</td>
+          <td class="old-val">43.72569, -79.55702<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72569&mlon=-79.55702#map=19/43.72569/-79.55702" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 12.4m</td>
-          <td class="new-val">43.72580, -79.55704</td>
+          <td class="new-val">43.72580, -79.55704<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72580&mlon=-79.55704#map=19/43.72580/-79.55704" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>81 Irwin Rd</td>
           
-          <td class="old-val">43.72493, -79.55844</td>
+          <td class="old-val">43.72493, -79.55844<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72493&mlon=-79.55844#map=19/43.72493/-79.55844" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 27.8m</td>
-          <td class="new-val">43.72468, -79.55844</td>
+          <td class="new-val">43.72468, -79.55844<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72468&mlon=-79.55844#map=19/43.72468/-79.55844" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>83 Irwin Rd</td>
           
-          <td class="old-val">43.72496, -79.55850</td>
+          <td class="old-val">43.72496, -79.55850<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72496&mlon=-79.55850#map=19/43.72496/-79.55850" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 72.4m</td>
-          <td class="new-val">43.72431, -79.55848</td>
+          <td class="new-val">43.72431, -79.55848<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72431&mlon=-79.55848#map=19/43.72431/-79.55848" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>85 Irwin Rd</td>
           
-          <td class="old-val">43.72494, -79.55858</td>
+          <td class="old-val">43.72494, -79.55858<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72494&mlon=-79.55858#map=19/43.72494/-79.55858" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↙ 64.9m</td>
-          <td class="new-val">43.72443, -79.55897</td>
+          <td class="new-val">43.72443, -79.55897<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72443&mlon=-79.55897#map=19/43.72443/-79.55897" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>87 Irwin Rd</td>
           
-          <td class="old-val">43.72490, -79.55877</td>
+          <td class="old-val">43.72490, -79.55877<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72490&mlon=-79.55877#map=19/43.72490/-79.55877" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↙ 34.6m</td>
-          <td class="new-val">43.72471, -79.55911</td>
+          <td class="new-val">43.72471, -79.55911<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72471&mlon=-79.55911#map=19/43.72471/-79.55911" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>2442 Islington Ave</td>
           
-          <td class="old-val">43.72455, -79.56000</td>
+          <td class="old-val">43.72455, -79.56000<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72455&mlon=-79.56000#map=19/43.72455/-79.56000" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↘ 6.6m</td>
-          <td class="new-val">43.72451, -79.55994</td>
+          <td class="new-val">43.72451, -79.55994<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72451&mlon=-79.55994#map=19/43.72451/-79.55994" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>490 Midland Ave</td>
           
-          <td class="old-val">43.71575, -79.25047</td>
+          <td class="old-val">43.71575, -79.25047<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71575&mlon=-79.25047#map=19/43.71575/-79.25047" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↘ 3.3m</td>
-          <td class="new-val">43.71573, -79.25044</td>
+          <td class="new-val">43.71573, -79.25044<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71573&mlon=-79.25044#map=19/43.71573/-79.25044" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>492 Midland Ave</td>
           
-          <td class="old-val">43.71583, -79.25043</td>
+          <td class="old-val">43.71583, -79.25043<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71583&mlon=-79.25043#map=19/43.71583/-79.25043" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↙ 6.1m</td>
-          <td class="new-val">43.71578, -79.25046</td>
+          <td class="new-val">43.71578, -79.25046<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71578&mlon=-79.25046#map=19/43.71578/-79.25046" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>500 Midland Ave</td>
           
-          <td class="old-val">43.71608, -79.25059</td>
+          <td class="old-val">43.71608, -79.25059<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71608&mlon=-79.25059#map=19/43.71608/-79.25059" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 2.4m</td>
-          <td class="new-val">43.71610, -79.25060</td>
+          <td class="new-val">43.71610, -79.25060<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71610&mlon=-79.25060#map=19/43.71610/-79.25060" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>504 Midland Ave</td>
           
-          <td class="old-val">43.71624, -79.25068</td>
+          <td class="old-val">43.71624, -79.25068<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71624&mlon=-79.25068#map=19/43.71624/-79.25068" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 3.4m</td>
-          <td class="new-val">43.71627, -79.25069</td>
+          <td class="new-val">43.71627, -79.25069<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71627&mlon=-79.25069#map=19/43.71627/-79.25069" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>508 Midland Ave</td>
           
-          <td class="old-val">43.71640, -79.25075</td>
+          <td class="old-val">43.71640, -79.25075<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71640&mlon=-79.25075#map=19/43.71640/-79.25075" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 3.3m</td>
-          <td class="new-val">43.71643, -79.25075</td>
+          <td class="new-val">43.71643, -79.25075<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71643&mlon=-79.25075#map=19/43.71643/-79.25075" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>509 Midland Ave</td>
           
-          <td class="old-val">43.71679, -79.25011</td>
+          <td class="old-val">43.71679, -79.25011<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71679&mlon=-79.25011#map=19/43.71679/-79.25011" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 2.2m</td>
-          <td class="new-val">43.71681, -79.25011</td>
+          <td class="new-val">43.71681, -79.25011<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71681&mlon=-79.25011#map=19/43.71681/-79.25011" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>512 Midland Ave</td>
           
-          <td class="old-val">43.71657, -79.25080</td>
+          <td class="old-val">43.71657, -79.25080<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71657&mlon=-79.25080#map=19/43.71657/-79.25080" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 3.4m</td>
-          <td class="new-val">43.71660, -79.25081</td>
+          <td class="new-val">43.71660, -79.25081<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71660&mlon=-79.25081#map=19/43.71660/-79.25081" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>516 Midland Ave</td>
           
-          <td class="old-val">43.71674, -79.25088</td>
+          <td class="old-val">43.71674, -79.25088<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71674&mlon=-79.25088#map=19/43.71674/-79.25088" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 2.4m</td>
-          <td class="new-val">43.71676, -79.25087</td>
+          <td class="new-val">43.71676, -79.25087<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71676&mlon=-79.25087#map=19/43.71676/-79.25087" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>517 Midland Ave</td>
           
-          <td class="old-val">43.71711, -79.25029</td>
+          <td class="old-val">43.71711, -79.25029<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71711&mlon=-79.25029#map=19/43.71711/-79.25029" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 2.4m</td>
-          <td class="new-val">43.71713, -79.25030</td>
+          <td class="new-val">43.71713, -79.25030<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71713&mlon=-79.25030#map=19/43.71713/-79.25030" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>520 Midland Ave</td>
           
-          <td class="old-val">43.71690, -79.25095</td>
+          <td class="old-val">43.71690, -79.25095<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71690&mlon=-79.25095#map=19/43.71690/-79.25095" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 3.4m</td>
-          <td class="new-val">43.71693, -79.25096</td>
+          <td class="new-val">43.71693, -79.25096<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71693&mlon=-79.25096#map=19/43.71693/-79.25096" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>521 Midland Ave</td>
           
-          <td class="old-val">43.71727, -79.25035</td>
+          <td class="old-val">43.71727, -79.25035<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71727&mlon=-79.25035#map=19/43.71727/-79.25035" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 2.4m</td>
-          <td class="new-val">43.71729, -79.25036</td>
+          <td class="new-val">43.71729, -79.25036<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71729&mlon=-79.25036#map=19/43.71729/-79.25036" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>525 Midland Ave</td>
           
-          <td class="old-val">43.71744, -79.25043</td>
+          <td class="old-val">43.71744, -79.25043<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71744&mlon=-79.25043#map=19/43.71744/-79.25043" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 2.4m</td>
-          <td class="new-val">43.71746, -79.25044</td>
+          <td class="new-val">43.71746, -79.25044<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71746&mlon=-79.25044#map=19/43.71746/-79.25044" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>529 Midland Ave</td>
           
-          <td class="old-val">43.71760, -79.25048</td>
+          <td class="old-val">43.71760, -79.25048<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71760&mlon=-79.25048#map=19/43.71760/-79.25048" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 2.4m</td>
-          <td class="new-val">43.71762, -79.25049</td>
+          <td class="new-val">43.71762, -79.25049<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71762&mlon=-79.25049#map=19/43.71762/-79.25049" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>530 Midland Ave</td>
           
-          <td class="old-val">43.71737, -79.25120</td>
+          <td class="old-val">43.71737, -79.25120<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71737&mlon=-79.25120#map=19/43.71737/-79.25120" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 8.2m</td>
-          <td class="new-val">43.71730, -79.25117</td>
+          <td class="new-val">43.71730, -79.25117<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71730&mlon=-79.25117#map=19/43.71730/-79.25117" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>531 Midland Ave</td>
           
-          <td class="old-val">43.71776, -79.25055</td>
+          <td class="old-val">43.71776, -79.25055<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71776&mlon=-79.25055#map=19/43.71776/-79.25055" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 3.4m</td>
-          <td class="new-val">43.71773, -79.25054</td>
+          <td class="new-val">43.71773, -79.25054<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71773&mlon=-79.25054#map=19/43.71773/-79.25054" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>534 Midland Ave</td>
           
-          <td class="old-val">43.71759, -79.25123</td>
+          <td class="old-val">43.71759, -79.25123<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71759&mlon=-79.25123#map=19/43.71759/-79.25123" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 2.2m</td>
-          <td class="new-val">43.71761, -79.25123</td>
+          <td class="new-val">43.71761, -79.25123<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71761&mlon=-79.25123#map=19/43.71761/-79.25123" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>535 Midland Ave</td>
           
-          <td class="old-val">43.71792, -79.25061</td>
+          <td class="old-val">43.71792, -79.25061<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71792&mlon=-79.25061#map=19/43.71792/-79.25061" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 3.3m</td>
-          <td class="new-val">43.71789, -79.25061</td>
+          <td class="new-val">43.71789, -79.25061<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71789&mlon=-79.25061#map=19/43.71789/-79.25061" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>536 Midland Ave</td>
           
-          <td class="old-val">43.71774, -79.25129</td>
+          <td class="old-val">43.71774, -79.25129<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71774&mlon=-79.25129#map=19/43.71774/-79.25129" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↘ 2.7m</td>
-          <td class="new-val">43.71772, -79.25127</td>
+          <td class="new-val">43.71772, -79.25127<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71772&mlon=-79.25127#map=19/43.71772/-79.25127" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>541 Midland Ave</td>
           
-          <td class="old-val">43.71809, -79.25066</td>
+          <td class="old-val">43.71809, -79.25066<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71809&mlon=-79.25066#map=19/43.71809/-79.25066" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 3.3m</td>
-          <td class="new-val">43.71812, -79.25066</td>
+          <td class="new-val">43.71812, -79.25066<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71812&mlon=-79.25066#map=19/43.71812/-79.25066" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>544 Midland Ave</td>
           
-          <td class="old-val">43.71806, -79.25143</td>
+          <td class="old-val">43.71806, -79.25143<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71806&mlon=-79.25143#map=19/43.71806/-79.25143" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↘ 3.3m</td>
-          <td class="new-val">43.71804, -79.25140</td>
+          <td class="new-val">43.71804, -79.25140<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71804&mlon=-79.25140#map=19/43.71804/-79.25140" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>555 Midland Ave</td>
           
-          <td class="old-val">43.71927, -79.25123</td>
+          <td class="old-val">43.71927, -79.25123<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71927&mlon=-79.25123#map=19/43.71927/-79.25123" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↗ 11.4m</td>
-          <td class="new-val">43.71931, -79.25110</td>
+          <td class="new-val">43.71931, -79.25110<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71931&mlon=-79.25110#map=19/43.71931/-79.25110" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>557 Midland Ave</td>
           
-          <td class="old-val">43.71933, -79.25125</td>
+          <td class="old-val">43.71933, -79.25125<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71933&mlon=-79.25125#map=19/43.71933/-79.25125" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">→ 9.9m</td>
-          <td class="new-val">43.71935, -79.25113</td>
+          <td class="new-val">43.71935, -79.25113<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71935&mlon=-79.25113#map=19/43.71935/-79.25113" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>559 Midland Ave</td>
           
-          <td class="old-val">43.71936, -79.25126</td>
+          <td class="old-val">43.71936, -79.25126<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71936&mlon=-79.25126#map=19/43.71936/-79.25126" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">→ 11.7m</td>
-          <td class="new-val">43.71939, -79.25112</td>
+          <td class="new-val">43.71939, -79.25112<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71939&mlon=-79.25112#map=19/43.71939/-79.25112" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>561 Midland Ave</td>
           
-          <td class="old-val">43.71940, -79.25128</td>
+          <td class="old-val">43.71940, -79.25128<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71940&mlon=-79.25128#map=19/43.71940/-79.25128" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">→ 9.9m</td>
-          <td class="new-val">43.71942, -79.25116</td>
+          <td class="new-val">43.71942, -79.25116<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71942&mlon=-79.25116#map=19/43.71942/-79.25116" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>563 Midland Ave</td>
           
-          <td class="old-val">43.71944, -79.25129</td>
+          <td class="old-val">43.71944, -79.25129<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71944&mlon=-79.25129#map=19/43.71944/-79.25129" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">→ 10.7m</td>
-          <td class="new-val">43.71946, -79.25116</td>
+          <td class="new-val">43.71946, -79.25116<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71946&mlon=-79.25116#map=19/43.71946/-79.25116" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>565 Midland Ave</td>
           
-          <td class="old-val">43.71947, -79.25131</td>
+          <td class="old-val">43.71947, -79.25131<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71947&mlon=-79.25131#map=19/43.71947/-79.25131" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">→ 11.0m</td>
-          <td class="new-val">43.71950, -79.25118</td>
+          <td class="new-val">43.71950, -79.25118<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71950&mlon=-79.25118#map=19/43.71950/-79.25118" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>567 Midland Ave</td>
           
-          <td class="old-val">43.71951, -79.25132</td>
+          <td class="old-val">43.71951, -79.25132<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71951&mlon=-79.25132#map=19/43.71951/-79.25132" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">→ 10.7m</td>
-          <td class="new-val">43.71953, -79.25119</td>
+          <td class="new-val">43.71953, -79.25119<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71953&mlon=-79.25119#map=19/43.71953/-79.25119" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>569 Midland Ave</td>
           
-          <td class="old-val">43.71955, -79.25134</td>
+          <td class="old-val">43.71955, -79.25134<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71955&mlon=-79.25134#map=19/43.71955/-79.25134" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">→ 11.5m</td>
-          <td class="new-val">43.71957, -79.25120</td>
+          <td class="new-val">43.71957, -79.25120<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71957&mlon=-79.25120#map=19/43.71957/-79.25120" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>15 Mitchell Ave</td>
           
-          <td class="old-val">43.64507, -79.40644</td>
+          <td class="old-val">43.64507, -79.40644<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64507&mlon=-79.40644#map=19/43.64507/-79.40644" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↖ 4.6m</td>
-          <td class="new-val">43.64510, -79.40648</td>
+          <td class="new-val">43.64510, -79.40648<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64510&mlon=-79.40648#map=19/43.64510/-79.40648" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>26 Mitchell Ave</td>
           
-          <td class="old-val">43.64525, -79.40712</td>
+          <td class="old-val">43.64525, -79.40712<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64525&mlon=-79.40712#map=19/43.64525/-79.40712" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↘ 2.7m</td>
-          <td class="new-val">43.64523, -79.40710</td>
+          <td class="new-val">43.64523, -79.40710<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64523&mlon=-79.40710#map=19/43.64523/-79.40710" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>27 Mitchell Ave</td>
           
-          <td class="old-val">43.64502, -79.40680</td>
+          <td class="old-val">43.64502, -79.40680<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64502&mlon=-79.40680#map=19/43.64502/-79.40680" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 2.4m</td>
-          <td class="new-val">43.64504, -79.40679</td>
+          <td class="new-val">43.64504, -79.40679<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64504&mlon=-79.40679#map=19/43.64504/-79.40679" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>32 Mitchell Ave</td>
           
-          <td class="old-val">43.64521, -79.40729</td>
+          <td class="old-val">43.64521, -79.40729<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64521&mlon=-79.40729#map=19/43.64521/-79.40729" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↘ 3.3m</td>
-          <td class="new-val">43.64519, -79.40726</td>
+          <td class="new-val">43.64519, -79.40726<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64519&mlon=-79.40726#map=19/43.64519/-79.40726" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>34 Mitchell Ave</td>
           
-          <td class="old-val">43.64520, -79.40735</td>
+          <td class="old-val">43.64520, -79.40735<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64520&mlon=-79.40735#map=19/43.64520/-79.40735" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">→ 3.4m</td>
-          <td class="new-val">43.64519, -79.40731</td>
+          <td class="new-val">43.64519, -79.40731<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64519&mlon=-79.40731#map=19/43.64519/-79.40731" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>40 Mitchell Ave</td>
           
-          <td class="old-val">43.64517, -79.40749</td>
+          <td class="old-val">43.64517, -79.40749<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64517&mlon=-79.40749#map=19/43.64517/-79.40749" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">→ 2.4m</td>
-          <td class="new-val">43.64517, -79.40746</td>
+          <td class="new-val">43.64517, -79.40746<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64517&mlon=-79.40746#map=19/43.64517/-79.40746" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>44 Mitchell Ave</td>
           
-          <td class="old-val">43.64515, -79.40757</td>
+          <td class="old-val">43.64515, -79.40757<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64515&mlon=-79.40757#map=19/43.64515/-79.40757" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↗ 2.0m</td>
-          <td class="new-val">43.64516, -79.40755</td>
+          <td class="new-val">43.64516, -79.40755<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64516&mlon=-79.40755#map=19/43.64516/-79.40755" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>66 Mitchell Ave</td>
           
-          <td class="old-val">43.64503, -79.40819</td>
+          <td class="old-val">43.64503, -79.40819<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64503&mlon=-79.40819#map=19/43.64503/-79.40819" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↘ 2.7m</td>
-          <td class="new-val">43.64502, -79.40816</td>
+          <td class="new-val">43.64502, -79.40816<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64502&mlon=-79.40816#map=19/43.64502/-79.40816" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>67 Mitchell Ave</td>
           
-          <td class="old-val">43.64484, -79.40780</td>
+          <td class="old-val">43.64484, -79.40780<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64484&mlon=-79.40780#map=19/43.64484/-79.40780" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">→ 1.6m</td>
-          <td class="new-val">43.64484, -79.40778</td>
+          <td class="new-val">43.64484, -79.40778<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64484&mlon=-79.40778#map=19/43.64484/-79.40778" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>68 Mitchell Ave</td>
           
-          <td class="old-val">43.64509, -79.40824</td>
+          <td class="old-val">43.64509, -79.40824<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64509&mlon=-79.40824#map=19/43.64509/-79.40824" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 9.1m</td>
-          <td class="new-val">43.64501, -79.40822</td>
+          <td class="new-val">43.64501, -79.40822<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64501&mlon=-79.40822#map=19/43.64501/-79.40822" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>71 Mitchell Ave</td>
           
-          <td class="old-val">43.64479, -79.40792</td>
+          <td class="old-val">43.64479, -79.40792<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64479&mlon=-79.40792#map=19/43.64479/-79.40792" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 3.4m</td>
-          <td class="new-val">43.64482, -79.40791</td>
+          <td class="new-val">43.64482, -79.40791<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64482&mlon=-79.40791#map=19/43.64482/-79.40791" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>72 Mitchell Ave</td>
           
-          <td class="old-val">43.64500, -79.40835</td>
+          <td class="old-val">43.64500, -79.40835<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64500&mlon=-79.40835#map=19/43.64500/-79.40835" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↘ 2.7m</td>
-          <td class="new-val">43.64498, -79.40833</td>
+          <td class="new-val">43.64498, -79.40833<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64498&mlon=-79.40833#map=19/43.64498/-79.40833" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>75 Mitchell Ave</td>
           
-          <td class="old-val">43.64477, -79.40801</td>
+          <td class="old-val">43.64477, -79.40801<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64477&mlon=-79.40801#map=19/43.64477/-79.40801" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↗ 3.7m</td>
-          <td class="new-val">43.64480, -79.40799</td>
+          <td class="new-val">43.64480, -79.40799<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64480&mlon=-79.40799#map=19/43.64480/-79.40799" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>77 Mitchell Ave</td>
           
-          <td class="old-val">43.64478, -79.40812</td>
+          <td class="old-val">43.64478, -79.40812<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64478&mlon=-79.40812#map=19/43.64478/-79.40812" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">→ 1.6m</td>
-          <td class="new-val">43.64478, -79.40810</td>
+          <td class="new-val">43.64478, -79.40810<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64478&mlon=-79.40810#map=19/43.64478/-79.40810" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>80 Mitchell Ave</td>
           
-          <td class="old-val">43.64500, -79.40863</td>
+          <td class="old-val">43.64500, -79.40863<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64500&mlon=-79.40863#map=19/43.64500/-79.40863" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↘ 12.5m</td>
-          <td class="new-val">43.64490, -79.40856</td>
+          <td class="new-val">43.64490, -79.40856<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64490&mlon=-79.40856#map=19/43.64490/-79.40856" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>80A Mitchell Ave</td>
           
-          <td class="old-val">43.64498, -79.40867</td>
+          <td class="old-val">43.64498, -79.40867<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64498&mlon=-79.40867#map=19/43.64498/-79.40867" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↘ 13.7m</td>
-          <td class="new-val">43.64491, -79.40853</td>
+          <td class="new-val">43.64491, -79.40853<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64491&mlon=-79.40853#map=19/43.64491/-79.40853" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>85 Mitchell Ave</td>
           
-          <td class="old-val">43.64470, -79.40831</td>
+          <td class="old-val">43.64470, -79.40831<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64470&mlon=-79.40831#map=19/43.64470/-79.40831" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 2.4m</td>
-          <td class="new-val">43.64472, -79.40830</td>
+          <td class="new-val">43.64472, -79.40830<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64472&mlon=-79.40830#map=19/43.64472/-79.40830" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>88 Mitchell Ave</td>
           
-          <td class="old-val">43.64492, -79.40870</td>
+          <td class="old-val">43.64492, -79.40870<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64492&mlon=-79.40870#map=19/43.64492/-79.40870" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 2.4m</td>
-          <td class="new-val">43.64490, -79.40871</td>
+          <td class="new-val">43.64490, -79.40871<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64490&mlon=-79.40871#map=19/43.64490/-79.40871" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>104 Mitchell Ave</td>
           
-          <td class="old-val">43.64486, -79.40906</td>
+          <td class="old-val">43.64486, -79.40906<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64486&mlon=-79.40906#map=19/43.64486/-79.40906" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 4.7m</td>
-          <td class="new-val">43.64482, -79.40908</td>
+          <td class="new-val">43.64482, -79.40908<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64482&mlon=-79.40908#map=19/43.64482/-79.40908" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>173 Mount Olive Dr</td>
           
-          <td class="old-val">43.74840, -79.59556</td>
+          <td class="old-val">43.74840, -79.59556<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74840&mlon=-79.59556#map=19/43.74840/-79.59556" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↗ 31.2m</td>
-          <td class="new-val">43.74864, -79.59536</td>
+          <td class="new-val">43.74864, -79.59536<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74864&mlon=-79.59536#map=19/43.74864/-79.59536" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>25 Olga St</td>
           
-          <td class="old-val">43.71964, -79.25088</td>
+          <td class="old-val">43.71964, -79.25088<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71964&mlon=-79.25088#map=19/43.71964/-79.25088" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 6.9m</td>
-          <td class="new-val">43.71958, -79.25086</td>
+          <td class="new-val">43.71958, -79.25086<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71958&mlon=-79.25086#map=19/43.71958/-79.25086" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>27 Olga St</td>
           
-          <td class="old-val">43.71966, -79.25079</td>
+          <td class="old-val">43.71966, -79.25079<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71966&mlon=-79.25079#map=19/43.71966/-79.25079" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 6.9m</td>
-          <td class="new-val">43.71960, -79.25077</td>
+          <td class="new-val">43.71960, -79.25077<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71960&mlon=-79.25077#map=19/43.71960/-79.25077" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>29 Olga St</td>
           
-          <td class="old-val">43.71967, -79.25071</td>
+          <td class="old-val">43.71967, -79.25071<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71967&mlon=-79.25071#map=19/43.71967/-79.25071" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 4.5m</td>
-          <td class="new-val">43.71963, -79.25070</td>
+          <td class="new-val">43.71963, -79.25070<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71963&mlon=-79.25070#map=19/43.71963/-79.25070" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>31 Olga St</td>
           
-          <td class="old-val">43.71969, -79.25058</td>
+          <td class="old-val">43.71969, -79.25058<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71969&mlon=-79.25058#map=19/43.71969/-79.25058" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 4.5m</td>
-          <td class="new-val">43.71965, -79.25057</td>
+          <td class="new-val">43.71965, -79.25057<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71965&mlon=-79.25057#map=19/43.71965/-79.25057" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>33 Olga St</td>
           
-          <td class="old-val">43.71971, -79.25050</td>
+          <td class="old-val">43.71971, -79.25050<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71971&mlon=-79.25050#map=19/43.71971/-79.25050" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 5.8m</td>
-          <td class="new-val">43.71966, -79.25048</td>
+          <td class="new-val">43.71966, -79.25048<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71966&mlon=-79.25048#map=19/43.71966/-79.25048" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>35 Olga St</td>
           
-          <td class="old-val">43.71972, -79.25042</td>
+          <td class="old-val">43.71972, -79.25042<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71972&mlon=-79.25042#map=19/43.71972/-79.25042" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 4.7m</td>
-          <td class="new-val">43.71968, -79.25040</td>
+          <td class="new-val">43.71968, -79.25040<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71968&mlon=-79.25040#map=19/43.71968/-79.25040" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>37 Olga St</td>
           
-          <td class="old-val">43.71974, -79.25034</td>
+          <td class="old-val">43.71974, -79.25034<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71974&mlon=-79.25034#map=19/43.71974/-79.25034" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 5.8m</td>
-          <td class="new-val">43.71969, -79.25032</td>
+          <td class="new-val">43.71969, -79.25032<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71969&mlon=-79.25032#map=19/43.71969/-79.25032" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>39 Olga St</td>
           
-          <td class="old-val">43.71976, -79.25026</td>
+          <td class="old-val">43.71976, -79.25026<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71976&mlon=-79.25026#map=19/43.71976/-79.25026" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 7.1m</td>
-          <td class="new-val">43.71970, -79.25023</td>
+          <td class="new-val">43.71970, -79.25023<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71970&mlon=-79.25023#map=19/43.71970/-79.25023" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>41 Olga St</td>
           
-          <td class="old-val">43.71979, -79.25019</td>
+          <td class="old-val">43.71979, -79.25019<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71979&mlon=-79.25019#map=19/43.71979/-79.25019" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 7.1m</td>
-          <td class="new-val">43.71973, -79.25016</td>
+          <td class="new-val">43.71973, -79.25016<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71973&mlon=-79.25016#map=19/43.71973/-79.25016" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>43 Olga St</td>
           
-          <td class="old-val">43.71982, -79.25008</td>
+          <td class="old-val">43.71982, -79.25008<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71982&mlon=-79.25008#map=19/43.71982/-79.25008" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 8.2m</td>
-          <td class="new-val">43.71975, -79.25005</td>
+          <td class="new-val">43.71975, -79.25005<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71975&mlon=-79.25005#map=19/43.71975/-79.25005" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>45 Olga St</td>
           
-          <td class="old-val">43.71984, -79.24999</td>
+          <td class="old-val">43.71984, -79.24999<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71984&mlon=-79.24999#map=19/43.71984/-79.24999" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 9.2m</td>
-          <td class="new-val">43.71976, -79.24996</td>
+          <td class="new-val">43.71976, -79.24996<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71976&mlon=-79.24996#map=19/43.71976/-79.24996" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>47 Olga St</td>
           
-          <td class="old-val">43.71986, -79.24992</td>
+          <td class="old-val">43.71986, -79.24992<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71986&mlon=-79.24992#map=19/43.71986/-79.24992" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 8.4m</td>
-          <td class="new-val">43.71979, -79.24988</td>
+          <td class="new-val">43.71979, -79.24988<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71979&mlon=-79.24988#map=19/43.71979/-79.24988" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>49 Olga St</td>
           
-          <td class="old-val">43.71987, -79.24984</td>
+          <td class="old-val">43.71987, -79.24984<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71987&mlon=-79.24984#map=19/43.71987/-79.24984" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 7.1m</td>
-          <td class="new-val">43.71981, -79.24981</td>
+          <td class="new-val">43.71981, -79.24981<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71981&mlon=-79.24981#map=19/43.71981/-79.24981" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>51 Olga St</td>
           
-          <td class="old-val">43.71989, -79.24975</td>
+          <td class="old-val">43.71989, -79.24975<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71989&mlon=-79.24975#map=19/43.71989/-79.24975" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 8.0m</td>
-          <td class="new-val">43.71982, -79.24973</td>
+          <td class="new-val">43.71982, -79.24973<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71982&mlon=-79.24973#map=19/43.71982/-79.24973" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>65 Olga St</td>
           
-          <td class="old-val">43.72009, -79.24881</td>
+          <td class="old-val">43.72009, -79.24881<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72009&mlon=-79.24881#map=19/43.72009/-79.24881" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 5.8m</td>
-          <td class="new-val">43.72004, -79.24879</td>
+          <td class="new-val">43.72004, -79.24879<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72004&mlon=-79.24879#map=19/43.72004/-79.24879" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>73 Olga St</td>
           
-          <td class="old-val">43.72017, -79.24847</td>
+          <td class="old-val">43.72017, -79.24847<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72017&mlon=-79.24847#map=19/43.72017/-79.24847" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 5.6m</td>
-          <td class="new-val">43.72012, -79.24846</td>
+          <td class="new-val">43.72012, -79.24846<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72012&mlon=-79.24846#map=19/43.72012/-79.24846" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>79 Olga St</td>
           
-          <td class="old-val">43.72022, -79.24821</td>
+          <td class="old-val">43.72022, -79.24821<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72022&mlon=-79.24821#map=19/43.72022/-79.24821" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 5.8m</td>
-          <td class="new-val">43.72017, -79.24819</td>
+          <td class="new-val">43.72017, -79.24819<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72017&mlon=-79.24819#map=19/43.72017/-79.24819" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>132 Park St</td>
           
-          <td class="old-val">43.71168, -79.25068</td>
+          <td class="old-val">43.71168, -79.25068<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71168&mlon=-79.25068#map=19/43.71168/-79.25068" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 5.8m</td>
-          <td class="new-val">43.71163, -79.25066</td>
+          <td class="new-val">43.71163, -79.25066<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71163&mlon=-79.25066#map=19/43.71163/-79.25066" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>136 Park St</td>
           
-          <td class="old-val">43.71173, -79.25047</td>
+          <td class="old-val">43.71173, -79.25047<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71173&mlon=-79.25047#map=19/43.71173/-79.25047" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 6.7m</td>
-          <td class="new-val">43.71167, -79.25048</td>
+          <td class="new-val">43.71167, -79.25048<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71167&mlon=-79.25048#map=19/43.71167/-79.25048" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>140 Park St</td>
           
-          <td class="old-val">43.71176, -79.25030</td>
+          <td class="old-val">43.71176, -79.25030<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71176&mlon=-79.25030#map=19/43.71176/-79.25030" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 5.6m</td>
-          <td class="new-val">43.71171, -79.25029</td>
+          <td class="new-val">43.71171, -79.25029<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71171&mlon=-79.25029#map=19/43.71171/-79.25029" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>144 Park St</td>
           
-          <td class="old-val">43.71180, -79.25011</td>
+          <td class="old-val">43.71180, -79.25011<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71180&mlon=-79.25011#map=19/43.71180/-79.25011" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 4.5m</td>
-          <td class="new-val">43.71176, -79.25011</td>
+          <td class="new-val">43.71176, -79.25011<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71176&mlon=-79.25011#map=19/43.71176/-79.25011" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>146 Park St</td>
           
-          <td class="old-val">43.71182, -79.25002</td>
+          <td class="old-val">43.71182, -79.25002<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71182&mlon=-79.25002#map=19/43.71182/-79.25002" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↘ 5.1m</td>
-          <td class="new-val">43.71178, -79.24999</td>
+          <td class="new-val">43.71178, -79.24999<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71178&mlon=-79.24999#map=19/43.71178/-79.24999" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>148 Park St</td>
           
-          <td class="old-val">43.71180, -79.24996</td>
+          <td class="old-val">43.71180, -79.24996<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71180&mlon=-79.24996#map=19/43.71180/-79.24996" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">→ 4.2m</td>
-          <td class="new-val">43.71179, -79.24991</td>
+          <td class="new-val">43.71179, -79.24991<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71179&mlon=-79.24991#map=19/43.71179/-79.24991" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>737 Queen St W</td>
           
-          <td class="old-val">43.64645, -79.40700</td>
+          <td class="old-val">43.64645, -79.40700<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64645&mlon=-79.40700#map=19/43.64645/-79.40700" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">→ 13.9m</td>
-          <td class="new-val">43.64643, -79.40683</td>
+          <td class="new-val">43.64643, -79.40683<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64643&mlon=-79.40683#map=19/43.64643/-79.40683" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>739 Queen St W</td>
           
-          <td class="old-val">43.64641, -79.40704</td>
+          <td class="old-val">43.64641, -79.40704<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64641&mlon=-79.40704#map=19/43.64641/-79.40704" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">→ 8.1m</td>
-          <td class="new-val">43.64641, -79.40694</td>
+          <td class="new-val">43.64641, -79.40694<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64641&mlon=-79.40694#map=19/43.64641/-79.40694" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>741 Queen St W</td>
           
-          <td class="old-val">43.64644, -79.40704</td>
+          <td class="old-val">43.64644, -79.40704<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64644&mlon=-79.40704#map=19/43.64644/-79.40704" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 4.7m</td>
-          <td class="new-val">43.64640, -79.40702</td>
+          <td class="new-val">43.64640, -79.40702<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64640&mlon=-79.40702#map=19/43.64640/-79.40702" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>749 Queen St W</td>
           
-          <td class="old-val">43.64637, -79.40721</td>
+          <td class="old-val">43.64637, -79.40721<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64637&mlon=-79.40721#map=19/43.64637/-79.40721" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 4.5m</td>
-          <td class="new-val">43.64641, -79.40721</td>
+          <td class="new-val">43.64641, -79.40721<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64641&mlon=-79.40721#map=19/43.64641/-79.40721" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>749A Queen St W</td>
           
-          <td class="old-val">43.64632, -79.40716</td>
+          <td class="old-val">43.64632, -79.40716<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64632&mlon=-79.40716#map=19/43.64632/-79.40716" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 12.5m</td>
-          <td class="new-val">43.64643, -79.40719</td>
+          <td class="new-val">43.64643, -79.40719<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64643&mlon=-79.40719#map=19/43.64643/-79.40719" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>749B Queen St W</td>
           
-          <td class="old-val">43.64631, -79.40720</td>
+          <td class="old-val">43.64631, -79.40720<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64631&mlon=-79.40720#map=19/43.64631/-79.40720" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 12.5m</td>
-          <td class="new-val">43.64642, -79.40723</td>
+          <td class="new-val">43.64642, -79.40723<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64642&mlon=-79.40723#map=19/43.64642/-79.40723" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>757 Queen St W</td>
           
-          <td class="old-val">43.64633, -79.40750</td>
+          <td class="old-val">43.64633, -79.40750<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64633&mlon=-79.40750#map=19/43.64633/-79.40750" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↗ 3.7m</td>
-          <td class="new-val">43.64636, -79.40748</td>
+          <td class="new-val">43.64636, -79.40748<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64636&mlon=-79.40748#map=19/43.64636/-79.40748" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>759 Queen St W</td>
           
-          <td class="old-val">43.64632, -79.40746</td>
+          <td class="old-val">43.64632, -79.40746<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64632&mlon=-79.40746#map=19/43.64632/-79.40746" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↖ 6.6m</td>
-          <td class="new-val">43.64636, -79.40752</td>
+          <td class="new-val">43.64636, -79.40752<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64636&mlon=-79.40752#map=19/43.64636/-79.40752" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>779 Queen St W</td>
           
-          <td class="old-val">43.64620, -79.40816</td>
+          <td class="old-val">43.64620, -79.40816<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64620&mlon=-79.40816#map=19/43.64620/-79.40816" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↗ 2.7m</td>
-          <td class="new-val">43.64621, -79.40813</td>
+          <td class="new-val">43.64621, -79.40813<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64621&mlon=-79.40813#map=19/43.64621/-79.40813" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>785 Queen St W</td>
           
-          <td class="old-val">43.64617, -79.40834</td>
+          <td class="old-val">43.64617, -79.40834<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64617&mlon=-79.40834#map=19/43.64617/-79.40834" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">→ 1.6m</td>
-          <td class="new-val">43.64617, -79.40832</td>
+          <td class="new-val">43.64617, -79.40832<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64617&mlon=-79.40832#map=19/43.64617/-79.40832" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>787 Queen St W</td>
           
-          <td class="old-val">43.64615, -79.40840</td>
+          <td class="old-val">43.64615, -79.40840<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64615&mlon=-79.40840#map=19/43.64615/-79.40840" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">→ 1.6m</td>
-          <td class="new-val">43.64615, -79.40838</td>
+          <td class="new-val">43.64615, -79.40838<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64615&mlon=-79.40838#map=19/43.64615/-79.40838" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>789 Queen St W</td>
           
-          <td class="old-val">43.64613, -79.40846</td>
+          <td class="old-val">43.64613, -79.40846<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64613&mlon=-79.40846#map=19/43.64613/-79.40846" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↗ 2.7m</td>
-          <td class="new-val">43.64615, -79.40844</td>
+          <td class="new-val">43.64615, -79.40844<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64615&mlon=-79.40844#map=19/43.64615/-79.40844" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>799 Queen St W</td>
           
-          <td class="old-val">43.64611, -79.40871</td>
+          <td class="old-val">43.64611, -79.40871<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64611&mlon=-79.40871#map=19/43.64611/-79.40871" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">→ 1.6m</td>
-          <td class="new-val">43.64611, -79.40869</td>
+          <td class="new-val">43.64611, -79.40869<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64611&mlon=-79.40869#map=19/43.64611/-79.40869" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>811 Queen St W</td>
           
-          <td class="old-val">43.64606, -79.40901</td>
+          <td class="old-val">43.64606, -79.40901<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64606&mlon=-79.40901#map=19/43.64606/-79.40901" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↘ 4.1m</td>
-          <td class="new-val">43.64603, -79.40898</td>
+          <td class="new-val">43.64603, -79.40898<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64603&mlon=-79.40898#map=19/43.64603/-79.40898" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>815 Queen St W</td>
           
-          <td class="old-val">43.64603, -79.40914</td>
+          <td class="old-val">43.64603, -79.40914<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64603&mlon=-79.40914#map=19/43.64603/-79.40914" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">→ 2.4m</td>
-          <td class="new-val">43.64603, -79.40911</td>
+          <td class="new-val">43.64603, -79.40911<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64603&mlon=-79.40911#map=19/43.64603/-79.40911" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>823 Queen St W</td>
           
-          <td class="old-val">43.64594, -79.40937</td>
+          <td class="old-val">43.64594, -79.40937<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64594&mlon=-79.40937#map=19/43.64594/-79.40937" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↘ 2.7m</td>
-          <td class="new-val">43.64593, -79.40934</td>
+          <td class="new-val">43.64593, -79.40934<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64593&mlon=-79.40934#map=19/43.64593/-79.40934" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>829 Queen St W</td>
           
-          <td class="old-val">43.64591, -79.40949</td>
+          <td class="old-val">43.64591, -79.40949<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64591&mlon=-79.40949#map=19/43.64591/-79.40949" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 4.5m</td>
-          <td class="new-val">43.64595, -79.40949</td>
+          <td class="new-val">43.64595, -79.40949<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64595&mlon=-79.40949#map=19/43.64595/-79.40949" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>690 Richmond St W</td>
           
-          <td class="old-val">43.64601, -79.40706</td>
+          <td class="old-val">43.64601, -79.40706<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64601&mlon=-79.40706#map=19/43.64601/-79.40706" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↘ 6.6m</td>
-          <td class="new-val">43.64597, -79.40700</td>
+          <td class="new-val">43.64597, -79.40700<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64597&mlon=-79.40700#map=19/43.64597/-79.40700" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>692 Richmond St W</td>
           
-          <td class="old-val">43.64600, -79.40704</td>
+          <td class="old-val">43.64600, -79.40704<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64600&mlon=-79.40704#map=19/43.64600/-79.40704" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 3.3m</td>
-          <td class="new-val">43.64597, -79.40704</td>
+          <td class="new-val">43.64597, -79.40704<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64597&mlon=-79.40704#map=19/43.64597/-79.40704" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>695 Richmond St W</td>
           
-          <td class="old-val">43.64567, -79.40682</td>
+          <td class="old-val">43.64567, -79.40682<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64567&mlon=-79.40682#map=19/43.64567/-79.40682" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">→ 2.4m</td>
-          <td class="new-val">43.64567, -79.40679</td>
+          <td class="new-val">43.64567, -79.40679<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64567&mlon=-79.40679#map=19/43.64567/-79.40679" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>696 Richmond St W</td>
           
-          <td class="old-val">43.64595, -79.40726</td>
+          <td class="old-val">43.64595, -79.40726<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64595&mlon=-79.40726#map=19/43.64595/-79.40726" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↘ 3.9m</td>
-          <td class="new-val">43.64593, -79.40722</td>
+          <td class="new-val">43.64593, -79.40722<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64593&mlon=-79.40722#map=19/43.64593/-79.40722" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>698 Richmond St W</td>
           
-          <td class="old-val">43.64599, -79.40731</td>
+          <td class="old-val">43.64599, -79.40731<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64599&mlon=-79.40731#map=19/43.64599/-79.40731" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 10.1m</td>
-          <td class="new-val">43.64590, -79.40729</td>
+          <td class="new-val">43.64590, -79.40729<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64590&mlon=-79.40729#map=19/43.64590/-79.40729" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>704 Richmond St W</td>
           
-          <td class="old-val">43.64590, -79.40750</td>
+          <td class="old-val">43.64590, -79.40750<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64590&mlon=-79.40750#map=19/43.64590/-79.40750" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↘ 3.9m</td>
-          <td class="new-val">43.64588, -79.40746</td>
+          <td class="new-val">43.64588, -79.40746<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64588&mlon=-79.40746#map=19/43.64588/-79.40746" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>712 Richmond St W</td>
           
-          <td class="old-val">43.64586, -79.40774</td>
+          <td class="old-val">43.64586, -79.40774<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64586&mlon=-79.40774#map=19/43.64586/-79.40774" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↘ 5.5m</td>
-          <td class="new-val">43.64582, -79.40770</td>
+          <td class="new-val">43.64582, -79.40770<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64582&mlon=-79.40770#map=19/43.64582/-79.40770" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>725 Richmond St W</td>
           
-          <td class="old-val">43.64547, -79.40780</td>
+          <td class="old-val">43.64547, -79.40780<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64547&mlon=-79.40780#map=19/43.64547/-79.40780" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">→ 1.6m</td>
-          <td class="new-val">43.64547, -79.40778</td>
+          <td class="new-val">43.64547, -79.40778<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64547&mlon=-79.40778#map=19/43.64547/-79.40778" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>727 Richmond St W</td>
           
-          <td class="old-val">43.64545, -79.40789</td>
+          <td class="old-val">43.64545, -79.40789<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64545&mlon=-79.40789#map=19/43.64545/-79.40789" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↗ 2.7m</td>
-          <td class="new-val">43.64547, -79.40787</td>
+          <td class="new-val">43.64547, -79.40787<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64547&mlon=-79.40787#map=19/43.64547/-79.40787" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>731 Richmond St W</td>
           
-          <td class="old-val">43.64543, -79.40798</td>
+          <td class="old-val">43.64543, -79.40798<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64543&mlon=-79.40798#map=19/43.64543/-79.40798" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↗ 2.7m</td>
-          <td class="new-val">43.64545, -79.40796</td>
+          <td class="new-val">43.64545, -79.40796<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64545&mlon=-79.40796#map=19/43.64545/-79.40796" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>733 Richmond St W</td>
           
-          <td class="old-val">43.64543, -79.40808</td>
+          <td class="old-val">43.64543, -79.40808<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64543&mlon=-79.40808#map=19/43.64543/-79.40808" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↗ 2.0m</td>
-          <td class="new-val">43.64544, -79.40806</td>
+          <td class="new-val">43.64544, -79.40806<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64544&mlon=-79.40806#map=19/43.64544/-79.40806" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>735 Richmond St W</td>
           
-          <td class="old-val">43.64539, -79.40817</td>
+          <td class="old-val">43.64539, -79.40817<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64539&mlon=-79.40817#map=19/43.64539/-79.40817" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↗ 3.3m</td>
-          <td class="new-val">43.64541, -79.40814</td>
+          <td class="new-val">43.64541, -79.40814<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64541&mlon=-79.40814#map=19/43.64541/-79.40814" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>741 Richmond St W</td>
           
-          <td class="old-val">43.64537, -79.40835</td>
+          <td class="old-val">43.64537, -79.40835<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64537&mlon=-79.40835#map=19/43.64537/-79.40835" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↗ 1.4m</td>
-          <td class="new-val">43.64538, -79.40834</td>
+          <td class="new-val">43.64538, -79.40834<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64538&mlon=-79.40834#map=19/43.64538/-79.40834" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>743 Richmond St W</td>
           
-          <td class="old-val">43.64536, -79.40843</td>
+          <td class="old-val">43.64536, -79.40843<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64536&mlon=-79.40843#map=19/43.64536/-79.40843" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↗ 2.7m</td>
-          <td class="new-val">43.64537, -79.40840</td>
+          <td class="new-val">43.64537, -79.40840<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64537&mlon=-79.40840#map=19/43.64537/-79.40840" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>745 Richmond St W</td>
           
-          <td class="old-val">43.64535, -79.40848</td>
+          <td class="old-val">43.64535, -79.40848<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64535&mlon=-79.40848#map=19/43.64535/-79.40848" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">→ 1.6m</td>
-          <td class="new-val">43.64535, -79.40846</td>
+          <td class="new-val">43.64535, -79.40846<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64535&mlon=-79.40846#map=19/43.64535/-79.40846" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>749 Richmond St W</td>
           
-          <td class="old-val">43.64533, -79.40863</td>
+          <td class="old-val">43.64533, -79.40863<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64533&mlon=-79.40863#map=19/43.64533/-79.40863" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">→ 2.4m</td>
-          <td class="new-val">43.64533, -79.40860</td>
+          <td class="new-val">43.64533, -79.40860<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64533&mlon=-79.40860#map=19/43.64533/-79.40860" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>769 Richmond St W</td>
           
-          <td class="old-val">43.64520, -79.40915</td>
+          <td class="old-val">43.64520, -79.40915<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64520&mlon=-79.40915#map=19/43.64520/-79.40915" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">← 2.4m</td>
-          <td class="new-val">43.64520, -79.40918</td>
+          <td class="new-val">43.64520, -79.40918<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64520&mlon=-79.40918#map=19/43.64520/-79.40918" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>770 Richmond St W</td>
           
-          <td class="old-val">43.64559, -79.40947</td>
+          <td class="old-val">43.64559, -79.40947<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64559&mlon=-79.40947#map=19/43.64559/-79.40947" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↘ 12.5m</td>
-          <td class="new-val">43.64549, -79.40940</td>
+          <td class="new-val">43.64549, -79.40940<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64549&mlon=-79.40940#map=19/43.64549/-79.40940" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>774 Richmond St W</td>
           
-          <td class="old-val">43.64555, -79.40958</td>
+          <td class="old-val">43.64555, -79.40958<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64555&mlon=-79.40958#map=19/43.64555/-79.40958" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↘ 10.5m</td>
-          <td class="new-val">43.64547, -79.40951</td>
+          <td class="new-val">43.64547, -79.40951<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64547&mlon=-79.40951#map=19/43.64547/-79.40951" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>288 Silverstone Dr</td>
           
-          <td class="old-val">43.75014, -79.59867</td>
+          <td class="old-val">43.75014, -79.59867<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75014&mlon=-79.59867#map=19/43.75014/-79.59867" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 21.6m</td>
-          <td class="new-val">43.75032, -79.59877</td>
+          <td class="new-val">43.75032, -79.59877<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75032&mlon=-79.59877#map=19/43.75032/-79.59877" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>290 Silverstone Dr</td>
           
-          <td class="old-val">43.75024, -79.59911</td>
+          <td class="old-val">43.75024, -79.59911<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75024&mlon=-79.59911#map=19/43.75024/-79.59911" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">→ 32.9m</td>
-          <td class="new-val">43.75018, -79.59871</td>
+          <td class="new-val">43.75018, -79.59871<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75018&mlon=-79.59871#map=19/43.75018/-79.59871" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>298 Silverstone Dr</td>
           
-          <td class="old-val">43.74980, -79.59853</td>
+          <td class="old-val">43.74980, -79.59853<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74980&mlon=-79.59853#map=19/43.74980/-79.59853" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↘ 17.2m</td>
-          <td class="new-val">43.74966, -79.59844</td>
+          <td class="new-val">43.74966, -79.59844<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74966&mlon=-79.59844#map=19/43.74966/-79.59844" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>12 Tamarack Crcl</td>
           
-          <td class="old-val">43.69795, -79.53959</td>
+          <td class="old-val">43.69795, -79.53959<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69795&mlon=-79.53959#map=19/43.69795/-79.53959" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 3.4m</td>
-          <td class="new-val">43.69792, -79.53960</td>
+          <td class="new-val">43.69792, -79.53960<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69792&mlon=-79.53960#map=19/43.69792/-79.53960" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>13 Tamarack Crcl</td>
           
-          <td class="old-val">43.69785, -79.53964</td>
+          <td class="old-val">43.69785, -79.53964<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69785&mlon=-79.53964#map=19/43.69785/-79.53964" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 3.3m</td>
-          <td class="new-val">43.69788, -79.53964</td>
+          <td class="new-val">43.69788, -79.53964<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69788&mlon=-79.53964#map=19/43.69788/-79.53964" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>15 Tamarack Crcl</td>
           
-          <td class="old-val">43.69776, -79.53971</td>
+          <td class="old-val">43.69776, -79.53971<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69776&mlon=-79.53971#map=19/43.69776/-79.53971" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↗ 1.4m</td>
-          <td class="new-val">43.69777, -79.53970</td>
+          <td class="new-val">43.69777, -79.53970<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69777&mlon=-79.53970#map=19/43.69777/-79.53970" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>16 Tamarack Crcl</td>
           
-          <td class="old-val">43.69770, -79.53975</td>
+          <td class="old-val">43.69770, -79.53975<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69770&mlon=-79.53975#map=19/43.69770/-79.53975" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 2.4m</td>
-          <td class="new-val">43.69772, -79.53974</td>
+          <td class="new-val">43.69772, -79.53974<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69772&mlon=-79.53974#map=19/43.69772/-79.53974" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>19 Tamarack Crcl</td>
           
-          <td class="old-val">43.69750, -79.53961</td>
+          <td class="old-val">43.69750, -79.53961<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69750&mlon=-79.53961#map=19/43.69750/-79.53961" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↘ 2.0m</td>
-          <td class="new-val">43.69749, -79.53959</td>
+          <td class="new-val">43.69749, -79.53959<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69749&mlon=-79.53959#map=19/43.69749/-79.53959" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>20 Tamarack Crcl</td>
           
-          <td class="old-val">43.69748, -79.53956</td>
+          <td class="old-val">43.69748, -79.53956<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69748&mlon=-79.53956#map=19/43.69748/-79.53956" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↘ 2.0m</td>
-          <td class="new-val">43.69747, -79.53954</td>
+          <td class="new-val">43.69747, -79.53954<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69747&mlon=-79.53954#map=19/43.69747/-79.53954" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>21 Tamarack Crcl</td>
           
-          <td class="old-val">43.69745, -79.53948</td>
+          <td class="old-val">43.69745, -79.53948<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69745&mlon=-79.53948#map=19/43.69745/-79.53948" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">→ 4.2m</td>
-          <td class="new-val">43.69744, -79.53943</td>
+          <td class="new-val">43.69744, -79.53943<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69744&mlon=-79.53943#map=19/43.69744/-79.53943" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>22 Tamarack Crcl</td>
           
-          <td class="old-val">43.69743, -79.53938</td>
+          <td class="old-val">43.69743, -79.53938<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69743&mlon=-79.53938#map=19/43.69743/-79.53938" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↘ 1.4m</td>
-          <td class="new-val">43.69742, -79.53937</td>
+          <td class="new-val">43.69742, -79.53937<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69742&mlon=-79.53937#map=19/43.69742/-79.53937" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>34 Tamarack Crcl</td>
           
-          <td class="old-val">43.69689, -79.53905</td>
+          <td class="old-val">43.69689, -79.53905<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69689&mlon=-79.53905#map=19/43.69689/-79.53905" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 2.4m</td>
-          <td class="new-val">43.69687, -79.53904</td>
+          <td class="new-val">43.69687, -79.53904<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69687&mlon=-79.53904#map=19/43.69687/-79.53904" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>57 Tamarack Crcl</td>
           
-          <td class="old-val">43.69712, -79.53865</td>
+          <td class="old-val">43.69712, -79.53865<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69712&mlon=-79.53865#map=19/43.69712/-79.53865" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 2.4m</td>
-          <td class="new-val">43.69714, -79.53866</td>
+          <td class="new-val">43.69714, -79.53866<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69714&mlon=-79.53866#map=19/43.69714/-79.53866" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>70 Tamarack Crcl</td>
           
-          <td class="old-val">43.69787, -79.53908</td>
+          <td class="old-val">43.69787, -79.53908<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69787&mlon=-79.53908#map=19/43.69787/-79.53908" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">→ 4.2m</td>
-          <td class="new-val">43.69786, -79.53903</td>
+          <td class="new-val">43.69786, -79.53903<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69786&mlon=-79.53903#map=19/43.69786/-79.53903" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>71 Tamarack Crcl</td>
           
-          <td class="old-val">43.69791, -79.53911</td>
+          <td class="old-val">43.69791, -79.53911<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69791&mlon=-79.53911#map=19/43.69791/-79.53911" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↘ 2.0m</td>
-          <td class="new-val">43.69790, -79.53909</td>
+          <td class="new-val">43.69790, -79.53909<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69790&mlon=-79.53909#map=19/43.69790/-79.53909" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>74 Tamarack Crcl</td>
           
-          <td class="old-val">43.69797, -79.53929</td>
+          <td class="old-val">43.69797, -79.53929<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69797&mlon=-79.53929#map=19/43.69797/-79.53929" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">← 1.6m</td>
-          <td class="new-val">43.69797, -79.53931</td>
+          <td class="new-val">43.69797, -79.53931<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69797&mlon=-79.53931#map=19/43.69797/-79.53931" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>140 Tecumseth St</td>
           
-          <td class="old-val">43.64545, -79.40637</td>
+          <td class="old-val">43.64545, -79.40637<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64545&mlon=-79.40637#map=19/43.64545/-79.40637" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↘ 4.6m</td>
-          <td class="new-val">43.64543, -79.40632</td>
+          <td class="new-val">43.64543, -79.40632<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64543&mlon=-79.40632#map=19/43.64543/-79.40632" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>62 Vanguard Dr</td>
           
-          <td class="old-val">43.65393, -79.56269</td>
+          <td class="old-val">43.65393, -79.56269<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65393&mlon=-79.56269#map=19/43.65393/-79.56269" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">← 6.4m</td>
-          <td class="new-val">43.65393, -79.56277</td>
+          <td class="new-val">43.65393, -79.56277<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65393&mlon=-79.56277#map=19/43.65393/-79.56277" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>66 Vanguard Dr</td>
           
-          <td class="old-val">43.65405, -79.56280</td>
+          <td class="old-val">43.65405, -79.56280<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65405&mlon=-79.56280#map=19/43.65405/-79.56280" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↖ 6.0m</td>
-          <td class="new-val">43.65409, -79.56285</td>
+          <td class="new-val">43.65409, -79.56285<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65409&mlon=-79.56285#map=19/43.65409/-79.56285" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>12 Whitaker Ave</td>
           
-          <td class="old-val">43.64403, -79.40633</td>
+          <td class="old-val">43.64403, -79.40633<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64403&mlon=-79.40633#map=19/43.64403/-79.40633" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↘ 2.0m</td>
-          <td class="new-val">43.64402, -79.40631</td>
+          <td class="new-val">43.64402, -79.40631<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64402&mlon=-79.40631#map=19/43.64402/-79.40631" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>17 Whitaker Ave</td>
           
-          <td class="old-val">43.64375, -79.40643</td>
+          <td class="old-val">43.64375, -79.40643<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64375&mlon=-79.40643#map=19/43.64375/-79.40643" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↗ 2.0m</td>
-          <td class="new-val">43.64376, -79.40641</td>
+          <td class="new-val">43.64376, -79.40641<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64376&mlon=-79.40641#map=19/43.64376/-79.40641" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>18 Whitaker Ave</td>
           
-          <td class="old-val">43.64400, -79.40647</td>
+          <td class="old-val">43.64400, -79.40647<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64400&mlon=-79.40647#map=19/43.64400/-79.40647" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↘ 4.6m</td>
-          <td class="new-val">43.64397, -79.40643</td>
+          <td class="new-val">43.64397, -79.40643<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64397&mlon=-79.40643#map=19/43.64397/-79.40643" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>19 Whitaker Ave</td>
           
-          <td class="old-val">43.64372, -79.40649</td>
+          <td class="old-val">43.64372, -79.40649<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64372&mlon=-79.40649#map=19/43.64372/-79.40649" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 3.4m</td>
-          <td class="new-val">43.64375, -79.40648</td>
+          <td class="new-val">43.64375, -79.40648<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64375&mlon=-79.40648#map=19/43.64375/-79.40648" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>20 Whitaker Ave</td>
           
-          <td class="old-val">43.64400, -79.40651</td>
+          <td class="old-val">43.64400, -79.40651<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64400&mlon=-79.40651#map=19/43.64400/-79.40651" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↘ 4.1m</td>
-          <td class="new-val">43.64397, -79.40648</td>
+          <td class="new-val">43.64397, -79.40648<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64397&mlon=-79.40648#map=19/43.64397/-79.40648" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>21 Whitaker Ave</td>
           
-          <td class="old-val">43.64371, -79.40655</td>
+          <td class="old-val">43.64371, -79.40655<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64371&mlon=-79.40655#map=19/43.64371/-79.40655" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 3.4m</td>
-          <td class="new-val">43.64374, -79.40654</td>
+          <td class="new-val">43.64374, -79.40654<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64374&mlon=-79.40654#map=19/43.64374/-79.40654" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>22 Whitaker Ave</td>
           
-          <td class="old-val">43.64398, -79.40655</td>
+          <td class="old-val">43.64398, -79.40655<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64398&mlon=-79.40655#map=19/43.64398/-79.40655" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↘ 2.7m</td>
-          <td class="new-val">43.64396, -79.40653</td>
+          <td class="new-val">43.64396, -79.40653<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64396&mlon=-79.40653#map=19/43.64396/-79.40653" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>25 Whitaker Ave</td>
           
-          <td class="old-val">43.64370, -79.40666</td>
+          <td class="old-val">43.64370, -79.40666<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64370&mlon=-79.40666#map=19/43.64370/-79.40666" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↗ 2.0m</td>
-          <td class="new-val">43.64371, -79.40664</td>
+          <td class="new-val">43.64371, -79.40664<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64371&mlon=-79.40664#map=19/43.64371/-79.40664" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>27 Whitaker Ave</td>
           
-          <td class="old-val">43.64369, -79.40670</td>
+          <td class="old-val">43.64369, -79.40670<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64369&mlon=-79.40670#map=19/43.64369/-79.40670" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↗ 2.0m</td>
-          <td class="new-val">43.64370, -79.40668</td>
+          <td class="new-val">43.64370, -79.40668<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64370&mlon=-79.40668#map=19/43.64370/-79.40668" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>29 Whitaker Ave</td>
           
-          <td class="old-val">43.64368, -79.40674</td>
+          <td class="old-val">43.64368, -79.40674<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64368&mlon=-79.40674#map=19/43.64368/-79.40674" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 2.4m</td>
-          <td class="new-val">43.64370, -79.40673</td>
+          <td class="new-val">43.64370, -79.40673<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64370&mlon=-79.40673#map=19/43.64370/-79.40673" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>30 Whitaker Ave</td>
           
-          <td class="old-val">43.64394, -79.40675</td>
+          <td class="old-val">43.64394, -79.40675<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64394&mlon=-79.40675#map=19/43.64394/-79.40675" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↘ 4.1m</td>
-          <td class="new-val">43.64391, -79.40672</td>
+          <td class="new-val">43.64391, -79.40672<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64391&mlon=-79.40672#map=19/43.64391/-79.40672" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>31 Whitaker Ave</td>
           
-          <td class="old-val">43.64367, -79.40679</td>
+          <td class="old-val">43.64367, -79.40679<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64367&mlon=-79.40679#map=19/43.64367/-79.40679" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 2.4m</td>
-          <td class="new-val">43.64369, -79.40678</td>
+          <td class="new-val">43.64369, -79.40678<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64369&mlon=-79.40678#map=19/43.64369/-79.40678" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
       </tbody>
     </table>
     
+    
   </div>
 
-  <div class="generated-at">Report generated Jun 11, 2026 at 03:21 PM · source licence: Open Government Licence – Toronto</div>
+  <div class="generated-at">Report generated Jun 12, 2026 at 12:24 PM · source licence: Open Government Licence – Toronto</div>
 
   <script>
     function sortTable(tbodyId, col) {

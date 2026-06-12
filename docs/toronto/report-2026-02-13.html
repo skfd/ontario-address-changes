@@ -13,6 +13,7 @@
       --accent-hover: #106ebe; --accent-bg: #eff6fc; --green: #107c10;
       --green-bg: #f1faf1; --green-tint: #9fd89f; --red: #c50f1f; --red-bg: #fdf3f4;
       --red-tint: #eeacb2; --yellow: #eaa300; --yellow-bg: #fefbf4; --yellow-tint: #f9e2ae;
+      --purple: #881798; --purple-bg: #f9f3fb;
       --shadow-4: 0 2px 4px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
       --shadow-8: 0 4px 8px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
       --card-bg: #ffffff; --card-hover: #f5f5f5; color-scheme: light;
@@ -25,6 +26,7 @@
         --accent-hover: #3aa0f3; --accent-bg: #002848; --green: #54b054;
         --green-bg: #052505; --green-tint: #107c10; --red: #dc626d; --red-bg: #3b0509;
         --red-tint: #c50f1f; --yellow: #f2c661; --yellow-bg: #463100; --yellow-tint: #eaa300;
+        --purple: #d29ddb; --purple-bg: #3a1040;
         --shadow-4: 0 2px 4px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
         --shadow-8: 0 4px 8px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
         --card-bg: #333333; --card-hover: #3d3d3d; color-scheme: dark;
@@ -53,6 +55,7 @@
     .card .value { font-size: 28px; font-weight: 600; margin-top: 4px; }
     .card .value.green { color: var(--green); } .card .value.red { color: var(--red); }
     .card .value.yellow { color: var(--yellow); } .card .value.accent { color: var(--accent); }
+    .card .value.purple { color: var(--purple); }
     .sparkline { display: block; margin-top: 6px; overflow: visible; opacity: 0.9; }
     .sparkline-label { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
     .section { margin-bottom: 24px; }
@@ -62,6 +65,8 @@
     .badge-green { background: var(--green-bg); color: var(--green); }
     .badge-red { background: var(--red-bg); color: var(--red); }
     .badge-yellow { background: var(--yellow-bg); color: var(--yellow); }
+    .badge-accent { background: var(--accent-bg); color: var(--accent); }
+    .badge-purple { background: var(--purple-bg); color: var(--purple); }
     table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface);
       border-radius: 8px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
     thead { background: var(--surface2); }
@@ -94,6 +99,13 @@
       color: var(--accent); padding: 5px 12px; border-radius: 4px; cursor: pointer;
       font-size: 12px; font-family: inherit; margin-bottom: 12px; transition: background 0.1s; }
     .collapsible-toggle:hover { background: var(--surface2); }
+    details.rename-group { background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; margin-bottom: 8px; box-shadow: var(--shadow-4); }
+    details.rename-group summary { padding: 10px 14px; cursor: pointer; font-size: 13px; }
+    details.rename-group[open] summary { border-bottom: 1px solid var(--border); }
+    details.rename-group table { border: none; box-shadow: none; border-radius: 0; }
+    details.rename-group .truncated { padding: 0 14px 10px; margin-top: 0; }
+    .rename-count { color: var(--text-dim); font-size: 12px; margin-left: 6px; }
     .no-changes-banner { background: var(--green-bg); border: 1px solid var(--green-tint);
       color: var(--green); padding: 16px; border-radius: 8px; margin-bottom: 24px;
       text-align: center; font-weight: 600; font-size: 14px; }
@@ -136,6 +148,10 @@
 
 
 
+
+
+
+
 <body>
 
   <a class="back-link" href="index.html">← Back to City of Toronto reports</a>
@@ -161,17 +177,23 @@
     <span class="info-btn"><span class="glyph">i</span> Fields</span>
     <span class="info-pop">
       <strong>Compared for changes</strong>
-      <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (LINEAR_NAME_FULL)</li><li>Full address (ADDRESS_FULL)</li><li>Coordinates (latitude, longitude)</li><li>ADDRESS_POINT_ID</li><li>ADDRESS_STATUS</li><li>ADDRESS_STRING_ID</li><li>CENTRELINE_SIDE</li><li>GENERAL_USE</li><li>GENERAL_USE_CODE</li><li>HI_NUM</li><li>HI_NUM_SUF</li><li>LINEAR_NAME</li><li>LINEAR_NAME_DESC</li><li>LINEAR_NAME_DIR</li><li>LINEAR_NAME_ID</li><li>LINEAR_NAME_TYPE</li><li>LO_NUM</li><li>LO_NUM_SUF</li><li>MAINT_STAGE</li><li>MUNICIPALITY</li><li>MUNICIPALITY_NAME</li><li>PLACE_NAME</li><li>PLACE_NAME_ALL</li><li>WARD</li><li>WARD_NAME</li></ul>
+      <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (LINEAR_NAME_FULL)</li><li>Full address (ADDRESS_FULL)</li><li>Coordinates (latitude, longitude)</li><li>ADDRESS_POINT_ID</li><li>ADDRESS_STATUS</li><li>GENERAL_USE</li><li>GENERAL_USE_CODE</li><li>LINEAR_NAME_DESC</li><li>MAINT_STAGE</li><li>MUNICIPALITY</li><li>MUNICIPALITY_NAME</li><li>PLACE_NAME</li><li>PLACE_NAME_ALL</li><li>WARD</li><li>WARD_NAME</li></ul>
       <strong>Ignored (changes here are not counted)</strong>
-      <ul><li>ADDRESS_CLASS</li><li>ADDRESS_CLASS_DESC</li><li>ADDRESS_ID</li><li>ADDRESS_ID_LINK</li><li>ADDRESS_POINT_ID_LINK</li><li>CENTRELINE_ID</li><li>CENTRELINE_MEASURE</li><li>CENTRELINE_OFFSET</li><li>CLASS_FAMILY</li><li>CLASS_FAMILY_DESC</li></ul>
+      <ul><li>ADDRESS_CLASS</li><li>ADDRESS_CLASS_DESC</li><li>ADDRESS_ID</li><li>ADDRESS_ID_LINK</li><li>ADDRESS_POINT_ID_LINK</li><li>ADDRESS_STRING_ID</li><li>CENTRELINE_ID</li><li>CENTRELINE_MEASURE</li><li>CENTRELINE_OFFSET</li><li>CENTRELINE_SIDE</li><li>CLASS_FAMILY</li><li>CLASS_FAMILY_DESC</li><li>HI_NUM</li><li>HI_NUM_SUF</li><li>LINEAR_NAME</li><li>LINEAR_NAME_DIR</li><li>LINEAR_NAME_ID</li><li>LINEAR_NAME_TYPE</li><li>LO_NUM</li><li>LO_NUM_SUF</li></ul>
       
     </span>
   </span></div>
       <div class="value yellow">0</div>
-      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 37.3,2.0 72.7,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 37.3,2.0 72.7,8.7 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Renumbered</div>
+      <div class="value accent">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#0078d4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 37.3,18.0 72.7,2.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#0078d4"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Street Renames</div>
+      <div class="value purple">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#9141ac" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 37.3,18.0 72.7,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#9141ac"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
     <div class="card"><div class="label">Location Adjustments</div>
       <div class="value" style="color: var(--text-dim)">14</div>
-      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#808080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 37.3,6.1 72.7,2.0 108.0,17.9"/><circle cx="108.0" cy="17.9" r="2" fill="#808080"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#808080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 37.3,2.0 72.7,17.9 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#808080"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
   </div>
 
   
@@ -241,13 +263,23 @@
     <span class="info-btn"><span class="glyph">i</span> Fields</span>
     <span class="info-pop">
       <strong>Compared for changes</strong>
-      <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (LINEAR_NAME_FULL)</li><li>Full address (ADDRESS_FULL)</li><li>Coordinates (latitude, longitude)</li><li>ADDRESS_POINT_ID</li><li>ADDRESS_STATUS</li><li>ADDRESS_STRING_ID</li><li>CENTRELINE_SIDE</li><li>GENERAL_USE</li><li>GENERAL_USE_CODE</li><li>HI_NUM</li><li>HI_NUM_SUF</li><li>LINEAR_NAME</li><li>LINEAR_NAME_DESC</li><li>LINEAR_NAME_DIR</li><li>LINEAR_NAME_ID</li><li>LINEAR_NAME_TYPE</li><li>LO_NUM</li><li>LO_NUM_SUF</li><li>MAINT_STAGE</li><li>MUNICIPALITY</li><li>MUNICIPALITY_NAME</li><li>PLACE_NAME</li><li>PLACE_NAME_ALL</li><li>WARD</li><li>WARD_NAME</li></ul>
+      <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (LINEAR_NAME_FULL)</li><li>Full address (ADDRESS_FULL)</li><li>Coordinates (latitude, longitude)</li><li>ADDRESS_POINT_ID</li><li>ADDRESS_STATUS</li><li>GENERAL_USE</li><li>GENERAL_USE_CODE</li><li>LINEAR_NAME_DESC</li><li>MAINT_STAGE</li><li>MUNICIPALITY</li><li>MUNICIPALITY_NAME</li><li>PLACE_NAME</li><li>PLACE_NAME_ALL</li><li>WARD</li><li>WARD_NAME</li></ul>
       <strong>Ignored (changes here are not counted)</strong>
-      <ul><li>ADDRESS_CLASS</li><li>ADDRESS_CLASS_DESC</li><li>ADDRESS_ID</li><li>ADDRESS_ID_LINK</li><li>ADDRESS_POINT_ID_LINK</li><li>CENTRELINE_ID</li><li>CENTRELINE_MEASURE</li><li>CENTRELINE_OFFSET</li><li>CLASS_FAMILY</li><li>CLASS_FAMILY_DESC</li></ul>
+      <ul><li>ADDRESS_CLASS</li><li>ADDRESS_CLASS_DESC</li><li>ADDRESS_ID</li><li>ADDRESS_ID_LINK</li><li>ADDRESS_POINT_ID_LINK</li><li>ADDRESS_STRING_ID</li><li>CENTRELINE_ID</li><li>CENTRELINE_MEASURE</li><li>CENTRELINE_OFFSET</li><li>CENTRELINE_SIDE</li><li>CLASS_FAMILY</li><li>CLASS_FAMILY_DESC</li><li>HI_NUM</li><li>HI_NUM_SUF</li><li>LINEAR_NAME</li><li>LINEAR_NAME_DIR</li><li>LINEAR_NAME_ID</li><li>LINEAR_NAME_TYPE</li><li>LO_NUM</li><li>LO_NUM_SUF</li></ul>
       
     </span>
-  </span>
+  </span></h2>
     <p class="empty">No addresses updated.</p>
+  </div>
+
+  <div class="section">
+    <h2>Renumbered Addresses <span class="badge badge-accent">0</span></h2>
+    <p class="empty">No addresses renumbered.</p>
+  </div>
+
+  <div class="section">
+    <h2>Street Renames <span class="badge badge-purple">0</span></h2>
+    <p class="empty">No street renames.</p>
   </div>
 
   <div class="section">
@@ -259,122 +291,123 @@
         
         <tr><td>87A Disco Rd</td>
           
-          <td class="old-val">43.70068, -79.59665</td>
+          <td class="old-val">43.70068, -79.59665<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70068&mlon=-79.59665#map=19/43.70068/-79.59665" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↙ 25.6m</td>
-          <td class="new-val">43.70049, -79.59683</td>
+          <td class="new-val">43.70049, -79.59683<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70049&mlon=-79.59683#map=19/43.70049/-79.59683" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>7 Government Rd</td>
           
-          <td class="old-val">43.66020, -79.50395</td>
+          <td class="old-val">43.66020, -79.50395<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66020&mlon=-79.50395#map=19/43.66020/-79.50395" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">← 3.2m</td>
-          <td class="new-val">43.66020, -79.50399</td>
+          <td class="new-val">43.66020, -79.50399<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66020&mlon=-79.50399#map=19/43.66020/-79.50399" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>9 Government Rd</td>
           
-          <td class="old-val">43.66017, -79.50413</td>
+          <td class="old-val">43.66017, -79.50413<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66017&mlon=-79.50413#map=19/43.66017/-79.50413" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">→ 6.8m</td>
-          <td class="new-val">43.66019, -79.50405</td>
+          <td class="new-val">43.66019, -79.50405<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66019&mlon=-79.50405#map=19/43.66019/-79.50405" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>2661 Islington Ave</td>
           
-          <td class="old-val">43.73881, -79.56564</td>
+          <td class="old-val">43.73881, -79.56564<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73881&mlon=-79.56564#map=19/43.73881/-79.56564" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">→ 7.6m</td>
-          <td class="new-val">43.73883, -79.56555</td>
+          <td class="new-val">43.73883, -79.56555<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73883&mlon=-79.56555#map=19/43.73883/-79.56555" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>2665 Islington Ave</td>
           
-          <td class="old-val">43.73891, -79.56568</td>
+          <td class="old-val">43.73891, -79.56568<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73891&mlon=-79.56568#map=19/43.73891/-79.56568" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">→ 7.3m</td>
-          <td class="new-val">43.73892, -79.56559</td>
+          <td class="new-val">43.73892, -79.56559<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73892&mlon=-79.56559#map=19/43.73892/-79.56559" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>2669 Islington Ave</td>
           
-          <td class="old-val">43.73907, -79.56589</td>
+          <td class="old-val">43.73907, -79.56589<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73907&mlon=-79.56589#map=19/43.73907/-79.56589" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↗ 15.2m</td>
-          <td class="new-val">43.73913, -79.56572</td>
+          <td class="new-val">43.73913, -79.56572<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73913&mlon=-79.56572#map=19/43.73913/-79.56572" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>2670 Islington Ave</td>
           
-          <td class="old-val">43.73908, -79.56649</td>
+          <td class="old-val">43.73908, -79.56649<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73908&mlon=-79.56649#map=19/43.73908/-79.56649" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 7.1m</td>
-          <td class="new-val">43.73902, -79.56652</td>
+          <td class="new-val">43.73902, -79.56652<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73902&mlon=-79.56652#map=19/43.73902/-79.56652" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>2672 Islington Ave</td>
           
-          <td class="old-val">43.73915, -79.56668</td>
+          <td class="old-val">43.73915, -79.56668<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73915&mlon=-79.56668#map=19/43.73915/-79.56668" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↗ 7.2m</td>
-          <td class="new-val">43.73918, -79.56660</td>
+          <td class="new-val">43.73918, -79.56660<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73918&mlon=-79.56660#map=19/43.73918/-79.56660" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>89 Kingsway Cres</td>
           
-          <td class="old-val">43.65971, -79.50421</td>
+          <td class="old-val">43.65971, -79.50421<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65971&mlon=-79.50421#map=19/43.65971/-79.50421" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↗ 7.8m</td>
-          <td class="new-val">43.65975, -79.50413</td>
+          <td class="new-val">43.65975, -79.50413<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65975&mlon=-79.50413#map=19/43.65975/-79.50413" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>899 Kipling Ave</td>
           
-          <td class="old-val">43.63713, -79.53314</td>
+          <td class="old-val">43.63713, -79.53314<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.63713&mlon=-79.53314#map=19/43.63713/-79.53314" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">→ 6.4m</td>
-          <td class="new-val">43.63713, -79.53306</td>
+          <td class="new-val">43.63713, -79.53306<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.63713&mlon=-79.53306#map=19/43.63713/-79.53306" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>910 The East Mall</td>
           
-          <td class="old-val">43.67024, -79.57189</td>
+          <td class="old-val">43.67024, -79.57189<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67024&mlon=-79.57189#map=19/43.67024/-79.57189" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 13.5m</td>
-          <td class="new-val">43.67012, -79.57187</td>
+          <td class="new-val">43.67012, -79.57187<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67012&mlon=-79.57187#map=19/43.67012/-79.57187" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>2 Thorndale Ave</td>
           
-          <td class="old-val">43.66126, -79.50497</td>
+          <td class="old-val">43.66126, -79.50497<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66126&mlon=-79.50497#map=19/43.66126/-79.50497" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↗ 18.6m</td>
-          <td class="new-val">43.66133, -79.50476</td>
+          <td class="new-val">43.66133, -79.50476<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66133&mlon=-79.50476#map=19/43.66133/-79.50476" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>6 Thorndale Ave</td>
           
-          <td class="old-val">43.66137, -79.50505</td>
+          <td class="old-val">43.66137, -79.50505<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66137&mlon=-79.50505#map=19/43.66137/-79.50505" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↗ 7.4m</td>
-          <td class="new-val">43.66143, -79.50501</td>
+          <td class="new-val">43.66143, -79.50501<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66143&mlon=-79.50501#map=19/43.66143/-79.50501" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>14 Thorndale Ave</td>
           
-          <td class="old-val">43.66123, -79.50565</td>
+          <td class="old-val">43.66123, -79.50565<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66123&mlon=-79.50565#map=19/43.66123/-79.50565" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 30.1m</td>
-          <td class="new-val">43.66150, -79.50565</td>
+          <td class="new-val">43.66150, -79.50565<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66150&mlon=-79.50565#map=19/43.66150/-79.50565" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
       </tbody>
     </table>
     
+    
   </div>
 
-  <div class="generated-at">Report generated Jun 11, 2026 at 03:21 PM · source licence: Open Government Licence – Toronto</div>
+  <div class="generated-at">Report generated Jun 12, 2026 at 12:24 PM · source licence: Open Government Licence – Toronto</div>
 
   <script>
     function sortTable(tbodyId, col) {

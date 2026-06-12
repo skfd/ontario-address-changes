@@ -13,6 +13,7 @@
       --accent-hover: #106ebe; --accent-bg: #eff6fc; --green: #107c10;
       --green-bg: #f1faf1; --green-tint: #9fd89f; --red: #c50f1f; --red-bg: #fdf3f4;
       --red-tint: #eeacb2; --yellow: #eaa300; --yellow-bg: #fefbf4; --yellow-tint: #f9e2ae;
+      --purple: #881798; --purple-bg: #f9f3fb;
       --shadow-4: 0 2px 4px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
       --shadow-8: 0 4px 8px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
       --card-bg: #ffffff; --card-hover: #f5f5f5; color-scheme: light;
@@ -25,6 +26,7 @@
         --accent-hover: #3aa0f3; --accent-bg: #002848; --green: #54b054;
         --green-bg: #052505; --green-tint: #107c10; --red: #dc626d; --red-bg: #3b0509;
         --red-tint: #c50f1f; --yellow: #f2c661; --yellow-bg: #463100; --yellow-tint: #eaa300;
+        --purple: #d29ddb; --purple-bg: #3a1040;
         --shadow-4: 0 2px 4px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
         --shadow-8: 0 4px 8px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
         --card-bg: #333333; --card-hover: #3d3d3d; color-scheme: dark;
@@ -53,6 +55,7 @@
     .card .value { font-size: 28px; font-weight: 600; margin-top: 4px; }
     .card .value.green { color: var(--green); } .card .value.red { color: var(--red); }
     .card .value.yellow { color: var(--yellow); } .card .value.accent { color: var(--accent); }
+    .card .value.purple { color: var(--purple); }
     .sparkline { display: block; margin-top: 6px; overflow: visible; opacity: 0.9; }
     .sparkline-label { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
     .section { margin-bottom: 24px; }
@@ -62,6 +65,8 @@
     .badge-green { background: var(--green-bg); color: var(--green); }
     .badge-red { background: var(--red-bg); color: var(--red); }
     .badge-yellow { background: var(--yellow-bg); color: var(--yellow); }
+    .badge-accent { background: var(--accent-bg); color: var(--accent); }
+    .badge-purple { background: var(--purple-bg); color: var(--purple); }
     table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface);
       border-radius: 8px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
     thead { background: var(--surface2); }
@@ -94,6 +99,13 @@
       color: var(--accent); padding: 5px 12px; border-radius: 4px; cursor: pointer;
       font-size: 12px; font-family: inherit; margin-bottom: 12px; transition: background 0.1s; }
     .collapsible-toggle:hover { background: var(--surface2); }
+    details.rename-group { background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; margin-bottom: 8px; box-shadow: var(--shadow-4); }
+    details.rename-group summary { padding: 10px 14px; cursor: pointer; font-size: 13px; }
+    details.rename-group[open] summary { border-bottom: 1px solid var(--border); }
+    details.rename-group table { border: none; box-shadow: none; border-radius: 0; }
+    details.rename-group .truncated { padding: 0 14px 10px; margin-top: 0; }
+    .rename-count { color: var(--text-dim); font-size: 12px; margin-left: 6px; }
     .no-changes-banner { background: var(--green-bg); border: 1px solid var(--green-tint);
       color: var(--green); padding: 16px; border-radius: 8px; margin-bottom: 24px;
       text-align: center; font-weight: 600; font-size: 14px; }
@@ -136,6 +148,10 @@
 
 
 
+
+
+
+
 <body>
 
   <a class="back-link" href="index.html">← Back to City of Toronto reports</a>
@@ -161,14 +177,20 @@
     <span class="info-btn"><span class="glyph">i</span> Fields</span>
     <span class="info-pop">
       <strong>Compared for changes</strong>
-      <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (LINEAR_NAME_FULL)</li><li>Full address (ADDRESS_FULL)</li><li>Coordinates (latitude, longitude)</li><li>ADDRESS_POINT_ID</li><li>ADDRESS_STATUS</li><li>ADDRESS_STRING_ID</li><li>CENTRELINE_SIDE</li><li>GENERAL_USE</li><li>GENERAL_USE_CODE</li><li>HI_NUM</li><li>HI_NUM_SUF</li><li>LINEAR_NAME</li><li>LINEAR_NAME_DESC</li><li>LINEAR_NAME_DIR</li><li>LINEAR_NAME_ID</li><li>LINEAR_NAME_TYPE</li><li>LO_NUM</li><li>LO_NUM_SUF</li><li>MAINT_STAGE</li><li>MUNICIPALITY</li><li>MUNICIPALITY_NAME</li><li>PLACE_NAME</li><li>PLACE_NAME_ALL</li><li>WARD</li><li>WARD_NAME</li></ul>
+      <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (LINEAR_NAME_FULL)</li><li>Full address (ADDRESS_FULL)</li><li>Coordinates (latitude, longitude)</li><li>ADDRESS_POINT_ID</li><li>ADDRESS_STATUS</li><li>GENERAL_USE</li><li>GENERAL_USE_CODE</li><li>LINEAR_NAME_DESC</li><li>MAINT_STAGE</li><li>MUNICIPALITY</li><li>MUNICIPALITY_NAME</li><li>PLACE_NAME</li><li>PLACE_NAME_ALL</li><li>WARD</li><li>WARD_NAME</li></ul>
       <strong>Ignored (changes here are not counted)</strong>
-      <ul><li>ADDRESS_CLASS</li><li>ADDRESS_CLASS_DESC</li><li>ADDRESS_ID</li><li>ADDRESS_ID_LINK</li><li>ADDRESS_POINT_ID_LINK</li><li>CENTRELINE_ID</li><li>CENTRELINE_MEASURE</li><li>CENTRELINE_OFFSET</li><li>CLASS_FAMILY</li><li>CLASS_FAMILY_DESC</li></ul>
+      <ul><li>ADDRESS_CLASS</li><li>ADDRESS_CLASS_DESC</li><li>ADDRESS_ID</li><li>ADDRESS_ID_LINK</li><li>ADDRESS_POINT_ID_LINK</li><li>ADDRESS_STRING_ID</li><li>CENTRELINE_ID</li><li>CENTRELINE_MEASURE</li><li>CENTRELINE_OFFSET</li><li>CENTRELINE_SIDE</li><li>CLASS_FAMILY</li><li>CLASS_FAMILY_DESC</li><li>HI_NUM</li><li>HI_NUM_SUF</li><li>LINEAR_NAME</li><li>LINEAR_NAME_DIR</li><li>LINEAR_NAME_ID</li><li>LINEAR_NAME_TYPE</li><li>LO_NUM</li><li>LO_NUM_SUF</li></ul>
       
     </span>
   </span></div>
       <div class="value yellow">4</div>
       <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,10.0 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Renumbered</div>
+      <div class="value accent">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#0078d4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#0078d4"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Street Renames</div>
+      <div class="value purple">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#9141ac" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#9141ac"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
     <div class="card"><div class="label">Location Adjustments</div>
       <div class="value" style="color: var(--text-dim)">20</div>
       <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#808080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,2.0 19.7,13.0 37.3,14.3 55.0,16.9 72.7,16.1 90.3,17.4 108.0,13.7"/><circle cx="108.0" cy="13.7" r="2" fill="#808080"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
@@ -257,75 +279,85 @@
     <span class="info-btn"><span class="glyph">i</span> Fields</span>
     <span class="info-pop">
       <strong>Compared for changes</strong>
-      <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (LINEAR_NAME_FULL)</li><li>Full address (ADDRESS_FULL)</li><li>Coordinates (latitude, longitude)</li><li>ADDRESS_POINT_ID</li><li>ADDRESS_STATUS</li><li>ADDRESS_STRING_ID</li><li>CENTRELINE_SIDE</li><li>GENERAL_USE</li><li>GENERAL_USE_CODE</li><li>HI_NUM</li><li>HI_NUM_SUF</li><li>LINEAR_NAME</li><li>LINEAR_NAME_DESC</li><li>LINEAR_NAME_DIR</li><li>LINEAR_NAME_ID</li><li>LINEAR_NAME_TYPE</li><li>LO_NUM</li><li>LO_NUM_SUF</li><li>MAINT_STAGE</li><li>MUNICIPALITY</li><li>MUNICIPALITY_NAME</li><li>PLACE_NAME</li><li>PLACE_NAME_ALL</li><li>WARD</li><li>WARD_NAME</li></ul>
+      <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (LINEAR_NAME_FULL)</li><li>Full address (ADDRESS_FULL)</li><li>Coordinates (latitude, longitude)</li><li>ADDRESS_POINT_ID</li><li>ADDRESS_STATUS</li><li>GENERAL_USE</li><li>GENERAL_USE_CODE</li><li>LINEAR_NAME_DESC</li><li>MAINT_STAGE</li><li>MUNICIPALITY</li><li>MUNICIPALITY_NAME</li><li>PLACE_NAME</li><li>PLACE_NAME_ALL</li><li>WARD</li><li>WARD_NAME</li></ul>
       <strong>Ignored (changes here are not counted)</strong>
-      <ul><li>ADDRESS_CLASS</li><li>ADDRESS_CLASS_DESC</li><li>ADDRESS_ID</li><li>ADDRESS_ID_LINK</li><li>ADDRESS_POINT_ID_LINK</li><li>CENTRELINE_ID</li><li>CENTRELINE_MEASURE</li><li>CENTRELINE_OFFSET</li><li>CLASS_FAMILY</li><li>CLASS_FAMILY_DESC</li></ul>
+      <ul><li>ADDRESS_CLASS</li><li>ADDRESS_CLASS_DESC</li><li>ADDRESS_ID</li><li>ADDRESS_ID_LINK</li><li>ADDRESS_POINT_ID_LINK</li><li>ADDRESS_STRING_ID</li><li>CENTRELINE_ID</li><li>CENTRELINE_MEASURE</li><li>CENTRELINE_OFFSET</li><li>CENTRELINE_SIDE</li><li>CLASS_FAMILY</li><li>CLASS_FAMILY_DESC</li><li>HI_NUM</li><li>HI_NUM_SUF</li><li>LINEAR_NAME</li><li>LINEAR_NAME_DIR</li><li>LINEAR_NAME_ID</li><li>LINEAR_NAME_TYPE</li><li>LO_NUM</li><li>LO_NUM_SUF</li></ul>
       
     </span>
-  </span>
+  </span></h2>
     
     <table>
-      <thead><tr><th>Address</th><th>What Changed</th><th>Before</th><th></th><th>After</th></tr></thead>
+      <thead><tr><th>Address</th><th>What Changed</th><th>Before</th><th></th><th>After</th><th>Map</th></tr></thead>
       <tbody>
         
-        <tr><td rowspan="2">45 Ancaster Rd</td>
-          <td class="change-field">PLACE_NAME</td>
-          <td class="old-val">None</td>
-          <td class="arrow-val"></td>
-          <td class="new-val">Ancaster Early Learning And Child Care Centre</td></tr>
-        
-        <tr>
-          <td class="change-field">PLACE_NAME_ALL</td>
-          <td class="old-val">None</td>
-          <td class="arrow-val"></td>
-          <td class="new-val">Ancaster Early Learning And Child Care Centre</td></tr>
-        
-        <tr><td rowspan="3">4777 Dufferin St</td>
-          <td class="change-field">PLACE_NAME</td>
-          <td class="old-val">G Ross Lord Park</td>
-          <td class="arrow-val"></td>
-          <td class="new-val">Community Association for Riding for the Disabled</td></tr>
-        
-        <tr>
-          <td class="change-field">PLACE_NAME_ALL</td>
-          <td class="old-val">G Ross Lord Park</td>
-          <td class="arrow-val"></td>
-          <td class="new-val">Community Association for Riding for the Disabled</td></tr>
-        
-        <tr>
-          <td class="change-field">Location</td>
-          <td class="old-val">43.77754, -79.46856</td>
-          <td class="arrow-val">→ 543.6m</td>
-          <td class="new-val">43.77714, -79.46182</td></tr>
-        
-        <tr><td rowspan="2">173 Fairglen Ave</td>
-          <td class="change-field">PLACE_NAME</td>
-          <td class="old-val">None</td>
-          <td class="arrow-val"></td>
-          <td class="new-val">Fairglen Park</td></tr>
-        
-        <tr>
-          <td class="change-field">PLACE_NAME_ALL</td>
-          <td class="old-val">None</td>
-          <td class="arrow-val"></td>
-          <td class="new-val">Fairglen Park</td></tr>
-        
-        <tr><td rowspan="2">51 Neptune Dr</td>
-          <td class="change-field">PLACE_NAME</td>
-          <td class="old-val">None</td>
-          <td class="arrow-val"></td>
-          <td class="new-val">Elijah Park</td></tr>
-        
-        <tr>
-          <td class="change-field">PLACE_NAME_ALL</td>
-          <td class="old-val">None</td>
-          <td class="arrow-val"></td>
-          <td class="new-val">Elijah Park</td></tr>
-        
+  <tr><td rowspan="2">45 Ancaster Rd</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Ancaster Early Learning And Child Care Centre</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73303&mlon=-79.46601#map=18/43.73303/-79.46601" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Ancaster Early Learning And Child Care Centre</td>
+    </tr>
+  <tr><td rowspan="3">4777 Dufferin St</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">G Ross Lord Park</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Community Association for Riding for the Disabled</td>
+    <td rowspan="3"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.77714&mlon=-79.46182#map=18/43.77714/-79.46182" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">G Ross Lord Park</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Community Association for Riding for the Disabled</td>
+    </tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">43.77754, -79.46856<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.77754&mlon=-79.46856#map=19/43.77754/-79.46856" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">→ 543.6m</td>
+    <td class="new-val">43.77714, -79.46182<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.77714&mlon=-79.46182#map=19/43.77714/-79.46182" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="2">173 Fairglen Ave</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Fairglen Park</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78637&mlon=-79.32603#map=18/43.78637/-79.32603" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Fairglen Park</td>
+    </tr>
+  <tr><td rowspan="2">51 Neptune Dr</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Elijah Park</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73160&mlon=-79.43541#map=18/43.73160/-79.43541" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Elijah Park</td>
+    </tr>
       </tbody>
     </table>
     
     
+  </div>
+
+  <div class="section">
+    <h2>Renumbered Addresses <span class="badge badge-accent">0</span></h2>
+    <p class="empty">No addresses renumbered.</p>
+  </div>
+
+  <div class="section">
+    <h2>Street Renames <span class="badge badge-purple">0</span></h2>
+    <p class="empty">No street renames.</p>
   </div>
 
   <div class="section">
@@ -337,170 +369,171 @@
         
         <tr><td>159 Brockley Dr</td>
           
-          <td class="old-val">43.75543, -79.26488</td>
+          <td class="old-val">43.75543, -79.26488<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75543&mlon=-79.26488#map=19/43.75543/-79.26488" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↙ 2.7m</td>
-          <td class="new-val">43.75542, -79.26491</td>
+          <td class="new-val">43.75542, -79.26491<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75542&mlon=-79.26491#map=19/43.75542/-79.26491" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>161 Brockley Dr</td>
           
-          <td class="old-val">43.75542, -79.26494</td>
+          <td class="old-val">43.75542, -79.26494<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75542&mlon=-79.26494#map=19/43.75542/-79.26494" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">← 3.2m</td>
-          <td class="new-val">43.75542, -79.26498</td>
+          <td class="new-val">43.75542, -79.26498<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75542&mlon=-79.26498#map=19/43.75542/-79.26498" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>163 Brockley Dr</td>
           
-          <td class="old-val">43.75540, -79.26501</td>
+          <td class="old-val">43.75540, -79.26501<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75540&mlon=-79.26501#map=19/43.75540/-79.26501" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">← 3.2m</td>
-          <td class="new-val">43.75540, -79.26505</td>
+          <td class="new-val">43.75540, -79.26505<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75540&mlon=-79.26505#map=19/43.75540/-79.26505" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>165 Brockley Dr</td>
           
-          <td class="old-val">43.75539, -79.26508</td>
+          <td class="old-val">43.75539, -79.26508<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75539&mlon=-79.26508#map=19/43.75539/-79.26508" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">← 3.4m</td>
-          <td class="new-val">43.75540, -79.26512</td>
+          <td class="new-val">43.75540, -79.26512<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75540&mlon=-79.26512#map=19/43.75540/-79.26512" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>167 Brockley Dr</td>
           
-          <td class="old-val">43.75537, -79.26515</td>
+          <td class="old-val">43.75537, -79.26515<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75537&mlon=-79.26515#map=19/43.75537/-79.26515" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↖ 4.6m</td>
-          <td class="new-val">43.75539, -79.26520</td>
+          <td class="new-val">43.75539, -79.26520<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75539&mlon=-79.26520#map=19/43.75539/-79.26520" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>49 Chestnut Cres</td>
           
-          <td class="old-val">43.71577, -79.27610</td>
+          <td class="old-val">43.71577, -79.27610<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71577&mlon=-79.27610#map=19/43.71577/-79.27610" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">← 5.0m</td>
-          <td class="new-val">43.71576, -79.27616</td>
+          <td class="new-val">43.71576, -79.27616<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71576&mlon=-79.27616#map=19/43.71576/-79.27616" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>66 Chestnut Cres</td>
           
-          <td class="old-val">43.71559, -79.27696</td>
+          <td class="old-val">43.71559, -79.27696<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71559&mlon=-79.27696#map=19/43.71559/-79.27696" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 2.2m</td>
-          <td class="new-val">43.71561, -79.27696</td>
+          <td class="new-val">43.71561, -79.27696<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71561&mlon=-79.27696#map=19/43.71561/-79.27696" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>70 Chestnut Cres</td>
           
-          <td class="old-val">43.71575, -79.27708</td>
+          <td class="old-val">43.71575, -79.27708<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71575&mlon=-79.27708#map=19/43.71575/-79.27708" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↗ 5.2m</td>
-          <td class="new-val">43.71578, -79.27703</td>
+          <td class="new-val">43.71578, -79.27703<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71578&mlon=-79.27703#map=19/43.71578/-79.27703" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>72 Chestnut Cres</td>
           
-          <td class="old-val">43.71591, -79.27710</td>
+          <td class="old-val">43.71591, -79.27710<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71591&mlon=-79.27710#map=19/43.71591/-79.27710" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↘ 2.7m</td>
-          <td class="new-val">43.71589, -79.27708</td>
+          <td class="new-val">43.71589, -79.27708<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71589&mlon=-79.27708#map=19/43.71589/-79.27708" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>74 Chestnut Cres</td>
           
-          <td class="old-val">43.71597, -79.27706</td>
+          <td class="old-val">43.71597, -79.27706<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71597&mlon=-79.27706#map=19/43.71597/-79.27706" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 2.4m</td>
-          <td class="new-val">43.71595, -79.27707</td>
+          <td class="new-val">43.71595, -79.27707<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71595&mlon=-79.27707#map=19/43.71595/-79.27707" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>79 Chestnut Cres</td>
           
-          <td class="old-val">43.71608, -79.27647</td>
+          <td class="old-val">43.71608, -79.27647<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71608&mlon=-79.27647#map=19/43.71608/-79.27647" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↙ 5.1m</td>
-          <td class="new-val">43.71604, -79.27650</td>
+          <td class="new-val">43.71604, -79.27650<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71604&mlon=-79.27650#map=19/43.71604/-79.27650" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>1 Liam Foudy Crt</td>
           
-          <td class="old-val">43.75540, -79.26526</td>
+          <td class="old-val">43.75540, -79.26526<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75540&mlon=-79.26526#map=19/43.75540/-79.26526" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↙ 3.3m</td>
-          <td class="new-val">43.75538, -79.26529</td>
+          <td class="new-val">43.75538, -79.26529<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75538&mlon=-79.26529#map=19/43.75538/-79.26529" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>6 Liam Foudy Crt</td>
           
-          <td class="old-val">43.75543, -79.26567</td>
+          <td class="old-val">43.75543, -79.26567<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75543&mlon=-79.26567#map=19/43.75543/-79.26567" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 2.2m</td>
-          <td class="new-val">43.75541, -79.26567</td>
+          <td class="new-val">43.75541, -79.26567<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75541&mlon=-79.26567#map=19/43.75541/-79.26567" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>8 Liam Foudy Crt</td>
           
-          <td class="old-val">43.75549, -79.26570</td>
+          <td class="old-val">43.75549, -79.26570<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75549&mlon=-79.26570#map=19/43.75549/-79.26570" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 3.4m</td>
-          <td class="new-val">43.75546, -79.26569</td>
+          <td class="new-val">43.75546, -79.26569<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75546&mlon=-79.26569#map=19/43.75546/-79.26569" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>42 Mercury Rd</td>
           
-          <td class="old-val">43.72102, -79.59141</td>
+          <td class="old-val">43.72102, -79.59141<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72102&mlon=-79.59141#map=19/43.72102/-79.59141" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 25.9m</td>
-          <td class="new-val">43.72125, -79.59136</td>
+          <td class="new-val">43.72125, -79.59136<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72125&mlon=-79.59136#map=19/43.72125/-79.59136" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>53 Neptune Dr</td>
           
-          <td class="old-val">43.73164, -79.43578</td>
+          <td class="old-val">43.73164, -79.43578<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73164&mlon=-79.43578#map=19/43.73164/-79.43578" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">→ 13.6m</td>
-          <td class="new-val">43.73168, -79.43562</td>
+          <td class="new-val">43.73168, -79.43562<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73168&mlon=-79.43562#map=19/43.73168/-79.43562" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>12 Southwell Dr</td>
           
-          <td class="old-val">43.74659, -79.35698</td>
+          <td class="old-val">43.74659, -79.35698<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74659&mlon=-79.35698#map=19/43.74659/-79.35698" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↙ 11.8m</td>
-          <td class="new-val">43.74654, -79.35711</td>
+          <td class="new-val">43.74654, -79.35711<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74654&mlon=-79.35711#map=19/43.74654/-79.35711" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>23 Willowmount Dr</td>
           
-          <td class="old-val">43.71673, -79.27522</td>
+          <td class="old-val">43.71673, -79.27522<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71673&mlon=-79.27522#map=19/43.71673/-79.27522" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↘ 6.1m</td>
-          <td class="new-val">43.71668, -79.27519</td>
+          <td class="new-val">43.71668, -79.27519<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71668&mlon=-79.27519#map=19/43.71668/-79.27519" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>30 Willowmount Dr</td>
           
-          <td class="old-val">43.71694, -79.27571</td>
+          <td class="old-val">43.71694, -79.27571<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71694&mlon=-79.27571#map=19/43.71694/-79.27571" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 4.7m</td>
-          <td class="new-val">43.71690, -79.27569</td>
+          <td class="new-val">43.71690, -79.27569<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71690&mlon=-79.27569#map=19/43.71690/-79.27569" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>38 Willowmount Dr</td>
           
-          <td class="old-val">43.71718, -79.27534</td>
+          <td class="old-val">43.71718, -79.27534<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71718&mlon=-79.27534#map=19/43.71718/-79.27534" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↙ 2.7m</td>
-          <td class="new-val">43.71716, -79.27536</td>
+          <td class="new-val">43.71716, -79.27536<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71716&mlon=-79.27536#map=19/43.71716/-79.27536" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
       </tbody>
     </table>
     
+    
   </div>
 
-  <div class="generated-at">Report generated Jun 11, 2026 at 03:21 PM · source licence: Open Government Licence – Toronto</div>
+  <div class="generated-at">Report generated Jun 12, 2026 at 12:24 PM · source licence: Open Government Licence – Toronto</div>
 
   <script>
     function sortTable(tbodyId, col) {

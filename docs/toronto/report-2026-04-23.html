@@ -13,6 +13,7 @@
       --accent-hover: #106ebe; --accent-bg: #eff6fc; --green: #107c10;
       --green-bg: #f1faf1; --green-tint: #9fd89f; --red: #c50f1f; --red-bg: #fdf3f4;
       --red-tint: #eeacb2; --yellow: #eaa300; --yellow-bg: #fefbf4; --yellow-tint: #f9e2ae;
+      --purple: #881798; --purple-bg: #f9f3fb;
       --shadow-4: 0 2px 4px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
       --shadow-8: 0 4px 8px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
       --card-bg: #ffffff; --card-hover: #f5f5f5; color-scheme: light;
@@ -25,6 +26,7 @@
         --accent-hover: #3aa0f3; --accent-bg: #002848; --green: #54b054;
         --green-bg: #052505; --green-tint: #107c10; --red: #dc626d; --red-bg: #3b0509;
         --red-tint: #c50f1f; --yellow: #f2c661; --yellow-bg: #463100; --yellow-tint: #eaa300;
+        --purple: #d29ddb; --purple-bg: #3a1040;
         --shadow-4: 0 2px 4px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
         --shadow-8: 0 4px 8px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
         --card-bg: #333333; --card-hover: #3d3d3d; color-scheme: dark;
@@ -53,6 +55,7 @@
     .card .value { font-size: 28px; font-weight: 600; margin-top: 4px; }
     .card .value.green { color: var(--green); } .card .value.red { color: var(--red); }
     .card .value.yellow { color: var(--yellow); } .card .value.accent { color: var(--accent); }
+    .card .value.purple { color: var(--purple); }
     .sparkline { display: block; margin-top: 6px; overflow: visible; opacity: 0.9; }
     .sparkline-label { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
     .section { margin-bottom: 24px; }
@@ -62,6 +65,8 @@
     .badge-green { background: var(--green-bg); color: var(--green); }
     .badge-red { background: var(--red-bg); color: var(--red); }
     .badge-yellow { background: var(--yellow-bg); color: var(--yellow); }
+    .badge-accent { background: var(--accent-bg); color: var(--accent); }
+    .badge-purple { background: var(--purple-bg); color: var(--purple); }
     table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface);
       border-radius: 8px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
     thead { background: var(--surface2); }
@@ -94,6 +99,13 @@
       color: var(--accent); padding: 5px 12px; border-radius: 4px; cursor: pointer;
       font-size: 12px; font-family: inherit; margin-bottom: 12px; transition: background 0.1s; }
     .collapsible-toggle:hover { background: var(--surface2); }
+    details.rename-group { background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; margin-bottom: 8px; box-shadow: var(--shadow-4); }
+    details.rename-group summary { padding: 10px 14px; cursor: pointer; font-size: 13px; }
+    details.rename-group[open] summary { border-bottom: 1px solid var(--border); }
+    details.rename-group table { border: none; box-shadow: none; border-radius: 0; }
+    details.rename-group .truncated { padding: 0 14px 10px; margin-top: 0; }
+    .rename-count { color: var(--text-dim); font-size: 12px; margin-left: 6px; }
     .no-changes-banner { background: var(--green-bg); border: 1px solid var(--green-tint);
       color: var(--green); padding: 16px; border-radius: 8px; margin-bottom: 24px;
       text-align: center; font-weight: 600; font-size: 14px; }
@@ -136,6 +148,10 @@
 
 
 
+
+
+
+
 <body>
 
   <a class="back-link" href="index.html">← Back to City of Toronto reports</a>
@@ -161,14 +177,20 @@
     <span class="info-btn"><span class="glyph">i</span> Fields</span>
     <span class="info-pop">
       <strong>Compared for changes</strong>
-      <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (LINEAR_NAME_FULL)</li><li>Full address (ADDRESS_FULL)</li><li>Coordinates (latitude, longitude)</li><li>ADDRESS_POINT_ID</li><li>ADDRESS_STATUS</li><li>ADDRESS_STRING_ID</li><li>CENTRELINE_SIDE</li><li>GENERAL_USE</li><li>GENERAL_USE_CODE</li><li>HI_NUM</li><li>HI_NUM_SUF</li><li>LINEAR_NAME</li><li>LINEAR_NAME_DESC</li><li>LINEAR_NAME_DIR</li><li>LINEAR_NAME_ID</li><li>LINEAR_NAME_TYPE</li><li>LO_NUM</li><li>LO_NUM_SUF</li><li>MAINT_STAGE</li><li>MUNICIPALITY</li><li>MUNICIPALITY_NAME</li><li>PLACE_NAME</li><li>PLACE_NAME_ALL</li><li>WARD</li><li>WARD_NAME</li></ul>
+      <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (LINEAR_NAME_FULL)</li><li>Full address (ADDRESS_FULL)</li><li>Coordinates (latitude, longitude)</li><li>ADDRESS_POINT_ID</li><li>ADDRESS_STATUS</li><li>GENERAL_USE</li><li>GENERAL_USE_CODE</li><li>LINEAR_NAME_DESC</li><li>MAINT_STAGE</li><li>MUNICIPALITY</li><li>MUNICIPALITY_NAME</li><li>PLACE_NAME</li><li>PLACE_NAME_ALL</li><li>WARD</li><li>WARD_NAME</li></ul>
       <strong>Ignored (changes here are not counted)</strong>
-      <ul><li>ADDRESS_CLASS</li><li>ADDRESS_CLASS_DESC</li><li>ADDRESS_ID</li><li>ADDRESS_ID_LINK</li><li>ADDRESS_POINT_ID_LINK</li><li>CENTRELINE_ID</li><li>CENTRELINE_MEASURE</li><li>CENTRELINE_OFFSET</li><li>CLASS_FAMILY</li><li>CLASS_FAMILY_DESC</li></ul>
+      <ul><li>ADDRESS_CLASS</li><li>ADDRESS_CLASS_DESC</li><li>ADDRESS_ID</li><li>ADDRESS_ID_LINK</li><li>ADDRESS_POINT_ID_LINK</li><li>ADDRESS_STRING_ID</li><li>CENTRELINE_ID</li><li>CENTRELINE_MEASURE</li><li>CENTRELINE_OFFSET</li><li>CENTRELINE_SIDE</li><li>CLASS_FAMILY</li><li>CLASS_FAMILY_DESC</li><li>HI_NUM</li><li>HI_NUM_SUF</li><li>LINEAR_NAME</li><li>LINEAR_NAME_DIR</li><li>LINEAR_NAME_ID</li><li>LINEAR_NAME_TYPE</li><li>LO_NUM</li><li>LO_NUM_SUF</li></ul>
       
     </span>
   </span></div>
       <div class="value yellow">0</div>
       <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Renumbered</div>
+      <div class="value accent">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#0078d4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#0078d4"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Street Renames</div>
+      <div class="value purple">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#9141ac" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#9141ac"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
     <div class="card"><div class="label">Location Adjustments</div>
       <div class="value" style="color: var(--text-dim)">64</div>
       <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#808080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,15.5 37.3,12.8 55.0,15.0 72.7,15.5 90.3,17.0 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#808080"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
@@ -256,13 +278,23 @@
     <span class="info-btn"><span class="glyph">i</span> Fields</span>
     <span class="info-pop">
       <strong>Compared for changes</strong>
-      <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (LINEAR_NAME_FULL)</li><li>Full address (ADDRESS_FULL)</li><li>Coordinates (latitude, longitude)</li><li>ADDRESS_POINT_ID</li><li>ADDRESS_STATUS</li><li>ADDRESS_STRING_ID</li><li>CENTRELINE_SIDE</li><li>GENERAL_USE</li><li>GENERAL_USE_CODE</li><li>HI_NUM</li><li>HI_NUM_SUF</li><li>LINEAR_NAME</li><li>LINEAR_NAME_DESC</li><li>LINEAR_NAME_DIR</li><li>LINEAR_NAME_ID</li><li>LINEAR_NAME_TYPE</li><li>LO_NUM</li><li>LO_NUM_SUF</li><li>MAINT_STAGE</li><li>MUNICIPALITY</li><li>MUNICIPALITY_NAME</li><li>PLACE_NAME</li><li>PLACE_NAME_ALL</li><li>WARD</li><li>WARD_NAME</li></ul>
+      <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (LINEAR_NAME_FULL)</li><li>Full address (ADDRESS_FULL)</li><li>Coordinates (latitude, longitude)</li><li>ADDRESS_POINT_ID</li><li>ADDRESS_STATUS</li><li>GENERAL_USE</li><li>GENERAL_USE_CODE</li><li>LINEAR_NAME_DESC</li><li>MAINT_STAGE</li><li>MUNICIPALITY</li><li>MUNICIPALITY_NAME</li><li>PLACE_NAME</li><li>PLACE_NAME_ALL</li><li>WARD</li><li>WARD_NAME</li></ul>
       <strong>Ignored (changes here are not counted)</strong>
-      <ul><li>ADDRESS_CLASS</li><li>ADDRESS_CLASS_DESC</li><li>ADDRESS_ID</li><li>ADDRESS_ID_LINK</li><li>ADDRESS_POINT_ID_LINK</li><li>CENTRELINE_ID</li><li>CENTRELINE_MEASURE</li><li>CENTRELINE_OFFSET</li><li>CLASS_FAMILY</li><li>CLASS_FAMILY_DESC</li></ul>
+      <ul><li>ADDRESS_CLASS</li><li>ADDRESS_CLASS_DESC</li><li>ADDRESS_ID</li><li>ADDRESS_ID_LINK</li><li>ADDRESS_POINT_ID_LINK</li><li>ADDRESS_STRING_ID</li><li>CENTRELINE_ID</li><li>CENTRELINE_MEASURE</li><li>CENTRELINE_OFFSET</li><li>CENTRELINE_SIDE</li><li>CLASS_FAMILY</li><li>CLASS_FAMILY_DESC</li><li>HI_NUM</li><li>HI_NUM_SUF</li><li>LINEAR_NAME</li><li>LINEAR_NAME_DIR</li><li>LINEAR_NAME_ID</li><li>LINEAR_NAME_TYPE</li><li>LO_NUM</li><li>LO_NUM_SUF</li></ul>
       
     </span>
-  </span>
+  </span></h2>
     <p class="empty">No addresses updated.</p>
+  </div>
+
+  <div class="section">
+    <h2>Renumbered Addresses <span class="badge badge-accent">0</span></h2>
+    <p class="empty">No addresses renumbered.</p>
+  </div>
+
+  <div class="section">
+    <h2>Street Renames <span class="badge badge-purple">0</span></h2>
+    <p class="empty">No street renames.</p>
   </div>
 
   <div class="section">
@@ -274,522 +306,523 @@
         
         <tr><td>44 Cedar Brae Blvd</td>
           
-          <td class="old-val">43.74535, -79.23461</td>
+          <td class="old-val">43.74535, -79.23461<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74535&mlon=-79.23461#map=19/43.74535/-79.23461" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 7.1m</td>
-          <td class="new-val">43.74529, -79.23458</td>
+          <td class="new-val">43.74529, -79.23458<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74529&mlon=-79.23458#map=19/43.74529/-79.23458" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>44A Cedar Brae Blvd</td>
           
-          <td class="old-val">43.74547, -79.23454</td>
+          <td class="old-val">43.74547, -79.23454<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74547&mlon=-79.23454#map=19/43.74547/-79.23454" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">← 10.2m</td>
-          <td class="new-val">43.74544, -79.23466</td>
+          <td class="new-val">43.74544, -79.23466<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74544&mlon=-79.23466#map=19/43.74544/-79.23466" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>46A Cedar Brae Blvd</td>
           
-          <td class="old-val">43.74572, -79.23465</td>
+          <td class="old-val">43.74572, -79.23465<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74572&mlon=-79.23465#map=19/43.74572/-79.23465" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">← 20.9m</td>
-          <td class="new-val">43.74567, -79.23490</td>
+          <td class="new-val">43.74567, -79.23490<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74567&mlon=-79.23490#map=19/43.74567/-79.23490" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>48 Cedar Brae Blvd</td>
           
-          <td class="old-val">43.74587, -79.23501</td>
+          <td class="old-val">43.74587, -79.23501<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74587&mlon=-79.23501#map=19/43.74587/-79.23501" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 7.8m</td>
-          <td class="new-val">43.74594, -79.23500</td>
+          <td class="new-val">43.74594, -79.23500<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74594&mlon=-79.23500#map=19/43.74594/-79.23500" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>48A Cedar Brae Blvd</td>
           
-          <td class="old-val">43.74587, -79.23471</td>
+          <td class="old-val">43.74587, -79.23471<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74587&mlon=-79.23471#map=19/43.74587/-79.23471" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">← 21.9m</td>
-          <td class="new-val">43.74581, -79.23497</td>
+          <td class="new-val">43.74581, -79.23497<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74581&mlon=-79.23497#map=19/43.74581/-79.23497" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>50 Cedar Brae Blvd</td>
           
-          <td class="old-val">43.74628, -79.23487</td>
+          <td class="old-val">43.74628, -79.23487<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74628&mlon=-79.23487#map=19/43.74628/-79.23487" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">← 15.5m</td>
-          <td class="new-val">43.74623, -79.23505</td>
+          <td class="new-val">43.74623, -79.23505<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74623&mlon=-79.23505#map=19/43.74623/-79.23505" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>50A Cedar Brae Blvd</td>
           
-          <td class="old-val">43.74613, -79.23481</td>
+          <td class="old-val">43.74613, -79.23481<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74613&mlon=-79.23481#map=19/43.74613/-79.23481" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">← 18.5m</td>
-          <td class="new-val">43.74608, -79.23503</td>
+          <td class="new-val">43.74608, -79.23503<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74608&mlon=-79.23503#map=19/43.74608/-79.23503" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>51 Cedar Brae Blvd</td>
           
-          <td class="old-val">43.74733, -79.23469</td>
+          <td class="old-val">43.74733, -79.23469<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74733&mlon=-79.23469#map=19/43.74733/-79.23469" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 5.8m</td>
-          <td class="new-val">43.74728, -79.23467</td>
+          <td class="new-val">43.74728, -79.23467<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74728&mlon=-79.23467#map=19/43.74728/-79.23467" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>52 Cedar Brae Blvd</td>
           
-          <td class="old-val">43.74642, -79.23494</td>
+          <td class="old-val">43.74642, -79.23494<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74642&mlon=-79.23494#map=19/43.74642/-79.23494" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">← 10.2m</td>
-          <td class="new-val">43.74639, -79.23506</td>
+          <td class="new-val">43.74639, -79.23506<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74639&mlon=-79.23506#map=19/43.74639/-79.23506" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>52A Cedar Brae Blvd</td>
           
-          <td class="old-val">43.74656, -79.23500</td>
+          <td class="old-val">43.74656, -79.23500<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74656&mlon=-79.23500#map=19/43.74656/-79.23500" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">← 12.1m</td>
-          <td class="new-val">43.74652, -79.23514</td>
+          <td class="new-val">43.74652, -79.23514<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74652&mlon=-79.23514#map=19/43.74652/-79.23514" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>56 Cedar Brae Blvd</td>
           
-          <td class="old-val">43.74697, -79.23518</td>
+          <td class="old-val">43.74697, -79.23518<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74697&mlon=-79.23518#map=19/43.74697/-79.23518" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">← 18.9m</td>
-          <td class="new-val">43.74691, -79.23540</td>
+          <td class="new-val">43.74691, -79.23540<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74691&mlon=-79.23540#map=19/43.74691/-79.23540" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>56A Cedar Brae Blvd</td>
           
-          <td class="old-val">43.74711, -79.23523</td>
+          <td class="old-val">43.74711, -79.23523<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74711&mlon=-79.23523#map=19/43.74711/-79.23523" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">← 20.4m</td>
-          <td class="new-val">43.74705, -79.23547</td>
+          <td class="new-val">43.74705, -79.23547<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74705&mlon=-79.23547#map=19/43.74705/-79.23547" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>60A Cedar Brae Blvd</td>
           
-          <td class="old-val">43.74750, -79.23544</td>
+          <td class="old-val">43.74750, -79.23544<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74750&mlon=-79.23544#map=19/43.74750/-79.23544" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">← 14.9m</td>
-          <td class="new-val">43.74747, -79.23562</td>
+          <td class="new-val">43.74747, -79.23562<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74747&mlon=-79.23562#map=19/43.74747/-79.23562" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>60C Cedar Brae Blvd</td>
           
-          <td class="old-val">43.74763, -79.23551</td>
+          <td class="old-val">43.74763, -79.23551<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74763&mlon=-79.23551#map=19/43.74763/-79.23551" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">← 12.3m</td>
-          <td class="new-val">43.74761, -79.23566</td>
+          <td class="new-val">43.74761, -79.23566<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74761&mlon=-79.23566#map=19/43.74761/-79.23566" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>15 Fifth St</td>
           
-          <td class="old-val">43.59692, -79.50096</td>
+          <td class="old-val">43.59692, -79.50096<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.59692&mlon=-79.50096#map=19/43.59692/-79.50096" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 2.4m</td>
-          <td class="new-val">43.59694, -79.50097</td>
+          <td class="new-val">43.59694, -79.50097<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.59694&mlon=-79.50097#map=19/43.59694/-79.50097" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>19 Fifth St</td>
           
-          <td class="old-val">43.59701, -79.50105</td>
+          <td class="old-val">43.59701, -79.50105<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.59701&mlon=-79.50105#map=19/43.59701/-79.50105" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↗ 2.7m</td>
-          <td class="new-val">43.59703, -79.50103</td>
+          <td class="new-val">43.59703, -79.50103<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.59703&mlon=-79.50103#map=19/43.59703/-79.50103" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>61 Fifth St</td>
           
-          <td class="old-val">43.59837, -79.50159</td>
+          <td class="old-val">43.59837, -79.50159<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.59837&mlon=-79.50159#map=19/43.59837/-79.50159" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 2.2m</td>
-          <td class="new-val">43.59839, -79.50159</td>
+          <td class="new-val">43.59839, -79.50159<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.59839&mlon=-79.50159#map=19/43.59839/-79.50159" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>65 Fifth St</td>
           
-          <td class="old-val">43.59849, -79.50164</td>
+          <td class="old-val">43.59849, -79.50164<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.59849&mlon=-79.50164#map=19/43.59849/-79.50164" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 2.2m</td>
-          <td class="new-val">43.59851, -79.50164</td>
+          <td class="new-val">43.59851, -79.50164<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.59851&mlon=-79.50164#map=19/43.59851/-79.50164" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>71 Fifth St</td>
           
-          <td class="old-val">43.59874, -79.50169</td>
+          <td class="old-val">43.59874, -79.50169<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.59874&mlon=-79.50169#map=19/43.59874/-79.50169" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">← 4.2m</td>
-          <td class="new-val">43.59875, -79.50174</td>
+          <td class="new-val">43.59875, -79.50174<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.59875&mlon=-79.50174#map=19/43.59875/-79.50174" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>2 Hahn Pl</td>
           
-          <td class="old-val">43.64860, -79.36305</td>
+          <td class="old-val">43.64860, -79.36305<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64860&mlon=-79.36305#map=19/43.64860/-79.36305" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↘ 4.6m</td>
-          <td class="new-val">43.64858, -79.36300</td>
+          <td class="new-val">43.64858, -79.36300<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64858&mlon=-79.36300#map=19/43.64858/-79.36300" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>4 Hahn Pl</td>
           
-          <td class="old-val">43.64861, -79.36303</td>
+          <td class="old-val">43.64861, -79.36303<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64861&mlon=-79.36303#map=19/43.64861/-79.36303" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↘ 2.0m</td>
-          <td class="new-val">43.64860, -79.36301</td>
+          <td class="new-val">43.64860, -79.36301<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64860&mlon=-79.36301#map=19/43.64860/-79.36301" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>5 Hahn Pl</td>
           
-          <td class="old-val">43.64890, -79.36281</td>
+          <td class="old-val">43.64890, -79.36281<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64890&mlon=-79.36281#map=19/43.64890/-79.36281" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↘ 15.8m</td>
-          <td class="new-val">43.64877, -79.36273</td>
+          <td class="new-val">43.64877, -79.36273<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64877&mlon=-79.36273#map=19/43.64877/-79.36273" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>6 Hahn Pl</td>
           
-          <td class="old-val">43.64862, -79.36307</td>
+          <td class="old-val">43.64862, -79.36307<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64862&mlon=-79.36307#map=19/43.64862/-79.36307" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">→ 4.0m</td>
-          <td class="new-val">43.64862, -79.36302</td>
+          <td class="new-val">43.64862, -79.36302<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64862&mlon=-79.36302#map=19/43.64862/-79.36302" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>7 Hahn Pl</td>
           
-          <td class="old-val">43.64891, -79.36278</td>
+          <td class="old-val">43.64891, -79.36278<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64891&mlon=-79.36278#map=19/43.64891/-79.36278" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 10.3m</td>
-          <td class="new-val">43.64882, -79.36275</td>
+          <td class="new-val">43.64882, -79.36275<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64882&mlon=-79.36275#map=19/43.64882/-79.36275" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>8 Hahn Pl</td>
           
-          <td class="old-val">43.64864, -79.36308</td>
+          <td class="old-val">43.64864, -79.36308<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64864&mlon=-79.36308#map=19/43.64864/-79.36308" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">→ 4.0m</td>
-          <td class="new-val">43.64864, -79.36303</td>
+          <td class="new-val">43.64864, -79.36303<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64864&mlon=-79.36303#map=19/43.64864/-79.36303" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>9 Hahn Pl</td>
           
-          <td class="old-val">43.64894, -79.36278</td>
+          <td class="old-val">43.64894, -79.36278<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64894&mlon=-79.36278#map=19/43.64894/-79.36278" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 7.8m</td>
-          <td class="new-val">43.64887, -79.36277</td>
+          <td class="new-val">43.64887, -79.36277<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64887&mlon=-79.36277#map=19/43.64887/-79.36277" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>10 Hahn Pl</td>
           
-          <td class="old-val">43.64866, -79.36308</td>
+          <td class="old-val">43.64866, -79.36308<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64866&mlon=-79.36308#map=19/43.64866/-79.36308" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">→ 3.4m</td>
-          <td class="new-val">43.64867, -79.36304</td>
+          <td class="new-val">43.64867, -79.36304<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64867&mlon=-79.36304#map=19/43.64867/-79.36304" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>11 Hahn Pl</td>
           
-          <td class="old-val">43.64897, -79.36279</td>
+          <td class="old-val">43.64897, -79.36279<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64897&mlon=-79.36279#map=19/43.64897/-79.36279" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 5.6m</td>
-          <td class="new-val">43.64892, -79.36279</td>
+          <td class="new-val">43.64892, -79.36279<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64892&mlon=-79.36279#map=19/43.64892/-79.36279" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>12 Hahn Pl</td>
           
-          <td class="old-val">43.64868, -79.36309</td>
+          <td class="old-val">43.64868, -79.36309<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64868&mlon=-79.36309#map=19/43.64868/-79.36309" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">→ 3.4m</td>
-          <td class="new-val">43.64869, -79.36305</td>
+          <td class="new-val">43.64869, -79.36305<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64869&mlon=-79.36305#map=19/43.64869/-79.36305" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>13 Hahn Pl</td>
           
-          <td class="old-val">43.64900, -79.36281</td>
+          <td class="old-val">43.64900, -79.36281<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64900&mlon=-79.36281#map=19/43.64900/-79.36281" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 4.5m</td>
-          <td class="new-val">43.64896, -79.36281</td>
+          <td class="new-val">43.64896, -79.36281<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64896&mlon=-79.36281#map=19/43.64896/-79.36281" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>14 Hahn Pl</td>
           
-          <td class="old-val">43.64869, -79.36310</td>
+          <td class="old-val">43.64869, -79.36310<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64869&mlon=-79.36310#map=19/43.64869/-79.36310" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↗ 3.9m</td>
-          <td class="new-val">43.64871, -79.36306</td>
+          <td class="new-val">43.64871, -79.36306<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64871&mlon=-79.36306#map=19/43.64871/-79.36306" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>15 Hahn Pl</td>
           
-          <td class="old-val">43.64903, -79.36282</td>
+          <td class="old-val">43.64903, -79.36282<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64903&mlon=-79.36282#map=19/43.64903/-79.36282" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 2.2m</td>
-          <td class="new-val">43.64901, -79.36282</td>
+          <td class="new-val">43.64901, -79.36282<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64901&mlon=-79.36282#map=19/43.64901/-79.36282" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>16 Hahn Pl</td>
           
-          <td class="old-val">43.64871, -79.36310</td>
+          <td class="old-val">43.64871, -79.36310<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64871&mlon=-79.36310#map=19/43.64871/-79.36310" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↗ 2.7m</td>
-          <td class="new-val">43.64872, -79.36307</td>
+          <td class="new-val">43.64872, -79.36307<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64872&mlon=-79.36307#map=19/43.64872/-79.36307" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>17 Hahn Pl</td>
           
-          <td class="old-val">43.64907, -79.36283</td>
+          <td class="old-val">43.64907, -79.36283<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64907&mlon=-79.36283#map=19/43.64907/-79.36283" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 2.4m</td>
-          <td class="new-val">43.64905, -79.36284</td>
+          <td class="new-val">43.64905, -79.36284<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64905&mlon=-79.36284#map=19/43.64905/-79.36284" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>18 Hahn Pl</td>
           
-          <td class="old-val">43.64872, -79.36311</td>
+          <td class="old-val">43.64872, -79.36311<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64872&mlon=-79.36311#map=19/43.64872/-79.36311" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↗ 5.1m</td>
-          <td class="new-val">43.64876, -79.36308</td>
+          <td class="new-val">43.64876, -79.36308<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64876&mlon=-79.36308#map=19/43.64876/-79.36308" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>19 Hahn Pl</td>
           
-          <td class="old-val">43.64910, -79.36285</td>
+          <td class="old-val">43.64910, -79.36285<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64910&mlon=-79.36285#map=19/43.64910/-79.36285" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↙ 1.4m</td>
-          <td class="new-val">43.64909, -79.36286</td>
+          <td class="new-val">43.64909, -79.36286<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64909&mlon=-79.36286#map=19/43.64909/-79.36286" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>20 Hahn Pl</td>
           
-          <td class="old-val">43.64874, -79.36312</td>
+          <td class="old-val">43.64874, -79.36312<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64874&mlon=-79.36312#map=19/43.64874/-79.36312" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↗ 5.1m</td>
-          <td class="new-val">43.64878, -79.36309</td>
+          <td class="new-val">43.64878, -79.36309<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64878&mlon=-79.36309#map=19/43.64878/-79.36309" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>22 Hahn Pl</td>
           
-          <td class="old-val">43.64876, -79.36312</td>
+          <td class="old-val">43.64876, -79.36312<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64876&mlon=-79.36312#map=19/43.64876/-79.36312" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 4.7m</td>
-          <td class="new-val">43.64880, -79.36310</td>
+          <td class="new-val">43.64880, -79.36310<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64880&mlon=-79.36310#map=19/43.64880/-79.36310" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>24 Hahn Pl</td>
           
-          <td class="old-val">43.64877, -79.36313</td>
+          <td class="old-val">43.64877, -79.36313<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64877&mlon=-79.36313#map=19/43.64877/-79.36313" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↗ 6.1m</td>
-          <td class="new-val">43.64882, -79.36310</td>
+          <td class="new-val">43.64882, -79.36310<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64882&mlon=-79.36310#map=19/43.64882/-79.36310" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>26 Hahn Pl</td>
           
-          <td class="old-val">43.64879, -79.36314</td>
+          <td class="old-val">43.64879, -79.36314<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64879&mlon=-79.36314#map=19/43.64879/-79.36314" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 6.9m</td>
-          <td class="new-val">43.64885, -79.36312</td>
+          <td class="new-val">43.64885, -79.36312<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64885&mlon=-79.36312#map=19/43.64885/-79.36312" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>28 Hahn Pl</td>
           
-          <td class="old-val">43.64881, -79.36315</td>
+          <td class="old-val">43.64881, -79.36315<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64881&mlon=-79.36315#map=19/43.64881/-79.36315" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 6.9m</td>
-          <td class="new-val">43.64887, -79.36313</td>
+          <td class="new-val">43.64887, -79.36313<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64887&mlon=-79.36313#map=19/43.64887/-79.36313" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>30 Hahn Pl</td>
           
-          <td class="old-val">43.64883, -79.36315</td>
+          <td class="old-val">43.64883, -79.36315<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64883&mlon=-79.36315#map=19/43.64883/-79.36315" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 6.7m</td>
-          <td class="new-val">43.64889, -79.36314</td>
+          <td class="new-val">43.64889, -79.36314<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64889&mlon=-79.36314#map=19/43.64889/-79.36314" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>32 Hahn Pl</td>
           
-          <td class="old-val">43.64885, -79.36316</td>
+          <td class="old-val">43.64885, -79.36316<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64885&mlon=-79.36316#map=19/43.64885/-79.36316" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 6.7m</td>
-          <td class="new-val">43.64891, -79.36315</td>
+          <td class="new-val">43.64891, -79.36315<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64891&mlon=-79.36315#map=19/43.64891/-79.36315" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>34 Hahn Pl</td>
           
-          <td class="old-val">43.64886, -79.36317</td>
+          <td class="old-val">43.64886, -79.36317<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64886&mlon=-79.36317#map=19/43.64886/-79.36317" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 10.1m</td>
-          <td class="new-val">43.64895, -79.36316</td>
+          <td class="new-val">43.64895, -79.36316<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64895&mlon=-79.36316#map=19/43.64895/-79.36316" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>36 Hahn Pl</td>
           
-          <td class="old-val">43.64888, -79.36317</td>
+          <td class="old-val">43.64888, -79.36317<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64888&mlon=-79.36317#map=19/43.64888/-79.36317" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 10.0m</td>
-          <td class="new-val">43.64897, -79.36317</td>
+          <td class="new-val">43.64897, -79.36317<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64897&mlon=-79.36317#map=19/43.64897/-79.36317" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>38 Hahn Pl</td>
           
-          <td class="old-val">43.64890, -79.36318</td>
+          <td class="old-val">43.64890, -79.36318<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64890&mlon=-79.36318#map=19/43.64890/-79.36318" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 8.9m</td>
-          <td class="new-val">43.64898, -79.36318</td>
+          <td class="new-val">43.64898, -79.36318<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64898&mlon=-79.36318#map=19/43.64898/-79.36318" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>40 Hahn Pl</td>
           
-          <td class="old-val">43.64891, -79.36319</td>
+          <td class="old-val">43.64891, -79.36319<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64891&mlon=-79.36319#map=19/43.64891/-79.36319" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 10.0m</td>
-          <td class="new-val">43.64900, -79.36319</td>
+          <td class="new-val">43.64900, -79.36319<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64900&mlon=-79.36319#map=19/43.64900/-79.36319" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>42 Hahn Pl</td>
           
-          <td class="old-val">43.64893, -79.36319</td>
+          <td class="old-val">43.64893, -79.36319<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64893&mlon=-79.36319#map=19/43.64893/-79.36319" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 10.1m</td>
-          <td class="new-val">43.64902, -79.36321</td>
+          <td class="new-val">43.64902, -79.36321<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64902&mlon=-79.36321#map=19/43.64902/-79.36321" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>44 Hahn Pl</td>
           
-          <td class="old-val">43.64895, -79.36320</td>
+          <td class="old-val">43.64895, -79.36320<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64895&mlon=-79.36320#map=19/43.64895/-79.36320" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 10.1m</td>
-          <td class="new-val">43.64904, -79.36322</td>
+          <td class="new-val">43.64904, -79.36322<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64904&mlon=-79.36322#map=19/43.64904/-79.36322" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>46 Hahn Pl</td>
           
-          <td class="old-val">43.64897, -79.36320</td>
+          <td class="old-val">43.64897, -79.36320<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64897&mlon=-79.36320#map=19/43.64897/-79.36320" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 10.1m</td>
-          <td class="new-val">43.64906, -79.36322</td>
+          <td class="new-val">43.64906, -79.36322<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64906&mlon=-79.36322#map=19/43.64906/-79.36322" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>48 Hahn Pl</td>
           
-          <td class="old-val">43.64898, -79.36324</td>
+          <td class="old-val">43.64898, -79.36324<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64898&mlon=-79.36324#map=19/43.64898/-79.36324" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↑ 11.2m</td>
-          <td class="new-val">43.64908, -79.36323</td>
+          <td class="new-val">43.64908, -79.36323<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64908&mlon=-79.36323#map=19/43.64908/-79.36323" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>320 Horner Ave</td>
           
-          <td class="old-val">43.60627, -79.52672</td>
+          <td class="old-val">43.60627, -79.52672<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.60627&mlon=-79.52672#map=19/43.60627/-79.52672" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">← 9.7m</td>
-          <td class="new-val">43.60627, -79.52684</td>
+          <td class="new-val">43.60627, -79.52684<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.60627&mlon=-79.52684#map=19/43.60627/-79.52684" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>34 Lake Shore Dr</td>
           
-          <td class="old-val">43.59873, -79.50000</td>
+          <td class="old-val">43.59873, -79.50000<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.59873&mlon=-79.50000#map=19/43.59873/-79.50000" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↗ 3.9m</td>
-          <td class="new-val">43.59875, -79.49996</td>
+          <td class="new-val">43.59875, -79.49996<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.59875&mlon=-79.49996#map=19/43.59875/-79.49996" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>90 Longboat Ave</td>
           
-          <td class="old-val">43.64868, -79.36305</td>
+          <td class="old-val">43.64868, -79.36305<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64868&mlon=-79.36305#map=19/43.64868/-79.36305" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 12.4m</td>
-          <td class="new-val">43.64857, -79.36303</td>
+          <td class="new-val">43.64857, -79.36303<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64857&mlon=-79.36303#map=19/43.64857/-79.36303" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>114 Longboat Ave</td>
           
-          <td class="old-val">43.64874, -79.36271</td>
+          <td class="old-val">43.64874, -79.36271<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64874&mlon=-79.36271#map=19/43.64874/-79.36271" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 6.7m</td>
-          <td class="new-val">43.64868, -79.36271</td>
+          <td class="new-val">43.64868, -79.36271<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64868&mlon=-79.36271#map=19/43.64868/-79.36271" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>140 Longboat Ave</td>
           
-          <td class="old-val">43.64883, -79.36220</td>
+          <td class="old-val">43.64883, -79.36220<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64883&mlon=-79.36220#map=19/43.64883/-79.36220" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">← 0.8m</td>
-          <td class="new-val">43.64883, -79.36221</td>
+          <td class="new-val">43.64883, -79.36221<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64883&mlon=-79.36221#map=19/43.64883/-79.36221" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>144 Longboat Ave</td>
           
-          <td class="old-val">43.64884, -79.36196</td>
+          <td class="old-val">43.64884, -79.36196<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64884&mlon=-79.36196#map=19/43.64884/-79.36196" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">← 14.5m</td>
-          <td class="new-val">43.64884, -79.36214</td>
+          <td class="new-val">43.64884, -79.36214<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64884&mlon=-79.36214#map=19/43.64884/-79.36214" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>1000 The Queensway</td>
           
-          <td class="old-val">43.62383, -79.51556</td>
+          <td class="old-val">43.62383, -79.51556<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.62383&mlon=-79.51556#map=19/43.62383/-79.51556" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↙ 16.0m</td>
-          <td class="new-val">43.62371, -79.51567</td>
+          <td class="new-val">43.62371, -79.51567<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.62371&mlon=-79.51567#map=19/43.62371/-79.51567" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>1040 The Queensway</td>
           
-          <td class="old-val">43.62361, -79.51653</td>
+          <td class="old-val">43.62361, -79.51653<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.62361&mlon=-79.51653#map=19/43.62361/-79.51653" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">↓ 16.6m</td>
-          <td class="new-val">43.62347, -79.51660</td>
+          <td class="new-val">43.62347, -79.51660<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.62347&mlon=-79.51660#map=19/43.62347/-79.51660" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>1050 The Queensway</td>
           
-          <td class="old-val">43.62342, -79.51744</td>
+          <td class="old-val">43.62342, -79.51744<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.62342&mlon=-79.51744#map=19/43.62342/-79.51744" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">→ 29.1m</td>
-          <td class="new-val">43.62340, -79.51708</td>
+          <td class="new-val">43.62340, -79.51708<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.62340&mlon=-79.51708#map=19/43.62340/-79.51708" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>1060 The Queensway</td>
           
-          <td class="old-val">43.62337, -79.51721</td>
+          <td class="old-val">43.62337, -79.51721<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.62337&mlon=-79.51721#map=19/43.62337/-79.51721" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">← 18.8m</td>
-          <td class="new-val">43.62334, -79.51744</td>
+          <td class="new-val">43.62334, -79.51744<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.62334&mlon=-79.51744#map=19/43.62334/-79.51744" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>1062 The Queensway</td>
           
-          <td class="old-val">43.62335, -79.51733</td>
+          <td class="old-val">43.62335, -79.51733<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.62335&mlon=-79.51733#map=19/43.62335/-79.51733" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">← 15.7m</td>
-          <td class="new-val">43.62332, -79.51752</td>
+          <td class="new-val">43.62332, -79.51752<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.62332&mlon=-79.51752#map=19/43.62332/-79.51752" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>1064 The Queensway</td>
           
-          <td class="old-val">43.62332, -79.51746</td>
+          <td class="old-val">43.62332, -79.51746<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.62332&mlon=-79.51746#map=19/43.62332/-79.51746" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">← 9.7m</td>
-          <td class="new-val">43.62331, -79.51758</td>
+          <td class="new-val">43.62331, -79.51758<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.62331&mlon=-79.51758#map=19/43.62331/-79.51758" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
         <tr><td>1066 The Queensway</td>
           
-          <td class="old-val">43.62330, -79.51758</td>
+          <td class="old-val">43.62330, -79.51758<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.62330&mlon=-79.51758#map=19/43.62330/-79.51758" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           <td class="arrow-val">← 4.2m</td>
-          <td class="new-val">43.62329, -79.51763</td>
+          <td class="new-val">43.62329, -79.51763<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.62329&mlon=-79.51763#map=19/43.62329/-79.51763" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
           
         </tr>
         
       </tbody>
     </table>
     
+    
   </div>
 
-  <div class="generated-at">Report generated Jun 11, 2026 at 03:21 PM · source licence: Open Government Licence – Toronto</div>
+  <div class="generated-at">Report generated Jun 12, 2026 at 12:24 PM · source licence: Open Government Licence – Toronto</div>
 
   <script>
     function sortTable(tbodyId, col) {
