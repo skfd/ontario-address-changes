@@ -10,6 +10,7 @@ Canonical record keys:
 
 import hashlib
 import json
+from functools import lru_cache
 
 # ESRI / shapefile housekeeping keys that churn on republish and must not
 # influence identity or change-detection.
@@ -30,6 +31,26 @@ def _clean(val):
     return s or None
 
 
+@lru_cache(maxsize=None)
+def _transformer(crs):
+    from pyproj import Transformer
+    return Transformer.from_crs(crs, "EPSG:4326", always_xy=True)
+
+
+def _to_wgs84(ds, lon, lat):
+    """Reproject projected coords to WGS84 via the dataset's source_crs.
+
+    Pass-through when already in lon/lat range, or when no source_crs is set.
+    The range guard means already-WGS84 snapshots are untouched even if a source_crs
+    is configured (e.g. a city that switched its export CRS partway through history).
+    """
+    if abs(lon) <= 180 and abs(lat) <= 90:
+        return lon, lat
+    if not ds.source_crs:
+        return lon, lat
+    return _transformer(ds.source_crs).transform(lon, lat)
+
+
 def _ring_centroid(ring):
     pts = [p for p in ring if isinstance(p, list) and len(p) >= 2]
     if not pts:
@@ -38,8 +59,11 @@ def _ring_centroid(ring):
             sum(p[1] for p in pts) / len(pts))
 
 
-def _coords(feature):
-    """Representative point (lon, lat). Points pass through; polygons -> ring centroid."""
+def _coords(ds, feature):
+    """Representative point (lon, lat). Points pass through; polygons -> ring centroid.
+
+    Projected coords (per ds.source_crs) are reprojected to WGS84 before rounding.
+    """
     geom = feature.get("geometry") or {}
     gtype = geom.get("type")
     c = geom.get("coordinates")
@@ -60,6 +84,7 @@ def _coords(feature):
         lon, lat = (c[0], c[1]) if len(c) >= 2 else (None, None)
     if lon is None or lat is None:
         return None, None
+    lon, lat = _to_wgs84(ds, float(lon), float(lat))
     return round(float(lon), 5), round(float(lat), 5)
 
 
@@ -77,7 +102,7 @@ def _clean_props(props):
 def canonical(ds, feature):
     """Return the canonical record dict, or None if it lacks usable geometry."""
     props = feature.get("properties") or {}
-    lon, lat = _coords(feature)
+    lon, lat = _coords(ds, feature)
     if lon is None or lat is None:
         return None
 

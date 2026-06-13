@@ -21,6 +21,7 @@ class Dataset:
     format: str
     license_name: str = ""
     osm_compatible: str = ""
+    source_crs: str = ""  # e.g. "EPSG:2952"; reproject to WGS84 when coords are out of lon/lat range
     key_field: str = ""
     synth_fields: list = field(default_factory=lambda: ["full"])
     fields: dict = field(default_factory=dict)
@@ -62,6 +63,7 @@ def _parse(path):
         format=raw["format"],
         license_name=raw.get("license_name", ""),
         osm_compatible=raw.get("osm_compatible", ""),
+        source_crs=raw.get("source_crs", ""),
         key_field=identity.get("key_field", ""),
         synth_fields=identity.get("synth_fields", ["full"]),
         fields=raw.get("fields", {}),

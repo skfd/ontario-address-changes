@@ -161,21 +161,29 @@ def compute_histories(ds, keys, before_id):
         f"WHERE identity_key IN ({placeholders})", tuple(keys)).fetchall()
     conn.close()
 
-    hist = {k: [] for k in keys}
+    ranges = {k: [] for k in keys}
     for r in rows:
-        k = r["identity_key"]
-        mn, mx = r["min_snapshot_id"], r["max_snapshot_id"]
-        if mn < before_id:
-            hist[k].append((mn, date_of.get(mn, ""), "added"))
-        # removed event: the snapshot following max (if the point then disappeared)
-        if mx in order:
-            i = order.index(mx)
-            if i + 1 < len(order):
-                succ = order[i + 1]
-                if succ < before_id:
-                    hist[k].append((succ, date_of.get(succ, ""), "removed"))
-    return {k: [{"date": d, "kind": kind}
-                for _, d, kind in sorted(v)] for k, v in hist.items()}
+        ranges[r["identity_key"]].append((r["min_snapshot_id"], r["max_snapshot_id"]))
+
+    # Walk the timeline and emit an event only on a presence transition, so that a
+    # modification (one span closing and another opening with no gap in coverage)
+    # is NOT mistaken for a remove-then-add. "added" = coverage starts here;
+    # "removed" = coverage ends here.
+    hist = {}
+    for k, rngs in ranges.items():
+        events = []
+        prev = False
+        for sid in order:
+            if sid >= before_id:
+                break
+            present = any(mn <= sid <= mx for mn, mx in rngs)
+            if present and not prev:
+                events.append({"date": date_of.get(sid, ""), "kind": "added"})
+            elif not present and prev:
+                events.append({"date": date_of.get(sid, ""), "kind": "removed"})
+            prev = present
+        hist[k] = events
+    return hist
 
 
 # ---- new streets ----

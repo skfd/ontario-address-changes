@@ -145,5 +145,34 @@ def test_categories():
     assert [(g["count"], g["changes"][0]["old"]) for g in groups] == [(2, "06"), (1, "18")], groups
 
 
+def test_history_coverage():
+    """A modification splits the SCD-2 span, but the history must report a single
+    'added' (a coverage transition) rather than a spurious remove-then-add."""
+    ds = _ds()
+    ds.slug = "_test_hist"
+    if os.path.isdir(ds.data_dir):
+        shutil.rmtree(ds.data_dir)
+
+    db.import_snapshot(ds, "snap-2026-01-01.geojson",
+                       [_feat("1", "Main St", -75.1, 45.1)])
+    # modify (extra prop) -> splits into spans (1,1)+(2,2), still continuously present
+    db.import_snapshot(ds, "snap-2026-01-02.geojson",
+                       [_feat("1", "Main St", -75.1, 45.1, extra={"NOTE": "x"})])
+
+    conn = sqlite3.connect(ds.db_path)
+    key = conn.execute("SELECT identity_key FROM addresses LIMIT 1").fetchone()[0]
+    spans = conn.execute(
+        "SELECT min_snapshot_id, max_snapshot_id FROM addresses").fetchall()
+    conn.close()
+    assert len(spans) == 2, f"modification should split into two spans, got {spans}"
+
+    hist = diff.compute_histories(ds, [key], before_id=999)
+    kinds = [e["kind"] for e in hist[key]]
+    assert kinds == ["added"], f"continuous coverage = one 'added', got {kinds}"
+
+    shutil.rmtree(ds.data_dir)
+
+
 if __name__ == "__main__":
     main()
+    test_history_coverage()

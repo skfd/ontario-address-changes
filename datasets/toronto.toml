@@ -6,6 +6,11 @@ format = "geojson"         # geojson | shapefile (static only)
 license_name = "Open Government Licence – Toronto"
 osm_compatible = "green-lwg"
 
+# The 2025-04-01 baseline snapshot was exported in NAD83(CSRS) / MTM zone 10
+# (projected easting/northing); every later snapshot is WGS84. Reproject the
+# projected ones so coordinates don't churn between the baseline and snapshot 2.
+source_crs = "EPSG:2952"
+
 # Source props whose changes are noise (internal centreline geometry, classification
 # and join codes that churn daily) — excluded from change detection. Established by
 # diffing snapshots: these drove ~all "modified" rows with no real address change.
