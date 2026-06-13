@@ -6,6 +6,10 @@ format = "geojson"
 license_name = "Open Government Licence - Niagara Region"
 osm_compatible = "green-lwg"
 
+# Xcoord/Ycoord duplicate the point geometry (tracked as coordinates already);
+# StreetNo duplicates the mapped number field (Full_StreetNo = StreetNo + suffix).
+ignore_fields = ["Xcoord", "Ycoord", "StreetNo"]
+
 [identity]
 key_field = "GSmartID"            # stable municipal point id, 100% populated and unique (OBJECTID is sequential, untrusted)
 synth_fields = ["number", "street", "unit"]   # fallback only if a row ever lacks GSmartID

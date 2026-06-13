@@ -25,7 +25,8 @@ DOCS_DIR = os.path.join(ROOT_DIR, "docs")
 SKIPPED_PATH = os.path.join(ROOT_DIR, "skipped.toml")
 
 MAX_RENDER = 1000          # cap rows rendered per table (true counts still shown)
-SPARK_KEYS = ("added", "removed", "modified", "modified_location")
+SPARK_KEYS = ("added", "removed", "modified", "modified_location",
+              "renumbered", "renamed")
 
 _env = Environment(loader=FileSystemLoader(TEMPLATES_DIR), autoescape=True)
 
@@ -77,7 +78,9 @@ def _combine_location(m):
 
     changes = [c for c in changes if c["field"] not in ("latitude", "longitude")]
     changes.append({"field": "location", "display_field": "Location",
-                    "old": fmt(old_lat, old_lon), "new": fmt(new_lat, new_lon), "arrow": arrow})
+                    "old": fmt(old_lat, old_lon), "new": fmt(new_lat, new_lon), "arrow": arrow,
+                    "old_pt": None if None in (old_lat, old_lon) else (old_lat, old_lon),
+                    "new_pt": None if None in (new_lat, new_lon) else (new_lat, new_lon)})
     m["changes"] = changes
 
 
@@ -125,28 +128,61 @@ def _sparkline_svg(values, color, width=110, height=20, pad=2):
 _env.globals["sparkline_svg"] = _sparkline_svg
 
 
+def _category(m):
+    """Classify a modified row by its changed-field set.
+
+    Works both before and after _combine_location (raw latitude/longitude or the
+    combined 'location' pseudo-field). 'full' is derived from number+street, so it
+    rides along with either; number takes precedence (matches the sibling Toronto
+    tracker's renumbered category).
+    """
+    fields = {c["field"] for c in m["changes"]}
+    if fields <= {"latitude", "longitude", "location"}:
+        return "location"
+    if fields <= {"number", "full"}:
+        return "renumbered"
+    if fields <= {"street", "full"}:
+        return "renamed"
+    return "significant"
+
+
+def _group_renames(renamed):
+    """Group street renames by (old, new) street: one upstream rename event covers
+    every address on the street, so present it once with a count."""
+    groups = {}
+    for m in renamed:
+        ch = next(c for c in m["changes"] if c["field"] == "street")
+        groups.setdefault((ch["old"] or "—", ch["new"] or "—"), []).append(m)
+    out = [{"old": o, "new": n, "count": len(rows), "rows": rows[:MAX_RENDER]}
+           for (o, n), rows in groups.items()]
+    out.sort(key=lambda g: (-g["count"], g["old"]))
+    return out
+
+
 def _prepare(ds, d, new_id):
-    """Cap rows, attach addr + history, split location-only modifications."""
+    """Cap rows, attach addr + history, split modifications into categories."""
     for r in d["added"] + d["removed"]:
         r["addr"] = _addr(r)
     for m in d["modified"]:
         m["addr"] = _addr(m)
         _combine_location(m)
 
-    significant, location_only = [], []
+    cats = {"significant": [], "location": [], "renumbered": [], "renamed": []}
     for m in d["modified"]:
-        if {c["field"] for c in m["changes"]} == {"location"}:
-            location_only.append(m)
-        else:
-            significant.append(m)
+        cats[_category(m)].append(m)
 
     counts = {"added": len(d["added"]), "removed": len(d["removed"]),
-              "modified": len(significant), "modified_location": len(location_only)}
+              "modified": len(cats["significant"]),
+              "modified_location": len(cats["location"]),
+              "renumbered": len(cats["renumbered"]),
+              "renamed": len(cats["renamed"])}
 
     added = d["added"][:MAX_RENDER]
     removed = d["removed"][:MAX_RENDER]
-    modified = significant[:MAX_RENDER]
-    location_only = location_only[:MAX_RENDER]
+    modified = cats["significant"][:MAX_RENDER]
+    location_only = cats["location"][:MAX_RENDER]
+    renumbered = cats["renumbered"][:MAX_RENDER]
+    renamed_groups = _group_renames(cats["renamed"])
 
     # history only for the rows we actually render
     keys = [r["identity_key"] for r in added + removed]
@@ -154,7 +190,7 @@ def _prepare(ds, d, new_id):
     for r in added + removed:
         r["history"] = hist.get(r["identity_key"], [])
 
-    return added, removed, modified, location_only, counts
+    return added, removed, modified, location_only, renumbered, renamed_groups, counts
 
 
 _CANON_LABEL = {"number": "Street number", "street": "Street name",
@@ -172,13 +208,15 @@ def _compared_fields(ds, prop_keys):
     out.append("Coordinates (latitude, longitude)")
     seen = {src.lower() for src in ds.fields.values() if src}
     seen |= {f.lower() for f in ds.ignore_fields}
+    seen |= diff.EDIT_METADATA_FIELDS
     out += [k for k in prop_keys if k.lower() not in seen]
     return out
 
 
 def _render_report(ds, snap, d, is_baseline, spark, source_url, compared, ignored):
     new_id = snap["id"]
-    added, removed, modified, location_only, counts = _prepare(ds, d, new_id)
+    added, removed, modified, location_only, renumbered, renamed_groups, counts = \
+        _prepare(ds, d, new_id)
     date = diff.snap_date(snap)
     ctx = {
         "compared_fields": compared, "ignored_fields": ignored,
@@ -188,8 +226,10 @@ def _render_report(ds, snap, d, is_baseline, spark, source_url, compared, ignore
         "old_date_friendly": "", "is_baseline": is_baseline,
         "added": added, "removed": removed, "modified": modified,
         "modified_location": location_only,
+        "renumbered": renumbered, "renamed_groups": renamed_groups,
         "added_count": counts["added"], "removed_count": counts["removed"],
         "modified_count": counts["modified"], "modified_location_count": counts["modified_location"],
+        "renumbered_count": counts["renumbered"], "renamed_count": counts["renamed"],
         "stats": _stats(d), "sparklines": spark, "source_url": source_url,
     }
     html = _env.get_template("report.html").render(**ctx)
@@ -224,18 +264,21 @@ def generate_all(datasets):
                           diff.compute_diff(ds, snaps[i]["id"], snaps[i + 1]["id"]), False))
 
         new_by_snap = diff.new_streets_by_snapshot(ds)
-        compared = _compared_fields(ds, diff.prop_keys(ds, snaps[-1]["id"]))
-        ignored = sorted(ds.ignore_fields)
+        pkeys = diff.prop_keys(ds, snaps[-1]["id"])
+        compared = _compared_fields(ds, pkeys)
+        ignored = sorted(set(ds.ignore_fields) |
+                         {k for k in pkeys if k.lower() in diff.EDIT_METADATA_FIELDS})
 
         series = {k: [] for k in SPARK_KEYS}  # filled as we render, for sparklines
         meta = []
         for idx, (snap, d, is_base) in enumerate(diffs):
-            loc = sum(1 for m in d["modified"]
-                      if _is_location_only(m))
+            cat = Counter(_category(m) for m in d["modified"])
             series["added"].append(len(d["added"]))
             series["removed"].append(len(d["removed"]))
-            series["modified"].append(len(d["modified"]) - loc)
-            series["modified_location"].append(loc)
+            series["modified"].append(cat["significant"])
+            series["modified_location"].append(cat["location"])
+            series["renumbered"].append(cat["renumbered"])
+            series["renamed"].append(cat["renamed"])
 
         for idx, (snap, d, is_base) in enumerate(diffs):
             counts = _render_report(ds, snap, d, is_base, _spark_series(series, idx), source_url,
@@ -245,7 +288,8 @@ def generate_all(datasets):
                 "date": date, "friendly_date": _friendly_date(date),
                 "filename": f"report-{date}.html", "is_baseline": is_base,
                 "added": counts["added"], "removed": counts["removed"],
-                "modified": counts["modified"] + counts["modified_location"],
+                "modified": counts["modified"] + counts["modified_location"]
+                            + counts["renumbered"] + counts["renamed"],
                 "new_streets": new_by_snap.get(snap["id"], []),
             })
 
@@ -303,11 +347,6 @@ def _load_skipped():
         return []
     with open(SKIPPED_PATH, "rb") as f:
         return tomllib.load(f).get("skipped", [])
-
-
-def _is_location_only(m):
-    fields = {c["field"] for c in m["changes"]}
-    return fields and fields <= {"latitude", "longitude"}
 
 
 def _source_url(ds):

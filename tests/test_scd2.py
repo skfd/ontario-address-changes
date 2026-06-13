@@ -84,7 +84,47 @@ def main():
     assert any(c["field"] == "NOTE" for m in d["modified"] for c in m["changes"]), d["modified"]
 
     shutil.rmtree(ds.data_dir)
+
+    test_field_changes()
+    test_categories()
     print("\nALL ASSERTIONS PASSED")
+
+
+def test_field_changes():
+    """Echo dedup + always-ignored edit metadata in diff.field_changes."""
+    fmap = {"number": "NUM", "street": "ST", "full": "FULL"}
+    old = {"number": "93", "street": "Main St", "full": "93 Main St",
+           "props": '{"NUM": "93", "FULL": "93 Main St", "EDIT_DATE": 1, "NOTE": "x"}'}
+    new = {"number": "97", "street": "Main St", "full": "97 Main St",
+           "props": '{"NUM": "97", "FULL": "97 Main St", "EDIT_DATE": 2, "NOTE": "x"}'}
+    ch = diff.field_changes(old, new, field_map=fmap)
+    fields = {c["field"] for c in ch}
+    # NUM/FULL props are echoes of the changed canonical columns; EDIT_DATE is metadata
+    assert fields == {"number", "full"}, fields
+
+    # a mapped prop change with NO canonical change is not an echo and must survive
+    old = {"street": "McCaul St", "props": '{"ST": "Mc Caul St"}'}
+    new = {"street": "McCaul St", "props": '{"ST": "McCaul St"}'}
+    ch = diff.field_changes(old, new, field_map=fmap)
+    assert {c["field"] for c in ch} == {"ST"}, ch
+
+
+def test_categories():
+    """Report-level classification of modified rows by changed-field set."""
+    from src import report
+
+    def m(*fields):
+        return {"changes": [{"field": f} for f in fields]}
+
+    assert report._category(m("latitude", "longitude")) == "location"
+    assert report._category(m("location")) == "location"      # after _combine_location
+    assert report._category(m("number", "full")) == "renumbered"
+    assert report._category(m("number")) == "renumbered"
+    assert report._category(m("street", "full")) == "renamed"
+    assert report._category(m("street")) == "renamed"
+    assert report._category(m("street", "number", "full")) == "significant"
+    assert report._category(m("location", "PLACE_NAME")) == "significant"
+    assert report._category(m("NOTE")) == "significant"
 
 
 if __name__ == "__main__":

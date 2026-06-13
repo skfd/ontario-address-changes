@@ -20,6 +20,17 @@ _CANONICAL_DISPLAY = {
 
 _DATE_RE = re.compile(r"(\d{4}-\d{2}-\d{2})")
 
+# Edit-metadata props ignored in every dataset (case-insensitive): timestamps and
+# editor names that change alongside any real edit (or on their own) and carry no
+# address information. Curated from a scan of all tracked sources; meaningful date
+# fields (OCCUPANCY_DATE, VERIFIED_DATE, ...) are deliberately not listed.
+EDIT_METADATA_FIELDS = frozenset({
+    "created_date", "create_date", "createdate", "created_user",
+    "edit_date", "edited_date", "editdate", "dateedit", "dateupdate",
+    "update_date", "updated", "lastupdate", "lasteditdate",
+    "last_edited_date", "last_edited_user", "modified_date", "moddate", "adddate",
+})
+
 
 # ---- snapshot helpers ----
 
@@ -55,22 +66,31 @@ def prop_keys(ds, snapshot_id):
 
 # ---- field-level change detection ----
 
-def field_changes(old, new, ignore=()):
+def field_changes(old, new, ignore=(), field_map=None):
     """List of {field, old, new, display_field} between two row dicts.
 
     `ignore` is a set of source prop names (case-insensitive) whose changes are
     not counted — used to silence per-dataset noise fields (see Dataset.ignore_fields).
+    Edit-metadata props (EDIT_METADATA_FIELDS) are always ignored.
+
+    `field_map` is the dataset's canonical->source mapping (Dataset.fields). The
+    canonical columns are copies of mapped source props, so when a canonical field
+    changed, the matching source-prop change is dropped as a duplicate echo.
     """
-    ignore = {k.lower() for k in ignore}
+    ignore = {k.lower() for k in ignore} | EDIT_METADATA_FIELDS
     out = []
+    changed_canon = set()
     for f in ("number", "street", "unit", "full", "latitude", "longitude"):
         if (old.get(f) if old.get(f) != "" else None) != (new.get(f) if new.get(f) != "" else None):
             out.append({"field": f, "old": old.get(f), "new": new.get(f),
                         "display_field": _CANONICAL_DISPLAY.get(f, f)})
+            changed_canon.add(f)
+    echoes = {src.lower() for canon, src in (field_map or {}).items()
+              if src and canon in changed_canon}
     oldp = json.loads(old.get("props") or "{}")
     newp = json.loads(new.get("props") or "{}")
     for k in sorted(set(oldp) | set(newp)):
-        if k.lower() in ignore:
+        if k.lower() in ignore or k.lower() in echoes:
             continue
         if oldp.get(k) != newp.get(k):
             out.append({"field": k, "old": oldp.get(k), "new": newp.get(k),
@@ -104,7 +124,7 @@ def compute_diff(ds, old_id, new_id):
     modified = []
     for k in old.keys() & new.keys():
         if old[k]["payload_hash"] != new[k]["payload_hash"]:
-            ch = field_changes(old[k], new[k], ds.ignore_fields)
+            ch = field_changes(old[k], new[k], ds.ignore_fields, ds.fields)
             if ch:
                 m = dict(new[k])
                 m["changes"] = ch
