@@ -109,7 +109,8 @@
     <div class="section-header">Reports · {{ license_name }} {{ ui.field_info(compared_fields, ignored_fields) }}</div>
     <div class="reports">
       {% for report in reports %}
-      {% if report.added == 0 and report.removed == 0 and report.modified == 0 and not report.is_baseline %}
+      {% set changed = report.changed|default(report.modified) %}
+      {% if report.added == 0 and report.removed == 0 and changed == 0 and not report.is_baseline %}
       <div class="report-link" style="opacity:.55">
         <div class="date-row"><span class="date">{{ report.friendly_date }}</span></div>
         <div class="summary"><span class="indicator neutral"></span>No changes</div>
@@ -122,10 +123,10 @@
           {% if report.new_streets %}<span class="new-streets-pill">+{{ report.new_streets|length }} new street{% if report.new_streets|length != 1 %}s{% endif %}</span>{% endif %}
         </div>
         <div class="summary">
-          {% if report.added >= report.removed and report.added >= report.modified %}<span class="indicator green"></span>
-          {% elif report.removed >= report.added and report.removed >= report.modified %}<span class="indicator red"></span>
+          {% if report.added >= report.removed and report.added >= changed %}<span class="indicator green"></span>
+          {% elif report.removed >= report.added and report.removed >= changed %}<span class="indicator red"></span>
           {% else %}<span class="indicator yellow"></span>{% endif %}
-          {{ "{:,}".format(report.added) }} new · {{ "{:,}".format(report.removed) }} removed · {{ "{:,}".format(report.modified) }} updated
+          {{ "{:,}".format(report.added) }} new · {{ "{:,}".format(report.removed) }} removed{% if report.modified %} · {{ "{:,}".format(report.modified) }} updated{% endif %}{% for p in report.phrases|default([]) %} · {{ p }}{% endfor %}
         </div>
       </a>
       {% endif %}

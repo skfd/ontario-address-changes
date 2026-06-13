@@ -229,6 +229,26 @@ def _prepare(ds, d, new_id):
 _CANON_LABEL = {"number": "Street number", "street": "Street name",
                 "unit": "Unit", "full": "Full address"}
 
+# Humanized index labels for the category counts, in display priority order.
+_CAT_LABELS = (
+    ("renamed", "street rename", "street renames"),
+    ("place_name", "place rename", "place renames"),
+    ("boundary", "boundary change", "boundary changes"),
+    ("status", "status change", "status changes"),
+    ("renumbered", "renumbered", "renumbered"),
+    ("modified_location", "moved", "moved"),
+)
+
+
+def _cat_phrases(counts):
+    """['2 place renames', '19 status changes', ...] for the nonzero categories."""
+    out = []
+    for key, sing, plur in _CAT_LABELS:
+        n = counts.get(key, 0)
+        if n:
+            out.append(f"{n:,} {sing if n == 1 else plur}")
+    return out
+
 
 def _compared_fields(ds, prop_keys):
     """Exact list of the fields change detection compares, for the info popup.
@@ -321,13 +341,15 @@ def generate_all(datasets):
             counts = _render_report(ds, snap, d, is_base, _spark_series(series, idx), source_url,
                                     compared, ignored)
             date = diff.snap_date(snap)
+            changed = (counts["modified"] + counts["modified_location"]
+                       + counts["renumbered"] + counts["renamed"]
+                       + counts["place_name"] + counts["status"] + counts["boundary"])
             meta.append({
                 "date": date, "friendly_date": _friendly_date(date),
                 "filename": f"report-{date}.html", "is_baseline": is_base,
                 "added": counts["added"], "removed": counts["removed"],
-                "modified": counts["modified"] + counts["modified_location"]
-                            + counts["renumbered"] + counts["renamed"]
-                            + counts["place_name"] + counts["status"] + counts["boundary"],
+                "modified": counts["modified"], "changed": changed,
+                "phrases": _cat_phrases(counts),
                 "new_streets": new_by_snap.get(snap["id"], []),
             })
 
@@ -353,7 +375,8 @@ def generate_all(datasets):
         card = {
             "slug": ds.slug, "provider": ds.provider, "license_name": ds.license_name,
             "row_count": snaps[-1]["row_count"], "last_date": diff.snap_date(snaps[-1]),
-            "added": latest["added"], "removed": latest["removed"], "modified": latest["modified"],
+            "added": latest["added"], "removed": latest["removed"], "modified": latest["changed"],
+            "highlight": "" if latest["is_baseline"] else " · ".join(latest["phrases"][:2]),
             "has_changes": not latest["is_baseline"], "report_count": len(meta),
             "compared_fields": compared, "ignored_fields": ignored,
         }

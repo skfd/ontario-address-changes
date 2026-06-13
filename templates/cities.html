@@ -34,6 +34,7 @@
     .city-main { flex:1; min-width:0; }
     .city-name { font-weight:600; font-size:15px; }
     .city-sub { font-size:12px; color:var(--text-dim); margin-top:2px; }
+    .city-highlight { color:var(--accent); }
     .city-right { text-align:right; white-space:nowrap; }
     .city-count { font-weight:600; font-variant-numeric:tabular-nums; }
     .city-delta { font-size:12px; margin-top:2px; }
@@ -88,6 +89,7 @@
           <div class="city-main">
             <div class="city-name">{{ c.provider }}</div>
             <div class="city-sub">{{ c.license_name }} · last snapshot {{ c.last_date }} · {{ c.report_count }} report{{ 's' if c.report_count != 1 else '' }}</div>
+            {% if c.highlight %}<div class="city-sub city-highlight">latest: {{ c.highlight }}</div>{% endif %}
           </div>
           <div class="city-right">
             <div class="city-count">{{ "{:,}".format(c.row_count) }}</div>

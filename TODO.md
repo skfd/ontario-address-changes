@@ -122,7 +122,9 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
   on its report.
 - [ ] **After a few weeks of real diffs** — review each city's "modified" noise and
   pick `ignore_fields` (Toronto needed this — 387→3 modified). Needs a human eye on
-  which fields are meaningless churn.
+  which fields are meaningless churn. Same pass: check whether the `[classes]`
+  assignments (2026-06-12, sampled from one snapshot each) hold up against real
+  transitions, and whether unclassed cities grew class-worthy fields.
 
 ## 5. Hand to coding agent when convenient
 
