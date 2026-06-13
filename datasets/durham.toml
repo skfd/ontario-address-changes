@@ -17,3 +17,11 @@ synth_fields = ["number", "street", "unit"]   # fallback only if a row ever lack
 number = "CIVIC_NUM"
 street = "ROAD_NAME"              # ROAD_TYPE/ROAD_DIR are separate source fields, tracked via the props blob
 unit   = "UNIT_NUM"              # real suite value (e.g. "2-61"); UNIT is just a Y/N has-unit flag
+
+# Change classes (field values verified against the latest snapshot): a
+# modification touching only these fields is reported in its humanized section
+# (place renames / status changes / boundary reassignments) instead of the
+# generic Updated Addresses table.
+[classes]
+status = ["MXCREATIONSTATE"]
+boundary = ["MUNICIPALITY", "TOWN"]

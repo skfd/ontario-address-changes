@@ -9,6 +9,7 @@ DATASETS_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "dataset
 _REQUIRED = ("slug", "provider", "data_url", "access", "format")
 _VALID_ACCESS = ("arcgis", "static")
 _VALID_FORMAT = ("geojson", "shapefile")
+_VALID_CLASSES = ("place_name", "status", "boundary")
 
 
 @dataclass
@@ -24,6 +25,7 @@ class Dataset:
     synth_fields: list = field(default_factory=lambda: ["full"])
     fields: dict = field(default_factory=dict)
     ignore_fields: list = field(default_factory=list)  # source props excluded from change detection
+    classes: dict = field(default_factory=dict)  # change class -> source props (see _VALID_CLASSES)
 
     @property
     def data_dir(self):
@@ -46,6 +48,10 @@ def _parse(path):
         raise ValueError(f"{path}: access must be one of {_VALID_ACCESS}")
     if raw["format"] not in _VALID_FORMAT:
         raise ValueError(f"{path}: format must be one of {_VALID_FORMAT}")
+    classes = raw.get("classes", {})
+    bad = [k for k in classes if k not in _VALID_CLASSES]
+    if bad:
+        raise ValueError(f"{path}: unknown classes {bad}; valid: {_VALID_CLASSES}")
 
     identity = raw.get("identity", {})
     return Dataset(
@@ -60,6 +66,7 @@ def _parse(path):
         synth_fields=identity.get("synth_fields", ["full"]),
         fields=raw.get("fields", {}),
         ignore_fields=raw.get("ignore_fields", []),
+        classes=classes,
     )
 
 

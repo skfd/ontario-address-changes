@@ -14,3 +14,10 @@ synth_fields = ["number", "street", "unit"]   # unit needed: multi-unit building
 number = "NUMBER_COMPLETE"
 street = "FULL_STREET_NAME"
 unit   = "UNIT_NUMBER_COMPLETE"
+
+# Change classes (field values verified against the latest snapshot): a
+# modification touching only these fields is reported in its humanized section
+# (place renames / status changes / boundary reassignments) instead of the
+# generic Updated Addresses table.
+[classes]
+boundary = ["MUNICIPALITY", "COMMUNITY"]

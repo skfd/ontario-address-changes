@@ -126,6 +126,24 @@ def test_categories():
     assert report._category(m("location", "PLACE_NAME")) == "significant"
     assert report._category(m("NOTE")) == "significant"
 
+    # per-dataset classes (Dataset.classes): all changed fields inside ONE class
+    classes = {"place_name": ["PLACE_NAME", "PLACE_NAME_ALL"],
+               "status": ["MAINT_STAGE"], "boundary": ["WARD", "WARD_NAME"]}
+    assert report._category(m("PLACE_NAME"), classes) == "place_name"
+    assert report._category(m("PLACE_NAME", "PLACE_NAME_ALL"), classes) == "place_name"
+    assert report._category(m("MAINT_STAGE"), classes) == "status"
+    assert report._category(m("WARD", "WARD_NAME"), classes) == "boundary"
+    assert report._category(m("MAINT_STAGE", "WARD"), classes) == "significant"   # cross-class mix
+    assert report._category(m("PLACE_NAME", "location"), classes) == "significant"
+    assert report._category(m("street"), classes) == "renamed"  # built-ins win
+
+    # transition grouping: same old->new signature collapses into one group
+    a = {"changes": [{"field": "WARD", "old": "06", "new": "18"}], "addr": "1 A St"}
+    b = {"changes": [{"field": "WARD", "old": "06", "new": "18"}], "addr": "2 A St"}
+    c = {"changes": [{"field": "WARD", "old": "18", "new": "06"}], "addr": "3 A St"}
+    groups = report._group_transitions([a, b, c])
+    assert [(g["count"], g["changes"][0]["old"]) for g in groups] == [(2, "06"), (1, "18")], groups
+
 
 if __name__ == "__main__":
     main()

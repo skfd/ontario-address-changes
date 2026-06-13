@@ -17,3 +17,10 @@ synth_fields = ["number", "street", "unit"]
 number = "Address"
 street = "WC_FullNam"                           # WC_Name/Suffix/Dir/Municipality/UrbanCentre tracked via the props blob
 unit   = "Unit"
+
+# Change classes (field values verified against the latest snapshot): a
+# modification touching only these fields is reported in its humanized section
+# (place renames / status changes / boundary reassignments) instead of the
+# generic Updated Addresses table.
+[classes]
+boundary = ["Municipality"]

@@ -17,3 +17,10 @@ synth_fields = ["number", "street", "unit"]    # fallback only
 number = "STREETNUM"
 street = "STREETNAME"                           # STREETDIRECTION/STREETTYPE/MUNICIPALITY tracked via the props blob
 unit   = "UNIT_IDENTIFIER"
+
+# Change classes (field values verified against the latest snapshot): a
+# modification touching only these fields is reported in its humanized section
+# (place renames / status changes / boundary reassignments) instead of the
+# generic Updated Addresses table.
+[classes]
+boundary = ["WARD", "MUNICIPALITY"]

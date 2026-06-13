@@ -13,7 +13,7 @@
       --accent-hover: #106ebe; --accent-bg: #eff6fc; --green: #107c10;
       --green-bg: #f1faf1; --green-tint: #9fd89f; --red: #c50f1f; --red-bg: #fdf3f4;
       --red-tint: #eeacb2; --yellow: #eaa300; --yellow-bg: #fefbf4; --yellow-tint: #f9e2ae;
-      --purple: #881798; --purple-bg: #f9f3fb;
+      --purple: #881798; --purple-bg: #f9f3fb; --teal: #038387; --teal-bg: #f0fafa;
       --shadow-4: 0 2px 4px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
       --shadow-8: 0 4px 8px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
       --card-bg: #ffffff; --card-hover: #f5f5f5; color-scheme: light;
@@ -26,7 +26,7 @@
         --accent-hover: #3aa0f3; --accent-bg: #002848; --green: #54b054;
         --green-bg: #052505; --green-tint: #107c10; --red: #dc626d; --red-bg: #3b0509;
         --red-tint: #c50f1f; --yellow: #f2c661; --yellow-bg: #463100; --yellow-tint: #eaa300;
-        --purple: #d29ddb; --purple-bg: #3a1040;
+        --purple: #d29ddb; --purple-bg: #3a1040; --teal: #58c0c4; --teal-bg: #013638;
         --shadow-4: 0 2px 4px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
         --shadow-8: 0 4px 8px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
         --card-bg: #333333; --card-hover: #3d3d3d; color-scheme: dark;
@@ -56,6 +56,7 @@
     .card .value.green { color: var(--green); } .card .value.red { color: var(--red); }
     .card .value.yellow { color: var(--yellow); } .card .value.accent { color: var(--accent); }
     .card .value.purple { color: var(--purple); }
+    .card .value.teal { color: var(--teal); }
     .sparkline { display: block; margin-top: 6px; overflow: visible; opacity: 0.9; }
     .sparkline-label { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
     .section { margin-bottom: 24px; }
@@ -67,6 +68,7 @@
     .badge-yellow { background: var(--yellow-bg); color: var(--yellow); }
     .badge-accent { background: var(--accent-bg); color: var(--accent); }
     .badge-purple { background: var(--purple-bg); color: var(--purple); }
+    .badge-teal { background: var(--teal-bg); color: var(--teal); }
     table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface);
       border-radius: 8px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
     thead { background: var(--surface2); }
@@ -152,6 +154,8 @@
 
 
 
+
+
 <body>
 
   <a class="back-link" href="index.html">← Back to City of Toronto reports</a>
@@ -183,14 +187,29 @@
       
     </span>
   </span></div>
-      <div class="value yellow">341</div>
-      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 55.0,2.0 108.0,8.7"/><circle cx="108.0" cy="8.7" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+      <div class="value yellow">244</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 55.0,2.0 108.0,11.3"/><circle cx="108.0" cy="11.3" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
     <div class="card"><div class="label">Renumbered</div>
       <div class="value accent">4</div>
       <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#0078d4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 55.0,18.0 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#0078d4"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
     <div class="card"><div class="label">Street Renames</div>
       <div class="value purple">0</div>
       <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#9141ac" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 55.0,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#9141ac"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    <div class="card"><div class="label">Place Renames</div>
+      <div class="value teal">90</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#038387" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 55.0,18.0 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#038387"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    <div class="card"><div class="label">Status Changes</div>
+      <div class="value teal">7</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#038387" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 55.0,18.0 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#038387"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    <div class="card"><div class="label">Boundary Changes</div>
+      <div class="value teal">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#038387" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 55.0,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#038387"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
     <div class="card"><div class="label">Location Adjustments</div>
       <div class="value" style="color: var(--text-dim)">2,233</div>
       <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#808080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 55.0,2.0 108.0,17.9"/><circle cx="108.0" cy="17.9" r="2" fill="#808080"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
@@ -2588,7 +2607,7 @@
   </div>
 
   <div class="section">
-    <h2>Updated Addresses <span class="badge badge-yellow">341</span>
+    <h2>Updated Addresses <span class="badge badge-yellow">244</span>
       <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
     <span class="info-btn"><span class="glyph">i</span> Fields</span>
     <span class="info-pop">
@@ -2604,30 +2623,6 @@
       <thead><tr><th>Address</th><th>What Changed</th><th>Before</th><th></th><th>After</th><th>Map</th></tr></thead>
       <tbody>
         
-  <tr><td rowspan="1">925 Albion Rd</td>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">Village Green Park, Thistletown Multi Service Centre - Building Grounds</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Village Green Park</td>
-    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73547&mlon=-79.56258#map=18/43.73547/-79.56258" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr><td rowspan="2">819 Bathurst St</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Bathurst Station</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66618&mlon=-79.41129#map=18/43.66618/-79.41129" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Bathurst Station</td>
-    </tr>
-  <tr><td rowspan="1">3180 Bathurst St</td>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">Asbury &amp; West United Church</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">None</td>
-    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72267&mlon=-79.43125#map=18/43.72267/-79.43125" target="_blank" rel="noopener">View ↗</a></td></tr>
   <tr><td rowspan="3">1234 Bay St</td>
     <td class="change-field">PLACE_NAME</td>
     <td class="old-val">None</td>
@@ -2663,18 +2658,6 @@
     <td class="old-val">43.67034, -79.39013<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67034&mlon=-79.39013#map=19/43.67034/-79.39013" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
     <td class="arrow-val">↗ 11.2m</td>
     <td class="new-val">43.67039, -79.39001<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67039&mlon=-79.39001#map=19/43.67039/-79.39001" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
-    </tr>
-  <tr><td rowspan="2">2643 Bayview Ave</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">York Mills Gardens</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75507&mlon=-79.38525#map=18/43.75507/-79.38525" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">York Mills Gardens</td>
     </tr>
   <tr><td rowspan="3">8 Bedford Rd</td>
     <td class="change-field">PLACE_NAME</td>
@@ -2712,144 +2695,6 @@
     <td class="arrow-val"></td>
     <td class="new-val">28 Belle Ayre Blvd</td>
     </tr>
-  <tr><td rowspan="1">95 Bernice Cres</td>
-    <td class="change-field">MAINT_STAGE</td>
-    <td class="old-val">RESERVED</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">REGULAR</td>
-    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66687&mlon=-79.49851#map=18/43.66687/-79.49851" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr><td rowspan="1">97 Bernice Cres</td>
-    <td class="change-field">MAINT_STAGE</td>
-    <td class="old-val">RESERVED</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">REGULAR</td>
-    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66687&mlon=-79.49861#map=18/43.66687/-79.49861" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr><td rowspan="2">20 Bloor St E</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Bloor-Yonge Station</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67075&mlon=-79.38544#map=18/43.67075/-79.38544" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Bloor-Yonge Station</td>
-    </tr>
-  <tr><td rowspan="2">600 Bloor St E</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Castle Frank Station</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67385&mlon=-79.36861#map=18/43.67385/-79.36861" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Castle Frank Station</td>
-    </tr>
-  <tr><td rowspan="2">2672 Bloor St W</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Old Mill Station</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65006&mlon=-79.49492#map=18/43.65006/-79.49492" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Old Mill Station</td>
-    </tr>
-  <tr><td rowspan="2">3330 Bloor St W</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">TTC commuter parking lot 802</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Carpark 802</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64446&mlon=-79.52602#map=18/43.64446/-79.52602" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">TTC commuter parking lot 802</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Carpark 802</td>
-    </tr>
-  <tr><td rowspan="2">28 Bonnyview Dr</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Jeff Healey Park</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.63062&mlon=-79.49314#map=18/43.63062/-79.49314" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Jeff Healey Park</td>
-    </tr>
-  <tr><td rowspan="2">290 Borough Dr</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Scarborough Centre Station</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.77439&mlon=-79.25822#map=18/43.77439/-79.25822" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Scarborough Centre Station</td>
-    </tr>
-  <tr><td rowspan="2">769 Broadview Ave</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">Broadview Subway Station</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Broadview Station</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67681&mlon=-79.35850#map=18/43.67681/-79.35850" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">Broadview Subway Station</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Broadview Station</td>
-    </tr>
-  <tr><td rowspan="2">627 Burnhamthorpe Rd</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Renforth Baptist Church</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64365&mlon=-79.57320#map=18/43.64365/-79.57320" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Renforth Baptist Church</td>
-    </tr>
-  <tr><td rowspan="1">197 Caribou Rd</td>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">St Philip Anglican Church</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">None</td>
-    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71765&mlon=-79.42843#map=18/43.71765/-79.42843" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr><td rowspan="2">3 Carlton St</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">College Station</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66120&mlon=-79.38268#map=18/43.66120/-79.38268" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">College Station</td>
-    </tr>
-  <tr><td rowspan="2">550 Centennial Park Blvd</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Centennial Park Golf Centre</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65196&mlon=-79.59756#map=18/43.65196/-79.59756" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Centennial Park Golf Centre</td>
-    </tr>
   <tr><td rowspan="3">156 Centennial Park Rd</td>
     <td class="change-field">PLACE_NAME</td>
     <td class="old-val">None</td>
@@ -2867,42 +2712,6 @@
     <td class="old-val">43.65692, -79.58633<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65692&mlon=-79.58633#map=19/43.65692/-79.58633" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
     <td class="arrow-val">↘ 94.4m</td>
     <td class="new-val">43.65615, -79.58584<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65615&mlon=-79.58584#map=19/43.65615/-79.58584" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
-    </tr>
-  <tr><td rowspan="2">22 Chester Ave</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Chester Station</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67823&mlon=-79.35253#map=18/43.67823/-79.35253" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Chester Station</td>
-    </tr>
-  <tr><td rowspan="2">5 Christie St</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Christie Station</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66412&mlon=-79.41837#map=18/43.66412/-79.41837" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Christie Station</td>
-    </tr>
-  <tr><td rowspan="2">376 Clinton St</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Carpark 144</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66434&mlon=-79.41755#map=18/43.66434/-79.41755" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Carpark 144</td>
     </tr>
   <tr><td rowspan="3">129 College St</td>
     <td class="change-field">PLACE_NAME</td>
@@ -2922,18 +2731,6 @@
     <td class="arrow-val">← 4.2m</td>
     <td class="new-val">43.65965, -79.39082<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65965&mlon=-79.39082#map=19/43.65965/-79.39082" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
     </tr>
-  <tr><td rowspan="2">1 Colonel Samuel Smith Park Dr</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Assembly Hall</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.59766&mlon=-79.51582#map=18/43.59766/-79.51582" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Assembly Hall</td>
-    </tr>
   <tr><td rowspan="3">2 Colonel Samuel Smith Park Dr</td>
     <td class="change-field">PLACE_NAME</td>
     <td class="old-val">Colonel Samuel Smith Park</td>
@@ -2951,42 +2748,6 @@
     <td class="old-val">43.59773, -79.51734<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.59773&mlon=-79.51734#map=19/43.59773/-79.51734" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
     <td class="arrow-val">↙ 34.6m</td>
     <td class="new-val">43.59760, -79.51773<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.59760&mlon=-79.51773#map=19/43.59760/-79.51773" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
-    </tr>
-  <tr><td rowspan="2">19 Colonel Samuel Smith Park Dr</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Humber Lakeshore Campus</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.59593&mlon=-79.51507#map=18/43.59593/-79.51507" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Humber Lakeshore Campus</td>
-    </tr>
-  <tr><td rowspan="2">7 Crescent Rd</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Rosedale Station</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67694&mlon=-79.38875#map=18/43.67694/-79.38875" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Rosedale Station</td>
-    </tr>
-  <tr><td rowspan="2">77 Curlew Dr</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Curlew Park</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74264&mlon=-79.31608#map=18/43.74264/-79.31608" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Curlew Park</td>
     </tr>
   <tr><td rowspan="2">1 Deane Field Cres</td>
     <td class="change-field">ADDRESS_FULL</td>
@@ -3504,66 +3265,6 @@
     <td class="arrow-val"></td>
     <td class="new-val">Deane Field Cres</td>
     </tr>
-  <tr><td rowspan="2">795 Dixon Rd</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Bell Canada Installation</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68745&mlon=-79.58778#map=18/43.68745/-79.58778" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Bell Canada Installation</td>
-    </tr>
-  <tr><td rowspan="2">30 Donlands Ave</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Donlands Station</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68098&mlon=-79.33782#map=18/43.68098/-79.33782" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Donlands Station</td>
-    </tr>
-  <tr><td rowspan="2">1006 Dufferin St</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">Dufferin Subway Station</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Dufferin Station</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66008&mlon=-79.43561#map=18/43.66008/-79.43561" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">Dufferin Subway Station</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Dufferin Station</td>
-    </tr>
-  <tr><td rowspan="2">1 Dundas St E</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Sankofa Square</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65619&mlon=-79.38044#map=18/43.65619/-79.38044" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Sankofa Square</td>
-    </tr>
-  <tr><td rowspan="2">3 Dundas St E</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">TMU Station, Dundas Station</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65630&mlon=-79.38038#map=18/43.65630/-79.38038" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">TMU Station, Dundas Station</td>
-    </tr>
   <tr><td rowspan="3">2365 Dundas St W</td>
     <td class="change-field">PLACE_NAME</td>
     <td class="old-val">None</td>
@@ -3581,42 +3282,6 @@
     <td class="old-val">43.65693, -79.45324<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65693&mlon=-79.45324#map=19/43.65693/-79.45324" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
     <td class="arrow-val">↓ 4.5m</td>
     <td class="new-val">43.65689, -79.45324<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65689&mlon=-79.45324#map=19/43.65689/-79.45324" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
-    </tr>
-  <tr><td rowspan="2">263 Dupont St</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Dupont Station</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67478&mlon=-79.40680#map=18/43.67478/-79.40680" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Dupont Station</td>
-    </tr>
-  <tr><td rowspan="2">2455 Eglinton Ave E</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Kennedy Station</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73249&mlon=-79.26399#map=18/43.73249/-79.26399" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Kennedy Station</td>
-    </tr>
-  <tr><td rowspan="2">1300 Eglinton Ave W</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">Eglinton West Station</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Cedarvale Station, Eglinton West Station</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69925&mlon=-79.43608#map=18/43.69925/-79.43608" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">Eglinton West Station</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Cedarvale Station, Eglinton West Station</td>
     </tr>
   <tr><td rowspan="2">5 Electric Lane</td>
     <td class="change-field">ADDRESS_FULL</td>
@@ -3714,114 +3379,6 @@
     <td class="arrow-val">→ 167.6m</td>
     <td class="new-val">43.64936, -79.58728<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64936&mlon=-79.58728#map=19/43.64936/-79.58728" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
     </tr>
-  <tr><td rowspan="2">25 Fairfield Ave</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">St James Presbyterian Church</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">None</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.59716&mlon=-79.52495#map=18/43.59716/-79.52495" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">St James Presbyterian Church</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">None</td>
-    </tr>
-  <tr><td rowspan="1">157 Florence Ave</td>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">Church Of The Annunciation</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">None</td>
-    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75633&mlon=-79.41748#map=18/43.75633/-79.41748" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr><td rowspan="2">55 Forest Manor Rd</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Parkway Forest Community Centre &amp; Child Care</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.77254&mlon=-79.34389#map=18/43.77254/-79.34389" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Parkway Forest Community Centre &amp; Child Care</td>
-    </tr>
-  <tr><td rowspan="2">59 Forest Manor Rd</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Parkway Forest Outdoor Pool</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.77345&mlon=-79.34297#map=18/43.77345/-79.34297" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Parkway Forest Outdoor Pool</td>
-    </tr>
-  <tr><td rowspan="2">55 Front St W</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Union Station</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64563&mlon=-79.37935#map=18/43.64563/-79.37935" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Union Station</td>
-    </tr>
-  <tr><td rowspan="1">47 Glenbrook Ave</td>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">Beth Torah Synagogue</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">None</td>
-    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70939&mlon=-79.45210#map=18/43.70939/-79.45210" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr><td rowspan="2">770 Glencairn Ave</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Glencairn Station</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70967&mlon=-79.44131#map=18/43.70967/-79.44131" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Glencairn Station</td>
-    </tr>
-  <tr><td rowspan="2">39 Glentworth Rd</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">Lescon Park</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">None</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.77546&mlon=-79.35708#map=18/43.77546/-79.35708" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">Lescon Park</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">None</td>
-    </tr>
-  <tr><td rowspan="2">25 Grand Ave</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Grand Avenue Park</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.62227&mlon=-79.49129#map=18/43.62227/-79.49129" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Grand Avenue Park</td>
-    </tr>
-  <tr><td rowspan="2">45 Grand Ave</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Grand Avenue Park</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.62313&mlon=-79.49180#map=18/43.62313/-79.49180" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Grand Avenue Park</td>
-    </tr>
   <tr><td rowspan="3">23 Grandravine Dr</td>
     <td class="change-field">PLACE_NAME</td>
     <td class="old-val">Grandravine Park</td>
@@ -3857,30 +3414,6 @@
     <td class="old-val">43.75239, -79.49057<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75239&mlon=-79.49057#map=19/43.75239/-79.49057" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
     <td class="arrow-val">↖ 83.4m</td>
     <td class="new-val">43.75283, -79.49141<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75283&mlon=-79.49141#map=19/43.75283/-79.49141" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
-    </tr>
-  <tr><td rowspan="2">20 Howard Moscoe Way</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Pioneer Village Station Bus Terminal</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.77696&mlon=-79.50950#map=18/43.77696/-79.50950" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Pioneer Village Station Bus Terminal</td>
-    </tr>
-  <tr><td rowspan="2">24 Howard Moscoe Way</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Emergency Exit EEB5</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.77669&mlon=-79.50873#map=18/43.77669/-79.50873" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Emergency Exit EEB5</td>
     </tr>
   <tr><td rowspan="3">157 Hudson Dr</td>
     <td class="change-field">Address Number</td>
@@ -4032,12 +3565,6 @@
     <td class="arrow-val">↗ 10.6m</td>
     <td class="new-val">43.76399, -79.49154<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.76399&mlon=-79.49154#map=19/43.76399/-79.49154" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
     </tr>
-  <tr><td rowspan="1">3965 Keele St</td>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">Fire Station 141</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">None</td>
-    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.76505&mlon=-79.49105#map=18/43.76505/-79.49105" target="_blank" rel="noopener">View ↗</a></td></tr>
   <tr><td rowspan="3">26 Kimbark Blvd</td>
     <td class="change-field">MUNICIPALITY</td>
     <td class="old-val">TO</td>
@@ -4182,60 +3709,6 @@
     <td class="arrow-val">↑ 12.5m</td>
     <td class="new-val">43.71818, -79.41692<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71818&mlon=-79.41692#map=19/43.71818/-79.41692" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
     </tr>
-  <tr><td rowspan="2">3 King St E</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">King Station</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64911&mlon=-79.37752#map=18/43.64911/-79.37752" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">King Station</td>
-    </tr>
-  <tr><td rowspan="1">1157 Kingston Rd</td>
-    <td class="change-field">MAINT_STAGE</td>
-    <td class="old-val">RESERVED</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">REGULAR</td>
-    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68182&mlon=-79.28005#map=18/43.68182/-79.28005" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr><td rowspan="1">1159 Kingston Rd</td>
-    <td class="change-field">MAINT_STAGE</td>
-    <td class="old-val">RESERVED</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">REGULAR</td>
-    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68186&mlon=-79.27991#map=18/43.68186/-79.27991" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr><td rowspan="1">1161 Kingston Rd</td>
-    <td class="change-field">MAINT_STAGE</td>
-    <td class="old-val">RESERVED</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">REGULAR</td>
-    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68191&mlon=-79.27977#map=18/43.68191/-79.27977" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr><td rowspan="2">435 Kipling Ave</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">System &amp; Services Facilities</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Kipling Yard</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.60816&mlon=-79.52013#map=18/43.60816/-79.52013" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">System &amp; Services Facilities</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Kipling Yard</td>
-    </tr>
-  <tr><td rowspan="2">950 Kipling Ave</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Kipling Station</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.63863&mlon=-79.53437#map=18/43.63863/-79.53437" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Kipling Station</td>
-    </tr>
   <tr><td rowspan="3">1949 Kipling Ave</td>
     <td class="change-field">PLACE_NAME</td>
     <td class="old-val">None</td>
@@ -4253,18 +3726,6 @@
     <td class="old-val">43.70612, -79.56377<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70612&mlon=-79.56377#map=19/43.70612/-79.56377" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
     <td class="arrow-val">↑ 32.8m</td>
     <td class="new-val">43.70641, -79.56370<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70641&mlon=-79.56370#map=19/43.70641/-79.56370" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
-    </tr>
-  <tr><td rowspan="2">2300 Lake Shore Blvd W</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Car Park 533</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.61859&mlon=-79.48704#map=18/43.61859/-79.48704" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Car Park 533</td>
     </tr>
   <tr><td rowspan="3">691 Lansdowne Ave</td>
     <td class="change-field">PLACE_NAME</td>
@@ -4319,48 +3780,6 @@
     <td class="old-val">43.79437, -79.36939<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.79437&mlon=-79.36939#map=19/43.79437/-79.36939" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
     <td class="arrow-val">↙ 177.6m</td>
     <td class="new-val">43.79369, -79.37139<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.79369&mlon=-79.37139#map=19/43.79369/-79.37139" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
-    </tr>
-  <tr><td rowspan="2">10 Linnsmore Cres</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Greenwood Station</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68257&mlon=-79.33029#map=18/43.68257/-79.33029" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Greenwood Station</td>
-    </tr>
-  <tr><td rowspan="1">11 Lowesmoor Ave</td>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">Clanton Park Synagogue</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">None</td>
-    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74572&mlon=-79.44445#map=18/43.74572/-79.44445" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr><td rowspan="2">315 Main St</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Main Station</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68908&mlon=-79.30150#map=18/43.68908/-79.30150" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Main Station</td>
-    </tr>
-  <tr><td rowspan="2">10 Martha Eaton Way</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">Maple Creek Recreation Centre</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">None</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69731&mlon=-79.48990#map=18/43.69731/-79.48990" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">Maple Creek Recreation Centre</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">None</td>
     </tr>
   <tr><td rowspan="2">2 McCaul St</td>
     <td class="change-field">ADDRESS_FULL</td>
@@ -5910,30 +5329,6 @@
     <td class="arrow-val"></td>
     <td class="new-val">Narges Dr</td>
     </tr>
-  <tr><td rowspan="2">185 Northwest Gt</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Pioneer Village Station</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.77718&mlon=-79.51032#map=18/43.77718/-79.51032" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Pioneer Village Station</td>
-    </tr>
-  <tr><td rowspan="2">67 Nymark Ave</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Lescon Park</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78037&mlon=-79.36008#map=18/43.78037/-79.36008" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Lescon Park</td>
-    </tr>
   <tr><td rowspan="2">145 Old Foundry Rd</td>
     <td class="change-field">ADDRESS_FULL</td>
     <td class="old-val">145 Old Foundry Rd </td>
@@ -6054,30 +5449,6 @@
     <td class="arrow-val"></td>
     <td class="new-val">Ookwemin St</td>
     </tr>
-  <tr><td rowspan="2">4 Orianna Dr</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Bell Canada Installation</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.60173&mlon=-79.54668#map=18/43.60173/-79.54668" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Bell Canada Installation</td>
-    </tr>
-  <tr><td rowspan="2">746 Ossington Ave</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Ossington Station</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66238&mlon=-79.42630#map=18/43.66238/-79.42630" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Ossington Station</td>
-    </tr>
   <tr><td rowspan="3">716 Pape Ave</td>
     <td class="change-field">PLACE_NAME</td>
     <td class="old-val">None</td>
@@ -6096,96 +5467,6 @@
     <td class="arrow-val">↑ 6.9m</td>
     <td class="new-val">43.67960, -79.34539<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67960&mlon=-79.34539#map=19/43.67960/-79.34539" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
     </tr>
-  <tr><td rowspan="2">743 Pape Ave</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Pape Station</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67989&mlon=-79.34501#map=18/43.67989/-79.34501" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Pape Station</td>
-    </tr>
-  <tr><td rowspan="2">15 Park Lawn Rd</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Bell Structure</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.62347&mlon=-79.48188#map=18/43.62347/-79.48188" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Bell Structure</td>
-    </tr>
-  <tr><td rowspan="2">277 Park Lawn Rd</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">St. Mark&#39;s Catholic Church</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.63415&mlon=-79.49211#map=18/43.63415/-79.49211" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">St. Mark&#39;s Catholic Church</td>
-    </tr>
-  <tr><td rowspan="2">10 Penhurst Ave</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Bell Structure</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.62636&mlon=-79.50055#map=18/43.62636/-79.50055" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Bell Structure</td>
-    </tr>
-  <tr><td rowspan="2">1051 Progress Ave</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">Rosebank Park</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Cynthia Lai Park</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.79276&mlon=-79.23388#map=18/43.79276/-79.23388" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">Rosebank Park</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Cynthia Lai Park</td>
-    </tr>
-  <tr><td rowspan="2">35 Quebec Ave</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">High Park Station</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65386&mlon=-79.46689#map=18/43.65386/-79.46689" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">High Park Station</td>
-    </tr>
-  <tr><td rowspan="2">3 Queen St E</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Queen Station</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65242&mlon=-79.37846#map=18/43.65242/-79.37846" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Queen Station</td>
-    </tr>
-  <tr><td rowspan="1">303 Queen&#39;s Dr</td>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">Central Park Lodge</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">None</td>
-    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70757&mlon=-79.50221#map=18/43.70757/-79.50221" target="_blank" rel="noopener">View ↗</a></td></tr>
   <tr><td rowspan="3">3 Queen&#39;s Park</td>
     <td class="change-field">PLACE_NAME</td>
     <td class="old-val">None</td>
@@ -6222,18 +5503,6 @@
     <td class="arrow-val">↙ 19.1m</td>
     <td class="new-val">43.68278, -79.56828<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68278&mlon=-79.56828#map=19/43.68278/-79.56828" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
     </tr>
-  <tr><td rowspan="2">250 Rory Rd</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">Rainbow Park</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Ernie Lustig - Rainbow Park</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72027&mlon=-79.48374#map=18/43.72027/-79.48374" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">Rainbow Park</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Ernie Lustig - Rainbow Park</td>
-    </tr>
   <tr><td rowspan="3">271 Royal York Rd</td>
     <td class="change-field">PLACE_NAME</td>
     <td class="old-val">None</td>
@@ -6251,30 +5520,6 @@
     <td class="old-val">43.61329, -79.49667<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.61329&mlon=-79.49667#map=19/43.61329/-79.49667" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
     <td class="arrow-val">↑ 81.3m</td>
     <td class="new-val">43.61402, -79.49667<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.61402&mlon=-79.49667#map=19/43.61402/-79.49667" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
-    </tr>
-  <tr><td rowspan="2">575 Royal York Rd</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Carpark 513</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.62689&mlon=-79.50251#map=18/43.62689/-79.50251" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Carpark 513</td>
-    </tr>
-  <tr><td rowspan="2">955 Royal York Rd</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Royal York Station</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64816&mlon=-79.51134#map=18/43.64816/-79.51134" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Royal York Station</td>
     </tr>
   <tr><td rowspan="3">265 Runnymede Rd</td>
     <td class="change-field">PLACE_NAME</td>
@@ -6294,30 +5539,6 @@
     <td class="arrow-val">↓ 4.7m</td>
     <td class="new-val">43.65170, -79.47595<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65170&mlon=-79.47595#map=19/43.65170/-79.47595" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
     </tr>
-  <tr><td rowspan="2">16 Shaftesbury Ave</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Summerhill Station</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68229&mlon=-79.39079#map=18/43.68229/-79.39079" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Summerhill Station</td>
-    </tr>
-  <tr><td rowspan="2">110 Shaughnessy Blvd</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Dallington Park</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.77634&mlon=-79.35380#map=18/43.77634/-79.35380" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Dallington Park</td>
-    </tr>
   <tr><td rowspan="3">550 Sheppard Ave E</td>
     <td class="change-field">PLACE_NAME</td>
     <td class="old-val">None</td>
@@ -6336,18 +5557,6 @@
     <td class="arrow-val">↖ 5.3m</td>
     <td class="new-val">43.76712, -79.38759<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.76712&mlon=-79.38759#map=19/43.76712/-79.38759" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
     </tr>
-  <tr><td rowspan="2">731 Sheppard Ave E</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Bessarion Station</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.76907&mlon=-79.37591#map=18/43.76907/-79.37591" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Bessarion Station</td>
-    </tr>
   <tr><td rowspan="3">1209 Sheppard Ave E</td>
     <td class="change-field">PLACE_NAME</td>
     <td class="old-val">None</td>
@@ -6365,66 +5574,6 @@
     <td class="old-val">43.77104, -79.36696<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.77104&mlon=-79.36696#map=19/43.77104/-79.36696" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
     <td class="arrow-val">← 15.9m</td>
     <td class="new-val">43.77100, -79.36715<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.77100&mlon=-79.36715#map=19/43.77100/-79.36715" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
-    </tr>
-  <tr><td rowspan="2">1275 Sheppard Ave E</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Leslie Station</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.77118&mlon=-79.36465#map=18/43.77118/-79.36465" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Leslie Station</td>
-    </tr>
-  <tr><td rowspan="1">4750 Sheppard Ave E</td>
-    <td class="change-field">MAINT_STAGE</td>
-    <td class="old-val">RESERVED</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">REGULAR</td>
-    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.79114&mlon=-79.25459#map=18/43.79114/-79.25459" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr><td rowspan="1">4760 Sheppard Ave E</td>
-    <td class="change-field">MAINT_STAGE</td>
-    <td class="old-val">RESERVED</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">REGULAR</td>
-    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.79266&mlon=-79.25416#map=18/43.79266/-79.25416" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr><td rowspan="2">8450 Sheppard Ave E</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Rouge Valley Community Recreation &amp; Child Care Centre</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.80529&mlon=-79.18987#map=18/43.80529/-79.18987" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Rouge Valley Community Recreation &amp; Child Care Centre</td>
-    </tr>
-  <tr><td rowspan="2">20 Sheppard Ave W</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Sheppard Yonge Station</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.76170&mlon=-79.41236#map=18/43.76170/-79.41236" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Sheppard Yonge Station</td>
-    </tr>
-  <tr><td rowspan="2">633 Sherbourne St</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Sherbourne Station</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67204&mlon=-79.37645#map=18/43.67204/-79.37645" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Sherbourne Station</td>
     </tr>
   <tr><td rowspan="2">15 Signal St</td>
     <td class="change-field">ADDRESS_FULL</td>
@@ -6558,42 +5707,6 @@
     <td class="arrow-val">← 33.3m</td>
     <td class="new-val">43.68395, -79.41548<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68395&mlon=-79.41548#map=19/43.68395/-79.41548" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
     </tr>
-  <tr><td rowspan="2">139 St George St</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">St George Station</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66827&mlon=-79.39981#map=18/43.66827/-79.39981" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">St George Station</td>
-    </tr>
-  <tr><td rowspan="2">5 Steve Podborski Rd</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Big Bear Park</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71994&mlon=-79.34324#map=18/43.71994/-79.34324" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Big Bear Park</td>
-    </tr>
-  <tr><td rowspan="2">355 Strathmore Blvd</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Coxwell Station</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68412&mlon=-79.32306#map=18/43.68412/-79.32306" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Coxwell Station</td>
-    </tr>
   <tr><td rowspan="2">26 Thane Murray Way</td>
     <td class="change-field">ADDRESS_FULL</td>
     <td class="old-val">26 Thane Murray Way </td>
@@ -6618,42 +5731,6 @@
     <td class="arrow-val"></td>
     <td class="new-val">Thane Murray Way</td>
     </tr>
-  <tr><td rowspan="2">130 The Queensway</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Humber Treatment Plant</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.63316&mlon=-79.48022#map=18/43.63316/-79.48022" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Humber Treatment Plant</td>
-    </tr>
-  <tr><td rowspan="2">66 Third St</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Carpark 507</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.60114&mlon=-79.50081#map=18/43.60114/-79.50081" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Carpark 507</td>
-    </tr>
-  <tr><td rowspan="2">66Y Third St</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Carpark 507</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.60119&mlon=-79.50094#map=18/43.60119/-79.50094" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Carpark 507</td>
-    </tr>
   <tr><td rowspan="3">2 Twenty Sixth St</td>
     <td class="change-field">PLACE_NAME</td>
     <td class="old-val">None</td>
@@ -6672,18 +5749,6 @@
     <td class="arrow-val">← 14.4m</td>
     <td class="new-val">43.59696, -79.52494<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.59696&mlon=-79.52494#map=19/43.59696/-79.52494" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
     </tr>
-  <tr><td rowspan="2">45 Twenty Third St</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">R.L. Clark Water Treatment Plant</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.59413&mlon=-79.51970#map=18/43.59413/-79.51970" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">R.L. Clark Water Treatment Plant</td>
-    </tr>
   <tr><td rowspan="3">671 University Ave</td>
     <td class="change-field">PLACE_NAME</td>
     <td class="old-val">Queen&#39;s Park Subway Entrance</td>
@@ -6701,18 +5766,6 @@
     <td class="old-val">43.65980, -79.39007<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65980&mlon=-79.39007#map=19/43.65980/-79.39007" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
     <td class="arrow-val">↓ 7.8m</td>
     <td class="new-val">43.65973, -79.39006<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65973&mlon=-79.39006#map=19/43.65973/-79.39006" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
-    </tr>
-  <tr><td rowspan="2">777 Victoria Park Ave</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Victoria Park Station</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69454&mlon=-79.28916#map=18/43.69454/-79.28916" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Victoria Park Station</td>
     </tr>
   <tr><td rowspan="3">244 Viewmount Ave</td>
     <td class="change-field">PLACE_NAME</td>
@@ -6804,78 +5857,6 @@
     <td class="arrow-val">↓ 3.4m</td>
     <td class="new-val">43.73654, -79.43681<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73654&mlon=-79.43681#map=19/43.73654/-79.43681" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
     </tr>
-  <tr><td rowspan="2">570 Wilson Ave</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">Wilson Subway Station</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Wilson Station</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73459&mlon=-79.45087#map=18/43.73459/-79.45087" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">Wilson Subway Station</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Wilson Station</td>
-    </tr>
-  <tr><td rowspan="2">1235 Wilson Ave</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">HUMBER RIVER HOSPITAL</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72426&mlon=-79.48922#map=18/43.72426/-79.48922" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">HUMBER RIVER HOSPITAL</td>
-    </tr>
-  <tr><td rowspan="2">991 Woodbine Ave</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Woodbine Station</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68641&mlon=-79.31277#map=18/43.68641/-79.31277" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Woodbine Station</td>
-    </tr>
-  <tr><td rowspan="2">1900 Yonge St</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Davisville Station</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69784&mlon=-79.39694#map=18/43.69784/-79.39694" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Davisville Station</td>
-    </tr>
-  <tr><td rowspan="2">2190 Yonge St</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Eglinton Station</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70529&mlon=-79.39885#map=18/43.70529/-79.39885" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Eglinton Station</td>
-    </tr>
-  <tr><td rowspan="2">3101 Yonge St</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">George Milbrandt Parkette</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Lawrence Station, George Milbrandt Parkette</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72535&mlon=-79.40193#map=18/43.72535/-79.40193" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">George Milbrandt Parkette</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Lawrence Station, George Milbrandt Parkette</td>
-    </tr>
   <tr><td rowspan="3">4015 Yonge St</td>
     <td class="change-field">PLACE_NAME</td>
     <td class="old-val">None</td>
@@ -6893,42 +5874,6 @@
     <td class="old-val">43.74318, -79.40615<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74318&mlon=-79.40615#map=19/43.74318/-79.40615" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
     <td class="arrow-val">→ 24.0m</td>
     <td class="new-val">43.74323, -79.40586<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74323&mlon=-79.40586#map=19/43.74323/-79.40586" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
-    </tr>
-  <tr><td rowspan="2">4070 Yonge St</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Yonge &amp; York Mills Dog Off Leash Area</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74553&mlon=-79.40730#map=18/43.74553/-79.40730" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Yonge &amp; York Mills Dog Off Leash Area</td>
-    </tr>
-  <tr><td rowspan="2">5102 Yonge St</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">North York Centre Station</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.76828&mlon=-79.41291#map=18/43.76828/-79.41291" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">None</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">North York Centre Station</td>
-    </tr>
-  <tr><td rowspan="2">50 Yorkdale Rd</td>
-    <td class="change-field">PLACE_NAME</td>
-    <td class="old-val">Yorkdale Subway Station</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Yorkdale Station</td>
-    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72509&mlon=-79.44774#map=18/43.72509/-79.44774" target="_blank" rel="noopener">View ↗</a></td></tr>
-  <tr>
-    <td class="change-field">PLACE_NAME_ALL</td>
-    <td class="old-val">Yorkdale Subway Station</td>
-    <td class="arrow-val"></td>
-    <td class="new-val">Yorkdale Station</td>
     </tr>
       </tbody>
     </table>
@@ -7001,6 +5946,1092 @@
     <h2>Street Renames <span class="badge badge-purple">0</span></h2>
     <p class="empty">No street renames.</p>
   </div>
+
+  
+  <div class="section">
+    <h2>Place Renames <span class="badge badge-teal">90</span></h2>
+    
+    <table>
+      <thead><tr><th>Address</th><th>What Changed</th><th>Before</th><th></th><th>After</th><th>Map</th></tr></thead>
+      <tbody>
+        
+  <tr><td rowspan="1">925 Albion Rd</td>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">Village Green Park, Thistletown Multi Service Centre - Building Grounds</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Village Green Park</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73547&mlon=-79.56258#map=18/43.73547/-79.56258" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="2">819 Bathurst St</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Bathurst Station</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66618&mlon=-79.41129#map=18/43.66618/-79.41129" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Bathurst Station</td>
+    </tr>
+  <tr><td rowspan="1">3180 Bathurst St</td>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">Asbury &amp; West United Church</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">None</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72267&mlon=-79.43125#map=18/43.72267/-79.43125" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="2">2643 Bayview Ave</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">York Mills Gardens</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75507&mlon=-79.38525#map=18/43.75507/-79.38525" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">York Mills Gardens</td>
+    </tr>
+  <tr><td rowspan="2">20 Bloor St E</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Bloor-Yonge Station</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67075&mlon=-79.38544#map=18/43.67075/-79.38544" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Bloor-Yonge Station</td>
+    </tr>
+  <tr><td rowspan="2">600 Bloor St E</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Castle Frank Station</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67385&mlon=-79.36861#map=18/43.67385/-79.36861" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Castle Frank Station</td>
+    </tr>
+  <tr><td rowspan="2">2672 Bloor St W</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Old Mill Station</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65006&mlon=-79.49492#map=18/43.65006/-79.49492" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Old Mill Station</td>
+    </tr>
+  <tr><td rowspan="2">3330 Bloor St W</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">TTC commuter parking lot 802</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Carpark 802</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64446&mlon=-79.52602#map=18/43.64446/-79.52602" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">TTC commuter parking lot 802</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Carpark 802</td>
+    </tr>
+  <tr><td rowspan="2">28 Bonnyview Dr</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Jeff Healey Park</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.63062&mlon=-79.49314#map=18/43.63062/-79.49314" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Jeff Healey Park</td>
+    </tr>
+  <tr><td rowspan="2">290 Borough Dr</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Scarborough Centre Station</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.77439&mlon=-79.25822#map=18/43.77439/-79.25822" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Scarborough Centre Station</td>
+    </tr>
+  <tr><td rowspan="2">769 Broadview Ave</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">Broadview Subway Station</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Broadview Station</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67681&mlon=-79.35850#map=18/43.67681/-79.35850" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">Broadview Subway Station</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Broadview Station</td>
+    </tr>
+  <tr><td rowspan="2">627 Burnhamthorpe Rd</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Renforth Baptist Church</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64365&mlon=-79.57320#map=18/43.64365/-79.57320" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Renforth Baptist Church</td>
+    </tr>
+  <tr><td rowspan="1">197 Caribou Rd</td>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">St Philip Anglican Church</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">None</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71765&mlon=-79.42843#map=18/43.71765/-79.42843" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="2">3 Carlton St</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">College Station</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66120&mlon=-79.38268#map=18/43.66120/-79.38268" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">College Station</td>
+    </tr>
+  <tr><td rowspan="2">550 Centennial Park Blvd</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Centennial Park Golf Centre</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65196&mlon=-79.59756#map=18/43.65196/-79.59756" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Centennial Park Golf Centre</td>
+    </tr>
+  <tr><td rowspan="2">22 Chester Ave</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Chester Station</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67823&mlon=-79.35253#map=18/43.67823/-79.35253" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Chester Station</td>
+    </tr>
+  <tr><td rowspan="2">5 Christie St</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Christie Station</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66412&mlon=-79.41837#map=18/43.66412/-79.41837" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Christie Station</td>
+    </tr>
+  <tr><td rowspan="2">376 Clinton St</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Carpark 144</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66434&mlon=-79.41755#map=18/43.66434/-79.41755" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Carpark 144</td>
+    </tr>
+  <tr><td rowspan="2">1 Colonel Samuel Smith Park Dr</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Assembly Hall</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.59766&mlon=-79.51582#map=18/43.59766/-79.51582" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Assembly Hall</td>
+    </tr>
+  <tr><td rowspan="2">19 Colonel Samuel Smith Park Dr</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Humber Lakeshore Campus</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.59593&mlon=-79.51507#map=18/43.59593/-79.51507" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Humber Lakeshore Campus</td>
+    </tr>
+  <tr><td rowspan="2">7 Crescent Rd</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Rosedale Station</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67694&mlon=-79.38875#map=18/43.67694/-79.38875" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Rosedale Station</td>
+    </tr>
+  <tr><td rowspan="2">77 Curlew Dr</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Curlew Park</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74264&mlon=-79.31608#map=18/43.74264/-79.31608" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Curlew Park</td>
+    </tr>
+  <tr><td rowspan="2">795 Dixon Rd</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Bell Canada Installation</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68745&mlon=-79.58778#map=18/43.68745/-79.58778" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Bell Canada Installation</td>
+    </tr>
+  <tr><td rowspan="2">30 Donlands Ave</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Donlands Station</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68098&mlon=-79.33782#map=18/43.68098/-79.33782" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Donlands Station</td>
+    </tr>
+  <tr><td rowspan="2">1006 Dufferin St</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">Dufferin Subway Station</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Dufferin Station</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66008&mlon=-79.43561#map=18/43.66008/-79.43561" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">Dufferin Subway Station</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Dufferin Station</td>
+    </tr>
+  <tr><td rowspan="2">1 Dundas St E</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Sankofa Square</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65619&mlon=-79.38044#map=18/43.65619/-79.38044" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Sankofa Square</td>
+    </tr>
+  <tr><td rowspan="2">3 Dundas St E</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">TMU Station, Dundas Station</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65630&mlon=-79.38038#map=18/43.65630/-79.38038" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">TMU Station, Dundas Station</td>
+    </tr>
+  <tr><td rowspan="2">263 Dupont St</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Dupont Station</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67478&mlon=-79.40680#map=18/43.67478/-79.40680" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Dupont Station</td>
+    </tr>
+  <tr><td rowspan="2">2455 Eglinton Ave E</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Kennedy Station</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73249&mlon=-79.26399#map=18/43.73249/-79.26399" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Kennedy Station</td>
+    </tr>
+  <tr><td rowspan="2">1300 Eglinton Ave W</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">Eglinton West Station</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Cedarvale Station, Eglinton West Station</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69925&mlon=-79.43608#map=18/43.69925/-79.43608" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">Eglinton West Station</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Cedarvale Station, Eglinton West Station</td>
+    </tr>
+  <tr><td rowspan="2">25 Fairfield Ave</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">St James Presbyterian Church</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">None</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.59716&mlon=-79.52495#map=18/43.59716/-79.52495" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">St James Presbyterian Church</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">None</td>
+    </tr>
+  <tr><td rowspan="1">157 Florence Ave</td>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">Church Of The Annunciation</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">None</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75633&mlon=-79.41748#map=18/43.75633/-79.41748" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="2">55 Forest Manor Rd</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Parkway Forest Community Centre &amp; Child Care</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.77254&mlon=-79.34389#map=18/43.77254/-79.34389" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Parkway Forest Community Centre &amp; Child Care</td>
+    </tr>
+  <tr><td rowspan="2">59 Forest Manor Rd</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Parkway Forest Outdoor Pool</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.77345&mlon=-79.34297#map=18/43.77345/-79.34297" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Parkway Forest Outdoor Pool</td>
+    </tr>
+  <tr><td rowspan="2">55 Front St W</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Union Station</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64563&mlon=-79.37935#map=18/43.64563/-79.37935" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Union Station</td>
+    </tr>
+  <tr><td rowspan="1">47 Glenbrook Ave</td>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">Beth Torah Synagogue</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">None</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70939&mlon=-79.45210#map=18/43.70939/-79.45210" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="2">770 Glencairn Ave</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Glencairn Station</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70967&mlon=-79.44131#map=18/43.70967/-79.44131" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Glencairn Station</td>
+    </tr>
+  <tr><td rowspan="2">39 Glentworth Rd</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">Lescon Park</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">None</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.77546&mlon=-79.35708#map=18/43.77546/-79.35708" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">Lescon Park</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">None</td>
+    </tr>
+  <tr><td rowspan="2">25 Grand Ave</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Grand Avenue Park</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.62227&mlon=-79.49129#map=18/43.62227/-79.49129" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Grand Avenue Park</td>
+    </tr>
+  <tr><td rowspan="2">45 Grand Ave</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Grand Avenue Park</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.62313&mlon=-79.49180#map=18/43.62313/-79.49180" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Grand Avenue Park</td>
+    </tr>
+  <tr><td rowspan="2">20 Howard Moscoe Way</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Pioneer Village Station Bus Terminal</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.77696&mlon=-79.50950#map=18/43.77696/-79.50950" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Pioneer Village Station Bus Terminal</td>
+    </tr>
+  <tr><td rowspan="2">24 Howard Moscoe Way</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Emergency Exit EEB5</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.77669&mlon=-79.50873#map=18/43.77669/-79.50873" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Emergency Exit EEB5</td>
+    </tr>
+  <tr><td rowspan="1">3965 Keele St</td>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">Fire Station 141</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">None</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.76505&mlon=-79.49105#map=18/43.76505/-79.49105" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="2">3 King St E</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">King Station</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64911&mlon=-79.37752#map=18/43.64911/-79.37752" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">King Station</td>
+    </tr>
+  <tr><td rowspan="2">435 Kipling Ave</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">System &amp; Services Facilities</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Kipling Yard</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.60816&mlon=-79.52013#map=18/43.60816/-79.52013" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">System &amp; Services Facilities</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Kipling Yard</td>
+    </tr>
+  <tr><td rowspan="2">950 Kipling Ave</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Kipling Station</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.63863&mlon=-79.53437#map=18/43.63863/-79.53437" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Kipling Station</td>
+    </tr>
+  <tr><td rowspan="2">2300 Lake Shore Blvd W</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Car Park 533</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.61859&mlon=-79.48704#map=18/43.61859/-79.48704" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Car Park 533</td>
+    </tr>
+  <tr><td rowspan="2">10 Linnsmore Cres</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Greenwood Station</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68257&mlon=-79.33029#map=18/43.68257/-79.33029" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Greenwood Station</td>
+    </tr>
+  <tr><td rowspan="1">11 Lowesmoor Ave</td>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">Clanton Park Synagogue</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">None</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74572&mlon=-79.44445#map=18/43.74572/-79.44445" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="2">315 Main St</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Main Station</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68908&mlon=-79.30150#map=18/43.68908/-79.30150" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Main Station</td>
+    </tr>
+  <tr><td rowspan="2">10 Martha Eaton Way</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">Maple Creek Recreation Centre</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">None</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69731&mlon=-79.48990#map=18/43.69731/-79.48990" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">Maple Creek Recreation Centre</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">None</td>
+    </tr>
+  <tr><td rowspan="2">185 Northwest Gt</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Pioneer Village Station</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.77718&mlon=-79.51032#map=18/43.77718/-79.51032" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Pioneer Village Station</td>
+    </tr>
+  <tr><td rowspan="2">67 Nymark Ave</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Lescon Park</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78037&mlon=-79.36008#map=18/43.78037/-79.36008" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Lescon Park</td>
+    </tr>
+  <tr><td rowspan="2">4 Orianna Dr</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Bell Canada Installation</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.60173&mlon=-79.54668#map=18/43.60173/-79.54668" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Bell Canada Installation</td>
+    </tr>
+  <tr><td rowspan="2">746 Ossington Ave</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Ossington Station</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66238&mlon=-79.42630#map=18/43.66238/-79.42630" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Ossington Station</td>
+    </tr>
+  <tr><td rowspan="2">743 Pape Ave</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Pape Station</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67989&mlon=-79.34501#map=18/43.67989/-79.34501" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Pape Station</td>
+    </tr>
+  <tr><td rowspan="2">15 Park Lawn Rd</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Bell Structure</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.62347&mlon=-79.48188#map=18/43.62347/-79.48188" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Bell Structure</td>
+    </tr>
+  <tr><td rowspan="2">277 Park Lawn Rd</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">St. Mark&#39;s Catholic Church</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.63415&mlon=-79.49211#map=18/43.63415/-79.49211" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">St. Mark&#39;s Catholic Church</td>
+    </tr>
+  <tr><td rowspan="2">10 Penhurst Ave</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Bell Structure</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.62636&mlon=-79.50055#map=18/43.62636/-79.50055" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Bell Structure</td>
+    </tr>
+  <tr><td rowspan="2">1051 Progress Ave</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">Rosebank Park</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Cynthia Lai Park</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.79276&mlon=-79.23388#map=18/43.79276/-79.23388" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">Rosebank Park</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Cynthia Lai Park</td>
+    </tr>
+  <tr><td rowspan="2">35 Quebec Ave</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">High Park Station</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65386&mlon=-79.46689#map=18/43.65386/-79.46689" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">High Park Station</td>
+    </tr>
+  <tr><td rowspan="2">3 Queen St E</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Queen Station</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65242&mlon=-79.37846#map=18/43.65242/-79.37846" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Queen Station</td>
+    </tr>
+  <tr><td rowspan="1">303 Queen&#39;s Dr</td>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">Central Park Lodge</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">None</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70757&mlon=-79.50221#map=18/43.70757/-79.50221" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="2">250 Rory Rd</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">Rainbow Park</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Ernie Lustig - Rainbow Park</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72027&mlon=-79.48374#map=18/43.72027/-79.48374" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">Rainbow Park</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Ernie Lustig - Rainbow Park</td>
+    </tr>
+  <tr><td rowspan="2">575 Royal York Rd</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Carpark 513</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.62689&mlon=-79.50251#map=18/43.62689/-79.50251" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Carpark 513</td>
+    </tr>
+  <tr><td rowspan="2">955 Royal York Rd</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Royal York Station</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64816&mlon=-79.51134#map=18/43.64816/-79.51134" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Royal York Station</td>
+    </tr>
+  <tr><td rowspan="2">16 Shaftesbury Ave</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Summerhill Station</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68229&mlon=-79.39079#map=18/43.68229/-79.39079" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Summerhill Station</td>
+    </tr>
+  <tr><td rowspan="2">110 Shaughnessy Blvd</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Dallington Park</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.77634&mlon=-79.35380#map=18/43.77634/-79.35380" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Dallington Park</td>
+    </tr>
+  <tr><td rowspan="2">731 Sheppard Ave E</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Bessarion Station</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.76907&mlon=-79.37591#map=18/43.76907/-79.37591" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Bessarion Station</td>
+    </tr>
+  <tr><td rowspan="2">1275 Sheppard Ave E</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Leslie Station</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.77118&mlon=-79.36465#map=18/43.77118/-79.36465" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Leslie Station</td>
+    </tr>
+  <tr><td rowspan="2">8450 Sheppard Ave E</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Rouge Valley Community Recreation &amp; Child Care Centre</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.80529&mlon=-79.18987#map=18/43.80529/-79.18987" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Rouge Valley Community Recreation &amp; Child Care Centre</td>
+    </tr>
+  <tr><td rowspan="2">20 Sheppard Ave W</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Sheppard Yonge Station</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.76170&mlon=-79.41236#map=18/43.76170/-79.41236" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Sheppard Yonge Station</td>
+    </tr>
+  <tr><td rowspan="2">633 Sherbourne St</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Sherbourne Station</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67204&mlon=-79.37645#map=18/43.67204/-79.37645" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Sherbourne Station</td>
+    </tr>
+  <tr><td rowspan="2">139 St George St</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">St George Station</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66827&mlon=-79.39981#map=18/43.66827/-79.39981" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">St George Station</td>
+    </tr>
+  <tr><td rowspan="2">5 Steve Podborski Rd</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Big Bear Park</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71994&mlon=-79.34324#map=18/43.71994/-79.34324" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Big Bear Park</td>
+    </tr>
+  <tr><td rowspan="2">355 Strathmore Blvd</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Coxwell Station</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68412&mlon=-79.32306#map=18/43.68412/-79.32306" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Coxwell Station</td>
+    </tr>
+  <tr><td rowspan="2">130 The Queensway</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Humber Treatment Plant</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.63316&mlon=-79.48022#map=18/43.63316/-79.48022" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Humber Treatment Plant</td>
+    </tr>
+  <tr><td rowspan="2">66 Third St</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Carpark 507</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.60114&mlon=-79.50081#map=18/43.60114/-79.50081" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Carpark 507</td>
+    </tr>
+  <tr><td rowspan="2">66Y Third St</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Carpark 507</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.60119&mlon=-79.50094#map=18/43.60119/-79.50094" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Carpark 507</td>
+    </tr>
+  <tr><td rowspan="2">45 Twenty Third St</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">R.L. Clark Water Treatment Plant</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.59413&mlon=-79.51970#map=18/43.59413/-79.51970" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">R.L. Clark Water Treatment Plant</td>
+    </tr>
+  <tr><td rowspan="2">777 Victoria Park Ave</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Victoria Park Station</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69454&mlon=-79.28916#map=18/43.69454/-79.28916" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Victoria Park Station</td>
+    </tr>
+  <tr><td rowspan="2">570 Wilson Ave</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">Wilson Subway Station</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Wilson Station</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73459&mlon=-79.45087#map=18/43.73459/-79.45087" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">Wilson Subway Station</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Wilson Station</td>
+    </tr>
+  <tr><td rowspan="2">1235 Wilson Ave</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">HUMBER RIVER HOSPITAL</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72426&mlon=-79.48922#map=18/43.72426/-79.48922" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">HUMBER RIVER HOSPITAL</td>
+    </tr>
+  <tr><td rowspan="2">991 Woodbine Ave</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Woodbine Station</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68641&mlon=-79.31277#map=18/43.68641/-79.31277" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Woodbine Station</td>
+    </tr>
+  <tr><td rowspan="2">1900 Yonge St</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Davisville Station</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69784&mlon=-79.39694#map=18/43.69784/-79.39694" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Davisville Station</td>
+    </tr>
+  <tr><td rowspan="2">2190 Yonge St</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Eglinton Station</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70529&mlon=-79.39885#map=18/43.70529/-79.39885" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Eglinton Station</td>
+    </tr>
+  <tr><td rowspan="2">3101 Yonge St</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">George Milbrandt Parkette</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Lawrence Station, George Milbrandt Parkette</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72535&mlon=-79.40193#map=18/43.72535/-79.40193" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">George Milbrandt Parkette</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Lawrence Station, George Milbrandt Parkette</td>
+    </tr>
+  <tr><td rowspan="2">4070 Yonge St</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Yonge &amp; York Mills Dog Off Leash Area</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74553&mlon=-79.40730#map=18/43.74553/-79.40730" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Yonge &amp; York Mills Dog Off Leash Area</td>
+    </tr>
+  <tr><td rowspan="2">5102 Yonge St</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">North York Centre Station</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.76828&mlon=-79.41291#map=18/43.76828/-79.41291" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">North York Centre Station</td>
+    </tr>
+  <tr><td rowspan="2">50 Yorkdale Rd</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">Yorkdale Subway Station</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Yorkdale Station</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72509&mlon=-79.44774#map=18/43.72509/-79.44774" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">Yorkdale Subway Station</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Yorkdale Station</td>
+    </tr>
+      </tbody>
+    </table>
+    
+    
+  </div>
+  
+
+  
+  <div class="section">
+    <h2>Status Changes <span class="badge badge-teal">7</span></h2>
+    
+  <details class="rename-group">
+    <summary><span class="change-field">MAINT_STAGE:</span> <span class="old-val">RESERVED</span> <span class="arrow-val">→</span> <span class="new-val">REGULAR</span><span class="rename-count">7 addresses</span></summary>
+    <table>
+      <tbody>
+        
+        <tr><td>95 Bernice Cres</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66687&mlon=-79.49851#map=18/43.66687/-79.49851" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>97 Bernice Cres</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66687&mlon=-79.49861#map=18/43.66687/-79.49861" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1157 Kingston Rd</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68182&mlon=-79.28005#map=18/43.68182/-79.28005" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1159 Kingston Rd</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68186&mlon=-79.27991#map=18/43.68186/-79.27991" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1161 Kingston Rd</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68191&mlon=-79.27977#map=18/43.68191/-79.27977" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>4750 Sheppard Ave E</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.79114&mlon=-79.25459#map=18/43.79114/-79.25459" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>4760 Sheppard Ave E</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.79266&mlon=-79.25416#map=18/43.79266/-79.25416" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+  </details>
+  
+    
+  </div>
+  
+
+  
+  <div class="section">
+    <h2>Boundary Changes <span class="badge badge-teal">0</span></h2>
+    <p class="empty">No ward or municipality reassignments.</p>
+  </div>
+  
 
   <div class="section">
     <h2>Location Adjustments <span class="badge" style="background: var(--surface2); color: var(--text-dim)">2,233</span></h2>
@@ -15015,7 +15046,7 @@
     
   </div>
 
-  <div class="generated-at">Report generated Jun 12, 2026 at 12:24 PM · source licence: Open Government Licence – Toronto</div>
+  <div class="generated-at">Report generated Jun 12, 2026 at 08:25 PM · source licence: Open Government Licence – Toronto</div>
 
   <script>
     function sortTable(tbodyId, col) {

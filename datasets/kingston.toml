@@ -17,3 +17,10 @@ number = "ADDRESS_NUMBER"
 street = "STREET"                               # STREET_BODY_NAME/TYPE_SUFFIX/DIRECTION components tracked via the props blob
 unit   = "UNIT"
 full   = "FULL_ADDRESS"
+
+# Change classes (field values verified against the latest snapshot): a
+# modification touching only these fields is reported in its humanized section
+# (place renames / status changes / boundary reassignments) instead of the
+# generic Updated Addresses table.
+[classes]
+boundary = ["ELECTORAL_DISTRICT_NAME", "MUNICIPALITY"]

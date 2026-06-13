@@ -26,7 +26,7 @@ SKIPPED_PATH = os.path.join(ROOT_DIR, "skipped.toml")
 
 MAX_RENDER = 1000          # cap rows rendered per table (true counts still shown)
 SPARK_KEYS = ("added", "removed", "modified", "modified_location",
-              "renumbered", "renamed")
+              "renumbered", "renamed", "place_name", "status", "boundary")
 
 _env = Environment(loader=FileSystemLoader(TEMPLATES_DIR), autoescape=True)
 
@@ -128,13 +128,16 @@ def _sparkline_svg(values, color, width=110, height=20, pad=2):
 _env.globals["sparkline_svg"] = _sparkline_svg
 
 
-def _category(m):
+def _category(m, classes=None):
     """Classify a modified row by its changed-field set.
 
     Works both before and after _combine_location (raw latitude/longitude or the
     combined 'location' pseudo-field). 'full' is derived from number+street, so it
     rides along with either; number takes precedence (matches the sibling Toronto
     tracker's renumbered category).
+
+    `classes` is Dataset.classes: per-city class -> source prop names. A row whose
+    changes all fall inside one class lands in that class; any mix stays significant.
     """
     fields = {c["field"] for c in m["changes"]}
     if fields <= {"latitude", "longitude", "location"}:
@@ -143,6 +146,9 @@ def _category(m):
         return "renumbered"
     if fields <= {"street", "full"}:
         return "renamed"
+    for cls, srcs in (classes or {}).items():
+        if fields <= set(srcs):
+            return cls
     return "significant"
 
 
@@ -159,6 +165,22 @@ def _group_renames(renamed):
     return out
 
 
+def _group_transitions(mods):
+    """Group status/boundary modifications by their exact change signature: one
+    upstream decision (redistricting, lifecycle stage flip) covers many addresses,
+    so present each distinct old->new transition once with a count."""
+    groups = {}
+    for m in mods:
+        key = tuple(sorted((c["field"], str(c["old"]), str(c["new"]))
+                           for c in m["changes"]))
+        groups.setdefault(key, []).append(m)
+    out = [{"changes": rows[0]["changes"], "count": len(rows), "rows": rows[:MAX_RENDER]}
+           for rows in groups.values()]
+    out.sort(key=lambda g: (-g["count"],
+                            [(c["field"], str(c["old"])) for c in g["changes"]]))
+    return out
+
+
 def _prepare(ds, d, new_id):
     """Cap rows, attach addr + history, split modifications into categories."""
     for r in d["added"] + d["removed"]:
@@ -167,15 +189,19 @@ def _prepare(ds, d, new_id):
         m["addr"] = _addr(m)
         _combine_location(m)
 
-    cats = {"significant": [], "location": [], "renumbered": [], "renamed": []}
+    cats = {"significant": [], "location": [], "renumbered": [], "renamed": [],
+            "place_name": [], "status": [], "boundary": []}
     for m in d["modified"]:
-        cats[_category(m)].append(m)
+        cats[_category(m, ds.classes)].append(m)
 
     counts = {"added": len(d["added"]), "removed": len(d["removed"]),
               "modified": len(cats["significant"]),
               "modified_location": len(cats["location"]),
               "renumbered": len(cats["renumbered"]),
-              "renamed": len(cats["renamed"])}
+              "renamed": len(cats["renamed"]),
+              "place_name": len(cats["place_name"]),
+              "status": len(cats["status"]),
+              "boundary": len(cats["boundary"])}
 
     added = d["added"][:MAX_RENDER]
     removed = d["removed"][:MAX_RENDER]
@@ -183,6 +209,9 @@ def _prepare(ds, d, new_id):
     location_only = cats["location"][:MAX_RENDER]
     renumbered = cats["renumbered"][:MAX_RENDER]
     renamed_groups = _group_renames(cats["renamed"])
+    place_name = cats["place_name"][:MAX_RENDER]
+    status_groups = _group_transitions(cats["status"])
+    boundary_groups = _group_transitions(cats["boundary"])
 
     # history only for the rows we actually render
     keys = [r["identity_key"] for r in added + removed]
@@ -190,7 +219,11 @@ def _prepare(ds, d, new_id):
     for r in added + removed:
         r["history"] = hist.get(r["identity_key"], [])
 
-    return added, removed, modified, location_only, renumbered, renamed_groups, counts
+    return {"added": added, "removed": removed, "modified": modified,
+            "location": location_only, "renumbered": renumbered,
+            "renamed_groups": renamed_groups, "place_name": place_name,
+            "status_groups": status_groups, "boundary_groups": boundary_groups,
+            "counts": counts}
 
 
 _CANON_LABEL = {"number": "Street number", "street": "Street name",
@@ -214,9 +247,8 @@ def _compared_fields(ds, prop_keys):
 
 
 def _render_report(ds, snap, d, is_baseline, spark, source_url, compared, ignored):
-    new_id = snap["id"]
-    added, removed, modified, location_only, renumbered, renamed_groups, counts = \
-        _prepare(ds, d, new_id)
+    p = _prepare(ds, d, snap["id"])
+    counts = p["counts"]
     date = diff.snap_date(snap)
     ctx = {
         "compared_fields": compared, "ignored_fields": ignored,
@@ -224,12 +256,17 @@ def _render_report(ds, snap, d, is_baseline, spark, source_url, compared, ignore
         "generated": datetime.now().strftime("%b %d, %Y at %I:%M %p"),
         "new_snapshot": snap, "new_date_friendly": _friendly_date(date),
         "old_date_friendly": "", "is_baseline": is_baseline,
-        "added": added, "removed": removed, "modified": modified,
-        "modified_location": location_only,
-        "renumbered": renumbered, "renamed_groups": renamed_groups,
+        "added": p["added"], "removed": p["removed"], "modified": p["modified"],
+        "modified_location": p["location"],
+        "renumbered": p["renumbered"], "renamed_groups": p["renamed_groups"],
+        "place_name": p["place_name"], "status_groups": p["status_groups"],
+        "boundary_groups": p["boundary_groups"],
+        "configured_classes": set(ds.classes),
         "added_count": counts["added"], "removed_count": counts["removed"],
         "modified_count": counts["modified"], "modified_location_count": counts["modified_location"],
         "renumbered_count": counts["renumbered"], "renamed_count": counts["renamed"],
+        "place_name_count": counts["place_name"], "status_count": counts["status"],
+        "boundary_count": counts["boundary"],
         "stats": _stats(d), "sparklines": spark, "source_url": source_url,
     }
     html = _env.get_template("report.html").render(**ctx)
@@ -272,13 +309,13 @@ def generate_all(datasets):
         series = {k: [] for k in SPARK_KEYS}  # filled as we render, for sparklines
         meta = []
         for idx, (snap, d, is_base) in enumerate(diffs):
-            cat = Counter(_category(m) for m in d["modified"])
+            cat = Counter(_category(m, ds.classes) for m in d["modified"])
             series["added"].append(len(d["added"]))
             series["removed"].append(len(d["removed"]))
             series["modified"].append(cat["significant"])
             series["modified_location"].append(cat["location"])
-            series["renumbered"].append(cat["renumbered"])
-            series["renamed"].append(cat["renamed"])
+            for k in ("renumbered", "renamed", "place_name", "status", "boundary"):
+                series[k].append(cat[k])
 
         for idx, (snap, d, is_base) in enumerate(diffs):
             counts = _render_report(ds, snap, d, is_base, _spark_series(series, idx), source_url,
@@ -289,7 +326,8 @@ def generate_all(datasets):
                 "filename": f"report-{date}.html", "is_baseline": is_base,
                 "added": counts["added"], "removed": counts["removed"],
                 "modified": counts["modified"] + counts["modified_location"]
-                            + counts["renumbered"] + counts["renamed"],
+                            + counts["renumbered"] + counts["renamed"]
+                            + counts["place_name"] + counts["status"] + counts["boundary"],
                 "new_streets": new_by_snap.get(snap["id"], []),
             })
 

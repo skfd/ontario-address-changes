@@ -18,3 +18,10 @@ synth_fields = ["number", "street"]
 number = "ADDRESS_NUMBER"
 street = "STREET"                               # ROWTYPE/ROOT/TYPE/PCL_PIN tracked via the props blob
 full   = "COMPLETE"
+
+# Change classes (field values verified against the latest snapshot): a
+# modification touching only these fields is reported in its humanized section
+# (place renames / status changes / boundary reassignments) instead of the
+# generic Updated Addresses table.
+[classes]
+boundary = ["CITY"]

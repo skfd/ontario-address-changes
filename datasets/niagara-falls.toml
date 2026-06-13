@@ -19,3 +19,11 @@ number = "Full_StreetNo"
 street = "StreetName"             # StreetType/StreetDir are separate source fields, tracked via the props blob
 unit   = "Unit"
 # No combined full-address field is published; `full` stays empty.
+
+# Change classes (field values verified against the latest snapshot): a
+# modification touching only these fields is reported in its humanized section
+# (place renames / status changes / boundary reassignments) instead of the
+# generic Updated Addresses table.
+[classes]
+status = ["LifeCycleStatus"]
+boundary = ["Municipality"]

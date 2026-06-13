@@ -14,3 +14,10 @@ synth_fields = ["number", "street"]     # no unit field is published
 number = "STNUM"
 street = "STNAME"                        # STTYPE/STDIR (and abbreviations) tracked via the props blob
 full   = "ADDRESS"
+
+# Change classes (field values verified against the latest snapshot): a
+# modification touching only these fields is reported in its humanized section
+# (place renames / status changes / boundary reassignments) instead of the
+# generic Updated Addresses table.
+[classes]
+boundary = ["MUNICIPALITY", "CITY"]

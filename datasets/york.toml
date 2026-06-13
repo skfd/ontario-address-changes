@@ -17,3 +17,11 @@ number = "ADDRESS_NUMBER"
 street = "FULL_STREET_NAME"                     # component street fields tracked via the props blob
 unit   = "SUITE_NUMBER"
 full   = "FULL_CIVIC_ADDR"
+
+# Change classes (field values verified against the latest snapshot): a
+# modification touching only these fields is reported in its humanized section
+# (place renames / status changes / boundary reassignments) instead of the
+# generic Updated Addresses table.
+[classes]
+status = ["LIFESTATUS", "MAIL_STATUS"]
+boundary = ["MUNICIPALITY"]

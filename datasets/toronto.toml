@@ -33,3 +33,12 @@ number = "ADDRESS_NUMBER"
 street = "LINEAR_NAME_FULL"
 full   = "ADDRESS_FULL"
 # Toronto address points carry no unit field
+
+# Change classes (field values verified against the latest snapshot): a
+# modification touching only these fields is reported in its humanized section
+# (place renames / status changes / boundary reassignments) instead of the
+# generic Updated Addresses table.
+[classes]
+place_name = ["PLACE_NAME", "PLACE_NAME_ALL"]
+status = ["ADDRESS_STATUS", "MAINT_STAGE"]
+boundary = ["MUNICIPALITY", "MUNICIPALITY_NAME", "WARD", "WARD_NAME"]
