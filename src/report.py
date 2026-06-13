@@ -18,7 +18,7 @@ from datetime import datetime
 
 from jinja2 import Environment, FileSystemLoader
 
-from src import diff
+from src import db, diff
 
 ROOT_DIR = os.path.dirname(os.path.dirname(__file__))
 TEMPLATES_DIR = os.path.join(ROOT_DIR, "templates")
@@ -411,6 +411,20 @@ def generate_all(datasets):
         meta.reverse()                       # newest first
         if meta:
             meta[0]["is_latest"] = not meta[0]["is_baseline"]
+
+        # The most recent run may have found no changes (a skipped snapshot newer
+        # than the latest real report). Surface that check date as an inactive
+        # "No changes" row, matching the sibling Toronto tracker's index.
+        all_snaps = db.get_snapshots(ds)
+        if all_snaps:
+            last_date = diff.snap_date(all_snaps[-1])
+            if last_date > meta[0]["date"]:
+                meta.insert(0, {
+                    "date": last_date, "friendly_date": _friendly_date(last_date),
+                    "filename": None, "is_baseline": False,
+                    "added": 0, "removed": 0, "modified": 0, "changed": 0,
+                    "phrases": [], "new_streets": [],
+                })
 
         # flatten new-street debuts across reports, newest first, cap at 15
         recent_new_streets = [
