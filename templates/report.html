@@ -198,6 +198,21 @@
   {% endfor %}
 {%- endmacro %}
 
+{% macro mass_groups(groups, label) -%}
+  {% for g in groups %}
+  <details class="rename-group">
+    <summary>{% if label %}{{ label }}{% else %}{% for f in g.fields %}{% if not loop.first %} · {% endif %}<span class="change-field">{{ f }}</span>{% endfor %} updated in bulk{% endif %}<span class="rename-count">{{ "{:,}".format(g.count) }} address{{ 'es' if g.count != 1 }}</span></summary>
+    <table>
+      <thead><tr><th>Address</th><th>What Changed</th><th>Before</th><th></th><th>After</th><th>Map</th></tr></thead>
+      <tbody>
+        {% for m in g.rows %}{{ change_rows(m) }}{% endfor %}
+      </tbody>
+    </table>
+    {% if g.count > g.rows|length %}<p class="truncated">Showing first {{ g.rows|length }} of {{ "{:,}".format(g.count) }}.</p>{% endif %}
+  </details>
+  {% endfor %}
+{%- endmacro %}
+
 {% import "_macros.html" as ui %}
 
 <body>
@@ -326,6 +341,7 @@
   <div class="section">
     <h2>Updated Addresses <span class="badge badge-yellow">{{ "{:,}".format(modified_count) }}</span>
       {{ ui.field_info(compared_fields, ignored_fields) }}</h2>
+    {{ mass_groups(modified_mass|default([]), '') }}
     {% if modified %}
     <table>
       <thead><tr><th>Address</th><th>What Changed</th><th>Before</th><th></th><th>After</th><th>Map</th></tr></thead>
@@ -333,12 +349,13 @@
         {% for m in modified %}{{ change_rows(m) }}{% endfor %}
       </tbody>
     </table>
-    {% if modified_count > modified|length %}<p class="truncated">Showing first {{ modified|length }} of {{ "{:,}".format(modified_count) }}.</p>{% endif %}
-    {% else %}<p class="empty">No addresses updated.</p>{% endif %}
+    {% if modified_rest_count|default(modified_count) > modified|length %}<p class="truncated">Showing first {{ modified|length }} of {{ "{:,}".format(modified_rest_count|default(modified_count)) }}.</p>{% endif %}
+    {% elif not modified_mass|default([]) %}<p class="empty">No addresses updated.</p>{% endif %}
   </div>
 
   <div class="section">
     <h2>Renumbered Addresses <span class="badge badge-accent">{{ "{:,}".format(renumbered_count|default(0)) }}</span></h2>
+    {{ mass_groups(renumbered_mass|default([]), 'Renumbered in one sweep') }}
     {% if renumbered %}
     <table>
       <thead><tr><th>Address</th><th>What Changed</th><th>Before</th><th></th><th>After</th><th>Map</th></tr></thead>
@@ -346,8 +363,8 @@
         {% for m in renumbered %}{{ change_rows(m) }}{% endfor %}
       </tbody>
     </table>
-    {% if renumbered_count > renumbered|length %}<p class="truncated">Showing first {{ renumbered|length }} of {{ "{:,}".format(renumbered_count) }}.</p>{% endif %}
-    {% else %}<p class="empty">No addresses renumbered.</p>{% endif %}
+    {% if renumbered_rest_count|default(renumbered_count) > renumbered|length %}<p class="truncated">Showing first {{ renumbered|length }} of {{ "{:,}".format(renumbered_rest_count|default(renumbered_count)) }}.</p>{% endif %}
+    {% elif not renumbered_mass|default([]) %}<p class="empty">No addresses renumbered.</p>{% endif %}
   </div>
 
   <div class="section">
@@ -402,7 +419,12 @@
 
   <div class="section">
     <h2>Location Adjustments <span class="badge" style="background: var(--surface2); color: var(--text-dim)">{{ "{:,}".format(modified_location_count|default(0)) }}</span></h2>
+    {% if location_mass|default(none) %}
+    <p class="explainer">{{ "{:,}".format(location_mass.count) }} addresses had only their map position adjusted{% if location_mass.median_m is not none %} — median shift {{ "%.1f"|format(location_mass.median_m) }}&nbsp;m, largest {{ "%.1f"|format(location_mass.max_m) }}&nbsp;m{% endif %}. The street addresses themselves did not change.</p>
+    {% endif %}
     {% if modified_location %}
+    {% if location_mass|default(none) %}<details class="rename-group">
+      <summary>Per-address detail<span class="rename-count">{% if modified_location_count > modified_location|length %}first {{ "{:,}".format(modified_location|length) }} of {% endif %}{{ "{:,}".format(modified_location_count) }} address{{ 'es' if modified_location_count != 1 }}</span></summary>{% endif %}
     <table>
       <thead><tr><th>Address</th><th>Before</th><th></th><th>After</th></tr></thead>
       <tbody>
@@ -418,6 +440,7 @@
       </tbody>
     </table>
     {% if modified_location_count > modified_location|length %}<p class="truncated">Showing first {{ modified_location|length }} of {{ "{:,}".format(modified_location_count) }}.</p>{% endif %}
+    {% if location_mass|default(none) %}</details>{% endif %}
     {% else %}<p class="empty">No location adjustments.</p>{% endif %}
   </div>
 

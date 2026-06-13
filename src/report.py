@@ -11,6 +11,7 @@ import glob
 import json
 import math
 import os
+import statistics
 import tomllib
 from collections import Counter
 from datetime import datetime
@@ -25,6 +26,8 @@ DOCS_DIR = os.path.join(ROOT_DIR, "docs")
 SKIPPED_PATH = os.path.join(ROOT_DIR, "skipped.toml")
 
 MAX_RENDER = 1000          # cap rows rendered per table (true counts still shown)
+MASS_MIN_ROWS = 50         # a same-shaped sweep must cover this many rows...
+MASS_MIN_SHARE = 0.25      # ...and this share of its section to collapse to a summary
 SPARK_KEYS = ("added", "removed", "modified", "modified_location",
               "renumbered", "renamed", "place_name", "status", "boundary")
 
@@ -63,22 +66,30 @@ def _combine_location(m):
     old_lat = lat_c["old"] if lat_c else new_lat
     old_lon = lon_c["old"] if lon_c else new_lon
 
+    def _is_deg(lat, lon):
+        return lat is not None and lon is not None and abs(lat) <= 90 and abs(lon) <= 180
+
     arrow = ""
-    if None not in (old_lat, old_lon, new_lat, new_lon):
+    dist_m = None
+    # Distance only makes sense between two geographic points; some imported
+    # snapshots stored projected (metre) coordinates, where degree math explodes.
+    if _is_deg(old_lat, old_lon) and _is_deg(new_lat, new_lon):
         mid = math.radians((old_lat + new_lat) / 2)
         dy = new_lat - old_lat
         dx = (new_lon - old_lon) * math.cos(mid)
         if abs(dy) > 1e-6 or abs(dx) > 1e-6:
             dy_m = dy * 111_320
             dx_m = (new_lon - old_lon) * 111_320 * math.cos(mid)
-            arrow = f"{_bearing_arrow(dx, dy)} {math.hypot(dx_m, dy_m):.1f}m"
+            dist_m = math.hypot(dx_m, dy_m)
+            arrow = f"{_bearing_arrow(dx, dy)} {dist_m:.1f}m"
 
     def fmt(lat, lon):
         return "—" if lat is None or lon is None else f"{lat:.5f}, {lon:.5f}"
 
     changes = [c for c in changes if c["field"] not in ("latitude", "longitude")]
     changes.append({"field": "location", "display_field": "Location",
-                    "old": fmt(old_lat, old_lon), "new": fmt(new_lat, new_lon), "arrow": arrow,
+                    "old": fmt(old_lat, old_lon), "new": fmt(new_lat, new_lon),
+                    "arrow": arrow, "dist_m": dist_m,
                     "old_pt": None if None in (old_lat, old_lon) else (old_lat, old_lon),
                     "new_pt": None if None in (new_lat, new_lon) else (new_lat, new_lon)})
     m["changes"] = changes
@@ -181,6 +192,41 @@ def _group_transitions(mods):
     return out
 
 
+def _collapse_mass(mods):
+    """Split a section into mass events and the remaining one-off rows.
+
+    One upstream sweep (field recode, bulk renumbering) shows up as the same
+    changed-field-set on a large share of a section; row by row in a capped
+    table it reads as noise, so present each such sweep once with a count."""
+    groups = {}
+    for m in mods:
+        key = tuple(sorted(c.get("display_field") or c["field"] for c in m["changes"]))
+        groups.setdefault(key, []).append(m)
+    mass, rest = [], []
+    for key, rows in groups.items():
+        if len(rows) > MASS_MIN_ROWS and len(rows) > len(mods) * MASS_MIN_SHARE:
+            mass.append({"fields": list(key), "count": len(rows),
+                         "rows": rows[:MAX_RENDER]})
+        else:
+            rest.extend(rows)
+    mass.sort(key=lambda g: (-g["count"], g["fields"]))
+    rest.sort(key=diff.addr_sort_key)
+    return mass, rest
+
+
+def _location_mass(rows):
+    """Summary stats when a bulk re-geocode moved a large share of the city.
+    The section is homogeneous (every row is one location change), so the
+    mass trigger reduces to the row-count threshold."""
+    if len(rows) <= MASS_MIN_ROWS:
+        return None
+    dists = [c["dist_m"] for m in rows for c in m["changes"]
+             if c["field"] == "location" and c.get("dist_m") is not None]
+    return {"count": len(rows),
+            "median_m": statistics.median(dists) if dists else None,
+            "max_m": max(dists) if dists else None}
+
+
 def _prepare(ds, d, new_id):
     """Cap rows, attach addr + history, split modifications into categories."""
     for r in d["added"] + d["removed"]:
@@ -205,9 +251,12 @@ def _prepare(ds, d, new_id):
 
     added = d["added"][:MAX_RENDER]
     removed = d["removed"][:MAX_RENDER]
-    modified = cats["significant"][:MAX_RENDER]
+    modified_mass, modified_rest = _collapse_mass(cats["significant"])
+    modified = modified_rest[:MAX_RENDER]
+    location_mass = _location_mass(cats["location"])
     location_only = cats["location"][:MAX_RENDER]
-    renumbered = cats["renumbered"][:MAX_RENDER]
+    renumbered_mass, renumbered_rest = _collapse_mass(cats["renumbered"])
+    renumbered = renumbered_rest[:MAX_RENDER]
     renamed_groups = _group_renames(cats["renamed"])
     place_name = cats["place_name"][:MAX_RENDER]
     status_groups = _group_transitions(cats["status"])
@@ -220,7 +269,10 @@ def _prepare(ds, d, new_id):
         r["history"] = hist.get(r["identity_key"], [])
 
     return {"added": added, "removed": removed, "modified": modified,
-            "location": location_only, "renumbered": renumbered,
+            "modified_mass": modified_mass, "modified_rest_count": len(modified_rest),
+            "location": location_only, "location_mass": location_mass,
+            "renumbered": renumbered, "renumbered_mass": renumbered_mass,
+            "renumbered_rest_count": len(renumbered_rest),
             "renamed_groups": renamed_groups, "place_name": place_name,
             "status_groups": status_groups, "boundary_groups": boundary_groups,
             "counts": counts}
@@ -277,8 +329,11 @@ def _render_report(ds, snap, d, is_baseline, spark, source_url, compared, ignore
         "new_snapshot": snap, "new_date_friendly": _friendly_date(date),
         "old_date_friendly": "", "is_baseline": is_baseline,
         "added": p["added"], "removed": p["removed"], "modified": p["modified"],
-        "modified_location": p["location"],
-        "renumbered": p["renumbered"], "renamed_groups": p["renamed_groups"],
+        "modified_mass": p["modified_mass"], "modified_rest_count": p["modified_rest_count"],
+        "modified_location": p["location"], "location_mass": p["location_mass"],
+        "renumbered": p["renumbered"], "renumbered_mass": p["renumbered_mass"],
+        "renumbered_rest_count": p["renumbered_rest_count"],
+        "renamed_groups": p["renamed_groups"],
         "place_name": p["place_name"], "status_groups": p["status_groups"],
         "boundary_groups": p["boundary_groups"],
         "configured_classes": set(ds.classes),
