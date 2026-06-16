@@ -1,0 +1,1598 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ontario Address Change Tracker</title>
+  <style>
+    :root { --bg:#fafafa; --surface:#ffffff; --surface2:#f5f5f5; --border:#e0e0e0;
+      --text:#242424; --text-secondary:#424242; --text-dim:#616161; --accent:#0078d4;
+      --accent-hover:#106ebe; --accent-bg:#eff6fc; --green:#107c10; --red:#c50f1f; --yellow:#eaa300;
+      --shadow-4:0 2px 4px rgba(0,0,0,0.14),0 0 2px rgba(0,0,0,0.12);
+      --shadow-8:0 4px 8px rgba(0,0,0,0.14),0 0 2px rgba(0,0,0,0.12); color-scheme:light; }
+    @media (prefers-color-scheme: dark) { :root { --bg:#1f1f1f; --surface:#292929; --surface2:#333333;
+      --border:#525252; --text:#ffffff; --text-secondary:#d6d6d6; --text-dim:#adadad; --accent:#2899f5;
+      --accent-hover:#3aa0f3; --accent-bg:#002848; --green:#54b054; --red:#dc626d; --yellow:#f2c661;
+      --shadow-4:0 2px 4px rgba(0,0,0,0.28),0 0 2px rgba(0,0,0,0.24);
+      --shadow-8:0 4px 8px rgba(0,0,0,0.28),0 0 2px rgba(0,0,0,0.24); color-scheme:dark; } }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    html, body { height:100%; }
+    body { font-family:'Segoe UI Variable','Segoe UI',system-ui,-apple-system,sans-serif;
+      background:var(--bg); color:var(--text); line-height:1.5; display:flex; justify-content:center;
+      padding:16px 24px; font-size:14px; -webkit-font-smoothing:antialiased; overflow:hidden; }
+    main { width:100%; height:100%; }
+    a { color:var(--accent); text-decoration:none; } a:hover { text-decoration:underline; color:var(--accent-hover); }
+    .hero { margin-bottom:16px; } .hero h1 { font-size:28px; font-weight:600; margin-bottom:8px; }
+    .hero .tagline { color:var(--text-secondary); font-size:14px; }
+    .stats { display:flex; flex-wrap:wrap; gap:8px 24px; margin-top:16px; font-size:13px;
+      color:var(--text-dim); }
+    .stats strong { color:var(--text); font-size:15px; font-variant-numeric:tabular-nums; }
+    .stats .src { color:var(--text-dim); } .stats .src:hover { color:var(--accent); }
+    .section-header { font-size:12px; font-weight:600; margin-bottom:12px; color:var(--text-dim); }
+    .cities { display:flex; flex-direction:column; gap:8px; }
+    .city-row { display:flex; align-items:center; gap:8px; }
+    .city-link { flex:1; min-width:0; display:flex; align-items:center; gap:12px; background:var(--surface);
+      border:1px solid var(--border); border-radius:8px; padding:14px 16px; color:var(--text);
+      box-shadow:var(--shadow-4); transition:box-shadow 0.1s, border-color 0.1s; }
+    .city-link:hover { border-color:var(--accent); text-decoration:none; box-shadow:var(--shadow-8); }
+    .city-main { flex:1; min-width:0; }
+    .city-name { font-weight:600; font-size:15px; }
+    .city-sub { font-size:12px; color:var(--text-dim); margin-top:2px; }
+    .city-highlight { color:var(--accent); }
+    .city-right { text-align:right; white-space:nowrap; }
+    .city-count { font-weight:600; font-variant-numeric:tabular-nums; }
+    .city-delta { font-size:12px; margin-top:2px; }
+    .delta-add { color:var(--green); } .delta-rem { color:var(--red); } .delta-mod { color:var(--yellow); }
+    .skipped { margin-top:40px; }
+    .skip-row { display:flex; align-items:center; gap:12px; background:var(--surface2);
+      border:1px solid var(--border); border-radius:8px; padding:12px 16px; }
+    .skip-main { flex:1; min-width:0; }
+    .skip-name { font-weight:600; font-size:14px; color:var(--text-secondary); }
+    .skip-detail { font-size:12px; color:var(--text-dim); margin-top:2px; }
+    .skip-badge { flex-shrink:0; align-self:flex-start; white-space:nowrap; font-size:11px; font-weight:600;
+      padding:3px 9px; border-radius:999px; background:var(--accent-bg); color:var(--accent);
+      border:1px solid var(--border); }
+    .info-wrap { position:relative; display:inline-flex; vertical-align:middle; }
+    .info-btn { display:inline-flex; align-items:center; justify-content:center; gap:4px;
+      height:18px; padding:0 8px 0 7px; border-radius:999px; border:none; color:#fff;
+      background:var(--accent); cursor:help; font-size:11px; font-weight:600; line-height:1; white-space:nowrap; }
+    .info-btn .glyph { font-style:italic; font-weight:700; font-family:Georgia,'Times New Roman',serif; }
+    .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn, .info-wrap:focus .info-btn { background:var(--accent-hover); }
+    .info-pop { display:none; position:absolute; top:calc(100% + 8px); left:0; z-index:20; width:320px;
+      max-width:80vw; padding:12px 14px; background:var(--surface); border:1px solid var(--border);
+      border-radius:8px; box-shadow:var(--shadow-8); font-size:12.5px; font-weight:400;
+      color:var(--text-secondary); line-height:1.5; text-align:left; white-space:normal; }
+    .info-wrap.right .info-pop { left:auto; right:0; }
+    .info-wrap:hover .info-pop, .info-wrap:focus-within .info-pop, .info-wrap:focus .info-pop { display:block; }
+    .info-pop strong { display:block; color:var(--text); font-size:12px; margin-bottom:4px; }
+    .info-pop ul { list-style:none; margin:0 0 10px; padding:0; }
+    .info-pop li { padding:1px 0 1px 14px; position:relative; }
+    .info-pop li::before { content:"·"; position:absolute; left:4px; color:var(--text-dim); }
+    .info-pop .note { color:var(--text-dim); font-size:11.5px; margin:0 0 10px; }
+    .info-pop .muted { color:var(--text-dim); font-style:italic; }
+    .info-pop.wide { width:420px; }
+    .info-pop.wide strong { display:inline; margin:0; font-size:inherit; }
+    .info-pop p { margin:0 0 9px; } .info-pop p:last-child { margin-bottom:0; }
+    .info-pop p.muted { font-size:11.5px; }
+    .info-pop code { font-family:'Cascadia Code',Consolas,monospace; font-size:11.5px; background:var(--surface2);
+      border:1px solid var(--border); border-radius:4px; padding:0 4px; }
+    .panels { display:flex; gap:24px; align-items:stretch; height:100%; min-height:0; }
+    .panel-map { flex:1 1 0; min-width:0; display:flex; flex-direction:column; min-height:0; }
+    .panel-list { flex:0 0 700px; max-width:700px; min-width:0; height:100%; overflow-y:auto;
+      padding-right:8px; }
+    #map { width:100%; flex:1 1 auto; min-height:0; border:1px solid var(--border);
+      border-radius:8px; background:var(--surface2); z-index:0; }
+    .leaflet-container { font:inherit; background:var(--surface2); }
+    .map-legend { display:flex; flex-wrap:wrap; gap:6px 18px; margin-top:10px; font-size:12px;
+      color:var(--text-dim); flex:none; }
+    .map-legend span { display:inline-flex; align-items:center; gap:6px; }
+    .map-legend i { width:14px; height:14px; border-radius:3px; display:inline-block; }
+    .map-title { font-size:12px; font-weight:600; margin-bottom:10px; color:var(--text-dim); flex:none; }
+    @media (max-width:980px) {
+      html, body { height:auto; }
+      body { overflow:auto; padding:16px; }
+      main { height:auto; }
+      .panels { flex-direction:column; height:auto; min-height:0; }
+      .panel-map { flex-basis:auto; }
+      .panel-list { flex-basis:auto; max-width:none; width:100%; height:auto; overflow:visible;
+        padding-right:0; }
+      #map { flex:none; height:60vh; }
+    }
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+</head>
+
+
+
+<body>
+  <main>
+    <div class="panels">
+    <div class="panel panel-map">
+    <div class="hero">
+      <h1>Ontario Address Change Tracker</h1>
+      <p class="tagline">We periodically compare each municipality's official open address
+        list to spot new buildings, retired addresses, and corrections over time.</p>
+      <div class="stats">
+        <span><strong>42</strong> datasets</span>
+        <span><strong>4.6M</strong> addresses tracked</span>
+        <span>updated <strong>daily</strong></span>
+        <span><a class="src" href="https://github.com/skfd/ontario-address-changes">Source on GitHub&nbsp;↗</a></span>
+        <span class="info-wrap" tabindex="0" role="button" aria-label="About this project">
+          <span class="info-btn"><span class="glyph">i</span> How it works</span>
+          <span class="info-pop wide">
+            <p>Every day each dataset is re-downloaded and diffed against the previous snapshot.
+              History is kept as a <strong>Slowly-Changing-Dimension Type-2</strong> table, so every
+              address records the span of snapshots it was valid for — letting us replay exactly when
+              an address first appeared, was corrected, or retired.</p>
+            <p>The hard part is <strong>identity</strong>: ESRI <code>OBJECTID</code>s are reassigned on
+              every republish, so records are matched on a stable source ID where one exists, or on a
+              synthesized key (street&nbsp;+&nbsp;number&nbsp;+&nbsp;unit&nbsp;+&nbsp;rounded coordinates)
+              otherwise. Adding a city is a config file, not code.</p>
+            <p class="muted">An independent civic-data project — not affiliated with any municipality.
+              Each source keeps its own open licence.</p>
+          </span>
+        </span>
+      </div>
+    </div>
+
+      <div class="map-title">Coverage of every dataset we observe</div>
+      <div id="map"></div>
+      <div class="map-legend">
+        <span><i style="background:#0078d4"></i> Active — changes observed</span>
+        <span><i style="background:#eaa300"></i> Initial sync only — no changes yet</span>
+      </div>
+    </div>
+    <div class="panel panel-list">
+    <div class="cities">
+      
+      <div class="city-row">
+        <a class="city-link" href="barrie/index.html">
+          <div class="city-main">
+            <div class="city-name">City of Barrie</div>
+            <div class="city-sub">Open Government Licence - Barrie · last snapshot 2026-06-11 · 1 report</div>
+            
+          </div>
+          <div class="city-right">
+            <div class="city-count">63,313</div>
+            <div class="city-delta">
+              
+              <span class="delta-add">+0</span>
+              <span class="delta-rem">−0</span>
+              <span class="delta-mod">~0</span>
+              
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRNUMBER)</li><li>Street name (SSTRNAME)</li><li>Unit (UNITNUMBER)</li><li>Full address (FULLADDR)</li><li>Coordinates (latitude, longitude)</li><li>ADDRESSID</li><li>COMMENT</li><li>OBJECTID_1</li><li>PARCELID</li><li>SSTRDIR</li><li>SSTRSUFF</li><li>STATUS</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>LASTUPDATE</li></ul>
+      
+    </span>
+  </span>
+      </div>
+      
+      <div class="city-row">
+        <a class="city-link" href="brampton/index.html">
+          <div class="city-main">
+            <div class="city-name">City of Brampton</div>
+            <div class="city-sub">Creative Commons Attribution 4.0 (CC BY 4.0) · last snapshot 2026-06-16 · 6 reports</div>
+            
+          </div>
+          <div class="city-right">
+            <div class="city-count">248,331</div>
+            <div class="city-delta">
+              
+              <span class="delta-add">+2</span>
+              <span class="delta-rem">−1</span>
+              <span class="delta-mod">~40</span>
+              
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (CIVIC_NUMBER)</li><li>Street name (STREET_NAME)</li><li>Unit (UNIT_NO)</li><li>Full address (FULL_ADDRESS)</li><li>Coordinates (latitude, longitude)</li><li>ADDRESS_ID</li><li>ADDRESS_TYPE</li><li>BLOCK_PLAN</li><li>CITY</li><li>CITY_FILE</li><li>CITY_GRID</li><li>CONDO_PLAN_NUMBER</li><li>CON_NUM</li><li>C_OF_A</li><li>DRAFT_PLAN_NUMBER</li><li>GIS_ID</li><li>HERITAGE</li><li>LOT_NUM</li><li>OCCUPANCY_DATE</li><li>PERMIT_ISSUEDATE</li><li>PERMIT_NO</li><li>PERMIT_TYPE</li><li>POSTAL_CODE</li><li>PROP_CODE_DESC</li><li>PROVINCE</li><li>REG_PLAN_ASSUMP_DATE</li><li>REG_PLAN_NUMBER</li><li>SEC_PLAN_AREA</li><li>SITE_PLAN_NUMBER</li><li>STREET_DIRECTION</li><li>STREET_TYPE</li><li>SUB_TYPE</li><li>TOWNSHIP</li><li>WARD</li><li>WORK_TYPE</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span>
+      </div>
+      
+      <div class="city-row">
+        <a class="city-link" href="brantford/index.html">
+          <div class="city-main">
+            <div class="city-name">City of Brantford</div>
+            <div class="city-sub">Open Government Licence - Brantford · last snapshot 2026-06-16 · 3 reports</div>
+            
+          </div>
+          <div class="city-right">
+            <div class="city-count">38,678</div>
+            <div class="city-delta">
+              
+              <span class="delta-add">+8</span>
+              <span class="delta-rem">−8</span>
+              <span class="delta-mod">~0</span>
+              
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (STREETNUM)</li><li>Street name (STREETNAME)</li><li>Full address (FULLADDRESS)</li><li>Coordinates (latitude, longitude)</li><li>OBJECTID_1</li><li>POSTALCODE</li><li>STNUMSUFF</li><li>STREETNUMIN</li><li>STREETTYPE</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span>
+      </div>
+      
+      <div class="city-row">
+        <a class="city-link" href="burlington/index.html">
+          <div class="city-main">
+            <div class="city-name">City of Burlington</div>
+            <div class="city-sub">City of Burlington Terms of Use · last snapshot 2026-06-11 · 1 report</div>
+            
+          </div>
+          <div class="city-right">
+            <div class="city-count">60,325</div>
+            <div class="city-delta">
+              
+              <span class="delta-add">+0</span>
+              <span class="delta-rem">−0</span>
+              <span class="delta-mod">~0</span>
+              
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (HOUSENUM)</li><li>Street name (STREET)</li><li>Unit (UNIT)</li><li>Full address (ADDRESS)</li><li>Coordinates (latitude, longitude)</li><li>CITY</li><li>COUNTRY</li><li>COUNTRYCODE</li><li>LATITUDE</li><li>LONGITUDE</li><li>NAME</li><li>PROPCODE</li><li>PROPDESC</li><li>PROPERTYRSN</li><li>PROPINFOVALUE_WARD</li><li>PROPSTATUSCODE</li><li>PROPSTATUSDESC</li><li>PROVINCE</li><li>STRDIR</li><li>STRTYPE</li><li>UNITTYPE</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span>
+      </div>
+      
+      <div class="city-row">
+        <a class="city-link" href="cambridge/index.html">
+          <div class="city-main">
+            <div class="city-name">City of Cambridge</div>
+            <div class="city-sub">Open Government Licence - City of Cambridge · last snapshot 2026-06-11 · 1 report</div>
+            
+          </div>
+          <div class="city-right">
+            <div class="city-count">53,998</div>
+            <div class="city-delta">
+              
+              <span class="delta-add">+0</span>
+              <span class="delta-rem">−0</span>
+              <span class="delta-mod">~0</span>
+              
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (HOUSE_NUMBER)</li><li>Street name (STREET_NAME)</li><li>Unit (UNIT_NUMBER)</li><li>Full address (ADDRESS_LABEL)</li><li>Coordinates (latitude, longitude)</li><li>ADDRESS_POINT_ID</li><li>STATUS</li><li>WARD_ID</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span>
+      </div>
+      
+      <div class="city-row">
+        <a class="city-link" href="cornwall/index.html">
+          <div class="city-main">
+            <div class="city-name">City of Cornwall</div>
+            <div class="city-sub">Open Government Licence - City of Cornwall · last snapshot 2026-06-11 · 1 report</div>
+            
+          </div>
+          <div class="city-right">
+            <div class="city-count">20,582</div>
+            <div class="city-delta">
+              
+              <span class="delta-add">+0</span>
+              <span class="delta-rem">−0</span>
+              <span class="delta-mod">~0</span>
+              
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ST_NUMBER)</li><li>Street name (STREET)</li><li>Unit (UNIT)</li><li>Full address (ADDRESS)</li><li>Coordinates (latitude, longitude)</li><li>ADD_TYPE</li><li>AddressID</li><li>BUILDING</li><li>CITY</li><li>COUNTRY</li><li>DIRECTION</li><li>FLOOR</li><li>LAST_EDIT</li><li>POLY_ID</li><li>POSTAL</li><li>PROVINCE</li><li>STREET_LNG</li><li>SUFFIX</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span>
+      </div>
+      
+      <div class="city-row">
+        <a class="city-link" href="greater-sudbury/index.html">
+          <div class="city-main">
+            <div class="city-name">City of Greater Sudbury</div>
+            <div class="city-sub">Open Data Licence - City of Greater Sudbury · last snapshot 2026-06-16 · 6 reports</div>
+            <div class="city-sub city-highlight">latest: 1 moved</div>
+          </div>
+          <div class="city-right">
+            <div class="city-count">70,008</div>
+            <div class="city-delta">
+              
+              <span class="delta-add">+5</span>
+              <span class="delta-rem">−0</span>
+              <span class="delta-mod">~3</span>
+              
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRESSNUMBER)</li><li>Street name (FULLSTREETNAME)</li><li>Unit (UNIT_OR_AMENITY)</li><li>Full address (FULLADDRESSTEXT)</li><li>Coordinates (latitude, longitude)</li><li>ADDRESSALIAS</li><li>ADDRESSID</li><li>ADDRESSLIFECYCLESTATUS</li><li>ADDRESSNUMBERPREFIX</li><li>ADDRESSNUMBERSUFFIX</li><li>ALTERNATENAME1</li><li>ALTERNATENAME2</li><li>ALTERNATENAME3</li><li>ASSIGNEDADDRESSID</li><li>BASESTREETNAME</li><li>COMMUNITY</li><li>NAME</li><li>STREETSUFFIX</li><li>STREETTYPE</li><li>STYPE</li><li>UNIT_AMENITY_TYPE</li><li>VERIFIED_DATE</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>CREATEDATE</li><li>LASTUPDATE</li></ul>
+      
+    </span>
+  </span>
+      </div>
+      
+      <div class="city-row">
+        <a class="city-link" href="guelph/index.html">
+          <div class="city-main">
+            <div class="city-name">City of Guelph</div>
+            <div class="city-sub">Open Government Licence - City of Guelph · last snapshot 2026-06-14 · 2 reports</div>
+            
+          </div>
+          <div class="city-right">
+            <div class="city-count">53,889</div>
+            <div class="city-delta">
+              
+              <span class="delta-add">+0</span>
+              <span class="delta-rem">−0</span>
+              <span class="delta-mod">~0</span>
+              
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (STREETNO)</li><li>Street name (FULLNAME)</li><li>Unit (UNIT_NO)</li><li>Full address (ADDRESS)</li><li>Coordinates (latitude, longitude)</li><li>ADDID</li><li>ADDLEG</li><li>ADDLOCINFO</li><li>AMAID</li><li>GPID</li><li>HAS_UNIT</li><li>LABEL</li><li>LANDMKNAME</li><li>LAT</li><li>LONG</li><li>NAME</li><li>PARITY</li><li>PIN</li><li>PLACE</li><li>POSTCODE</li><li>QUALIFIER</li><li>ROLL_NO</li><li>SEGMENTID</li><li>STATUS</li><li>STDIR</li><li>STNAME</li><li>STREETID</li><li>STREETNAME</li><li>STSUF</li><li>UTM_X</li><li>UTM_Y</li><li>WARD</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span>
+      </div>
+      
+      <div class="city-row">
+        <a class="city-link" href="hamilton/index.html">
+          <div class="city-main">
+            <div class="city-name">City of Hamilton</div>
+            <div class="city-sub">Open Data Licence – Hamilton · last snapshot 2026-06-16 · 3 reports</div>
+            
+          </div>
+          <div class="city-right">
+            <div class="city-count">273,086</div>
+            <div class="city-delta">
+              
+              <span class="delta-add">+2</span>
+              <span class="delta-rem">−0</span>
+              <span class="delta-mod">~0</span>
+              
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (NUMBER_COMPLETE)</li><li>Street name (FULL_STREET_NAME)</li><li>Unit (UNIT_NUMBER_COMPLETE)</li><li>Coordinates (latitude, longitude)</li><li>COMMUNITY</li><li>COUNTRY</li><li>MUNICIPALITY</li><li>POSTAL_CODE</li><li>PROVINCE</li><li>STREET_NAME</li><li>STREET_SUFFIX_DIRECTION</li><li>STREET_SUFFIX_TYPE</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span>
+      </div>
+      
+      <div class="city-row">
+        <a class="city-link" href="kawartha-lakes/index.html">
+          <div class="city-main">
+            <div class="city-name">City of Kawartha Lakes</div>
+            <div class="city-sub">Not identified · last snapshot 2026-06-12 · 2 reports</div>
+            
+          </div>
+          <div class="city-right">
+            <div class="city-count">44,177</div>
+            <div class="city-delta">
+              
+              <span class="delta-add">+0</span>
+              <span class="delta-rem">−0</span>
+              <span class="delta-mod">~0</span>
+              
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (StreetNumber)</li><li>Street name (StreetNameFull)</li><li>Unit (UnitNumber)</li><li>Full address (FullAddress)</li><li>Coordinates (latitude, longitude)</li><li>ARUApproved</li><li>AddressID</li><li>HwyCountyNum</li><li>MultiUnitLot</li><li>PlaceName</li><li>SingleLowerTier</li><li>StreetAddress</li><li>StreetDirectionAbrv</li><li>StreetDirectionSuffix</li><li>StreetNameAlt</li><li>StreetNameBody</li><li>StreetNumSuffixConcat</li><li>StreetNumberPrefix</li><li>StreetNumberSuffix</li><li>StreetSegmentID</li><li>StreetTypeSuffix</li><li>StreetTypeSuffixAbrv</li><li>Xlong</li><li>Ylat</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span>
+      </div>
+      
+      <div class="city-row">
+        <a class="city-link" href="kingston/index.html">
+          <div class="city-main">
+            <div class="city-name">City of Kingston</div>
+            <div class="city-sub">Open Data Licence - City of Kingston · last snapshot 2026-06-16 · 5 reports</div>
+            
+          </div>
+          <div class="city-right">
+            <div class="city-count">77,139</div>
+            <div class="city-delta">
+              
+              <span class="delta-add">+0</span>
+              <span class="delta-rem">−0</span>
+              <span class="delta-mod">~5</span>
+              
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (STREET)</li><li>Unit (UNIT)</li><li>Full address (FULL_ADDRESS)</li><li>Coordinates (latitude, longitude)</li><li>ADDRESS_ID</li><li>ADDRESS_NUMBER_SUFFIX</li><li>COLLECTION_TYPE</li><li>DIRECTION_SUFFIX</li><li>ELECTORAL_DISTRICT_NAME</li><li>GARBAGE_DAY</li><li>MUNICIPALITY</li><li>NEIGHBOURHOOD</li><li>POSTAL_CODE</li><li>RECYCLING_DAY</li><li>STREET_BODY_NAME</li><li>STREET_TYPE_SUFFIX</li><li>UNIT_TYPE</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span>
+      </div>
+      
+      <div class="city-row">
+        <a class="city-link" href="kitchener/index.html">
+          <div class="city-main">
+            <div class="city-name">City of Kitchener</div>
+            <div class="city-sub">Open Government Licence - The Corporation of the City of Kitchener · last snapshot 2026-06-16 · 2 reports</div>
+            
+          </div>
+          <div class="city-right">
+            <div class="city-count">131,908</div>
+            <div class="city-delta">
+              
+              <span class="delta-add">+10</span>
+              <span class="delta-rem">−0</span>
+              <span class="delta-mod">~9</span>
+              
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (CIVIC_NO)</li><li>Street name (STREET)</li><li>Unit (UNIT)</li><li>Full address (ADDRESS)</li><li>Coordinates (latitude, longitude)</li><li>PARCELID</li><li>POLL</li><li>PROPERTY_UNIT_ID</li><li>ROADSEGMENTID</li><li>ROLL_REFERENCE</li><li>STATUS</li><li>UNIT_TYPE</li><li>WARD</li><li>X_COORD</li><li>Y_COORD</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>UPDATE_DATE</li></ul>
+      
+    </span>
+  </span>
+      </div>
+      
+      <div class="city-row">
+        <a class="city-link" href="london/index.html">
+          <div class="city-main">
+            <div class="city-name">City of London</div>
+            <div class="city-sub">City of London Terms of Use · last snapshot 2026-06-11 · 1 report</div>
+            
+          </div>
+          <div class="city-right">
+            <div class="city-count">142,890</div>
+            <div class="city-delta">
+              
+              <span class="delta-add">+0</span>
+              <span class="delta-rem">−0</span>
+              <span class="delta-mod">~0</span>
+              
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (MunicipalNumber)</li><li>Street name (FullStreetName)</li><li>Unit (UnitNumber)</li><li>Full address (FullAddress)</li><li>Coordinates (latitude, longitude)</li><li>CondoNumber</li><li>ElectionWard</li><li>FullNumber</li><li>FullStreetName_ID</li><li>GIS_ID</li><li>IntegerMunicipalNumber</li><li>MunicipalNumberQualifier</li><li>Status</li><li>StreetClassification</li><li>StreetDirection</li><li>StreetName</li><li>StreetType</li><li>UnitFullAddress</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>LastEditDate</li></ul>
+      
+    </span>
+  </span>
+      </div>
+      
+      <div class="city-row">
+        <a class="city-link" href="niagara-falls/index.html">
+          <div class="city-main">
+            <div class="city-name">City of Niagara Falls</div>
+            <div class="city-sub">Open Government Licence - Niagara Region · last snapshot 2026-06-10 · 2 reports</div>
+            
+          </div>
+          <div class="city-right">
+            <div class="city-count">207,845</div>
+            <div class="city-delta">
+              
+              <span class="delta-add">+0</span>
+              <span class="delta-rem">−0</span>
+              <span class="delta-mod">~0</span>
+              
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (Full_StreetNo)</li><li>Street name (StreetName)</li><li>Unit (Unit)</li><li>Coordinates (latitude, longitude)</li><li>GSmartID</li><li>LifeCycleStatus</li><li>Municipality</li><li>Qualifier</li><li>StreetDir</li><li>StreetType</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>CreateDate</li><li>StreetNo</li><li>Xcoord</li><li>Ycoord</li></ul>
+      
+    </span>
+  </span>
+      </div>
+      
+      <div class="city-row">
+        <a class="city-link" href="ottawa/index.html">
+          <div class="city-main">
+            <div class="city-name">City of Ottawa</div>
+            <div class="city-sub">Open Government Licence – City of Ottawa 2.0 · last snapshot 2026-06-16 · 5 reports</div>
+            
+          </div>
+          <div class="city-right">
+            <div class="city-count">402,888</div>
+            <div class="city-delta">
+              
+              <span class="delta-add">+77</span>
+              <span class="delta-rem">−1</span>
+              <span class="delta-mod">~7</span>
+              
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRNUM)</li><li>Street name (FULLNAME)</li><li>Unit (UNITID)</li><li>Full address (FULLADDR)</li><li>Coordinates (latitude, longitude)</li><li>ADDRTYPE</li><li>PI_MUNICIPAL_ADDRESS_ID</li><li>QUALIFIER</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>CREATED_DATE</li><li>MODIFIED_DATE</li></ul>
+      
+    </span>
+  </span>
+      </div>
+      
+      <div class="city-row">
+        <a class="city-link" href="quinte-west/index.html">
+          <div class="city-main">
+            <div class="city-name">City of Quinte West</div>
+            <div class="city-sub">City of Quinte West Open Data Licence · last snapshot 2026-06-16 · 2 reports</div>
+            
+          </div>
+          <div class="city-right">
+            <div class="city-count">20,272</div>
+            <div class="city-delta">
+              
+              <span class="delta-add">+2</span>
+              <span class="delta-rem">−0</span>
+              <span class="delta-mod">~0</span>
+              
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (address_nu)</li><li>Street name (street_nam)</li><li>Unit (unit_num)</li><li>Full address (address)</li><li>Coordinates (latitude, longitude)</li><li>label</li><li>lat</li><li>long</li><li>objectid_1</li><li>unit_type</li><li>ward</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span>
+      </div>
+      
+      <div class="city-row">
+        <a class="city-link" href="sarnia/index.html">
+          <div class="city-main">
+            <div class="city-name">City of Sarnia</div>
+            <div class="city-sub">Not identified · last snapshot 2026-06-11 · 1 report</div>
+            
+          </div>
+          <div class="city-right">
+            <div class="city-count">26,896</div>
+            <div class="city-delta">
+              
+              <span class="delta-add">+0</span>
+              <span class="delta-rem">−0</span>
+              <span class="delta-mod">~0</span>
+              
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (STNUM)</li><li>Street name (STNAME)</li><li>Full address (ADDRESS)</li><li>Coordinates (latitude, longitude)</li><li>CITY</li><li>OBJECTID_1</li><li>STDIR</li><li>STDIR_A</li><li>STTYPE</li><li>STTYPE_A</li><li>TOWNSHIP</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>created_date</li><li>created_user</li><li>last_edited_date</li><li>last_edited_user</li></ul>
+      
+    </span>
+  </span>
+      </div>
+      
+      <div class="city-row">
+        <a class="city-link" href="thunder-bay/index.html">
+          <div class="city-main">
+            <div class="city-name">City of Thunder Bay</div>
+            <div class="city-sub">City of Thunder Bay Open Data Licence · last snapshot 2026-06-11 · 1 report</div>
+            
+          </div>
+          <div class="city-right">
+            <div class="city-count">45,049</div>
+            <div class="city-delta">
+              
+              <span class="delta-add">+0</span>
+              <span class="delta-rem">−0</span>
+              <span class="delta-mod">~0</span>
+              
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (STREET)</li><li>Full address (COMPLETE)</li><li>Coordinates (latitude, longitude)</li><li>ADDRESS</li><li>ADDRESS_QUALIFIER</li><li>CITY</li><li>CTB_TYPE</li><li>PCL_PIN</li><li>PROVINCE</li><li>REFNAME</li><li>ROOT</li><li>ROWTYPE</li><li>RSN</li><li>SPLITLOC</li><li>TYPE</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span>
+      </div>
+      
+      <div class="city-row">
+        <a class="city-link" href="toronto/index.html">
+          <div class="city-main">
+            <div class="city-name">City of Toronto</div>
+            <div class="city-sub">Open Government Licence – Toronto · last snapshot 2026-06-16 · 62 reports</div>
+            <div class="city-sub city-highlight">latest: 4 place renames · 2 status changes</div>
+          </div>
+          <div class="city-right">
+            <div class="city-count">525,447</div>
+            <div class="city-delta">
+              
+              <span class="delta-add">+10</span>
+              <span class="delta-rem">−0</span>
+              <span class="delta-mod">~7</span>
+              
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (LINEAR_NAME_FULL)</li><li>Full address (ADDRESS_FULL)</li><li>Coordinates (latitude, longitude)</li><li>ADDRESS_POINT_ID</li><li>ADDRESS_STATUS</li><li>GENERAL_USE</li><li>GENERAL_USE_CODE</li><li>LINEAR_NAME_DESC</li><li>MAINT_STAGE</li><li>MUNICIPALITY</li><li>MUNICIPALITY_NAME</li><li>PLACE_NAME</li><li>PLACE_NAME_ALL</li><li>WARD</li><li>WARD_NAME</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>ADDRESS_CLASS</li><li>ADDRESS_CLASS_DESC</li><li>ADDRESS_ID</li><li>ADDRESS_ID_LINK</li><li>ADDRESS_POINT_ID_LINK</li><li>ADDRESS_STRING_ID</li><li>CENTRELINE_ID</li><li>CENTRELINE_MEASURE</li><li>CENTRELINE_OFFSET</li><li>CENTRELINE_SIDE</li><li>CLASS_FAMILY</li><li>CLASS_FAMILY_DESC</li><li>HI_NUM</li><li>HI_NUM_SUF</li><li>LINEAR_NAME</li><li>LINEAR_NAME_DIR</li><li>LINEAR_NAME_ID</li><li>LINEAR_NAME_TYPE</li><li>LO_NUM</li><li>LO_NUM_SUF</li></ul>
+      
+    </span>
+  </span>
+      </div>
+      
+      <div class="city-row">
+        <a class="city-link" href="waterloo/index.html">
+          <div class="city-main">
+            <div class="city-name">City of Waterloo</div>
+            <div class="city-sub">Open Government Licence – City of Waterloo · last snapshot 2026-06-09 · 1 report</div>
+            
+          </div>
+          <div class="city-right">
+            <div class="city-count">55,541</div>
+            <div class="city-delta">
+              
+              <span class="delta-add">+0</span>
+              <span class="delta-rem">−0</span>
+              <span class="delta-mod">~0</span>
+              
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street name (STREET_NM)</li><li>Full address (CIVIC_ADDR)</li><li>Coordinates (latitude, longitude)</li><li>ADDRESS_ID</li><li>LATITUDE</li><li>LONGITUDE</li><li>OBJECTID_1</li><li>SEGMENT_ID</li><li>WARD</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span>
+      </div>
+      
+      <div class="city-row">
+        <a class="city-link" href="windsor/index.html">
+          <div class="city-main">
+            <div class="city-name">City of Windsor</div>
+            <div class="city-sub">City of Windsor Terms of Use · last snapshot 2026-06-11 · 1 report</div>
+            
+          </div>
+          <div class="city-right">
+            <div class="city-count">118,841</div>
+            <div class="city-delta">
+              
+              <span class="delta-add">+0</span>
+              <span class="delta-rem">−0</span>
+              <span class="delta-mod">~0</span>
+              
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (street_address)</li><li>Street name (street_name)</li><li>Unit (unit_number)</li><li>Full address (Address)</li><li>Coordinates (latitude, longitude)</li><li>AmandaArea</li><li>Depth</li><li>Frontage</li><li>Legal1</li><li>Legal2</li><li>Legal3</li><li>PROP_RSN</li><li>PropCode</li><li>RollNumber</li><li>Ward</li><li>Zoning</li><li>gisid</li><li>propertyrsn</li><li>roll_number</li><li>street_direction</li><li>street_name_alias</li><li>street_suffix</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>created_date</li><li>created_user</li><li>last_edited_date</li><li>last_edited_user</li></ul>
+      
+    </span>
+  </span>
+      </div>
+      
+      <div class="city-row">
+        <a class="city-link" href="brant/index.html">
+          <div class="city-main">
+            <div class="city-name">County of Brant</div>
+            <div class="city-sub">Not identified · last snapshot 2026-06-16 · 5 reports</div>
+            
+          </div>
+          <div class="city-right">
+            <div class="city-count">19,323</div>
+            <div class="city-delta">
+              
+              <span class="delta-add">+0</span>
+              <span class="delta-rem">−0</span>
+              <span class="delta-mod">~0</span>
+              
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (STREET_NUMBER)</li><li>Street name (STREET_NAME)</li><li>Unit (STREET_UNIT_NUMBER)</li><li>Full address (FULL_ADDRESS)</li><li>Coordinates (latitude, longitude)</li><li>CIVIC_ADDRESS_TYPE</li><li>PLACE_NAME</li><li>POSTAL_CODE</li><li>PROVINCE</li><li>STREET_DIRECTION_PREFIX</li><li>STREET_DIRECTION_SUFFIX</li><li>STREET_NUMBER_ALPHA</li><li>STREET_TYPE</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>CREATED_DATE</li><li>EDITED_DATE</li></ul>
+      
+    </span>
+  </span>
+      </div>
+      
+      <div class="city-row">
+        <a class="city-link" href="bruce/index.html">
+          <div class="city-main">
+            <div class="city-name">County of Bruce</div>
+            <div class="city-sub">BGDISC Open Data Licence · last snapshot 2026-06-11 · 1 report</div>
+            
+          </div>
+          <div class="city-right">
+            <div class="city-count">51,666</div>
+            <div class="city-delta">
+              
+              <span class="delta-add">+0</span>
+              <span class="delta-rem">−0</span>
+              <span class="delta-mod">~0</span>
+              
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (AddrNum)</li><li>Street name (RoadName)</li><li>Unit (Unit)</li><li>Full address (CivicAddress)</li><li>Coordinates (latitude, longitude)</li><li>ARN</li><li>Municipality</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span>
+      </div>
+      
+      <div class="city-row">
+        <a class="city-link" href="dufferin/index.html">
+          <div class="city-main">
+            <div class="city-name">County of Dufferin</div>
+            <div class="city-sub">Open Government Licence - County of Dufferin · last snapshot 2026-06-11 · 1 report</div>
+            
+          </div>
+          <div class="city-right">
+            <div class="city-count">27,075</div>
+            <div class="city-delta">
+              
+              <span class="delta-add">+0</span>
+              <span class="delta-rem">−0</span>
+              <span class="delta-mod">~0</span>
+              
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (STREETNUM)</li><li>Street name (STREETNAME)</li><li>Full address (FULLADDY)</li><li>Coordinates (latitude, longitude)</li><li>EASTINGX</li><li>ID</li><li>LATITUDEY</li><li>LONGITUDEX</li><li>NORTHINGY</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span>
+      </div>
+      
+      <div class="city-row">
+        <a class="city-link" href="elgin/index.html">
+          <div class="city-main">
+            <div class="city-name">County of Elgin</div>
+            <div class="city-sub">Not identified · last snapshot 2026-06-11 · 1 report</div>
+            
+          </div>
+          <div class="city-right">
+            <div class="city-count">21,785</div>
+            <div class="city-delta">
+              
+              <span class="delta-add">+0</span>
+              <span class="delta-rem">−0</span>
+              <span class="delta-mod">~0</span>
+              
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (StrNUM)</li><li>Street name (StrFULL)</li><li>Unit (StrUNIT)</li><li>Full address (StrNUM_StrFULL)</li><li>Coordinates (latitude, longitude)</li><li>ARN</li><li>Condition</li><li>MUNI</li><li>StrNum2</li><li>x</li><li>y</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span>
+      </div>
+      
+      <div class="city-row">
+        <a class="city-link" href="frontenac/index.html">
+          <div class="city-main">
+            <div class="city-name">County of Frontenac</div>
+            <div class="city-sub">Not identified · last snapshot 2026-06-11 · 1 report</div>
+            
+          </div>
+          <div class="city-right">
+            <div class="city-count">22,347</div>
+            <div class="city-delta">
+              
+              <span class="delta-add">+0</span>
+              <span class="delta-rem">−0</span>
+              <span class="delta-mod">~0</span>
+              
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (StreetNumber)</li><li>Street name (StreetName)</li><li>Unit (UnitNumber)</li><li>Full address (Location)</li><li>Coordinates (latitude, longitude)</li><li>Municipality</li><li>Qualifier</li><li>UpperNumber</li><li>Verified</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>EditDate</li></ul>
+      
+    </span>
+  </span>
+      </div>
+      
+      <div class="city-row">
+        <a class="city-link" href="hastings/index.html">
+          <div class="city-main">
+            <div class="city-name">County of Hastings</div>
+            <div class="city-sub">Open Government Licence - The Corporation of the County of Hastings · last snapshot 2026-06-15 · 2 reports</div>
+            
+          </div>
+          <div class="city-right">
+            <div class="city-count">30,817</div>
+            <div class="city-delta">
+              
+              <span class="delta-add">+0</span>
+              <span class="delta-rem">−0</span>
+              <span class="delta-mod">~0</span>
+              
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (House_No)</li><li>Street name (Rd_Name)</li><li>Unit (Unit)</li><li>Full address (Full_Add)</li><li>Coordinates (latitude, longitude)</li><li>ADDRESS_NU</li><li>GISCODE</li><li>House_Suf</li><li>LAT</li><li>LONG</li><li>Landmark_Name</li><li>MUNICIPALI</li><li>OBJECTID_12</li><li>Rd_Dir</li><li>Rd_Suf</li><li>RnoTXT2</li><li>STREET_NAM</li><li>UNIQUE_ID</li><li>UNIT_NUM</li><li>UNIT_TYPE</li><li>X</li><li>Y</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>DateEdit</li></ul>
+      
+    </span>
+  </span>
+      </div>
+      
+      <div class="city-row">
+        <a class="city-link" href="huron/index.html">
+          <div class="city-main">
+            <div class="city-name">County of Huron</div>
+            <div class="city-sub">Open Government Licence - The County of Huron · last snapshot 2026-06-13 · 2 reports</div>
+            
+          </div>
+          <div class="city-right">
+            <div class="city-count">38,194</div>
+            <div class="city-delta">
+              
+              <span class="delta-add">+0</span>
+              <span class="delta-rem">−0</span>
+              <span class="delta-mod">~0</span>
+              
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (StreetNumber)</li><li>Street name (StreetName)</li><li>Unit (Unit)</li><li>Full address (FullAddress)</li><li>Coordinates (latitude, longitude)</li><li>A3</li><li>AddNum_Suf</li><li>Add_Number</li><li>FullAddress_Mun</li><li>HuronID</li><li>Mun</li><li>St_Name</li><li>St_PosDir</li><li>St_PosTyp</li><li>St_PreSep</li><li>St_PreTyp</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>DateUpdate</li></ul>
+      
+    </span>
+  </span>
+      </div>
+      
+      <div class="city-row">
+        <a class="city-link" href="lambton/index.html">
+          <div class="city-main">
+            <div class="city-name">County of Lambton</div>
+            <div class="city-sub">Open Government Licence - County of Lambton · last snapshot 2026-06-10 · 1 report</div>
+            
+          </div>
+          <div class="city-right">
+            <div class="city-count">56,897</div>
+            <div class="city-delta">
+              
+              <span class="delta-add">+0</span>
+              <span class="delta-rem">−0</span>
+              <span class="delta-mod">~0</span>
+              
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (STNUM)</li><li>Street name (STNAME)</li><li>Full address (ADDRESS)</li><li>Coordinates (latitude, longitude)</li><li>CITY</li><li>MUNICIPALITY</li><li>STDIR</li><li>STDIR_A</li><li>STTYPE</li><li>STTYPE_A</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>UPDATED</li></ul>
+      
+    </span>
+  </span>
+      </div>
+      
+      <div class="city-row">
+        <a class="city-link" href="lennox-addington/index.html">
+          <div class="city-main">
+            <div class="city-name">County of Lennox and Addington</div>
+            <div class="city-sub">Not identified · last snapshot 2026-06-11 · 1 report</div>
+            
+          </div>
+          <div class="city-right">
+            <div class="city-count">26,093</div>
+            <div class="city-delta">
+              
+              <span class="delta-add">+0</span>
+              <span class="delta-rem">−0</span>
+              <span class="delta-mod">~0</span>
+              
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (Number)</li><li>Full address (ADDRESS)</li><li>Coordinates (latitude, longitude)</li><li>ADD_LABEL</li><li>BELL_MUNIC</li><li>GlobalID_1</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span>
+      </div>
+      
+      <div class="city-row">
+        <a class="city-link" href="peterborough-county/index.html">
+          <div class="city-main">
+            <div class="city-name">County of Peterborough</div>
+            <div class="city-sub">Not identified · last snapshot 2026-06-12 · 2 reports</div>
+            
+          </div>
+          <div class="city-right">
+            <div class="city-count">40,524</div>
+            <div class="city-delta">
+              
+              <span class="delta-add">+0</span>
+              <span class="delta-rem">−0</span>
+              <span class="delta-mod">~0</span>
+              
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRNUM)</li><li>Street name (FULLNAME)</li><li>Full address (FULLADDR)</li><li>Coordinates (latitude, longitude)</li><li>AddressCla</li><li>MUNICIPALI</li><li>PLACENAME</li><li>SITEADDID</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span>
+      </div>
+      
+      <div class="city-row">
+        <a class="city-link" href="renfrew/index.html">
+          <div class="city-main">
+            <div class="city-name">County of Renfrew</div>
+            <div class="city-sub">Not identified · last snapshot 2026-06-15 · 3 reports</div>
+            
+          </div>
+          <div class="city-right">
+            <div class="city-count">39,023</div>
+            <div class="city-delta">
+              
+              <span class="delta-add">+0</span>
+              <span class="delta-rem">−0</span>
+              <span class="delta-mod">~0</span>
+              
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (Add_Number)</li><li>Street name (St_Name)</li><li>Unit (Unit)</li><li>Full address (Full_Address)</li><li>Coordinates (latitude, longitude)</li><li>A1</li><li>A2</li><li>A3</li><li>A4</li><li>ADDRRANGE</li><li>AddNum_Cmp</li><li>AddNum_Suf</li><li>CAPTUREMETH</li><li>Comment</li><li>Country</li><li>DiscrpAgID</li><li>Effective</li><li>Latitude</li><li>Longitude</li><li>NGUID</li><li>POINTTYPE</li><li>Placement</li><li>RollNumber</li><li>STATUS</li><li>Site</li><li>St_PosDir</li><li>St_PosTyp</li><li>St_PreDir</li><li>St_PreTyp</li><li>SubSite</li><li>UnitPreTyp</li><li>UnitValue</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>DateUpdate</li></ul>
+      
+    </span>
+  </span>
+      </div>
+      
+      <div class="city-row">
+        <a class="city-link" href="wellington/index.html">
+          <div class="city-main">
+            <div class="city-name">County of Wellington</div>
+            <div class="city-sub">Not identified · last snapshot 2026-06-11 · 1 report</div>
+            
+          </div>
+          <div class="city-right">
+            <div class="city-count">42,892</div>
+            <div class="city-delta">
+              
+              <span class="delta-add">+0</span>
+              <span class="delta-rem">−0</span>
+              <span class="delta-mod">~0</span>
+              
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (Address)</li><li>Street name (WC_FullNam)</li><li>Unit (Unit)</li><li>Coordinates (latitude, longitude)</li><li>Municipality</li><li>RoadClass</li><li>UrbanCentre</li><li>WC_Dir</li><li>WC_Name</li><li>WC_Number</li><li>WC_Prefix</li><li>WC_Sign</li><li>WC_Suffix</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span>
+      </div>
+      
+      <div class="city-row">
+        <a class="city-link" href="muskoka/index.html">
+          <div class="city-main">
+            <div class="city-name">District Municipality of Muskoka</div>
+            <div class="city-sub">Not identified · last snapshot 2026-06-11 · 1 report</div>
+            
+          </div>
+          <div class="city-right">
+            <div class="city-count">66,180</div>
+            <div class="city-delta">
+              
+              <span class="delta-add">+0</span>
+              <span class="delta-rem">−0</span>
+              <span class="delta-mod">~0</span>
+              
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (StreetNumber)</li><li>Street name (StreetName)</li><li>Unit (StreetUnit)</li><li>Full address (Location)</li><li>Coordinates (latitude, longitude)</li><li>Municipality</li><li>PropertyNum</li><li>StreetAlias</li><li>StreetQual</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span>
+      </div>
+      
+      <div class="city-row">
+        <a class="city-link" href="chatham-kent/index.html">
+          <div class="city-main">
+            <div class="city-name">Municipality of Chatham-Kent</div>
+            <div class="city-sub">Not identified · last snapshot 2026-06-13 · 3 reports</div>
+            
+          </div>
+          <div class="city-right">
+            <div class="city-count">59,206</div>
+            <div class="city-delta">
+              
+              <span class="delta-add">+0</span>
+              <span class="delta-rem">−0</span>
+              <span class="delta-mod">~0</span>
+              
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (STREET_NAME)</li><li>Full address (BASE_ADDRESS)</li><li>Coordinates (latitude, longitude)</li><li>ADDRESS_ID</li><li>COMMUNITY_NAME</li><li>COMMUNITY_TYPE</li><li>GISID</li><li>STREET_DIR</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span>
+      </div>
+      
+      <div class="city-row">
+        <a class="city-link" href="durham/index.html">
+          <div class="city-main">
+            <div class="city-name">Regional Municipality of Durham</div>
+            <div class="city-sub">Open Government Licence – City of Oshawa · last snapshot 2026-06-10 · 2 reports</div>
+            
+          </div>
+          <div class="city-right">
+            <div class="city-count">253,555</div>
+            <div class="city-delta">
+              
+              <span class="delta-add">+0</span>
+              <span class="delta-rem">−0</span>
+              <span class="delta-mod">~0</span>
+              
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (CIVIC_NUM)</li><li>Street name (ROAD_NAME)</li><li>Unit (UNIT_NUM)</li><li>Coordinates (latitude, longitude)</li><li>CIVIC_SFX</li><li>DIR_SHORT</li><li>MUNICIPALITY</li><li>MXADDRESSCODE</li><li>MXCREATIONSTATE</li><li>MXORGID</li><li>POSTAL_CODE</li><li>REGION_ID</li><li>ROAD_DIR</li><li>ROAD_TYPE</li><li>TOWN</li><li>TYPE_SHORT</li><li>UNIT</li><li>UNIT_RANGE</li><li>UNIT_TYPE</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>EDIT_DATE</li></ul>
+      
+    </span>
+  </span>
+      </div>
+      
+      <div class="city-row">
+        <a class="city-link" href="peel-region/index.html">
+          <div class="city-main">
+            <div class="city-name">Regional Municipality of Peel</div>
+            <div class="city-sub">Not identified · last snapshot 2026-06-11 · 1 report</div>
+            
+          </div>
+          <div class="city-right">
+            <div class="city-count">503,923</div>
+            <div class="city-delta">
+              
+              <span class="delta-add">+0</span>
+              <span class="delta-rem">−0</span>
+              <span class="delta-mod">~0</span>
+              
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (STREETNUM)</li><li>Street name (STREETNAME)</li><li>Unit (UNIT_IDENTIFIER)</li><li>Coordinates (latitude, longitude)</li><li>HOUSESTYLE</li><li>LANDUSE</li><li>LATITUDE</li><li>LINK_ID</li><li>LONGITUDE</li><li>MUNICIPALITY</li><li>ROPADRID</li><li>SIDE_OF_RD</li><li>STREETDIRECTION</li><li>STREETTYPE</li><li>WARD</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span>
+      </div>
+      
+      <div class="city-row">
+        <a class="city-link" href="york/index.html">
+          <div class="city-main">
+            <div class="city-name">Regional Municipality of York</div>
+            <div class="city-sub">York Region Open Data Licence · last snapshot 2026-06-15 · 5 reports</div>
+            
+          </div>
+          <div class="city-right">
+            <div class="city-count">431,536</div>
+            <div class="city-delta">
+              
+              <span class="delta-add">+0</span>
+              <span class="delta-rem">−0</span>
+              <span class="delta-mod">~0</span>
+              
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (FULL_STREET_NAME)</li><li>Unit (SUITE_NUMBER)</li><li>Full address (FULL_CIVIC_ADDR)</li><li>Coordinates (latitude, longitude)</li><li>ADDRS_PNT_TYPE</li><li>ADD_NUM_SUFFIX</li><li>COUNTRY</li><li>LIFESTATUS</li><li>MAIL_ADDRESS_NUMBER</li><li>MAIL_ADDRESS_NUMBER_SUFFIX</li><li>MAIL_COMMUNITY_NAME</li><li>MAIL_FULL_ADDRESS_TEXT</li><li>MAIL_POSTAL_CODE</li><li>MAIL_PROVINCE</li><li>MAIL_STATUS</li><li>MAIL_STREET_NAME</li><li>MAIL_STREET_TYPE</li><li>MAIL_SUITE_NUMBER</li><li>MAIL_UNIT_DESIGNATOR</li><li>MUNICIPALITY</li><li>PARID</li><li>PNT_GIS_ID</li><li>PREFIX_DIRECTION</li><li>PREFIX_TYPE</li><li>PRO_DATE</li><li>STREET_NAME</li><li>STREET_NAME_ID</li><li>STREET_TYPE</li><li>SUFFIX_DIRECTION</li><li>UNIT_DESIGNATOR</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>CREATE_DATE</li><li>MODDATE</li></ul>
+      
+    </span>
+  </span>
+      </div>
+      
+      <div class="city-row">
+        <a class="city-link" href="milton/index.html">
+          <div class="city-main">
+            <div class="city-name">Town of Milton</div>
+            <div class="city-sub">Not identified · last snapshot 2026-06-14 · 3 reports</div>
+            
+          </div>
+          <div class="city-right">
+            <div class="city-count">46,324</div>
+            <div class="city-delta">
+              
+              <span class="delta-add">+0</span>
+              <span class="delta-rem">−0</span>
+              <span class="delta-mod">~0</span>
+              
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRESS_NUM)</li><li>Street name (STREET_NAME)</li><li>Unit (UNIT_NUMBER)</li><li>Full address (FULL_ADDRESS)</li><li>Coordinates (latitude, longitude)</li><li>ADU</li><li>ADU_UNIT_NO</li><li>ASSIGNED_BY</li><li>Address_ID</li><li>BLOCK</li><li>DESCRIPTION</li><li>DISPLAY_NAME</li><li>GEOSTNAME</li><li>HISTORY</li><li>LABEL_ANGLE</li><li>LOT</li><li>POLL</li><li>PROP_RSN</li><li>STATUS</li><li>STREET_TYPE</li><li>ST_DIR_SUFFIX</li><li>SUBDIVISION_PLAN</li><li>WARD</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span>
+      </div>
+      
+      <div class="city-row">
+        <a class="city-link" href="oakville/index.html">
+          <div class="city-main">
+            <div class="city-name">Town of Oakville</div>
+            <div class="city-sub">Open Government Licence — Town of Oakville · last snapshot 2026-06-10 · 1 report</div>
+            
+          </div>
+          <div class="city-right">
+            <div class="city-count">71,051</div>
+            <div class="city-delta">
+              
+              <span class="delta-add">+0</span>
+              <span class="delta-rem">−0</span>
+              <span class="delta-mod">~0</span>
+              
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (STREET_NUM)</li><li>Street name (SNAME)</li><li>Unit (UNIT)</li><li>Full address (ADDRESS)</li><li>Coordinates (latitude, longitude)</li><li>LABEL</li><li>STREET_DIR</li><li>STREET_NAME</li><li>STREET_TYPE</li><li>SUFFIX</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>created_date</li><li>created_user</li><li>last_edited_date</li><li>last_edited_user</li></ul>
+      
+    </span>
+  </span>
+      </div>
+      
+      <div class="city-row">
+        <a class="city-link" href="leeds-grenville/index.html">
+          <div class="city-main">
+            <div class="city-name">United Counties of Leeds and Grenville</div>
+            <div class="city-sub">Not identified · last snapshot 2026-06-11 · 1 report</div>
+            
+          </div>
+          <div class="city-right">
+            <div class="city-count">54,008</div>
+            <div class="city-delta">
+              
+              <span class="delta-add">+0</span>
+              <span class="delta-rem">−0</span>
+              <span class="delta-mod">~0</span>
+              
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (CIVICNUM)</li><li>Street name (STREET)</li><li>Unit (UNITNUM)</li><li>Full address (ADDRESSAGOL)</li><li>Coordinates (latitude, longitude)</li><li>ADDRESS911</li><li>ARN</li><li>GEOTOWNSHP</li><li>Id</li><li>LABEL</li><li>MUN</li><li>OBJECTID_1</li><li>OWNER</li><li>REFORMLOC</li><li>TYPE</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span>
+      </div>
+      
+      <div class="city-row">
+        <a class="city-link" href="sdg/index.html">
+          <div class="city-main">
+            <div class="city-name">United Counties of Stormont, Dundas and Glengarry</div>
+            <div class="city-sub">Not identified · last snapshot 2026-06-15 · 3 reports</div>
+            
+          </div>
+          <div class="city-right">
+            <div class="city-count">31,856</div>
+            <div class="city-delta">
+              
+              <span class="delta-add">+0</span>
+              <span class="delta-rem">−0</span>
+              <span class="delta-mod">~0</span>
+              
+            </div>
+          </div>
+        </a>
+        <span class="info-wrap right" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (Address_Nu)</li><li>Street name (Street_Nam)</li><li>Unit (UnitNum)</li><li>Full address (LabelFull)</li><li>Coordinates (latitude, longitude)</li><li>Civic_Num</li><li>EmilyProj</li><li>Label</li><li>Municipali</li><li>SDGCivicID</li><li>Settlement</li><li>StrNamAlia</li><li>Unique_ID</li><li>Unit_Type</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>AddDate</li><li>EditDate</li></ul>
+      
+    </span>
+  </span>
+      </div>
+      
+    </div>
+
+    
+    <div class="skipped">
+      <div class="section-header">20 sources probed but not added</div>
+      <div class="cities">
+        
+        <div class="skip-row">
+          <div class="skip-main">
+            <div class="skip-name">City of Peterborough</div>
+            <div class="skip-detail">Hosted layer is published &#39;Proprietary - All rights reserved&#39; (OSM red); not republished. The surrounding County of Peterborough is added separately.</div>
+          </div>
+          <span class="skip-badge">Proprietary licence</span>
+        </div>
+        
+        <div class="skip-row">
+          <div class="skip-main">
+            <div class="skip-name">City of Belleville</div>
+            <div class="skip-detail">gis.city.belleville.on.ca returns empty; no ArcGIS Online migration found.</div>
+          </div>
+          <span class="skip-badge">Dead endpoint</span>
+        </div>
+        
+        <div class="skip-row">
+          <div class="skip-main">
+            <div class="skip-name">Norfolk County</div>
+            <div class="skip-detail">services1.arcgis.com CivicAddresses layer is token-secured (HTTP 499).</div>
+          </div>
+          <span class="skip-badge">Empty / secured</span>
+        </div>
+        
+        <div class="skip-row">
+          <div class="skip-main">
+            <div class="skip-name">Simcoe County</div>
+            <div class="skip-detail">maps.simcoe.ca Search_Layers_Dynamic/0 returns 404; no open address layer found via search.</div>
+          </div>
+          <span class="skip-badge">Dead endpoint</span>
+        </div>
+        
+        <div class="skip-row">
+          <div class="skip-main">
+            <div class="skip-name">Grey County</div>
+            <div class="skip-detail">Official service_grey org publishes only boundary/reference layers (no civic address points); self-hosted geo.grey.ca / restgeo.grey.ca are dead (502).</div>
+          </div>
+          <span class="skip-badge">No address layer</span>
+        </div>
+        
+        <div class="skip-row">
+          <div class="skip-main">
+            <div class="skip-name">Oxford County</div>
+            <div class="skip-detail">public.oxfordcounty.ca 404s; an ArcGIS Online search for &#39;Oxford County Address Points&#39; returns City of Oxford, MISSISSIPPI (wrong place) - not added.</div>
+          </div>
+          <span class="skip-badge">Dead endpoint</span>
+        </div>
+        
+        <div class="skip-row">
+          <div class="skip-main">
+            <div class="skip-name">Northumberland County</div>
+            <div class="skip-detail">maps.northumberlandcounty.ca 404s; search returns Union/Snyder County, Pennsylvania (wrong place).</div>
+          </div>
+          <span class="skip-badge">Dead endpoint</span>
+        </div>
+        
+        <div class="skip-row">
+          <div class="skip-main">
+            <div class="skip-name">Haldimand County</div>
+            <div class="skip-detail">maps.haldimandcounty.on.ca redirects to a maintenance page.</div>
+          </div>
+          <span class="skip-badge">Dead endpoint</span>
+        </div>
+        
+        <div class="skip-row">
+          <div class="skip-main">
+            <div class="skip-name">Prince Edward County</div>
+            <div class="skip-detail">maps.thecounty.ca returns empty; the county&#39;s ArcGIS Online org exposes only a &#39;Property Info&#39; layer, not clean civic addresses.</div>
+          </div>
+          <span class="skip-badge">No address layer</span>
+        </div>
+        
+        <div class="skip-row">
+          <div class="skip-main">
+            <div class="skip-name">Town of Amherstburg</div>
+            <div class="skip-detail">mapamherstburg.ca is live but the only layer is parcel/assessment data (mailing addresses, no parsed civic address points).</div>
+          </div>
+          <span class="skip-badge">No address layer</span>
+        </div>
+        
+        <div class="skip-row">
+          <div class="skip-main">
+            <div class="skip-name">Middlesex County (Lucan Biddulph, Newbury, North Middlesex, Southwest Middlesex, Strathroy-Caradoc, Thames Centre)</div>
+            <div class="skip-detail">The shared maps.middlesex.ca ArcGIS server is entirely unreachable, taking all six member-municipality address layers with it.</div>
+          </div>
+          <span class="skip-badge">Dead endpoint</span>
+        </div>
+        
+        <div class="skip-row">
+          <div class="skip-main">
+            <div class="skip-name">Town of Cobourg</div>
+            <div class="skip-detail">maps.cobourg.ca returns empty.</div>
+          </div>
+          <span class="skip-badge">Dead endpoint</span>
+        </div>
+        
+        <div class="skip-row">
+          <div class="skip-main">
+            <div class="skip-name">West Parry Sound District</div>
+            <div class="skip-detail">wpsgn.ca ArcGIS server returns an HTML error page, not a queryable layer.</div>
+          </div>
+          <span class="skip-badge">Dead endpoint</span>
+        </div>
+        
+        <div class="skip-row">
+          <div class="skip-main">
+            <div class="skip-name">City of Sault Ste. Marie</div>
+            <div class="skip-detail">SSMIC publishes only date-versioned layers (Collection_Addresses_&lt;month&gt;_&lt;year&gt;); the URL would 404 on the next republish, so it can&#39;t be tracked over time.</div>
+          </div>
+          <span class="skip-badge">Unstable URL</span>
+        </div>
+        
+        <div class="skip-row">
+          <div class="skip-main">
+            <div class="skip-name">Perth County</div>
+            <div class="skip-detail">No official ArcGIS Online open-data address service located; the catalogued OpenAddresses cache is also dead.</div>
+          </div>
+          <span class="skip-badge">Not found</span>
+        </div>
+        
+        <div class="skip-row">
+          <div class="skip-main">
+            <div class="skip-name">Lanark County</div>
+            <div class="skip-detail">No official ArcGIS Online open-data address service located via search.</div>
+          </div>
+          <span class="skip-badge">Not found</span>
+        </div>
+        
+        <div class="skip-row">
+          <div class="skip-main">
+            <div class="skip-name">Haliburton County</div>
+            <div class="skip-detail">No official ArcGIS Online open-data address service located via search.</div>
+          </div>
+          <span class="skip-badge">Not found</span>
+        </div>
+        
+        <div class="skip-row">
+          <div class="skip-main">
+            <div class="skip-name">Halton Region (Halton Hills)</div>
+            <div class="skip-detail">No region-wide open address layer found; member towns Oakville, Milton and Burlington are tracked individually, leaving Halton Hills uncovered.</div>
+          </div>
+          <span class="skip-badge">Not found</span>
+        </div>
+        
+        <div class="skip-row">
+          <div class="skip-main">
+            <div class="skip-name">Essex County</div>
+            <div class="skip-detail">OpenAddresses cache is deprecated (0 bytes); ArcGIS Online search returns US/untrusted date-versioned copies.</div>
+          </div>
+          <span class="skip-badge">Not found</span>
+        </div>
+        
+        <div class="skip-row">
+          <div class="skip-main">
+            <div class="skip-name">North Bay, Timmins, Collingwood, Owen Sound, Innisfil, Kenora, Stratford</div>
+            <div class="skip-detail">Off-catalogue cities probed via ArcGIS Online search: no official municipal open-data address service surfaced (only US/student/unrelated results).</div>
+          </div>
+          <span class="skip-badge">Not found</span>
+        </div>
+        
+      </div>
+    </div>
+    
+    </div>
+    </div>
+  </main>
+
+  <script id="city-polys" type="application/json">{"features": [{"geometry": {"coordinates": [[[-77.85707, 45.52351], [-77.69837, 45.6767], [-77.65715, 45.67139], [-77.58457, 45.67175], [-77.43328, 45.64363], [-77.38451, 45.87903], [-77.38581, 45.8826], [-77.30699, 45.93776], [-77.25244, 45.90914], [-77.18167, 45.85371], [-77.01914, 45.77197], [-76.92152, 45.87929], [-76.91877, 45.88813], [-76.91565, 45.89056], [-76.89923, 45.89627], [-76.89289, 45.89598], [-76.86629, 45.89017], [-76.78499, 45.86185], [-76.77521, 45.855], [-76.77134, 45.84909], [-76.70394, 45.68318], [-76.55531, 45.51713], [-76.51447, 45.51331], [-76.50096, 45.51056], [-76.45274, 45.49671], [-76.32281, 45.43855], [-76.32496, 45.42972], [-76.43002, 45.35757], [-76.69371, 45.19322], [-76.87185, 45.20602], [-77.07273, 45.1309], [-77.1113, 45.1115], [-77.14628, 45.1368], [-77.36782, 45.1937], [-77.48764, 45.16701], [-77.53282, 45.15538], [-77.54456, 45.16436], [-77.58193, 45.23167], [-77.61831, 45.28948], [-77.77747, 45.43257], [-77.82036, 45.44557], [-77.84257, 45.48389], [-77.85707, 45.52351]]], "type": "Polygon"}, "properties": {"name": "County of Renfrew", "no_changes": false, "slug": "renfrew"}, "type": "Feature"}, {"geometry": {"coordinates": [[[-78.10234, 45.22974], [-78.10543, 45.27438], [-78.04877, 45.31115], [-78.01668, 45.32744], [-77.70141, 45.43291], [-77.64332, 45.35077], [-77.6251, 45.31747], [-77.44642, 44.97018], [-77.25928, 44.67083], [-77.07537, 44.44195], [-77.04176, 44.19732], [-77.05005, 44.19129], [-77.08759, 44.17667], [-77.12901, 44.16611], [-77.19018, 44.15819], [-77.21357, 44.15855], [-77.25491, 44.18918], [-77.62877, 44.2766], [-77.65235, 44.28567], [-77.82087, 44.6148], [-77.99251, 44.96886], [-78.04903, 45.07346], [-78.06598, 45.10738], [-78.10234, 45.22974]]], "type": "Polygon"}, "properties": {"name": "County of Hastings", "no_changes": false, "slug": "hastings"}, "type": "Feature"}, {"geometry": {"coordinates": [[[-81.66163, 45.1868], [-81.72707, 45.2212], [-81.68915, 45.25384], [-81.61428, 45.30704], [-81.31911, 45.19952], [-81.00454, 44.95533], [-80.9712, 44.88863], [-81.11688, 44.46757], [-81.11438, 44.44901], [-81.03473, 44.16423], [-80.99569, 44.01137], [-81.011, 43.98646], [-81.40199, 43.91586], [-81.51992, 43.95649], [-81.7458, 44.05596], [-81.75382, 44.06442], [-81.75674, 44.07345], [-81.74036, 44.09249], [-81.60625, 44.27129], [-81.55071, 44.35535], [-81.50732, 44.39932], [-81.48194, 44.41788], [-81.32163, 44.74131], [-81.43489, 44.97178], [-81.50473, 45.06962], [-81.55232, 45.1159], [-81.66163, 45.1868]]], "type": "Polygon"}, "properties": {"name": "County of Bruce", "no_changes": true, "slug": "bruce"}, "type": "Feature"}, {"geometry": {"coordinates": [[[-80.09055, 45.08287], [-80.09167, 45.09274], [-80.05012, 45.09414], [-79.95519, 45.10945], [-79.77811, 45.15378], [-79.76114, 45.17075], [-79.64645, 45.32164], [-79.61807, 45.32332], [-79.44919, 45.38356], [-79.408, 45.40472], [-79.38172, 45.4133], [-79.19485, 45.4631], [-79.04632, 45.4768], [-78.93624, 45.47818], [-78.89937, 45.44624], [-78.90354, 45.26141], [-78.8774, 45.21163], [-78.87677, 45.20394], [-78.88106, 45.14703], [-78.98127, 45.03394], [-79.1106, 44.88057], [-79.20969, 44.79432], [-79.29169, 44.77628], [-79.3511, 44.77357], [-79.38613, 44.77442], [-79.53539, 44.85708], [-79.68452, 44.82343], [-79.74174, 44.78586], [-79.77666, 44.79196], [-79.85176, 44.8165], [-79.9045, 44.89354], [-80.02734, 44.99769], [-80.09055, 45.08287]]], "type": "Polygon"}, "properties": {"name": "District Municipality of Muskoka", "no_changes": true, "slug": "muskoka"}, "type": "Feature"}, {"geometry": {"coordinates": [[[-77.20274, 44.90993], [-77.12785, 45.10159], [-76.86533, 45.20663], [-76.83155, 45.21754], [-76.82044, 45.21832], [-76.65783, 44.94407], [-76.62683, 44.88795], [-76.39756, 44.60376], [-76.3431, 44.55512], [-76.25455, 44.48272], [-76.16848, 44.24429], [-76.183, 44.23047], [-76.20602, 44.21665], [-76.35476, 44.13605], [-76.40259, 44.11815], [-76.46508, 44.11792], [-76.55539, 44.15141], [-76.71386, 44.35366], [-76.74215, 44.392], [-76.99287, 44.62437], [-77.17517, 44.77593], [-77.20199, 44.86725], [-77.20274, 44.90993]]], "type": "Polygon"}, "properties": {"name": "County of Frontenac", "no_changes": true, "slug": "frontenac"}, "type": "Feature"}, {"geometry": {"coordinates": [[[-78.64876, 44.78103], [-78.64718, 44.78314], [-78.55116, 44.81811], [-78.369, 44.85908], [-78.17621, 44.89569], [-78.14201, 44.90053], [-78.00299, 44.88842], [-77.9428, 44.87347], [-77.91863, 44.83172], [-77.8967, 44.77478], [-77.80973, 44.59095], [-77.80091, 44.57822], [-77.73829, 44.45579], [-77.76587, 44.4308], [-77.9314, 44.32814], [-77.96978, 44.29803], [-78.05032, 44.26397], [-78.22093, 44.15986], [-78.26579, 44.12922], [-78.42582, 44.10429], [-78.52107, 44.11085], [-78.57833, 44.23969], [-78.48651, 44.42695], [-78.48874, 44.44065], [-78.54604, 44.55688], [-78.5827, 44.63473], [-78.64876, 44.78103]]], "type": "Polygon"}, "properties": {"name": "County of Peterborough", "no_changes": false, "slug": "peterborough-county"}, "type": "Feature"}, {"geometry": {"coordinates": [[[-76.48181, 44.72859], [-76.45804, 44.75651], [-76.44785, 44.75794], [-76.14618, 44.84476], [-76.08193, 44.87949], [-76.05692, 44.89161], [-75.79723, 44.98169], [-75.61508, 45.10715], [-75.53795, 45.01893], [-75.36288, 44.80124], [-75.37668, 44.78765], [-75.4817, 44.72353], [-75.61456, 44.63275], [-75.84172, 44.42076], [-75.91382, 44.36934], [-75.97146, 44.34339], [-76.09265, 44.30463], [-76.15866, 44.28657], [-76.22702, 44.31596], [-76.23458, 44.32527], [-76.3889, 44.59874], [-76.48078, 44.68156], [-76.48181, 44.72859]]], "type": "Polygon"}, "properties": {"name": "United Counties of Leeds and Grenville", "no_changes": true, "slug": "leeds-grenville"}, "type": "Feature"}, {"geometry": {"coordinates": [[[-81.72572, 43.7367], [-81.74291, 44.0529], [-81.53155, 43.96714], [-81.24444, 43.94849], [-81.18899, 43.95812], [-80.99993, 43.98499], [-80.98465, 43.95468], [-80.97366, 43.90743], [-80.9662, 43.82606], [-81.10616, 43.66808], [-81.13321, 43.63583], [-81.16294, 43.62058], [-81.30242, 43.35053], [-81.30993, 43.32871], [-81.34213, 43.29003], [-81.3719, 43.26765], [-81.69083, 43.24613], [-81.71762, 43.24299], [-81.76641, 43.24238], [-81.75865, 43.31784], [-81.71502, 43.47461], [-81.71849, 43.64415], [-81.72567, 43.6994], [-81.72572, 43.7367]]], "type": "Polygon"}, "properties": {"name": "County of Huron", "no_changes": false, "slug": "huron"}, "type": "Feature"}, {"geometry": {"coordinates": [[[-77.46348, 45.00521], [-77.4892, 45.06389], [-77.37136, 45.19111], [-77.21246, 45.23309], [-77.0836, 44.99487], [-77.07792, 44.97715], [-76.88778, 44.56592], [-76.82432, 44.50088], [-76.75227, 44.40489], [-76.70902, 44.34454], [-76.6512, 44.26012], [-76.629, 44.22437], [-76.63439, 44.1872], [-76.63867, 44.16767], [-76.69902, 44.11262], [-77.05048, 44.04835], [-77.05667, 44.05117], [-77.07555, 44.07583], [-77.14027, 44.39788], [-77.23197, 44.61813], [-77.2483, 44.65083], [-77.44548, 44.9719], [-77.46348, 45.00521]]], "type": "Polygon"}, "properties": {"name": "County of Lennox and Addington", "no_changes": true, "slug": "lennox-addington"}, "type": "Feature"}, {"geometry": {"coordinates": [[[-75.58429, 45.0789], [-75.56728, 45.0964], [-75.55197, 45.10327], [-75.33626, 45.18844], [-75.22249, 45.23164], [-74.97712, 45.31589], [-74.68693, 45.46516], [-74.60347, 45.48703], [-74.56538, 45.48183], [-74.45421, 45.37974], [-74.34473, 45.2049], [-74.36097, 45.19137], [-74.53774, 45.06382], [-74.61843, 45.03571], [-74.63003, 45.0336], [-74.65915, 45.03005], [-74.88237, 45.0127], [-75.04032, 44.94977], [-75.20123, 44.88314], [-75.36129, 44.80367], [-75.40607, 44.85484], [-75.564, 45.04898], [-75.58429, 45.0789]]], "type": "Polygon"}, "properties": {"name": "United Counties of Stormont, Dundas and Glengarry", "no_changes": false, "slug": "sdg"}, "type": "Feature"}, {"geometry": {"coordinates": [[[-80.98011, 43.93744], [-80.99013, 43.98121], [-80.95126, 43.99103], [-80.87332, 43.99999], [-80.73129, 43.99379], [-80.55284, 44.00128], [-80.45136, 44.02305], [-80.40452, 43.88084], [-80.15964, 43.8434], [-80.1272, 43.85197], [-79.97808, 43.74108], [-79.98302, 43.72213], [-79.98562, 43.71977], [-80.03451, 43.47097], [-80.08544, 43.4172], [-80.26324, 43.38815], [-80.26971, 43.38825], [-80.27474, 43.40074], [-80.35828, 43.51831], [-80.36824, 43.53613], [-80.6068, 43.59831], [-80.6237, 43.5956], [-80.75532, 43.64885], [-80.83567, 43.68294], [-80.9405, 43.82387], [-80.98011, 43.93744]]], "type": "Polygon"}, "properties": {"name": "County of Wellington", "no_changes": true, "slug": "wellington"}, "type": "Feature"}, {"geometry": {"coordinates": [[[-78.93487, 44.18431], [-79.20638, 44.79628], [-79.20238, 44.7984], [-79.09158, 44.8097], [-78.88758, 44.76307], [-78.6815, 44.78689], [-78.65716, 44.79165], [-78.64911, 44.78016], [-78.61835, 44.71138], [-78.52744, 44.54948], [-78.45054, 44.34458], [-78.42881, 44.29584], [-78.42783, 44.29068], [-78.52936, 44.11916], [-78.56327, 44.09142], [-78.59743, 44.08131], [-78.64109, 44.07075], [-78.69999, 44.08188], [-78.71698, 44.11239], [-78.93096, 44.18406], [-78.93487, 44.18431]]], "type": "Polygon"}, "properties": {"name": "City of Kawartha Lakes", "no_changes": false, "slug": "kawartha-lakes"}, "type": "Feature"}, {"geometry": {"coordinates": [[[-82.41777, 42.99864], [-82.3826, 43.0143], [-82.31886, 43.02334], [-82.1485, 43.09185], [-82.00794, 43.20947], [-81.89493, 43.23837], [-81.769, 43.31044], [-81.75994, 43.31738], [-81.74432, 43.31089], [-81.77673, 43.25728], [-81.78454, 43.23955], [-81.78982, 43.06209], [-81.79066, 42.86268], [-81.84668, 42.70398], [-81.8474, 42.67253], [-81.86316, 42.66489], [-81.91336, 42.65216], [-82.04362, 42.6272], [-82.14069, 42.62835], [-82.25484, 42.62792], [-82.33314, 42.62941], [-82.45729, 42.56241], [-82.54413, 42.56122], [-82.5061, 42.66447], [-82.47667, 42.81353], [-82.4562, 42.90988], [-82.45231, 42.92149], [-82.41777, 42.99864]]], "type": "Polygon"}, "properties": {"name": "County of Lambton", "no_changes": true, "slug": "lambton"}, "type": "Feature"}, {"geometry": {"coordinates": [[[-76.30784, 45.37447], [-76.33236, 45.42411], [-76.22997, 45.49748], [-76.2013, 45.51559], [-76.13904, 45.51475], [-76.0962, 45.50965], [-76.00148, 45.4791], [-75.67891, 45.4516], [-75.66234, 45.45548], [-75.49145, 45.50564], [-75.44889, 45.51672], [-75.38449, 45.52282], [-75.34909, 45.52288], [-75.32447, 45.50621], [-75.28901, 45.41253], [-75.28413, 45.35914], [-75.45248, 45.15943], [-75.55224, 45.10385], [-75.69414, 45.04213], [-75.84385, 45.00041], [-76.00228, 45.14177], [-76.20758, 45.30601], [-76.30784, 45.37447]]], "type": "Polygon"}, "properties": {"name": "City of Ottawa", "no_changes": false, "slug": "ottawa"}, "type": "Feature"}, {"geometry": {"coordinates": [[[-81.50762, 46.43818], [-81.43055, 46.61321], [-81.39507, 46.64822], [-81.3916, 46.65087], [-81.34041, 46.67564], [-81.22938, 46.64421], [-81.10909, 46.72588], [-81.06158, 46.84085], [-81.02738, 46.85476], [-80.93049, 46.71615], [-80.83791, 46.74267], [-80.73022, 46.79057], [-80.60228, 46.77113], [-80.57281, 46.72828], [-80.56832, 46.71959], [-80.57762, 46.65032], [-80.69977, 46.52432], [-80.69331, 46.44774], [-80.71043, 46.4126], [-80.71978, 46.40311], [-80.74256, 46.39317], [-80.83014, 46.36436], [-80.8649, 46.36413], [-80.94949, 46.37104], [-81.0748, 46.35081], [-81.11065, 46.35802], [-81.25242, 46.37994], [-81.31004, 46.2189], [-81.43735, 46.24222], [-81.52366, 46.29217], [-81.54167, 46.31291], [-81.57941, 46.38478], [-81.50762, 46.43818]]], "type": "Polygon"}, "properties": {"name": "City of Greater Sudbury", "no_changes": false, "slug": "greater-sudbury"}, "type": "Feature"}, {"geometry": {"coordinates": [[[-79.29378, 44.20655], [-79.21729, 44.45228], [-79.15318, 44.4954], [-79.11321, 44.50755], [-79.09528, 44.51081], [-79.07113, 44.48968], [-79.03587, 44.3518], [-78.7677, 44.21871], [-78.53446, 44.03062], [-78.50233, 44.01449], [-78.48091, 43.98824], [-78.44961, 43.92251], [-78.45201, 43.9111], [-78.48578, 43.89778], [-78.67864, 43.88377], [-78.85515, 43.85474], [-79.11757, 43.79796], [-79.11947, 43.79839], [-79.1542, 43.82127], [-79.18724, 43.89522], [-79.29989, 44.17156], [-79.29378, 44.20655]]], "type": "Polygon"}, "properties": {"name": "Regional Municipality of Durham", "no_changes": false, "slug": "durham"}, "type": "Feature"}, {"geometry": {"coordinates": [[[-82.47557, 42.6079], [-82.48055, 42.6288], [-82.46824, 42.63004], [-82.45091, 42.63071], [-82.42014, 42.62966], [-82.23017, 42.63014], [-82.15742, 42.62822], [-81.96839, 42.65052], [-81.9081, 42.64933], [-81.86068, 42.64159], [-81.84786, 42.63709], [-81.73612, 42.52715], [-81.69189, 42.47853], [-81.68934, 42.46633], [-81.696, 42.45522], [-81.84506, 42.26532], [-81.91218, 42.25849], [-81.91817, 42.2589], [-82.11905, 42.23801], [-82.18119, 42.20714], [-82.23135, 42.18487], [-82.46497, 42.06772], [-82.46697, 42.0945], [-82.44757, 42.32403], [-82.4138, 42.44875], [-82.46617, 42.586], [-82.47557, 42.6079]]], "type": "Polygon"}, "properties": {"name": "Municipality of Chatham-Kent", "no_changes": false, "slug": "chatham-kent"}, "type": "Feature"}, {"geometry": {"coordinates": [[[-81.80182, 42.58158], [-81.81501, 42.60308], [-81.75415, 42.64564], [-81.66617, 42.69773], [-81.5178, 42.76223], [-81.4751, 42.77617], [-81.364, 42.8087], [-81.10807, 42.89027], [-80.90384, 42.91186], [-80.76494, 42.84594], [-80.7223, 42.7942], [-80.71947, 42.78476], [-80.71782, 42.77377], [-80.72098, 42.62633], [-80.72612, 42.6245], [-81.07404, 42.6616], [-81.21606, 42.65928], [-81.46863, 42.58361], [-81.65308, 42.48628], [-81.67968, 42.48529], [-81.80182, 42.58158]]], "type": "Polygon"}, "properties": {"name": "County of Elgin", "no_changes": true, "slug": "elgin"}, "type": "Feature"}, {"geometry": {"coordinates": [[[-79.73268, 43.10025], [-79.71415, 43.1436], [-79.62362, 43.21576], [-79.56358, 43.20581], [-79.4205, 43.19755], [-79.21184, 43.22613], [-79.15147, 43.24793], [-79.0935, 43.26033], [-79.06749, 43.25667], [-79.06109, 43.25391], [-79.0537, 43.16591], [-79.01833, 43.03714], [-78.93342, 42.94594], [-78.91703, 42.93322], [-78.91433, 42.92771], [-78.90982, 42.91091], [-78.92438, 42.8908], [-78.93106, 42.88581], [-79.09032, 42.84298], [-79.27352, 42.87216], [-79.34912, 42.85941], [-79.38218, 42.86142], [-79.43701, 42.87604], [-79.58473, 42.99161], [-79.72096, 43.05009], [-79.73268, 43.10025]]], "type": "Polygon"}, "properties": {"name": "City of Niagara Falls", "no_changes": false, "slug": "niagara-falls"}, "type": "Feature"}, {"geometry": {"coordinates": [[[-79.53822, 44.14726], [-79.49043, 44.28234], [-79.46985, 44.30229], [-79.45013, 44.31042], [-79.25099, 44.35768], [-79.20555, 44.34576], [-79.19082, 44.3363], [-79.18448, 44.25784], [-79.19391, 44.25785], [-79.29633, 44.14013], [-79.26584, 44.05], [-79.26074, 44.04357], [-79.22368, 43.97624], [-79.18458, 43.8862], [-79.20596, 43.86209], [-79.23935, 43.84123], [-79.24703, 43.83835], [-79.37073, 43.80925], [-79.59637, 43.76015], [-79.65501, 43.78492], [-79.68175, 43.82632], [-79.7549, 43.96676], [-79.74701, 43.97889], [-79.68273, 44.00839], [-79.67345, 44.00878], [-79.59521, 44.0363], [-79.53822, 44.14726]]], "type": "Polygon"}, "properties": {"name": "Regional Municipality of York", "no_changes": false, "slug": "york"}, "type": "Feature"}, {"geometry": {"coordinates": [[[-80.3929, 44.132], [-80.4212, 44.2016], [-80.4166, 44.2057], [-80.3566, 44.2262], [-80.2175, 44.2567], [-80.0394, 44.2937], [-80.022, 44.2462], [-79.9744, 44.0444], [-79.9509, 43.9514], [-79.9676, 43.9468], [-80.004, 43.9397], [-80.0706, 43.9169], [-80.1426, 43.859], [-80.2487, 43.7637], [-80.2648, 43.7709], [-80.3997, 43.8605], [-80.4369, 44.0198], [-80.3929, 44.132]]], "type": "Polygon"}, "properties": {"name": "County of Dufferin", "no_changes": true, "slug": "dufferin"}, "type": "Feature"}, {"geometry": {"coordinates": [[[-80.01997, 43.78984], [-80.08979, 43.86224], [-80.03223, 43.92182], [-79.96865, 43.94702], [-79.88192, 43.96558], [-79.81009, 43.9775], [-79.7737, 43.96833], [-79.73935, 43.92209], [-79.7006, 43.85635], [-79.60687, 43.69392], [-79.56931, 43.62384], [-79.54837, 43.58921], [-79.54963, 43.58625], [-79.55479, 43.57666], [-79.60636, 43.51041], [-79.64429, 43.4971], [-79.70758, 43.52269], [-79.74001, 43.53711], [-79.79191, 43.57852], [-79.84851, 43.6467], [-79.91078, 43.69252], [-79.94575, 43.72261], [-80.01997, 43.78984]]], "type": "Polygon"}, "properties": {"name": "Regional Municipality of Peel", "no_changes": true, "slug": "peel-region"}, "type": "Feature"}, {"geometry": {"coordinates": [[[-80.23327, 43.33332], [-80.18033, 43.39285], [-80.04067, 43.43787], [-80.01133, 43.43305], [-79.96391, 43.41982], [-79.78902, 43.28771], [-79.68014, 43.23265], [-79.62839, 43.22771], [-79.62895, 43.2165], [-79.63158, 43.20679], [-79.66727, 43.14951], [-79.75453, 43.05106], [-79.84941, 43.08968], [-79.90293, 43.10327], [-79.96174, 43.13484], [-80.0917, 43.17833], [-80.16829, 43.20651], [-80.19097, 43.22009], [-80.22661, 43.29195], [-80.23327, 43.33332]]], "type": "Polygon"}, "properties": {"name": "City of Hamilton", "no_changes": false, "slug": "hamilton"}, "type": "Feature"}, {"geometry": {"coordinates": [[[-80.55406, 43.00706], [-80.60738, 43.14881], [-80.60428, 43.15152], [-80.53967, 43.16211], [-80.47054, 43.2649], [-80.45404, 43.26958], [-80.24897, 43.30453], [-80.24179, 43.29873], [-80.2238, 43.26408], [-80.14529, 43.19008], [-80.0136, 43.14241], [-79.98518, 43.13085], [-80.00683, 43.09136], [-80.04867, 43.09183], [-80.06414, 43.09575], [-80.16373, 43.0904], [-80.24298, 43.03249], [-80.53232, 42.98678], [-80.54414, 42.99619], [-80.55406, 43.00706]]], "type": "Polygon"}, "properties": {"name": "County of Brant", "no_changes": false, "slug": "brant"}, "type": "Feature"}, {"geometry": {"coordinates": [[[-79.62299, 43.72974], [-79.61452, 43.75154], [-79.60155, 43.75775], [-79.23248, 43.84028], [-79.14365, 43.8031], [-79.12401, 43.79175], [-79.12895, 43.78304], [-79.13789, 43.77462], [-79.28089, 43.6718], [-79.38134, 43.61379], [-79.50813, 43.59435], [-79.54112, 43.58715], [-79.58411, 43.63187], [-79.6222, 43.72339], [-79.62299, 43.72974]]], "type": "Polygon"}, "properties": {"name": "City of Toronto", "no_changes": false, "slug": "toronto"}, "type": "Feature"}, {"geometry": {"coordinates": [[[-77.72, 44.1633], [-77.75601, 44.23552], [-77.68134, 44.2637], [-77.49161, 44.30965], [-77.47247, 44.31215], [-77.44147, 44.237], [-77.41608, 44.19101], [-77.43018, 44.12933], [-77.50632, 44.10758], [-77.54732, 44.09181], [-77.58433, 44.04617], [-77.60406, 44.02561], [-77.64, 44.02011], [-77.65315, 44.02198], [-77.66426, 44.03995], [-77.6881, 44.09072], [-77.72, 44.1633]]], "type": "Polygon"}, "properties": {"name": "City of Quinte West", "no_changes": false, "slug": "quinte-west"}, "type": "Feature"}, {"geometry": {"coordinates": [[[-76.69725, 44.3315], [-76.69961, 44.3508], [-76.69857, 44.35174], [-76.57025, 44.35693], [-76.50106, 44.34106], [-76.43667, 44.34397], [-76.29424, 44.43765], [-76.27709, 44.45028], [-76.24879, 44.45486], [-76.2352, 44.3196], [-76.23921, 44.30837], [-76.42698, 44.23754], [-76.52317, 44.21479], [-76.56163, 44.20986], [-76.56617, 44.20988], [-76.62873, 44.22479], [-76.69725, 44.3315]]], "type": "Polygon"}, "properties": {"name": "City of Kingston", "no_changes": false, "slug": "kingston"}, "type": "Feature"}, {"geometry": {"coordinates": [[[-80.1451, 43.55778], [-80.15194, 43.56798], [-80.09651, 43.61839], [-80.08477, 43.62728], [-80.0162, 43.57878], [-79.89977, 43.55745], [-79.82026, 43.56902], [-79.79097, 43.57096], [-79.7847, 43.57014], [-79.75905, 43.55341], [-79.7351, 43.53578], [-79.73323, 43.53364], [-79.73195, 43.52783], [-79.79807, 43.44812], [-79.81341, 43.43761], [-79.83335, 43.44957], [-79.94408, 43.43155], [-79.95215, 43.42426], [-79.96467, 43.42204], [-80.13046, 43.54114], [-80.1451, 43.55778]]], "type": "Polygon"}, "properties": {"name": "Town of Milton", "no_changes": false, "slug": "milton"}, "type": "Feature"}, {"geometry": {"coordinates": [[[-89.42552, 48.4182], [-89.42625, 48.50304], [-89.40383, 48.50876], [-89.36994, 48.5145], [-89.32526, 48.51312], [-89.29645, 48.51491], [-89.24921, 48.5144], [-89.18305, 48.50579], [-89.15661, 48.48933], [-89.15259, 48.47524], [-89.18178, 48.45498], [-89.19411, 48.44925], [-89.21837, 48.39302], [-89.20195, 48.33021], [-89.20508, 48.31628], [-89.21846, 48.30179], [-89.22749, 48.30428], [-89.23651, 48.30879], [-89.24509, 48.31893], [-89.26289, 48.33387], [-89.31211, 48.32039], [-89.35603, 48.29343], [-89.38456, 48.29814], [-89.3881, 48.35817], [-89.41713, 48.40007], [-89.42552, 48.4182]]], "type": "Polygon"}, "properties": {"name": "City of Thunder Bay", "no_changes": true, "slug": "thunder-bay"}, "type": "Feature"}, {"geometry": {"coordinates": [[[-81.37151, 42.96841], [-81.35788, 43.0043], [-81.33757, 43.02372], [-81.2924, 43.04398], [-81.25207, 43.05571], [-81.23075, 43.05594], [-81.203, 43.05057], [-81.1689, 43.03273], [-81.15593, 43.03512], [-81.13988, 43.01536], [-81.1345, 42.98825], [-81.12209, 42.96957], [-81.12154, 42.95884], [-81.13801, 42.94621], [-81.14253, 42.90722], [-81.1428, 42.87185], [-81.20094, 42.8655], [-81.24231, 42.85052], [-81.26074, 42.84076], [-81.27031, 42.83885], [-81.27949, 42.86074], [-81.30274, 42.88847], [-81.31795, 42.89204], [-81.33591, 42.91328], [-81.3594, 42.95083], [-81.37219, 42.96101], [-81.37151, 42.96841]]], "type": "Polygon"}, "properties": {"name": "City of London", "no_changes": true, "slug": "london"}, "type": "Feature"}, {"geometry": {"coordinates": [[[-79.86668, 43.69461], [-79.83171, 43.7363], [-79.78581, 43.76831], [-79.71038, 43.83444], [-79.66566, 43.79565], [-79.65622, 43.77959], [-79.64115, 43.73857], [-79.65793, 43.72489], [-79.68938, 43.6792], [-79.71925, 43.65288], [-79.75265, 43.62811], [-79.79179, 43.60707], [-79.80145, 43.61049], [-79.84058, 43.64589], [-79.85635, 43.65198], [-79.87276, 43.6638], [-79.86668, 43.69461]]], "type": "Polygon"}, "properties": {"name": "City of Brampton", "no_changes": false, "slug": "brampton"}, "type": "Feature"}, {"geometry": {"coordinates": [[[-79.94615, 43.40847], [-79.95507, 43.4182], [-79.91681, 43.45614], [-79.90671, 43.46404], [-79.86999, 43.45895], [-79.83113, 43.42997], [-79.80754, 43.43187], [-79.72702, 43.37328], [-79.72672, 43.37078], [-79.72722, 43.36941], [-79.75006, 43.35395], [-79.77241, 43.3353], [-79.79776, 43.3023], [-79.83404, 43.30653], [-79.87039, 43.28825], [-79.88503, 43.28827], [-79.91112, 43.30887], [-79.89107, 43.32352], [-79.88245, 43.36489], [-79.88366, 43.36822], [-79.94615, 43.40847]]], "type": "Polygon"}, "properties": {"name": "City of Burlington", "no_changes": true, "slug": "burlington"}, "type": "Feature"}, {"geometry": {"coordinates": [[[-82.45521, 42.91283], [-82.41591, 43.00114], [-82.38628, 43.01327], [-82.37699, 43.01554], [-82.23012, 43.03794], [-82.23342, 42.95493], [-82.23848, 42.9338], [-82.25763, 42.92222], [-82.33118, 42.92302], [-82.37555, 42.93055], [-82.44975, 42.91269], [-82.45521, 42.91283]]], "type": "Polygon"}, "properties": {"name": "City of Sarnia", "no_changes": true, "slug": "sarnia"}, "type": "Feature"}, {"geometry": {"coordinates": [[[-83.08694, 42.29248], [-83.07414, 42.30744], [-83.05685, 42.31545], [-83.02004, 42.32467], [-82.99495, 42.32634], [-82.97554, 42.33034], [-82.93996, 42.34271], [-82.89786, 42.33363], [-82.89608, 42.33171], [-82.89178, 42.31468], [-82.89659, 42.30554], [-82.90509, 42.27859], [-82.90473, 42.26111], [-82.91333, 42.24523], [-82.94241, 42.25389], [-82.96438, 42.247], [-82.98719, 42.2345], [-82.99748, 42.23671], [-83.02514, 42.24675], [-83.04536, 42.25256], [-83.078, 42.24867], [-83.1003, 42.26605], [-83.08694, 42.29248]]], "type": "Polygon"}, "properties": {"name": "City of Windsor", "no_changes": true, "slug": "windsor"}, "type": "Feature"}, {"geometry": {"coordinates": [[[-80.56273, 43.42565], [-80.56134, 43.43584], [-80.51929, 43.45637], [-80.49256, 43.47741], [-80.47889, 43.49806], [-80.47194, 43.49961], [-80.45948, 43.48193], [-80.43495, 43.47956], [-80.39936, 43.45338], [-80.39759, 43.45046], [-80.39937, 43.44637], [-80.38582, 43.40863], [-80.38513, 43.4025], [-80.41133, 43.37795], [-80.41983, 43.3733], [-80.44247, 43.36507], [-80.45208, 43.3662], [-80.48504, 43.37658], [-80.51333, 43.37363], [-80.53707, 43.39956], [-80.55448, 43.4154], [-80.56273, 43.42565]]], "type": "Polygon"}, "properties": {"name": "City of Kitchener", "no_changes": false, "slug": "kitchener"}, "type": "Feature"}, {"geometry": {"coordinates": [[[-79.78762, 43.45597], [-79.77144, 43.48182], [-79.74961, 43.49455], [-79.7137, 43.52009], [-79.68253, 43.51948], [-79.6547, 43.50271], [-79.62608, 43.48125], [-79.62776, 43.47818], [-79.66961, 43.43916], [-79.6863, 43.41802], [-79.69215, 43.40499], [-79.71727, 43.3778], [-79.72537, 43.37267], [-79.73707, 43.38139], [-79.7531, 43.39686], [-79.77878, 43.41407], [-79.80109, 43.4328], [-79.79788, 43.45172], [-79.78762, 43.45597]]], "type": "Polygon"}, "properties": {"name": "Town of Oakville", "no_changes": true, "slug": "oakville"}, "type": "Feature"}, {"geometry": {"coordinates": [[[-79.74467, 44.39291], [-79.73735, 44.40118], [-79.71859, 44.41494], [-79.70457, 44.42193], [-79.7004, 44.42248], [-79.65002, 44.44137], [-79.64609, 44.42311], [-79.6195, 44.41833], [-79.64488, 44.40994], [-79.65071, 44.39604], [-79.64233, 44.37355], [-79.62481, 44.37105], [-79.60465, 44.36642], [-79.59226, 44.36871], [-79.59105, 44.36746], [-79.59546, 44.34428], [-79.64172, 44.33322], [-79.65887, 44.31641], [-79.67334, 44.31231], [-79.69839, 44.30192], [-79.70337, 44.30056], [-79.7291, 44.2999], [-79.74083, 44.3463], [-79.73942, 44.37403], [-79.74486, 44.38147], [-79.74467, 44.39291]]], "type": "Polygon"}, "properties": {"name": "City of Barrie", "no_changes": true, "slug": "barrie"}, "type": "Feature"}, {"geometry": {"coordinates": [[[-80.40727, 43.4202], [-80.4043, 43.43617], [-80.40133, 43.43908], [-80.35375, 43.45207], [-80.33986, 43.45974], [-80.32891, 43.45871], [-80.30546, 43.46322], [-80.29786, 43.45524], [-80.26945, 43.38547], [-80.27369, 43.36807], [-80.25417, 43.34799], [-80.25208, 43.34186], [-80.27209, 43.33799], [-80.31174, 43.33449], [-80.32901, 43.33344], [-80.33402, 43.33473], [-80.34005, 43.3392], [-80.34888, 43.35606], [-80.36872, 43.37786], [-80.40803, 43.37823], [-80.39671, 43.38303], [-80.38961, 43.39398], [-80.40727, 43.4202]]], "type": "Polygon"}, "properties": {"name": "City of Cambridge", "no_changes": true, "slug": "cambridge"}, "type": "Feature"}, {"geometry": {"coordinates": [[[-80.34277, 43.17052], [-80.31348, 43.19912], [-80.26535, 43.20726], [-80.23589, 43.19291], [-80.22552, 43.19506], [-80.21234, 43.17795], [-80.19039, 43.16942], [-80.19701, 43.14796], [-80.22429, 43.13406], [-80.23939, 43.12198], [-80.26938, 43.10254], [-80.3033, 43.10225], [-80.31361, 43.10609], [-80.31524, 43.11085], [-80.3085, 43.12975], [-80.33027, 43.14842], [-80.3329, 43.1483], [-80.34174, 43.1623], [-80.34277, 43.17052]]], "type": "Polygon"}, "properties": {"name": "City of Brantford", "no_changes": false, "slug": "brantford"}, "type": "Feature"}, {"geometry": {"coordinates": [[[-80.3237, 43.5348], [-80.30865, 43.54977], [-80.29926, 43.55315], [-80.28096, 43.56767], [-80.27236, 43.58544], [-80.22531, 43.58347], [-80.20593, 43.56995], [-80.1884, 43.55304], [-80.17207, 43.5139], [-80.16035, 43.505], [-80.177, 43.48348], [-80.21542, 43.48111], [-80.27907, 43.51209], [-80.30709, 43.52037], [-80.3237, 43.5348]]], "type": "Polygon"}, "properties": {"name": "City of Guelph", "no_changes": false, "slug": "guelph"}, "type": "Feature"}, {"geometry": {"coordinates": [[[-80.60488, 43.46113], [-80.60831, 43.47908], [-80.59186, 43.49159], [-80.53286, 43.51242], [-80.48939, 43.52999], [-80.48227, 43.53087], [-80.47725, 43.52399], [-80.4815, 43.48841], [-80.49913, 43.46645], [-80.50505, 43.46159], [-80.54701, 43.44206], [-80.56365, 43.4361], [-80.59109, 43.44889], [-80.60488, 43.46113]]], "type": "Polygon"}, "properties": {"name": "City of Waterloo", "no_changes": true, "slug": "waterloo"}, "type": "Feature"}, {"geometry": {"coordinates": [[[-74.82588, 45.03506], [-74.81767, 45.0405], [-74.70976, 45.08509], [-74.7059, 45.08057], [-74.69363, 45.05927], [-74.68334, 45.05264], [-74.67678, 45.0455], [-74.67229, 45.03881], [-74.66994, 45.03057], [-74.69785, 45.01808], [-74.71361, 45.01428], [-74.78381, 45.00815], [-74.79054, 45.00892], [-74.7902, 45.03327], [-74.79557, 45.04035], [-74.82265, 45.03373], [-74.82588, 45.03506]]], "type": "Polygon"}, "properties": {"name": "City of Cornwall", "no_changes": true, "slug": "cornwall"}, "type": "Feature"}], "type": "FeatureCollection"}</script>
+  <script>
+    (function () {
+      var data = JSON.parse(document.getElementById('city-polys').textContent);
+      var dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var map = L.map('map', { scrollWheelZoom: true });
+      L.tileLayer(
+        'https://{s}.basemaps.cartocdn.com/' + (dark ? 'dark_all' : 'light_all') +
+        '/{z}/{x}/{y}{r}.png',
+        { attribution: '&copy; OpenStreetMap contributors &copy; CARTO', maxZoom: 19 }
+      ).addTo(map);
+
+      function style(f) {
+        var c = f.properties.no_changes ? '#eaa300' : '#0078d4';
+        return { color: c, weight: 1.5, fillColor: c, fillOpacity: 0.18 };
+      }
+      var layer = L.geoJSON(data, {
+        style: style,
+        onEachFeature: function (f, lyr) {
+          lyr.bindTooltip(f.properties.name, { sticky: true });
+          lyr.on('mouseover', function () { lyr.setStyle({ fillOpacity: 0.4, weight: 2 }); });
+          lyr.on('mouseout', function () { layer.resetStyle(lyr); });
+          lyr.on('click', function () { window.location = f.properties.slug + '/index.html'; });
+        }
+      }).addTo(map);
+
+      if (data.features.length) {
+        map.fitBounds(layer.getBounds(), { padding: [20, 20] });
+      } else {
+        map.setView([44.5, -79.5], 6);  // Ontario fallback
+      }
+    })();
+  </script>
+</body>
+
+</html>
