@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>City of Brantford Address Changes — Wednesday, Jun 17, 2026</title>
+  <style>
+    :root {
+      --bg: #fafafa; --surface: #ffffff; --surface2: #f5f5f5; --surface3: #ebebeb;
+      --border: #e0e0e0; --border-strong: #d1d1d1; --text: #242424;
+      --text-secondary: #424242; --text-dim: #616161; --accent: #0078d4;
+      --accent-hover: #106ebe; --accent-bg: #eff6fc; --green: #107c10;
+      --green-bg: #f1faf1; --green-tint: #9fd89f; --red: #c50f1f; --red-bg: #fdf3f4;
+      --red-tint: #eeacb2; --yellow: #eaa300; --yellow-bg: #fefbf4; --yellow-tint: #f9e2ae;
+      --purple: #881798; --purple-bg: #f9f3fb; --teal: #038387; --teal-bg: #f0fafa;
+      --shadow-4: 0 2px 4px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --shadow-8: 0 4px 8px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --card-bg: #ffffff; --card-hover: #f5f5f5; color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1f1f1f; --surface: #292929; --surface2: #333333; --surface3: #3d3d3d;
+        --border: #525252; --border-strong: #666666; --text: #ffffff;
+        --text-secondary: #d6d6d6; --text-dim: #adadad; --accent: #2899f5;
+        --accent-hover: #3aa0f3; --accent-bg: #002848; --green: #54b054;
+        --green-bg: #052505; --green-tint: #107c10; --red: #dc626d; --red-bg: #3b0509;
+        --red-tint: #c50f1f; --yellow: #f2c661; --yellow-bg: #463100; --yellow-tint: #eaa300;
+        --purple: #d29ddb; --purple-bg: #3a1040; --teal: #58c0c4; --teal-bg: #013638;
+        --shadow-4: 0 2px 4px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --shadow-8: 0 4px 8px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --card-bg: #333333; --card-hover: #3d3d3d; color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI Variable','Segoe UI',system-ui,-apple-system,sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.5; padding: 2rem;
+      max-width: 1100px; margin: 0 auto; font-size: 14px; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; color: var(--accent-hover); }
+    .back-link { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 12px;
+      color: var(--text-dim); margin-bottom: 1.5rem; transition: color 0.1s; }
+    .back-link:hover { color: var(--accent); text-decoration: none; }
+    h1 { font-size: 24px; font-weight: 600; margin-bottom: 4px; }
+    .subtitle { color: var(--text-secondary); font-size: 14px; margin-bottom: 12px; }
+    .explainer { color: var(--text-secondary); font-size: 13px; line-height: 1.5;
+      margin-bottom: 24px; padding: 12px 16px; background: var(--surface);
+      border-radius: 8px; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px; margin-bottom: 24px; }
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px;
+      padding: 16px; box-shadow: var(--shadow-4); transition: box-shadow 0.1s; }
+    .card:hover { box-shadow: var(--shadow-8); }
+    .card .label { font-size: 12px; color: var(--text-dim); font-weight: 400; }
+    .card .value { font-size: 28px; font-weight: 600; margin-top: 4px; }
+    .card .value.green { color: var(--green); } .card .value.red { color: var(--red); }
+    .card .value.yellow { color: var(--yellow); } .card .value.accent { color: var(--accent); }
+    .card .value.purple { color: var(--purple); }
+    .card .value.teal { color: var(--teal); }
+    .sparkline { display: block; margin-top: 6px; overflow: visible; opacity: 0.9; }
+    .sparkline-label { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+    .section { margin-bottom: 24px; }
+    .section h2 { font-size: 16px; font-weight: 600; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px; }
+    .badge { font-size: 12px; padding: 2px 8px; border-radius: 999px; font-weight: 600; }
+    .badge-green { background: var(--green-bg); color: var(--green); }
+    .badge-red { background: var(--red-bg); color: var(--red); }
+    .badge-yellow { background: var(--yellow-bg); color: var(--yellow); }
+    .badge-accent { background: var(--accent-bg); color: var(--accent); }
+    .badge-purple { background: var(--purple-bg); color: var(--purple); }
+    .badge-teal { background: var(--teal-bg); color: var(--teal); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface);
+      border-radius: 8px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    thead { background: var(--surface2); }
+    th { text-align: left; padding: 8px 12px; font-weight: 600; color: var(--text-dim);
+      font-size: 12px; cursor: pointer; user-select: none; border-bottom: 1px solid var(--border); }
+    th:hover { color: var(--accent); }
+    td { padding: 8px 12px; border-top: 1px solid var(--border); }
+    tr:hover td { background: var(--surface2); }
+    .old-val { color: var(--red); text-decoration: line-through; }
+    .new-val { color: var(--green); }
+    .arrow-val { color: var(--text-dim); text-align: center; white-space: nowrap; }
+    .map-link { display: inline-flex; align-items: center; margin-left: 0.4em;
+      color: var(--accent); vertical-align: middle; white-space: nowrap; font-size: 12px; }
+    .map-link:hover { color: var(--accent-hover); }
+    .map-link svg { width: 14px; height: 14px; }
+    .change-field { color: var(--yellow); font-weight: 600; }
+    .bar-chart { margin-top: 8px; }
+    .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 12px; }
+    .bar-label { width: 180px; text-align: right; color: var(--text-secondary); flex-shrink: 0;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .bar-track { flex: 1; height: 8px; background: var(--surface2); border-radius: 4px;
+      overflow: hidden; position: relative; }
+    .bar-fill { height: 100%; border-radius: 4px; transition: width 0.15s ease; }
+    .bar-fill.green { background: var(--green); } .bar-fill.red { background: var(--red); }
+    .bar-count { width: 40px; font-size: 12px; color: var(--text-dim); }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+    .empty { color: var(--text-dim); font-style: italic; padding: 16px; }
+    .truncated { color: var(--text-dim); font-size: 12px; margin-top: 8px; }
+    .collapsible-toggle { background: transparent; border: 1px solid var(--border);
+      color: var(--accent); padding: 5px 12px; border-radius: 4px; cursor: pointer;
+      font-size: 12px; font-family: inherit; margin-bottom: 12px; transition: background 0.1s; }
+    .collapsible-toggle:hover { background: var(--surface2); }
+    details.rename-group { background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; margin-bottom: 8px; box-shadow: var(--shadow-4); }
+    details.rename-group summary { padding: 10px 14px; cursor: pointer; font-size: 13px; }
+    details.rename-group[open] summary { border-bottom: 1px solid var(--border); }
+    details.rename-group table { border: none; box-shadow: none; border-radius: 0; }
+    details.rename-group .truncated { padding: 0 14px 10px; margin-top: 0; }
+    .rename-count { color: var(--text-dim); font-size: 12px; margin-left: 6px; }
+    .no-changes-banner { background: var(--green-bg); border: 1px solid var(--green-tint);
+      color: var(--green); padding: 16px; border-radius: 8px; margin-bottom: 24px;
+      text-align: center; font-weight: 600; font-size: 14px; }
+    .baseline-banner { background: var(--accent-bg); border: 1px solid var(--accent);
+      color: var(--accent); padding: 16px; border-radius: 8px; margin-bottom: 24px; font-size: 13px; }
+    .generated-at { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-dim); }
+    .history { font-size: 12.5px; color: var(--text-secondary); white-space: nowrap; }
+    .history .a { color: var(--green); font-weight: 500; }
+    .history .r { color: var(--red); font-weight: 500; }
+    .history .dot { color: var(--text-dim); margin: 0 4px; }
+    .history-none { color: var(--text-dim); font-style: italic; font-size: 12.5px; }
+    .info-wrap { position: relative; display: inline-flex; vertical-align: middle; }
+    .info-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+      height: 18px; padding: 0 8px 0 7px; border-radius: 999px; border: none;
+      color: #fff; background: var(--accent); cursor: help; font-size: 11px; font-weight: 600;
+      font-style: normal; font-family: inherit; line-height: 1; white-space: nowrap; }
+    .info-btn .glyph { font-style: italic; font-weight: 700;
+      font-family: Georgia, 'Times New Roman', serif; }
+    .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn,
+    .info-wrap:focus .info-btn { background: var(--accent-hover); }
+    .info-pop { display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 20;
+      width: 320px; max-width: 80vw; padding: 12px 14px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-8);
+      font-size: 12.5px; font-weight: 400; color: var(--text-secondary); line-height: 1.5; }
+    .info-wrap:hover .info-pop, .info-wrap:focus-within .info-pop,
+    .info-wrap:focus .info-pop { display: block; }
+    .info-pop strong { display: block; color: var(--text); font-size: 12px; margin-bottom: 4px; }
+    .info-pop ul { list-style: none; margin: 0 0 10px; padding: 0; }
+    .info-pop li { padding: 1px 0 1px 14px; position: relative; }
+    .info-pop li::before { content: "·"; position: absolute; left: 4px; color: var(--text-dim); }
+    .info-pop .note { color: var(--text-dim); font-size: 11.5px; margin: 0 0 10px; }
+    .info-pop .muted { color: var(--text-dim); font-style: italic; }
+  </style>
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+
+  <a class="back-link" href="index.html">← Back to City of Brantford reports</a>
+
+  <h1>City of Brantford — Address Changes</h1>
+  <p class="subtitle">
+    Changes between  and Wednesday, Jun 17, 2026
+    · 38,696 total addresses
+  </p>
+
+  
+
+  <div class="cards">
+    <div class="card"><div class="label">Total Addresses</div>
+      <div class="value accent">38,696</div></div>
+    <div class="card"><div class="label">New Addresses</div>
+      <div class="value green">+125</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#107c10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,2.0 37.3,18.0 72.7,18.0 108.0,17.9"/><circle cx="108.0" cy="17.9" r="2" fill="#107c10"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Retired Addresses</div>
+      <div class="value red">−107</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#c50f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 37.3,16.5 72.7,16.8 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#c50f1f"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Updated Addresses <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (STREETNUM)</li><li>Street name (STREETNAME)</li><li>Full address (FULLADDRESS)</li><li>Coordinates (latitude, longitude)</li><li>OBJECTID_1</li><li>POSTALCODE</li><li>STNUMSUFF</li><li>STREETNUMIN</li><li>STREETTYPE</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span></div>
+      <div class="value yellow">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 37.3,18.0 72.7,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Renumbered</div>
+      <div class="value accent">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#0078d4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 37.3,18.0 72.7,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#0078d4"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Street Renames</div>
+      <div class="value purple">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#9141ac" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 37.3,18.0 72.7,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#9141ac"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    
+    <div class="card"><div class="label">Location Adjustments</div>
+      <div class="value" style="color: var(--text-dim)">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#808080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 37.3,18.0 72.7,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#808080"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+  </div>
+
+  
+  <div class="section">
+    <h2>Change Breakdown</h2>
+    <div class="stats-grid">
+      
+      <div class="card"><div class="label">Top Streets by New Addresses</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">STANLEY</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">81</span></div>
+        <div class="bar-row"><span class="bar-label">MELBOURNE</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:16.0%"></div></div>
+          <span class="bar-count">13</span></div>
+        <div class="bar-row"><span class="bar-label">BRISBANE</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:10.0%"></div></div>
+          <span class="bar-count">8</span></div>
+        <div class="bar-row"><span class="bar-label">MCMURRAY</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:10.0%"></div></div>
+          <span class="bar-count">8</span></div>
+        <div class="bar-row"><span class="bar-label">GREY</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:6.0%"></div></div>
+          <span class="bar-count">5</span></div>
+        <div class="bar-row"><span class="bar-label">LYONS</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:4.0%"></div></div>
+          <span class="bar-count">3</span></div>
+      </div></div>
+      
+      <div class="card"><div class="label">Top Streets by Retired Addresses</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">STANLEY</span>
+          <div class="bar-track"><div class="bar-fill red" style="width:100.0%"></div></div>
+          <span class="bar-count">68</span></div>
+        <div class="bar-row"><span class="bar-label">MELBOURNE</span>
+          <div class="bar-track"><div class="bar-fill red" style="width:19.0%"></div></div>
+          <span class="bar-count">13</span></div>
+        <div class="bar-row"><span class="bar-label">BRISBANE</span>
+          <div class="bar-track"><div class="bar-fill red" style="width:12.0%"></div></div>
+          <span class="bar-count">8</span></div>
+        <div class="bar-row"><span class="bar-label">MCMURRAY</span>
+          <div class="bar-track"><div class="bar-fill red" style="width:12.0%"></div></div>
+          <span class="bar-count">8</span></div>
+        <div class="bar-row"><span class="bar-label">GREY</span>
+          <div class="bar-track"><div class="bar-fill red" style="width:7.0%"></div></div>
+          <span class="bar-count">5</span></div>
+        <div class="bar-row"><span class="bar-label">LYONS</span>
+          <div class="bar-track"><div class="bar-fill red" style="width:4.0%"></div></div>
+          <span class="bar-count">3</span></div>
+      </div></div>
+      
+    </div>
+  </div>
+  
+
+  <div class="section">
+    <h2>New Addresses <span class="badge badge-green">125</span></h2>
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-added',0)">Address</th><th onclick="sortTable('t-added',1)">Street</th>
+        <th onclick="sortTable('t-added',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-added">
+        
+        <tr><td>24A BALFOUR ST</td><td>BALFOUR</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.13380&mlon=-80.27252#map=18/43.13380/-80.27252" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>24B BALFOUR ST</td><td>BALFOUR</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.13375&mlon=-80.27257#map=18/43.13375/-80.27257" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>461 BLACKBURN DR</td><td>BLACKBURN</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.11074&mlon=-80.30931#map=18/43.11074/-80.30931" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>32 BRISBANE BLVD</td><td>BRISBANE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14705&mlon=-80.21463#map=18/43.14705/-80.21463" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>34 BRISBANE BLVD</td><td>BRISBANE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14714&mlon=-80.21441#map=18/43.14714/-80.21441" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>38 BRISBANE BLVD</td><td>BRISBANE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14726&mlon=-80.21400#map=18/43.14726/-80.21400" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>44 BRISBANE BLVD</td><td>BRISBANE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14741&mlon=-80.21322#map=18/43.14741/-80.21322" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>46 BRISBANE BLVD</td><td>BRISBANE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14742&mlon=-80.21307#map=18/43.14742/-80.21307" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>48 BRISBANE BLVD</td><td>BRISBANE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14742&mlon=-80.21289#map=18/43.14742/-80.21289" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>50 BRISBANE BLVD</td><td>BRISBANE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14743&mlon=-80.21265#map=18/43.14743/-80.21265" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>52 BRISBANE BLVD</td><td>BRISBANE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14749&mlon=-80.21242#map=18/43.14749/-80.21242" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>273 ELGIN ST</td><td>ELGIN</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14990&mlon=-80.24063#map=18/43.14990/-80.24063" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>416 GREY ST</td><td>GREY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14768&mlon=-80.23640#map=18/43.14768/-80.23640" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>422 GREY ST</td><td>GREY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14769&mlon=-80.23592#map=18/43.14769/-80.23592" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>442 GREY ST</td><td>GREY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14758&mlon=-80.23499#map=18/43.14758/-80.23499" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>446 GREY ST</td><td>GREY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14743&mlon=-80.23365#map=18/43.14743/-80.23365" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>452 GREY ST</td><td>GREY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14757&mlon=-80.23250#map=18/43.14757/-80.23250" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6 LYONS AVE</td><td>LYONS</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15140&mlon=-80.27938#map=18/43.15140/-80.27938" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>20 LYONS AVE</td><td>LYONS</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15190&mlon=-80.27904#map=18/43.15190/-80.27904" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>24 LYONS AVE</td><td>LYONS</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15200&mlon=-80.27896#map=18/43.15200/-80.27896" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3 MCCONKEY CRES</td><td>MCCONKEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14988&mlon=-80.23849#map=18/43.14988/-80.23849" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>20 MCCONKEY CRES</td><td>MCCONKEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14952&mlon=-80.23859#map=18/43.14952/-80.23859" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>17 MCMURRAY ST</td><td>MCMURRAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15018&mlon=-80.27478#map=18/43.15018/-80.27478" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>19 MCMURRAY ST</td><td>MCMURRAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15026&mlon=-80.27474#map=18/43.15026/-80.27474" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>21 MCMURRAY ST</td><td>MCMURRAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15032&mlon=-80.27469#map=18/43.15032/-80.27469" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>23 MCMURRAY ST</td><td>MCMURRAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15038&mlon=-80.27465#map=18/43.15038/-80.27465" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>25 MCMURRAY ST</td><td>MCMURRAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15043&mlon=-80.27461#map=18/43.15043/-80.27461" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>27 MCMURRAY ST</td><td>MCMURRAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15051&mlon=-80.27456#map=18/43.15051/-80.27456" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>38 MCMURRAY ST</td><td>MCMURRAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15106&mlon=-80.27468#map=18/43.15106/-80.27468" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>40 MCMURRAY ST</td><td>MCMURRAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15116&mlon=-80.27461#map=18/43.15116/-80.27461" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>26 MELBOURNE CRES</td><td>MELBOURNE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14793&mlon=-80.21671#map=18/43.14793/-80.21671" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>28 MELBOURNE CRES</td><td>MELBOURNE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14793&mlon=-80.21651#map=18/43.14793/-80.21651" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>30 MELBOURNE CRES</td><td>MELBOURNE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14792&mlon=-80.21630#map=18/43.14792/-80.21630" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>32 MELBOURNE CRES</td><td>MELBOURNE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14791&mlon=-80.21608#map=18/43.14791/-80.21608" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>34 MELBOURNE CRES</td><td>MELBOURNE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14790&mlon=-80.21590#map=18/43.14790/-80.21590" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>36 MELBOURNE CRES</td><td>MELBOURNE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14790&mlon=-80.21572#map=18/43.14790/-80.21572" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>38 MELBOURNE CRES</td><td>MELBOURNE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14789&mlon=-80.21551#map=18/43.14789/-80.21551" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>40 MELBOURNE CRES</td><td>MELBOURNE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14787&mlon=-80.21531#map=18/43.14787/-80.21531" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>44 MELBOURNE CRES</td><td>MELBOURNE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14786&mlon=-80.21494#map=18/43.14786/-80.21494" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>52 MELBOURNE CRES</td><td>MELBOURNE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14781&mlon=-80.21416#map=18/43.14781/-80.21416" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>54 MELBOURNE CRES</td><td>MELBOURNE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14779&mlon=-80.21396#map=18/43.14779/-80.21396" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>56 MELBOURNE CRES</td><td>MELBOURNE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14775&mlon=-80.21378#map=18/43.14775/-80.21378" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>58 MELBOURNE CRES</td><td>MELBOURNE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14765&mlon=-80.21359#map=18/43.14765/-80.21359" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>285 STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15301&mlon=-80.23964#map=18/43.15301/-80.23964" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>139 STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14888&mlon=-80.24208#map=18/43.14888/-80.24208" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>255 STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15201&mlon=-80.24048#map=18/43.15201/-80.24048" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>257 STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15217&mlon=-80.24042#map=18/43.15217/-80.24042" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>267 STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15269&mlon=-80.24040#map=18/43.15269/-80.24040" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>267A STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15294&mlon=-80.24022#map=18/43.15294/-80.24022" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>267B STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15289&mlon=-80.24024#map=18/43.15289/-80.24024" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>267C STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15283&mlon=-80.24024#map=18/43.15283/-80.24024" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>267D STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15279&mlon=-80.24026#map=18/43.15279/-80.24026" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>267E STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15273&mlon=-80.24025#map=18/43.15273/-80.24025" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>267F STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15268&mlon=-80.24027#map=18/43.15268/-80.24027" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>267G STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15263&mlon=-80.24028#map=18/43.15263/-80.24028" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>267H STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15258&mlon=-80.24030#map=18/43.15258/-80.24030" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>267I STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15253&mlon=-80.24029#map=18/43.15253/-80.24029" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>267J STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15249&mlon=-80.24031#map=18/43.15249/-80.24031" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>267K STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15242&mlon=-80.24031#map=18/43.15242/-80.24031" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>267L STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15238&mlon=-80.24033#map=18/43.15238/-80.24033" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>271 STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15222&mlon=-80.23984#map=18/43.15222/-80.23984" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>271A STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15236&mlon=-80.24005#map=18/43.15236/-80.24005" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>271C STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15234&mlon=-80.23994#map=18/43.15234/-80.23994" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>271F STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15227&mlon=-80.23974#map=18/43.15227/-80.23974" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>271G STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15225&mlon=-80.23968#map=18/43.15225/-80.23968" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>271I STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15222&mlon=-80.23954#map=18/43.15222/-80.23954" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>273 STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15193&mlon=-80.23989#map=18/43.15193/-80.23989" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>273A STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15177&mlon=-80.24004#map=18/43.15177/-80.24004" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>273B STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15182&mlon=-80.24003#map=18/43.15182/-80.24003" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>273C STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15186&mlon=-80.24001#map=18/43.15186/-80.24001" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>273D STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15191&mlon=-80.23999#map=18/43.15191/-80.23999" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>273E STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15196&mlon=-80.23997#map=18/43.15196/-80.23997" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>273F STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15201&mlon=-80.23996#map=18/43.15201/-80.23996" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>273G STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15205&mlon=-80.23994#map=18/43.15205/-80.23994" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>273H STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15210&mlon=-80.23992#map=18/43.15210/-80.23992" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>275 STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15191&mlon=-80.23974#map=18/43.15191/-80.23974" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>275A STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15203&mlon=-80.23960#map=18/43.15203/-80.23960" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>275B STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15198&mlon=-80.23962#map=18/43.15198/-80.23962" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>275C STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15194&mlon=-80.23963#map=18/43.15194/-80.23963" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>275D STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15189&mlon=-80.23965#map=18/43.15189/-80.23965" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>275E STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15185&mlon=-80.23966#map=18/43.15185/-80.23966" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>275F STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15181&mlon=-80.23967#map=18/43.15181/-80.23967" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>277 STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15193&mlon=-80.23921#map=18/43.15193/-80.23921" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>277A STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15186&mlon=-80.23901#map=18/43.15186/-80.23901" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>277B STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15185&mlon=-80.23909#map=18/43.15185/-80.23909" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>277C STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15186&mlon=-80.23914#map=18/43.15186/-80.23914" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>277D STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15187&mlon=-80.23922#map=18/43.15187/-80.23922" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>277E STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15188&mlon=-80.23928#map=18/43.15188/-80.23928" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>277F STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15187&mlon=-80.23936#map=18/43.15187/-80.23936" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>277G STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15188&mlon=-80.23942#map=18/43.15188/-80.23942" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>279 STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15222&mlon=-80.23934#map=18/43.15222/-80.23934" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>281 STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15268&mlon=-80.23952#map=18/43.15268/-80.23952" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>283 STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15265&mlon=-80.23965#map=18/43.15265/-80.23965" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>283A STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15249&mlon=-80.23967#map=18/43.15249/-80.23967" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>283B STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15253&mlon=-80.23969#map=18/43.15253/-80.23969" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>283C STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15259&mlon=-80.23972#map=18/43.15259/-80.23972" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>283D STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15263&mlon=-80.23974#map=18/43.15263/-80.23974" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>283E STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15268&mlon=-80.23976#map=18/43.15268/-80.23976" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>283F STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15272&mlon=-80.23977#map=18/43.15272/-80.23977" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>283G STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15278&mlon=-80.23978#map=18/43.15278/-80.23978" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>283H STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15283&mlon=-80.23980#map=18/43.15283/-80.23980" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>283I STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15287&mlon=-80.23981#map=18/43.15287/-80.23981" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>285A STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15310&mlon=-80.23957#map=18/43.15310/-80.23957" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>285B STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15307&mlon=-80.23955#map=18/43.15307/-80.23955" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>285C STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15302&mlon=-80.23954#map=18/43.15302/-80.23954" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>285D STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15297&mlon=-80.23952#map=18/43.15297/-80.23952" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>287 STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15315&mlon=-80.23975#map=18/43.15315/-80.23975" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>287A STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15323&mlon=-80.23981#map=18/43.15323/-80.23981" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>287B STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15322&mlon=-80.23974#map=18/43.15322/-80.23974" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>287C STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15320&mlon=-80.23968#map=18/43.15320/-80.23968" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>287D STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15319&mlon=-80.23962#map=18/43.15319/-80.23962" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>289 STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15312&mlon=-80.23997#map=18/43.15312/-80.23997" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>291 STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15355&mlon=-80.24001#map=18/43.15355/-80.24001" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>291A STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15374&mlon=-80.23983#map=18/43.15374/-80.23983" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>291B STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15370&mlon=-80.23984#map=18/43.15370/-80.23984" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>291C STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15366&mlon=-80.23986#map=18/43.15366/-80.23986" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>291D STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15360&mlon=-80.23987#map=18/43.15360/-80.23987" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>291E STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15356&mlon=-80.23989#map=18/43.15356/-80.23989" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>291F STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15352&mlon=-80.23991#map=18/43.15352/-80.23991" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>291G STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15346&mlon=-80.23994#map=18/43.15346/-80.23994" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>291H STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15340&mlon=-80.23998#map=18/43.15340/-80.23998" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>291I STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15336&mlon=-80.24000#map=18/43.15336/-80.24000" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>291J STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15332&mlon=-80.24003#map=18/43.15332/-80.24003" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>291K STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15327&mlon=-80.24004#map=18/43.15327/-80.24004" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>35 STRATFORD TERR</td><td>STRATFORD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12830&mlon=-80.28033#map=18/43.12830/-80.28033" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Retired Addresses <span class="badge badge-red">107</span></h2>
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-removed',0)">Address</th><th onclick="sortTable('t-removed',1)">Street</th>
+        <th onclick="sortTable('t-removed',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-removed">
+        
+        <tr><td>24 BALFOUR ST</td><td>BALFOUR</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.13379&mlon=-80.27253#map=18/43.13379/-80.27253" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>461 BLACKBURN DR</td><td>BLACKBURN</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.11064&mlon=-80.30928#map=18/43.11064/-80.30928" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>32 BRISBANE BLVD</td><td>BRISBANE</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14706&mlon=-80.21466#map=18/43.14706/-80.21466" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>34 BRISBANE BLVD</td><td>BRISBANE</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14716&mlon=-80.21445#map=18/43.14716/-80.21445" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>38 BRISBANE BLVD</td><td>BRISBANE</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14729&mlon=-80.21404#map=18/43.14729/-80.21404" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>44 BRISBANE BLVD</td><td>BRISBANE</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14747&mlon=-80.21325#map=18/43.14747/-80.21325" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>46 BRISBANE BLVD</td><td>BRISBANE</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14747&mlon=-80.21308#map=18/43.14747/-80.21308" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>48 BRISBANE BLVD</td><td>BRISBANE</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14748&mlon=-80.21291#map=18/43.14748/-80.21291" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>50 BRISBANE BLVD</td><td>BRISBANE</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14748&mlon=-80.21266#map=18/43.14748/-80.21266" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>52 BRISBANE BLVD</td><td>BRISBANE</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14755&mlon=-80.21243#map=18/43.14755/-80.21243" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>416 GREY ST</td><td>GREY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14778&mlon=-80.23647#map=18/43.14778/-80.23647" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>422 GREY ST</td><td>GREY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14774&mlon=-80.23615#map=18/43.14774/-80.23615" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>442 GREY ST</td><td>GREY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14816&mlon=-80.23517#map=18/43.14816/-80.23517" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>446 GREY ST</td><td>GREY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14743&mlon=-80.23319#map=18/43.14743/-80.23319" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>452 GREY ST</td><td>GREY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14768&mlon=-80.23245#map=18/43.14768/-80.23245" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6 LYONS AVE</td><td>LYONS</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15143&mlon=-80.27944#map=18/43.15143/-80.27944" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>20 LYONS AVE</td><td>LYONS</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15189&mlon=-80.27905#map=18/43.15189/-80.27905" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>24 LYONS AVE</td><td>LYONS</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15200&mlon=-80.27898#map=18/43.15200/-80.27898" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>17 MCMURRAY ST</td><td>MCMURRAY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15017&mlon=-80.27479#map=18/43.15017/-80.27479" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>19 MCMURRAY ST</td><td>MCMURRAY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15024&mlon=-80.27474#map=18/43.15024/-80.27474" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>21 MCMURRAY ST</td><td>MCMURRAY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15030&mlon=-80.27470#map=18/43.15030/-80.27470" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>23 MCMURRAY ST</td><td>MCMURRAY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15036&mlon=-80.27466#map=18/43.15036/-80.27466" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>25 MCMURRAY ST</td><td>MCMURRAY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15042&mlon=-80.27462#map=18/43.15042/-80.27462" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>27 MCMURRAY ST</td><td>MCMURRAY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15049&mlon=-80.27458#map=18/43.15049/-80.27458" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>38 MCMURRAY ST</td><td>MCMURRAY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15105&mlon=-80.27471#map=18/43.15105/-80.27471" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>40 MCMURRAY ST</td><td>MCMURRAY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15117&mlon=-80.27465#map=18/43.15117/-80.27465" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>26 MELBOURNE CRES</td><td>MELBOURNE</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14795&mlon=-80.21674#map=18/43.14795/-80.21674" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>28 MELBOURNE CRES</td><td>MELBOURNE</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14796&mlon=-80.21656#map=18/43.14796/-80.21656" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>30 MELBOURNE CRES</td><td>MELBOURNE</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14797&mlon=-80.21633#map=18/43.14797/-80.21633" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>32 MELBOURNE CRES</td><td>MELBOURNE</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14794&mlon=-80.21615#map=18/43.14794/-80.21615" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>34 MELBOURNE CRES</td><td>MELBOURNE</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14794&mlon=-80.21593#map=18/43.14794/-80.21593" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>36 MELBOURNE CRES</td><td>MELBOURNE</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14794&mlon=-80.21574#map=18/43.14794/-80.21574" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>38 MELBOURNE CRES</td><td>MELBOURNE</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14792&mlon=-80.21557#map=18/43.14792/-80.21557" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>40 MELBOURNE CRES</td><td>MELBOURNE</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14790&mlon=-80.21531#map=18/43.14790/-80.21531" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>44 MELBOURNE CRES</td><td>MELBOURNE</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14789&mlon=-80.21496#map=18/43.14789/-80.21496" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>52 MELBOURNE CRES</td><td>MELBOURNE</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14787&mlon=-80.21421#map=18/43.14787/-80.21421" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>54 MELBOURNE CRES</td><td>MELBOURNE</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14783&mlon=-80.21398#map=18/43.14783/-80.21398" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>56 MELBOURNE CRES</td><td>MELBOURNE</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14780&mlon=-80.21377#map=18/43.14780/-80.21377" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>58 MELBOURNE CRES</td><td>MELBOURNE</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14768&mlon=-80.21358#map=18/43.14768/-80.21358" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>255 STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15199&mlon=-80.24048#map=18/43.15199/-80.24048" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>257 STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15218&mlon=-80.24035#map=18/43.15218/-80.24035" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>267A STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15291&mlon=-80.24019#map=18/43.15291/-80.24019" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>267B STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15286&mlon=-80.24020#map=18/43.15286/-80.24020" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>267C STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15281&mlon=-80.24021#map=18/43.15281/-80.24021" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>267D STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15277&mlon=-80.24022#map=18/43.15277/-80.24022" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>267E STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15271&mlon=-80.24022#map=18/43.15271/-80.24022" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>267F STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15266&mlon=-80.24024#map=18/43.15266/-80.24024" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>267G STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15260&mlon=-80.24023#map=18/43.15260/-80.24023" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>267H STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15256&mlon=-80.24025#map=18/43.15256/-80.24025" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>267I STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15250&mlon=-80.24025#map=18/43.15250/-80.24025" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>267J STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15246&mlon=-80.24027#map=18/43.15246/-80.24027" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>267K STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15240&mlon=-80.24027#map=18/43.15240/-80.24027" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>267L STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15236&mlon=-80.24029#map=18/43.15236/-80.24029" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>271A STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15235&mlon=-80.24003#map=18/43.15235/-80.24003" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>271C STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15233&mlon=-80.23992#map=18/43.15233/-80.23992" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>271F STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15226&mlon=-80.23973#map=18/43.15226/-80.23973" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>271G STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15225&mlon=-80.23967#map=18/43.15225/-80.23967" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>271I STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15222&mlon=-80.23953#map=18/43.15222/-80.23953" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>273A STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15176&mlon=-80.24004#map=18/43.15176/-80.24004" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>273B STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15181&mlon=-80.24003#map=18/43.15181/-80.24003" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>273C STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15185&mlon=-80.24001#map=18/43.15185/-80.24001" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>273D STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15190&mlon=-80.23999#map=18/43.15190/-80.23999" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>273E STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15195&mlon=-80.23997#map=18/43.15195/-80.23997" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>273F STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15200&mlon=-80.23996#map=18/43.15200/-80.23996" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>273G STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15204&mlon=-80.23994#map=18/43.15204/-80.23994" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>273H STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15209&mlon=-80.23992#map=18/43.15209/-80.23992" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>275A STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15201&mlon=-80.23960#map=18/43.15201/-80.23960" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>275B STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15196&mlon=-80.23962#map=18/43.15196/-80.23962" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>275C STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15192&mlon=-80.23963#map=18/43.15192/-80.23963" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>275D STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15187&mlon=-80.23965#map=18/43.15187/-80.23965" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>275E STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15183&mlon=-80.23966#map=18/43.15183/-80.23966" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>275F STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15179&mlon=-80.23967#map=18/43.15179/-80.23967" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>277A STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15183&mlon=-80.23901#map=18/43.15183/-80.23901" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>277B STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15182&mlon=-80.23908#map=18/43.15182/-80.23908" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>277C STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15183&mlon=-80.23914#map=18/43.15183/-80.23914" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>277D STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15183&mlon=-80.23922#map=18/43.15183/-80.23922" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>277E STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15184&mlon=-80.23928#map=18/43.15184/-80.23928" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>277F STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15184&mlon=-80.23936#map=18/43.15184/-80.23936" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>277G STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15185&mlon=-80.23941#map=18/43.15185/-80.23941" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>283A STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15246&mlon=-80.23969#map=18/43.15246/-80.23969" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>283B STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15251&mlon=-80.23971#map=18/43.15251/-80.23971" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>283C STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15257&mlon=-80.23975#map=18/43.15257/-80.23975" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>283D STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15261&mlon=-80.23976#map=18/43.15261/-80.23976" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>283E STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15265&mlon=-80.23978#map=18/43.15265/-80.23978" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>283F STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15270&mlon=-80.23980#map=18/43.15270/-80.23980" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>283G STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15275&mlon=-80.23980#map=18/43.15275/-80.23980" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>283H STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15279&mlon=-80.23982#map=18/43.15279/-80.23982" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>283I STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15284&mlon=-80.23983#map=18/43.15284/-80.23983" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>285A STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15308&mlon=-80.23956#map=18/43.15308/-80.23956" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>285B STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15304&mlon=-80.23954#map=18/43.15304/-80.23954" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>285C STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15299&mlon=-80.23952#map=18/43.15299/-80.23952" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>285D STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15295&mlon=-80.23950#map=18/43.15295/-80.23950" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>287A STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15326&mlon=-80.23979#map=18/43.15326/-80.23979" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>287B STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15325&mlon=-80.23972#map=18/43.15325/-80.23972" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>287C STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15323&mlon=-80.23966#map=18/43.15323/-80.23966" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>287D STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15321&mlon=-80.23960#map=18/43.15321/-80.23960" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>291A STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15375&mlon=-80.23980#map=18/43.15375/-80.23980" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>291B STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15371&mlon=-80.23982#map=18/43.15371/-80.23982" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>291C STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15367&mlon=-80.23983#map=18/43.15367/-80.23983" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>291D STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15361&mlon=-80.23985#map=18/43.15361/-80.23985" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>291E STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15357&mlon=-80.23987#map=18/43.15357/-80.23987" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>291F STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15353&mlon=-80.23989#map=18/43.15353/-80.23989" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>291G STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15347&mlon=-80.23991#map=18/43.15347/-80.23991" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>291H STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15342&mlon=-80.23996#map=18/43.15342/-80.23996" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>291I STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15337&mlon=-80.23998#map=18/43.15337/-80.23998" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>291J STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15333&mlon=-80.24000#map=18/43.15333/-80.24000" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>291K STANLEY ST</td><td>STANLEY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15329&mlon=-80.24002#map=18/43.15329/-80.24002" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Updated Addresses <span class="badge badge-yellow">0</span>
+      <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (STREETNUM)</li><li>Street name (STREETNAME)</li><li>Full address (FULLADDRESS)</li><li>Coordinates (latitude, longitude)</li><li>OBJECTID_1</li><li>POSTALCODE</li><li>STNUMSUFF</li><li>STREETNUMIN</li><li>STREETTYPE</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span></h2>
+    
+    <p class="empty">No addresses updated.</p>
+  </div>
+
+  <div class="section">
+    <h2>Renumbered Addresses <span class="badge badge-accent">0</span></h2>
+    
+    <p class="empty">No addresses renumbered.</p>
+  </div>
+
+  <div class="section">
+    <h2>Street Renames <span class="badge badge-purple">0</span></h2>
+    <p class="empty">No street renames.</p>
+  </div>
+
+  
+
+  
+
+  
+
+  <div class="section">
+    <h2>Location Adjustments <span class="badge" style="background: var(--surface2); color: var(--text-dim)">0</span></h2>
+    
+    <p class="empty">No location adjustments.</p>
+  </div>
+
+  <div class="generated-at">Report generated Jun 17, 2026 at 12:19 PM · source licence: Open Government Licence - Brantford</div>
+
+  <script>
+    function sortTable(tbodyId, col) {
+      const tbody = document.getElementById(tbodyId);
+      if (!tbody) return;
+      const rows = Array.from(tbody.rows);
+      const dir = tbody.dataset.sortDir === 'asc' ? 'desc' : 'asc';
+      tbody.dataset.sortDir = dir;
+      rows.sort((a, b) => {
+        const av = a.cells[col]?.textContent.trim() || '';
+        const bv = b.cells[col]?.textContent.trim() || '';
+        const an = parseFloat(av), bn = parseFloat(bv);
+        if (!isNaN(an) && !isNaN(bn)) return dir === 'asc' ? an - bn : bn - an;
+        return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+      });
+      rows.forEach(r => tbody.appendChild(r));
+    }
+  </script>
+</body>
+
+</html>
