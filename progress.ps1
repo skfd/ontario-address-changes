@@ -33,6 +33,7 @@ function Get-Stage {
         '^parsed'          { return 'parsed' }
         '^snapshot '       { return 'imported' }
         'already imported' { return 'up-to-date' }
+        'need \d+ to diff' { return 'baseline' }
         'no changes'       { return 'no changes' }
         '^diff '           { return 'diffed' }
         'wrote site'       { return 'reported' }
@@ -50,6 +51,10 @@ function Show-Progress {
     $raw   = Get-Content -Raw -LiteralPath $path
     $total = (Get-ChildItem "$PSScriptRoot\datasets\*.toml" -ErrorAction SilentlyContinue).Count
     $mtime = (Get-Item $path).LastWriteTime
+
+    # run.py prints "wrote site for N dataset(s)" once every city is done, before
+    # the commit/push output. Its presence means nothing is still running.
+    $runDone = $raw -match 'wrote site for \d+ dataset'
 
     # daily-update.ps1 writes "START <iso8601> jobs=<N>" as the log's first line.
     $startTime = $null
@@ -81,12 +86,15 @@ function Show-Progress {
         $slug  = $parts[$k]
         [void]$completed.Add($slug)
         $body  = $parts[$k + 1]
+        # The report summary and git commit/push trail the last city's banner with
+        # no banner of their own; drop them so they aren't read as that city's stage.
+        $body  = ($body -split 'wrote site for \d+ dataset', 2)[0]
         $lines = @($body -split "[`r`n]+" | Where-Object { $_.Trim() -ne '' })
         if ($lines) { $detail = $lines[-1].Trim() } else { $detail = '(starting...)' }
         $stage = Get-Stage $detail
 
-        # The last section in the file is the one currently in progress.
-        $active = ($k -eq $parts.Count - 2)
+        # Until the run finishes, the last section is the one still in progress.
+        $active = (-not $runDone) -and ($k -eq $parts.Count - 2)
         $mark   = if ($active) { '>' } else { ' ' }
         Write-Host ("{0} {1,-16} [{2,-11}] {3}" -f $mark, $slug, $stage, $detail)
     }
