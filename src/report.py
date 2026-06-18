@@ -17,6 +17,8 @@ from collections import Counter
 from datetime import datetime
 
 from jinja2 import Environment, FileSystemLoader
+from shapely import MultiPoint, concave_hull
+from shapely.geometry import mapping, shape
 
 from src import db, diff
 
@@ -30,6 +32,13 @@ MASS_MIN_ROWS = 50         # a same-shaped sweep must cover this many rows...
 MASS_MIN_SHARE = 0.25      # ...and this share of its section to collapse to a summary
 SPARK_KEYS = ("added", "removed", "modified", "modified_location",
               "renumbered", "renamed", "place_name", "status", "boundary")
+
+# Ontario bounding box (lon_min, lat_min, lon_max, lat_max): drops stray
+# geocodes / leftover projected coords that would otherwise distort a hull.
+ONT_BBOX = (-96.0, 41.0, -73.0, 57.0)
+HULL_MAX_POINTS = 6000     # sample cap: a hull from this many points is visually identical
+HULL_RATIO = 0.4           # concave_hull ratio: 0=most detailed, 1=convex
+HULL_SIMPLIFY = 0.0008     # ~80m, trims the embedded coordinate count
 
 _env = Environment(loader=FileSystemLoader(TEMPLATES_DIR), autoescape=True)
 
@@ -441,13 +450,19 @@ def generate_all(datasets):
                 compared_fields=compared, ignored_fields=ignored))
 
         latest = meta[0]
+        # "No changes ever observed": no non-baseline report found any add/remove/
+        # change (baseline-only cities qualify — they have no non-baseline reports).
+        no_changes = sum(m["added"] + m["removed"] + m["changed"]
+                         for m in meta if not m["is_baseline"]) == 0
         card = {
             "slug": ds.slug, "provider": ds.provider, "license_name": ds.license_name,
             "row_count": snaps[-1]["row_count"], "last_date": diff.snap_date(snaps[-1]),
             "added": latest["added"], "removed": latest["removed"], "modified": latest["changed"],
             "highlight": "" if latest["is_baseline"] else " · ".join(latest["phrases"][:2]),
-            "has_changes": not latest["is_baseline"], "report_count": len(meta),
+            "has_changes": not latest["is_baseline"],
+            "report_count": sum(1 for m in meta if m["filename"]),
             "compared_fields": compared, "ignored_fields": ignored,
+            "no_changes": no_changes, "hull": _hull_geometry(ds),
         }
         cities.append(card)
         # Persist the landing card so a single-city update still leaves the
@@ -464,11 +479,35 @@ def generate_all(datasets):
                 cities.append(json.load(f))
 
     cities.sort(key=lambda c: c["provider"])
+    total_addresses = sum(c["row_count"] for c in cities)
+    map_features = _map_features(cities)
     with open(os.path.join(DOCS_DIR, "index.html"), "w", encoding="utf-8") as f:
         f.write(_env.get_template("cities.html").render(
             cities=cities, skipped=_load_skipped(),
-            generated=datetime.now().strftime("%b %d, %Y at %I:%M %p")))
+            total_addresses=total_addresses, map_features=map_features))
     print(f"\nwrote site for {len(cities)} dataset(s) to {DOCS_DIR}")
+
+
+def _map_features(cities):
+    """FeatureCollection of city hulls, smaller polygons drawn last (on top).
+
+    Regional/county datasets geographically swallow a city inside them (e.g.
+    Wellington over Guelph, Peel over Brampton). Drawn as raw overlapping
+    polygons the larger one sits on top and intercepts every click, leaving the
+    inner city unreachable. Emitting features largest-area-first puts the
+    smaller, more specific city on top so it stays clickable, while the
+    container stays clickable everywhere it doesn't overlap. We deliberately do
+    not cut holes: a hull can't tell a separated city excluded from its county
+    (a true gap, e.g. Guelph) from a two-tier region that does include the city
+    (Peel/Brampton), so carving would misrepresent the latter's coverage.
+    """
+    feats = [(shape(c["hull"]).area,
+              {"type": "Feature", "geometry": c["hull"],
+               "properties": {"name": c["provider"], "slug": c["slug"],
+                              "no_changes": bool(c.get("no_changes"))}})
+             for c in cities if c.get("hull")]
+    feats.sort(key=lambda t: -t[0])     # largest first => smaller drawn on top & clickable
+    return {"type": "FeatureCollection", "features": [f for _, f in feats]}
 
 
 def _load_skipped():
@@ -482,3 +521,35 @@ def _load_skipped():
 def _source_url(ds):
     # ArcGIS layers have a browsable HTML page at their REST URL.
     return ds.data_url if ds.access == "arcgis" else ""
+
+
+def _round_coords(obj, ndigits=5):
+    """Round every coordinate float in a GeoJSON geometry to trim payload."""
+    if isinstance(obj, float):
+        return round(obj, ndigits)
+    if isinstance(obj, (list, tuple)):
+        return [_round_coords(x, ndigits) for x in obj]
+    return obj
+
+
+def _hull_geometry(ds):
+    """Concave-hull GeoJSON geometry around a city's active address points.
+
+    We track points, not municipal boundaries, so the observed coverage area is
+    derived as a concave hull of the latest snapshot's points. Returns a GeoJSON
+    geometry dict, or None when there are too few usable points.
+    """
+    lo_lon, lo_lat, hi_lon, hi_lat = ONT_BBOX
+    pts = [(x, y) for (x, y) in db.active_points(ds)
+           if lo_lon <= x <= hi_lon and lo_lat <= y <= hi_lat]
+    if len(pts) < 3:
+        return None
+    if len(pts) > HULL_MAX_POINTS:           # even stride = spatially uniform sample
+        step = len(pts) / HULL_MAX_POINTS
+        pts = [pts[int(i * step)] for i in range(HULL_MAX_POINTS)]
+    hull = concave_hull(MultiPoint(pts), ratio=HULL_RATIO).simplify(HULL_SIMPLIFY)
+    if hull.is_empty or hull.geom_type not in ("Polygon", "MultiPolygon"):
+        return None
+    geom = mapping(hull)
+    geom["coordinates"] = _round_coords(geom["coordinates"])
+    return geom

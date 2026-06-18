@@ -196,3 +196,19 @@ def latest_snapshot_id(conn):
     row = conn.execute(
         "SELECT MAX(id) FROM snapshots WHERE skipped = 0").fetchone()[0]
     return row
+
+
+def active_points(ds):
+    """(lon, lat) for every active row of the latest non-skipped snapshot."""
+    conn = init_db(ds)
+    sid = latest_snapshot_id(conn)
+    if sid is None:
+        conn.close()
+        return []
+    rows = conn.execute(
+        "SELECT longitude, latitude FROM addresses "
+        "WHERE min_snapshot_id <= ? AND max_snapshot_id >= ? "
+        "AND longitude IS NOT NULL AND latitude IS NOT NULL",
+        (sid, sid)).fetchall()
+    conn.close()
+    return [(r["longitude"], r["latitude"]) for r in rows]

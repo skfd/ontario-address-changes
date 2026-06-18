@@ -17,13 +17,18 @@
       --shadow-4:0 2px 4px rgba(0,0,0,0.28),0 0 2px rgba(0,0,0,0.24);
       --shadow-8:0 4px 8px rgba(0,0,0,0.28),0 0 2px rgba(0,0,0,0.24); color-scheme:dark; } }
     * { box-sizing:border-box; margin:0; padding:0; }
+    html, body { height:100%; }
     body { font-family:'Segoe UI Variable','Segoe UI',system-ui,-apple-system,sans-serif;
       background:var(--bg); color:var(--text); line-height:1.5; display:flex; justify-content:center;
-      padding:48px 24px; font-size:14px; -webkit-font-smoothing:antialiased; }
-    main { max-width:760px; width:100%; }
+      padding:16px 24px; font-size:14px; -webkit-font-smoothing:antialiased; overflow:hidden; }
+    main { width:100%; height:100%; }
     a { color:var(--accent); text-decoration:none; } a:hover { text-decoration:underline; color:var(--accent-hover); }
-    .hero { margin-bottom:32px; } .hero h1 { font-size:28px; font-weight:600; margin-bottom:8px; }
+    .hero { margin-bottom:16px; } .hero h1 { font-size:28px; font-weight:600; margin-bottom:8px; }
     .hero .tagline { color:var(--text-secondary); font-size:14px; }
+    .stats { display:flex; flex-wrap:wrap; gap:8px 24px; margin-top:16px; font-size:13px;
+      color:var(--text-dim); }
+    .stats strong { color:var(--text); font-size:15px; font-variant-numeric:tabular-nums; }
+    .stats .src { color:var(--text-dim); } .stats .src:hover { color:var(--accent); }
     .section-header { font-size:12px; font-weight:600; margin-bottom:12px; color:var(--text-dim); }
     .cities { display:flex; flex-direction:column; gap:8px; }
     .city-row { display:flex; align-items:center; gap:8px; }
@@ -48,8 +53,6 @@
     .skip-badge { flex-shrink:0; align-self:flex-start; white-space:nowrap; font-size:11px; font-weight:600;
       padding:3px 9px; border-radius:999px; background:var(--accent-bg); color:var(--accent);
       border:1px solid var(--border); }
-    footer { margin-top:32px; padding-top:16px; border-top:1px solid var(--border); font-size:12px; color:var(--text-dim); }
-    footer a { color:var(--text-dim); } footer a:hover { color:var(--accent); }
     .info-wrap { position:relative; display:inline-flex; vertical-align:middle; }
     .info-btn { display:inline-flex; align-items:center; justify-content:center; gap:4px;
       height:18px; padding:0 8px 0 7px; border-radius:999px; border:none; color:#fff;
@@ -68,20 +71,82 @@
     .info-pop li::before { content:"·"; position:absolute; left:4px; color:var(--text-dim); }
     .info-pop .note { color:var(--text-dim); font-size:11.5px; margin:0 0 10px; }
     .info-pop .muted { color:var(--text-dim); font-style:italic; }
+    .info-pop.wide { width:420px; }
+    .info-pop.wide strong { display:inline; margin:0; font-size:inherit; }
+    .info-pop p { margin:0 0 9px; } .info-pop p:last-child { margin-bottom:0; }
+    .info-pop p.muted { font-size:11.5px; }
+    .info-pop code { font-family:'Cascadia Code',Consolas,monospace; font-size:11.5px; background:var(--surface2);
+      border:1px solid var(--border); border-radius:4px; padding:0 4px; }
+    .panels { display:flex; gap:24px; align-items:stretch; height:100%; min-height:0; }
+    .panel-map { flex:1 1 0; min-width:0; display:flex; flex-direction:column; min-height:0; }
+    .panel-list { flex:0 0 700px; max-width:700px; min-width:0; height:100%; overflow-y:auto;
+      padding-right:8px; }
+    #map { width:100%; flex:1 1 auto; min-height:0; border:1px solid var(--border);
+      border-radius:8px; background:var(--surface2); z-index:0; }
+    .leaflet-container { font:inherit; background:var(--surface2); }
+    .map-legend { display:flex; flex-wrap:wrap; gap:6px 18px; margin-top:10px; font-size:12px;
+      color:var(--text-dim); flex:none; }
+    .map-legend span { display:inline-flex; align-items:center; gap:6px; }
+    .map-legend i { width:14px; height:14px; border-radius:3px; display:inline-block; }
+    .map-title { font-size:12px; font-weight:600; margin-bottom:10px; color:var(--text-dim); flex:none; }
+    @media (max-width:980px) {
+      html, body { height:auto; }
+      body { overflow:auto; padding:16px; }
+      main { height:auto; }
+      .panels { flex-direction:column; height:auto; min-height:0; }
+      .panel-map { flex-basis:auto; }
+      .panel-list { flex-basis:auto; max-width:none; width:100%; height:auto; overflow:visible;
+        padding-right:0; }
+      #map { flex:none; height:60vh; }
+    }
   </style>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 </head>
 
 {% import "_macros.html" as ui %}
 
 <body>
   <main>
+    <div class="panels">
+    <div class="panel panel-map">
     <div class="hero">
       <h1>Ontario Address Change Tracker</h1>
       <p class="tagline">We periodically compare each municipality's official open address
         list to spot new buildings, retired addresses, and corrections over time.</p>
+      <div class="stats">
+        <span><strong>{{ cities|length }}</strong> datasets</span>
+        <span><strong>{{ "%.1fM"|format(total_addresses / 1000000) }}</strong> addresses tracked</span>
+        <span>updated <strong>daily</strong></span>
+        <span><a class="src" href="https://github.com/skfd/ontario-address-changes">Source on GitHub&nbsp;↗</a></span>
+        <span class="info-wrap" tabindex="0" role="button" aria-label="About this project">
+          <span class="info-btn"><span class="glyph">i</span> How it works</span>
+          <span class="info-pop wide">
+            <p>Every day each dataset is re-downloaded and diffed against the previous snapshot.
+              History is kept as a <strong>Slowly-Changing-Dimension Type-2</strong> table, so every
+              address records the span of snapshots it was valid for — letting us replay exactly when
+              an address first appeared, was corrected, or retired.</p>
+            <p>The hard part is <strong>identity</strong>: ESRI <code>OBJECTID</code>s are reassigned on
+              every republish, so records are matched on a stable source ID where one exists, or on a
+              synthesized key (street&nbsp;+&nbsp;number&nbsp;+&nbsp;unit&nbsp;+&nbsp;rounded coordinates)
+              otherwise. Adding a city is a config file, not code.</p>
+            <p class="muted">An independent civic-data project — not affiliated with any municipality.
+              Each source keeps its own open licence.</p>
+          </span>
+        </span>
+      </div>
     </div>
 
-    <div class="section-header">{{ cities|length }} dataset{{ 's' if cities|length != 1 else '' }}</div>
+      <div class="map-title">Coverage of every dataset we observe</div>
+      <div id="map"></div>
+      <div class="map-legend">
+        <span><i style="background:#0078d4"></i> Active — changes observed</span>
+        <span><i style="background:#eaa300"></i> Initial sync only — no changes yet</span>
+      </div>
+    </div>
+    <div class="panel panel-list">
     <div class="cities">
       {% for c in cities %}
       <div class="city-row">
@@ -123,12 +188,43 @@
       </div>
     </div>
     {% endif %}
-
-    <footer>
-      Generated {{ generated }} ·
-      <a href="https://github.com/skfd/ontario-address-changes">Source on GitHub</a>
-    </footer>
+    </div>
+    </div>
   </main>
+
+  <script id="city-polys" type="application/json">{{ map_features|tojson }}</script>
+  <script>
+    (function () {
+      var data = JSON.parse(document.getElementById('city-polys').textContent);
+      var dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var map = L.map('map', { scrollWheelZoom: true });
+      L.tileLayer(
+        'https://{s}.basemaps.cartocdn.com/' + (dark ? 'dark_all' : 'light_all') +
+        '/{z}/{x}/{y}{r}.png',
+        { attribution: '&copy; OpenStreetMap contributors &copy; CARTO', maxZoom: 19 }
+      ).addTo(map);
+
+      function style(f) {
+        var c = f.properties.no_changes ? '#eaa300' : '#0078d4';
+        return { color: c, weight: 1.5, fillColor: c, fillOpacity: 0.18 };
+      }
+      var layer = L.geoJSON(data, {
+        style: style,
+        onEachFeature: function (f, lyr) {
+          lyr.bindTooltip(f.properties.name, { sticky: true });
+          lyr.on('mouseover', function () { lyr.setStyle({ fillOpacity: 0.4, weight: 2 }); });
+          lyr.on('mouseout', function () { layer.resetStyle(lyr); });
+          lyr.on('click', function () { window.location = f.properties.slug + '/index.html'; });
+        }
+      }).addTo(map);
+
+      if (data.features.length) {
+        map.fitBounds(layer.getBounds(), { padding: [20, 20] });
+      } else {
+        map.setView([44.5, -79.5], 6);  // Ontario fallback
+      }
+    })();
+  </script>
 </body>
 
 </html>
