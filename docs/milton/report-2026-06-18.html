@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Town of Milton Address Changes — Thursday, Jun 18, 2026</title>
+  <style>
+    :root {
+      --bg: #fafafa; --surface: #ffffff; --surface2: #f5f5f5; --surface3: #ebebeb;
+      --border: #e0e0e0; --border-strong: #d1d1d1; --text: #242424;
+      --text-secondary: #424242; --text-dim: #616161; --accent: #0078d4;
+      --accent-hover: #106ebe; --accent-bg: #eff6fc; --green: #107c10;
+      --green-bg: #f1faf1; --green-tint: #9fd89f; --red: #c50f1f; --red-bg: #fdf3f4;
+      --red-tint: #eeacb2; --yellow: #eaa300; --yellow-bg: #fefbf4; --yellow-tint: #f9e2ae;
+      --purple: #881798; --purple-bg: #f9f3fb; --teal: #038387; --teal-bg: #f0fafa;
+      --shadow-4: 0 2px 4px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --shadow-8: 0 4px 8px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --card-bg: #ffffff; --card-hover: #f5f5f5; color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1f1f1f; --surface: #292929; --surface2: #333333; --surface3: #3d3d3d;
+        --border: #525252; --border-strong: #666666; --text: #ffffff;
+        --text-secondary: #d6d6d6; --text-dim: #adadad; --accent: #2899f5;
+        --accent-hover: #3aa0f3; --accent-bg: #002848; --green: #54b054;
+        --green-bg: #052505; --green-tint: #107c10; --red: #dc626d; --red-bg: #3b0509;
+        --red-tint: #c50f1f; --yellow: #f2c661; --yellow-bg: #463100; --yellow-tint: #eaa300;
+        --purple: #d29ddb; --purple-bg: #3a1040; --teal: #58c0c4; --teal-bg: #013638;
+        --shadow-4: 0 2px 4px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --shadow-8: 0 4px 8px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --card-bg: #333333; --card-hover: #3d3d3d; color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI Variable','Segoe UI',system-ui,-apple-system,sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.5; padding: 2rem;
+      max-width: 1100px; margin: 0 auto; font-size: 14px; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; color: var(--accent-hover); }
+    .back-link { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 12px;
+      color: var(--text-dim); margin-bottom: 1.5rem; transition: color 0.1s; }
+    .back-link:hover { color: var(--accent); text-decoration: none; }
+    h1 { font-size: 24px; font-weight: 600; margin-bottom: 4px; }
+    .subtitle { color: var(--text-secondary); font-size: 14px; margin-bottom: 12px; }
+    .explainer { color: var(--text-secondary); font-size: 13px; line-height: 1.5;
+      margin-bottom: 24px; padding: 12px 16px; background: var(--surface);
+      border-radius: 8px; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px; margin-bottom: 24px; }
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px;
+      padding: 16px; box-shadow: var(--shadow-4); transition: box-shadow 0.1s; }
+    .card:hover { box-shadow: var(--shadow-8); }
+    .card .label { font-size: 12px; color: var(--text-dim); font-weight: 400; }
+    .card .value { font-size: 28px; font-weight: 600; margin-top: 4px; }
+    .card .value.green { color: var(--green); } .card .value.red { color: var(--red); }
+    .card .value.yellow { color: var(--yellow); } .card .value.accent { color: var(--accent); }
+    .card .value.purple { color: var(--purple); }
+    .card .value.teal { color: var(--teal); }
+    .sparkline { display: block; margin-top: 6px; overflow: visible; opacity: 0.9; }
+    .sparkline-label { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+    .section { margin-bottom: 24px; }
+    .section h2 { font-size: 16px; font-weight: 600; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px; }
+    .badge { font-size: 12px; padding: 2px 8px; border-radius: 999px; font-weight: 600; }
+    .badge-green { background: var(--green-bg); color: var(--green); }
+    .badge-red { background: var(--red-bg); color: var(--red); }
+    .badge-yellow { background: var(--yellow-bg); color: var(--yellow); }
+    .badge-accent { background: var(--accent-bg); color: var(--accent); }
+    .badge-purple { background: var(--purple-bg); color: var(--purple); }
+    .badge-teal { background: var(--teal-bg); color: var(--teal); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface);
+      border-radius: 8px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    thead { background: var(--surface2); }
+    th { text-align: left; padding: 8px 12px; font-weight: 600; color: var(--text-dim);
+      font-size: 12px; cursor: pointer; user-select: none; border-bottom: 1px solid var(--border); }
+    th:hover { color: var(--accent); }
+    td { padding: 8px 12px; border-top: 1px solid var(--border); }
+    tr:hover td { background: var(--surface2); }
+    .old-val { color: var(--red); text-decoration: line-through; }
+    .new-val { color: var(--green); }
+    .arrow-val { color: var(--text-dim); text-align: center; white-space: nowrap; }
+    .map-link { display: inline-flex; align-items: center; margin-left: 0.4em;
+      color: var(--accent); vertical-align: middle; white-space: nowrap; font-size: 12px; }
+    .map-link:hover { color: var(--accent-hover); }
+    .map-link svg { width: 14px; height: 14px; }
+    .change-field { color: var(--yellow); font-weight: 600; }
+    .bar-chart { margin-top: 8px; }
+    .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 12px; }
+    .bar-label { width: 180px; text-align: right; color: var(--text-secondary); flex-shrink: 0;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .bar-track { flex: 1; height: 8px; background: var(--surface2); border-radius: 4px;
+      overflow: hidden; position: relative; }
+    .bar-fill { height: 100%; border-radius: 4px; transition: width 0.15s ease; }
+    .bar-fill.green { background: var(--green); } .bar-fill.red { background: var(--red); }
+    .bar-count { width: 40px; font-size: 12px; color: var(--text-dim); }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+    .empty { color: var(--text-dim); font-style: italic; padding: 16px; }
+    .truncated { color: var(--text-dim); font-size: 12px; margin-top: 8px; }
+    .collapsible-toggle { background: transparent; border: 1px solid var(--border);
+      color: var(--accent); padding: 5px 12px; border-radius: 4px; cursor: pointer;
+      font-size: 12px; font-family: inherit; margin-bottom: 12px; transition: background 0.1s; }
+    .collapsible-toggle:hover { background: var(--surface2); }
+    details.rename-group { background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; margin-bottom: 8px; box-shadow: var(--shadow-4); }
+    details.rename-group summary { padding: 10px 14px; cursor: pointer; font-size: 13px; }
+    details.rename-group[open] summary { border-bottom: 1px solid var(--border); }
+    details.rename-group table { border: none; box-shadow: none; border-radius: 0; }
+    details.rename-group .truncated { padding: 0 14px 10px; margin-top: 0; }
+    .rename-count { color: var(--text-dim); font-size: 12px; margin-left: 6px; }
+    .no-changes-banner { background: var(--green-bg); border: 1px solid var(--green-tint);
+      color: var(--green); padding: 16px; border-radius: 8px; margin-bottom: 24px;
+      text-align: center; font-weight: 600; font-size: 14px; }
+    .baseline-banner { background: var(--accent-bg); border: 1px solid var(--accent);
+      color: var(--accent); padding: 16px; border-radius: 8px; margin-bottom: 24px; font-size: 13px; }
+    .generated-at { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-dim); }
+    .history { font-size: 12.5px; color: var(--text-secondary); white-space: nowrap; }
+    .history .a { color: var(--green); font-weight: 500; }
+    .history .r { color: var(--red); font-weight: 500; }
+    .history .dot { color: var(--text-dim); margin: 0 4px; }
+    .history-none { color: var(--text-dim); font-style: italic; font-size: 12.5px; }
+    .info-wrap { position: relative; display: inline-flex; vertical-align: middle; }
+    .info-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+      height: 18px; padding: 0 8px 0 7px; border-radius: 999px; border: none;
+      color: #fff; background: var(--accent); cursor: help; font-size: 11px; font-weight: 600;
+      font-style: normal; font-family: inherit; line-height: 1; white-space: nowrap; }
+    .info-btn .glyph { font-style: italic; font-weight: 700;
+      font-family: Georgia, 'Times New Roman', serif; }
+    .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn,
+    .info-wrap:focus .info-btn { background: var(--accent-hover); }
+    .info-pop { display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 20;
+      width: 320px; max-width: 80vw; padding: 12px 14px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-8);
+      font-size: 12.5px; font-weight: 400; color: var(--text-secondary); line-height: 1.5; }
+    .info-wrap:hover .info-pop, .info-wrap:focus-within .info-pop,
+    .info-wrap:focus .info-pop { display: block; }
+    .info-pop strong { display: block; color: var(--text); font-size: 12px; margin-bottom: 4px; }
+    .info-pop ul { list-style: none; margin: 0 0 10px; padding: 0; }
+    .info-pop li { padding: 1px 0 1px 14px; position: relative; }
+    .info-pop li::before { content: "·"; position: absolute; left: 4px; color: var(--text-dim); }
+    .info-pop .note { color: var(--text-dim); font-size: 11.5px; margin: 0 0 10px; }
+    .info-pop .muted { color: var(--text-dim); font-style: italic; }
+  </style>
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+
+  <a class="back-link" href="index.html">← Back to Town of Milton reports</a>
+
+  <h1>Town of Milton — Address Changes</h1>
+  <p class="subtitle">
+    Changes between  and Thursday, Jun 18, 2026
+    · 46,260 total addresses
+  </p>
+
+  
+
+  <div class="cards">
+    <div class="card"><div class="label">Total Addresses</div>
+      <div class="value accent">46,260</div></div>
+    <div class="card"><div class="label">New Addresses</div>
+      <div class="value green">+0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#107c10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,2.0 28.5,18.0 55.0,18.0 81.5,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#107c10"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Retired Addresses</div>
+      <div class="value red">−65</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#c50f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 28.5,18.0 55.0,18.0 81.5,18.0 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#c50f1f"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Updated Addresses <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRESS_NUM)</li><li>Street name (STREET_NAME)</li><li>Unit (UNIT_NUMBER)</li><li>Full address (FULL_ADDRESS)</li><li>Coordinates (latitude, longitude)</li><li>ADU</li><li>ADU_UNIT_NO</li><li>ASSIGNED_BY</li><li>Address_ID</li><li>BLOCK</li><li>DESCRIPTION</li><li>DISPLAY_NAME</li><li>GEOSTNAME</li><li>HISTORY</li><li>LABEL_ANGLE</li><li>LOT</li><li>POLL</li><li>PROP_RSN</li><li>STATUS</li><li>STREET_TYPE</li><li>ST_DIR_SUFFIX</li><li>SUBDIVISION_PLAN</li><li>WARD</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span></div>
+      <div class="value yellow">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 28.5,18.0 55.0,18.0 81.5,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Renumbered</div>
+      <div class="value accent">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#0078d4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 28.5,18.0 55.0,18.0 81.5,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#0078d4"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Street Renames</div>
+      <div class="value purple">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#9141ac" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 28.5,18.0 55.0,18.0 81.5,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#9141ac"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    <div class="card"><div class="label">Status Changes</div>
+      <div class="value teal">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#038387" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 28.5,18.0 55.0,18.0 81.5,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#038387"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    <div class="card"><div class="label">Boundary Changes</div>
+      <div class="value teal">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#038387" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 28.5,18.0 55.0,18.0 81.5,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#038387"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    <div class="card"><div class="label">Location Adjustments</div>
+      <div class="value" style="color: var(--text-dim)">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#808080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 28.5,18.0 55.0,18.0 81.5,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#808080"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+  </div>
+
+  
+  <div class="section">
+    <h2>Change Breakdown</h2>
+    <div class="stats-grid">
+      
+      
+      <div class="card"><div class="label">Top Streets by Retired Addresses</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">CHRETIEN STREET</span>
+          <div class="bar-track"><div class="bar-fill red" style="width:100.0%"></div></div>
+          <span class="bar-count">65</span></div>
+      </div></div>
+      
+    </div>
+  </div>
+  
+
+  <div class="section">
+    <h2>New Addresses <span class="badge badge-green">0</span></h2>
+    <p class="empty">No new addresses.</p>
+  </div>
+
+  <div class="section">
+    <h2>Retired Addresses <span class="badge badge-red">65</span></h2>
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-removed',0)">Address</th><th onclick="sortTable('t-removed',1)">Street</th>
+        <th onclick="sortTable('t-removed',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-removed">
+        
+        <tr><td>1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47874&mlon=-79.84543#map=18/43.47874/-79.84543" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>1</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47912&mlon=-79.84547#map=18/43.47912/-79.84547" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>10</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47869&mlon=-79.84594#map=18/43.47869/-79.84594" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>11 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>11</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47864&mlon=-79.84599#map=18/43.47864/-79.84599" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>12 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>12</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47860&mlon=-79.84604#map=18/43.47860/-79.84604" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>13 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>14</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47856&mlon=-79.84609#map=18/43.47856/-79.84609" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>14 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>15</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47851&mlon=-79.84613#map=18/43.47851/-79.84613" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>15 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>16</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47847&mlon=-79.84618#map=18/43.47847/-79.84618" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>16 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>17</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47843&mlon=-79.84623#map=18/43.47843/-79.84623" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>17 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>18</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47835&mlon=-79.84605#map=18/43.47835/-79.84605" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>18 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>19</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47839&mlon=-79.84601#map=18/43.47839/-79.84601" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>2</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47908&mlon=-79.84552#map=18/43.47908/-79.84552" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>19 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>20</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47843&mlon=-79.84596#map=18/43.47843/-79.84596" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>20 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>21</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47848&mlon=-79.84591#map=18/43.47848/-79.84591" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>21 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>22</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47852&mlon=-79.84587#map=18/43.47852/-79.84587" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>22 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>23</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47856&mlon=-79.84582#map=18/43.47856/-79.84582" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>23 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>24</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47861&mlon=-79.84577#map=18/43.47861/-79.84577" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>24 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>25</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47865&mlon=-79.84573#map=18/43.47865/-79.84573" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>25 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>26</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47874&mlon=-79.84564#map=18/43.47874/-79.84564" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>26 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>27</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47878&mlon=-79.84559#map=18/43.47878/-79.84559" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>27 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>28</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47882&mlon=-79.84554#map=18/43.47882/-79.84554" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>28 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>29</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47887&mlon=-79.84550#map=18/43.47887/-79.84550" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>3</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47904&mlon=-79.84556#map=18/43.47904/-79.84556" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>29 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>30</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47891&mlon=-79.84545#map=18/43.47891/-79.84545" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>30 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>31</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47895&mlon=-79.84540#map=18/43.47895/-79.84540" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>31 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>32</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47900&mlon=-79.84536#map=18/43.47900/-79.84536" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>32 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>33</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47904&mlon=-79.84531#map=18/43.47904/-79.84531" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>33 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>34</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47873&mlon=-79.84487#map=18/43.47873/-79.84487" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>34 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>35</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47867&mlon=-79.84493#map=18/43.47867/-79.84493" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>35 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>36</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47863&mlon=-79.84498#map=18/43.47863/-79.84498" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>36 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>37</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47859&mlon=-79.84502#map=18/43.47859/-79.84502" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>37 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>38</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47854&mlon=-79.84507#map=18/43.47854/-79.84507" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>38 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>39</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47850&mlon=-79.84512#map=18/43.47850/-79.84512" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>4 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>4</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47899&mlon=-79.84561#map=18/43.47899/-79.84561" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>39 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>40</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47846&mlon=-79.84516#map=18/43.47846/-79.84516" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>47 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>41</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47831&mlon=-79.84533#map=18/43.47831/-79.84533" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>48 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>42</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47825&mlon=-79.84539#map=18/43.47825/-79.84539" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>49 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>43</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47821&mlon=-79.84543#map=18/43.47821/-79.84543" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>50 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>44</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47817&mlon=-79.84548#map=18/43.47817/-79.84548" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>51 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>45</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47813&mlon=-79.84553#map=18/43.47813/-79.84553" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>52 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>46</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47808&mlon=-79.84557#map=18/43.47808/-79.84557" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>53 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>47</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47804&mlon=-79.84562#map=18/43.47804/-79.84562" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>60 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>48</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47799&mlon=-79.84553#map=18/43.47799/-79.84553" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>59 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>49</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47803&mlon=-79.84548#map=18/43.47803/-79.84548" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>5 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>5</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47895&mlon=-79.84566#map=18/43.47895/-79.84566" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>58 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>50</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47807&mlon=-79.84543#map=18/43.47807/-79.84543" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>57 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>51</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47812&mlon=-79.84539#map=18/43.47812/-79.84539" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>56 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>52</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47816&mlon=-79.84534#map=18/43.47816/-79.84534" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>55 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>53</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47820&mlon=-79.84529#map=18/43.47820/-79.84529" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>54 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>54</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47826&mlon=-79.84524#map=18/43.47826/-79.84524" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>46 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>55</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47840&mlon=-79.84507#map=18/43.47840/-79.84507" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>45 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>56</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47844&mlon=-79.84503#map=18/43.47844/-79.84503" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>44 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>57</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47849&mlon=-79.84498#map=18/43.47849/-79.84498" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>43 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>58</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47853&mlon=-79.84493#map=18/43.47853/-79.84493" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>42 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>59</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47857&mlon=-79.84489#map=18/43.47857/-79.84489" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>6</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47891&mlon=-79.84570#map=18/43.47891/-79.84570" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>41 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>60</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47862&mlon=-79.84484#map=18/43.47862/-79.84484" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>40 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>61</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47867&mlon=-79.84478#map=18/43.47867/-79.84478" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>7 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>7</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47886&mlon=-79.84575#map=18/43.47886/-79.84575" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>8 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>8</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47882&mlon=-79.84579#map=18/43.47882/-79.84579" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>9 - 1572 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td>9</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47872&mlon=-79.84590#map=18/43.47872/-79.84590" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1582 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47818&mlon=-79.84639#map=18/43.47818/-79.84639" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1592 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47764&mlon=-79.84568#map=18/43.47764/-79.84568" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1592 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47763&mlon=-79.84532#map=18/43.47763/-79.84532" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1600 CHRETIEN STREET</td><td>CHRETIEN STREET</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.47821&mlon=-79.84470#map=18/43.47821/-79.84470" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Updated Addresses <span class="badge badge-yellow">0</span>
+      <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRESS_NUM)</li><li>Street name (STREET_NAME)</li><li>Unit (UNIT_NUMBER)</li><li>Full address (FULL_ADDRESS)</li><li>Coordinates (latitude, longitude)</li><li>ADU</li><li>ADU_UNIT_NO</li><li>ASSIGNED_BY</li><li>Address_ID</li><li>BLOCK</li><li>DESCRIPTION</li><li>DISPLAY_NAME</li><li>GEOSTNAME</li><li>HISTORY</li><li>LABEL_ANGLE</li><li>LOT</li><li>POLL</li><li>PROP_RSN</li><li>STATUS</li><li>STREET_TYPE</li><li>ST_DIR_SUFFIX</li><li>SUBDIVISION_PLAN</li><li>WARD</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span></h2>
+    
+    <p class="empty">No addresses updated.</p>
+  </div>
+
+  <div class="section">
+    <h2>Renumbered Addresses <span class="badge badge-accent">0</span></h2>
+    
+    <p class="empty">No addresses renumbered.</p>
+  </div>
+
+  <div class="section">
+    <h2>Street Renames <span class="badge badge-purple">0</span></h2>
+    <p class="empty">No street renames.</p>
+  </div>
+
+  
+
+  
+  <div class="section">
+    <h2>Status Changes <span class="badge badge-teal">0</span></h2>
+    <p class="empty">No status changes.</p>
+  </div>
+  
+
+  
+  <div class="section">
+    <h2>Boundary Changes <span class="badge badge-teal">0</span></h2>
+    <p class="empty">No ward or municipality reassignments.</p>
+  </div>
+  
+
+  <div class="section">
+    <h2>Location Adjustments <span class="badge" style="background: var(--surface2); color: var(--text-dim)">0</span></h2>
+    
+    <p class="empty">No location adjustments.</p>
+  </div>
+
+  <div class="generated-at">Report generated Jun 18, 2026 at 12:18 PM · source licence: Not identified</div>
+
+  <script>
+    function sortTable(tbodyId, col) {
+      const tbody = document.getElementById(tbodyId);
+      if (!tbody) return;
+      const rows = Array.from(tbody.rows);
+      const dir = tbody.dataset.sortDir === 'asc' ? 'desc' : 'asc';
+      tbody.dataset.sortDir = dir;
+      rows.sort((a, b) => {
+        const av = a.cells[col]?.textContent.trim() || '';
+        const bv = b.cells[col]?.textContent.trim() || '';
+        const an = parseFloat(av), bn = parseFloat(bv);
+        if (!isNaN(an) && !isNaN(bn)) return dir === 'asc' ? an - bn : bn - an;
+        return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+      });
+      rows.forEach(r => tbody.appendChild(r));
+    }
+  </script>
+</body>
+
+</html>
