@@ -3,10 +3,24 @@
 import argparse
 import os
 import sys
+import time
+from datetime import datetime
 
 sys.path.insert(0, os.path.dirname(__file__))
 
 from src import registry
+
+
+def _record_timing(slug, seconds):
+    """Append one successful per-city wall-clock sample; progress.ps1 medians
+    these to estimate ETA for the cities still pending in a run."""
+    path = os.path.join(os.path.dirname(__file__), "logs", "timings.csv")
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    header = not os.path.exists(path)
+    with open(path, "a", encoding="utf-8") as f:
+        if header:
+            f.write("slug,finished_iso,seconds\n")
+        f.write(f"{slug},{datetime.now().isoformat(timespec='seconds')},{seconds:.1f}\n")
 
 
 def _resolve(args):
@@ -94,16 +108,19 @@ def _update_parallel(datasets, args):
                "update", "--city", ds.slug, "--no-report"]
         if args.force:
             cmd.append("--force")
-        return ds, subprocess.run(cmd, capture_output=True, text=True,
-                                  encoding="utf-8", errors="replace", env=env)
+        t0 = time.perf_counter()
+        proc = subprocess.run(cmd, capture_output=True, text=True,
+                              encoding="utf-8", errors="replace", env=env)
+        return ds, proc, time.perf_counter() - t0
 
     done = []
     failed = []
     with ThreadPoolExecutor(max_workers=args.jobs) as pool:
         for future in as_completed([pool.submit(worker, ds) for ds in queue]):
-            ds, proc = future.result()
+            ds, proc, secs = future.result()
             print(proc.stdout, end="")
             if proc.returncode == 0:
+                _record_timing(ds.slug, secs)
                 done.append(ds)
             else:
                 if proc.stderr:

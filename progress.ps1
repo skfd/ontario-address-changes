@@ -51,6 +51,19 @@ function Show-Progress {
     $total = (Get-ChildItem "$PSScriptRoot\datasets\*.toml" -ErrorAction SilentlyContinue).Count
     $mtime = (Get-Item $path).LastWriteTime
 
+    # daily-update.ps1 writes "START <iso8601> jobs=<N>" as the log's first line.
+    $startTime = $null
+    $jobs      = 6
+    $firstLine = ($raw -split "[`r`n]+", 2)[0]
+    if ($firstLine -match '^START\s+(\S+)(?:\s+jobs=(\d+))?') {
+        try {
+            $startTime = [datetime]::Parse(
+                $matches[1], $null,
+                [System.Globalization.DateTimeStyles]::RoundtripKind)
+        } catch { $startTime = $null }
+        if ($matches[2]) { $jobs = [int]$matches[2] }
+    }
+
     Write-Host ("Log: {0}" -f $path)
     Write-Host ("Updated: {0:HH:mm:ss}   datasets in registry: {1}" -f $mtime, $total)
     Write-Host ("-" * 72)
@@ -63,10 +76,12 @@ function Show-Progress {
         return
     }
 
+    $completed = [System.Collections.Generic.HashSet[string]]::new()
     for ($k = 1; $k -lt $parts.Count; $k += 2) {
         $slug  = $parts[$k]
+        [void]$completed.Add($slug)
         $body  = $parts[$k + 1]
-        $lines = $body -split "[`r`n]+" | Where-Object { $_.Trim() -ne '' }
+        $lines = @($body -split "[`r`n]+" | Where-Object { $_.Trim() -ne '' })
         if ($lines) { $detail = $lines[-1].Trim() } else { $detail = '(starting...)' }
         $stage = Get-Stage $detail
 
@@ -78,6 +93,69 @@ function Show-Progress {
 
     Write-Host ("-" * 72)
     Write-Host ("{0} of {1} datasets seen in this run." -f $sectionCount, $total)
+
+    # In parallel mode run.py prints a city's block only when it finishes, so the
+    # number of sections == cities completed. ETA assumes a steady throughput.
+    if (-not $startTime) {
+        Write-Host "ETA: no START header in log (launch via daily-update.ps1 for ETA)."
+        return
+    }
+
+    $done = $completed.Count
+    $finished = ($done -ge $total)
+    # While running, measure to now; once finished, freeze at last log write.
+    $endRef  = if ($finished) { $mtime } else { Get-Date }
+    $elapsed = $endRef - $startTime
+
+    $fmt = { param($ts) "{0:00}:{1:00}:{2:00}" -f [int]$ts.TotalHours, $ts.Minutes, $ts.Seconds }
+
+    if ($finished) {
+        Write-Host ("Done. Elapsed {0} (finished {1:HH:mm:ss})." -f (& $fmt $elapsed), $mtime)
+        return
+    }
+
+    # Per-city median seconds from history (run.py appends logs\timings.csv).
+    $median = @{}
+    $csv = "$PSScriptRoot\logs\timings.csv"
+    if (Test-Path $csv) {
+        Import-Csv $csv | Group-Object slug | ForEach-Object {
+            $v = @($_.Group.seconds | ForEach-Object { [double]$_ } | Sort-Object)
+            $n = $v.Count
+            $median[$_.Name] = if ($n % 2) { $v[($n-1)/2] } else { ($v[$n/2-1] + $v[$n/2]) / 2 }
+        }
+    }
+
+    $remaining = $null
+    $source    = ''
+    if ($median.Count -gt 0) {
+        # Sum the expected time of cities not yet seen this run; unknown cities use
+        # the overall median. With N workers the floor is the single longest pole.
+        $fallback = ($median.Values | Sort-Object | Select-Object -Index ([int]($median.Count/2)))
+        $allSlugs = Get-ChildItem "$PSScriptRoot\datasets\*.toml" | ForEach-Object { $_.BaseName }
+        $pending  = @($allSlugs | Where-Object { -not $completed.Contains($_) })
+        if ($pending.Count -gt 0) {
+            $exp = $pending | ForEach-Object { if ($median.ContainsKey($_)) { $median[$_] } else { $fallback } }
+            $sum = ($exp | Measure-Object -Sum).Sum
+            $max = ($exp | Measure-Object -Maximum).Maximum
+            $secs = [math]::Max($sum / $jobs, $max)
+            $remaining = [TimeSpan]::FromSeconds($secs)
+            $source = "history, {0} pending" -f $pending.Count
+        }
+    }
+
+    if (-not $remaining -and $done -gt 0) {
+        # No usable history yet: flat elapsed/done average.
+        $remaining = [TimeSpan]::FromSeconds(($elapsed.TotalSeconds / $done) * ($total - $done))
+        $source = 'flat avg'
+    }
+
+    if ($remaining) {
+        $eta = (Get-Date) + $remaining
+        Write-Host ("Elapsed {0}  |  ETA ~{1} remaining  |  finish ~{2:HH:mm:ss}  ({3})" -f `
+            (& $fmt $elapsed), (& $fmt $remaining), $eta, $source)
+    } else {
+        Write-Host ("Elapsed {0}. ETA: estimating (no cities finished yet)..." -f (& $fmt $elapsed))
+    }
 }
 
 if ($Follow -gt 0) {

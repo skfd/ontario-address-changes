@@ -6,6 +6,9 @@
 $projectDir = $PSScriptRoot
 Set-Location $projectDir
 
+# First log line is the run anchor progress.ps1 uses for elapsed/ETA.
+Write-Output "START $(Get-Date -Format o) jobs=6"
+
 python run.py update --all --jobs 6
 $updateExit = $LASTEXITCODE
 

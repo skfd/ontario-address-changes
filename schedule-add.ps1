@@ -14,7 +14,7 @@ if (-not (Test-Path $logDir)) {
 
 $action = New-ScheduledTaskAction `
     -Execute "cmd.exe" `
-    -Argument "/c powershell -NoProfile -ExecutionPolicy Bypass -File `"$projectDir\daily-update.ps1`" >> `"$logFile`" 2>&1"
+    -Argument "/c powershell -NoProfile -ExecutionPolicy Bypass -File `"$projectDir\daily-update.ps1`" > `"$logFile`" 2>&1"
 
 $trigger = New-ScheduledTaskTrigger -Daily -At $runAt
 
