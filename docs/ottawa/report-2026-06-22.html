@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>City of Ottawa Address Changes — Monday, Jun 22, 2026</title>
+  <style>
+    :root {
+      --bg: #fafafa; --surface: #ffffff; --surface2: #f5f5f5; --surface3: #ebebeb;
+      --border: #e0e0e0; --border-strong: #d1d1d1; --text: #242424;
+      --text-secondary: #424242; --text-dim: #616161; --accent: #0078d4;
+      --accent-hover: #106ebe; --accent-bg: #eff6fc; --green: #107c10;
+      --green-bg: #f1faf1; --green-tint: #9fd89f; --red: #c50f1f; --red-bg: #fdf3f4;
+      --red-tint: #eeacb2; --yellow: #eaa300; --yellow-bg: #fefbf4; --yellow-tint: #f9e2ae;
+      --purple: #881798; --purple-bg: #f9f3fb; --teal: #038387; --teal-bg: #f0fafa;
+      --shadow-4: 0 2px 4px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --shadow-8: 0 4px 8px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --card-bg: #ffffff; --card-hover: #f5f5f5; color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1f1f1f; --surface: #292929; --surface2: #333333; --surface3: #3d3d3d;
+        --border: #525252; --border-strong: #666666; --text: #ffffff;
+        --text-secondary: #d6d6d6; --text-dim: #adadad; --accent: #2899f5;
+        --accent-hover: #3aa0f3; --accent-bg: #002848; --green: #54b054;
+        --green-bg: #052505; --green-tint: #107c10; --red: #dc626d; --red-bg: #3b0509;
+        --red-tint: #c50f1f; --yellow: #f2c661; --yellow-bg: #463100; --yellow-tint: #eaa300;
+        --purple: #d29ddb; --purple-bg: #3a1040; --teal: #58c0c4; --teal-bg: #013638;
+        --shadow-4: 0 2px 4px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --shadow-8: 0 4px 8px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --card-bg: #333333; --card-hover: #3d3d3d; color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI Variable','Segoe UI',system-ui,-apple-system,sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.5; padding: 2rem;
+      max-width: 1100px; margin: 0 auto; font-size: 14px; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; color: var(--accent-hover); }
+    .back-link { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 12px;
+      color: var(--text-dim); margin-bottom: 1.5rem; transition: color 0.1s; }
+    .back-link:hover { color: var(--accent); text-decoration: none; }
+    h1 { font-size: 24px; font-weight: 600; margin-bottom: 4px; }
+    .subtitle { color: var(--text-secondary); font-size: 14px; margin-bottom: 12px; }
+    .explainer { color: var(--text-secondary); font-size: 13px; line-height: 1.5;
+      margin-bottom: 24px; padding: 12px 16px; background: var(--surface);
+      border-radius: 8px; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px; margin-bottom: 24px; }
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px;
+      padding: 16px; box-shadow: var(--shadow-4); transition: box-shadow 0.1s; }
+    .card:hover { box-shadow: var(--shadow-8); }
+    .card .label { font-size: 12px; color: var(--text-dim); font-weight: 400; }
+    .card .value { font-size: 28px; font-weight: 600; margin-top: 4px; }
+    .card .value.green { color: var(--green); } .card .value.red { color: var(--red); }
+    .card .value.yellow { color: var(--yellow); } .card .value.accent { color: var(--accent); }
+    .card .value.purple { color: var(--purple); }
+    .card .value.teal { color: var(--teal); }
+    .sparkline { display: block; margin-top: 6px; overflow: visible; opacity: 0.9; }
+    .sparkline-label { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+    .section { margin-bottom: 24px; }
+    .section h2 { font-size: 16px; font-weight: 600; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px; }
+    .badge { font-size: 12px; padding: 2px 8px; border-radius: 999px; font-weight: 600; }
+    .badge-green { background: var(--green-bg); color: var(--green); }
+    .badge-red { background: var(--red-bg); color: var(--red); }
+    .badge-yellow { background: var(--yellow-bg); color: var(--yellow); }
+    .badge-accent { background: var(--accent-bg); color: var(--accent); }
+    .badge-purple { background: var(--purple-bg); color: var(--purple); }
+    .badge-teal { background: var(--teal-bg); color: var(--teal); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface);
+      border-radius: 8px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    thead { background: var(--surface2); }
+    th { text-align: left; padding: 8px 12px; font-weight: 600; color: var(--text-dim);
+      font-size: 12px; cursor: pointer; user-select: none; border-bottom: 1px solid var(--border); }
+    th:hover { color: var(--accent); }
+    td { padding: 8px 12px; border-top: 1px solid var(--border); }
+    tr:hover td { background: var(--surface2); }
+    .old-val { color: var(--red); text-decoration: line-through; }
+    .new-val { color: var(--green); }
+    .arrow-val { color: var(--text-dim); text-align: center; white-space: nowrap; }
+    .map-link { display: inline-flex; align-items: center; margin-left: 0.4em;
+      color: var(--accent); vertical-align: middle; white-space: nowrap; font-size: 12px; }
+    .map-link:hover { color: var(--accent-hover); }
+    .map-link svg { width: 14px; height: 14px; }
+    .change-field { color: var(--yellow); font-weight: 600; }
+    .bar-chart { margin-top: 8px; }
+    .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 12px; }
+    .bar-label { width: 180px; text-align: right; color: var(--text-secondary); flex-shrink: 0;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .bar-track { flex: 1; height: 8px; background: var(--surface2); border-radius: 4px;
+      overflow: hidden; position: relative; }
+    .bar-fill { height: 100%; border-radius: 4px; transition: width 0.15s ease; }
+    .bar-fill.green { background: var(--green); } .bar-fill.red { background: var(--red); }
+    .bar-count { width: 40px; font-size: 12px; color: var(--text-dim); }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+    .empty { color: var(--text-dim); font-style: italic; padding: 16px; }
+    .truncated { color: var(--text-dim); font-size: 12px; margin-top: 8px; }
+    .collapsible-toggle { background: transparent; border: 1px solid var(--border);
+      color: var(--accent); padding: 5px 12px; border-radius: 4px; cursor: pointer;
+      font-size: 12px; font-family: inherit; margin-bottom: 12px; transition: background 0.1s; }
+    .collapsible-toggle:hover { background: var(--surface2); }
+    details.rename-group { background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; margin-bottom: 8px; box-shadow: var(--shadow-4); }
+    details.rename-group summary { padding: 10px 14px; cursor: pointer; font-size: 13px; }
+    details.rename-group[open] summary { border-bottom: 1px solid var(--border); }
+    details.rename-group table { border: none; box-shadow: none; border-radius: 0; }
+    details.rename-group .truncated { padding: 0 14px 10px; margin-top: 0; }
+    .rename-count { color: var(--text-dim); font-size: 12px; margin-left: 6px; }
+    .no-changes-banner { background: var(--green-bg); border: 1px solid var(--green-tint);
+      color: var(--green); padding: 16px; border-radius: 8px; margin-bottom: 24px;
+      text-align: center; font-weight: 600; font-size: 14px; }
+    .baseline-banner { background: var(--accent-bg); border: 1px solid var(--accent);
+      color: var(--accent); padding: 16px; border-radius: 8px; margin-bottom: 24px; font-size: 13px; }
+    .generated-at { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-dim); }
+    .history { font-size: 12.5px; color: var(--text-secondary); white-space: nowrap; }
+    .history .a { color: var(--green); font-weight: 500; }
+    .history .r { color: var(--red); font-weight: 500; }
+    .history .dot { color: var(--text-dim); margin: 0 4px; }
+    .history-none { color: var(--text-dim); font-style: italic; font-size: 12.5px; }
+    .info-wrap { position: relative; display: inline-flex; vertical-align: middle; }
+    .info-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+      height: 18px; padding: 0 8px 0 7px; border-radius: 999px; border: none;
+      color: #fff; background: var(--accent); cursor: help; font-size: 11px; font-weight: 600;
+      font-style: normal; font-family: inherit; line-height: 1; white-space: nowrap; }
+    .info-btn .glyph { font-style: italic; font-weight: 700;
+      font-family: Georgia, 'Times New Roman', serif; }
+    .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn,
+    .info-wrap:focus .info-btn { background: var(--accent-hover); }
+    .info-pop { display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 20;
+      width: 320px; max-width: 80vw; padding: 12px 14px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-8);
+      font-size: 12.5px; font-weight: 400; color: var(--text-secondary); line-height: 1.5; }
+    .info-wrap:hover .info-pop, .info-wrap:focus-within .info-pop,
+    .info-wrap:focus .info-pop { display: block; }
+    .info-pop strong { display: block; color: var(--text); font-size: 12px; margin-bottom: 4px; }
+    .info-pop ul { list-style: none; margin: 0 0 10px; padding: 0; }
+    .info-pop li { padding: 1px 0 1px 14px; position: relative; }
+    .info-pop li::before { content: "·"; position: absolute; left: 4px; color: var(--text-dim); }
+    .info-pop .note { color: var(--text-dim); font-size: 11.5px; margin: 0 0 10px; }
+    .info-pop .muted { color: var(--text-dim); font-style: italic; }
+  </style>
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+
+  <a class="back-link" href="index.html">← Back to City of Ottawa reports</a>
+
+  <h1>City of Ottawa — Address Changes</h1>
+  <p class="subtitle">
+    Changes between  and Monday, Jun 22, 2026
+    · 402,914 total addresses
+  </p>
+
+  
+
+  <div class="cards">
+    <div class="card"><div class="label">Total Addresses</div>
+      <div class="value accent">402,914</div></div>
+    <div class="card"><div class="label">New Addresses</div>
+      <div class="value green">+14</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#107c10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,16.1 19.7,16.5 37.3,2.0 55.0,17.8 72.7,17.8 90.3,13.0 108.0,15.1"/><circle cx="108.0" cy="15.1" r="2" fill="#107c10"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Retired Addresses</div>
+      <div class="value red">−1</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#c50f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,16.8 55.0,18.0 72.7,18.0 90.3,2.0 108.0,16.8"/><circle cx="108.0" cy="16.8" r="2" fill="#c50f1f"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Updated Addresses <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRNUM)</li><li>Street name (FULLNAME)</li><li>Unit (UNITID)</li><li>Full address (FULLADDR)</li><li>Coordinates (latitude, longitude)</li><li>ADDRTYPE</li><li>PI_MUNICIPAL_ADDRESS_ID</li><li>QUALIFIER</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>CREATED_DATE</li><li>MODIFIED_DATE</li></ul>
+      
+    </span>
+  </span></div>
+      <div class="value yellow">53</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,17.1 19.7,8.9 37.3,15.9 55.0,9.2 72.7,11.1 90.3,16.2 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Renumbered</div>
+      <div class="value accent">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#0078d4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#0078d4"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Street Renames</div>
+      <div class="value purple">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#9141ac" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#9141ac"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    
+    <div class="card"><div class="label">Location Adjustments</div>
+      <div class="value" style="color: var(--text-dim)">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#808080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,12.7 37.3,18.0 55.0,18.0 72.7,18.0 90.3,2.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#808080"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+  </div>
+
+  
+  <div class="section">
+    <h2>Change Breakdown</h2>
+    <div class="stats-grid">
+      
+      
+      
+      <div class="card"><div class="label">Most Frequently Updated Fields</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">ADDRTYPE</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">53</span></div>
+        <div class="bar-row"><span class="bar-label">Location</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:2.0%"></div></div>
+          <span class="bar-count">1</span></div>
+      </div></div>
+    </div>
+  </div>
+  
+
+  <div class="section">
+    <h2>New Addresses <span class="badge badge-green">14</span></h2>
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-added',0)">Address</th><th onclick="sortTable('t-added',1)">Street</th>
+        <th onclick="sortTable('t-added',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-added">
+        
+        <tr><td>1212 B ADIRONDACK DR</td><td>ADIRONDACK DR</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.35539&mlon=-75.76780#map=18/45.35539/-75.76780" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>945 BANK ST</td><td>BANK ST</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-09</span><span class="dot">·</span><span class="r">− 2026-06-19</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39796&mlon=-75.68214#map=18/45.39796/-75.68214" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>890 B BERMUDA AVE</td><td>BERMUDA AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44365&mlon=-75.62861#map=18/45.44365/-75.62861" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>5260 CANON SMITH DR</td><td>CANON SMITH DR</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.48571&mlon=-76.21112#map=18/45.48571/-76.21112" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>306 B CROSSWAY TERR</td><td>CROSSWAY TERR</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.28503&mlon=-75.93698#map=18/45.28503/-75.93698" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>257 B CUNNINGHAM AVE</td><td>CUNNINGHAM AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.38927&mlon=-75.66220#map=18/45.38927/-75.66220" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>656 B EDISON AVE</td><td>EDISON AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.38334&mlon=-75.74997#map=18/45.38334/-75.74997" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>77 B GLEN AVE</td><td>GLEN AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39164&mlon=-75.68646#map=18/45.39164/-75.68646" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2484 B GOLDHAWK DR</td><td>GOLDHAWK DR</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.26186&mlon=-75.89485#map=18/45.26186/-75.89485" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2414 B JOLIFFE ST</td><td>JOLIFFE ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39352&mlon=-75.61380#map=18/45.39352/-75.61380" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>726 B OCTAVE GROVE</td><td>OCTAVE GROVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.26980&mlon=-75.67801#map=18/45.26980/-75.67801" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6141 OTTAWA ST</td><td>OTTAWA ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.18492&mlon=-75.82803#map=18/45.18492/-75.82803" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>7330 PARKWAY RD</td><td>PARKWAY RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.26793&mlon=-75.54707#map=18/45.26793/-75.54707" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>401 SUMMERHILL ST</td><td>SUMMERHILL ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.26530&mlon=-75.70045#map=18/45.26530/-75.70045" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Retired Addresses <span class="badge badge-red">1</span></h2>
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-removed',0)">Address</th><th onclick="sortTable('t-removed',1)">Street</th>
+        <th onclick="sortTable('t-removed',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-removed">
+        
+        <tr><td>1675 OLD PRESCOTT RD</td><td>OLD PRESCOTT RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-18</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.24732&mlon=-75.56121#map=18/45.24732/-75.56121" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Updated Addresses <span class="badge badge-yellow">53</span>
+      <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRNUM)</li><li>Street name (FULLNAME)</li><li>Unit (UNITID)</li><li>Full address (FULLADDR)</li><li>Coordinates (latitude, longitude)</li><li>ADDRTYPE</li><li>PI_MUNICIPAL_ADDRESS_ID</li><li>QUALIFIER</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>CREATED_DATE</li><li>MODIFIED_DATE</li></ul>
+      
+    </span>
+  </span></h2>
+    
+  <details class="rename-group">
+    <summary><span class="change-field">ADDRTYPE</span> updated in bulk<span class="rename-count">52 addresses</span></summary>
+    <table>
+      <thead><tr><th>Address</th><th>What Changed</th><th>Before</th><th></th><th>After</th><th>Map</th></tr></thead>
+      <tbody>
+        
+  <tr><td rowspan="1">227 BANKSIDE WAY</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25750&mlon=-75.74616#map=18/45.25750/-75.74616" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">229 BANKSIDE WAY</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25753&mlon=-75.74608#map=18/45.25753/-75.74608" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">231 BANKSIDE WAY</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25756&mlon=-75.74601#map=18/45.25756/-75.74601" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">233 BANKSIDE WAY</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25759&mlon=-75.74594#map=18/45.25759/-75.74594" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">235 BANKSIDE WAY</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25761&mlon=-75.74587#map=18/45.25761/-75.74587" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">239 BANKSIDE WAY</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25767&mlon=-75.74572#map=18/45.25767/-75.74572" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">241 BANKSIDE WAY</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25770&mlon=-75.74565#map=18/45.25770/-75.74565" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">243 BANKSIDE WAY</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25774&mlon=-75.74559#map=18/45.25774/-75.74559" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">245 BANKSIDE WAY</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25776&mlon=-75.74551#map=18/45.25776/-75.74551" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">247 BANKSIDE WAY</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25779&mlon=-75.74542#map=18/45.25779/-75.74542" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">285 BANKSIDE WAY</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25812&mlon=-75.74386#map=18/45.25812/-75.74386" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">287 BANKSIDE WAY</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25807&mlon=-75.74380#map=18/45.25807/-75.74380" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">289 BANKSIDE WAY</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25801&mlon=-75.74376#map=18/45.25801/-75.74376" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">327 A BLOOMFIELD AVE</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39647&mlon=-75.75621#map=18/45.39647/-75.75621" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">819 EILEEN VOLLICK CRES</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.36341&mlon=-75.93404#map=18/45.36341/-75.93404" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">821 EILEEN VOLLICK CRES</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.36336&mlon=-75.93398#map=18/45.36336/-75.93398" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">823 EILEEN VOLLICK CRES</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.36333&mlon=-75.93393#map=18/45.36333/-75.93393" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">825 EILEEN VOLLICK CRES</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.36328&mlon=-75.93388#map=18/45.36328/-75.93388" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">912 EILEEN VOLLICK CRES</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.36380&mlon=-75.93124#map=18/45.36380/-75.93124" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">914 EILEEN VOLLICK CRES</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.36385&mlon=-75.93122#map=18/45.36385/-75.93122" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">747 HAFLINGER ROW</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.18836&mlon=-75.85175#map=18/45.18836/-75.85175" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">211 LUDIS WAY</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44576&mlon=-75.51980#map=18/45.44576/-75.51980" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">213 LUDIS WAY</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44578&mlon=-75.51972#map=18/45.44578/-75.51972" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">215 LUDIS WAY</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44581&mlon=-75.51964#map=18/45.44581/-75.51964" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">217 LUDIS WAY</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44583&mlon=-75.51956#map=18/45.44583/-75.51956" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">1142 NORMANDY CRES</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.35726&mlon=-75.71047#map=18/45.35726/-75.71047" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">910 QUORNDON RD</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.18739&mlon=-75.85269#map=18/45.18739/-75.85269" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">917 QUORNDON RD</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.18745&mlon=-75.85222#map=18/45.18745/-75.85222" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">424 SEGUN RAJI ST</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32230&mlon=-75.61389#map=18/45.32230/-75.61389" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">426 SEGUN RAJI ST</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32228&mlon=-75.61395#map=18/45.32228/-75.61395" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">428 SEGUN RAJI ST</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32225&mlon=-75.61402#map=18/45.32225/-75.61402" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">430 SEGUN RAJI ST</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32223&mlon=-75.61409#map=18/45.32223/-75.61409" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">30 SINTALUTA WALK</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.18852&mlon=-75.85299#map=18/45.18852/-75.85299" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">31 SINTALUTA WALK</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.18874&mlon=-75.85275#map=18/45.18874/-75.85275" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">736 TADPOLE CRES</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25641&mlon=-75.74506#map=18/45.25641/-75.74506" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">738 TADPOLE CRES</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25636&mlon=-75.74503#map=18/45.25636/-75.74503" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">740 TADPOLE CRES</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25631&mlon=-75.74499#map=18/45.25631/-75.74499" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">742 TADPOLE CRES</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25626&mlon=-75.74493#map=18/45.25626/-75.74493" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">401 VELOCITY MEWS</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.36451&mlon=-75.93353#map=18/45.36451/-75.93353" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">403 VELOCITY MEWS</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.36446&mlon=-75.93347#map=18/45.36446/-75.93347" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">405 VELOCITY MEWS</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.36442&mlon=-75.93343#map=18/45.36442/-75.93343" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">407 VELOCITY MEWS</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.36438&mlon=-75.93336#map=18/45.36438/-75.93336" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">419 VELOCITY MEWS</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.36408&mlon=-75.93298#map=18/45.36408/-75.93298" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">421 VELOCITY MEWS</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.36403&mlon=-75.93293#map=18/45.36403/-75.93293" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">423 VELOCITY MEWS</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.36400&mlon=-75.93288#map=18/45.36400/-75.93288" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">425 VELOCITY MEWS</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.36395&mlon=-75.93282#map=18/45.36395/-75.93282" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">202 VISIONARY LANE</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.36454&mlon=-75.93335#map=18/45.36454/-75.93335" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">204 VISIONARY LANE</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.36450&mlon=-75.93330#map=18/45.36450/-75.93330" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">206 VISIONARY LANE</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.36446&mlon=-75.93324#map=18/45.36446/-75.93324" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">220 VISIONARY LANE</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.36411&mlon=-75.93280#map=18/45.36411/-75.93280" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">222 VISIONARY LANE</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.36407&mlon=-75.93276#map=18/45.36407/-75.93276" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">224 VISIONARY LANE</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.36402&mlon=-75.93270#map=18/45.36402/-75.93270" target="_blank" rel="noopener">View ↗</a></td></tr>
+      </tbody>
+    </table>
+    
+  </details>
+  
+    
+    <table>
+      <thead><tr><th>Address</th><th>What Changed</th><th>Before</th><th></th><th>After</th><th>Map</th></tr></thead>
+      <tbody>
+        
+  <tr><td rowspan="2">1035 RICHMOND RD</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.37479&mlon=-75.77830#map=18/45.37479/-75.77830" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">45.37491, -75.77817<a class="map-link" href="https://www.openstreetmap.org/?mlat=45.37491&mlon=-75.77817#map=19/45.37491/-75.77817" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↙ 16.8m</td>
+    <td class="new-val">45.37479, -75.77830<a class="map-link" href="https://www.openstreetmap.org/?mlat=45.37479&mlon=-75.77830#map=19/45.37479/-75.77830" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Renumbered Addresses <span class="badge badge-accent">0</span></h2>
+    
+    <p class="empty">No addresses renumbered.</p>
+  </div>
+
+  <div class="section">
+    <h2>Street Renames <span class="badge badge-purple">0</span></h2>
+    <p class="empty">No street renames.</p>
+  </div>
+
+  
+
+  
+
+  
+
+  <div class="section">
+    <h2>Location Adjustments <span class="badge" style="background: var(--surface2); color: var(--text-dim)">0</span></h2>
+    
+    <p class="empty">No location adjustments.</p>
+  </div>
+
+  <div class="generated-at">Report generated Jun 22, 2026 at 12:21 PM · source licence: Open Government Licence – City of Ottawa 2.0</div>
+
+  <script>
+    function sortTable(tbodyId, col) {
+      const tbody = document.getElementById(tbodyId);
+      if (!tbody) return;
+      const rows = Array.from(tbody.rows);
+      const dir = tbody.dataset.sortDir === 'asc' ? 'desc' : 'asc';
+      tbody.dataset.sortDir = dir;
+      rows.sort((a, b) => {
+        const av = a.cells[col]?.textContent.trim() || '';
+        const bv = b.cells[col]?.textContent.trim() || '';
+        const an = parseFloat(av), bn = parseFloat(bv);
+        if (!isNaN(an) && !isNaN(bn)) return dir === 'asc' ? an - bn : bn - an;
+        return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+      });
+      rows.forEach(r => tbody.appendChild(r));
+    }
+  </script>
+</body>
+
+</html>
