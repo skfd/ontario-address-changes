@@ -45,7 +45,7 @@ def _max_oid(batch, oid_field, fmt):
 
 def fetch(ds, force=False):
     filename = f"{ds.slug}-{date.today().isoformat()}.geojson"
-    filepath = os.path.join(ds.data_dir, filename)
+    filepath = os.path.join(ds.download_dir, filename)
     if os.path.exists(filepath) and not force:
         print(f"  using cached {filename}")
         with open(filepath, encoding="utf-8") as f:
@@ -80,7 +80,9 @@ def fetch(ds, force=False):
             break
     print()
 
-    os.makedirs(ds.data_dir, exist_ok=True)
-    with open(filepath, "w", encoding="utf-8") as f:
+    os.makedirs(ds.download_dir, exist_ok=True)
+    tmp = filepath + ".tmp"
+    with open(tmp, "w", encoding="utf-8") as f:
         json.dump({"type": "FeatureCollection", "features": features}, f)
+    os.replace(tmp, filepath)  # atomic: a shared-cache reader never sees a partial file
     return filepath, features
