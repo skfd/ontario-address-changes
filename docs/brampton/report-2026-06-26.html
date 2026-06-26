@@ -1,0 +1,2899 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>City of Brampton Address Changes — Friday, Jun 26, 2026</title>
+  <style>
+    :root {
+      --bg: #fafafa; --surface: #ffffff; --surface2: #f5f5f5; --surface3: #ebebeb;
+      --border: #e0e0e0; --border-strong: #d1d1d1; --text: #242424;
+      --text-secondary: #424242; --text-dim: #616161; --accent: #0078d4;
+      --accent-hover: #106ebe; --accent-bg: #eff6fc; --green: #107c10;
+      --green-bg: #f1faf1; --green-tint: #9fd89f; --red: #c50f1f; --red-bg: #fdf3f4;
+      --red-tint: #eeacb2; --yellow: #eaa300; --yellow-bg: #fefbf4; --yellow-tint: #f9e2ae;
+      --purple: #881798; --purple-bg: #f9f3fb; --teal: #038387; --teal-bg: #f0fafa;
+      --shadow-4: 0 2px 4px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --shadow-8: 0 4px 8px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --card-bg: #ffffff; --card-hover: #f5f5f5; color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1f1f1f; --surface: #292929; --surface2: #333333; --surface3: #3d3d3d;
+        --border: #525252; --border-strong: #666666; --text: #ffffff;
+        --text-secondary: #d6d6d6; --text-dim: #adadad; --accent: #2899f5;
+        --accent-hover: #3aa0f3; --accent-bg: #002848; --green: #54b054;
+        --green-bg: #052505; --green-tint: #107c10; --red: #dc626d; --red-bg: #3b0509;
+        --red-tint: #c50f1f; --yellow: #f2c661; --yellow-bg: #463100; --yellow-tint: #eaa300;
+        --purple: #d29ddb; --purple-bg: #3a1040; --teal: #58c0c4; --teal-bg: #013638;
+        --shadow-4: 0 2px 4px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --shadow-8: 0 4px 8px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --card-bg: #333333; --card-hover: #3d3d3d; color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI Variable','Segoe UI',system-ui,-apple-system,sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.5; padding: 2rem;
+      max-width: 1100px; margin: 0 auto; font-size: 14px; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; color: var(--accent-hover); }
+    .back-link { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 12px;
+      color: var(--text-dim); margin-bottom: 1.5rem; transition: color 0.1s; }
+    .back-link:hover { color: var(--accent); text-decoration: none; }
+    h1 { font-size: 24px; font-weight: 600; margin-bottom: 4px; }
+    .subtitle { color: var(--text-secondary); font-size: 14px; margin-bottom: 12px; }
+    .explainer { color: var(--text-secondary); font-size: 13px; line-height: 1.5;
+      margin-bottom: 24px; padding: 12px 16px; background: var(--surface);
+      border-radius: 8px; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px; margin-bottom: 24px; }
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px;
+      padding: 16px; box-shadow: var(--shadow-4); transition: box-shadow 0.1s; }
+    .card:hover { box-shadow: var(--shadow-8); }
+    .card .label { font-size: 12px; color: var(--text-dim); font-weight: 400; }
+    .card .value { font-size: 28px; font-weight: 600; margin-top: 4px; }
+    .card .value.green { color: var(--green); } .card .value.red { color: var(--red); }
+    .card .value.yellow { color: var(--yellow); } .card .value.accent { color: var(--accent); }
+    .card .value.purple { color: var(--purple); }
+    .card .value.teal { color: var(--teal); }
+    .sparkline { display: block; margin-top: 6px; overflow: visible; opacity: 0.9; }
+    .sparkline-label { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+    .section { margin-bottom: 24px; }
+    .section h2 { font-size: 16px; font-weight: 600; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px; }
+    .badge { font-size: 12px; padding: 2px 8px; border-radius: 999px; font-weight: 600; }
+    .badge-green { background: var(--green-bg); color: var(--green); }
+    .badge-red { background: var(--red-bg); color: var(--red); }
+    .badge-yellow { background: var(--yellow-bg); color: var(--yellow); }
+    .badge-accent { background: var(--accent-bg); color: var(--accent); }
+    .badge-purple { background: var(--purple-bg); color: var(--purple); }
+    .badge-teal { background: var(--teal-bg); color: var(--teal); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface);
+      border-radius: 8px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    thead { background: var(--surface2); }
+    th { text-align: left; padding: 8px 12px; font-weight: 600; color: var(--text-dim);
+      font-size: 12px; cursor: pointer; user-select: none; border-bottom: 1px solid var(--border); }
+    th:hover { color: var(--accent); }
+    td { padding: 8px 12px; border-top: 1px solid var(--border); }
+    tr:hover td { background: var(--surface2); }
+    .old-val { color: var(--red); text-decoration: line-through; }
+    .new-val { color: var(--green); }
+    .arrow-val { color: var(--text-dim); text-align: center; white-space: nowrap; }
+    .map-link { display: inline-flex; align-items: center; margin-left: 0.4em;
+      color: var(--accent); vertical-align: middle; white-space: nowrap; font-size: 12px; }
+    .map-link:hover { color: var(--accent-hover); }
+    .map-link svg { width: 14px; height: 14px; }
+    .change-field { color: var(--yellow); font-weight: 600; }
+    .bar-chart { margin-top: 8px; }
+    .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 12px; }
+    .bar-label { width: 180px; text-align: right; color: var(--text-secondary); flex-shrink: 0;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .bar-track { flex: 1; height: 8px; background: var(--surface2); border-radius: 4px;
+      overflow: hidden; position: relative; }
+    .bar-fill { height: 100%; border-radius: 4px; transition: width 0.15s ease; }
+    .bar-fill.green { background: var(--green); } .bar-fill.red { background: var(--red); }
+    .bar-count { width: 40px; font-size: 12px; color: var(--text-dim); }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+    .empty { color: var(--text-dim); font-style: italic; padding: 16px; }
+    .truncated { color: var(--text-dim); font-size: 12px; margin-top: 8px; }
+    .collapsible-toggle { background: transparent; border: 1px solid var(--border);
+      color: var(--accent); padding: 5px 12px; border-radius: 4px; cursor: pointer;
+      font-size: 12px; font-family: inherit; margin-bottom: 12px; transition: background 0.1s; }
+    .collapsible-toggle:hover { background: var(--surface2); }
+    details.rename-group { background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; margin-bottom: 8px; box-shadow: var(--shadow-4); }
+    details.rename-group summary { padding: 10px 14px; cursor: pointer; font-size: 13px; }
+    details.rename-group[open] summary { border-bottom: 1px solid var(--border); }
+    details.rename-group table { border: none; box-shadow: none; border-radius: 0; }
+    details.rename-group .truncated { padding: 0 14px 10px; margin-top: 0; }
+    .rename-count { color: var(--text-dim); font-size: 12px; margin-left: 6px; }
+    .no-changes-banner { background: var(--green-bg); border: 1px solid var(--green-tint);
+      color: var(--green); padding: 16px; border-radius: 8px; margin-bottom: 24px;
+      text-align: center; font-weight: 600; font-size: 14px; }
+    .baseline-banner { background: var(--accent-bg); border: 1px solid var(--accent);
+      color: var(--accent); padding: 16px; border-radius: 8px; margin-bottom: 24px; font-size: 13px; }
+    .generated-at { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-dim); }
+    .history { font-size: 12.5px; color: var(--text-secondary); white-space: nowrap; }
+    .history .a { color: var(--green); font-weight: 500; }
+    .history .r { color: var(--red); font-weight: 500; }
+    .history .dot { color: var(--text-dim); margin: 0 4px; }
+    .history-none { color: var(--text-dim); font-style: italic; font-size: 12.5px; }
+    .info-wrap { position: relative; display: inline-flex; vertical-align: middle; }
+    .info-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+      height: 18px; padding: 0 8px 0 7px; border-radius: 999px; border: none;
+      color: #fff; background: var(--accent); cursor: help; font-size: 11px; font-weight: 600;
+      font-style: normal; font-family: inherit; line-height: 1; white-space: nowrap; }
+    .info-btn .glyph { font-style: italic; font-weight: 700;
+      font-family: Georgia, 'Times New Roman', serif; }
+    .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn,
+    .info-wrap:focus .info-btn { background: var(--accent-hover); }
+    .info-pop { display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 20;
+      width: 320px; max-width: 80vw; padding: 12px 14px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-8);
+      font-size: 12.5px; font-weight: 400; color: var(--text-secondary); line-height: 1.5; }
+    .info-wrap:hover .info-pop, .info-wrap:focus-within .info-pop,
+    .info-wrap:focus .info-pop { display: block; }
+    .info-pop strong { display: block; color: var(--text); font-size: 12px; margin-bottom: 4px; }
+    .info-pop ul { list-style: none; margin: 0 0 10px; padding: 0; }
+    .info-pop li { padding: 1px 0 1px 14px; position: relative; }
+    .info-pop li::before { content: "·"; position: absolute; left: 4px; color: var(--text-dim); }
+    .info-pop .note { color: var(--text-dim); font-size: 11.5px; margin: 0 0 10px; }
+    .info-pop .muted { color: var(--text-dim); font-style: italic; }
+  </style>
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+
+  <a class="back-link" href="index.html">← Back to City of Brampton reports</a>
+
+  <h1>City of Brampton — Address Changes</h1>
+  <p class="subtitle">
+    Changes between  and Friday, Jun 26, 2026
+    · 248,441 total addresses
+  </p>
+
+  
+
+  <div class="cards">
+    <div class="card"><div class="label">Total Addresses</div>
+      <div class="value accent">248,441</div></div>
+    <div class="card"><div class="label">New Addresses</div>
+      <div class="value green">+21</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#107c10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,4.1 19.7,18.0 37.3,18.0 55.0,18.0 72.7,14.3 90.3,2.0 108.0,6.8"/><circle cx="108.0" cy="6.8" r="2" fill="#107c10"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Retired Addresses</div>
+      <div class="value red">−1</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#c50f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,2.0 108.0,12.7"/><circle cx="108.0" cy="12.7" r="2" fill="#c50f1f"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Updated Addresses <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (CIVIC_NUMBER)</li><li>Street name (STREET_NAME)</li><li>Unit (UNIT_NO)</li><li>Full address (FULL_ADDRESS)</li><li>Coordinates (latitude, longitude)</li><li>ADDRESS_ID</li><li>ADDRESS_TYPE</li><li>BLOCK_PLAN</li><li>CITY</li><li>CITY_FILE</li><li>CITY_GRID</li><li>CONDO_PLAN_NUMBER</li><li>CON_NUM</li><li>C_OF_A</li><li>DRAFT_PLAN_NUMBER</li><li>GIS_ID</li><li>HERITAGE</li><li>LOT_NUM</li><li>OCCUPANCY_DATE</li><li>PERMIT_ISSUEDATE</li><li>PERMIT_NO</li><li>PERMIT_TYPE</li><li>POSTAL_CODE</li><li>PROP_CODE_DESC</li><li>PROVINCE</li><li>REG_PLAN_ASSUMP_DATE</li><li>REG_PLAN_NUMBER</li><li>SEC_PLAN_AREA</li><li>SITE_PLAN_NUMBER</li><li>STREET_DIRECTION</li><li>STREET_TYPE</li><li>SUB_TYPE</li><li>TOWNSHIP</li><li>WARD</li><li>WORK_TYPE</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span></div>
+      <div class="value yellow">66</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,15.9 19.7,11.3 37.3,18.0 55.0,17.4 72.7,17.6 90.3,2.0 108.0,16.8"/><circle cx="108.0" cy="16.8" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Renumbered</div>
+      <div class="value accent">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#0078d4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#0078d4"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Street Renames</div>
+      <div class="value purple">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#9141ac" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#9141ac"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    
+    <div class="card"><div class="label">Boundary Changes</div>
+      <div class="value teal">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#038387" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#038387"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    <div class="card"><div class="label">Location Adjustments</div>
+      <div class="value" style="color: var(--text-dim)">39</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#808080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,17.8 72.7,17.8 90.3,2.0 108.0,16.9"/><circle cx="108.0" cy="16.9" r="2" fill="#808080"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+  </div>
+
+  
+  <div class="section">
+    <h2>Change Breakdown</h2>
+    <div class="stats-grid">
+      
+      <div class="card"><div class="label">Top Streets by New Addresses</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">MARITIME ONTARIO</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">7</span></div>
+      </div></div>
+      
+      
+      <div class="card"><div class="label">Most Frequently Updated Fields</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">Location</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">72</span></div>
+        <div class="bar-row"><span class="bar-label">OCCUPANCY_DATE</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:89.0%"></div></div>
+          <span class="bar-count">64</span></div>
+        <div class="bar-row"><span class="bar-label">PERMIT_ISSUEDATE</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:71.0%"></div></div>
+          <span class="bar-count">51</span></div>
+        <div class="bar-row"><span class="bar-label">PERMIT_NO</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:71.0%"></div></div>
+          <span class="bar-count">51</span></div>
+        <div class="bar-row"><span class="bar-label">PERMIT_TYPE</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:71.0%"></div></div>
+          <span class="bar-count">51</span></div>
+        <div class="bar-row"><span class="bar-label">SUB_TYPE</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:71.0%"></div></div>
+          <span class="bar-count">51</span></div>
+        <div class="bar-row"><span class="bar-label">WORK_TYPE</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:71.0%"></div></div>
+          <span class="bar-count">51</span></div>
+        <div class="bar-row"><span class="bar-label">Address Number</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:1.0%"></div></div>
+          <span class="bar-count">1</span></div>
+        <div class="bar-row"><span class="bar-label">Full Address</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:1.0%"></div></div>
+          <span class="bar-count">1</span></div>
+        <div class="bar-row"><span class="bar-label">POSTAL_CODE</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:1.0%"></div></div>
+          <span class="bar-count">1</span></div>
+      </div></div>
+    </div>
+  </div>
+  
+
+  <div class="section">
+    <h2>New Addresses <span class="badge badge-green">21</span></h2>
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-added',0)">Address</th><th onclick="sortTable('t-added',1)">Street</th>
+        <th onclick="sortTable('t-added',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-added">
+        
+        <tr><td>2-20 CAMPKIN ST</td><td>CAMPKIN</td><td>2</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66830&mlon=-79.74199#map=18/43.66830/-79.74199" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2-6 CHESTERMERE CRES</td><td>CHESTERMERE</td><td>2</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68541&mlon=-79.82191#map=18/43.68541/-79.82191" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2-10 CLOVERLAWN ST</td><td>CLOVERLAWN</td><td>2</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69680&mlon=-79.84124#map=18/43.69680/-79.84124" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2-3 COLONEL BERTRAM RD</td><td>COLONEL BERTRAM</td><td>2</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72735&mlon=-79.81359#map=18/43.72735/-79.81359" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2-67 CRANNYFIELD DR</td><td>CRANNYFIELD</td><td>2</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69802&mlon=-79.83846#map=18/43.69802/-79.83846" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2-2 CRYSTALGATE WAY</td><td>CRYSTALGATE</td><td>2</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67771&mlon=-79.79822#map=18/43.67771/-79.79822" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2-89 DONALD STEWART RD</td><td>DONALD STEWART</td><td>2</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70540&mlon=-79.85041#map=18/43.70540/-79.85041" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>608 FOGAL RD</td><td>FOGAL</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.77267&mlon=-79.65605#map=18/43.77267/-79.65605" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2-21 HARTFORD TRAIL</td><td>HARTFORD</td><td>2</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67161&mlon=-79.72362#map=18/43.67161/-79.72362" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>222-80 MARITIME ONTARIO BLVD</td><td>MARITIME ONTARIO</td><td>222</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74829&mlon=-79.69940#map=18/43.74829/-79.69940" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>225-80 MARITIME ONTARIO BLVD</td><td>MARITIME ONTARIO</td><td>225</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74840&mlon=-79.69927#map=18/43.74840/-79.69927" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>227-80 MARITIME ONTARIO BLVD</td><td>MARITIME ONTARIO</td><td>227</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74848&mlon=-79.69918#map=18/43.74848/-79.69918" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>234-80 MARITIME ONTARIO BLVD</td><td>MARITIME ONTARIO</td><td>234</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74854&mlon=-79.69906#map=18/43.74854/-79.69906" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>237-80 MARITIME ONTARIO BLVD</td><td>MARITIME ONTARIO</td><td>237</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74842&mlon=-79.69918#map=18/43.74842/-79.69918" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>241-80 MARITIME ONTARIO BLVD</td><td>MARITIME ONTARIO</td><td>241</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74816&mlon=-79.69932#map=18/43.74816/-79.69932" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>243-80 MARITIME ONTARIO BLVD</td><td>MARITIME ONTARIO</td><td>243</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74810&mlon=-79.69922#map=18/43.74810/-79.69922" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2-47 MICHIGAN AVE</td><td>MICHIGAN</td><td>2</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64495&mlon=-79.75084#map=18/43.64495/-79.75084" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2-93 MOUNTAINBERRY RD</td><td>MOUNTAINBERRY</td><td>2</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.76495&mlon=-79.72778#map=18/43.76495/-79.72778" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2-28 NESS RD</td><td>NESS</td><td>2</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.63732&mlon=-79.75758#map=18/43.63732/-79.75758" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10350 THE GORE RD</td><td>THE GORE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.79775&mlon=-79.69883#map=18/43.79775/-79.69883" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2-8 WATCHMAN RD</td><td>WATCHMAN</td><td>2</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.76953&mlon=-79.69037#map=18/43.76953/-79.69037" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Retired Addresses <span class="badge badge-red">1</span></h2>
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-removed',0)">Address</th><th onclick="sortTable('t-removed',1)">Street</th>
+        <th onclick="sortTable('t-removed',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-removed">
+        
+        <tr><td>0 THE GORE RD</td><td>THE GORE</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.79775&mlon=-79.69883#map=18/43.79775/-79.69883" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Updated Addresses <span class="badge badge-yellow">66</span>
+      <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (CIVIC_NUMBER)</li><li>Street name (STREET_NAME)</li><li>Unit (UNIT_NO)</li><li>Full address (FULL_ADDRESS)</li><li>Coordinates (latitude, longitude)</li><li>ADDRESS_ID</li><li>ADDRESS_TYPE</li><li>BLOCK_PLAN</li><li>CITY</li><li>CITY_FILE</li><li>CITY_GRID</li><li>CONDO_PLAN_NUMBER</li><li>CON_NUM</li><li>C_OF_A</li><li>DRAFT_PLAN_NUMBER</li><li>GIS_ID</li><li>HERITAGE</li><li>LOT_NUM</li><li>OCCUPANCY_DATE</li><li>PERMIT_ISSUEDATE</li><li>PERMIT_NO</li><li>PERMIT_TYPE</li><li>POSTAL_CODE</li><li>PROP_CODE_DESC</li><li>PROVINCE</li><li>REG_PLAN_ASSUMP_DATE</li><li>REG_PLAN_NUMBER</li><li>SEC_PLAN_AREA</li><li>SITE_PLAN_NUMBER</li><li>STREET_DIRECTION</li><li>STREET_TYPE</li><li>SUB_TYPE</li><li>TOWNSHIP</li><li>WARD</li><li>WORK_TYPE</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span></h2>
+    
+    
+    <table>
+      <thead><tr><th>Address</th><th>What Changed</th><th>Before</th><th></th><th>After</th><th>Map</th></tr></thead>
+      <tbody>
+        
+  <tr><td rowspan="1">35 BAFFIN CRES</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1446508800000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1782345600000</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71557&mlon=-79.82801#map=18/43.71557/-79.82801" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">50 CORDGRASS CRES</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1782345600000</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74988&mlon=-79.74814#map=18/43.74988/-79.74814" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">105 DELLS CRES</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1066780800000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1782345600000</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70018&mlon=-79.80937#map=18/43.70018/-79.80937" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">46 DON MINAKER DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1060819200000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1782345600000</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.77414&mlon=-79.67059#map=18/43.77414/-79.67059" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">288 ELBERN MARKELL DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1432252800000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1782345600000</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66615&mlon=-79.81754#map=18/43.66615/-79.81754" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">9 HORSHAM ST</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1782345600000</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69947&mlon=-79.78541#map=18/43.69947/-79.78541" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">14 LONG MEADOW RD</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1103068800000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1782345600000</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.77733&mlon=-79.70257#map=18/43.77733/-79.70257" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">49 MARBLESEED CRES</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1782345600000</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75812&mlon=-79.74998#map=18/43.75812/-79.74998" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="6">64-90 MARITIME ONTARIO BLVD</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1527033600000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="6"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74912&mlon=-79.69851#map=18/43.74912/-79.69851" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1519776000000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">18-103873-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">E: Retail</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr><td rowspan="1">5 MELVILLE CRES</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1782345600000</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67582&mlon=-79.73772#map=18/43.67582/-79.73772" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">243 MOUNTAINBERRY RD</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1782345600000</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.76146&mlon=-79.72959#map=18/43.76146/-79.72959" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="6">102-2120 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1344297600000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="6"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75071&mlon=-79.72760#map=18/43.75071/-79.72760" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1343001600000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">12-254939-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">E: Retail</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr><td rowspan="6">103-2120 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1327276800000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="6"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75074&mlon=-79.72756#map=18/43.75074/-79.72756" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1299456000000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">11-112991-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">D: Business/Services</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr><td rowspan="6">104-2120 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1311206400000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="6"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75078&mlon=-79.72752#map=18/43.75078/-79.72752" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1299024000000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">11-109951-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">D: Business/Services</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr><td rowspan="6">106-2120 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1310083200000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="6"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75085&mlon=-79.72743#map=18/43.75085/-79.72743" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1300752000000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">11-111517-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">E: Retail</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr><td rowspan="7">111-2120 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1306368000000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="7"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75087&mlon=-79.72698#map=18/43.75087/-79.72698" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1301270400000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">11-117290-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">D: Business/Services</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">43.75091, -79.72694<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75091&mlon=-79.72694#map=19/43.75091/-79.72694" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↙ 5.5m</td>
+    <td class="new-val">43.75087, -79.72698<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75087&mlon=-79.72698#map=19/43.75087/-79.72698" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="7">112-2120 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1323820800000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="7"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75084&mlon=-79.72694#map=18/43.75084/-79.72694" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1315353600000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">11-143838-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">E: Retail</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">43.75088, -79.72689<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75088&mlon=-79.72689#map=19/43.75088/-79.72689" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↙ 6.0m</td>
+    <td class="new-val">43.75084, -79.72694<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75084&mlon=-79.72694#map=19/43.75084/-79.72694" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="7">113-2120 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1665014400000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="7"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75080&mlon=-79.72688#map=18/43.75080/-79.72688" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1312329600000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">11-140811-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">D: Business/Services</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">43.75084, -79.72683<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75084&mlon=-79.72683#map=19/43.75084/-79.72683" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↙ 6.0m</td>
+    <td class="new-val">43.75080, -79.72688<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75080&mlon=-79.72688#map=19/43.75080/-79.72688" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="7">114-2120 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1317340800000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="7"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75077&mlon=-79.72683#map=18/43.75077/-79.72683" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1295568000000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">10-160028-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">D: Business/Services</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">43.75081, -79.72678<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75081&mlon=-79.72678#map=19/43.75081/-79.72678" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↙ 6.0m</td>
+    <td class="new-val">43.75077, -79.72683<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75077&mlon=-79.72683#map=19/43.75077/-79.72683" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="7">116-2120 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1303948800000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="7"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75067&mlon=-79.72667#map=18/43.75067/-79.72667" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1296777600000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">11-108847-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">D: Business/Services</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">43.75071, -79.72662<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75071&mlon=-79.72662#map=19/43.75071/-79.72662" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↙ 6.0m</td>
+    <td class="new-val">43.75067, -79.72667<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75067&mlon=-79.72667#map=19/43.75067/-79.72667" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="7">117-2120 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1376524800000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="7"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75064&mlon=-79.72661#map=18/43.75064/-79.72661" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1300060800000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">11-115379-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">D: Business/Services</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">43.75068, -79.72657<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75068&mlon=-79.72657#map=19/43.75068/-79.72657" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↙ 5.5m</td>
+    <td class="new-val">43.75064, -79.72661<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75064&mlon=-79.72661#map=19/43.75064/-79.72661" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="7">118-2120 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1315958400000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="7"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75061&mlon=-79.72656#map=18/43.75061/-79.72656" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1303171200000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">11-121590-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">D: Business/Services</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">43.75065, -79.72651<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75065&mlon=-79.72651#map=19/43.75065/-79.72651" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↙ 6.0m</td>
+    <td class="new-val">43.75061, -79.72656<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75061&mlon=-79.72656#map=19/43.75061/-79.72656" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="7">120-2120 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1334707200000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="7"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75054&mlon=-79.72646#map=18/43.75054/-79.72646" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1317945600000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">11-158453-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">E: Retail</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">43.75059, -79.72642<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75059&mlon=-79.72642#map=19/43.75059/-79.72642" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↙ 6.4m</td>
+    <td class="new-val">43.75054, -79.72646<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75054&mlon=-79.72646#map=19/43.75054/-79.72646" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="7">121-2120 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1392336000000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="7"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75051&mlon=-79.72640#map=18/43.75051/-79.72640" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1297641600000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">11-109970-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">D: Business/Services</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">43.75055, -79.72636<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75055&mlon=-79.72636#map=19/43.75055/-79.72636" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↙ 5.5m</td>
+    <td class="new-val">43.75051, -79.72640<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75051&mlon=-79.72640#map=19/43.75051/-79.72640" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="7">122-2120 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1315785600000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="7"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75048&mlon=-79.72635#map=18/43.75048/-79.72635" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1297641600000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">11-109117-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">E: Retail</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">43.75052, -79.72631<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75052&mlon=-79.72631#map=19/43.75052/-79.72631" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↙ 5.5m</td>
+    <td class="new-val">43.75048, -79.72635<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75048&mlon=-79.72635#map=19/43.75048/-79.72635" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="7">124-2120 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1317340800000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="7"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75042&mlon=-79.72625#map=18/43.75042/-79.72625" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1312243200000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">11-140808-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">E: Retail</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">43.75046, -79.72620<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75046&mlon=-79.72620#map=19/43.75046/-79.72620" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↙ 6.0m</td>
+    <td class="new-val">43.75042, -79.72625<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75042&mlon=-79.72625#map=19/43.75042/-79.72625" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="7">125-2120 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1392854400000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="7"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75039&mlon=-79.72620#map=18/43.75039/-79.72620" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1300233600000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">11-112924-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">E: Retail</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">43.75043, -79.72615<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75043&mlon=-79.72615#map=19/43.75043/-79.72615" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↙ 6.0m</td>
+    <td class="new-val">43.75039, -79.72620<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75039&mlon=-79.72620#map=19/43.75039/-79.72620" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="7">201-2120 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1305158400000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="7"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75073&mlon=-79.72655#map=18/43.75073/-79.72655" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1295481600000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">10-105671-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">D: Business/Services</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">43.75099, -79.72732<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75099&mlon=-79.72732#map=19/43.75099/-79.72732" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↘ 68.3m</td>
+    <td class="new-val">43.75073, -79.72655<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75073&mlon=-79.72655#map=19/43.75073/-79.72655" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="7">203-2120 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1303257600000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="7"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75066&mlon=-79.72643#map=18/43.75066/-79.72643" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1296777600000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">11-107358-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">D: Business/Services</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">43.75099, -79.72732<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75099&mlon=-79.72732#map=19/43.75099/-79.72732" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↘ 80.4m</td>
+    <td class="new-val">43.75066, -79.72643<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75066&mlon=-79.72643#map=19/43.75066/-79.72643" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="7">205-2120 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1334102400000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="7"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75060&mlon=-79.72643#map=18/43.75060/-79.72643" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1297036800000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">11-107360-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">D: Business/Services</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">43.75099, -79.72732<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75099&mlon=-79.72732#map=19/43.75099/-79.72732" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↘ 83.7m</td>
+    <td class="new-val">43.75060, -79.72643<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75060&mlon=-79.72643#map=19/43.75060/-79.72643" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="6">207-2120 NORTH PARK DR</td>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1305504000000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="6"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75067&mlon=-79.72652#map=18/43.75067/-79.72652" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">11-124619-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">D: Business/Services</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">43.75099, -79.72732<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75099&mlon=-79.72732#map=19/43.75099/-79.72732" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↘ 73.5m</td>
+    <td class="new-val">43.75067, -79.72652<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75067&mlon=-79.72652#map=19/43.75067/-79.72652" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="7">209-2120 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1302480000000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="7"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75073&mlon=-79.72664#map=18/43.75073/-79.72664" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1299196800000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">11-112022-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">D: Business/Services</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">43.75099, -79.72732<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75099&mlon=-79.72732#map=19/43.75099/-79.72732" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↘ 61.9m</td>
+    <td class="new-val">43.75073, -79.72664<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75073&mlon=-79.72664#map=19/43.75073/-79.72664" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="7">211-2120 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1317340800000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="7"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75080&mlon=-79.72675#map=18/43.75080/-79.72675" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1311120000000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">11-137788-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">D: Business/Services</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">43.75099, -79.72732<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75099&mlon=-79.72732#map=19/43.75099/-79.72732" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↘ 50.5m</td>
+    <td class="new-val">43.75080, -79.72675<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75080&mlon=-79.72675#map=19/43.75080/-79.72675" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="7">212-2120 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1306195200000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="7"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75083&mlon=-79.72680#map=18/43.75083/-79.72680" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1299628800000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">11-113655-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">D: Business/Services</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">43.75099, -79.72732<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75099&mlon=-79.72732#map=19/43.75099/-79.72732" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↘ 45.4m</td>
+    <td class="new-val">43.75083, -79.72680<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75083&mlon=-79.72680#map=19/43.75083/-79.72680" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="7">213-2120 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1305244800000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="7"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75086&mlon=-79.72685#map=18/43.75086/-79.72685" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1299628800000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">11-113634-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">D: Business/Services</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">43.75099, -79.72732<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75099&mlon=-79.72732#map=19/43.75099/-79.72732" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">→ 40.5m</td>
+    <td class="new-val">43.75086, -79.72685<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75086&mlon=-79.72685#map=19/43.75086/-79.72685" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="7">214-2120 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1329782400000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="7"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75089&mlon=-79.72690#map=18/43.75089/-79.72690" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1303084800000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">11-121051-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">D: Business/Services</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">43.75099, -79.72732<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75099&mlon=-79.72732#map=19/43.75099/-79.72732" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">→ 35.6m</td>
+    <td class="new-val">43.75089, -79.72690<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75089&mlon=-79.72690#map=19/43.75089/-79.72690" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="7">216-2120 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1327536000000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="7"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75095&mlon=-79.72691#map=18/43.75095/-79.72691" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1300233600000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">11-113749-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">D: Business/Services</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">43.75099, -79.72732<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75099&mlon=-79.72732#map=19/43.75099/-79.72732" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">→ 33.3m</td>
+    <td class="new-val">43.75095, -79.72691<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75095&mlon=-79.72691#map=19/43.75095/-79.72691" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="7">218-2120 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1304553600000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="7"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75089&mlon=-79.72681#map=18/43.75089/-79.72681" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1297036800000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">11-105946-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">D: Business/Services</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">43.75099, -79.72732<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75099&mlon=-79.72732#map=19/43.75099/-79.72732" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">→ 42.5m</td>
+    <td class="new-val">43.75089, -79.72681<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75089&mlon=-79.72681#map=19/43.75089/-79.72681" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="7">220-2120 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1313107200000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="7"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75083&mlon=-79.72671#map=18/43.75083/-79.72671" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1302220800000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">11-121512-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">D: Business/Services</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">43.75099, -79.72732<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75099&mlon=-79.72732#map=19/43.75099/-79.72732" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">→ 52.2m</td>
+    <td class="new-val">43.75083, -79.72671<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75083&mlon=-79.72671#map=19/43.75083/-79.72671" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="6">130-2130 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1381449600000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="6"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74999&mlon=-79.72634#map=18/43.74999/-79.72634" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1329177600000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">12-101891-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">D: Business/Services</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr><td rowspan="6">133-2130 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1309132800000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="6"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74988&mlon=-79.72647#map=18/43.74988/-79.72647" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1292544000000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">10-151727-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">D: Business/Services</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr><td rowspan="6">139-2130 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1338768000000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="6"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74956&mlon=-79.72665#map=18/43.74956/-79.72665" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1326326400000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">11-221163-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">D: Business/Services</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr><td rowspan="6">141-2130 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1366243200000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="6"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74951&mlon=-79.72678#map=18/43.74951/-79.72678" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1300233600000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">11-116474-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">D: Business/Services</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr><td rowspan="6">142-2130 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1385078400000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="6"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74953&mlon=-79.72683#map=18/43.74953/-79.72683" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1297814400000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">11-106186-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">D: Business/Services</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr><td rowspan="6">143-2130 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1301443200000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="6"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74956&mlon=-79.72689#map=18/43.74956/-79.72689" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1299456000000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">11-113227-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">E: Retail</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr><td rowspan="6">145-2130 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1303948800000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="6"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74968&mlon=-79.72693#map=18/43.74968/-79.72693" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1296777600000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">11-109257-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">D: Business/Services</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr><td rowspan="6">146-2130 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1311811200000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="6"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74971&mlon=-79.72699#map=18/43.74971/-79.72699" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1309132800000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">11-137333-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">E: Retail</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr><td rowspan="6">221-2130 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1316736000000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="6"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74959&mlon=-79.72685#map=18/43.74959/-79.72685" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1296691200000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">10-157880-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">D: Business/Services</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr><td rowspan="6">222-2130 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1302480000000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="6"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74961&mlon=-79.72691#map=18/43.74961/-79.72691" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1297641600000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">11-109088-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">D: Business/Services</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr><td rowspan="6">223-2130 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1311724800000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="6"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74964&mlon=-79.72696#map=18/43.74964/-79.72696" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1304640000000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">11-116815-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">D: Business/Services</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr><td rowspan="6">225-2130 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1303948800000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="6"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74969&mlon=-79.72703#map=18/43.74969/-79.72703" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1292803200000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">10-153050-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">D: Business/Services</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr><td rowspan="7">232-2130 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1385078400000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="7"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74965&mlon=-79.72668#map=18/43.74965/-79.72668" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1297641600000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">11-109077-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">D: Business/Services</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">43.74988, -79.72640<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74988&mlon=-79.72640#map=19/43.74988/-79.72640" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↙ 34.1m</td>
+    <td class="new-val">43.74965, -79.72668<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74965&mlon=-79.72668#map=19/43.74965/-79.72668" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="7">233-2130 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1393804800000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="7"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74973&mlon=-79.72658#map=18/43.74973/-79.72658" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1328659200000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">12-106851-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">D: Business/Services</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">43.74991, -79.72636<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74991&mlon=-79.72636#map=19/43.74991/-79.72636" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↙ 26.7m</td>
+    <td class="new-val">43.74973, -79.72658<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74973&mlon=-79.72658#map=19/43.74973/-79.72658" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="7">237-2130 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1307318400000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="7"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74988&mlon=-79.72640#map=18/43.74988/-79.72640" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1292889600000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">10-156379-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">D: Business/Services</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">43.74986, -79.72638<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74986&mlon=-79.72638#map=19/43.74986/-79.72638" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↖ 2.7m</td>
+    <td class="new-val">43.74988, -79.72640<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74988&mlon=-79.72640#map=19/43.74988/-79.72640" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="7">238-2130 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1313107200000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="7"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74992&mlon=-79.72634#map=18/43.74992/-79.72634" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1307491200000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">11-130641-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">D: Business/Services</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">43.74983, -79.72643<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74983&mlon=-79.72643#map=19/43.74983/-79.72643" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↗ 12.4m</td>
+    <td class="new-val">43.74992, -79.72634<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74992&mlon=-79.72634#map=19/43.74992/-79.72634" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="1">243-2130 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1466121600000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74982&mlon=-79.72644#map=18/43.74982/-79.72644" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="6">245-2130 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1302220800000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="6"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74976&mlon=-79.72652#map=18/43.74976/-79.72652" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1294790400000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">10-157871-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">D: Business/Services</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr><td rowspan="7">246-2130 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1301443200000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="7"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74972&mlon=-79.72656#map=18/43.74972/-79.72656" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1294790400000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">10-157869-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">D: Business/Services</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">43.74952, -79.72695<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74952&mlon=-79.72695#map=19/43.74952/-79.72695" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↗ 38.5m</td>
+    <td class="new-val">43.74972, -79.72656<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74972&mlon=-79.72656#map=19/43.74972/-79.72656" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="7">247-2130 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1306281600000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="7"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74968&mlon=-79.72661#map=18/43.74968/-79.72661" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1300924800000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">11-116477-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">D: Business/Services</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">43.74952, -79.72694<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74952&mlon=-79.72694#map=19/43.74952/-79.72694" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↗ 32.0m</td>
+    <td class="new-val">43.74968, -79.72661<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74968&mlon=-79.72661#map=19/43.74968/-79.72661" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="7">248-2130 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1298505600000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="7"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74963&mlon=-79.72667#map=18/43.74963/-79.72667" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1297900800000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">11-111032-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">D: Business/Services</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Change of Use</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">43.74951, -79.72692<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74951&mlon=-79.72692#map=19/43.74951/-79.72692" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↗ 24.1m</td>
+    <td class="new-val">43.74963, -79.72667<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74963&mlon=-79.72667#map=19/43.74963/-79.72667" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="7">249-2130 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1385078400000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="7"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74960&mlon=-79.72672#map=18/43.74960/-79.72672" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1292889600000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">10-154902-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">D: Business/Services</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">43.74950, -79.72691<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74950&mlon=-79.72691#map=19/43.74950/-79.72691" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↗ 18.9m</td>
+    <td class="new-val">43.74960, -79.72672<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74960&mlon=-79.72672#map=19/43.74960/-79.72672" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="7">250-2130 NORTH PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1339027200000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="7"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74958&mlon=-79.72679#map=18/43.74958/-79.72679" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1326326400000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">11-221200-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">D: Business/Services</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">43.74949, -79.72690<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74949&mlon=-79.72690#map=19/43.74949/-79.72690" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↗ 13.4m</td>
+    <td class="new-val">43.74958, -79.72679<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74958&mlon=-79.72679#map=19/43.74958/-79.72679" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="1">200-164 SANDALWOOD PKY E</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1430352000000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1782345600000</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72767&mlon=-79.79703#map=18/43.72767/-79.79703" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">66 STUDEBAKER TRAIL</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1064361600000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1782345600000</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69060&mlon=-79.83660#map=18/43.69060/-79.83660" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="6">UNASSIGNED</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">10050</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="6"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.79219&mlon=-79.69113#map=18/43.79219/-79.69113" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Street</td>
+    <td class="old-val">THE GORE</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">UNASSIGNED</td>
+    </tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">10050 THE GORE RD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">UNASSIGNED</td>
+    </tr>
+  <tr>
+    <td class="change-field">POSTAL_CODE</td>
+    <td class="old-val">L6P0B4</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PROP_CODE_DESC</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Farm</td>
+    </tr>
+  <tr>
+    <td class="change-field">STREET_TYPE</td>
+    <td class="old-val">RD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr><td rowspan="1">5 VESPAHILLS CRES</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1211932800000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1782345600000</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.76635&mlon=-79.67242#map=18/43.76635/-79.67242" target="_blank" rel="noopener">View ↗</a></td></tr>
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Renumbered Addresses <span class="badge badge-accent">0</span></h2>
+    
+    <p class="empty">No addresses renumbered.</p>
+  </div>
+
+  <div class="section">
+    <h2>Street Renames <span class="badge badge-purple">0</span></h2>
+    <p class="empty">No street renames.</p>
+  </div>
+
+  
+
+  
+
+  
+  <div class="section">
+    <h2>Boundary Changes <span class="badge badge-teal">0</span></h2>
+    <p class="empty">No ward or municipality reassignments.</p>
+  </div>
+  
+
+  <div class="section">
+    <h2>Location Adjustments <span class="badge" style="background: var(--surface2); color: var(--text-dim)">39</span></h2>
+    
+    
+    
+    <table>
+      <thead><tr><th>Address</th><th>Before</th><th></th><th>After</th></tr></thead>
+      <tbody>
+        
+        <tr><td>2-9 BLUE BONNET DR</td>
+          
+          <td class="old-val">43.64476, -79.74964<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64476&mlon=-79.74964#map=19/43.64476/-79.74964" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 3.4m</td>
+          <td class="new-val">43.64473, -79.74965<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64473&mlon=-79.74965#map=19/43.64473/-79.74965" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>2-11 BLUE BONNET DR</td>
+          
+          <td class="old-val">43.64472, -79.74988<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64472&mlon=-79.74988#map=19/43.64472/-79.74988" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 3.4m</td>
+          <td class="new-val">43.64469, -79.74987<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64469&mlon=-79.74987#map=19/43.64469/-79.74987" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>2-3 CLOVERLAWN ST</td>
+          
+          <td class="old-val">43.69713, -79.84058<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69713&mlon=-79.84058#map=19/43.69713/-79.84058" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 4.1m</td>
+          <td class="new-val">43.69710, -79.84061<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69710&mlon=-79.84061#map=19/43.69710/-79.84061" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>16 CLOVERLAWN ST</td>
+          
+          <td class="old-val">43.69723, -79.84151<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69723&mlon=-79.84151#map=19/43.69723/-79.84151" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 7.4m</td>
+          <td class="new-val">43.69718, -79.84145<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69718&mlon=-79.84145#map=19/43.69718/-79.84145" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>18 CLOVERLAWN ST</td>
+          
+          <td class="old-val">43.69732, -79.84139<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69732&mlon=-79.84139#map=19/43.69732/-79.84139" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 3.3m</td>
+          <td class="new-val">43.69730, -79.84136<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69730&mlon=-79.84136#map=19/43.69730/-79.84136" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>2-19 CLOVERLAWN ST</td>
+          
+          <td class="old-val">43.69775, -79.84020<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69775&mlon=-79.84020#map=19/43.69775/-79.84020" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 2.0m</td>
+          <td class="new-val">43.69774, -79.84018<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69774&mlon=-79.84018#map=19/43.69774/-79.84018" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>2-21 CLOVERLAWN ST</td>
+          
+          <td class="old-val">43.69785, -79.84018<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69785&mlon=-79.84018#map=19/43.69785/-79.84018" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 8.0m</td>
+          <td class="new-val">43.69782, -79.84009<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69782&mlon=-79.84009#map=19/43.69782/-79.84009" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>2-24 CLOVERLAWN ST</td>
+          
+          <td class="old-val">43.69752, -79.84107<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69752&mlon=-79.84107#map=19/43.69752/-79.84107" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 9.9m</td>
+          <td class="new-val">43.69758, -79.84116<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69758&mlon=-79.84116#map=19/43.69758/-79.84116" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>2-25 CLOVERLAWN ST</td>
+          
+          <td class="old-val">43.69797, -79.83990<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69797&mlon=-79.83990#map=19/43.69797/-79.83990" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">← 3.2m</td>
+          <td class="new-val">43.69797, -79.83994<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69797&mlon=-79.83994#map=19/43.69797/-79.83994" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>2-28 CLOVERLAWN ST</td>
+          
+          <td class="old-val">43.69774, -79.84086<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69774&mlon=-79.84086#map=19/43.69774/-79.84086" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 8.5m</td>
+          <td class="new-val">43.69779, -79.84094<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69779&mlon=-79.84094#map=19/43.69779/-79.84094" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>2-36 CLOVERLAWN ST</td>
+          
+          <td class="old-val">43.69820, -79.84059<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69820&mlon=-79.84059#map=19/43.69820/-79.84059" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 3.3m</td>
+          <td class="new-val">43.69818, -79.84056<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69818&mlon=-79.84056#map=19/43.69818/-79.84056" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>2-9 COLONEL BERTRAM RD</td>
+          
+          <td class="old-val">43.72777, -79.81413<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72777&mlon=-79.81413#map=19/43.72777/-79.81413" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">← 5.6m</td>
+          <td class="new-val">43.72777, -79.81420<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72777&mlon=-79.81420#map=19/43.72777/-79.81420" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>2-61 CRANNYFIELD DR</td>
+          
+          <td class="old-val">43.69777, -79.83814<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69777&mlon=-79.83814#map=19/43.69777/-79.83814" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">← 4.0m</td>
+          <td class="new-val">43.69777, -79.83819<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69777&mlon=-79.83819#map=19/43.69777/-79.83819" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>2-71 CRANNYFIELD DR</td>
+          
+          <td class="old-val">43.69805, -79.83868<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69805&mlon=-79.83868#map=19/43.69805/-79.83868" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↗ 7.9m</td>
+          <td class="new-val">43.69810, -79.83861<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69810&mlon=-79.83861#map=19/43.69810/-79.83861" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>2-22 GOLDNUGGET RD</td>
+          
+          <td class="old-val">43.63699, -79.75681<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.63699&mlon=-79.75681#map=19/43.63699/-79.75681" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 3.9m</td>
+          <td class="new-val">43.63697, -79.75685<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.63697&mlon=-79.75685#map=19/43.63697/-79.75685" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>2-34 HARTFORD TRAIL</td>
+          
+          <td class="old-val">43.67149, -79.72273<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67149&mlon=-79.72273#map=19/43.67149/-79.72273" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 2.0m</td>
+          <td class="new-val">43.67148, -79.72271<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67148&mlon=-79.72271#map=19/43.67148/-79.72271" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>2-12 HIMALAYA ST</td>
+          
+          <td class="old-val">43.76574, -79.72887<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.76574&mlon=-79.72887#map=19/43.76574/-79.72887" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 3.4m</td>
+          <td class="new-val">43.76571, -79.72888<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.76571&mlon=-79.72888#map=19/43.76571/-79.72888" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>2-21 MICHIGAN AVE</td>
+          
+          <td class="old-val">43.64546, -79.74897<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64546&mlon=-79.74897#map=19/43.64546/-79.74897" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↑ 10.1m</td>
+          <td class="new-val">43.64555, -79.74896<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64555&mlon=-79.74896#map=19/43.64555/-79.74896" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>2-87 MOUNTAINBERRY RD</td>
+          
+          <td class="old-val">43.76525, -79.72796<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.76525&mlon=-79.72796#map=19/43.76525/-79.72796" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">→ 3.4m</td>
+          <td class="new-val">43.76526, -79.72792<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.76526&mlon=-79.72792#map=19/43.76526/-79.72792" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>2-89 MOUNTAINBERRY RD</td>
+          
+          <td class="old-val">43.76515, -79.72790<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.76515&mlon=-79.72790#map=19/43.76515/-79.72790" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">→ 1.6m</td>
+          <td class="new-val">43.76515, -79.72788<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.76515&mlon=-79.72788#map=19/43.76515/-79.72788" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>2-30 NESS RD</td>
+          
+          <td class="old-val">43.63718, -79.75763<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.63718&mlon=-79.75763#map=19/43.63718/-79.75763" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">→ 1.6m</td>
+          <td class="new-val">43.63718, -79.75761<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.63718&mlon=-79.75761#map=19/43.63718/-79.75761" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>2-32 NESS RD</td>
+          
+          <td class="old-val">43.63708, -79.75762<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.63708&mlon=-79.75762#map=19/43.63708/-79.75762" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 2.7m</td>
+          <td class="new-val">43.63706, -79.75760<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.63706&mlon=-79.75760#map=19/43.63706/-79.75760" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>109-2120 NORTH PARK DR</td>
+          
+          <td class="old-val">43.75096, -79.72704<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75096&mlon=-79.72704#map=19/43.75096/-79.72704" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 6.0m</td>
+          <td class="new-val">43.75092, -79.72709<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75092&mlon=-79.72709#map=19/43.75092/-79.72709" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>110-2120 NORTH PARK DR</td>
+          
+          <td class="old-val">43.75094, -79.72699<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75094&mlon=-79.72699#map=19/43.75094/-79.72699" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 6.0m</td>
+          <td class="new-val">43.75090, -79.72704<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75090&mlon=-79.72704#map=19/43.75090/-79.72704" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>115-2120 NORTH PARK DR</td>
+          
+          <td class="old-val">43.75078, -79.72673<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75078&mlon=-79.72673#map=19/43.75078/-79.72673" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 5.5m</td>
+          <td class="new-val">43.75074, -79.72677<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75074&mlon=-79.72677#map=19/43.75074/-79.72677" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>119-2120 NORTH PARK DR</td>
+          
+          <td class="old-val">43.75062, -79.72647<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75062&mlon=-79.72647#map=19/43.75062/-79.72647" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 5.5m</td>
+          <td class="new-val">43.75058, -79.72651<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75058&mlon=-79.72651#map=19/43.75058/-79.72651" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>123-2120 NORTH PARK DR</td>
+          
+          <td class="old-val">43.75049, -79.72625<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75049&mlon=-79.72625#map=19/43.75049/-79.72625" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 6.0m</td>
+          <td class="new-val">43.75045, -79.72630<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75045&mlon=-79.72630#map=19/43.75045/-79.72630" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>126-2120 NORTH PARK DR</td>
+          
+          <td class="old-val">43.75040, -79.72610<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75040&mlon=-79.72610#map=19/43.75040/-79.72610" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 5.5m</td>
+          <td class="new-val">43.75036, -79.72614<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75036&mlon=-79.72614#map=19/43.75036/-79.72614" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>127-2120 NORTH PARK DR</td>
+          
+          <td class="old-val">43.75037, -79.72604<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75037&mlon=-79.72604#map=19/43.75037/-79.72604" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 6.0m</td>
+          <td class="new-val">43.75033, -79.72609<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75033&mlon=-79.72609#map=19/43.75033/-79.72609" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>208-2120 NORTH PARK DR</td>
+          
+          <td class="old-val">43.75095, -79.72739<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75095&mlon=-79.72739#map=19/43.75095/-79.72739" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 70.1m</td>
+          <td class="new-val">43.75070, -79.72659<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75070&mlon=-79.72659#map=19/43.75070/-79.72659" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>235-2130 NORTH PARK DR</td>
+          
+          <td class="old-val">43.74993, -79.72631<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74993&mlon=-79.72631#map=19/43.74993/-79.72631" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 19.7m</td>
+          <td class="new-val">43.74981, -79.72649<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74981&mlon=-79.72649#map=19/43.74981/-79.72649" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>244-2130 NORTH PARK DR</td>
+          
+          <td class="old-val">43.74959, -79.72672<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74959&mlon=-79.72672#map=19/43.74959/-79.72672" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↗ 30.0m</td>
+          <td class="new-val">43.74979, -79.72647<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74979&mlon=-79.72647#map=19/43.74979/-79.72647" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>2-2 WARRINGTON CRT</td>
+          
+          <td class="old-val">43.67200, -79.72415<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67200&mlon=-79.72415#map=19/43.67200/-79.72415" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 3.9m</td>
+          <td class="new-val">43.67198, -79.72419<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67198&mlon=-79.72419#map=19/43.67198/-79.72419" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>2-4 WARRINGTON CRT</td>
+          
+          <td class="old-val">43.67184, -79.72402<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67184&mlon=-79.72402#map=19/43.67184/-79.72402" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 4.1m</td>
+          <td class="new-val">43.67181, -79.72405<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67181&mlon=-79.72405#map=19/43.67181/-79.72405" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>12 WARRINGTON CRT</td>
+          
+          <td class="old-val">43.67125, -79.72389<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67125&mlon=-79.72389#map=19/43.67125/-79.72389" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 3.3m</td>
+          <td class="new-val">43.67123, -79.72392<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67123&mlon=-79.72392#map=19/43.67123/-79.72392" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>2-12 WARRINGTON CRT</td>
+          
+          <td class="old-val">43.67126, -79.72379<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67126&mlon=-79.72379#map=19/43.67126/-79.72379" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 5.3m</td>
+          <td class="new-val">43.67124, -79.72385<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67124&mlon=-79.72385#map=19/43.67124/-79.72385" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>14 WARRINGTON CRT</td>
+          
+          <td class="old-val">43.67112, -79.72384<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67112&mlon=-79.72384#map=19/43.67112/-79.72384" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 2.7m</td>
+          <td class="new-val">43.67111, -79.72387<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67111&mlon=-79.72387#map=19/43.67111/-79.72387" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>16 WARRINGTON CRT</td>
+          
+          <td class="old-val">43.67099, -79.72375<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67099&mlon=-79.72375#map=19/43.67099/-79.72375" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 4.1m</td>
+          <td class="new-val">43.67096, -79.72378<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67096&mlon=-79.72378#map=19/43.67096/-79.72378" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>2-2 WATCHMAN RD</td>
+          
+          <td class="old-val">43.76916, -79.69028<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.76916&mlon=-79.69028#map=19/43.76916/-79.69028" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">← 12.1m</td>
+          <td class="new-val">43.76915, -79.69043<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.76915&mlon=-79.69043#map=19/43.76915/-79.69043" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+      </tbody>
+    </table>
+    
+    
+    
+  </div>
+
+  <div class="generated-at">Report generated Jun 26, 2026 at 12:19 PM · source licence: Creative Commons Attribution 4.0 (CC BY 4.0)</div>
+
+  <script>
+    function sortTable(tbodyId, col) {
+      const tbody = document.getElementById(tbodyId);
+      if (!tbody) return;
+      const rows = Array.from(tbody.rows);
+      const dir = tbody.dataset.sortDir === 'asc' ? 'desc' : 'asc';
+      tbody.dataset.sortDir = dir;
+      rows.sort((a, b) => {
+        const av = a.cells[col]?.textContent.trim() || '';
+        const bv = b.cells[col]?.textContent.trim() || '';
+        const an = parseFloat(av), bn = parseFloat(bv);
+        if (!isNaN(an) && !isNaN(bn)) return dir === 'asc' ? an - bn : bn - an;
+        return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+      });
+      rows.forEach(r => tbody.appendChild(r));
+    }
+  </script>
+</body>
+
+</html>
