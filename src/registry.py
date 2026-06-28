@@ -34,15 +34,6 @@ class Dataset:
         return os.path.join(root, "data", self.slug)
 
     @property
-    def download_dir(self):
-        """Where raw ``<slug>-DATE.geojson`` downloads live. Defaults to this
-        dataset's data_dir; point ADDRESSLAYERIST_CACHE at a shared folder so the
-        per-city address-layer repos and this tracker reuse one download per
-        source per day instead of each pulling the same data. The DB stays under
-        data_dir."""
-        return os.environ.get("ADDRESSLAYERIST_CACHE") or self.data_dir
-
-    @property
     def db_path(self):
         return os.path.join(self.data_dir, f"{self.slug}.db")
 
