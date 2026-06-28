@@ -17,9 +17,10 @@ of many datasets. Adding a city is a config file, not code.
 - **Registry** — one TOML per dataset in `datasets/`. It names the source URL,
   how to fetch it (`arcgis` REST query, or `static` file), the field map, and
   how to identify a record across snapshots.
-- **Fetch** — `src/fetch/arcgis.py` paginates an ArcGIS REST layer by OBJECTID
-  window (fast on large layers); `src/fetch/static.py` downloads a file
-  (geojson or shapefile, optionally zipped) and reprojects to EPSG:4326.
+- **Fetch** (`src/fetch/`) — pulls the dataset's latest snapshot from
+  `address-vault` (`Vault().pull(slug)`), which owns the `arcgis`/`static`
+  acquisition and reprojection to EPSG:4326 and keeps the dated history. Requires
+  `ADDRESSVAULT_DIR` set to the vault folder.
 - **Normalize** (`src/normalize.py`) — applies the field map to a small canonical
   set (`number`, `street`, `unit`, `full`, lon/lat) and computes a stable
   `identity_key` plus a `payload_hash` for change detection. All source
@@ -55,6 +56,8 @@ python -m venv .venv
 .venv\Scripts\activate
 pip install -r requirements.txt
 ```
+
+Set `ADDRESSVAULT_DIR` to the address-vault folder; `fetch` reads and writes there.
 
 ## Usage
 
