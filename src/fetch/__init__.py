@@ -27,11 +27,13 @@ def _vault(ds):
 def fetch(ds, force=False):
     from addressvault import Archived
     v = _vault(ds)
-    v.pull(ds.slug, force=force)
+    # wait=True: coalesce onto an in-flight pull of this slug rather than erroring
+    # or starting a duplicate download.
+    v.pull(ds.slug, force=force, wait=True)
     try:
         path = v.path(ds.slug, "latest")
     except Archived:  # latest is an unchanged day pointing at a cold canonical
-        v.thaw(ds.slug, v.snapshot(ds.slug, "latest").date)
+        v.thaw(ds.slug, v.snapshot(ds.slug, "latest").date, wait=True)
         path = v.path(ds.slug, "latest")
     with open(path, encoding="utf-8") as f:
         features = json.load(f).get("features", [])
