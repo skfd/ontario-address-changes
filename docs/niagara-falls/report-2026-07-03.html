@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>City of Niagara Falls Address Changes — Friday, Jul 03, 2026</title>
+  <style>
+    :root {
+      --bg: #fafafa; --surface: #ffffff; --surface2: #f5f5f5; --surface3: #ebebeb;
+      --border: #e0e0e0; --border-strong: #d1d1d1; --text: #242424;
+      --text-secondary: #424242; --text-dim: #616161; --accent: #0078d4;
+      --accent-hover: #106ebe; --accent-bg: #eff6fc; --green: #107c10;
+      --green-bg: #f1faf1; --green-tint: #9fd89f; --red: #c50f1f; --red-bg: #fdf3f4;
+      --red-tint: #eeacb2; --yellow: #eaa300; --yellow-bg: #fefbf4; --yellow-tint: #f9e2ae;
+      --purple: #881798; --purple-bg: #f9f3fb; --teal: #038387; --teal-bg: #f0fafa;
+      --shadow-4: 0 2px 4px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --shadow-8: 0 4px 8px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --card-bg: #ffffff; --card-hover: #f5f5f5; color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1f1f1f; --surface: #292929; --surface2: #333333; --surface3: #3d3d3d;
+        --border: #525252; --border-strong: #666666; --text: #ffffff;
+        --text-secondary: #d6d6d6; --text-dim: #adadad; --accent: #2899f5;
+        --accent-hover: #3aa0f3; --accent-bg: #002848; --green: #54b054;
+        --green-bg: #052505; --green-tint: #107c10; --red: #dc626d; --red-bg: #3b0509;
+        --red-tint: #c50f1f; --yellow: #f2c661; --yellow-bg: #463100; --yellow-tint: #eaa300;
+        --purple: #d29ddb; --purple-bg: #3a1040; --teal: #58c0c4; --teal-bg: #013638;
+        --shadow-4: 0 2px 4px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --shadow-8: 0 4px 8px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --card-bg: #333333; --card-hover: #3d3d3d; color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI Variable','Segoe UI',system-ui,-apple-system,sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.5; padding: 2rem;
+      max-width: 1100px; margin: 0 auto; font-size: 14px; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; color: var(--accent-hover); }
+    .back-link { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 12px;
+      color: var(--text-dim); margin-bottom: 1.5rem; transition: color 0.1s; }
+    .back-link:hover { color: var(--accent); text-decoration: none; }
+    h1 { font-size: 24px; font-weight: 600; margin-bottom: 4px; }
+    .subtitle { color: var(--text-secondary); font-size: 14px; margin-bottom: 12px; }
+    .explainer { color: var(--text-secondary); font-size: 13px; line-height: 1.5;
+      margin-bottom: 24px; padding: 12px 16px; background: var(--surface);
+      border-radius: 8px; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px; margin-bottom: 24px; }
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px;
+      padding: 16px; box-shadow: var(--shadow-4); transition: box-shadow 0.1s; }
+    .card:hover { box-shadow: var(--shadow-8); }
+    .card .label { font-size: 12px; color: var(--text-dim); font-weight: 400; }
+    .card .value { font-size: 28px; font-weight: 600; margin-top: 4px; }
+    .card .value.green { color: var(--green); } .card .value.red { color: var(--red); }
+    .card .value.yellow { color: var(--yellow); } .card .value.accent { color: var(--accent); }
+    .card .value.purple { color: var(--purple); }
+    .card .value.teal { color: var(--teal); }
+    .sparkline { display: block; margin-top: 6px; overflow: visible; opacity: 0.9; }
+    .sparkline-label { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+    .section { margin-bottom: 24px; }
+    .section h2 { font-size: 16px; font-weight: 600; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px; }
+    .badge { font-size: 12px; padding: 2px 8px; border-radius: 999px; font-weight: 600; }
+    .badge-green { background: var(--green-bg); color: var(--green); }
+    .badge-red { background: var(--red-bg); color: var(--red); }
+    .badge-yellow { background: var(--yellow-bg); color: var(--yellow); }
+    .badge-accent { background: var(--accent-bg); color: var(--accent); }
+    .badge-purple { background: var(--purple-bg); color: var(--purple); }
+    .badge-teal { background: var(--teal-bg); color: var(--teal); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface);
+      border-radius: 8px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    thead { background: var(--surface2); }
+    th { text-align: left; padding: 8px 12px; font-weight: 600; color: var(--text-dim);
+      font-size: 12px; cursor: pointer; user-select: none; border-bottom: 1px solid var(--border); }
+    th:hover { color: var(--accent); }
+    td { padding: 8px 12px; border-top: 1px solid var(--border); }
+    tr:hover td { background: var(--surface2); }
+    .old-val { color: var(--red); text-decoration: line-through; }
+    .new-val { color: var(--green); }
+    .arrow-val { color: var(--text-dim); text-align: center; white-space: nowrap; }
+    .map-link { display: inline-flex; align-items: center; margin-left: 0.4em;
+      color: var(--accent); vertical-align: middle; white-space: nowrap; font-size: 12px; }
+    .map-link:hover { color: var(--accent-hover); }
+    .map-link svg { width: 14px; height: 14px; }
+    .change-field { color: var(--yellow); font-weight: 600; }
+    .bar-chart { margin-top: 8px; }
+    .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 12px; }
+    .bar-label { width: 180px; text-align: right; color: var(--text-secondary); flex-shrink: 0;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .bar-track { flex: 1; height: 8px; background: var(--surface2); border-radius: 4px;
+      overflow: hidden; position: relative; }
+    .bar-fill { height: 100%; border-radius: 4px; transition: width 0.15s ease; }
+    .bar-fill.green { background: var(--green); } .bar-fill.red { background: var(--red); }
+    .bar-count { width: 40px; font-size: 12px; color: var(--text-dim); }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+    .empty { color: var(--text-dim); font-style: italic; padding: 16px; }
+    .truncated { color: var(--text-dim); font-size: 12px; margin-top: 8px; }
+    .collapsible-toggle { background: transparent; border: 1px solid var(--border);
+      color: var(--accent); padding: 5px 12px; border-radius: 4px; cursor: pointer;
+      font-size: 12px; font-family: inherit; margin-bottom: 12px; transition: background 0.1s; }
+    .collapsible-toggle:hover { background: var(--surface2); }
+    details.rename-group { background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; margin-bottom: 8px; box-shadow: var(--shadow-4); }
+    details.rename-group summary { padding: 10px 14px; cursor: pointer; font-size: 13px; }
+    details.rename-group[open] summary { border-bottom: 1px solid var(--border); }
+    details.rename-group table { border: none; box-shadow: none; border-radius: 0; }
+    details.rename-group .truncated { padding: 0 14px 10px; margin-top: 0; }
+    .rename-count { color: var(--text-dim); font-size: 12px; margin-left: 6px; }
+    .no-changes-banner { background: var(--green-bg); border: 1px solid var(--green-tint);
+      color: var(--green); padding: 16px; border-radius: 8px; margin-bottom: 24px;
+      text-align: center; font-weight: 600; font-size: 14px; }
+    .baseline-banner { background: var(--accent-bg); border: 1px solid var(--accent);
+      color: var(--accent); padding: 16px; border-radius: 8px; margin-bottom: 24px; font-size: 13px; }
+    .generated-at { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-dim); }
+    .history { font-size: 12.5px; color: var(--text-secondary); white-space: nowrap; }
+    .history .a { color: var(--green); font-weight: 500; }
+    .history .r { color: var(--red); font-weight: 500; }
+    .history .dot { color: var(--text-dim); margin: 0 4px; }
+    .history-none { color: var(--text-dim); font-style: italic; font-size: 12.5px; }
+    .info-wrap { position: relative; display: inline-flex; vertical-align: middle; }
+    .info-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+      height: 18px; padding: 0 8px 0 7px; border-radius: 999px; border: none;
+      color: #fff; background: var(--accent); cursor: help; font-size: 11px; font-weight: 600;
+      font-style: normal; font-family: inherit; line-height: 1; white-space: nowrap; }
+    .info-btn .glyph { font-style: italic; font-weight: 700;
+      font-family: Georgia, 'Times New Roman', serif; }
+    .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn,
+    .info-wrap:focus .info-btn { background: var(--accent-hover); }
+    .info-pop { display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 20;
+      width: 320px; max-width: 80vw; padding: 12px 14px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-8);
+      font-size: 12.5px; font-weight: 400; color: var(--text-secondary); line-height: 1.5; }
+    .info-wrap:hover .info-pop, .info-wrap:focus-within .info-pop,
+    .info-wrap:focus .info-pop { display: block; }
+    .info-pop strong { display: block; color: var(--text); font-size: 12px; margin-bottom: 4px; }
+    .info-pop ul { list-style: none; margin: 0 0 10px; padding: 0; }
+    .info-pop li { padding: 1px 0 1px 14px; position: relative; }
+    .info-pop li::before { content: "·"; position: absolute; left: 4px; color: var(--text-dim); }
+    .info-pop .note { color: var(--text-dim); font-size: 11.5px; margin: 0 0 10px; }
+    .info-pop .muted { color: var(--text-dim); font-style: italic; }
+  </style>
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+
+  <a class="back-link" href="index.html">← Back to City of Niagara Falls reports</a>
+
+  <h1>City of Niagara Falls — Address Changes</h1>
+  <p class="subtitle">
+    Changes between  and Friday, Jul 03, 2026
+    · 207,958 total addresses
+  </p>
+
+  
+
+  <div class="cards">
+    <div class="card"><div class="label">Total Addresses</div>
+      <div class="value accent">207,958</div></div>
+    <div class="card"><div class="label">New Addresses</div>
+      <div class="value green">+119</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#107c10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,2.0 55.0,17.9 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#107c10"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Retired Addresses</div>
+      <div class="value red">−6</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#c50f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 55.0,2.0 108.0,11.1"/><circle cx="108.0" cy="11.1" r="2" fill="#c50f1f"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Updated Addresses <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (Full_StreetNo)</li><li>Street name (StreetName)</li><li>Unit (Unit)</li><li>Coordinates (latitude, longitude)</li><li>GSmartID</li><li>LifeCycleStatus</li><li>Municipality</li><li>Qualifier</li><li>StreetDir</li><li>StreetType</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>CreateDate</li><li>StreetNo</li><li>Xcoord</li><li>Ycoord</li></ul>
+      
+    </span>
+  </span></div>
+      <div class="value yellow">4</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 55.0,2.0 108.0,17.3"/><circle cx="108.0" cy="17.3" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Renumbered</div>
+      <div class="value accent">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#0078d4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 55.0,2.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#0078d4"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Street Renames</div>
+      <div class="value purple">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#9141ac" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 55.0,2.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#9141ac"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    <div class="card"><div class="label">Status Changes</div>
+      <div class="value teal">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#038387" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 55.0,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#038387"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    <div class="card"><div class="label">Boundary Changes</div>
+      <div class="value teal">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#038387" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 55.0,2.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#038387"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    <div class="card"><div class="label">Location Adjustments</div>
+      <div class="value" style="color: var(--text-dim)">24</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#808080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 55.0,2.0 108.0,11.5"/><circle cx="108.0" cy="11.5" r="2" fill="#808080"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+  </div>
+
+  
+  <div class="section">
+    <h2>Change Breakdown</h2>
+    <div class="stats-grid">
+      
+      <div class="card"><div class="label">Top Streets by New Addresses</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">Tanbark</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">12</span></div>
+        <div class="bar-row"><span class="bar-label">Highway 20</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:50.0%"></div></div>
+          <span class="bar-count">6</span></div>
+        <div class="bar-row"><span class="bar-label">Sixteen</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:42.0%"></div></div>
+          <span class="bar-count">5</span></div>
+        <div class="bar-row"><span class="bar-label">Twenty</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:42.0%"></div></div>
+          <span class="bar-count">5</span></div>
+        <div class="bar-row"><span class="bar-label">Canborough</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:33.0%"></div></div>
+          <span class="bar-count">4</span></div>
+        <div class="bar-row"><span class="bar-label">Niagara</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:33.0%"></div></div>
+          <span class="bar-count">4</span></div>
+        <div class="bar-row"><span class="bar-label">Twenty Mile</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:33.0%"></div></div>
+          <span class="bar-count">4</span></div>
+        <div class="bar-row"><span class="bar-label">Caistor Centre</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:25.0%"></div></div>
+          <span class="bar-count">3</span></div>
+        <div class="bar-row"><span class="bar-label">Meadow</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:25.0%"></div></div>
+          <span class="bar-count">3</span></div>
+        <div class="bar-row"><span class="bar-label">Plymouth</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:25.0%"></div></div>
+          <span class="bar-count">3</span></div>
+      </div></div>
+      
+      <div class="card"><div class="label">Top Streets by Retired Addresses</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">Tanbark</span>
+          <div class="bar-track"><div class="bar-fill red" style="width:100.0%"></div></div>
+          <span class="bar-count">4</span></div>
+      </div></div>
+      
+      <div class="card"><div class="label">Most Frequently Updated Fields</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">Location</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">25</span></div>
+        <div class="bar-row"><span class="bar-label">Address Number</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:16.0%"></div></div>
+          <span class="bar-count">4</span></div>
+        <div class="bar-row"><span class="bar-label">Street</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:12.0%"></div></div>
+          <span class="bar-count">3</span></div>
+        <div class="bar-row"><span class="bar-label">StreetType</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:12.0%"></div></div>
+          <span class="bar-count">3</span></div>
+      </div></div>
+    </div>
+  </div>
+  
+
+  <div class="section">
+    <h2>New Addresses <span class="badge badge-green">119</span></h2>
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-added',0)">Address</th><th onclick="sortTable('t-added',1)">Street</th>
+        <th onclick="sortTable('t-added',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-added">
+        
+        <tr><td>1664 Abingdon</td><td>Abingdon</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.08155&mlon=-79.68540#map=18/43.08155/-79.68540" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1800 Abingdon</td><td>Abingdon</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.08870&mlon=-79.68610#map=18/43.08870/-79.68610" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6747 Ailanthus</td><td>Ailanthus</td><td>1</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.07715&mlon=-79.08974#map=18/43.07715/-79.08974" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6747 Ailanthus</td><td>Ailanthus</td><td>2</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.07714&mlon=-79.08978#map=18/43.07714/-79.08978" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>5499 Attema</td><td>Attema</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.07790&mlon=-79.49934#map=18/43.07790/-79.49934" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6859 Bismark</td><td>Bismark</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.03979&mlon=-79.57287#map=18/43.03979/-79.57287" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>9100 Bismark</td><td>Bismark</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.08063&mlon=-79.68012#map=18/43.08063/-79.68012" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1847 Book</td><td>Book</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.05727&mlon=-79.46281#map=18/43.05727/-79.46281" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>811 Caistor Centre</td><td>Caistor Centre</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.03046&mlon=-79.65087#map=18/43.03046/-79.65087" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1759 Caistor Centre</td><td>Caistor Centre</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.07340&mlon=-79.65124#map=18/43.07340/-79.65124" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2767 Caistor Centre</td><td>Caistor Centre</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12730&mlon=-79.65220#map=18/43.12730/-79.65220" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1184 Caistorville</td><td>Caistorville</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.07164&mlon=-79.71882#map=18/43.07164/-79.71882" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>4107 Campbell</td><td>Campbell</td><td>1</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.05003&mlon=-79.05467#map=18/43.05003/-79.05467" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>4107 Campbell</td><td>Campbell</td><td>2</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.05010&mlon=-79.05468#map=18/43.05010/-79.05468" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3772 Canborough</td><td>Canborough</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.01968&mlon=-79.40704#map=18/43.01968/-79.40704" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3982 Canborough</td><td>Canborough</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.01812&mlon=-79.41635#map=18/43.01812/-79.41635" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>4612 Canborough</td><td>Canborough</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.01227&mlon=-79.45063#map=18/43.01227/-79.45063" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>4813 Canborough</td><td>Canborough</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.00974&mlon=-79.46115#map=18/43.00974/-79.46115" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2684 Clifford</td><td>Clifford</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.10225&mlon=-79.53931#map=18/43.10225/-79.53931" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>750 Collver</td><td>Collver</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.00771&mlon=-79.48292#map=18/43.00771/-79.48292" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>114 Colver</td><td>Colver</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.09442&mlon=-79.54979#map=18/43.09442/-79.54979" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>9676 Concession 3</td><td>Concession 3</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.08335&mlon=-79.72356#map=18/43.08335/-79.72356" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6251 Concession 4</td><td>Concession 4</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.05294&mlon=-79.54063#map=18/43.05294/-79.54063" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>5798 Drummond</td><td>Drummond</td><td>1</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.09055&mlon=-79.09755#map=18/43.09055/-79.09755" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>5798 Drummond</td><td>Drummond</td><td>2</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.09054&mlon=-79.09754#map=18/43.09054/-79.09754" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3620 East Chippawa</td><td>East Chippawa</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.99174&mlon=-79.39609#map=18/42.99174/-79.39609" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3481 Fifteen</td><td>Fifteen</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.06844&mlon=-79.39195#map=18/43.06844/-79.39195" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>62 Golden Acres</td><td>Golden Acres</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.09694&mlon=-79.55786#map=18/43.09694/-79.55786" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>9812 Green</td><td>Green</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.06665&mlon=-79.73212#map=18/43.06665/-79.73212" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>132 Griffin</td><td>Griffin</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.09716&mlon=-79.54578#map=18/43.09716/-79.54578" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>4421 Highway 20</td><td>Highway 20</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.04315&mlon=-79.44369#map=18/43.04315/-79.44369" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>5269 Highway 20</td><td>Highway 20</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.04147&mlon=-79.48771#map=18/43.04147/-79.48771" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>7319 Highway 20</td><td>Highway 20</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.11990&mlon=-79.58971#map=18/43.11990/-79.58971" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>7339 Highway 20</td><td>Highway 20</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12022&mlon=-79.59112#map=18/43.12022/-79.59112" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>9031 Highway 20</td><td>Highway 20</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.13842&mlon=-79.67148#map=18/43.13842/-79.67148" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>9467 Highway 20</td><td>Highway 20</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14438&mlon=-79.69344#map=18/43.14438/-79.69344" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>261 Humboldt</td><td>Humboldt</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.89908&mlon=-79.24106#map=18/42.89908/-79.24106" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>271 Humboldt</td><td>Humboldt</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.89926&mlon=-79.24106#map=18/42.89926/-79.24106" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>500 Killaly</td><td>Killaly</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.88938&mlon=-79.27005#map=18/42.88938/-79.27005" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>103 McMurchie</td><td>McMurchie</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.09861&mlon=-79.54713#map=18/43.09861/-79.54713" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2477 Meadow</td><td>Meadow</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.08100&mlon=-79.49793#map=18/43.08100/-79.49793" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2478 Meadow</td><td>Meadow</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.08106&mlon=-79.49794#map=18/43.08106/-79.49794" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2479 Meadow</td><td>Meadow</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.08093&mlon=-79.49794#map=18/43.08093/-79.49794" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2490 Moote</td><td>Moote</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.08608&mlon=-79.41017#map=18/43.08608/-79.41017" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>5900 Mud</td><td>Mud</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.13336&mlon=-79.51733#map=18/43.13336/-79.51733" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>783 Niagara</td><td>Niagara</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.01511&mlon=-79.25097#map=18/43.01511/-79.25097" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>789 Niagara</td><td>Niagara</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.01553&mlon=-79.25026#map=18/43.01553/-79.25026" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>795 Niagara</td><td>Niagara</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.01611&mlon=-79.25025#map=18/43.01611/-79.25025" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>799 Niagara</td><td>Niagara</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.01657&mlon=-79.25024#map=18/43.01657/-79.25024" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>9547 North Chippawa</td><td>North Chippawa</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.05471&mlon=-79.70880#map=18/43.05471/-79.70880" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>7663 Oldfield</td><td>Oldfield</td><td>1</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.06355&mlon=-79.10053#map=18/43.06355/-79.10053" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>7663 Oldfield</td><td>Oldfield</td><td>2</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.06361&mlon=-79.10055#map=18/43.06361/-79.10055" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6559 Orchard</td><td>Orchard</td><td>1</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.08011&mlon=-79.09309#map=18/43.08011/-79.09309" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6559 Orchard</td><td>Orchard</td><td>2</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.08008&mlon=-79.09316#map=18/43.08008/-79.09316" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2314 Patterson</td><td>Patterson</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.07519&mlon=-79.52519#map=18/43.07519/-79.52519" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>48 Plymouth</td><td>Plymouth</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.98262&mlon=-79.24607#map=18/42.98262/-79.24607" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>52 Plymouth</td><td>Plymouth</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.98256&mlon=-79.24606#map=18/42.98256/-79.24606" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>56 Plymouth</td><td>Plymouth</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.98251&mlon=-79.24606#map=18/42.98251/-79.24606" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1127 Port Davidson</td><td>Port Davidson</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.02005&mlon=-79.55336#map=18/43.02005/-79.55336" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>7121 Ridgewood</td><td>Ridgewood</td><td>1</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.13619&mlon=-79.11598#map=18/43.13619/-79.11598" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>7121 Ridgewood</td><td>Ridgewood</td><td>2</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.13642&mlon=-79.11604#map=18/43.13642/-79.11604" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>5742 Robinson</td><td>Robinson</td><td>1</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.08600&mlon=-79.08865#map=18/43.08600/-79.08865" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>5742 Robinson</td><td>Robinson</td><td>2</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.08589&mlon=-79.08864#map=18/43.08589/-79.08864" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>7818 Rysdale</td><td>Rysdale</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.09327&mlon=-79.12758#map=18/43.09327/-79.12758" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>7713 Shagbark</td><td>Shagbark</td><td>1</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.06383&mlon=-79.14514#map=18/43.06383/-79.14514" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>7713 Shagbark</td><td>Shagbark</td><td>2</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.06382&mlon=-79.14520#map=18/43.06382/-79.14520" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2355 Shurie</td><td>Shurie</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.08274&mlon=-79.54052#map=18/43.08274/-79.54052" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1663 Silverdale</td><td>Silverdale</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.04855&mlon=-79.45009#map=18/43.04855/-79.45009" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2291 Silverdale</td><td>Silverdale</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.07482&mlon=-79.45373#map=18/43.07482/-79.45373" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>4050 Sixteen</td><td>Sixteen</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.07676&mlon=-79.42254#map=18/43.07676/-79.42254" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>5431 Sixteen</td><td>Sixteen</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.07458&mlon=-79.49717#map=18/43.07458/-79.49717" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>5456 Sixteen</td><td>Sixteen</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.07383&mlon=-79.49942#map=18/43.07383/-79.49942" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>5804 Sixteen</td><td>Sixteen</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.07337&mlon=-79.52024#map=18/43.07337/-79.52024" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>7481 Sixteen</td><td>Sixteen</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.07836&mlon=-79.60221#map=18/43.07836/-79.60221" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>585 Smithville</td><td>Smithville</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.01801&mlon=-79.64761#map=18/43.01801/-79.64761" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1658 Smithville</td><td>Smithville</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.05104&mlon=-79.61336#map=18/43.05104/-79.61336" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2555 South Grimsby Road 16</td><td>South Grimsby Road 16</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12143&mlon=-79.66626#map=18/43.12143/-79.66626" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2562 South Grimsby Road 16</td><td>South Grimsby Road 16</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12162&mlon=-79.66653#map=18/43.12162/-79.66653" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2564 South Grimsby Road 18</td><td>South Grimsby Road 18</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12284&mlon=-79.67293#map=18/43.12284/-79.67293" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3075 South Grimsby Road 18</td><td>South Grimsby Road 18</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.14500&mlon=-79.66750#map=18/43.14500/-79.66750" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2825 South Grimsby Road 21</td><td>South Grimsby Road 21</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.13942&mlon=-79.70085#map=18/43.13942/-79.70085" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3537 South Grimsby Road 3</td><td>South Grimsby Road 3</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.13093&mlon=-79.51455#map=18/43.13093/-79.51455" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>4 South Grimsby Road 5</td><td>South Grimsby Road 5</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.10596&mlon=-79.55504#map=18/43.10596/-79.55504" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>5931 Spring Creek</td><td>Spring Creek</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.10340&mlon=-79.51752#map=18/43.10340/-79.51752" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>8484 Sweet Chestnut</td><td>Sweet Chestnut</td><td>1</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.06005&mlon=-79.14076#map=18/43.06005/-79.14076" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>8484 Sweet Chestnut</td><td>Sweet Chestnut</td><td>2</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.06001&mlon=-79.14073#map=18/43.06001/-79.14073" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>170 Tanbark</td><td>Tanbark</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15440&mlon=-79.10884#map=18/43.15440/-79.10884" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>174 Tanbark</td><td>Tanbark</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15454&mlon=-79.10885#map=18/43.15454/-79.10885" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>176 Tanbark</td><td>Tanbark</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15468&mlon=-79.10885#map=18/43.15468/-79.10885" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>178 Tanbark</td><td>Tanbark</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15483&mlon=-79.10885#map=18/43.15483/-79.10885" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>180 Tanbark</td><td>Tanbark</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15498&mlon=-79.10886#map=18/43.15498/-79.10886" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>182 Tanbark</td><td>Tanbark</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15513&mlon=-79.10886#map=18/43.15513/-79.10886" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>184 Tanbark</td><td>Tanbark</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15527&mlon=-79.10887#map=18/43.15527/-79.10887" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>186 Tanbark</td><td>Tanbark</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15542&mlon=-79.10887#map=18/43.15542/-79.10887" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>188 Tanbark</td><td>Tanbark</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15557&mlon=-79.10887#map=18/43.15557/-79.10887" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>190 Tanbark</td><td>Tanbark</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15572&mlon=-79.10888#map=18/43.15572/-79.10888" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>192 Tanbark</td><td>Tanbark</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15586&mlon=-79.10888#map=18/43.15586/-79.10888" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>194 Tanbark</td><td>Tanbark</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15600&mlon=-79.10888#map=18/43.15600/-79.10888" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2943 Thompson</td><td>Thompson</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.10956&mlon=-79.53474#map=18/43.10956/-79.53474" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6346 Townline</td><td>Townline</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.09104&mlon=-79.54769#map=18/43.09104/-79.54769" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6350 Townline</td><td>Townline</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.09103&mlon=-79.54791#map=18/43.09103/-79.54791" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6773 Townline</td><td>Townline</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.09110&mlon=-79.57539#map=18/43.09110/-79.57539" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>7553 Twenty</td><td>Twenty</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.09678&mlon=-79.60217#map=18/43.09678/-79.60217" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>7838 Twenty</td><td>Twenty</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.10188&mlon=-79.61685#map=18/43.10188/-79.61685" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>8088 Twenty</td><td>Twenty</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.10716&mlon=-79.63029#map=18/43.10716/-79.63029" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>9282 Twenty</td><td>Twenty</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12654&mlon=-79.69354#map=18/43.12654/-79.69354" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>9286 Twenty</td><td>Twenty</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12658&mlon=-79.69368#map=18/43.12658/-79.69368" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3670 Twenty Mile</td><td>Twenty Mile</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.09523&mlon=-79.40355#map=18/43.09523/-79.40355" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>4317 Twenty Mile</td><td>Twenty Mile</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.09115&mlon=-79.43733#map=18/43.09115/-79.43733" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>4427 Twenty Mile</td><td>Twenty Mile</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.08973&mlon=-79.44283#map=18/43.08973/-79.44283" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>5480 Twenty Mile</td><td>Twenty Mile</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.08208&mlon=-79.49872#map=18/43.08208/-79.49872" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>5858 Vaughan</td><td>Vaughan</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.02781&mlon=-79.52305#map=18/43.02781/-79.52305" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6001 Vaughan</td><td>Vaughan</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.02814&mlon=-79.53169#map=18/43.02814/-79.53169" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1616 Victoria</td><td>Victoria</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.05147&mlon=-79.39248#map=18/43.05147/-79.39248" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>137 West</td><td>West</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.10062&mlon=-79.54870#map=18/43.10062/-79.54870" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>4966 Windgate</td><td>Windgate</td><td>1</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.10175&mlon=-79.12472#map=18/43.10175/-79.12472" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>4966 Windgate</td><td>Windgate</td><td>2</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.10168&mlon=-79.12455#map=18/43.10168/-79.12455" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>9707 York</td><td>York</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.04917&mlon=-79.73051#map=18/43.04917/-79.73051" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6648 Young</td><td>Young</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12158&mlon=-79.55104#map=18/43.12158/-79.55104" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Retired Addresses <span class="badge badge-red">6</span></h2>
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-removed',0)">Address</th><th onclick="sortTable('t-removed',1)">Street</th>
+        <th onclick="sortTable('t-removed',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-removed">
+        
+        <tr><td>68 Plymouth</td><td>Plymouth</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.98256&mlon=-79.24606#map=18/42.98256/-79.24606" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1975 South Service</td><td>South Service</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17895&mlon=-79.32344#map=18/43.17895/-79.32344" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>170 Tanbark</td><td>Tanbark</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15462&mlon=-79.10904#map=18/43.15462/-79.10904" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>178 Tanbark</td><td>Tanbark</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15515&mlon=-79.10889#map=18/43.15515/-79.10889" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>184 Tanbark</td><td>Tanbark</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15540&mlon=-79.10936#map=18/43.15540/-79.10936" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>192 Tanbark</td><td>Tanbark</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15593&mlon=-79.10932#map=18/43.15593/-79.10932" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Updated Addresses <span class="badge badge-yellow">4</span>
+      <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (Full_StreetNo)</li><li>Street name (StreetName)</li><li>Unit (Unit)</li><li>Coordinates (latitude, longitude)</li><li>GSmartID</li><li>LifeCycleStatus</li><li>Municipality</li><li>Qualifier</li><li>StreetDir</li><li>StreetType</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>CreateDate</li><li>StreetNo</li><li>Xcoord</li><li>Ycoord</li></ul>
+      
+    </span>
+  </span></h2>
+    
+    
+    <table>
+      <thead><tr><th>Address</th><th>What Changed</th><th>Before</th><th></th><th>After</th><th>Map</th></tr></thead>
+      <tbody>
+        
+  <tr><td rowspan="2">2103 Pelham</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">3000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">2103</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.11267&mlon=-79.32698#map=18/43.11267/-79.32698" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">43.11305, -79.32695<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.11305&mlon=-79.32695#map=19/43.11305/-79.32695" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↓ 42.4m</td>
+    <td class="new-val">43.11267, -79.32698<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.11267&mlon=-79.32698#map=19/43.11267/-79.32698" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="3">26 Summersides</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">63</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">26</td>
+    <td rowspan="3"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.04403&mlon=-79.27920#map=18/43.04403/-79.27920" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Street</td>
+    <td class="old-val">Shaw</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Summersides</td>
+    </tr>
+  <tr>
+    <td class="change-field">StreetType</td>
+    <td class="old-val">Avenue</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Boulevard</td>
+    </tr>
+  <tr><td rowspan="3">32 Summersides</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">64</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">32</td>
+    <td rowspan="3"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.04404&mlon=-79.27851#map=18/43.04404/-79.27851" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Street</td>
+    <td class="old-val">Shaw</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Summersides</td>
+    </tr>
+  <tr>
+    <td class="change-field">StreetType</td>
+    <td class="old-val">Avenue</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Boulevard</td>
+    </tr>
+  <tr><td rowspan="3">36 Summersides</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">45</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">36</td>
+    <td rowspan="3"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.04404&mlon=-79.27812#map=18/43.04404/-79.27812" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Street</td>
+    <td class="old-val">Norgate</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Summersides</td>
+    </tr>
+  <tr>
+    <td class="change-field">StreetType</td>
+    <td class="old-val">Way</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Boulevard</td>
+    </tr>
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Renumbered Addresses <span class="badge badge-accent">0</span></h2>
+    
+    <p class="empty">No addresses renumbered.</p>
+  </div>
+
+  <div class="section">
+    <h2>Street Renames <span class="badge badge-purple">0</span></h2>
+    <p class="empty">No street renames.</p>
+  </div>
+
+  
+
+  
+  <div class="section">
+    <h2>Status Changes <span class="badge badge-teal">0</span></h2>
+    <p class="empty">No status changes.</p>
+  </div>
+  
+
+  
+  <div class="section">
+    <h2>Boundary Changes <span class="badge badge-teal">0</span></h2>
+    <p class="empty">No ward or municipality reassignments.</p>
+  </div>
+  
+
+  <div class="section">
+    <h2>Location Adjustments <span class="badge" style="background: var(--surface2); color: var(--text-dim)">24</span></h2>
+    
+    
+    
+    <table>
+      <thead><tr><th>Address</th><th>Before</th><th></th><th>After</th></tr></thead>
+      <tbody>
+        
+        <tr><td>1660 Caistor Centre</td>
+          
+          <td class="old-val">43.06628, -79.65459<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.06628&mlon=-79.65459#map=19/43.06628/-79.65459" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↗ 388.2m</td>
+          <td class="new-val">43.06918, -79.65194<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.06918&mlon=-79.65194#map=19/43.06918/-79.65194" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>1129 Caistorville</td>
+          
+          <td class="old-val">43.07046, -79.71531<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.07046&mlon=-79.71531#map=19/43.07046/-79.71531" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 291.3m</td>
+          <td class="new-val">43.06903, -79.71831<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.06903&mlon=-79.71831#map=19/43.06903/-79.71831" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>5330 Canborough</td>
+          
+          <td class="old-val">43.00249, -79.49017<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.00249&mlon=-79.49017#map=19/43.00249/-79.49017" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 8.1m</td>
+          <td class="new-val">43.00246, -79.49026<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.00246&mlon=-79.49026#map=19/43.00246/-79.49026" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>2691 Clifford</td>
+          
+          <td class="old-val">43.10136, -79.53787<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.10136&mlon=-79.53787#map=19/43.10136/-79.53787" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↑ 63.5m</td>
+          <td class="new-val">43.10192, -79.53772<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.10192&mlon=-79.53772#map=19/43.10192/-79.53772" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>9605 Concession 1</td>
+          
+          <td class="old-val">43.05729, -79.72385<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.05729&mlon=-79.72385#map=19/43.05729/-79.72385" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 457.6m</td>
+          <td class="new-val">43.05531, -79.71892<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.05531&mlon=-79.71892#map=19/43.05531/-79.71892" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>8761 Concession 3</td>
+          
+          <td class="old-val">43.06381, -79.66146<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.06381&mlon=-79.66146#map=19/43.06381/-79.66146" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 336.0m</td>
+          <td class="new-val">43.06139, -79.66393<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.06139&mlon=-79.66393#map=19/43.06139/-79.66393" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>8863 Concession 3</td>
+          
+          <td class="old-val">43.06559, -79.66975<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.06559&mlon=-79.66975#map=19/43.06559/-79.66975" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 274.2m</td>
+          <td class="new-val">43.06321, -79.66888<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.06321&mlon=-79.66888#map=19/43.06321/-79.66888" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>7617 Concession 5</td>
+          
+          <td class="old-val">43.07101, -79.60751<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.07101&mlon=-79.60751#map=19/43.07101/-79.60751" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 506.3m</td>
+          <td class="new-val">43.06655, -79.60629<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.06655&mlon=-79.60629#map=19/43.06655/-79.60629" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>7760 Highway 20</td>
+          
+          <td class="old-val">43.12228, -79.62107<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12228&mlon=-79.62107#map=19/43.12228/-79.62107" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↗ 425.2m</td>
+          <td class="new-val">43.12567, -79.61866<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12567&mlon=-79.61866#map=19/43.12567/-79.61866" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>8270 Highway 20</td>
+          
+          <td class="old-val">43.12894, -79.63504<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12894&mlon=-79.63504#map=19/43.12894/-79.63504" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 61.6m</td>
+          <td class="new-val">43.12920, -79.63571<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12920&mlon=-79.63571#map=19/43.12920/-79.63571" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>2015 Hodgkins</td>
+          
+          <td class="old-val">43.06656, -79.43129<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.06656&mlon=-79.43129#map=19/43.06656/-79.43129" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 488.6m</td>
+          <td class="new-val">43.06244, -79.43336<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.06244&mlon=-79.43336#map=19/43.06244/-79.43336" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>7631 Kimbo</td>
+          
+          <td class="old-val">43.12451, -79.61049<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12451&mlon=-79.61049#map=19/43.12451/-79.61049" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↗ 72.9m</td>
+          <td class="new-val">43.12492, -79.60979<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12492&mlon=-79.60979#map=19/43.12492/-79.60979" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>777 Niagara</td>
+          
+          <td class="old-val">43.01579, -79.25126<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.01579&mlon=-79.25126#map=19/43.01579/-79.25126" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 64.5m</td>
+          <td class="new-val">43.01538, -79.25182<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.01538&mlon=-79.25182#map=19/43.01538/-79.25182" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>803 Niagara</td>
+          
+          <td class="old-val">43.01637, -79.25097<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.01637&mlon=-79.25097#map=19/43.01637/-79.25097" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">← 71.7m</td>
+          <td class="new-val">43.01627, -79.25184<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.01627&mlon=-79.25184#map=19/43.01627/-79.25184" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>8936 North Chippawa</td>
+          
+          <td class="old-val">43.03757, -79.66951<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.03757&mlon=-79.66951#map=19/43.03757/-79.66951" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↑ 232.4m</td>
+          <td class="new-val">43.03952, -79.66849<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.03952&mlon=-79.66849#map=19/43.03952/-79.66849" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>8740 Sixteen</td>
+          
+          <td class="old-val">43.09828, -79.66304<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.09828&mlon=-79.66304#map=19/43.09828/-79.66304" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↑ 388.0m</td>
+          <td class="new-val">43.10175, -79.66349<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.10175&mlon=-79.66349#map=19/43.10175/-79.66349" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>913 Smithville</td>
+          
+          <td class="old-val">43.02608, -79.63443<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.02608&mlon=-79.63443#map=19/43.02608/-79.63443" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↗ 57.9m</td>
+          <td class="new-val">43.02650, -79.63401<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.02650&mlon=-79.63401#map=19/43.02650/-79.63401" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>8452 South Chippawa</td>
+          
+          <td class="old-val">43.02360, -79.64768<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.02360&mlon=-79.64768#map=19/43.02360/-79.64768" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 148.9m</td>
+          <td class="new-val">43.02431, -79.64923<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.02431&mlon=-79.64923#map=19/43.02431/-79.64923" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>4062 Spring Creek</td>
+          
+          <td class="old-val">43.09965, -79.42464<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.09965&mlon=-79.42464#map=19/43.09965/-79.42464" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↑ 479.0m</td>
+          <td class="new-val">43.10395, -79.42444<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.10395&mlon=-79.42444#map=19/43.10395/-79.42444" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>5482 Twenty Mile</td>
+          
+          <td class="old-val">43.08088, -79.49863<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.08088&mlon=-79.49863#map=19/43.08088/-79.49863" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↑ 118.2m</td>
+          <td class="new-val">43.08188, -79.49912<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.08188&mlon=-79.49912#map=19/43.08188/-79.49912" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>116 West</td>
+          
+          <td class="old-val">43.09961, -79.54842<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.09961&mlon=-79.54842#map=19/43.09961/-79.54842" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 45.5m</td>
+          <td class="new-val">43.09931, -79.54804<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.09931&mlon=-79.54804#map=19/43.09931/-79.54804" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>3872 Wismer</td>
+          
+          <td class="old-val">43.15072, -79.36984<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15072&mlon=-79.36984#map=19/43.15072/-79.36984" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 51.4m</td>
+          <td class="new-val">43.15026, -79.36989<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.15026&mlon=-79.36989#map=19/43.15026/-79.36989" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>9801 York</td>
+          
+          <td class="old-val">43.04979, -79.73714<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.04979&mlon=-79.73714#map=19/43.04979/-79.73714" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 296.6m</td>
+          <td class="new-val">43.04752, -79.73905<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.04752&mlon=-79.73905#map=19/43.04752/-79.73905" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>9841 York</td>
+          
+          <td class="old-val">43.05028, -79.74086<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.05028&mlon=-79.74086#map=19/43.05028/-79.74086" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 242.1m</td>
+          <td class="new-val">43.04811, -79.74105<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.04811&mlon=-79.74105#map=19/43.04811/-79.74105" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+      </tbody>
+    </table>
+    
+    
+    
+  </div>
+
+  <div class="generated-at">Report generated Jul 03, 2026 at 12:19 PM · source licence: Open Government Licence - Niagara Region</div>
+
+  <script>
+    function sortTable(tbodyId, col) {
+      const tbody = document.getElementById(tbodyId);
+      if (!tbody) return;
+      const rows = Array.from(tbody.rows);
+      const dir = tbody.dataset.sortDir === 'asc' ? 'desc' : 'asc';
+      tbody.dataset.sortDir = dir;
+      rows.sort((a, b) => {
+        const av = a.cells[col]?.textContent.trim() || '';
+        const bv = b.cells[col]?.textContent.trim() || '';
+        const an = parseFloat(av), bn = parseFloat(bv);
+        if (!isNaN(an) && !isNaN(bn)) return dir === 'asc' ? an - bn : bn - an;
+        return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+      });
+      rows.forEach(r => tbody.appendChild(r));
+    }
+  </script>
+</body>
+
+</html>
