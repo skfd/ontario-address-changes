@@ -42,6 +42,17 @@ function Test-Online {
     return $false
 }
 
+# Asks Windows whether the internet connection is metered (cellular/tethering,
+# or a wifi marked "Metered connection" in Settings). Runs the WinRT call in a
+# Windows PowerShell 5.1 subprocess because the projection syntax doesn't load
+# under pwsh 7; any detection failure fails open (unmetered) so a broken API
+# never silently blocks updates.
+function Test-Metered {
+    $probe = '[Windows.Networking.Connectivity.NetworkInformation,Windows.Networking.Connectivity,ContentType=WindowsRuntime]::GetInternetConnectionProfile().GetConnectionCost().NetworkCostType'
+    $cost = powershell -NoProfile -Command "try { $probe } catch {}"
+    return $cost -in 'Fixed', 'Variable'
+}
+
 # Waits up to $Minutes for connectivity (wifi lags behind wake-from-sleep).
 function Wait-Online {
     param([int]$Minutes)
@@ -65,6 +76,7 @@ $runStart = Get-Date
 # already-updated cities short-circuit (cached download + already-imported).
 $updateExit = 1
 $ranUpdate  = $false
+$skipReason = 'offline'
 foreach ($attempt in 1..3) {
     if ($attempt -gt 1) {
         Log "RETRY attempt $attempt $(Get-Date -Format o)"
@@ -74,6 +86,15 @@ foreach ($attempt in 1..3) {
     # instead of letting every city fail and be recorded as a run failure.
     if (-not (Wait-Online -Minutes 10)) {
         Log "OFFLINE $(Get-Date -Format o) attempt $attempt skipped"
+        $skipReason = 'offline'
+        continue
+    }
+    # Metered connections (tethering/hotspot) are unreliable and cost data:
+    # don't even try. Later attempts re-check, so a hotspot that ends within
+    # ~30 min still gets that day's update.
+    if (Test-Metered) {
+        Log "METERED $(Get-Date -Format o) attempt $attempt skipped"
+        $skipReason = 'metered'
         continue
     }
     Invoke-Logged "python run.py update --all --jobs 6"
@@ -82,10 +103,14 @@ foreach ($attempt in 1..3) {
     if ($updateExit -eq 0) { break }
 }
 
-# A failed run on a machine that is (or went) offline is "offline", not
-# "FAILED": same as if the laptop had been off, the update just didn't happen.
+# A failed run on a machine that is (or went) offline/metered is not "FAILED":
+# same as if the laptop had been off, the update just didn't happen.
 $outcome = $updateExit
-if ($updateExit -ne 0 -and (-not $ranUpdate -or -not (Test-Online))) { $outcome = 'offline' }
+if ($updateExit -ne 0) {
+    if (-not $ranUpdate)        { $outcome = $skipReason }
+    elseif (-not (Test-Online)) { $outcome = 'offline' }
+    elseif (Test-Metered)       { $outcome = 'metered' }
+}
 
 git add docs
 git diff --cached --quiet
@@ -108,6 +133,7 @@ $row = [pscustomobject]@{
 if (Test-Path $runsCsv) { $row | Export-Csv $runsCsv -NoTypeInformation -Append }
 else                    { $row | Export-Csv $runsCsv -NoTypeInformation }
 
-# Offline exits 0: nothing is wrong with the pipeline, there was just no network.
-if ($outcome -eq 'offline') { exit 0 }
+# Offline/metered exits 0: nothing is wrong with the pipeline, there was just
+# no (usable) network.
+if ($outcome -in 'offline', 'metered') { exit 0 }
 exit $updateExit

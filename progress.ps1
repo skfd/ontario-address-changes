@@ -70,13 +70,14 @@ function Show-Progress {
     # Split on the "=== slug ===" banner; capturing group keeps the slug in results.
     $parts = [regex]::Split($raw, '={3}\s*(\S+)\s*={3}')
     if ($parts.Count -lt 3) {
-        # A fully offline run never prints a city banner, only OFFLINE lines.
-        if ($raw -match '(?m)^OFFLINE ') {
+        # A fully skipped run never prints a city banner, only OFFLINE/METERED lines.
+        if ($raw -match '(?m)^(OFFLINE|METERED) ') {
+            $why = if ($matches[1] -eq 'METERED') { 'metered connection' } else { 'no internet' }
             if ($raw -match '(?m)^END ') {
-                Write-Host "Offline: no internet, run skipped (treated like the laptop being off)."
-                Write-Host "Rerun manually once online: .\daily-update.ps1"
+                Write-Host "Run skipped: $why (treated like the laptop being off)."
+                Write-Host "Rerun manually once on a usable network: .\daily-update.ps1"
             } else {
-                Write-Host "Offline so far: waiting for network (attempts continue 15 min apart)."
+                Write-Host "Skipping so far: $why (attempts continue 15 min apart)."
             }
             Show-History -Total $total
         } else {
@@ -115,9 +116,10 @@ function Show-Progress {
     $status = if (-not $finished) {
                   if ($raw -match '(?m)^RETRY ') { 'Retrying failures' } else { 'Running' }
               }
-              # daily-update.ps1 stamps exit=offline when the machine had (or
-              # lost) internet -- failures below are offline noise, not real.
+              # daily-update.ps1 stamps exit=offline/metered when the machine
+              # had no usable network -- failures below are noise, not real.
               elseif ($raw -match '(?m)^END .*exit=offline') { 'Run offline (treated like laptop off)' }
+              elseif ($raw -match '(?m)^END .*exit=metered') { 'Run skipped (metered connection)' }
               elseif ($failed.Count)   { 'Run finished with failures' }
               else                     { 'Run OK' }
     Write-Host ("{0}: {1} ok, {2} failed, {3} pending (of {4})" -f `
@@ -237,6 +239,7 @@ function Show-History {
         if ($runs.ContainsKey($day)) {
             $r = $runs[$day]
             $note = if ($r.exit -eq 'offline') { 'offline (like laptop off)' }
+                    elseif ($r.exit -eq 'metered') { 'skipped (metered connection)' }
                     elseif ([int]$r.exit -eq 0) { "run ok ({0} attempt(s))" -f $r.attempts }
                     else { "run FAILED after {0} attempt(s)" -f $r.attempts }
         } elseif ($okN -eq 0) {
