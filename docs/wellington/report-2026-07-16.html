@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>County of Wellington Address Changes — Thursday, Jul 16, 2026</title>
+  <style>
+    :root {
+      --bg: #fafafa; --surface: #ffffff; --surface2: #f5f5f5; --surface3: #ebebeb;
+      --border: #e0e0e0; --border-strong: #d1d1d1; --text: #242424;
+      --text-secondary: #424242; --text-dim: #616161; --accent: #0078d4;
+      --accent-hover: #106ebe; --accent-bg: #eff6fc; --green: #107c10;
+      --green-bg: #f1faf1; --green-tint: #9fd89f; --red: #c50f1f; --red-bg: #fdf3f4;
+      --red-tint: #eeacb2; --yellow: #eaa300; --yellow-bg: #fefbf4; --yellow-tint: #f9e2ae;
+      --purple: #881798; --purple-bg: #f9f3fb; --teal: #038387; --teal-bg: #f0fafa;
+      --shadow-4: 0 2px 4px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --shadow-8: 0 4px 8px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --card-bg: #ffffff; --card-hover: #f5f5f5; color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1f1f1f; --surface: #292929; --surface2: #333333; --surface3: #3d3d3d;
+        --border: #525252; --border-strong: #666666; --text: #ffffff;
+        --text-secondary: #d6d6d6; --text-dim: #adadad; --accent: #2899f5;
+        --accent-hover: #3aa0f3; --accent-bg: #002848; --green: #54b054;
+        --green-bg: #052505; --green-tint: #107c10; --red: #dc626d; --red-bg: #3b0509;
+        --red-tint: #c50f1f; --yellow: #f2c661; --yellow-bg: #463100; --yellow-tint: #eaa300;
+        --purple: #d29ddb; --purple-bg: #3a1040; --teal: #58c0c4; --teal-bg: #013638;
+        --shadow-4: 0 2px 4px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --shadow-8: 0 4px 8px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --card-bg: #333333; --card-hover: #3d3d3d; color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI Variable','Segoe UI',system-ui,-apple-system,sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.5; padding: 2rem;
+      max-width: 1100px; margin: 0 auto; font-size: 14px; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; color: var(--accent-hover); }
+    .back-link { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 12px;
+      color: var(--text-dim); margin-bottom: 1.5rem; transition: color 0.1s; }
+    .back-link:hover { color: var(--accent); text-decoration: none; }
+    h1 { font-size: 24px; font-weight: 600; margin-bottom: 4px; }
+    .subtitle { color: var(--text-secondary); font-size: 14px; margin-bottom: 12px; }
+    .explainer { color: var(--text-secondary); font-size: 13px; line-height: 1.5;
+      margin-bottom: 24px; padding: 12px 16px; background: var(--surface);
+      border-radius: 8px; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px; margin-bottom: 24px; }
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px;
+      padding: 16px; box-shadow: var(--shadow-4); transition: box-shadow 0.1s; }
+    .card:hover { box-shadow: var(--shadow-8); }
+    .card .label { font-size: 12px; color: var(--text-dim); font-weight: 400; }
+    .card .value { font-size: 28px; font-weight: 600; margin-top: 4px; }
+    .card .value.green { color: var(--green); } .card .value.red { color: var(--red); }
+    .card .value.yellow { color: var(--yellow); } .card .value.accent { color: var(--accent); }
+    .card .value.purple { color: var(--purple); }
+    .card .value.teal { color: var(--teal); }
+    .sparkline { display: block; margin-top: 6px; overflow: visible; opacity: 0.9; }
+    .sparkline-label { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+    .section { margin-bottom: 24px; }
+    .section h2 { font-size: 16px; font-weight: 600; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px; }
+    .badge { font-size: 12px; padding: 2px 8px; border-radius: 999px; font-weight: 600; }
+    .badge-green { background: var(--green-bg); color: var(--green); }
+    .badge-red { background: var(--red-bg); color: var(--red); }
+    .badge-yellow { background: var(--yellow-bg); color: var(--yellow); }
+    .badge-accent { background: var(--accent-bg); color: var(--accent); }
+    .badge-purple { background: var(--purple-bg); color: var(--purple); }
+    .badge-teal { background: var(--teal-bg); color: var(--teal); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface);
+      border-radius: 8px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    thead { background: var(--surface2); }
+    th { text-align: left; padding: 8px 12px; font-weight: 600; color: var(--text-dim);
+      font-size: 12px; cursor: pointer; user-select: none; border-bottom: 1px solid var(--border); }
+    th:hover { color: var(--accent); }
+    td { padding: 8px 12px; border-top: 1px solid var(--border); }
+    tr:hover td { background: var(--surface2); }
+    .old-val { color: var(--red); text-decoration: line-through; }
+    .new-val { color: var(--green); }
+    .arrow-val { color: var(--text-dim); text-align: center; white-space: nowrap; }
+    .map-link { display: inline-flex; align-items: center; margin-left: 0.4em;
+      color: var(--accent); vertical-align: middle; white-space: nowrap; font-size: 12px; }
+    .map-link:hover { color: var(--accent-hover); }
+    .map-link svg { width: 14px; height: 14px; }
+    .change-field { color: var(--yellow); font-weight: 600; }
+    .bar-chart { margin-top: 8px; }
+    .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 12px; }
+    .bar-label { width: 180px; text-align: right; color: var(--text-secondary); flex-shrink: 0;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .bar-track { flex: 1; height: 8px; background: var(--surface2); border-radius: 4px;
+      overflow: hidden; position: relative; }
+    .bar-fill { height: 100%; border-radius: 4px; transition: width 0.15s ease; }
+    .bar-fill.green { background: var(--green); } .bar-fill.red { background: var(--red); }
+    .bar-count { width: 40px; font-size: 12px; color: var(--text-dim); }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+    .empty { color: var(--text-dim); font-style: italic; padding: 16px; }
+    .truncated { color: var(--text-dim); font-size: 12px; margin-top: 8px; }
+    .collapsible-toggle { background: transparent; border: 1px solid var(--border);
+      color: var(--accent); padding: 5px 12px; border-radius: 4px; cursor: pointer;
+      font-size: 12px; font-family: inherit; margin-bottom: 12px; transition: background 0.1s; }
+    .collapsible-toggle:hover { background: var(--surface2); }
+    details.rename-group { background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; margin-bottom: 8px; box-shadow: var(--shadow-4); }
+    details.rename-group summary { padding: 10px 14px; cursor: pointer; font-size: 13px; }
+    details.rename-group[open] summary { border-bottom: 1px solid var(--border); }
+    details.rename-group table { border: none; box-shadow: none; border-radius: 0; }
+    details.rename-group .truncated { padding: 0 14px 10px; margin-top: 0; }
+    .rename-count { color: var(--text-dim); font-size: 12px; margin-left: 6px; }
+    .no-changes-banner { background: var(--green-bg); border: 1px solid var(--green-tint);
+      color: var(--green); padding: 16px; border-radius: 8px; margin-bottom: 24px;
+      text-align: center; font-weight: 600; font-size: 14px; }
+    .baseline-banner { background: var(--accent-bg); border: 1px solid var(--accent);
+      color: var(--accent); padding: 16px; border-radius: 8px; margin-bottom: 24px; font-size: 13px; }
+    .generated-at { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-dim); }
+    .history { font-size: 12.5px; color: var(--text-secondary); white-space: nowrap; }
+    .history .a { color: var(--green); font-weight: 500; }
+    .history .r { color: var(--red); font-weight: 500; }
+    .history .dot { color: var(--text-dim); margin: 0 4px; }
+    .history-none { color: var(--text-dim); font-style: italic; font-size: 12.5px; }
+    .info-wrap { position: relative; display: inline-flex; vertical-align: middle; }
+    .info-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+      height: 18px; padding: 0 8px 0 7px; border-radius: 999px; border: none;
+      color: #fff; background: var(--accent); cursor: help; font-size: 11px; font-weight: 600;
+      font-style: normal; font-family: inherit; line-height: 1; white-space: nowrap; }
+    .info-btn .glyph { font-style: italic; font-weight: 700;
+      font-family: Georgia, 'Times New Roman', serif; }
+    .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn,
+    .info-wrap:focus .info-btn { background: var(--accent-hover); }
+    .info-pop { display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 20;
+      width: 320px; max-width: 80vw; padding: 12px 14px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-8);
+      font-size: 12.5px; font-weight: 400; color: var(--text-secondary); line-height: 1.5; }
+    .info-wrap:hover .info-pop, .info-wrap:focus-within .info-pop,
+    .info-wrap:focus .info-pop { display: block; }
+    .info-pop strong { display: block; color: var(--text); font-size: 12px; margin-bottom: 4px; }
+    .info-pop ul { list-style: none; margin: 0 0 10px; padding: 0; }
+    .info-pop li { padding: 1px 0 1px 14px; position: relative; }
+    .info-pop li::before { content: "·"; position: absolute; left: 4px; color: var(--text-dim); }
+    .info-pop .note { color: var(--text-dim); font-size: 11.5px; margin: 0 0 10px; }
+    .info-pop .muted { color: var(--text-dim); font-style: italic; }
+  </style>
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+
+  <a class="back-link" href="index.html">← Back to County of Wellington reports</a>
+
+  <h1>County of Wellington — Address Changes</h1>
+  <p class="subtitle">
+    Changes between  and Thursday, Jul 16, 2026
+    · 42,908 total addresses
+  </p>
+
+  
+
+  <div class="cards">
+    <div class="card"><div class="label">Total Addresses</div>
+      <div class="value accent">42,908</div></div>
+    <div class="card"><div class="label">New Addresses</div>
+      <div class="value green">+94</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#107c10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,13.4 19.7,17.8 37.3,17.8 55.0,17.1 72.7,17.8 90.3,17.3 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#107c10"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Retired Addresses</div>
+      <div class="value red">−89</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#c50f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,14.6 19.7,17.8 37.3,17.8 55.0,17.6 72.7,17.8 90.3,17.3 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#c50f1f"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Updated Addresses <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (Address)</li><li>Street name (WC_FullNam)</li><li>Unit (Unit)</li><li>Coordinates (latitude, longitude)</li><li>Municipality</li><li>RoadClass</li><li>UrbanCentre</li><li>WC_Dir</li><li>WC_Name</li><li>WC_Number</li><li>WC_Prefix</li><li>WC_Sign</li><li>WC_Suffix</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span></div>
+      <div class="value yellow">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Renumbered</div>
+      <div class="value accent">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#0078d4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#0078d4"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Street Renames</div>
+      <div class="value purple">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#9141ac" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#9141ac"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    
+    <div class="card"><div class="label">Boundary Changes</div>
+      <div class="value teal">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#038387" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#038387"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    <div class="card"><div class="label">Location Adjustments</div>
+      <div class="value" style="color: var(--text-dim)">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#808080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#808080"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+  </div>
+
+  
+  <div class="section">
+    <h2>Change Breakdown</h2>
+    <div class="stats-grid">
+      
+      <div class="card"><div class="label">Top Streets by New Addresses</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">Collingridge Drive</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">30</span></div>
+        <div class="bar-row"><span class="bar-label">Blanchlett Street</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:83.0%"></div></div>
+          <span class="bar-count">25</span></div>
+        <div class="bar-row"><span class="bar-label">Runnells Way West</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:80.0%"></div></div>
+          <span class="bar-count">24</span></div>
+        <div class="bar-row"><span class="bar-label">Card Road</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:33.0%"></div></div>
+          <span class="bar-count">10</span></div>
+      </div></div>
+      
+      <div class="card"><div class="label">Top Streets by Retired Addresses</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">Collingridge Drive</span>
+          <div class="bar-track"><div class="bar-fill red" style="width:100.0%"></div></div>
+          <span class="bar-count">30</span></div>
+        <div class="bar-row"><span class="bar-label">Blanchlett Street</span>
+          <div class="bar-track"><div class="bar-fill red" style="width:80.0%"></div></div>
+          <span class="bar-count">24</span></div>
+        <div class="bar-row"><span class="bar-label">Runnells Way West</span>
+          <div class="bar-track"><div class="bar-fill red" style="width:80.0%"></div></div>
+          <span class="bar-count">24</span></div>
+        <div class="bar-row"><span class="bar-label">Card Road</span>
+          <div class="bar-track"><div class="bar-fill red" style="width:33.0%"></div></div>
+          <span class="bar-count">10</span></div>
+      </div></div>
+      
+    </div>
+  </div>
+  
+
+  <div class="section">
+    <h2>New Addresses <span class="badge badge-green">94</span></h2>
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-added',0)">Address</th><th onclick="sortTable('t-added',1)">Street</th>
+        <th onclick="sortTable('t-added',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-added">
+        
+        <tr><td>6657</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.40842&mlon=-80.24276#map=18/43.40842/-80.24276" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>44 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70166&mlon=-80.40204#map=18/43.70166/-80.40204" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>46 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70163&mlon=-80.40201#map=18/43.70163/-80.40201" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>48 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70157&mlon=-80.40192#map=18/43.70157/-80.40192" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>50 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70153&mlon=-80.40186#map=18/43.70153/-80.40186" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>52 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70149&mlon=-80.40179#map=18/43.70149/-80.40179" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>54 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70144&mlon=-80.40173#map=18/43.70144/-80.40173" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>58 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70139&mlon=-80.40166#map=18/43.70139/-80.40166" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>62 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70133&mlon=-80.40158#map=18/43.70133/-80.40158" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>66 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70127&mlon=-80.40150#map=18/43.70127/-80.40150" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>70 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70121&mlon=-80.40142#map=18/43.70121/-80.40142" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>74 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70116&mlon=-80.40134#map=18/43.70116/-80.40134" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>78 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70110&mlon=-80.40126#map=18/43.70110/-80.40126" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>82 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70104&mlon=-80.40117#map=18/43.70104/-80.40117" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>86 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70098&mlon=-80.40109#map=18/43.70098/-80.40109" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>90 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70092&mlon=-80.40101#map=18/43.70092/-80.40101" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>94 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70087&mlon=-80.40093#map=18/43.70087/-80.40093" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>98 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70081&mlon=-80.40085#map=18/43.70081/-80.40085" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>102 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70075&mlon=-80.40077#map=18/43.70075/-80.40077" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>106 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70069&mlon=-80.40068#map=18/43.70069/-80.40068" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>110 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70063&mlon=-80.40060#map=18/43.70063/-80.40060" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>114 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70057&mlon=-80.40052#map=18/43.70057/-80.40052" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>118 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70052&mlon=-80.40043#map=18/43.70052/-80.40043" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>122 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70047&mlon=-80.40035#map=18/43.70047/-80.40035" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>125 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70015&mlon=-80.40070#map=18/43.70015/-80.40070" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>126 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70040&mlon=-80.40026#map=18/43.70040/-80.40026" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>141 Card Road</td><td>Card Road</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70144&mlon=-80.40421#map=18/43.70144/-80.40421" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>143 Card Road</td><td>Card Road</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70151&mlon=-80.40418#map=18/43.70151/-80.40418" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>145 Card Road</td><td>Card Road</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70157&mlon=-80.40416#map=18/43.70157/-80.40416" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>147 Card Road</td><td>Card Road</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70164&mlon=-80.40413#map=18/43.70164/-80.40413" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>149 Card Road</td><td>Card Road</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70170&mlon=-80.40411#map=18/43.70170/-80.40411" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>153 Card Road</td><td>Card Road</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70175&mlon=-80.40411#map=18/43.70175/-80.40411" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>155 Card Road</td><td>Card Road</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70180&mlon=-80.40411#map=18/43.70180/-80.40411" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>157 Card Road</td><td>Card Road</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70186&mlon=-80.40411#map=18/43.70186/-80.40411" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>159 Card Road</td><td>Card Road</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70191&mlon=-80.40413#map=18/43.70191/-80.40413" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>161 Card Road</td><td>Card Road</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70196&mlon=-80.40416#map=18/43.70196/-80.40416" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>18 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70064&mlon=-80.40125#map=18/43.70064/-80.40125" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>22 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70051&mlon=-80.40131#map=18/43.70051/-80.40131" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>26 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70043&mlon=-80.40134#map=18/43.70043/-80.40134" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>30 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70035&mlon=-80.40136#map=18/43.70035/-80.40136" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>34 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70028&mlon=-80.40139#map=18/43.70028/-80.40139" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>38 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70019&mlon=-80.40142#map=18/43.70019/-80.40142" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>42 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70011&mlon=-80.40145#map=18/43.70011/-80.40145" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>46 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70003&mlon=-80.40148#map=18/43.70003/-80.40148" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>50 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69995&mlon=-80.40150#map=18/43.69995/-80.40150" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>54 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69980&mlon=-80.40155#map=18/43.69980/-80.40155" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>76 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69989&mlon=-80.40290#map=18/43.69989/-80.40290" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>80 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69999&mlon=-80.40284#map=18/43.69999/-80.40284" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>84 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70007&mlon=-80.40281#map=18/43.70007/-80.40281" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>88 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70015&mlon=-80.40279#map=18/43.70015/-80.40279" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>92 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70023&mlon=-80.40276#map=18/43.70023/-80.40276" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>96 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70031&mlon=-80.40273#map=18/43.70031/-80.40273" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>100 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70040&mlon=-80.40270#map=18/43.70040/-80.40270" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>104 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70047&mlon=-80.40268#map=18/43.70047/-80.40268" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>108 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70056&mlon=-80.40265#map=18/43.70056/-80.40265" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>112 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70064&mlon=-80.40262#map=18/43.70064/-80.40262" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>116 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70071&mlon=-80.40260#map=18/43.70071/-80.40260" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>120 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70080&mlon=-80.40257#map=18/43.70080/-80.40257" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>124 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70087&mlon=-80.40254#map=18/43.70087/-80.40254" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>128 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70096&mlon=-80.40252#map=18/43.70096/-80.40252" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>132 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70104&mlon=-80.40249#map=18/43.70104/-80.40249" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>136 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70112&mlon=-80.40246#map=18/43.70112/-80.40246" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>140 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70119&mlon=-80.40242#map=18/43.70119/-80.40242" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>144 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70126&mlon=-80.40237#map=18/43.70126/-80.40237" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>148 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70131&mlon=-80.40231#map=18/43.70131/-80.40231" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>152 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70138&mlon=-80.40223#map=18/43.70138/-80.40223" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>685 Dickson Drive</td><td>Dickson Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72569&mlon=-80.37510#map=18/43.72569/-80.37510" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>292 Jane Street</td><td>Jane Street</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.83660&mlon=-80.85004#map=18/43.83660/-80.85004" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>302 Jane Street</td><td>Jane Street</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.83667&mlon=-80.85007#map=18/43.83667/-80.85007" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>84 Runnells Way West</td><td>Runnells Way West</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70167&mlon=-80.40517#map=18/43.70167/-80.40517" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>88 Runnells Way West</td><td>Runnells Way West</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70157&mlon=-80.40523#map=18/43.70157/-80.40523" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>92 Runnells Way West</td><td>Runnells Way West</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70148&mlon=-80.40527#map=18/43.70148/-80.40527" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>96 Runnells Way West</td><td>Runnells Way West</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70139&mlon=-80.40530#map=18/43.70139/-80.40530" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>99 Runnells Way West</td><td>Runnells Way West</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70147&mlon=-80.40559#map=18/43.70147/-80.40559" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>100 Runnells Way West</td><td>Runnells Way West</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70129&mlon=-80.40532#map=18/43.70129/-80.40532" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>103 Runnells Way West</td><td>Runnells Way West</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70135&mlon=-80.40564#map=18/43.70135/-80.40564" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>104 Runnells Way West</td><td>Runnells Way West</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70119&mlon=-80.40535#map=18/43.70119/-80.40535" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>107 Runnells Way West</td><td>Runnells Way West</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70122&mlon=-80.40568#map=18/43.70122/-80.40568" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>108 Runnells Way West</td><td>Runnells Way West</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70109&mlon=-80.40540#map=18/43.70109/-80.40540" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>111 Runnells Way West</td><td>Runnells Way West</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70108&mlon=-80.40572#map=18/43.70108/-80.40572" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>112 Runnells Way West</td><td>Runnells Way West</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70100&mlon=-80.40542#map=18/43.70100/-80.40542" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>115 Runnells Way West</td><td>Runnells Way West</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70097&mlon=-80.40576#map=18/43.70097/-80.40576" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>116 Runnells Way West</td><td>Runnells Way West</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70090&mlon=-80.40546#map=18/43.70090/-80.40546" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>119 Runnells Way West</td><td>Runnells Way West</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70087&mlon=-80.40579#map=18/43.70087/-80.40579" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>120 Runnells Way West</td><td>Runnells Way West</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70080&mlon=-80.40549#map=18/43.70080/-80.40549" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>123 Runnells Way West</td><td>Runnells Way West</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70077&mlon=-80.40583#map=18/43.70077/-80.40583" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>124 Runnells Way West</td><td>Runnells Way West</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70071&mlon=-80.40552#map=18/43.70071/-80.40552" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>127 Runnells Way West</td><td>Runnells Way West</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70067&mlon=-80.40586#map=18/43.70067/-80.40586" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>128 Runnells Way West</td><td>Runnells Way West</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70061&mlon=-80.40555#map=18/43.70061/-80.40555" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>131 Runnells Way West</td><td>Runnells Way West</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70058&mlon=-80.40589#map=18/43.70058/-80.40589" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>132 Runnells Way West</td><td>Runnells Way West</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70052&mlon=-80.40559#map=18/43.70052/-80.40559" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>135 Runnells Way West</td><td>Runnells Way West</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70049&mlon=-80.40593#map=18/43.70049/-80.40593" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>136 Runnells Way West</td><td>Runnells Way West</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70041&mlon=-80.40563#map=18/43.70041/-80.40563" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>353 William Street</td><td>William Street</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97783&mlon=-80.73584#map=18/43.97783/-80.73584" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Retired Addresses <span class="badge badge-red">89</span></h2>
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-removed',0)">Address</th><th onclick="sortTable('t-removed',1)">Street</th>
+        <th onclick="sortTable('t-removed',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-removed">
+        
+        <tr><td>44 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70163&mlon=-80.40201#map=18/43.70163/-80.40201" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>46 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70160&mlon=-80.40195#map=18/43.70160/-80.40195" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>48 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70155&mlon=-80.40188#map=18/43.70155/-80.40188" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>50 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70149&mlon=-80.40179#map=18/43.70149/-80.40179" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>52 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70144&mlon=-80.40173#map=18/43.70144/-80.40173" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>56 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70139&mlon=-80.40166#map=18/43.70139/-80.40166" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>60 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70133&mlon=-80.40158#map=18/43.70133/-80.40158" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>64 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70127&mlon=-80.40150#map=18/43.70127/-80.40150" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>68 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70121&mlon=-80.40142#map=18/43.70121/-80.40142" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>72 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70116&mlon=-80.40134#map=18/43.70116/-80.40134" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>76 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70110&mlon=-80.40126#map=18/43.70110/-80.40126" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>80 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70104&mlon=-80.40117#map=18/43.70104/-80.40117" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>84 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70098&mlon=-80.40109#map=18/43.70098/-80.40109" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>88 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70092&mlon=-80.40101#map=18/43.70092/-80.40101" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>92 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70087&mlon=-80.40093#map=18/43.70087/-80.40093" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>96 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70081&mlon=-80.40085#map=18/43.70081/-80.40085" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>100 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70075&mlon=-80.40077#map=18/43.70075/-80.40077" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>104 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70069&mlon=-80.40068#map=18/43.70069/-80.40068" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>108 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70063&mlon=-80.40060#map=18/43.70063/-80.40060" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>112 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70057&mlon=-80.40052#map=18/43.70057/-80.40052" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>116 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70052&mlon=-80.40043#map=18/43.70052/-80.40043" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>120 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70047&mlon=-80.40035#map=18/43.70047/-80.40035" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>123 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70015&mlon=-80.40070#map=18/43.70015/-80.40070" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>124 Blanchlett Street</td><td>Blanchlett Street</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70040&mlon=-80.40026#map=18/43.70040/-80.40026" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>141 Card Road</td><td>Card Road</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70146&mlon=-80.40420#map=18/43.70146/-80.40420" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>143 Card Road</td><td>Card Road</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70154&mlon=-80.40417#map=18/43.70154/-80.40417" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>145 Card Road</td><td>Card Road</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70162&mlon=-80.40414#map=18/43.70162/-80.40414" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>147 Card Road</td><td>Card Road</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70169&mlon=-80.40412#map=18/43.70169/-80.40412" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>151 Card Road</td><td>Card Road</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70175&mlon=-80.40411#map=18/43.70175/-80.40411" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>152 Card Road</td><td>Card Road</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70186&mlon=-80.40441#map=18/43.70186/-80.40441" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>153 Card Road</td><td>Card Road</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70180&mlon=-80.40411#map=18/43.70180/-80.40411" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>155 Card Road</td><td>Card Road</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70186&mlon=-80.40411#map=18/43.70186/-80.40411" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>157 Card Road</td><td>Card Road</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70191&mlon=-80.40413#map=18/43.70191/-80.40413" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>159 Card Road</td><td>Card Road</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70196&mlon=-80.40416#map=18/43.70196/-80.40416" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>14 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70064&mlon=-80.40125#map=18/43.70064/-80.40125" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>18 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70051&mlon=-80.40131#map=18/43.70051/-80.40131" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>22 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70043&mlon=-80.40134#map=18/43.70043/-80.40134" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>26 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70035&mlon=-80.40136#map=18/43.70035/-80.40136" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>30 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70028&mlon=-80.40139#map=18/43.70028/-80.40139" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>34 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70019&mlon=-80.40142#map=18/43.70019/-80.40142" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>38 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70011&mlon=-80.40145#map=18/43.70011/-80.40145" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>42 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70003&mlon=-80.40148#map=18/43.70003/-80.40148" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>46 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69995&mlon=-80.40150#map=18/43.69995/-80.40150" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>50 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69980&mlon=-80.40155#map=18/43.69980/-80.40155" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>72 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69989&mlon=-80.40290#map=18/43.69989/-80.40290" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>76 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69999&mlon=-80.40284#map=18/43.69999/-80.40284" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>80 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70007&mlon=-80.40281#map=18/43.70007/-80.40281" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>84 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70015&mlon=-80.40279#map=18/43.70015/-80.40279" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>88 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70023&mlon=-80.40276#map=18/43.70023/-80.40276" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>92 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70031&mlon=-80.40273#map=18/43.70031/-80.40273" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>96 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70040&mlon=-80.40270#map=18/43.70040/-80.40270" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>100 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70047&mlon=-80.40268#map=18/43.70047/-80.40268" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>104 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70056&mlon=-80.40265#map=18/43.70056/-80.40265" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>108 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70064&mlon=-80.40262#map=18/43.70064/-80.40262" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>112 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70071&mlon=-80.40260#map=18/43.70071/-80.40260" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>116 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70080&mlon=-80.40257#map=18/43.70080/-80.40257" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>120 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70087&mlon=-80.40254#map=18/43.70087/-80.40254" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>124 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70096&mlon=-80.40252#map=18/43.70096/-80.40252" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>128 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70104&mlon=-80.40249#map=18/43.70104/-80.40249" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>132 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70112&mlon=-80.40246#map=18/43.70112/-80.40246" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>136 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70119&mlon=-80.40242#map=18/43.70119/-80.40242" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>140 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70126&mlon=-80.40237#map=18/43.70126/-80.40237" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>144 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70131&mlon=-80.40231#map=18/43.70131/-80.40231" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>148 Collingridge Drive</td><td>Collingridge Drive</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70138&mlon=-80.40223#map=18/43.70138/-80.40223" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>302 Jane Street</td><td>Jane Street</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.83659&mlon=-80.85007#map=18/43.83659/-80.85007" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>94 Runnells Way West</td><td>Runnells Way West</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70167&mlon=-80.40517#map=18/43.70167/-80.40517" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>98 Runnells Way West</td><td>Runnells Way West</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70157&mlon=-80.40523#map=18/43.70157/-80.40523" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>101 Runnells Way West</td><td>Runnells Way West</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70147&mlon=-80.40559#map=18/43.70147/-80.40559" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>102 Runnells Way West</td><td>Runnells Way West</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70148&mlon=-80.40527#map=18/43.70148/-80.40527" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>105 Runnells Way West</td><td>Runnells Way West</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70135&mlon=-80.40564#map=18/43.70135/-80.40564" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>106 Runnells Way West</td><td>Runnells Way West</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70139&mlon=-80.40530#map=18/43.70139/-80.40530" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>109 Runnells Way West</td><td>Runnells Way West</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70122&mlon=-80.40568#map=18/43.70122/-80.40568" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>110 Runnells Way West</td><td>Runnells Way West</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70129&mlon=-80.40532#map=18/43.70129/-80.40532" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>113 Runnells Way West</td><td>Runnells Way West</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70108&mlon=-80.40572#map=18/43.70108/-80.40572" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>114 Runnells Way West</td><td>Runnells Way West</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70119&mlon=-80.40535#map=18/43.70119/-80.40535" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>117 Runnells Way West</td><td>Runnells Way West</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70097&mlon=-80.40576#map=18/43.70097/-80.40576" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>118 Runnells Way West</td><td>Runnells Way West</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70109&mlon=-80.40540#map=18/43.70109/-80.40540" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>121 Runnells Way West</td><td>Runnells Way West</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70087&mlon=-80.40579#map=18/43.70087/-80.40579" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>122 Runnells Way West</td><td>Runnells Way West</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70100&mlon=-80.40542#map=18/43.70100/-80.40542" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>125 Runnells Way West</td><td>Runnells Way West</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70077&mlon=-80.40583#map=18/43.70077/-80.40583" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>126 Runnells Way West</td><td>Runnells Way West</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70090&mlon=-80.40546#map=18/43.70090/-80.40546" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>129 Runnells Way West</td><td>Runnells Way West</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70067&mlon=-80.40586#map=18/43.70067/-80.40586" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>130 Runnells Way West</td><td>Runnells Way West</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70080&mlon=-80.40549#map=18/43.70080/-80.40549" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>133 Runnells Way West</td><td>Runnells Way West</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70058&mlon=-80.40589#map=18/43.70058/-80.40589" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>134 Runnells Way West</td><td>Runnells Way West</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70071&mlon=-80.40552#map=18/43.70071/-80.40552" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>137 Runnells Way West</td><td>Runnells Way West</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70049&mlon=-80.40593#map=18/43.70049/-80.40593" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>138 Runnells Way West</td><td>Runnells Way West</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70061&mlon=-80.40555#map=18/43.70061/-80.40555" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>142 Runnells Way West</td><td>Runnells Way West</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70052&mlon=-80.40559#map=18/43.70052/-80.40559" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>146 Runnells Way West</td><td>Runnells Way West</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70041&mlon=-80.40563#map=18/43.70041/-80.40563" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Updated Addresses <span class="badge badge-yellow">0</span>
+      <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (Address)</li><li>Street name (WC_FullNam)</li><li>Unit (Unit)</li><li>Coordinates (latitude, longitude)</li><li>Municipality</li><li>RoadClass</li><li>UrbanCentre</li><li>WC_Dir</li><li>WC_Name</li><li>WC_Number</li><li>WC_Prefix</li><li>WC_Sign</li><li>WC_Suffix</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span></h2>
+    
+    <p class="empty">No addresses updated.</p>
+  </div>
+
+  <div class="section">
+    <h2>Renumbered Addresses <span class="badge badge-accent">0</span></h2>
+    
+    <p class="empty">No addresses renumbered.</p>
+  </div>
+
+  <div class="section">
+    <h2>Street Renames <span class="badge badge-purple">0</span></h2>
+    <p class="empty">No street renames.</p>
+  </div>
+
+  
+
+  
+
+  
+  <div class="section">
+    <h2>Boundary Changes <span class="badge badge-teal">0</span></h2>
+    <p class="empty">No ward or municipality reassignments.</p>
+  </div>
+  
+
+  <div class="section">
+    <h2>Location Adjustments <span class="badge" style="background: var(--surface2); color: var(--text-dim)">0</span></h2>
+    
+    <p class="empty">No location adjustments.</p>
+  </div>
+
+  <div class="generated-at">Report generated Jul 16, 2026 at 05:10 PM · source licence: Not identified</div>
+
+  <script>
+    function sortTable(tbodyId, col) {
+      const tbody = document.getElementById(tbodyId);
+      if (!tbody) return;
+      const rows = Array.from(tbody.rows);
+      const dir = tbody.dataset.sortDir === 'asc' ? 'desc' : 'asc';
+      tbody.dataset.sortDir = dir;
+      rows.sort((a, b) => {
+        const av = a.cells[col]?.textContent.trim() || '';
+        const bv = b.cells[col]?.textContent.trim() || '';
+        const an = parseFloat(av), bn = parseFloat(bv);
+        if (!isNaN(an) && !isNaN(bn)) return dir === 'asc' ? an - bn : bn - an;
+        return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+      });
+      rows.forEach(r => tbody.appendChild(r));
+    }
+  </script>
+</body>
+
+</html>
