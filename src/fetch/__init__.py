@@ -24,17 +24,27 @@ def _vault(ds):
     return v
 
 
-def fetch(ds, force=False):
+def fetch_path(ds, force=False):
+    """Pull (or reuse) the latest snapshot and return its hot path, unparsed.
+    Lets callers check "already imported" by filename before paying for a
+    full parse of the (possibly ~590 MB) GeoJSON."""
     from addressvault import Archived
     v = _vault(ds)
     # wait=True: coalesce onto an in-flight pull of this slug rather than erroring
     # or starting a duplicate download.
     v.pull(ds.slug, force=force, wait=True)
     try:
-        path = v.path(ds.slug, "latest")
+        return v.path(ds.slug, "latest")
     except Archived:  # latest is an unchanged day pointing at a cold canonical
         v.thaw(ds.slug, v.snapshot(ds.slug, "latest").date, wait=True)
-        path = v.path(ds.slug, "latest")
+        return v.path(ds.slug, "latest")
+
+
+def load_features(path):
     with open(path, encoding="utf-8") as f:
-        features = json.load(f).get("features", [])
-    return path, features
+        return json.load(f).get("features", [])
+
+
+def fetch(ds, force=False):
+    path = fetch_path(ds, force=force)
+    return path, load_features(path)

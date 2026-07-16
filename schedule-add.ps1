@@ -5,22 +5,19 @@
 $projectDir = $PSScriptRoot
 $taskName   = "kk-ontario-update"
 $runAt      = Get-Date "12:00"
-$logDir     = "$projectDir\logs"
-$logFile    = "$logDir\update.log"
+$logFile    = "$projectDir\logs\update.log"
 
-if (-not (Test-Path $logDir)) {
-    New-Item -ItemType Directory -Path $logDir | Out-Null
-}
-
+# No output redirection here: daily-update.ps1 writes its own log, so manual
+# reruns are tracked by progress.ps1 the same way as scheduled ones.
 $action = New-ScheduledTaskAction `
-    -Execute "cmd.exe" `
-    -Argument "/c powershell -NoProfile -ExecutionPolicy Bypass -File `"$projectDir\daily-update.ps1`" > `"$logFile`" 2>&1"
+    -Execute "powershell.exe" `
+    -Argument "-NoProfile -ExecutionPolicy Bypass -File `"$projectDir\daily-update.ps1`""
 
 $trigger = New-ScheduledTaskTrigger -Daily -At $runAt
 
-# run.py exits non-zero if any city failed, so RestartCount retries the whole run;
-# already-updated cities short-circuit (cached download + already-imported), making
-# a restart effectively a per-city retry.
+# RestartCount does NOT fire on a nonzero exit code (only on launch failures) --
+# observed 2026-07-16, when an all-cities failure never retried. daily-update.ps1
+# retries failed runs itself; RestartCount stays only to cover launch failures.
 $settings = New-ScheduledTaskSettingsSet `
     -ExecutionTimeLimit (New-TimeSpan -Hours 2) `
     -StartWhenAvailable `
@@ -30,4 +27,4 @@ $settings = New-ScheduledTaskSettingsSet `
 Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Settings $settings -Force | Out-Null
 
 Write-Host ("Registered {0}: daily {1:HH:mm} via daily-update.ps1, log: {2}" -f $taskName, $runAt, $logFile)
-Write-Host "Retry: up to 3 whole-run restarts, 30 min apart, when any city fails."
+Write-Host "Retry: daily-update.ps1 itself reruns up to 3 attempts, 15 min apart, on failure."

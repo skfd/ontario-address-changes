@@ -93,6 +93,15 @@ def _content_hash(records):
     return h.hexdigest()
 
 
+def already_imported(ds, filepath):
+    """True when a snapshot with this filename is already recorded."""
+    conn = init_db(ds)
+    hit = conn.execute("SELECT 1 FROM snapshots WHERE filename = ?",
+                       (os.path.basename(filepath),)).fetchone()
+    conn.close()
+    return bool(hit)
+
+
 def import_snapshot(ds, filepath, features, headers=None):
     """Import normalized features as a new snapshot using SCD-2 delta logic."""
     conn = init_db(ds)

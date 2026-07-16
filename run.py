@@ -80,8 +80,13 @@ def _update_serial(datasets, args):
     for ds in datasets:
         print(f"\n=== {ds.slug} ===")
         try:
-            filepath, features = fetch.fetch(ds, force=args.force)
-            db.import_snapshot(ds, filepath, features)
+            filepath = fetch.fetch_path(ds, force=args.force)
+            # Filename check before the (expensive) full parse: a rerun of an
+            # already-imported snapshot skips json.load entirely.
+            if db.already_imported(ds, filepath):
+                print(f"  already imported: {os.path.basename(filepath)}")
+            else:
+                db.import_snapshot(ds, filepath, fetch.load_features(filepath))
             diff.report_latest(ds)
             done.append(ds)
         except Exception as e:

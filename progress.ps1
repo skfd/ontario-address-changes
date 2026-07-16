@@ -1,10 +1,10 @@
 # Shows progress of an update run by parsing its log.
-# Works on both the combined `update --all` log and a per-city scheduled log,
-# since run.py banners every city with "=== <slug> ===".
+# run.py in parallel mode prints each city's block only when it finishes, so
+# mid-run the log can only tell us done/failed/pending counts - no live stages.
 #
 #   .\progress.ps1                 # snapshot of the newest log in logs\
 #   .\progress.ps1 -Follow 3       # refresh every 3 seconds
-#   .\progress.ps1 -Log logs\toronto.log
+#   .\progress.ps1 -Log logs\update.log
 
 param(
     [string]$Log,
@@ -24,21 +24,20 @@ function Resolve-Log {
     return $null
 }
 
-function Get-Stage {
-    param([string]$line)
-    switch -Regex ($line) {
-        'ERROR'            { return 'ERROR' }
-        '^querying|^fetched'{ return 'fetching' }
-        '^downloading'     { return 'downloading' }
-        '^parsed'          { return 'parsed' }
-        '^snapshot '       { return 'imported' }
-        'already imported' { return 'up-to-date' }
-        'need \d+ to diff' { return 'baseline' }
-        'no changes'       { return 'no changes' }
-        '^diff '           { return 'diffed' }
-        'wrote site'       { return 'reported' }
-        default            { return 'running' }
-    }
+# One short cause per failed city, condensed from its ERROR line.
+function Get-ErrorSummary {
+    param([string]$body)
+    $errLine = @($body -split "[`r`n]+" | Where-Object { $_ -match 'ERROR' }) | Select-Object -First 1
+    if (-not $errLine) { return 'failed (no ERROR line in log)' }
+    $hostName = if ($errLine -match "host='([^']+)'") { $matches[1] } else { '' }
+    $cause = if ($errLine -match 'Caused by (\w+?)(?:Error)?\(') { $matches[1] }
+             elseif ($errLine -match 'Read timed out')           { 'ReadTimeout' }
+             else {
+                 $msg = ($errLine -replace '^\s*ERROR \([^)]+\):\s*', '').Trim()
+                 if ($msg.Length -gt 70) { $msg.Substring(0, 70) + '...' } else { $msg }
+             }
+    if ($hostName) { return "$cause  $hostName" }
+    return $cause
 }
 
 function Show-Progress {
@@ -51,10 +50,6 @@ function Show-Progress {
     $raw   = Get-Content -Raw -LiteralPath $path
     $total = (Get-ChildItem "$PSScriptRoot\datasets\*.toml" -ErrorAction SilentlyContinue).Count
     $mtime = (Get-Item $path).LastWriteTime
-
-    # run.py prints "wrote site for N dataset(s)" once every city is done, before
-    # the commit/push output. Its presence means nothing is still running.
-    $runDone = $raw -match 'wrote site for \d+ dataset'
 
     # daily-update.ps1 writes "START <iso8601> jobs=<N>" as the log's first line.
     $startTime = $null
@@ -69,100 +64,209 @@ function Show-Progress {
         if ($matches[2]) { $jobs = [int]$matches[2] }
     }
 
-    Write-Host ("Log: {0}" -f $path)
-    Write-Host ("Updated: {0:HH:mm:ss}   datasets in registry: {1}" -f $mtime, $total)
-    Write-Host ("-" * 72)
+    Write-Host ("Log: {0}  (updated {1:HH:mm:ss})" -f $path, $mtime)
+    Write-Host ""
 
     # Split on the "=== slug ===" banner; capturing group keeps the slug in results.
     $parts = [regex]::Split($raw, '={3}\s*(\S+)\s*={3}')
-    $sectionCount = [math]::Floor(($parts.Count - 1) / 2)
-    if ($sectionCount -le 0) {
-        Write-Host "(no city sections yet)"
+    if ($parts.Count -lt 3) {
+        # A fully offline run never prints a city banner, only OFFLINE lines.
+        if ($raw -match '(?m)^OFFLINE ') {
+            if ($raw -match '(?m)^END ') {
+                Write-Host "Offline: no internet, run skipped (treated like the laptop being off)."
+                Write-Host "Rerun manually once online: .\daily-update.ps1"
+            } else {
+                Write-Host "Offline so far: waiting for network (attempts continue 15 min apart)."
+            }
+            Show-History -Total $total
+        } else {
+            Write-Host "(no city sections yet)"
+        }
         return
     }
 
-    $completed = [System.Collections.Generic.HashSet[string]]::new()
+    # Retry attempts reprint a city's banner; keep only its last section.
+    $sections = [ordered]@{}
     for ($k = 1; $k -lt $parts.Count; $k += 2) {
-        $slug  = $parts[$k]
-        [void]$completed.Add($slug)
-        $body  = $parts[$k + 1]
-        # The report summary and git commit/push trail the last city's banner with
-        # no banner of their own; drop them so they aren't read as that city's stage.
-        $body  = ($body -split 'wrote site for \d+ dataset', 2)[0]
-        $lines = @($body -split "[`r`n]+" | Where-Object { $_.Trim() -ne '' })
-        if ($lines) { $detail = $lines[-1].Trim() } else { $detail = '(starting...)' }
-        $stage = Get-Stage $detail
-
-        # Until the run finishes, the last section is the one still in progress.
-        $active = (-not $runDone) -and ($k -eq $parts.Count - 2)
-        $mark   = if ($active) { '>' } else { ' ' }
-        Write-Host ("{0} {1,-16} [{2,-11}] {3}" -f $mark, $slug, $stage, $detail)
+        # "wrote site for N dataset(s)" and the git output trail the last city's
+        # banner with no banner of their own; drop them from that city's body.
+        $sections[$parts[$k]] = ($parts[$k + 1] -split 'wrote site for \d+ dataset', 2)[0]
+    }
+    $ok     = [System.Collections.Generic.List[string]]::new()
+    $failed = [System.Collections.Generic.List[object]]::new()
+    foreach ($e in $sections.GetEnumerator()) {
+        if ($e.Value -match 'ERROR|update failed') {
+            $failed.Add([pscustomobject]@{ Slug = $e.Key; Why = Get-ErrorSummary $e.Value })
+        } else {
+            $ok.Add($e.Key)
+        }
     }
 
-    Write-Host ("-" * 72)
-    Write-Host ("{0} of {1} datasets seen in this run." -f $sectionCount, $total)
+    $seen    = $ok.Count + $failed.Count
+    $pending = [math]::Max($total - $seen, 0)
+    # daily-update.ps1 writes an END line when the run (incl. retries) is over;
+    # a RETRY line without it means an attempt is still in flight. Logs without
+    # retries fall back to "wrote site" (prints once every city is done) or,
+    # with zero successes, all-cities-seen.
+    $finished = if ($raw -match '(?m)^END ') { $true }
+                elseif ($raw -match '(?m)^RETRY ') { $false }
+                else { ($raw -match 'wrote site for \d+ dataset') -or ($seen -ge $total) }
 
-    # In parallel mode run.py prints a city's block only when it finishes, so the
-    # number of sections == cities completed. ETA assumes a steady throughput.
-    if (-not $startTime) {
-        Write-Host "ETA: no START header in log (launch via daily-update.ps1 for ETA)."
-        return
-    }
+    $status = if (-not $finished) {
+                  if ($raw -match '(?m)^RETRY ') { 'Retrying failures' } else { 'Running' }
+              }
+              # daily-update.ps1 stamps exit=offline when the machine had (or
+              # lost) internet -- failures below are offline noise, not real.
+              elseif ($raw -match '(?m)^END .*exit=offline') { 'Run offline (treated like laptop off)' }
+              elseif ($failed.Count)   { 'Run finished with failures' }
+              else                     { 'Run OK' }
+    Write-Host ("{0}: {1} ok, {2} failed, {3} pending (of {4})" -f `
+        $status, $ok.Count, $failed.Count, $pending, $total)
 
-    $done = $completed.Count
-    $finished = ($done -ge $total)
-    # While running, measure to now; once finished, freeze at last log write.
-    $endRef  = if ($finished) { $mtime } else { Get-Date }
-    $elapsed = $endRef - $startTime
-
+    # --- elapsed / ETA ---------------------------------------------------
     $fmt = { param($ts) "{0:00}:{1:00}:{2:00}" -f [int]$ts.TotalHours, $ts.Minutes, $ts.Seconds }
+    if ($startTime) {
+        # While running, measure to now; once finished, freeze at last log write.
+        $endRef  = if ($finished) { $mtime } else { Get-Date }
+        $elapsed = $endRef - $startTime
+        if ($finished) {
+            Write-Host ("Elapsed {0} (finished {1:HH:mm:ss})" -f (& $fmt $elapsed), $mtime)
+        } else {
+            # Per-city median seconds from history (run.py appends logs\timings.csv).
+            $median = @{}
+            $csv = "$PSScriptRoot\logs\timings.csv"
+            if (Test-Path $csv) {
+                Import-Csv $csv | Group-Object slug | ForEach-Object {
+                    $v = @($_.Group.seconds | ForEach-Object { [double]$_ } | Sort-Object)
+                    $n = $v.Count
+                    $median[$_.Name] = if ($n % 2) { $v[($n-1)/2] } else { ($v[$n/2-1] + $v[$n/2]) / 2 }
+                }
+            }
 
-    if ($finished) {
-        Write-Host ("Done. Elapsed {0} (finished {1:HH:mm:ss})." -f (& $fmt $elapsed), $mtime)
-        return
+            $seenSlugs = [System.Collections.Generic.HashSet[string]]::new()
+            $ok     | ForEach-Object { [void]$seenSlugs.Add($_) }
+            $failed | ForEach-Object { [void]$seenSlugs.Add($_.Slug) }
+
+            $remaining = $null
+            $source    = ''
+            if ($median.Count -gt 0) {
+                # Sum the expected time of cities not yet seen this run; unknown
+                # cities use the overall median. With N workers the floor is the
+                # single longest pole.
+                $fallback = ($median.Values | Sort-Object | Select-Object -Index ([int]($median.Count/2)))
+                $allSlugs = Get-ChildItem "$PSScriptRoot\datasets\*.toml" | ForEach-Object { $_.BaseName }
+                $notSeen  = @($allSlugs | Where-Object { -not $seenSlugs.Contains($_) })
+                if ($notSeen.Count -gt 0) {
+                    $exp = $notSeen | ForEach-Object { if ($median.ContainsKey($_)) { $median[$_] } else { $fallback } }
+                    $sum = ($exp | Measure-Object -Sum).Sum
+                    $max = ($exp | Measure-Object -Maximum).Maximum
+                    $remaining = [TimeSpan]::FromSeconds([math]::Max($sum / $jobs, $max))
+                    $source = 'history'
+                }
+            }
+            if (-not $remaining -and $seen -gt 0) {
+                # No usable history yet: flat elapsed/done average.
+                $remaining = [TimeSpan]::FromSeconds(($elapsed.TotalSeconds / $seen) * $pending)
+                $source = 'flat avg'
+            }
+
+            if ($remaining) {
+                $eta = (Get-Date) + $remaining
+                Write-Host ("Elapsed {0}  |  ETA ~{1} remaining  |  finish ~{2:HH:mm:ss}  ({3})" -f `
+                    (& $fmt $elapsed), (& $fmt $remaining), $eta, $source)
+            } else {
+                Write-Host ("Elapsed {0}. ETA: estimating (no cities finished yet)..." -f (& $fmt $elapsed))
+            }
+        }
+    } elseif (-not $finished) {
+        Write-Host "ETA: no START header in log (launch via daily-update.ps1 for ETA)."
     }
 
-    # Per-city median seconds from history (run.py appends logs\timings.csv).
-    $median = @{}
+    # --- failures --------------------------------------------------------
+    if ($failed.Count -gt 0) {
+        Write-Host ""
+        Write-Host "Failures:"
+        $show = $failed | Select-Object -First 15
+        foreach ($f in $show) {
+            Write-Host ("  {0,-20} {1}" -f $f.Slug, $f.Why)
+        }
+        if ($failed.Count -gt 15) {
+            Write-Host ("  ... ({0} more; see {1})" -f ($failed.Count - 15), $path)
+        }
+    }
+
+    Show-History -Total $total
+    Show-TaskVerdict -Finished $finished -FailedCount $failed.Count
+}
+
+# Last 7 days: successes/day from timings.csv, commit from git history, run
+# outcome from runs.csv (written by daily-update.ps1 since 2026-07-16).
+function Show-History {
+    param([int]$Total)
+
+    $okPerDay = @{}
     $csv = "$PSScriptRoot\logs\timings.csv"
     if (Test-Path $csv) {
-        Import-Csv $csv | Group-Object slug | ForEach-Object {
-            $v = @($_.Group.seconds | ForEach-Object { [double]$_ } | Sort-Object)
-            $n = $v.Count
-            $median[$_.Name] = if ($n % 2) { $v[($n-1)/2] } else { ($v[$n/2-1] + $v[$n/2]) / 2 }
+        Import-Csv $csv | ForEach-Object {
+            $d = ($_.finished_iso -split 'T')[0]
+            if ($okPerDay.ContainsKey($d)) { $okPerDay[$d]++ } else { $okPerDay[$d] = 1 }
         }
     }
 
-    $remaining = $null
-    $source    = ''
-    if ($median.Count -gt 0) {
-        # Sum the expected time of cities not yet seen this run; unknown cities use
-        # the overall median. With N workers the floor is the single longest pole.
-        $fallback = ($median.Values | Sort-Object | Select-Object -Index ([int]($median.Count/2)))
-        $allSlugs = Get-ChildItem "$PSScriptRoot\datasets\*.toml" | ForEach-Object { $_.BaseName }
-        $pending  = @($allSlugs | Where-Object { -not $completed.Contains($_) })
-        if ($pending.Count -gt 0) {
-            $exp = $pending | ForEach-Object { if ($median.ContainsKey($_)) { $median[$_] } else { $fallback } }
-            $sum = ($exp | Measure-Object -Sum).Sum
-            $max = ($exp | Measure-Object -Maximum).Maximum
-            $secs = [math]::Max($sum / $jobs, $max)
-            $remaining = [TimeSpan]::FromSeconds($secs)
-            $source = "history, {0} pending" -f $pending.Count
+    $committed = @{}
+    git -C $PSScriptRoot log --since=8.days --format=%s 2>$null | ForEach-Object {
+        if ($_ -match '^daily update (\d{4}-\d\d-\d\d)') { $committed[$matches[1]] = $true }
+    }
+
+    $runs = @{}
+    $runsCsv = "$PSScriptRoot\logs\runs.csv"
+    if (Test-Path $runsCsv) {
+        Import-Csv $runsCsv | ForEach-Object {
+            $runs[($_.started -split 'T')[0]] = $_   # last run of the day wins
         }
     }
 
-    if (-not $remaining -and $done -gt 0) {
-        # No usable history yet: flat elapsed/done average.
-        $remaining = [TimeSpan]::FromSeconds(($elapsed.TotalSeconds / $done) * ($total - $done))
-        $source = 'flat avg'
+    Write-Host ""
+    Write-Host "Last 7 days:"
+    for ($i = 6; $i -ge 0; $i--) {
+        $day = (Get-Date).Date.AddDays(-$i).ToString('yyyy-MM-dd')
+        $okN = 0
+        if ($okPerDay.ContainsKey($day)) { $okN = $okPerDay[$day] }
+        $commit = if ($committed.ContainsKey($day)) { 'committed' } else { 'no commit' }
+        $note = ''
+        if ($runs.ContainsKey($day)) {
+            $r = $runs[$day]
+            $note = if ($r.exit -eq 'offline') { 'offline (like laptop off)' }
+                    elseif ([int]$r.exit -eq 0) { "run ok ({0} attempt(s))" -f $r.attempts }
+                    else { "run FAILED after {0} attempt(s)" -f $r.attempts }
+        } elseif ($okN -eq 0) {
+            $note = 'no run recorded'
+        }
+        Write-Host ("  {0}  {1,3}/{2} ok  {3,-10} {4}" -f $day, $okN, $Total, $commit, $note)
     }
+}
 
-    if ($remaining) {
-        $eta = (Get-Date) + $remaining
-        Write-Host ("Elapsed {0}  |  ETA ~{1} remaining  |  finish ~{2:HH:mm:ss}  ({3})" -f `
-            (& $fmt $elapsed), (& $fmt $remaining), $eta, $source)
+# Answers "do I need to rerun manually?" from the scheduled task's state.
+function Show-TaskVerdict {
+    param([bool]$Finished, [int]$FailedCount)
+
+    Write-Host ""
+    $info = $null
+    try { $info = Get-ScheduledTaskInfo -TaskName 'kk-ontario-update' -ErrorAction Stop } catch {}
+    if (-not $info) {
+        Write-Host "Task kk-ontario-update not registered (run schedule-add.ps1)."
+        return
+    }
+    Write-Host ("Task: last run {0:yyyy-MM-dd HH:mm} (exit {1}), next run {2:yyyy-MM-dd HH:mm}." -f `
+        $info.LastRunTime, $info.LastTaskResult, $info.NextRunTime)
+
+    if (-not $Finished) {
+        Write-Host "-> Run still in progress (daily-update.ps1 retries failures itself, 15 min apart)."
+    } elseif ($FailedCount -gt 0) {
+        Write-Host "-> Retries exhausted; the task will NOT run again before its next trigger."
+        Write-Host "   Rerun manually: .\daily-update.ps1  (updated cities short-circuit, so it's cheap)"
     } else {
-        Write-Host ("Elapsed {0}. ETA: estimating (no cities finished yet)..." -f (& $fmt $elapsed))
+        Write-Host "-> All good; nothing to do."
     }
 }
 
