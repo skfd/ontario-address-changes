@@ -8,6 +8,7 @@ import json
 import re
 
 from src import db
+from src.normalize import EDIT_METADATA_FIELDS  # single source of truth; also stripped from props at import
 
 _FULL_COLS = ("identity_key", "number", "street", "unit", "full",
               "longitude", "latitude", "props", "payload_hash")
@@ -19,17 +20,6 @@ _CANONICAL_DISPLAY = {
 }
 
 _DATE_RE = re.compile(r"(\d{4}-\d{2}-\d{2})")
-
-# Edit-metadata props ignored in every dataset (case-insensitive): timestamps and
-# editor names that change alongside any real edit (or on their own) and carry no
-# address information. Curated from a scan of all tracked sources; meaningful date
-# fields (OCCUPANCY_DATE, VERIFIED_DATE, ...) are deliberately not listed.
-EDIT_METADATA_FIELDS = frozenset({
-    "created_date", "create_date", "createdate", "created_user",
-    "edit_date", "edited_date", "editdate", "dateedit", "dateupdate",
-    "update_date", "updated", "lastupdate", "lasteditdate",
-    "last_edited_date", "last_edited_user", "modified_date", "moddate", "adddate",
-})
 
 
 # ---- snapshot helpers ----

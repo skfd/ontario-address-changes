@@ -15,11 +15,23 @@ from functools import lru_cache
 # ESRI / shapefile housekeeping keys that churn on republish and must not
 # influence identity or change-detection.
 _VOLATILE_KEYS = {
-    "objectid", "object_id", "fid", "oid", "globalid", "global_id",
+    "objectid", "objectid_1", "object_id", "fid", "oid", "globalid", "global_id",
     "shape", "shape_length", "shape_area", "shape__length", "shape__area",
     "se_anno_cad_data",
     "_id",  # CKAN row-sequence id (Toronto), reassigned on every republish
 }
+
+# Edit-metadata props ignored in every dataset (case-insensitive): timestamps and
+# editor names that change alongside any real edit (or on their own) and carry no
+# address information. Curated from a scan of all tracked sources; meaningful date
+# fields (OCCUPANCY_DATE, VERIFIED_DATE, ...) are deliberately not listed. Stripped
+# from the props blob so they never influence payload_hash / change-detection.
+EDIT_METADATA_FIELDS = frozenset({
+    "created_date", "create_date", "createdate", "created_user",
+    "edit_date", "edited_date", "editdate", "dateedit", "dateupdate",
+    "update_date", "updated", "lastupdate", "lasteditdate",
+    "last_edited_date", "last_edited_user", "modified_date", "moddate", "adddate",
+})
 
 _CANONICAL = ("number", "street", "unit", "full")
 
@@ -88,10 +100,11 @@ def _coords(ds, feature):
     return round(float(lon), 5), round(float(lat), 5)
 
 
-def _clean_props(props):
+def _clean_props(props, ignore):
     out = {}
     for k, v in props.items():
-        if k.lower() in _VOLATILE_KEYS:
+        kl = k.lower()
+        if kl in _VOLATILE_KEYS or kl in ignore:
             continue
         if v is None or v == "":
             continue
@@ -114,7 +127,8 @@ def canonical(ds, feature):
     rec["longitude"] = lon
     rec["latitude"] = lat
 
-    clean_props = _clean_props(props)
+    ignore = {k.lower() for k in ds.ignore_fields} | EDIT_METADATA_FIELDS
+    clean_props = _clean_props(props, ignore)
     rec["props"] = json.dumps(clean_props, sort_keys=True, ensure_ascii=False, default=str)
 
     rec["identity_key"] = _identity(ds, rec, props, lon, lat)

@@ -6,6 +6,11 @@ format = "geojson"
 license_name = "York Region Open Data Licence"
 osm_compatible = "green-lwg"
 
+# PRO_DATE is a batch processing/publication stamp (String YYYYMMDD) rewritten to
+# ~yesterday on every republish for all 431k rows -- pure republish churn, no
+# address meaning (distinct from the real CREATE_DATE/MODDATE edit timestamps).
+ignore_fields = ["PRO_DATE"]
+
 [identity]
 # Region-wide layer (431k rows, all nine York municipalities incl. Vaughan/Markham);
 # the catalogue's separate "Markham" entry (ww8.yorkmaps) is the same dataset.

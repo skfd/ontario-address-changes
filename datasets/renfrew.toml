@@ -10,6 +10,12 @@ format = "geojson"
 license_name = "Not identified"
 osm_compatible = "unknown-review"
 
+# Effective is a static effective-date re-encoded with a shifting UTC offset each
+# republish (e.g. 1553576400000 -> 1553572800000 = same 2019-03-26, one hour apart):
+# churns ~25k rows/day with no real change. Edit-metadata timestamps/users on this
+# layer (DateUpdate, created_date/user, last_edited_user) are handled globally.
+ignore_fields = ["Effective"]
+
 [identity]
 # No integer stable id (OBJECTID sequential; GlobalID/NGUID are GUIDs that can regenerate). Synthesize.
 key_field = ""                                 # synthesize from address + rounded lon/lat
