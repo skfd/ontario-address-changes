@@ -128,11 +128,16 @@ def canonical(ds, feature):
     rec["latitude"] = lat
 
     ignore = {k.lower() for k in ds.ignore_fields} | EDIT_METADATA_FIELDS
-    clean_props = _clean_props(props, ignore)
+    # keep_fields are ignored for change detection but still stored, for consumers
+    # that need them (see datasets/toronto.toml). They are dropped from the hash
+    # basis below so their churn can't open a new SCD-2 range.
+    keep = {k.lower() for k in ds.keep_fields}
+    clean_props = _clean_props(props, ignore - keep)
     rec["props"] = json.dumps(clean_props, sort_keys=True, ensure_ascii=False, default=str)
 
+    hash_props = {k: v for k, v in clean_props.items() if k.lower() not in keep}
     rec["identity_key"] = _identity(ds, rec, props, lon, lat)
-    rec["payload_hash"] = _payload_hash(rec)
+    rec["payload_hash"] = _payload_hash(rec, hash_props)
     return rec
 
 
@@ -148,7 +153,10 @@ def _identity(ds, rec, props, lon, lat):
     return "syn:" + hashlib.sha1(basis.encode("utf-8")).hexdigest()
 
 
-def _payload_hash(rec):
+def _payload_hash(rec, hash_props):
+    """Hash over the change-tracked content. ``hash_props`` is the stored props
+    minus any keep_fields, so a dataset with no keep_fields hashes exactly as
+    before (byte-identical to rec["props"])."""
     basis = "|".join([
         str(rec.get("number") or ""),
         str(rec.get("street") or ""),
@@ -156,6 +164,6 @@ def _payload_hash(rec):
         str(rec.get("full") or ""),
         f"{rec['longitude']:.5f}",
         f"{rec['latitude']:.5f}",
-        rec["props"],
+        json.dumps(hash_props, sort_keys=True, ensure_ascii=False, default=str),
     ])
     return hashlib.sha1(basis.encode("utf-8")).hexdigest()

@@ -29,6 +29,20 @@ ignore_fields = [
   "ADDRESS_STRING_ID",
 ]
 
+# Ignored for change detection (above) but still written to props, because
+# toronto-2-address-import needs them and they exist nowhere else once ingested:
+#   ADDRESS_CLASS_DESC - Land / Structure / Structure Entrance / Land Entrance.
+#     Drives the Land Entrance ingest skip, Land-canonical dedup, and intra-source
+#     duplicate grouping. Without it those rules fail silently open.
+#   LO_NUM/HI_NUM(+_SUF) - range and half-number structure behind the range
+#     safety gate (ranges are never uploaded to OSM) and range-coverage analysis.
+# They stay out of payload_hash, so the 2026-06 source-wide HI_NUM 0->NULL style
+# recode still can't churn the SCD-2 store.
+keep_fields = [
+  "ADDRESS_CLASS_DESC",
+  "LO_NUM", "LO_NUM_SUF", "HI_NUM", "HI_NUM_SUF",
+]
+
 [identity]
 key_field = "ADDRESS_POINT_ID"  # stable municipal point id (OBJECTID is sequential, untrusted)
 synth_fields = ["full"]         # fallback when key_field is null on a row

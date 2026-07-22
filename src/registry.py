@@ -26,6 +26,7 @@ class Dataset:
     synth_fields: list = field(default_factory=lambda: ["full"])
     fields: dict = field(default_factory=dict)
     ignore_fields: list = field(default_factory=list)  # source props excluded from change detection
+    keep_fields: list = field(default_factory=list)  # ignored fields still stored in props for consumers
     classes: dict = field(default_factory=dict)  # change class -> source props (see _VALID_CLASSES)
 
     @property
@@ -54,6 +55,14 @@ def _parse(path):
     if bad:
         raise ValueError(f"{path}: unknown classes {bad}; valid: {_VALID_CLASSES}")
 
+    # A keep_fields entry that isn't ignored would be stored anyway, but would
+    # still be dropped from payload_hash — silently removing a live field from
+    # change detection. Almost always a typo, so reject it.
+    keep = raw.get("keep_fields", [])
+    stray = sorted(set(keep) - set(raw.get("ignore_fields", [])))
+    if stray:
+        raise ValueError(f"{path}: keep_fields not in ignore_fields: {stray}")
+
     identity = raw.get("identity", {})
     return Dataset(
         slug=raw["slug"],
@@ -68,6 +77,7 @@ def _parse(path):
         synth_fields=identity.get("synth_fields", ["full"]),
         fields=raw.get("fields", {}),
         ignore_fields=raw.get("ignore_fields", []),
+        keep_fields=keep,
         classes=classes,
     )
 
