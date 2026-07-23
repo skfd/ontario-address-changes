@@ -75,6 +75,29 @@ def test_keep_fields_must_be_ignored(tmp_path):
         _parse(str(cfg))
 
 
+def test_kept_field_zero_becomes_absent():
+    """Toronto encoded HI_NUM=0 for non-ranges until the city's mid-2026
+    recode; a stored 0 would read downstream as a real range bound and drop
+    the address from the import."""
+    ds = _ds(ignore_fields=["CLS", "NOISE"], keep_fields=["CLS"])
+    for zero in (0, "0"):
+        rec = normalize.canonical(ds, _feat(cls=zero))
+        assert "CLS" not in json.loads(rec["props"]), \
+            f"zero-encoded kept field must be stored as absent ({zero!r})"
+    kept = normalize.canonical(ds, _feat(cls=2210))
+    assert json.loads(kept["props"])["CLS"] == 2210, "real values must survive"
+
+
+def test_zero_survives_in_non_kept_props():
+    """Only kept fields treat 0 as absent — hashed props must keep their
+    shape, or the next ingest would reopen spans across every dataset."""
+    ds = _ds(ignore_fields=["CLS", "NOISE"], keep_fields=["CLS"])
+    feat = _feat()
+    feat["properties"]["EXTRA"] = 0
+    rec = normalize.canonical(ds, feat)
+    assert json.loads(rec["props"])["EXTRA"] == 0
+
+
 def test_real_toronto_config_keeps_importer_fields():
     ds = {d.slug: d for d in __import__("src.registry", fromlist=["x"]).load_all()}["toronto"]
     assert "ADDRESS_CLASS_DESC" in ds.keep_fields

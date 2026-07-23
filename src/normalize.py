@@ -100,13 +100,18 @@ def _coords(ds, feature):
     return round(float(lon), 5), round(float(lat), 5)
 
 
-def _clean_props(props, ignore):
+def _clean_props(props, ignore, keep=frozenset()):
     out = {}
     for k, v in props.items():
         kl = k.lower()
         if kl in _VOLATILE_KEYS or kl in ignore:
             continue
         if v is None or v == "":
+            continue
+        if kl in keep and (v == 0 or v == "0"):
+            # zero-encoded "absent" (Toronto stored HI_NUM=0 for non-ranges
+            # until mid-2026); a stored 0 would read downstream as a real
+            # range bound. Kept fields are outside the hash, so this is safe.
             continue
         out[k] = v
     return out
@@ -132,7 +137,7 @@ def canonical(ds, feature):
     # that need them (see datasets/toronto.toml). They are dropped from the hash
     # basis below so their churn can't open a new SCD-2 range.
     keep = {k.lower() for k in ds.keep_fields}
-    clean_props = _clean_props(props, ignore - keep)
+    clean_props = _clean_props(props, ignore - keep, keep)
     rec["props"] = json.dumps(clean_props, sort_keys=True, ensure_ascii=False, default=str)
 
     hash_props = {k: v for k, v in clean_props.items() if k.lower() not in keep}
