@@ -112,7 +112,16 @@ if ($updateExit -ne 0) {
     elseif (Test-Metered)       { $outcome = 'metered' }
 }
 
-git add docs
+# A crashed git process can leave a stale index.lock that makes the add fail,
+# so nothing gets staged and the commit is silently skipped (site goes stale
+# while runs keep exiting 0). An hour-old lock during a noon run is never live.
+$indexLock = Join-Path $projectDir '.git\index.lock'
+if ((Test-Path $indexLock) -and ((Get-Date) - (Get-Item $indexLock).LastWriteTime).TotalMinutes -gt 60) {
+    Log "STALE-LOCK $(Get-Date -Format o) removing .git\index.lock"
+    Remove-Item -Force $indexLock
+}
+
+Invoke-Logged "git add docs"
 git diff --cached --quiet
 if ($LASTEXITCODE -ne 0) {
     Invoke-Logged "git commit -m `"daily update $(Get-Date -Format yyyy-MM-dd)`""
