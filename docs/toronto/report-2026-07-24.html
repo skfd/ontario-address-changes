@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>City of Toronto Address Changes — Friday, Jul 24, 2026</title>
+  <style>
+    :root {
+      --bg: #fafafa; --surface: #ffffff; --surface2: #f5f5f5; --surface3: #ebebeb;
+      --border: #e0e0e0; --border-strong: #d1d1d1; --text: #242424;
+      --text-secondary: #424242; --text-dim: #616161; --accent: #0078d4;
+      --accent-hover: #106ebe; --accent-bg: #eff6fc; --green: #107c10;
+      --green-bg: #f1faf1; --green-tint: #9fd89f; --red: #c50f1f; --red-bg: #fdf3f4;
+      --red-tint: #eeacb2; --yellow: #eaa300; --yellow-bg: #fefbf4; --yellow-tint: #f9e2ae;
+      --purple: #881798; --purple-bg: #f9f3fb; --teal: #038387; --teal-bg: #f0fafa;
+      --shadow-4: 0 2px 4px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --shadow-8: 0 4px 8px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --card-bg: #ffffff; --card-hover: #f5f5f5; color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1f1f1f; --surface: #292929; --surface2: #333333; --surface3: #3d3d3d;
+        --border: #525252; --border-strong: #666666; --text: #ffffff;
+        --text-secondary: #d6d6d6; --text-dim: #adadad; --accent: #2899f5;
+        --accent-hover: #3aa0f3; --accent-bg: #002848; --green: #54b054;
+        --green-bg: #052505; --green-tint: #107c10; --red: #dc626d; --red-bg: #3b0509;
+        --red-tint: #c50f1f; --yellow: #f2c661; --yellow-bg: #463100; --yellow-tint: #eaa300;
+        --purple: #d29ddb; --purple-bg: #3a1040; --teal: #58c0c4; --teal-bg: #013638;
+        --shadow-4: 0 2px 4px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --shadow-8: 0 4px 8px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --card-bg: #333333; --card-hover: #3d3d3d; color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI Variable','Segoe UI',system-ui,-apple-system,sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.5; padding: 2rem;
+      max-width: 1100px; margin: 0 auto; font-size: 14px; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; color: var(--accent-hover); }
+    .back-link { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 12px;
+      color: var(--text-dim); margin-bottom: 1.5rem; transition: color 0.1s; }
+    .back-link:hover { color: var(--accent); text-decoration: none; }
+    h1 { font-size: 24px; font-weight: 600; margin-bottom: 4px; }
+    .subtitle { color: var(--text-secondary); font-size: 14px; margin-bottom: 12px; }
+    .explainer { color: var(--text-secondary); font-size: 13px; line-height: 1.5;
+      margin-bottom: 24px; padding: 12px 16px; background: var(--surface);
+      border-radius: 8px; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px; margin-bottom: 24px; }
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px;
+      padding: 16px; box-shadow: var(--shadow-4); transition: box-shadow 0.1s; }
+    .card:hover { box-shadow: var(--shadow-8); }
+    .card .label { font-size: 12px; color: var(--text-dim); font-weight: 400; }
+    .card .value { font-size: 28px; font-weight: 600; margin-top: 4px; }
+    .card .value.green { color: var(--green); } .card .value.red { color: var(--red); }
+    .card .value.yellow { color: var(--yellow); } .card .value.accent { color: var(--accent); }
+    .card .value.purple { color: var(--purple); }
+    .card .value.teal { color: var(--teal); }
+    .sparkline { display: block; margin-top: 6px; overflow: visible; opacity: 0.9; }
+    .sparkline-label { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+    .section { margin-bottom: 24px; }
+    .section h2 { font-size: 16px; font-weight: 600; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px; }
+    .badge { font-size: 12px; padding: 2px 8px; border-radius: 999px; font-weight: 600; }
+    .badge-green { background: var(--green-bg); color: var(--green); }
+    .badge-red { background: var(--red-bg); color: var(--red); }
+    .badge-yellow { background: var(--yellow-bg); color: var(--yellow); }
+    .badge-accent { background: var(--accent-bg); color: var(--accent); }
+    .badge-purple { background: var(--purple-bg); color: var(--purple); }
+    .badge-teal { background: var(--teal-bg); color: var(--teal); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface);
+      border-radius: 8px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    thead { background: var(--surface2); }
+    th { text-align: left; padding: 8px 12px; font-weight: 600; color: var(--text-dim);
+      font-size: 12px; cursor: pointer; user-select: none; border-bottom: 1px solid var(--border); }
+    th:hover { color: var(--accent); }
+    td { padding: 8px 12px; border-top: 1px solid var(--border); }
+    tr:hover td { background: var(--surface2); }
+    .old-val { color: var(--red); text-decoration: line-through; }
+    .new-val { color: var(--green); }
+    .arrow-val { color: var(--text-dim); text-align: center; white-space: nowrap; }
+    .map-link { display: inline-flex; align-items: center; margin-left: 0.4em;
+      color: var(--accent); vertical-align: middle; white-space: nowrap; font-size: 12px; }
+    .map-link:hover { color: var(--accent-hover); }
+    .map-link svg { width: 14px; height: 14px; }
+    .change-field { color: var(--yellow); font-weight: 600; }
+    .bar-chart { margin-top: 8px; }
+    .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 12px; }
+    .bar-label { width: 180px; text-align: right; color: var(--text-secondary); flex-shrink: 0;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .bar-track { flex: 1; height: 8px; background: var(--surface2); border-radius: 4px;
+      overflow: hidden; position: relative; }
+    .bar-fill { height: 100%; border-radius: 4px; transition: width 0.15s ease; }
+    .bar-fill.green { background: var(--green); } .bar-fill.red { background: var(--red); }
+    .bar-count { width: 40px; font-size: 12px; color: var(--text-dim); }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+    .empty { color: var(--text-dim); font-style: italic; padding: 16px; }
+    .truncated { color: var(--text-dim); font-size: 12px; margin-top: 8px; }
+    .collapsible-toggle { background: transparent; border: 1px solid var(--border);
+      color: var(--accent); padding: 5px 12px; border-radius: 4px; cursor: pointer;
+      font-size: 12px; font-family: inherit; margin-bottom: 12px; transition: background 0.1s; }
+    .collapsible-toggle:hover { background: var(--surface2); }
+    details.rename-group { background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; margin-bottom: 8px; box-shadow: var(--shadow-4); }
+    details.rename-group summary { padding: 10px 14px; cursor: pointer; font-size: 13px; }
+    details.rename-group[open] summary { border-bottom: 1px solid var(--border); }
+    details.rename-group table { border: none; box-shadow: none; border-radius: 0; }
+    details.rename-group .truncated { padding: 0 14px 10px; margin-top: 0; }
+    .rename-count { color: var(--text-dim); font-size: 12px; margin-left: 6px; }
+    .no-changes-banner { background: var(--green-bg); border: 1px solid var(--green-tint);
+      color: var(--green); padding: 16px; border-radius: 8px; margin-bottom: 24px;
+      text-align: center; font-weight: 600; font-size: 14px; }
+    .baseline-banner { background: var(--accent-bg); border: 1px solid var(--accent);
+      color: var(--accent); padding: 16px; border-radius: 8px; margin-bottom: 24px; font-size: 13px; }
+    .generated-at { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-dim); }
+    .history { font-size: 12.5px; color: var(--text-secondary); white-space: nowrap; }
+    .history .a { color: var(--green); font-weight: 500; }
+    .history .r { color: var(--red); font-weight: 500; }
+    .history .dot { color: var(--text-dim); margin: 0 4px; }
+    .history-none { color: var(--text-dim); font-style: italic; font-size: 12.5px; }
+    .info-wrap { position: relative; display: inline-flex; vertical-align: middle; }
+    .info-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+      height: 18px; padding: 0 8px 0 7px; border-radius: 999px; border: none;
+      color: #fff; background: var(--accent); cursor: help; font-size: 11px; font-weight: 600;
+      font-style: normal; font-family: inherit; line-height: 1; white-space: nowrap; }
+    .info-btn .glyph { font-style: italic; font-weight: 700;
+      font-family: Georgia, 'Times New Roman', serif; }
+    .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn,
+    .info-wrap:focus .info-btn { background: var(--accent-hover); }
+    .info-pop { display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 20;
+      width: 320px; max-width: 80vw; padding: 12px 14px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-8);
+      font-size: 12.5px; font-weight: 400; color: var(--text-secondary); line-height: 1.5; }
+    .info-wrap:hover .info-pop, .info-wrap:focus-within .info-pop,
+    .info-wrap:focus .info-pop { display: block; }
+    .info-pop strong { display: block; color: var(--text); font-size: 12px; margin-bottom: 4px; }
+    .info-pop ul { list-style: none; margin: 0 0 10px; padding: 0; }
+    .info-pop li { padding: 1px 0 1px 14px; position: relative; }
+    .info-pop li::before { content: "·"; position: absolute; left: 4px; color: var(--text-dim); }
+    .info-pop .note { color: var(--text-dim); font-size: 11.5px; margin: 0 0 10px; }
+    .info-pop .muted { color: var(--text-dim); font-style: italic; }
+  </style>
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+
+  <a class="back-link" href="index.html">← Back to City of Toronto reports</a>
+
+  <h1>City of Toronto — Address Changes</h1>
+  <p class="subtitle">
+    Changes between  and Friday, Jul 24, 2026
+    · 525,460 total addresses
+  </p>
+
+  
+
+  <div class="cards">
+    <div class="card"><div class="label">Total Addresses</div>
+      <div class="value accent">525,460</div></div>
+    <div class="card"><div class="label">New Addresses</div>
+      <div class="value green">+8</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#107c10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,12.0 55.0,14.0 72.7,18.0 90.3,14.0 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#107c10"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Retired Addresses</div>
+      <div class="value red">−2</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#c50f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,16.5 55.0,18.0 72.7,16.5 90.3,2.0 108.0,16.5"/><circle cx="108.0" cy="16.5" r="2" fill="#c50f1f"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Updated Addresses <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (LINEAR_NAME_FULL)</li><li>Full address (ADDRESS_FULL)</li><li>Coordinates (latitude, longitude)</li><li>ADDRESS_POINT_ID</li><li>ADDRESS_STATUS</li><li>GENERAL_USE</li><li>GENERAL_USE_CODE</li><li>LINEAR_NAME_DESC</li><li>MAINT_STAGE</li><li>MUNICIPALITY</li><li>MUNICIPALITY_NAME</li><li>PLACE_NAME</li><li>PLACE_NAME_ALL</li><li>WARD</li><li>WARD_NAME</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>ADDRESS_CLASS</li><li>ADDRESS_CLASS_DESC</li><li>ADDRESS_ID</li><li>ADDRESS_ID_LINK</li><li>ADDRESS_POINT_ID_LINK</li><li>ADDRESS_STRING_ID</li><li>CENTRELINE_ID</li><li>CENTRELINE_MEASURE</li><li>CENTRELINE_OFFSET</li><li>CENTRELINE_SIDE</li><li>CLASS_FAMILY</li><li>CLASS_FAMILY_DESC</li><li>HI_NUM</li><li>HI_NUM_SUF</li><li>LINEAR_NAME</li><li>LINEAR_NAME_DIR</li><li>LINEAR_NAME_ID</li><li>LINEAR_NAME_TYPE</li><li>LO_NUM</li><li>LO_NUM_SUF</li></ul>
+      
+    </span>
+  </span></div>
+      <div class="value yellow">3</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,15.3 55.0,18.0 72.7,18.0 90.3,2.0 108.0,10.0"/><circle cx="108.0" cy="10.0" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Renumbered</div>
+      <div class="value accent">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#0078d4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#0078d4"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Street Renames</div>
+      <div class="value purple">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#9141ac" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#9141ac"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    <div class="card"><div class="label">Place Renames</div>
+      <div class="value teal">3</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#038387" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,12.7 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#038387"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    <div class="card"><div class="label">Status Changes</div>
+      <div class="value teal">1</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#038387" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,17.6 90.3,2.0 108.0,17.8"/><circle cx="108.0" cy="17.8" r="2" fill="#038387"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    <div class="card"><div class="label">Boundary Changes</div>
+      <div class="value teal">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#038387" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#038387"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    <div class="card"><div class="label">Location Adjustments</div>
+      <div class="value" style="color: var(--text-dim)">61</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#808080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,8.0 19.7,17.2 37.3,17.0 55.0,11.4 72.7,15.1 90.3,14.9 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#808080"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+  </div>
+
+  
+  <div class="section">
+    <h2>Change Breakdown</h2>
+    <div class="stats-grid">
+      
+      
+      
+      <div class="card"><div class="label">Most Frequently Updated Fields</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">Location</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">64</span></div>
+        <div class="bar-row"><span class="bar-label">PLACE_NAME</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:8.0%"></div></div>
+          <span class="bar-count">5</span></div>
+        <div class="bar-row"><span class="bar-label">PLACE_NAME_ALL</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:8.0%"></div></div>
+          <span class="bar-count">5</span></div>
+        <div class="bar-row"><span class="bar-label">MAINT_STAGE</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:3.0%"></div></div>
+          <span class="bar-count">2</span></div>
+      </div></div>
+    </div>
+  </div>
+  
+
+  <div class="section">
+    <h2>New Addresses <span class="badge badge-green">8</span></h2>
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-added',0)">Address</th><th onclick="sortTable('t-added',1)">Street</th>
+        <th onclick="sortTable('t-added',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-added">
+        
+        <tr><td>535 Centennial Park Blvd</td><td>Centennial Park Blvd</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64910&mlon=-79.59575#map=18/43.64910/-79.59575" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>555 Centennial Park Blvd</td><td>Centennial Park Blvd</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65129&mlon=-79.59342#map=18/43.65129/-79.59342" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>600 Dundas St E</td><td>Dundas St E</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66052&mlon=-79.36223#map=18/43.66052/-79.36223" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>33 Elder Ave</td><td>Elder Ave</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.59864&mlon=-79.52627#map=18/43.59864/-79.52627" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>35 Elder Ave</td><td>Elder Ave</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.59861&mlon=-79.52636#map=18/43.59861/-79.52636" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>909 Logan Ave</td><td>Logan Ave</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67859&mlon=-79.34937#map=18/43.67859/-79.34937" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>911 Logan Ave</td><td>Logan Ave</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67863&mlon=-79.34939#map=18/43.67863/-79.34939" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>9R Spruce St</td><td>Spruce St</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66304&mlon=-79.36689#map=18/43.66304/-79.36689" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Retired Addresses <span class="badge badge-red">2</span></h2>
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-removed',0)">Address</th><th onclick="sortTable('t-removed',1)">Street</th>
+        <th onclick="sortTable('t-removed',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-removed">
+        
+        <tr><td>600 Dundas St E</td><td>Dundas St E</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66054&mlon=-79.36233#map=18/43.66054/-79.36233" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>60 Twenty Sixth St</td><td>Twenty Sixth St</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.59927&mlon=-79.52595#map=18/43.59927/-79.52595" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Updated Addresses <span class="badge badge-yellow">3</span>
+      <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (LINEAR_NAME_FULL)</li><li>Full address (ADDRESS_FULL)</li><li>Coordinates (latitude, longitude)</li><li>ADDRESS_POINT_ID</li><li>ADDRESS_STATUS</li><li>GENERAL_USE</li><li>GENERAL_USE_CODE</li><li>LINEAR_NAME_DESC</li><li>MAINT_STAGE</li><li>MUNICIPALITY</li><li>MUNICIPALITY_NAME</li><li>PLACE_NAME</li><li>PLACE_NAME_ALL</li><li>WARD</li><li>WARD_NAME</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>ADDRESS_CLASS</li><li>ADDRESS_CLASS_DESC</li><li>ADDRESS_ID</li><li>ADDRESS_ID_LINK</li><li>ADDRESS_POINT_ID_LINK</li><li>ADDRESS_STRING_ID</li><li>CENTRELINE_ID</li><li>CENTRELINE_MEASURE</li><li>CENTRELINE_OFFSET</li><li>CENTRELINE_SIDE</li><li>CLASS_FAMILY</li><li>CLASS_FAMILY_DESC</li><li>HI_NUM</li><li>HI_NUM_SUF</li><li>LINEAR_NAME</li><li>LINEAR_NAME_DIR</li><li>LINEAR_NAME_ID</li><li>LINEAR_NAME_TYPE</li><li>LO_NUM</li><li>LO_NUM_SUF</li></ul>
+      
+    </span>
+  </span></h2>
+    
+    
+    <table>
+      <thead><tr><th>Address</th><th>What Changed</th><th>Before</th><th></th><th>After</th><th>Map</th></tr></thead>
+      <tbody>
+        
+  <tr><td rowspan="3">620 Dundas St E</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">Regent Park North</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">None</td>
+    <td rowspan="3"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66193&mlon=-79.36232#map=18/43.66193/-79.36232" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">Regent Park North</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">None</td>
+    </tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">43.66104, -79.36183<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66104&mlon=-79.36183#map=19/43.66104/-79.36183" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↑ 106.6m</td>
+    <td class="new-val">43.66193, -79.36232<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66193&mlon=-79.36232#map=19/43.66193/-79.36232" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="3">34 Riverdale Dr</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">Curtin Park</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Curtin Park, Franklin Carmichael Art Centre</td>
+    <td rowspan="3"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73134&mlon=-79.55984#map=18/43.73134/-79.55984" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">Curtin Park</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Curtin Park, Franklin Carmichael Art Centre</td>
+    </tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">43.73125, -79.55987<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73125&mlon=-79.55987#map=19/43.73125/-79.55987" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↑ 10.3m</td>
+    <td class="new-val">43.73134, -79.55984<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73134&mlon=-79.55984#map=19/43.73134/-79.55984" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="2">60 Twenty Sixth St</td>
+    <td class="change-field">MAINT_STAGE</td>
+    <td class="old-val">RESERVED</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">REGULAR</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.59921&mlon=-79.52584#map=18/43.59921/-79.52584" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">43.59924, -79.52585<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.59924&mlon=-79.52585#map=19/43.59924/-79.52585" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↓ 3.4m</td>
+    <td class="new-val">43.59921, -79.52584<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.59921&mlon=-79.52584#map=19/43.59921/-79.52584" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Renumbered Addresses <span class="badge badge-accent">0</span></h2>
+    
+    <p class="empty">No addresses renumbered.</p>
+  </div>
+
+  <div class="section">
+    <h2>Street Renames <span class="badge badge-purple">0</span></h2>
+    <p class="empty">No street renames.</p>
+  </div>
+
+  
+  <div class="section">
+    <h2>Place Renames <span class="badge badge-teal">3</span></h2>
+    
+    <table>
+      <thead><tr><th>Address</th><th>What Changed</th><th>Before</th><th></th><th>After</th><th>Map</th></tr></thead>
+      <tbody>
+        
+  <tr><td rowspan="2">2539 Bayview Ave</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">Irving Paisley Park, York Mills Arena</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">York Mills Arena</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74760&mlon=-79.38351#map=18/43.74760/-79.38351" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">Irving Paisley Park, York Mills Arena</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">York Mills Arena</td>
+    </tr>
+  <tr><td rowspan="2">2539A Bayview Ave</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Irving Paisley Park</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74719&mlon=-79.38354#map=18/43.74719/-79.38354" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">None</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Irving Paisley Park</td>
+    </tr>
+  <tr><td rowspan="2">340 Chaplin Cres</td>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">Memorial Park - North York</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Memorial Park - North York, Larry Grossman Forest Hill Memorial Arena</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70425&mlon=-79.42054#map=18/43.70425/-79.42054" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">Memorial Park - North York</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Memorial Park - North York, Larry Grossman Forest Hill Memorial Arena</td>
+    </tr>
+      </tbody>
+    </table>
+    
+    
+  </div>
+  
+
+  
+  <div class="section">
+    <h2>Status Changes <span class="badge badge-teal">1</span></h2>
+    
+  <details class="rename-group">
+    <summary><span class="change-field">MAINT_STAGE:</span> <span class="old-val">RESERVED</span> <span class="arrow-val">→</span> <span class="new-val">REGULAR</span><span class="rename-count">1 address</span></summary>
+    <table>
+      <tbody>
+        
+        <tr><td>62 Twenty Sixth St</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.59929&mlon=-79.52587#map=18/43.59929/-79.52587" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+  </details>
+  
+    
+  </div>
+  
+
+  
+  <div class="section">
+    <h2>Boundary Changes <span class="badge badge-teal">0</span></h2>
+    <p class="empty">No ward or municipality reassignments.</p>
+  </div>
+  
+
+  <div class="section">
+    <h2>Location Adjustments <span class="badge" style="background: var(--surface2); color: var(--text-dim)">61</span></h2>
+    
+    <p class="explainer">61 addresses had only their map position adjusted — median shift 4.5&nbsp;m, largest 146.8&nbsp;m. The street addresses themselves did not change.</p>
+    
+    
+    <details class="rename-group">
+      <summary>Per-address detail<span class="rename-count">61 addresses</span></summary>
+    <table>
+      <thead><tr><th>Address</th><th>Before</th><th></th><th>After</th></tr></thead>
+      <tbody>
+        
+        <tr><td>1110 Don Mills Rd</td>
+          
+          <td class="old-val">43.73747, -79.34459<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73747&mlon=-79.34459#map=19/43.73747/-79.34459" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">→ 59.5m</td>
+          <td class="new-val">43.73748, -79.34385<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73748&mlon=-79.34385#map=19/43.73748/-79.34385" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>243 Downsview Park Blvd</td>
+          
+          <td class="old-val">43.73666, -79.47760<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73666&mlon=-79.47760#map=19/43.73666/-79.47760" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 2.0m</td>
+          <td class="new-val">43.73665, -79.47762<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73665&mlon=-79.47762#map=19/43.73665/-79.47762" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>556 Eglinton Ave W</td>
+          
+          <td class="old-val">43.70321, -79.41614<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70321&mlon=-79.41614#map=19/43.70321/-79.41614" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 10.5m</td>
+          <td class="new-val">43.70313, -79.41621<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70313&mlon=-79.41621#map=19/43.70313/-79.41621" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>558 Eglinton Ave W</td>
+          
+          <td class="old-val">43.70316, -79.41624<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70316&mlon=-79.41624#map=19/43.70316/-79.41624" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 10.5m</td>
+          <td class="new-val">43.70310, -79.41634<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70310&mlon=-79.41634#map=19/43.70310/-79.41634" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>560 Eglinton Ave W</td>
+          
+          <td class="old-val">43.70314, -79.41633<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70314&mlon=-79.41633#map=19/43.70314/-79.41633" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 13.0m</td>
+          <td class="new-val">43.70307, -79.41646<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70307&mlon=-79.41646#map=19/43.70307/-79.41646" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>160 Flemington Rd</td>
+          
+          <td class="old-val">43.72308, -79.44825<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72308&mlon=-79.44825#map=19/43.72308/-79.44825" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↑ 5.8m</td>
+          <td class="new-val">43.72313, -79.44827<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72313&mlon=-79.44827#map=19/43.72313/-79.44827" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>105 Hudson Dr</td>
+          
+          <td class="old-val">43.69250, -79.37668<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69250&mlon=-79.37668#map=19/43.69250/-79.37668" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 9.3m</td>
+          <td class="new-val">43.69244, -79.37676<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69244&mlon=-79.37676#map=19/43.69244/-79.37676" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>107 Hudson Dr</td>
+          
+          <td class="old-val">43.69254, -79.37696<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69254&mlon=-79.37696#map=19/43.69254/-79.37696" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 6.4m</td>
+          <td class="new-val">43.69249, -79.37700<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69249&mlon=-79.37700#map=19/43.69249/-79.37700" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>139 Hudson Dr</td>
+          
+          <td class="old-val">43.69278, -79.37821<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69278&mlon=-79.37821#map=19/43.69278/-79.37821" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">← 5.6m</td>
+          <td class="new-val">43.69278, -79.37828<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69278&mlon=-79.37828#map=19/43.69278/-79.37828" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>59 John Perkins Bull Dr</td>
+          
+          <td class="old-val">43.73270, -79.47642<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73270&mlon=-79.47642#map=19/43.73270/-79.47642" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 4.6m</td>
+          <td class="new-val">43.73268, -79.47647<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73268&mlon=-79.47647#map=19/43.73268/-79.47647" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>60 John Perkins Bull Dr</td>
+          
+          <td class="old-val">43.73298, -79.47641<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73298&mlon=-79.47641#map=19/43.73298/-79.47641" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↑ 3.3m</td>
+          <td class="new-val">43.73301, -79.47641<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73301&mlon=-79.47641#map=19/43.73301/-79.47641" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>61 John Perkins Bull Dr</td>
+          
+          <td class="old-val">43.73267, -79.47656<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73267&mlon=-79.47656#map=19/43.73267/-79.47656" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 7.8m</td>
+          <td class="new-val">43.73263, -79.47664<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73263&mlon=-79.47664#map=19/43.73263/-79.47664" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>65 John Perkins Bull Dr</td>
+          
+          <td class="old-val">43.73260, -79.47684<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73260&mlon=-79.47684#map=19/43.73260/-79.47684" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 4.6m</td>
+          <td class="new-val">43.73258, -79.47689<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73258&mlon=-79.47689#map=19/43.73258/-79.47689" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>1030 King St W</td>
+          
+          <td class="old-val">43.64163, -79.41599<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64163&mlon=-79.41599#map=19/43.64163/-79.41599" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↑ 11.6m</td>
+          <td class="new-val">43.64173, -79.41595<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64173&mlon=-79.41595#map=19/43.64173/-79.41595" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>980 Lawrence Ave E</td>
+          
+          <td class="old-val">43.73750, -79.34385<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73750&mlon=-79.34385#map=19/43.73750/-79.34385" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 59.1m</td>
+          <td class="new-val">43.73724, -79.34449<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73724&mlon=-79.34449#map=19/43.73724/-79.34449" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>909 Logan Ave</td>
+          
+          <td class="old-val">43.67862, -79.34926<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67862&mlon=-79.34926#map=19/43.67862/-79.34926" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">← 6.8m</td>
+          <td class="new-val">43.67860, -79.34934<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67860&mlon=-79.34934#map=19/43.67860/-79.34934" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>374 Mount Pleasant Rd</td>
+          
+          <td class="old-val">43.69430, -79.38527<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69430&mlon=-79.38527#map=19/43.69430/-79.38527" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 26.0m</td>
+          <td class="new-val">43.69409, -79.38513<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69409&mlon=-79.38513#map=19/43.69409/-79.38513" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>375 Mount Pleasant Rd</td>
+          
+          <td class="old-val">43.69539, -79.38492<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69539&mlon=-79.38492#map=19/43.69539/-79.38492" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↗ 146.8m</td>
+          <td class="new-val">43.69617, -79.38345<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69617&mlon=-79.38345#map=19/43.69617/-79.38345" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>255 Ranee Ave</td>
+          
+          <td class="old-val">43.72307, -79.44825<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72307&mlon=-79.44825#map=19/43.72307/-79.44825" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↗ 35.9m</td>
+          <td class="new-val">43.72325, -79.44788<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72325&mlon=-79.44788#map=19/43.72325/-79.44788" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>331 Rose Park Dr</td>
+          
+          <td class="old-val">43.69227, -79.37810<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69227&mlon=-79.37810#map=19/43.69227/-79.37810" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">→ 4.2m</td>
+          <td class="new-val">43.69228, -79.37805<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69228&mlon=-79.37805#map=19/43.69228/-79.37805" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>10 Shaw St</td>
+          
+          <td class="old-val">43.64187, -79.41544<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64187&mlon=-79.41544#map=19/43.64187/-79.41544" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 3.9m</td>
+          <td class="new-val">43.64185, -79.41540<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64185&mlon=-79.41540#map=19/43.64185/-79.41540" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>12 Shaw St</td>
+          
+          <td class="old-val">43.64188, -79.41545<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64188&mlon=-79.41545#map=19/43.64188/-79.41545" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">→ 3.4m</td>
+          <td class="new-val">43.64187, -79.41541<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64187&mlon=-79.41541#map=19/43.64187/-79.41541" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>14 Shaw St</td>
+          
+          <td class="old-val">43.64189, -79.41545<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64189&mlon=-79.41545#map=19/43.64189/-79.41545" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">→ 3.2m</td>
+          <td class="new-val">43.64189, -79.41541<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64189&mlon=-79.41541#map=19/43.64189/-79.41541" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>16 Shaw St</td>
+          
+          <td class="old-val">43.64191, -79.41546<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64191&mlon=-79.41546#map=19/43.64191/-79.41546" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">→ 3.4m</td>
+          <td class="new-val">43.64192, -79.41542<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64192&mlon=-79.41542#map=19/43.64192/-79.41542" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>18 Shaw St</td>
+          
+          <td class="old-val">43.64193, -79.41547<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64193&mlon=-79.41547#map=19/43.64193/-79.41547" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↗ 3.9m</td>
+          <td class="new-val">43.64195, -79.41543<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64195&mlon=-79.41543#map=19/43.64195/-79.41543" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>20 Shaw St</td>
+          
+          <td class="old-val">43.64194, -79.41548<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64194&mlon=-79.41548#map=19/43.64194/-79.41548" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↗ 4.6m</td>
+          <td class="new-val">43.64197, -79.41544<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64197&mlon=-79.41544#map=19/43.64197/-79.41544" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>15 Stanley Greene Blvd</td>
+          
+          <td class="old-val">43.73275, -79.47736<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73275&mlon=-79.47736#map=19/43.73275/-79.47736" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 1.4m</td>
+          <td class="new-val">43.73276, -79.47737<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73276&mlon=-79.47737#map=19/43.73276/-79.47737" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>12 Thomas Mulholland Dr</td>
+          
+          <td class="old-val">43.73685, -79.47632<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73685&mlon=-79.47632#map=19/43.73685/-79.47632" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 2.0m</td>
+          <td class="new-val">43.73684, -79.47630<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73684&mlon=-79.47630#map=19/43.73684/-79.47630" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>94 Trinity St</td>
+          
+          <td class="old-val">43.65259, -79.36120<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65259&mlon=-79.36120#map=19/43.65259/-79.36120" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">→ 4.8m</td>
+          <td class="new-val">43.65259, -79.36114<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65259&mlon=-79.36114#map=19/43.65259/-79.36114" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>96 Trinity St</td>
+          
+          <td class="old-val">43.65263, -79.36124<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65263&mlon=-79.36124#map=19/43.65263/-79.36124" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↑ 5.6m</td>
+          <td class="new-val">43.65268, -79.36123<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65268&mlon=-79.36123#map=19/43.65268/-79.36123" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>98 Trinity St</td>
+          
+          <td class="old-val">43.65266, -79.36128<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65266&mlon=-79.36128#map=19/43.65266/-79.36128" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↑ 12.9m</td>
+          <td class="new-val">43.65277, -79.36133<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65277&mlon=-79.36133#map=19/43.65277/-79.36133" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>104 Trinity St</td>
+          
+          <td class="old-val">43.65283, -79.36143<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65283&mlon=-79.36143#map=19/43.65283/-79.36143" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">→ 1.6m</td>
+          <td class="new-val">43.65283, -79.36141<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65283&mlon=-79.36141#map=19/43.65283/-79.36141" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>36 William Duncan Rd</td>
+          
+          <td class="old-val">43.73361, -79.47540<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73361&mlon=-79.47540#map=19/43.73361/-79.47540" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 1.4m</td>
+          <td class="new-val">43.73362, -79.47541<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73362&mlon=-79.47541#map=19/43.73362/-79.47541" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>62 William Duncan Rd</td>
+          
+          <td class="old-val">43.73433, -79.47556<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73433&mlon=-79.47556#map=19/43.73433/-79.47556" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↑ 1.1m</td>
+          <td class="new-val">43.73434, -79.47556<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73434&mlon=-79.47556#map=19/43.73434/-79.47556" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>74 William Duncan Rd</td>
+          
+          <td class="old-val">43.73459, -79.47562<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73459&mlon=-79.47562#map=19/43.73459/-79.47562" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↑ 1.1m</td>
+          <td class="new-val">43.73460, -79.47562<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73460&mlon=-79.47562#map=19/43.73460/-79.47562" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>76 William Duncan Rd</td>
+          
+          <td class="old-val">43.73463, -79.47563<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73463&mlon=-79.47563#map=19/43.73463/-79.47563" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↑ 2.2m</td>
+          <td class="new-val">43.73465, -79.47563<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73465&mlon=-79.47563#map=19/43.73465/-79.47563" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>78 William Duncan Rd</td>
+          
+          <td class="old-val">43.73467, -79.47564<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73467&mlon=-79.47564#map=19/43.73467/-79.47564" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↑ 2.2m</td>
+          <td class="new-val">43.73469, -79.47564<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73469&mlon=-79.47564#map=19/43.73469/-79.47564" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>81 William Duncan Rd</td>
+          
+          <td class="old-val">43.73458, -79.47522<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73458&mlon=-79.47522#map=19/43.73458/-79.47522" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↗ 1.4m</td>
+          <td class="new-val">43.73459, -79.47521<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73459&mlon=-79.47521#map=19/43.73459/-79.47521" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>83 William Duncan Rd</td>
+          
+          <td class="old-val">43.73462, -79.47522<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73462&mlon=-79.47522#map=19/43.73462/-79.47522" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↑ 1.1m</td>
+          <td class="new-val">43.73463, -79.47522<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73463&mlon=-79.47522#map=19/43.73463/-79.47522" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>109 William Duncan Rd</td>
+          
+          <td class="old-val">43.73528, -79.47532<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73528&mlon=-79.47532#map=19/43.73528/-79.47532" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↑ 2.2m</td>
+          <td class="new-val">43.73530, -79.47532<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73530&mlon=-79.47532#map=19/43.73530/-79.47532" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>146 William Duncan Rd</td>
+          
+          <td class="old-val">43.73621, -79.47594<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73621&mlon=-79.47594#map=19/43.73621/-79.47594" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">← 23.4m</td>
+          <td class="new-val">43.73623, -79.47623<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73623&mlon=-79.47623#map=19/43.73623/-79.47623" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>150 William Duncan Rd</td>
+          
+          <td class="old-val">43.73625, -79.47595<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73625&mlon=-79.47595#map=19/43.73625/-79.47595" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 4.5m</td>
+          <td class="new-val">43.73621, -79.47594<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73621&mlon=-79.47594#map=19/43.73621/-79.47594" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>152 William Duncan Rd</td>
+          
+          <td class="old-val">43.73629, -79.47595<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73629&mlon=-79.47595#map=19/43.73629/-79.47595" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 4.5m</td>
+          <td class="new-val">43.73625, -79.47595<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73625&mlon=-79.47595#map=19/43.73625/-79.47595" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>153 William Duncan Rd</td>
+          
+          <td class="old-val">43.73620, -79.47547<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73620&mlon=-79.47547#map=19/43.73620/-79.47547" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 3.7m</td>
+          <td class="new-val">43.73617, -79.47549<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73617&mlon=-79.47549#map=19/43.73617/-79.47549" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>154 William Duncan Rd</td>
+          
+          <td class="old-val">43.73632, -79.47596<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73632&mlon=-79.47596#map=19/43.73632/-79.47596" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 3.3m</td>
+          <td class="new-val">43.73629, -79.47596<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73629&mlon=-79.47596#map=19/43.73629/-79.47596" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>155 William Duncan Rd</td>
+          
+          <td class="old-val">43.73631, -79.47550<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73631&mlon=-79.47550#map=19/43.73631/-79.47550" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 4.7m</td>
+          <td class="new-val">43.73627, -79.47552<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73627&mlon=-79.47552#map=19/43.73627/-79.47552" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>156 William Duncan Rd</td>
+          
+          <td class="old-val">43.73636, -79.47597<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73636&mlon=-79.47597#map=19/43.73636/-79.47597" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 4.5m</td>
+          <td class="new-val">43.73632, -79.47596<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73632&mlon=-79.47596#map=19/43.73632/-79.47596" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>157 William Duncan Rd</td>
+          
+          <td class="old-val">43.73642, -79.47552<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73642&mlon=-79.47552#map=19/43.73642/-79.47552" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 5.8m</td>
+          <td class="new-val">43.73637, -79.47554<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73637&mlon=-79.47554#map=19/43.73637/-79.47554" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>158 William Duncan Rd</td>
+          
+          <td class="old-val">43.73639, -79.47597<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73639&mlon=-79.47597#map=19/43.73639/-79.47597" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 3.3m</td>
+          <td class="new-val">43.73636, -79.47597<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73636&mlon=-79.47597#map=19/43.73636/-79.47597" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>159 William Duncan Rd</td>
+          
+          <td class="old-val">43.73651, -79.47554<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73651&mlon=-79.47554#map=19/43.73651/-79.47554" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 3.4m</td>
+          <td class="new-val">43.73648, -79.47555<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73648&mlon=-79.47555#map=19/43.73648/-79.47555" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>160 William Duncan Rd</td>
+          
+          <td class="old-val">43.73643, -79.47598<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73643&mlon=-79.47598#map=19/43.73643/-79.47598" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 4.5m</td>
+          <td class="new-val">43.73639, -79.47598<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73639&mlon=-79.47598#map=19/43.73639/-79.47598" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>162 William Duncan Rd</td>
+          
+          <td class="old-val">43.73650, -79.47593<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73650&mlon=-79.47593#map=19/43.73650/-79.47593" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 9.2m</td>
+          <td class="new-val">43.73643, -79.47599<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73643&mlon=-79.47599#map=19/43.73643/-79.47599" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>167 William Duncan Rd</td>
+          
+          <td class="old-val">43.73684, -79.47560<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73684&mlon=-79.47560#map=19/43.73684/-79.47560" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 3.7m</td>
+          <td class="new-val">43.73687, -79.47562<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73687&mlon=-79.47562#map=19/43.73687/-79.47562" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>169 William Duncan Rd</td>
+          
+          <td class="old-val">43.73692, -79.47561<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73692&mlon=-79.47561#map=19/43.73692/-79.47561" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 2.0m</td>
+          <td class="new-val">43.73693, -79.47563<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73693&mlon=-79.47563#map=19/43.73693/-79.47563" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>179 William Duncan Rd</td>
+          
+          <td class="old-val">43.73735, -79.47569<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73735&mlon=-79.47569#map=19/43.73735/-79.47569" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 2.7m</td>
+          <td class="new-val">43.73736, -79.47572<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73736&mlon=-79.47572#map=19/43.73736/-79.47572" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>181 William Duncan Rd</td>
+          
+          <td class="old-val">43.73746, -79.47573<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73746&mlon=-79.47573#map=19/43.73746/-79.47573" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 3.9m</td>
+          <td class="new-val">43.73744, -79.47577<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73744&mlon=-79.47577#map=19/43.73744/-79.47577" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>183 William Duncan Rd</td>
+          
+          <td class="old-val">43.73754, -79.47577<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73754&mlon=-79.47577#map=19/43.73754/-79.47577" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">← 5.0m</td>
+          <td class="new-val">43.73753, -79.47583<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73753&mlon=-79.47583#map=19/43.73753/-79.47583" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>185 William Duncan Rd</td>
+          
+          <td class="old-val">43.73766, -79.47588<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73766&mlon=-79.47588#map=19/43.73766/-79.47588" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">← 5.7m</td>
+          <td class="new-val">43.73765, -79.47595<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73765&mlon=-79.47595#map=19/43.73765/-79.47595" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>187 William Duncan Rd</td>
+          
+          <td class="old-val">43.73773, -79.47598<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73773&mlon=-79.47598#map=19/43.73773/-79.47598" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">← 6.5m</td>
+          <td class="new-val">43.73772, -79.47606<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73772&mlon=-79.47606#map=19/43.73772/-79.47606" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>189 William Duncan Rd</td>
+          
+          <td class="old-val">43.73778, -79.47613<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73778&mlon=-79.47613#map=19/43.73778/-79.47613" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">← 5.0m</td>
+          <td class="new-val">43.73777, -79.47619<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73777&mlon=-79.47619#map=19/43.73777/-79.47619" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>460 Yonge St</td>
+          
+          <td class="old-val">43.66198, -79.38352<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66198&mlon=-79.38352#map=19/43.66198/-79.38352" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">← 7.6m</td>
+          <td class="new-val">43.66196, -79.38361<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66196&mlon=-79.38361#map=19/43.66196/-79.38361" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+      </tbody>
+    </table>
+    
+    </details>
+    
+  </div>
+
+  <div class="generated-at">Report generated Jul 24, 2026 at 06:11 PM · source licence: Open Government Licence – Toronto</div>
+
+  <script>
+    function sortTable(tbodyId, col) {
+      const tbody = document.getElementById(tbodyId);
+      if (!tbody) return;
+      const rows = Array.from(tbody.rows);
+      const dir = tbody.dataset.sortDir === 'asc' ? 'desc' : 'asc';
+      tbody.dataset.sortDir = dir;
+      rows.sort((a, b) => {
+        const av = a.cells[col]?.textContent.trim() || '';
+        const bv = b.cells[col]?.textContent.trim() || '';
+        const an = parseFloat(av), bn = parseFloat(bv);
+        if (!isNaN(an) && !isNaN(bn)) return dir === 'asc' ? an - bn : bn - an;
+        return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+      });
+      rows.forEach(r => tbody.appendChild(r));
+    }
+  </script>
+</body>
+
+</html>

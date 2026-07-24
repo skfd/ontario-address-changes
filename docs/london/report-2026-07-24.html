@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>City of London Address Changes — Friday, Jul 24, 2026</title>
+  <style>
+    :root {
+      --bg: #fafafa; --surface: #ffffff; --surface2: #f5f5f5; --surface3: #ebebeb;
+      --border: #e0e0e0; --border-strong: #d1d1d1; --text: #242424;
+      --text-secondary: #424242; --text-dim: #616161; --accent: #0078d4;
+      --accent-hover: #106ebe; --accent-bg: #eff6fc; --green: #107c10;
+      --green-bg: #f1faf1; --green-tint: #9fd89f; --red: #c50f1f; --red-bg: #fdf3f4;
+      --red-tint: #eeacb2; --yellow: #eaa300; --yellow-bg: #fefbf4; --yellow-tint: #f9e2ae;
+      --purple: #881798; --purple-bg: #f9f3fb; --teal: #038387; --teal-bg: #f0fafa;
+      --shadow-4: 0 2px 4px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --shadow-8: 0 4px 8px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --card-bg: #ffffff; --card-hover: #f5f5f5; color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1f1f1f; --surface: #292929; --surface2: #333333; --surface3: #3d3d3d;
+        --border: #525252; --border-strong: #666666; --text: #ffffff;
+        --text-secondary: #d6d6d6; --text-dim: #adadad; --accent: #2899f5;
+        --accent-hover: #3aa0f3; --accent-bg: #002848; --green: #54b054;
+        --green-bg: #052505; --green-tint: #107c10; --red: #dc626d; --red-bg: #3b0509;
+        --red-tint: #c50f1f; --yellow: #f2c661; --yellow-bg: #463100; --yellow-tint: #eaa300;
+        --purple: #d29ddb; --purple-bg: #3a1040; --teal: #58c0c4; --teal-bg: #013638;
+        --shadow-4: 0 2px 4px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --shadow-8: 0 4px 8px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --card-bg: #333333; --card-hover: #3d3d3d; color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI Variable','Segoe UI',system-ui,-apple-system,sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.5; padding: 2rem;
+      max-width: 1100px; margin: 0 auto; font-size: 14px; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; color: var(--accent-hover); }
+    .back-link { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 12px;
+      color: var(--text-dim); margin-bottom: 1.5rem; transition: color 0.1s; }
+    .back-link:hover { color: var(--accent); text-decoration: none; }
+    h1 { font-size: 24px; font-weight: 600; margin-bottom: 4px; }
+    .subtitle { color: var(--text-secondary); font-size: 14px; margin-bottom: 12px; }
+    .explainer { color: var(--text-secondary); font-size: 13px; line-height: 1.5;
+      margin-bottom: 24px; padding: 12px 16px; background: var(--surface);
+      border-radius: 8px; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px; margin-bottom: 24px; }
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px;
+      padding: 16px; box-shadow: var(--shadow-4); transition: box-shadow 0.1s; }
+    .card:hover { box-shadow: var(--shadow-8); }
+    .card .label { font-size: 12px; color: var(--text-dim); font-weight: 400; }
+    .card .value { font-size: 28px; font-weight: 600; margin-top: 4px; }
+    .card .value.green { color: var(--green); } .card .value.red { color: var(--red); }
+    .card .value.yellow { color: var(--yellow); } .card .value.accent { color: var(--accent); }
+    .card .value.purple { color: var(--purple); }
+    .card .value.teal { color: var(--teal); }
+    .sparkline { display: block; margin-top: 6px; overflow: visible; opacity: 0.9; }
+    .sparkline-label { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+    .section { margin-bottom: 24px; }
+    .section h2 { font-size: 16px; font-weight: 600; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px; }
+    .badge { font-size: 12px; padding: 2px 8px; border-radius: 999px; font-weight: 600; }
+    .badge-green { background: var(--green-bg); color: var(--green); }
+    .badge-red { background: var(--red-bg); color: var(--red); }
+    .badge-yellow { background: var(--yellow-bg); color: var(--yellow); }
+    .badge-accent { background: var(--accent-bg); color: var(--accent); }
+    .badge-purple { background: var(--purple-bg); color: var(--purple); }
+    .badge-teal { background: var(--teal-bg); color: var(--teal); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface);
+      border-radius: 8px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    thead { background: var(--surface2); }
+    th { text-align: left; padding: 8px 12px; font-weight: 600; color: var(--text-dim);
+      font-size: 12px; cursor: pointer; user-select: none; border-bottom: 1px solid var(--border); }
+    th:hover { color: var(--accent); }
+    td { padding: 8px 12px; border-top: 1px solid var(--border); }
+    tr:hover td { background: var(--surface2); }
+    .old-val { color: var(--red); text-decoration: line-through; }
+    .new-val { color: var(--green); }
+    .arrow-val { color: var(--text-dim); text-align: center; white-space: nowrap; }
+    .map-link { display: inline-flex; align-items: center; margin-left: 0.4em;
+      color: var(--accent); vertical-align: middle; white-space: nowrap; font-size: 12px; }
+    .map-link:hover { color: var(--accent-hover); }
+    .map-link svg { width: 14px; height: 14px; }
+    .change-field { color: var(--yellow); font-weight: 600; }
+    .bar-chart { margin-top: 8px; }
+    .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 12px; }
+    .bar-label { width: 180px; text-align: right; color: var(--text-secondary); flex-shrink: 0;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .bar-track { flex: 1; height: 8px; background: var(--surface2); border-radius: 4px;
+      overflow: hidden; position: relative; }
+    .bar-fill { height: 100%; border-radius: 4px; transition: width 0.15s ease; }
+    .bar-fill.green { background: var(--green); } .bar-fill.red { background: var(--red); }
+    .bar-count { width: 40px; font-size: 12px; color: var(--text-dim); }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+    .empty { color: var(--text-dim); font-style: italic; padding: 16px; }
+    .truncated { color: var(--text-dim); font-size: 12px; margin-top: 8px; }
+    .collapsible-toggle { background: transparent; border: 1px solid var(--border);
+      color: var(--accent); padding: 5px 12px; border-radius: 4px; cursor: pointer;
+      font-size: 12px; font-family: inherit; margin-bottom: 12px; transition: background 0.1s; }
+    .collapsible-toggle:hover { background: var(--surface2); }
+    details.rename-group { background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; margin-bottom: 8px; box-shadow: var(--shadow-4); }
+    details.rename-group summary { padding: 10px 14px; cursor: pointer; font-size: 13px; }
+    details.rename-group[open] summary { border-bottom: 1px solid var(--border); }
+    details.rename-group table { border: none; box-shadow: none; border-radius: 0; }
+    details.rename-group .truncated { padding: 0 14px 10px; margin-top: 0; }
+    .rename-count { color: var(--text-dim); font-size: 12px; margin-left: 6px; }
+    .no-changes-banner { background: var(--green-bg); border: 1px solid var(--green-tint);
+      color: var(--green); padding: 16px; border-radius: 8px; margin-bottom: 24px;
+      text-align: center; font-weight: 600; font-size: 14px; }
+    .baseline-banner { background: var(--accent-bg); border: 1px solid var(--accent);
+      color: var(--accent); padding: 16px; border-radius: 8px; margin-bottom: 24px; font-size: 13px; }
+    .generated-at { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-dim); }
+    .history { font-size: 12.5px; color: var(--text-secondary); white-space: nowrap; }
+    .history .a { color: var(--green); font-weight: 500; }
+    .history .r { color: var(--red); font-weight: 500; }
+    .history .dot { color: var(--text-dim); margin: 0 4px; }
+    .history-none { color: var(--text-dim); font-style: italic; font-size: 12.5px; }
+    .info-wrap { position: relative; display: inline-flex; vertical-align: middle; }
+    .info-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+      height: 18px; padding: 0 8px 0 7px; border-radius: 999px; border: none;
+      color: #fff; background: var(--accent); cursor: help; font-size: 11px; font-weight: 600;
+      font-style: normal; font-family: inherit; line-height: 1; white-space: nowrap; }
+    .info-btn .glyph { font-style: italic; font-weight: 700;
+      font-family: Georgia, 'Times New Roman', serif; }
+    .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn,
+    .info-wrap:focus .info-btn { background: var(--accent-hover); }
+    .info-pop { display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 20;
+      width: 320px; max-width: 80vw; padding: 12px 14px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-8);
+      font-size: 12.5px; font-weight: 400; color: var(--text-secondary); line-height: 1.5; }
+    .info-wrap:hover .info-pop, .info-wrap:focus-within .info-pop,
+    .info-wrap:focus .info-pop { display: block; }
+    .info-pop strong { display: block; color: var(--text); font-size: 12px; margin-bottom: 4px; }
+    .info-pop ul { list-style: none; margin: 0 0 10px; padding: 0; }
+    .info-pop li { padding: 1px 0 1px 14px; position: relative; }
+    .info-pop li::before { content: "·"; position: absolute; left: 4px; color: var(--text-dim); }
+    .info-pop .note { color: var(--text-dim); font-size: 11.5px; margin: 0 0 10px; }
+    .info-pop .muted { color: var(--text-dim); font-style: italic; }
+  </style>
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+
+  <a class="back-link" href="index.html">← Back to City of London reports</a>
+
+  <h1>City of London — Address Changes</h1>
+  <p class="subtitle">
+    Changes between  and Friday, Jul 24, 2026
+    · 143,000 total addresses
+  </p>
+
+  
+
+  <div class="cards">
+    <div class="card"><div class="label">Total Addresses</div>
+      <div class="value accent">143,000</div></div>
+    <div class="card"><div class="label">New Addresses</div>
+      <div class="value green">+78</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#107c10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,2.0 28.5,18.0 55.0,18.0 81.5,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#107c10"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Retired Addresses</div>
+      <div class="value red">−4</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#c50f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 28.5,14.0 55.0,18.0 81.5,18.0 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#c50f1f"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Updated Addresses <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (MunicipalNumber)</li><li>Street name (FullStreetName)</li><li>Unit (UnitNumber)</li><li>Full address (FullAddress)</li><li>Coordinates (latitude, longitude)</li><li>CondoNumber</li><li>ElectionWard</li><li>FullNumber</li><li>FullStreetName_ID</li><li>GIS_ID</li><li>IntegerMunicipalNumber</li><li>MunicipalNumberQualifier</li><li>Status</li><li>StreetClassification</li><li>StreetDirection</li><li>StreetName</li><li>StreetType</li><li>UnitFullAddress</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span></div>
+      <div class="value yellow">3</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 28.5,18.0 55.0,7.3 81.5,7.3 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Renumbered</div>
+      <div class="value accent">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#0078d4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 28.5,18.0 55.0,18.0 81.5,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#0078d4"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Street Renames</div>
+      <div class="value purple">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#9141ac" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 28.5,18.0 55.0,18.0 81.5,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#9141ac"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    <div class="card"><div class="label">Status Changes</div>
+      <div class="value teal">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#038387" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 28.5,18.0 55.0,18.0 81.5,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#038387"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    <div class="card"><div class="label">Boundary Changes</div>
+      <div class="value teal">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#038387" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 28.5,18.0 55.0,18.0 81.5,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#038387"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    <div class="card"><div class="label">Location Adjustments</div>
+      <div class="value" style="color: var(--text-dim)">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#808080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 28.5,18.0 55.0,18.0 81.5,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#808080"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+  </div>
+
+  
+  <div class="section">
+    <h2>Change Breakdown</h2>
+    <div class="stats-grid">
+      
+      <div class="card"><div class="label">Top Streets by New Addresses</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">Marianna Dr</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">24</span></div>
+        <div class="bar-row"><span class="bar-label">Wharncliffe Rd S</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:83.0%"></div></div>
+          <span class="bar-count">20</span></div>
+        <div class="bar-row"><span class="bar-label">Constance Ave</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:62.0%"></div></div>
+          <span class="bar-count">15</span></div>
+        <div class="bar-row"><span class="bar-label">Wistow St</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:38.0%"></div></div>
+          <span class="bar-count">9</span></div>
+        <div class="bar-row"><span class="bar-label">Colborne St</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:29.0%"></div></div>
+          <span class="bar-count">7</span></div>
+      </div></div>
+      
+      
+      <div class="card"><div class="label">Most Frequently Updated Fields</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">Location</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">3</span></div>
+        <div class="bar-row"><span class="bar-label">StreetDirection</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">3</span></div>
+      </div></div>
+    </div>
+  </div>
+  
+
+  <div class="section">
+    <h2>New Addresses <span class="badge badge-green">78</span></h2>
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-added',0)">Address</th><th onclick="sortTable('t-added',1)">Street</th>
+        <th onclick="sortTable('t-added',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-added">
+        
+        <tr><td>1045 Adelaide St S</td><td>Adelaide St S</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.92947&mlon=-81.20836#map=18/42.92947/-81.20836" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>576 Colborne St</td><td>Colborne St</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.99220&mlon=-81.24201#map=18/42.99220/-81.24201" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>576 Colborne St</td><td>Colborne St</td><td>1</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.99215&mlon=-81.24209#map=18/42.99215/-81.24209" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>576 Colborne St</td><td>Colborne St</td><td>11</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.99221&mlon=-81.24185#map=18/42.99221/-81.24185" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>576 Colborne St</td><td>Colborne St</td><td>3</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.99215&mlon=-81.24206#map=18/42.99215/-81.24206" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>576 Colborne St</td><td>Colborne St</td><td>5</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.99218&mlon=-81.24198#map=18/42.99218/-81.24198" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>576 Colborne St</td><td>Colborne St</td><td>7</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.99218&mlon=-81.24196#map=18/42.99218/-81.24196" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>576 Colborne St</td><td>Colborne St</td><td>9</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.99220&mlon=-81.24188#map=18/42.99220/-81.24188" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2492 Constance Ave</td><td>Constance Ave</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.96225&mlon=-81.14779#map=18/42.96225/-81.14779" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2492 Constance Ave</td><td>Constance Ave</td><td>1</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.96187&mlon=-81.14765#map=18/42.96187/-81.14765" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2492 Constance Ave</td><td>Constance Ave</td><td>10</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.96228&mlon=-81.14735#map=18/42.96228/-81.14735" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2492 Constance Ave</td><td>Constance Ave</td><td>11</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.96197&mlon=-81.14731#map=18/42.96197/-81.14731" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2492 Constance Ave</td><td>Constance Ave</td><td>12</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.96230&mlon=-81.14730#map=18/42.96230/-81.14730" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2492 Constance Ave</td><td>Constance Ave</td><td>13</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.96199&mlon=-81.14724#map=18/42.96199/-81.14724" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2492 Constance Ave</td><td>Constance Ave</td><td>14</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.96231&mlon=-81.14723#map=18/42.96231/-81.14723" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2492 Constance Ave</td><td>Constance Ave</td><td>2</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.96220&mlon=-81.14763#map=18/42.96220/-81.14763" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2492 Constance Ave</td><td>Constance Ave</td><td>3</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.96189&mlon=-81.14759#map=18/42.96189/-81.14759" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2492 Constance Ave</td><td>Constance Ave</td><td>4</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.96222&mlon=-81.14757#map=18/42.96222/-81.14757" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2492 Constance Ave</td><td>Constance Ave</td><td>5</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.96191&mlon=-81.14751#map=18/42.96191/-81.14751" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2492 Constance Ave</td><td>Constance Ave</td><td>6</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.96224&mlon=-81.14749#map=18/42.96224/-81.14749" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2492 Constance Ave</td><td>Constance Ave</td><td>7</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.96193&mlon=-81.14745#map=18/42.96193/-81.14745" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2492 Constance Ave</td><td>Constance Ave</td><td>8</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.96226&mlon=-81.14744#map=18/42.96226/-81.14744" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2492 Constance Ave</td><td>Constance Ave</td><td>9</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.96195&mlon=-81.14737#map=18/42.96195/-81.14737" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 Marianna Dr</td><td>Marianna Dr</td><td>1</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.90714&mlon=-81.29717#map=18/42.90714/-81.29717" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 Marianna Dr</td><td>Marianna Dr</td><td>11</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.90678&mlon=-81.29699#map=18/42.90678/-81.29699" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 Marianna Dr</td><td>Marianna Dr</td><td>13</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.90655&mlon=-81.29677#map=18/42.90655/-81.29677" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 Marianna Dr</td><td>Marianna Dr</td><td>15</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.90652&mlon=-81.29687#map=18/42.90652/-81.29687" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 Marianna Dr</td><td>Marianna Dr</td><td>17</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.90650&mlon=-81.29697#map=18/42.90650/-81.29697" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 Marianna Dr</td><td>Marianna Dr</td><td>19</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.90647&mlon=-81.29707#map=18/42.90647/-81.29707" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 Marianna Dr</td><td>Marianna Dr</td><td>21</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.90644&mlon=-81.29718#map=18/42.90644/-81.29718" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 Marianna Dr</td><td>Marianna Dr</td><td>23</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.90642&mlon=-81.29726#map=18/42.90642/-81.29726" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 Marianna Dr</td><td>Marianna Dr</td><td>25</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.90630&mlon=-81.29753#map=18/42.90630/-81.29753" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 Marianna Dr</td><td>Marianna Dr</td><td>27</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.90636&mlon=-81.29756#map=18/42.90636/-81.29756" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 Marianna Dr</td><td>Marianna Dr</td><td>29</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.90643&mlon=-81.29760#map=18/42.90643/-81.29760" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 Marianna Dr</td><td>Marianna Dr</td><td>3</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.90708&mlon=-81.29714#map=18/42.90708/-81.29714" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 Marianna Dr</td><td>Marianna Dr</td><td>30</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.90670&mlon=-81.29731#map=18/42.90670/-81.29731" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 Marianna Dr</td><td>Marianna Dr</td><td>31</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.90650&mlon=-81.29763#map=18/42.90650/-81.29763" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 Marianna Dr</td><td>Marianna Dr</td><td>32</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.90678&mlon=-81.29735#map=18/42.90678/-81.29735" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 Marianna Dr</td><td>Marianna Dr</td><td>33</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.90658&mlon=-81.29767#map=18/42.90658/-81.29767" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 Marianna Dr</td><td>Marianna Dr</td><td>34</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.90685&mlon=-81.29739#map=18/42.90685/-81.29739" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 Marianna Dr</td><td>Marianna Dr</td><td>35</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.90666&mlon=-81.29771#map=18/42.90666/-81.29771" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 Marianna Dr</td><td>Marianna Dr</td><td>36</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.90691&mlon=-81.29742#map=18/42.90691/-81.29742" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 Marianna Dr</td><td>Marianna Dr</td><td>37</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.90673&mlon=-81.29774#map=18/42.90673/-81.29774" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 Marianna Dr</td><td>Marianna Dr</td><td>39</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.90681&mlon=-81.29777#map=18/42.90681/-81.29777" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 Marianna Dr</td><td>Marianna Dr</td><td>5</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.90701&mlon=-81.29710#map=18/42.90701/-81.29710" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 Marianna Dr</td><td>Marianna Dr</td><td>7</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.90693&mlon=-81.29706#map=18/42.90693/-81.29706" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 Marianna Dr</td><td>Marianna Dr</td><td>9</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.90686&mlon=-81.29703#map=18/42.90686/-81.29703" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2125 Oxford St E</td><td>Oxford St E</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.02119&mlon=-81.16320#map=18/43.02119/-81.16320" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>335 Spruce St</td><td>Spruce St</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.99674&mlon=-81.19095#map=18/42.99674/-81.19095" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1467 Wharncliffe Rd S</td><td>Wharncliffe Rd S</td><td>10</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.92913&mlon=-81.27142#map=18/42.92913/-81.27142" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1467 Wharncliffe Rd S</td><td>Wharncliffe Rd S</td><td>12</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.92915&mlon=-81.27139#map=18/42.92915/-81.27139" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1467 Wharncliffe Rd S</td><td>Wharncliffe Rd S</td><td>14</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.92918&mlon=-81.27136#map=18/42.92918/-81.27136" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1467 Wharncliffe Rd S</td><td>Wharncliffe Rd S</td><td>16</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.92919&mlon=-81.27134#map=18/42.92919/-81.27134" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1467 Wharncliffe Rd S</td><td>Wharncliffe Rd S</td><td>18</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.92921&mlon=-81.27132#map=18/42.92921/-81.27132" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1467 Wharncliffe Rd S</td><td>Wharncliffe Rd S</td><td>2</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.92903&mlon=-81.27153#map=18/42.92903/-81.27153" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1467 Wharncliffe Rd S</td><td>Wharncliffe Rd S</td><td>20</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.92923&mlon=-81.27130#map=18/42.92923/-81.27130" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1467 Wharncliffe Rd S</td><td>Wharncliffe Rd S</td><td>22</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.92915&mlon=-81.27117#map=18/42.92915/-81.27117" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1467 Wharncliffe Rd S</td><td>Wharncliffe Rd S</td><td>24</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.92913&mlon=-81.27119#map=18/42.92913/-81.27119" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1467 Wharncliffe Rd S</td><td>Wharncliffe Rd S</td><td>26</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.92911&mlon=-81.27121#map=18/42.92911/-81.27121" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1467 Wharncliffe Rd S</td><td>Wharncliffe Rd S</td><td>28</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.92909&mlon=-81.27124#map=18/42.92909/-81.27124" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1467 Wharncliffe Rd S</td><td>Wharncliffe Rd S</td><td>30</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.92907&mlon=-81.27127#map=18/42.92907/-81.27127" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1467 Wharncliffe Rd S</td><td>Wharncliffe Rd S</td><td>32</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.92905&mlon=-81.27129#map=18/42.92905/-81.27129" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1467 Wharncliffe Rd S</td><td>Wharncliffe Rd S</td><td>34</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.92901&mlon=-81.27134#map=18/42.92901/-81.27134" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1467 Wharncliffe Rd S</td><td>Wharncliffe Rd S</td><td>36</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.92899&mlon=-81.27136#map=18/42.92899/-81.27136" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1467 Wharncliffe Rd S</td><td>Wharncliffe Rd S</td><td>38</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.92897&mlon=-81.27138#map=18/42.92897/-81.27138" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1467 Wharncliffe Rd S</td><td>Wharncliffe Rd S</td><td>4</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.92905&mlon=-81.27151#map=18/42.92905/-81.27151" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1467 Wharncliffe Rd S</td><td>Wharncliffe Rd S</td><td>40</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.92895&mlon=-81.27141#map=18/42.92895/-81.27141" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1467 Wharncliffe Rd S</td><td>Wharncliffe Rd S</td><td>6</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.92907&mlon=-81.27149#map=18/42.92907/-81.27149" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1467 Wharncliffe Rd S</td><td>Wharncliffe Rd S</td><td>8</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.92909&mlon=-81.27147#map=18/42.92909/-81.27147" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>17 Wistow St</td><td>Wistow St</td><td>10</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.00821&mlon=-81.21289#map=18/43.00821/-81.21289" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>17 Wistow St</td><td>Wistow St</td><td>12</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.00819&mlon=-81.21296#map=18/43.00819/-81.21296" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>17 Wistow St</td><td>Wistow St</td><td>14</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.00817&mlon=-81.21304#map=18/43.00817/-81.21304" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>17 Wistow St</td><td>Wistow St</td><td>16</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.00814&mlon=-81.21312#map=18/43.00814/-81.21312" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>17 Wistow St</td><td>Wistow St</td><td>18</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.00812&mlon=-81.21319#map=18/43.00812/-81.21319" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>17 Wistow St</td><td>Wistow St</td><td>2</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.00830&mlon=-81.21258#map=18/43.00830/-81.21258" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>17 Wistow St</td><td>Wistow St</td><td>4</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.00828&mlon=-81.21265#map=18/43.00828/-81.21265" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>17 Wistow St</td><td>Wistow St</td><td>6</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.00825&mlon=-81.21273#map=18/43.00825/-81.21273" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>17 Wistow St</td><td>Wistow St</td><td>8</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.00823&mlon=-81.21281#map=18/43.00823/-81.21281" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Retired Addresses <span class="badge badge-red">4</span></h2>
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-removed',0)">Address</th><th onclick="sortTable('t-removed',1)">Street</th>
+        <th onclick="sortTable('t-removed',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-removed">
+        
+        <tr><td>1982 Commissioners Rd E</td><td>Commissioners Rd E</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.96209&mlon=-81.14744#map=18/42.96209/-81.14744" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2484 Constance Ave</td><td>Constance Ave</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.96242&mlon=-81.14735#map=18/42.96242/-81.14735" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2767 Doyle Dr</td><td>Doyle Dr</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.96251&mlon=-81.14725#map=18/42.96251/-81.14725" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>19 Wistow St</td><td>Wistow St</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.00826&mlon=-81.21287#map=18/43.00826/-81.21287" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Updated Addresses <span class="badge badge-yellow">3</span>
+      <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (MunicipalNumber)</li><li>Street name (FullStreetName)</li><li>Unit (UnitNumber)</li><li>Full address (FullAddress)</li><li>Coordinates (latitude, longitude)</li><li>CondoNumber</li><li>ElectionWard</li><li>FullNumber</li><li>FullStreetName_ID</li><li>GIS_ID</li><li>IntegerMunicipalNumber</li><li>MunicipalNumberQualifier</li><li>Status</li><li>StreetClassification</li><li>StreetDirection</li><li>StreetName</li><li>StreetType</li><li>UnitFullAddress</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span></h2>
+    
+    
+    <table>
+      <thead><tr><th>Address</th><th>What Changed</th><th>Before</th><th></th><th>After</th><th>Map</th></tr></thead>
+      <tbody>
+        
+  <tr><td rowspan="2">331 Spruce St</td>
+    <td class="change-field">StreetDirection</td>
+    <td class="old-val"> </td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.99669&mlon=-81.19114#map=18/42.99669/-81.19114" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">42.99668, -81.19113<a class="map-link" href="https://www.openstreetmap.org/?mlat=42.99668&mlon=-81.19113#map=19/42.99668/-81.19113" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↖ 1.4m</td>
+    <td class="new-val">42.99669, -81.19114<a class="map-link" href="https://www.openstreetmap.org/?mlat=42.99669&mlon=-81.19114#map=19/42.99669/-81.19114" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="2">333 Spruce St</td>
+    <td class="change-field">StreetDirection</td>
+    <td class="old-val"> </td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=42.99672&mlon=-81.19104#map=18/42.99672/-81.19104" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">42.99673, -81.19100<a class="map-link" href="https://www.openstreetmap.org/?mlat=42.99673&mlon=-81.19100#map=19/42.99673/-81.19100" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">← 3.4m</td>
+    <td class="new-val">42.99672, -81.19104<a class="map-link" href="https://www.openstreetmap.org/?mlat=42.99672&mlon=-81.19104#map=19/42.99672/-81.19104" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="2">17 Wistow St</td>
+    <td class="change-field">StreetDirection</td>
+    <td class="old-val"> </td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.00814&mlon=-81.21253#map=18/43.00814/-81.21253" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">43.00810, -81.21268<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.00810&mlon=-81.21268#map=19/43.00810/-81.21268" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">→ 13.0m</td>
+    <td class="new-val">43.00814, -81.21253<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.00814&mlon=-81.21253#map=19/43.00814/-81.21253" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Renumbered Addresses <span class="badge badge-accent">0</span></h2>
+    
+    <p class="empty">No addresses renumbered.</p>
+  </div>
+
+  <div class="section">
+    <h2>Street Renames <span class="badge badge-purple">0</span></h2>
+    <p class="empty">No street renames.</p>
+  </div>
+
+  
+
+  
+  <div class="section">
+    <h2>Status Changes <span class="badge badge-teal">0</span></h2>
+    <p class="empty">No status changes.</p>
+  </div>
+  
+
+  
+  <div class="section">
+    <h2>Boundary Changes <span class="badge badge-teal">0</span></h2>
+    <p class="empty">No ward or municipality reassignments.</p>
+  </div>
+  
+
+  <div class="section">
+    <h2>Location Adjustments <span class="badge" style="background: var(--surface2); color: var(--text-dim)">0</span></h2>
+    
+    <p class="empty">No location adjustments.</p>
+  </div>
+
+  <div class="generated-at">Report generated Jul 24, 2026 at 05:55 PM · source licence: City of London Terms of Use</div>
+
+  <script>
+    function sortTable(tbodyId, col) {
+      const tbody = document.getElementById(tbodyId);
+      if (!tbody) return;
+      const rows = Array.from(tbody.rows);
+      const dir = tbody.dataset.sortDir === 'asc' ? 'desc' : 'asc';
+      tbody.dataset.sortDir = dir;
+      rows.sort((a, b) => {
+        const av = a.cells[col]?.textContent.trim() || '';
+        const bv = b.cells[col]?.textContent.trim() || '';
+        const an = parseFloat(av), bn = parseFloat(bv);
+        if (!isNaN(an) && !isNaN(bn)) return dir === 'asc' ? an - bn : bn - an;
+        return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+      });
+      rows.forEach(r => tbody.appendChild(r));
+    }
+  </script>
+</body>
+
+</html>
