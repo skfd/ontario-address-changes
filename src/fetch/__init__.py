@@ -15,7 +15,12 @@ import json
 
 def _vault(ds):
     from addressvault import Source, Vault
-    v = Vault()  # uses ADDRESSVAULT_DIR
+    # link_wait=False: the vault would otherwise wait an offline or metered link
+    # out in 15-min cycles until its 22:30 cutoff, inside each of the six
+    # parallel city workers. daily-update.ps1 already owns that decision -- it
+    # gates on Test-Online/Test-Metered and retries three times -- so the pull
+    # should fail fast and let the outer loop schedule the next attempt.
+    v = Vault(link_wait=False)  # uses ADDRESSVAULT_DIR
     v.add_source(Source(
         slug=ds.slug, provider=ds.provider, data_url=ds.data_url,
         access=ds.access, format=ds.format, source_crs=ds.source_crs,
