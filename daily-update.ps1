@@ -121,21 +121,42 @@ if ($updateExit -ne 0) {
 Invoke-Logged "python -m addressvault.cli report"
 if ($LASTEXITCODE -ne 0) { Log "REPORT-FAILED $(Get-Date -Format o) exit=$LASTEXITCODE" }
 
-# A crashed git process can leave a stale index.lock that makes the add fail,
-# so nothing gets staged and the commit is silently skipped (site goes stale
-# while runs keep exiting 0). An hour-old lock during a noon run is never live.
-$indexLock = Join-Path $projectDir '.git\index.lock'
-if ((Test-Path $indexLock) -and ((Get-Date) - (Get-Item $indexLock).LastWriteTime).TotalMinutes -gt 60) {
-    Log "STALE-LOCK $(Get-Date -Format o) removing .git\index.lock"
-    Remove-Item -Force $indexLock
+# A crashed git process can leave a stale .lock behind, and any of them stalls
+# the publish: index.lock fails the add (nothing staged, commit silently
+# skipped), while a ref lock fails the commit or the push's ref update
+# (observed 2026-08-05: refs\remotes\origin\main.lock left the day's docs staged
+# and the site a day stale). So sweep every lock under .git, not just index.lock.
+# An hour-old lock during a noon run is never a live one.
+$gitDir = Join-Path $projectDir '.git'
+foreach ($lock in @(Get-ChildItem $gitDir -Filter '*.lock' -Recurse -Force -File -ErrorAction SilentlyContinue)) {
+    if (((Get-Date) - $lock.LastWriteTime).TotalMinutes -gt 60) {
+        Log "STALE-LOCK $(Get-Date -Format o) removing $($lock.FullName.Substring($projectDir.Length + 1))"
+        Remove-Item -Force $lock.FullName
+    }
 }
 
 Invoke-Logged "git add docs"
-git diff --cached --quiet
-if ($LASTEXITCODE -ne 0) {
-    Invoke-Logged "git commit -m `"daily update $(Get-Date -Format yyyy-MM-dd)`""
-    Invoke-Logged "git push"
+$publishExit = $LASTEXITCODE
+if ($publishExit -eq 0) {
+    git diff --cached --quiet
+    if ($LASTEXITCODE -ne 0) {
+        Invoke-Logged "git commit -m `"daily update $(Get-Date -Format yyyy-MM-dd)`""
+        $publishExit = $LASTEXITCODE
+        # Nothing new to push if the commit never landed, and pushing anyway
+        # reports "Everything up-to-date" -- a success that hides the failure.
+        if ($publishExit -eq 0) {
+            Invoke-Logged "git push"
+            $publishExit = $LASTEXITCODE
+        }
+    }
 }
+
+# A failed add/commit/push leaves docs\ staged and the site stale, but every
+# step above is fire-and-forget, so the run used to exit 0 and look healthy
+# (observed 2026-08-05). Report it -- but never over-write a real update
+# failure or an offline/metered skip: those are the bigger news, and the first
+# already exits nonzero.
+if ($publishExit -ne 0 -and $outcome -eq 0) { $outcome = 'publish-failed' }
 
 # Final log line marks the run as over for progress.ps1.
 Log "END $(Get-Date -Format o) exit=$outcome attempts=$attempt"
@@ -154,4 +175,7 @@ else                    { $row | Export-Csv $runsCsv -NoTypeInformation }
 # Offline/metered exits 0: nothing is wrong with the pipeline, there was just
 # no (usable) network.
 if ($outcome -in 'offline', 'metered') { exit 0 }
+# The cities updated but the site did not: $updateExit is 0 here, so this needs
+# its own nonzero exit to reach Task Scheduler as a failure.
+if ($outcome -eq 'publish-failed') { exit 1 }
 exit $updateExit

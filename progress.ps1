@@ -120,6 +120,9 @@ function Show-Progress {
               # had no usable network -- failures below are noise, not real.
               elseif ($raw -match '(?m)^END .*exit=offline') { 'Run offline (treated like laptop off)' }
               elseif ($raw -match '(?m)^END .*exit=metered') { 'Run skipped (metered connection)' }
+              # Cities updated fine but the commit/push did not land, so the
+              # published site is stale even though no city failed.
+              elseif ($raw -match '(?m)^END .*exit=publish-failed') { 'Cities OK, site NOT published' }
               elseif ($failed.Count)   { 'Run finished with failures' }
               else                     { 'Run OK' }
     Write-Host ("{0}: {1} ok, {2} failed, {3} pending (of {4})" -f `
