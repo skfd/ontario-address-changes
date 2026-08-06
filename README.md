@@ -89,6 +89,12 @@ and run `python run.py update --city <slug>`.
 .\schedule-remove.ps1
 ```
 
+After the update, `daily-update.ps1` regenerates the address-vault status page
+(`addressvault report` → `<ADDRESSVAULT_DIR>\report.html`) — a local file about
+the vault, not part of the published site. It runs on every outcome, including
+offline/metered ones, since it reads only the catalog and disk; if it fails the
+run logs `REPORT-FAILED` and the run's own exit code is unaffected.
+
 ## Data sources & attribution
 
 Source datasets carry their own licences (see each dataset's `license_name`).

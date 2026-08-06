@@ -112,6 +112,15 @@ if ($updateExit -ne 0) {
     elseif (Test-Metered)       { $outcome = 'metered' }
 }
 
+# The vault's status page, regenerated from the catalog the update just wrote.
+# Runs on every outcome, including offline/metered: it reads only the catalog
+# and the vault on disk, so a day when nothing was pulled is exactly when the
+# "no attempt" gaps are worth looking at. It is a local artifact under the vault
+# root -- nothing here commits or publishes it -- and a render failure leaves
+# $outcome alone, since a stale status page is not a failed update.
+Invoke-Logged "python -m addressvault.cli report"
+if ($LASTEXITCODE -ne 0) { Log "REPORT-FAILED $(Get-Date -Format o) exit=$LASTEXITCODE" }
+
 # A crashed git process can leave a stale index.lock that makes the add fail,
 # so nothing gets staged and the commit is silently skipped (site goes stale
 # while runs keep exiting 0). An hour-old lock during a noon run is never live.
