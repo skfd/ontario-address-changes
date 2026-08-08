@@ -136,12 +136,22 @@ Two small code fixes found during the audit (both change payload hashes → one-
   Done 2026-08-08. `objectid_1` landed earlier in `363e435f`; `globalid_1` turned
   out to affect only lennox-addington, not 7 cities.
 - [x] Make `_clean_props` drop whitespace-only values (frontenac stores 22k blank
-  `" "` units). Done 2026-08-08. Real blast radius was 683,846 rows across 28
-  cities, led by london/windsor/lambton — frontenac was mid-pack.
+  `" "` units). Done 2026-08-08. Real blast radius was 27 cities / 670,584 active
+  rows, led by london 125k, windsor 117k, lambton 52k — frontenac was mid-pack.
 
 Both were backfilled in place by `tools/backfill_props_hash.py` rather than
 allowed to spike, so the reports lost the noise without gaining a phantom event
-(guelph's latest went 25 modified → 1).
+(guelph's latest went 25 modified → 1). The backfill rewrote 884,765 rows: it has
+to cover closed historical spans too, not just the active ones, because every
+report is rebuilt from the store on each run and a partial pass would invent a
+change at the boundary. Only one already-published row was ever wrong (a hamilton
+POSTAL_CODE `-> " "` on 2026-08-03); the bug was latent, not active, because a
+source that pads a column pads it identically on every republish.
+
+**Ops lesson:** disable `kk-ontario-update` before migrating the stores. The noon
+run fired mid-migration on 2026-08-08, imported against un-migrated stores with the
+new hashing rules, and had to be killed and rolled back from a DB backup before it
+committed.
 
 ### Open: stop recording corrupt pulls
 
