@@ -40,16 +40,33 @@ Remaining work on it:
     manufactured updates rather than demoting real ones. Location Adjustments stays 0
     and that is correct. The real find there was `RnoTXT2` (alias "ARN", the assessment
     roll number) backfilled from UNK: 158 of 159 solo changes.
-  - [ ] quinte-west (12 reports) — `lat, long`
+  - [x] **quinte-west** (2026-08-08) — phantom pattern, and *only* ever phantom: see the
+    identity rule below. Ignored `lat, long` (a stale full-precision copy — 1,720 of
+    20,290 rows already differ from the geometry by >10 m, one carries a projected
+    northing instead of a latitude) and `label` (number + unit suffix). Both pre-emptive:
+    the city's whole history holds exactly one modification, a `label` correction of
+    "13" to "3" on a row already numbered 3, which the change retroactively removed.
   - [ ] burlington (10 reports) — `LATITUDE, LONGITUDE`
   - [ ] kitchener (5 reports) — `X_COORD, Y_COORD`
   - [ ] renfrew (4 reports) — `Latitude, Longitude`
   - [ ] elgin / peel-region / waterloo — baseline only; revisit once each has a diff.
 
-  Expect both patterns. Neither is decidable from the field list alone: the churn tally
-  (`audit.py --tags`) is what separates a duplicate that masks real movement from one
-  that invents it, and in both cities so far the *larger* noise source turned out to be
-  something else the audit surfaced on the way past.
+  **Which pattern to expect is predictable from `[identity]`** (found 2026-08-08, and it
+  retro-explains guelph and hastings). Synthesized identity includes the 5 dp geometry
+  when `use_geometry` (`normalize.py:161`), so a real move past ~1.1 m mints a new key
+  and reports as retired + added — never a modification. `location` is only ever assigned
+  to a *modified* row (`report._category`), so for those cities Location Adjustments is
+  structurally unreachable and its 0 is correct, not a config bug. Coordinate duplicates
+  there can only manufacture updates.
+  - synth + geometry, phantom-only: **quinte-west**, **burlington**, **renfrew**,
+    **elgin** (+ hastings, confirmed)
+  - real `key_field`, masking possible: **kitchener** (`PROPERTY_UNIT_ID`),
+    **peel-region** (`ROPADRID`), **waterloo** (`ADDRESS_ID`) (+ guelph, confirmed)
+
+  This narrows what to look for but does not replace the churn tally (`audit.py --tags`),
+  which is still what shows whether the duplicate has actually moved — and in every city
+  so far the *larger* noise source turned out to be something else the audit surfaced on
+  the way past.
 
 - [ ] Consider a global fix for ESRI id spellings `_VOLATILE_KEYS` misses. Hastings
   publishes `OBJECTID_12` (its alias is literally "OBJECTID_1"), which was being

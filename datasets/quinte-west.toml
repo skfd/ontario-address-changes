@@ -6,6 +6,27 @@ format = "geojson"
 license_name = "City of Quinte West Open Data Licence"
 osm_compatible = "green-lwg"
 
+# Source props whose changes are noise. Nothing here has ever moved: across 12
+# snapshots the city recorded exactly one modification (a label correction, below).
+# Both entries are pre-emptive.
+ignore_fields = [
+  # A stale full-precision copy of the point geometry. These can only ever manufacture
+  # updates, never carry a real one: identity is synthesized from the 5 dp geometry
+  # (use_geometry), so a move past ~1.1 m mints a new key and reports as retired +
+  # added rather than a modification -- which is why Location Adjustments is
+  # unreachable for this city, and its 0 is correct rather than a config bug.
+  # The copies are already out of sync with the geometry: of 20,290 rows, 4,064 differ
+  # in the 1e-5..1e-4 band, 1,720 by more than 1e-4 (~10 m), and one carries a
+  # projected northing instead of a latitude (150 NORTH MURRAY STREET, lat=5484377.8).
+  # An upstream recompute would therefore fire a ~20k-row event with no address change.
+  "lat", "long",
+  # House number plus unit suffix ("91 - A"), a display duplicate of number + unit.
+  # It is dropped as an echo whenever those change, so it can only ever surface on its
+  # own -- as it did once, correcting "13" to "3" on 3 GRIST MILL LANE (2026-06-17),
+  # a row whose address_nu was already 3. A label fix with no address change.
+  "label",
+]
+
 [identity]
 key_field = ""                                # only sequential objectid/objectid_1 exist; GlobalID is volatile, so synthesize
 synth_fields = ["number", "street", "unit"]
