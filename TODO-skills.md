@@ -46,7 +46,16 @@ Remaining work on it:
     northing instead of a latitude) and `label` (number + unit suffix). Both pre-emptive:
     the city's whole history holds exactly one modification, a `label` correction of
     "13" to "3" on a row already numbered 3, which the change retroactively removed.
-  - [ ] burlington (10 reports) — `LATITUDE, LONGITUDE`
+  - [x] **burlington** (2026-08-08) — phantom pattern, and only ever phantom (same
+    identity rule). Unlike quinte-west the duplicates are *faithful*: worst deviation
+    from the geometry is 1.35e-5 over 60,326 rows, so they are the hastings shape
+    exactly — an 8 dp echo of a geometry compared at 5 dp, movable only by jitter below
+    the resolution. Ignored `LATITUDE, LONGITUDE` plus `PROPERTYRSN` (property-system
+    surrogate, near-monotonic with OBJECTID, `keep_fields` so consumers keep the link).
+    The audit's larger find was again elsewhere: both of the city's two real
+    modifications are classifiable, so `PROPCODE`/`PROPDESC` joined `status` (Tenant →
+    Secondary Building now groups as a Status Change instead of a generic update) and
+    `NAME` became `place_name` ahead of a rename.
   - [ ] kitchener (5 reports) — `X_COORD, Y_COORD`
   - [ ] renfrew (4 reports) — `Latitude, Longitude`
   - [ ] elgin / peel-region / waterloo — baseline only; revisit once each has a diff.

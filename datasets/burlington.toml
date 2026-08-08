@@ -6,6 +6,30 @@ format = "geojson"
 license_name = "City of Burlington Terms of Use"
 osm_compatible = "red-review"
 
+# Source props whose changes are noise. Nothing here has ever moved: across 10 snapshots
+# the city recorded two modifications, both real (a property reclassification and an
+# Active -> Pending flip). Both entries are pre-emptive.
+ignore_fields = [
+  # A faithful 8 dp copy of the point geometry - across all 60,326 rows the worst
+  # deviation is 1.35e-5, i.e. the geometry itself at higher precision. The tracker
+  # rounds coordinates to 5 dp (~1.1 m), so these can only move on jitter *below* the
+  # resolution anything else is compared at. And they can never carry a real move:
+  # identity is synthesized from the 5 dp geometry (use_geometry), so a genuine
+  # relocation mints a new key and reports as retired + added rather than a
+  # modification - which is why Location Adjustments is unreachable here, and its 0 is
+  # correct rather than a config bug.
+  "LATITUDE", "LONGITUDE",
+  # The city property system's surrogate id (source alias "Property RSN"). Unique over
+  # all 60,326 rows but near-monotonic with OBJECTID (26 inversions per 999 sampled),
+  # which is the reason the identity comment below rejects it as a key; by the same
+  # token a property-system renumber would fake a 60k-row mass event.
+  "PROPERTYRSN",
+]
+
+# Ignored for change detection (above) but still written to props: PROPERTYRSN is the
+# only link from an address to the city's property system.
+keep_fields = ["PROPERTYRSN"]
+
 [identity]
 # PROPERTYRSN tracks OBJECTID order too closely to trust as a stable id; synthesize instead.
 key_field = ""                                 # synthesize from address + rounded lon/lat
@@ -22,5 +46,17 @@ full   = "ADDRESS"
 # (place renames / status changes / boundary reassignments) instead of the
 # generic Updated Addresses table.
 [classes]
-status = ["PROPSTATUSCODE", "PROPSTATUSDESC"]
+# PROPSTATUS* is the lifecycle flip (Active / Pending, seen 2026-08-03). PROPCODE and
+# PROPDESC are a 1:1 code/description pair (10 values: Address, Block, Park, Road,
+# School Lease, Secondary Building, Tenant, ...) that only ever move together - the one
+# observed change was Tenant -> Secondary Building on 2026-07-07. They are grouped with
+# the lifecycle pair deliberately, against the usual "don't over-group" rule: a row that
+# reclassifies and changes status in the same republish is one upstream decision, and
+# reads better as a Status Change than as a generic update. Both descriptions are kept
+# rather than treated as echoes of their codes, since "20 -> 180" alone is unreadable.
+status = ["PROPSTATUSCODE", "PROPSTATUSDESC", "PROPCODE", "PROPDESC"]
 boundary = ["PROPINFOVALUE_WARD", "CITY"]
+# Subdivision, park and church names on 11,974 rows (Coronation Park, Knox Presbyterian
+# Church, Mill Brook Village Phase l). No rename has been observed yet; classed ahead of
+# one because [classes] is report-time only and costs nothing to carry.
+place_name = ["NAME"]
