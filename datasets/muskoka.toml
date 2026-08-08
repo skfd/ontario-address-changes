@@ -9,9 +9,17 @@ license_name = "Not identified"
 osm_compatible = "unknown-review"
 
 [identity]
-# PropertyNum is an assessment roll number (1:many with addresses), so synthesize.
-key_field = ""                                 # synthesize from address + rounded lon/lat
+# PropertyNum is an assessment roll number (1:many with addresses), so it can't be the
+# key on its own -- but it is the right disambiguator here, because geometry can't be.
+# This service's coordinates jitter up to 1.36 m between republishes, which crosses the
+# 5 dp (~1.1 m) rounding in normalize._identity: the 2026-06-28..07-01 republish alone
+# minted new keys for 28,250 of 65,279 addresses, leaving 157,666 keys for a 66k-row
+# city. Address + PropertyNum is stable across that boundary (0 churn) at the cost of
+# 279 same-address-same-roll rows collapsing onto shared keys.
+key_field = ""                                 # synthesize from address + roll number
 synth_fields = ["number", "street", "unit"]
+synth_props = ["PropertyNum"]
+use_geometry = false
 
 [fields]                                        # source property -> canonical name
 number = "StreetNumber"

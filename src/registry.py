@@ -24,6 +24,8 @@ class Dataset:
     source_crs: str = ""  # e.g. "EPSG:2952"; reproject to WGS84 when coords are out of lon/lat range
     key_field: str = ""
     synth_fields: list = field(default_factory=lambda: ["full"])
+    synth_props: list = field(default_factory=list)  # source props added to the synth basis
+    use_geometry: bool = True  # include rounded lon/lat in the synth basis
     fields: dict = field(default_factory=dict)
     ignore_fields: list = field(default_factory=list)  # source props excluded from change detection
     keep_fields: list = field(default_factory=list)  # ignored fields still stored in props for consumers
@@ -64,6 +66,12 @@ def _parse(path):
         raise ValueError(f"{path}: keep_fields not in ignore_fields: {stray}")
 
     identity = raw.get("identity", {})
+    # Geometry is the default disambiguator for a synthesized key. Dropping it
+    # without adding another one would collapse every same-address row onto one
+    # key, so require a replacement.
+    if identity.get("use_geometry", True) is False and not identity.get("synth_props"):
+        raise ValueError(f"{path}: identity.use_geometry = false needs synth_props "
+                         "to disambiguate")
     return Dataset(
         slug=raw["slug"],
         provider=raw["provider"],
@@ -75,6 +83,8 @@ def _parse(path):
         source_crs=raw.get("source_crs", ""),
         key_field=identity.get("key_field", ""),
         synth_fields=identity.get("synth_fields", ["full"]),
+        synth_props=identity.get("synth_props", []),
+        use_geometry=identity.get("use_geometry", True),
         fields=raw.get("fields", {}),
         ignore_fields=raw.get("ignore_fields", []),
         keep_fields=keep,

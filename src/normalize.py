@@ -15,7 +15,8 @@ from functools import lru_cache
 # ESRI / shapefile housekeeping keys that churn on republish and must not
 # influence identity or change-detection.
 _VOLATILE_KEYS = {
-    "objectid", "objectid_1", "object_id", "fid", "oid", "globalid", "global_id",
+    "objectid", "objectid_1", "object_id", "fid", "oid",
+    "globalid", "globalid_1", "global_id",
     "shape", "shape_length", "shape_area", "shape__length", "shape__area",
     "se_anno_cad_data",
     "_id",  # CKAN row-sequence id (Toronto), reassigned on every republish
@@ -106,7 +107,9 @@ def _clean_props(props, ignore, keep=frozenset()):
         kl = k.lower()
         if kl in _VOLATILE_KEYS or kl in ignore:
             continue
-        if v is None or v == "":
+        # whitespace-only strings are blanks the source pads out (" ", "\t"); they
+        # carry no value but would otherwise sit in props and in payload_hash
+        if v is None or (isinstance(v, str) and not v.strip()):
             continue
         if kl in keep and (v == 0 or v == "0"):
             # zero-encoded "absent" (Toronto stored HI_NUM=0 for non-ranges
@@ -153,7 +156,12 @@ def _identity(ds, rec, props, lon, lat):
             return str(key).strip()
     # synthesize from configured display fields + geometry
     parts = [str(rec.get(f) or "").strip().upper() for f in ds.synth_fields]
-    parts += [f"{lon:.5f}", f"{lat:.5f}"]
+    parts += [str(props.get(p) or "").strip().upper() for p in ds.synth_props]
+    if ds.use_geometry:
+        # 5 dp is ~1.1 m. A source whose coordinates jitter at that scale on
+        # republish would mint a new key for every jittered row, so such a
+        # dataset must disambiguate with synth_props instead (muskoka).
+        parts += [f"{lon:.5f}", f"{lat:.5f}"]
     basis = "|".join(parts)
     return "syn:" + hashlib.sha1(basis.encode("utf-8")).hexdigest()
 

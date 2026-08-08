@@ -131,10 +131,32 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
 Two small code fixes found during the audit (both change payload hashes → one-time
 "modified" spike, so batch them):
 
-- [ ] Add `objectid_1`/`globalid_1` variants to `_VOLATILE_KEYS` (normalize.py) —
+- [x] Add `objectid_1`/`globalid_1` variants to `_VOLATILE_KEYS` (normalize.py) —
   present in 7 cities' stored props; mass-modify risk if a provider reassigns them.
-- [ ] Make `_clean_props` drop whitespace-only values (frontenac stores 22k blank
-  `" "` units).
+  Done 2026-08-08. `objectid_1` landed earlier in `363e435f`; `globalid_1` turned
+  out to affect only lennox-addington, not 7 cities.
+- [x] Make `_clean_props` drop whitespace-only values (frontenac stores 22k blank
+  `" "` units). Done 2026-08-08. Real blast radius was 683,846 rows across 28
+  cities, led by london/windsor/lambton — frontenac was mid-pack.
+
+Both were backfilled in place by `tools/backfill_props_hash.py` rather than
+allowed to spike, so the reports lost the noise without gaining a phantom event
+(guelph's latest went 25 modified → 1).
+
+### Open: stop recording corrupt pulls
+
+`tools/repair_bad_snapshots.py` deleted three snapshots taken from degraded
+upstream responses (kitchener + huron 2026-07-28, muskoka 2026-06-28). The
+fetcher can still record their successors:
+
+- [ ] address-vault `fetch/arcgis.py`: a mid-stream empty page ends the paging
+  loop, so a transient blank page is written as a complete layer. Tell: a feature
+  count that is an exact multiple of the 2000-row page size. Probe
+  `returnCountOnly=true` first and refuse a pull that falls short.
+- [ ] Reject a pull where a mapped field that was ~100% populated returns ~0%
+  populated (muskoka 2026-06-28, york 2026-07-31).
+- [ ] `EDIT_METADATA_FIELDS` has `last_edited_user`/`created_user` but not
+  `lasteditor` — renfrew's 846-row editor wipe counted as a modification.
 
 ## Appendix: field coverage (latest snapshot, % non-null)
 
