@@ -6,6 +6,37 @@ format = "geojson"
 license_name = "Open Government Licence - The Corporation of the City of Kitchener"
 osm_compatible = "yellow-ogl"
 
+# Source props whose changes are noise. Measured over the whole history (4 snapshots,
+# 2026-06-10..2026-08-03): these five carried 1,067 of the 1,446 modifications, and
+# removing them is what lets the humanized categories fire at all.
+ignore_fields = [
+  # The point geometry reprojected into UTM 17N (the layer's own wkid 26917), stored as
+  # full-precision metres - over all 132,060 rows the worst deviation from the geometry
+  # is 1.35e-5 deg, so it is the same point, not a stale copy. The tracker compares
+  # coordinates at 5 dp (~1.1 m), so the metre-precision echo moves on jitter below that
+  # resolution *and* rides along with every real move. Identity here is a real key_field,
+  # so unlike the synth+geometry cities a genuine relocation does arrive as a
+  # modification - and was being demoted out of Location Adjustments by these two: 179
+  # coordinate moves on 2026-08-03 alone, against a category that had never fired. Five
+  # further rows were pure jitter and now report nothing.
+  "X_COORD", "Y_COORD",
+  # 15-digit MPAC assessment roll number, backfilled in batches: of 798 rows where it was
+  # the only change, 610 were a null -> roll fill (mostly condo units, which share a roll)
+  # and 188 a re-roll. It also masked status changes - 94 of the 103 Active -> Pending
+  # flips on 2026-08-03 were riding with a roll edit and read as generic updates.
+  "ROLL_REFERENCE",
+  # Join keys into two other city layers, both of which renumber on their own schedule.
+  # All 163 solo ROADSEGMENTID changes are re-links onto a recut centreline (22083 ->
+  # 609452); all 101 solo PARCELID changes move off the placeholder 55109981 onto newly
+  # registered subdivision parcels. Neither says anything about the address.
+  "ROADSEGMENTID", "PARCELID",
+]
+
+# Ignored for change detection (above) but still written to props: the roll number is the
+# only link to the tax roll, and the two ids are the only links to the centreline and
+# parcel layers.
+keep_fields = ["ROLL_REFERENCE", "ROADSEGMENTID", "PARCELID"]
+
 [identity]
 key_field = "PROPERTY_UNIT_ID"                # stable municipal point id, 100% populated (OBJECTID is sequential)
 synth_fields = ["number", "street", "unit"]   # fallback only if a row ever lacks PROPERTY_UNIT_ID

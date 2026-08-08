@@ -56,7 +56,14 @@ Remaining work on it:
     modifications are classifiable, so `PROPCODE`/`PROPDESC` joined `status` (Tenant →
     Secondary Building now groups as a Status Change instead of a generic update) and
     `NAME` became `place_name` ahead of a rename.
-  - [ ] kitchener (5 reports) — `X_COORD, Y_COORD`
+  - [x] **kitchener** (2026-08-08) — masking pattern, as the identity rule predicts for a
+    real `key_field`. `X_COORD, Y_COORD` are the geometry reprojected into the layer's own
+    UTM 17N and stored as full-precision metres — faithful (worst deviation 1.35e-5 deg
+    over 132,060 rows, the burlington shape) but finer than the 5 dp everything else is
+    compared at, so they rode along with 179 real moves and invented 5. Location
+    Adjustments went 0 → 192. The larger find was again elsewhere: `ROLL_REFERENCE` (MPAC
+    roll, 610 null→roll backfills + 188 re-rolls) and the `ROADSEGMENTID`/`PARCELID` join
+    keys, all three `keep_fields`. 2026-08-03 generic Updated 1410 → 56, Status 9 → 103.
   - [ ] renfrew (4 reports) — `Latitude, Longitude`
   - [ ] elgin / peel-region / waterloo — baseline only; revisit once each has a diff.
 

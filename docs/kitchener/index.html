@@ -76,6 +76,17 @@
     .info-pop li::before { content:"·"; position:absolute; left:4px; color:var(--text-dim); }
     .info-pop .note { color:var(--text-dim); font-size:11.5px; margin:0 0 10px; }
     .info-pop .muted { color:var(--text-dim); font-style:italic; }
+    /* A refused pull: deliberately louder than the amber "no changes yet" state,
+       because this one does not resolve itself by waiting. */
+    .blocked { background:var(--surface); border:1px solid var(--red);
+      border-left:4px solid var(--red); border-radius:8px; padding:14px 16px;
+      margin-bottom:32px; box-shadow:var(--shadow-4); }
+    .blocked .title { font-size:12px; font-weight:600; color:var(--red);
+      text-transform:uppercase; letter-spacing:0.04em; margin-bottom:8px; }
+    .blocked .reason { font-size:13px; color:var(--text); margin-bottom:6px; }
+    .blocked .reason code { font-family:'Cascadia Mono',Consolas,monospace; font-size:12px;
+      background:var(--surface2); border-radius:4px; padding:1px 5px; }
+    .blocked .detail { font-size:12px; color:var(--text-dim); }
   </style>
 </head>
 
@@ -93,13 +104,16 @@
 
     
 
+    
+
     <div class="section-header">Reports · Open Government Licence - The Corporation of the City of Kitchener <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
     <span class="info-btn"><span class="glyph">i</span> Fields</span>
     <span class="info-pop">
       <strong>Compared for changes</strong>
-      <ul><li>Street number (CIVIC_NO)</li><li>Street name (STREET)</li><li>Unit (UNIT)</li><li>Full address (ADDRESS)</li><li>Coordinates (latitude, longitude)</li><li>PARCELID</li><li>POLL</li><li>PROPERTY_UNIT_ID</li><li>ROADSEGMENTID</li><li>ROLL_REFERENCE</li><li>STATUS</li><li>UNIT_TYPE</li><li>WARD</li><li>X_COORD</li><li>Y_COORD</li></ul>
+      <ul><li>Street number (CIVIC_NO)</li><li>Street name (STREET)</li><li>Unit (UNIT)</li><li>Full address (ADDRESS)</li><li>Coordinates (latitude, longitude)</li><li>POLL</li><li>PROPERTY_UNIT_ID</li><li>STATUS</li><li>UNIT_TYPE</li><li>WARD</li></ul>
       <strong>Ignored (changes here are not counted)</strong>
-      <p class="muted">None — every source field is compared.</p>
+      <ul><li>PARCELID</li><li>ROADSEGMENTID</li><li>ROLL_REFERENCE</li><li>X_COORD</li><li>Y_COORD</li></ul>
+      
     </span>
   </span></div>
     <div class="reports">
@@ -114,7 +128,7 @@
         </div>
         <div class="summary">
           <span class="indicator yellow"></span>
-          156 new · 8 removed · 1,410 updated · 9 status changes · 2 renumbered
+          156 new · 8 removed · 56 updated · 103 status changes · 3 renumbered · 192 moved
         </div>
       </a>
       
@@ -129,7 +143,7 @@
         </div>
         <div class="summary">
           <span class="indicator yellow"></span>
-          4 new · 0 removed · 16 updated
+          4 new · 0 removed · 13 updated · 2 status changes · 1 moved
         </div>
       </a>
       
@@ -145,7 +159,7 @@
         <div class="summary">
           <span class="indicator green"></span>
           
-          10 new · 0 removed · 9 updated
+          10 new · 0 removed · 9 status changes
         </div>
       </a>
       
