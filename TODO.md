@@ -198,6 +198,13 @@ itself, including an unchanged republish that takes the content-hash skip path.
 This is the one state deliberately styled apart from an ordinary failure: a
 fetch error fixes itself tomorrow, a refusal is waiting on you.
 
+Deliberate asymmetry, decided 2026-08-08: only the *tracker's* guard produces
+that banner. A pull refused by the vault (a truncation) fails before the tracker
+imports anything, so the public site just goes stale with no explanation — and
+that is fine. The vault's own `report.html` shows those under "Refused — needs a
+look", which is the operator surface for them. Don't plumb vault refusals
+through to the public site without a reason to revisit it.
+
 Known gap, accepted: the tracker's 5% row floor cannot see a small truncation
 (replayed against real renfrew data, a 2.6% short pull imports cleanly). The
 vault's count probe is what catches those, so the gap is real only for static
