@@ -71,6 +71,10 @@ rather than the field config, and never edits a dataset.
   (address-vault's ArcGIS paging loop ending on a transient blank page — kitchener
   102,000 of 131,912, huron 20,000 of 38,300), an attribute-stripped pull where every
   field but the identity key is null (muskoka 2026-06-28), and plain row-count cliffs.
+  Narrower than it was since 2026-08-08: all three signatures are now refused at
+  fetch/import time (TODO.md §5), so the skill's job is the leftovers — a degraded
+  pull small enough to pass the thresholds, and deciding whether a city failing on
+  the guard every day is damage or a real source change that needs a config edit.
 - [ ] **Repair.** Generalize `tools/repair_bad_snapshots.py` from a one-shot script into
   an on-demand tool: drop the bad snapshot, rebuild the store's SCD-2 history, regenerate.
 - [ ] **Run-log triage.** Read `logs/runs.csv` and the daily log; separate genuine

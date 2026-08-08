@@ -161,20 +161,41 @@ run fired mid-migration on 2026-08-08, imported against un-migrated stores with 
 new hashing rules, and had to be killed and rolled back from a DB backup before it
 committed.
 
-### Open: stop recording corrupt pulls
+### Done 2026-08-08: stop recording corrupt pulls
 
 `tools/repair_bad_snapshots.py` deleted three snapshots taken from degraded
-upstream responses (kitchener + huron 2026-07-28, muskoka 2026-06-28). The
-fetcher can still record their successors:
+upstream responses (kitchener + huron 2026-07-28, muskoka 2026-06-28). All three
+guards against a repeat are now in:
 
-- [ ] address-vault `fetch/arcgis.py`: a mid-stream empty page ends the paging
-  loop, so a transient blank page is written as a complete layer. Tell: a feature
-  count that is an exact multiple of the 2000-row page size. Probe
-  `returnCountOnly=true` first and refuse a pull that falls short.
-- [ ] Reject a pull where a mapped field that was ~100% populated returns ~0%
-  populated (muskoka 2026-06-28, york 2026-07-31).
-- [ ] `EDIT_METADATA_FIELDS` has `last_edited_user`/`created_user` but not
-  `lasteditor` — renfrew's 846-row editor wipe counted as a modification.
+- [x] address-vault `fetch/arcgis.py`: a mid-stream empty page ended the paging
+  loop, so a transient blank page was written as a complete layer. Now probes
+  `returnCountOnly=true` alongside the layer metadata (same retry budget) and
+  raises if the pull lands more than 1% below that count. Only the short side is
+  checked — rows added while we page are normal. A layer that refuses the count
+  query is pulled unchecked rather than failed.
+- [x] Reject a pull where a mapped field that was ~100% populated returns ~0%
+  populated (muskoka 2026-06-28, york 2026-07-31). In `db.import_snapshot`, ahead
+  of any write, alongside a row-count floor.
+- [x] `EDIT_METADATA_FIELDS` has `last_edited_user`/`created_user` but not
+  `lasteditor` — renfrew's 846-row editor wipe counted as a modification. Added;
+  no `backfill_props_hash.py` run was needed, because the source had already
+  wiped the values, so no current row hashes it. Regenerating renfrew's reports
+  dropped the phantom event (`compute_diff` discards a modification whose only
+  changed field is filtered).
+
+Thresholds were measured, not guessed, over the whole history: across 620
+consecutive snapshot pairs the largest genuine row-count drop is 0.63% (sdg
+2026-08-01), and across 2,288 field-pairs the largest genuine coverage loss is a
+relative 1.5% (milton unit 2026-06-18). The degraded pulls lost 23–48% of their
+rows or all of a field at once, so the guards sit an order of magnitude clear of
+real movement. Rerun that measurement before loosening either constant.
+
+Known gap, accepted: the tracker's 5% row floor cannot see a small truncation
+(replayed against real renfrew data, a 2.6% short pull imports cleanly). The
+vault's count probe is what catches those, so the gap is real only for static
+sources, which report no count. There is deliberately no per-run override — a
+source that genuinely shrinks past a threshold should stop the city and get a
+human's attention, not a flag.
 
 ## Appendix: field coverage (latest snapshot, % non-null)
 

@@ -31,7 +31,8 @@ EDIT_METADATA_FIELDS = frozenset({
     "created_date", "create_date", "createdate", "created_user",
     "edit_date", "edited_date", "editdate", "dateedit", "dateupdate",
     "update_date", "updated", "lastupdate", "lasteditdate",
-    "last_edited_date", "last_edited_user", "modified_date", "moddate", "adddate",
+    "last_edited_date", "last_edited_user", "lasteditor",
+    "modified_date", "moddate", "adddate",
 })
 
 _CANONICAL = ("number", "street", "unit", "full")

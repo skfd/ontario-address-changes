@@ -15,6 +15,29 @@ from src import normalize
 _STAGING_COLS = ["identity_key", "number", "street", "unit", "full",
                  "longitude", "latitude", "props", "payload_hash"]
 
+# Degraded-pull thresholds. A snapshot that trips one is refused outright rather
+# than recorded (see _check_sanity): a bad snapshot cannot be un-published from
+# the report history without rebuilding the store by hand, and every one we have
+# seen was a transport failure that the next day's pull fixed by itself.
+#
+# Both numbers are set an order of magnitude clear of the worst real movement in
+# the history we have: over 620 consecutive snapshot pairs the largest genuine
+# row-count drop is 0.63% (sdg 2026-08-01), and over 2,288 field-pairs the
+# largest genuine coverage loss is a relative 1.5% (milton unit 2026-06-18).
+# By comparison the degraded pulls lost 23-48% of their rows (kitchener, huron
+# 2026-07-28) or all of a field at once (muskoka 2026-06-28, york 2026-07-31).
+# A source that really does shrink or drop a column that far needs a human to
+# look and then relax the constant, which is the intended cost.
+#
+# The row check is deliberately the coarser half of a pair: address-vault's
+# arcgis fetcher compares each pull against the layer's own reported count and
+# refuses anything more than 1% short, which catches a truncation this floor is
+# too loose to see. What is left here is the backstop for the sources that
+# report no count (static files) and for cliffs of any origin.
+_MAX_ROW_DROP = 0.05        # of the previous snapshot's row count
+_MAX_COVERAGE_DROP = 0.5    # of a field's previous populated share
+_MIN_GUARDED_ROWS = 100     # fields sparser than this are too noisy to judge
+
 
 def _connect(ds):
     os.makedirs(ds.data_dir, exist_ok=True)
@@ -93,6 +116,45 @@ def _content_hash(records):
     return h.hexdigest()
 
 
+def _populated(conn, snapshot_id, fields):
+    """How many rows of a snapshot carry a value for each canonical field."""
+    sel = ", ".join(f'SUM("{f}" IS NOT NULL AND "{f}" <> \'\')' for f in fields)
+    row = conn.execute(
+        f"SELECT {sel} FROM addresses "
+        f"WHERE min_snapshot_id <= ? AND max_snapshot_id >= ?",
+        (snapshot_id, snapshot_id)).fetchone()
+    return {f: row[i] or 0 for i, f in enumerate(fields)}
+
+
+def _check_sanity(conn, ds, records, prev):
+    """Raise if this snapshot looks like a degraded pull rather than real change.
+
+    Two signatures, both seen in production: the layer came back short (a paging
+    loop that ended on a transient blank page), and the layer came back with a
+    mapped field stripped to nulls. Only losses are checked -- a source gaining
+    rows or filling in a column is normal growth.
+    """
+    lost = (prev["row_count"] - len(records)) / prev["row_count"]
+    if lost > _MAX_ROW_DROP:
+        raise ValueError(
+            f"{len(records):,} rows is {lost:.1%} below snapshot {prev['id']} "
+            f"({prev['row_count']:,}) — refusing a likely degraded pull")
+
+    fields = [f for f in normalize._CANONICAL if ds.fields.get(f)]
+    if not fields:
+        return
+    before = _populated(conn, prev["id"], fields)
+    for f in fields:
+        was = before[f]
+        if was < _MIN_GUARDED_ROWS:
+            continue
+        now = sum(1 for r in records if r.get(f))
+        if now < was * (1 - _MAX_COVERAGE_DROP):
+            raise ValueError(
+                f"'{f}' ({ds.fields[f]}) populated on {now:,} rows, was {was:,} "
+                f"in snapshot {prev['id']} — refusing a likely degraded pull")
+
+
 def already_imported(ds, filepath):
     """True when a snapshot with this filename is already recorded."""
     conn = init_db(ds)
@@ -131,6 +193,15 @@ def import_snapshot(ds, filepath, features, headers=None):
         conn.commit()
         conn.close()
         return
+
+    # Only a snapshot we are about to record needs vetting; identical content
+    # (above) cannot have degraded since the snapshot it matches.
+    if prev:
+        try:
+            _check_sanity(conn, ds, records, prev)
+        except ValueError:
+            conn.close()
+            raise
 
     cur = conn.execute(
         "INSERT INTO snapshots (downloaded, row_count, filename, content_hash, "
