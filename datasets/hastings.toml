@@ -8,6 +8,33 @@ format = "geojson"
 license_name = "Open Government Licence - The Corporation of the County of Hastings"
 osm_compatible = "yellow-ogl"
 
+# Source props whose changes are noise, established by tallying every field-level change
+# across the snapshot history (159 of the 166 modified rows were one field, RnoTXT2).
+ignore_fields = [
+  # Duplicates of the point geometry, already tracked as coordinates. The only 4 rows
+  # they ever moved on had unchanged rounded coordinates: jitter below the 5 dp
+  # (~1.1 m) the tracker rounds to.
+  "LAT", "LONG", "X", "Y",
+  # Derived from the mapped fields: ADDRESS_NU = House_No + House_Suf,
+  # STREET_NAM = Rd_Name + Rd_Suf + Rd_Dir (matches on 100% of rows), UNIT_NUM = Unit.
+  # UNIT_TYPE (APT / UNIT) is NOT derived and stays compared.
+  "ADDRESS_NU", "STREET_NAM", "UNIT_NUM",
+  # Sequential ESRI id -- its alias is literally "OBJECTID_1", but _VOLATILE_KEYS only
+  # covers that spelling, not this column name.
+  "OBJECTID_12",
+  # "HC911_<n>", the contiguous sequence the identity comment above already calls
+  # unstable; a county-side renumber would fake a 31k-row mass event.
+  "UNIQUE_ID",
+  # Assessment roll number (source alias "ARN"), backfilled in batches: 158 of the 159
+  # rows it touched were a UNK -> roll number fill with no address change (111 on
+  # 2026-07-29, 47 on 2026-07-30).
+  "RnoTXT2",
+]
+
+# Ignored for change detection (above) but still written to props: the assessment roll
+# number is the only link from an address to the tax roll.
+keep_fields = ["RnoTXT2"]
+
 [identity]
 # Region-wide (Hastings munis in MUNICIPALI). UNIQUE_ID is "HC911_<n>", a contiguous reassigned
 # sequence (not stable), so synthesize.
