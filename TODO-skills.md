@@ -27,9 +27,36 @@ Remaining work on it:
 - [ ] Work `TODO.md` §1 with it: waterloo's unparsed `CIVIC_ADDR`, lennox-addington's
   `ADD_LABEL`, the five cities with no full-address field, the unit-field verification
   pass starting with toronto. The skill exists; the decisions are still open.
-- [ ] Sweep all 42 cities for the echo bug the Guelph audit exposed — a humanized
-  category stuck at 0 because duplicate coordinate or derived fields ride along with
-  every change. Guelph's Location Adjustments had never fired in three months.
+- [ ] Sweep the cities carrying unignored coordinate duplicates. A screen over all 42
+  (regex on prop names in the latest snapshot vs `ignore_fields`) found 8; none had ever
+  recorded a Location Adjustment. Three of them — elgin, peel-region, waterloo — have
+  only a baseline report, so their 0 is expected: flag the config, don't claim a bug.
+
+  - [x] **guelph** (2026-08-08) — masking pattern: real coordinate moves demoted to
+    generic updates because `LAT/LONG/UTM_X/UTM_Y` rode along. 520 moves on one day
+    alone. Location Adjustments fires on 7 of 24 reports now.
+  - [x] **hastings** (2026-08-08) — phantom pattern: the duplicates moved on 4 rows
+    whose *rounded* coordinates never changed (source jitter below 5 dp), so they
+    manufactured updates rather than demoting real ones. Location Adjustments stays 0
+    and that is correct. The real find there was `RnoTXT2` (alias "ARN", the assessment
+    roll number) backfilled from UNK: 158 of 159 solo changes.
+  - [ ] quinte-west (12 reports) — `lat, long`
+  - [ ] burlington (10 reports) — `LATITUDE, LONGITUDE`
+  - [ ] kitchener (5 reports) — `X_COORD, Y_COORD`
+  - [ ] renfrew (4 reports) — `Latitude, Longitude`
+  - [ ] elgin / peel-region / waterloo — baseline only; revisit once each has a diff.
+
+  Expect both patterns. Neither is decidable from the field list alone: the churn tally
+  (`audit.py --tags`) is what separates a duplicate that masks real movement from one
+  that invents it, and in both cities so far the *larger* noise source turned out to be
+  something else the audit surfaced on the way past.
+
+- [ ] Consider a global fix for ESRI id spellings `_VOLATILE_KEYS` misses. Hastings
+  publishes `OBJECTID_12` (its alias is literally "OBJECTID_1"), which was being
+  compared until 2026-08-08 and is now ignored per-city. A pattern match
+  (`^objectid(_\d+)?$`, `^fid(_\d+)?$`) in `normalize.py` would cover every city at
+  once — but it changes hashing for all 42 stores, so it needs the
+  `tools/backfill_props_hash.py` treatment, not a casual edit.
 - [ ] `audit.py --identity` reports flap history-wide, so damage predating a config fix
   still shows (muskoka: 16.75%). Add a per-snapshot breakdown, or teach the reference to
   always cross-check the per-diff summary for when the spikes stopped.

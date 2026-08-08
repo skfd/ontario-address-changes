@@ -1,6 +1,6 @@
 # Operator TODO — ontario-address-changes
 
-Last updated: 2026-06-11. Tasks for the human operator. Field-coverage numbers come
+Last updated: 2026-08-08. Tasks for the human operator. Field-coverage numbers come
 from an audit of all 42 tracked cities (latest snapshot in each city DB).
 
 ## 1. Complete field selection for tracked cities
@@ -16,6 +16,14 @@ These cities are imported and tracking, but their field maps need a human decisi
   is worth it.
 - [ ] **frontenac** — the source's `UnitNumber` column is 100% blank (22k rows, zero
   real values). Decide: unselect it, or keep it in case the county starts filling it.
+- [ ] **hastings** — `number` maps to `House_No`, which drops the house suffix that
+  `full` (`Full_Add`) keeps: "152 JAMIESON LN" as the number vs "152B JAMIESON LN" as
+  the full address, on the 2,721 rows with a `House_Suf`. The source's `ADDRESS_NU`
+  carries the combined form. Decide whether to remap `number` to `ADDRESS_NU` — but
+  note the cost: hastings synthesizes identity from `["number", "street", "unit"]`, so
+  remapping re-keys all 31k addresses and cannot be applied retroactively (one report
+  showing the whole city retired and re-added). Found 2026-08-08 while ignoring
+  `ADDRESS_NU` as a duplicate; it is a duplicate *of the wrong column*.
 - [ ] No full-address field selected — reports fall back to "number street" (works,
   but omits units). Check each source layer for a full-address column; select it if
   one exists, otherwise note "source has none" in the TOML comment:
