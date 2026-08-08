@@ -91,7 +91,7 @@ def _update_serial(datasets, args):
             done.append(ds)
         except Exception as e:
             print(f"  ERROR ({ds.slug}): {e}")
-            failed.append(ds.slug)
+            failed.append(ds)
     return done, failed
 
 
@@ -130,9 +130,9 @@ def _update_parallel(datasets, args):
             else:
                 if proc.stderr:
                     print(proc.stderr, end="")
-                failed.append(ds.slug)
+                failed.append(ds)
     done.sort(key=lambda ds: ds.slug)
-    failed.sort()
+    failed.sort(key=lambda ds: ds.slug)
     return done, failed
 
 
@@ -143,11 +143,17 @@ def cmd_update(args):
         done, failed = _update_parallel(datasets, args)
     else:
         done, failed = _update_serial(datasets, args)
-    if done and not args.no_report:
+    # A city refused by the quality guards is rendered too, even though it
+    # failed: the whole point of recording the refusal is that the site says so.
+    # (The parallel path only sees an exit code, so the standing refusal is read
+    # back from the city's own store rather than passed up from the worker.)
+    from src import db
+    blocked = [ds for ds in failed if db.active_block(ds)]
+    if (done or blocked) and not args.no_report:
         from src import report
-        report.generate_all(done)
+        report.generate_all(done + blocked)
     if failed:
-        sys.exit(f"update failed for: {', '.join(failed)}")
+        sys.exit(f"update failed for: {', '.join(ds.slug for ds in failed)}")
 
 
 def main():

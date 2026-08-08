@@ -55,11 +55,14 @@ def _rejects(ds, features, day, match):
     before = _state(ds)
     try:
         db.import_snapshot(ds, f"{ds.slug}-{day}.geojson", features)
-    except ValueError as e:
+    except db.DegradedPull as e:
         assert match in str(e), f"unexpected reason: {e}"
     else:
         raise AssertionError(f"{ds.slug}: degraded pull was imported")
     assert _state(ds) == before, "a refused pull must leave the store untouched"
+    # ...but the refusal itself is recorded, or the city would silently stall
+    block = db.active_block(ds)
+    assert block and match in block["reason"], block
 
 
 def test_a_short_pull_is_refused():
@@ -101,9 +104,38 @@ def test_a_sparse_field_emptying_is_not_treated_as_damage():
     shutil.rmtree(ds.data_dir)
 
 
+def test_a_recovered_source_clears_its_own_block():
+    # The refusal has to stop asking for attention on its own, or every transient
+    # bad day would need a human to dismiss it.
+    base = [_feat(i) for i in range(200)]
+    ds = _fresh("_test_recover", base)
+    _rejects(ds, base[:100], "2026-01-02", "below snapshot 1")
+    _rejects(ds, base[:100], "2026-01-03", "below snapshot 1")
+    assert db.active_block(ds)["attempts"] == 2, "each refusal counts"
+    assert db.active_block(ds)["since"] == db.active_block(ds)["detected"][:10]
+
+    db.import_snapshot(ds, "_test_recover-2026-01-04.geojson",
+                       [_feat(i) for i in range(201)])
+    assert db.active_block(ds) is None, "a good pull clears the block"
+    shutil.rmtree(ds.data_dir)
+
+
+def test_an_unchanged_republish_also_clears_a_block():
+    # The recovery pull is often byte-identical to the last good one, which takes
+    # the content-hash skip path and never reaches the guards.
+    base = [_feat(i) for i in range(200)]
+    ds = _fresh("_test_recover_skip", base)
+    _rejects(ds, base[:100], "2026-01-02", "below snapshot 1")
+    db.import_snapshot(ds, "_test_recover_skip-2026-01-03.geojson", list(base))
+    assert db.active_block(ds) is None, "an unchanged republish is still a good pull"
+    shutil.rmtree(ds.data_dir)
+
+
 if __name__ == "__main__":
     test_a_short_pull_is_refused()
     test_a_stripped_field_is_refused()
     test_ordinary_churn_still_imports()
     test_a_sparse_field_emptying_is_not_treated_as_damage()
+    test_a_recovered_source_clears_its_own_block()
+    test_an_unchanged_republish_also_clears_a_block()
     print("\nALL ASSERTIONS PASSED")

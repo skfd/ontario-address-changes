@@ -190,6 +190,14 @@ relative 1.5% (milton unit 2026-06-18). The degraded pulls lost 23–48% of thei
 rows or all of a field at once, so the guards sit an order of magnitude clear of
 real movement. Rerun that measurement before loosening either constant.
 
+A refusal is visible on the site, not just in the logs. `db.import_snapshot`
+records it in the city's new `blocks` table and `run.py` renders a refused city
+even though it failed, so the landing row gets a red "needs a look" badge with
+the reason and the city page gets a banner. A pull that passes clears it by
+itself, including an unchanged republish that takes the content-hash skip path.
+This is the one state deliberately styled apart from an ordinary failure: a
+fetch error fixes itself tomorrow, a refusal is waiting on you.
+
 Known gap, accepted: the tracker's 5% row floor cannot see a small truncation
 (replayed against real renfrew data, a 2.6% short pull imports cleanly). The
 vault's count probe is what catches those, so the gap is real only for static

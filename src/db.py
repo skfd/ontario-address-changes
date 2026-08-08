@@ -76,6 +76,17 @@ def init_db(ds):
             PRIMARY KEY (identity_key, min_snapshot_id)
         );
 
+        -- Pulls refused by _check_sanity. A refusal writes no snapshot, so
+        -- without this row the day leaves no trace anywhere and the city just
+        -- quietly stops updating; the report reads it to say so out loud.
+        CREATE TABLE IF NOT EXISTS blocks (
+            id        INTEGER PRIMARY KEY AUTOINCREMENT,
+            detected  TEXT NOT NULL,
+            filename  TEXT NOT NULL,
+            reason    TEXT NOT NULL,
+            resolved  INTEGER NOT NULL DEFAULT 0
+        );
+
         CREATE INDEX IF NOT EXISTS idx_addr_active ON addresses(max_snapshot_id);
         CREATE INDEX IF NOT EXISTS idx_addr_key_max ON addresses(identity_key, max_snapshot_id);
     """)
@@ -116,6 +127,40 @@ def _content_hash(records):
     return h.hexdigest()
 
 
+class DegradedPull(ValueError):
+    """A pull refused by the quality guards, as opposed to one that failed to
+    arrive. The distinction is the whole point: a fetch error is transient and
+    fixes itself tomorrow, while this one is a standing invitation to come and
+    look at the source."""
+
+
+def active_block(ds):
+    """The unresolved refusal for a dataset, or None. `attempts` counts how many
+    days running the guard has turned this source away."""
+    if not os.path.exists(ds.db_path):
+        return None
+    conn = init_db(ds)
+    row = conn.execute(
+        "SELECT detected, filename, reason FROM blocks WHERE resolved = 0 "
+        "ORDER BY id DESC LIMIT 1").fetchone()
+    first = attempts = None
+    if row:
+        first, attempts = conn.execute(
+            "SELECT MIN(detected), COUNT(*) FROM blocks WHERE resolved = 0").fetchone()
+    conn.close()
+    if not row:
+        return None
+    return {"since": first[:10], "detected": row["detected"], "attempts": attempts,
+            "filename": row["filename"], "reason": row["reason"]}
+
+
+def _resolve_blocks(conn):
+    """A pull that passed the guards means the source recovered on its own, so
+    any standing refusal stops asking for attention. The rows are kept, not
+    deleted: how long a source was refused is worth being able to look up."""
+    conn.execute("UPDATE blocks SET resolved = 1 WHERE resolved = 0")
+
+
 def _populated(conn, snapshot_id, fields):
     """How many rows of a snapshot carry a value for each canonical field."""
     sel = ", ".join(f'SUM("{f}" IS NOT NULL AND "{f}" <> \'\')' for f in fields)
@@ -136,7 +181,7 @@ def _check_sanity(conn, ds, records, prev):
     """
     lost = (prev["row_count"] - len(records)) / prev["row_count"]
     if lost > _MAX_ROW_DROP:
-        raise ValueError(
+        raise DegradedPull(
             f"{len(records):,} rows is {lost:.1%} below snapshot {prev['id']} "
             f"({prev['row_count']:,}) — refusing a likely degraded pull")
 
@@ -150,7 +195,7 @@ def _check_sanity(conn, ds, records, prev):
             continue
         now = sum(1 for r in records if r.get(f))
         if now < was * (1 - _MAX_COVERAGE_DROP):
-            raise ValueError(
+            raise DegradedPull(
                 f"'{f}' ({ds.fields[f]}) populated on {now:,} rows, was {was:,} "
                 f"in snapshot {prev['id']} — refusing a likely degraded pull")
 
@@ -190,6 +235,7 @@ def import_snapshot(ds, filepath, features, headers=None):
             "INSERT INTO snapshots (downloaded, row_count, filename, content_hash, skipped) "
             "VALUES (?, ?, ?, ?, 1)",
             (datetime.now().isoformat(), row_count, filename, content_hash))
+        _resolve_blocks(conn)
         conn.commit()
         conn.close()
         return
@@ -199,9 +245,14 @@ def import_snapshot(ds, filepath, features, headers=None):
     if prev:
         try:
             _check_sanity(conn, ds, records, prev)
-        except ValueError:
+        except DegradedPull as e:
+            conn.execute(
+                "INSERT INTO blocks (detected, filename, reason) VALUES (?, ?, ?)",
+                (datetime.now().isoformat(), filename, str(e)))
+            conn.commit()
             conn.close()
             raise
+    _resolve_blocks(conn)
 
     cur = conn.execute(
         "INSERT INTO snapshots (downloaded, row_count, filename, content_hash, "

@@ -40,6 +40,15 @@
     .city-name { font-weight:600; font-size:15px; }
     .city-sub { font-size:12px; color:var(--text-dim); margin-top:2px; }
     .city-highlight { color:var(--accent); }
+    /* A city whose pull was refused by the quality guards. The stats stay --
+       the data is sound, it just stopped moving -- but the row has to be
+       findable while scanning 42 of them. */
+    .city-link.is-blocked { border-color:var(--red); border-left:4px solid var(--red);
+      padding-left:13px; }
+    .city-blocked { color:var(--red); }
+    .badge-blocked { display:inline-block; font-size:10px; font-weight:600; padding:1px 7px;
+      border-radius:999px; border:1px solid var(--red); color:var(--red);
+      text-transform:uppercase; letter-spacing:0.04em; margin-left:8px; vertical-align:1px; }
     .city-right { text-align:right; white-space:nowrap; }
     .city-count { font-weight:600; font-variant-numeric:tabular-nums; }
     .city-delta { font-size:12px; margin-top:2px; }
