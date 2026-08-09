@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>City of Brampton Address Changes — Sunday, Aug 09, 2026</title>
+  <style>
+    :root {
+      --bg: #fafafa; --surface: #ffffff; --surface2: #f5f5f5; --surface3: #ebebeb;
+      --border: #e0e0e0; --border-strong: #d1d1d1; --text: #242424;
+      --text-secondary: #424242; --text-dim: #616161; --accent: #0078d4;
+      --accent-hover: #106ebe; --accent-bg: #eff6fc; --green: #107c10;
+      --green-bg: #f1faf1; --green-tint: #9fd89f; --red: #c50f1f; --red-bg: #fdf3f4;
+      --red-tint: #eeacb2; --yellow: #eaa300; --yellow-bg: #fefbf4; --yellow-tint: #f9e2ae;
+      --purple: #881798; --purple-bg: #f9f3fb; --teal: #038387; --teal-bg: #f0fafa;
+      --shadow-4: 0 2px 4px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --shadow-8: 0 4px 8px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --card-bg: #ffffff; --card-hover: #f5f5f5; color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1f1f1f; --surface: #292929; --surface2: #333333; --surface3: #3d3d3d;
+        --border: #525252; --border-strong: #666666; --text: #ffffff;
+        --text-secondary: #d6d6d6; --text-dim: #adadad; --accent: #2899f5;
+        --accent-hover: #3aa0f3; --accent-bg: #002848; --green: #54b054;
+        --green-bg: #052505; --green-tint: #107c10; --red: #dc626d; --red-bg: #3b0509;
+        --red-tint: #c50f1f; --yellow: #f2c661; --yellow-bg: #463100; --yellow-tint: #eaa300;
+        --purple: #d29ddb; --purple-bg: #3a1040; --teal: #58c0c4; --teal-bg: #013638;
+        --shadow-4: 0 2px 4px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --shadow-8: 0 4px 8px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --card-bg: #333333; --card-hover: #3d3d3d; color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI Variable','Segoe UI',system-ui,-apple-system,sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.5; padding: 2rem;
+      max-width: 1100px; margin: 0 auto; font-size: 14px; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; color: var(--accent-hover); }
+    .back-link { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 12px;
+      color: var(--text-dim); margin-bottom: 1.5rem; transition: color 0.1s; }
+    .back-link:hover { color: var(--accent); text-decoration: none; }
+    h1 { font-size: 24px; font-weight: 600; margin-bottom: 4px; }
+    .subtitle { color: var(--text-secondary); font-size: 14px; margin-bottom: 12px; }
+    .explainer { color: var(--text-secondary); font-size: 13px; line-height: 1.5;
+      margin-bottom: 24px; padding: 12px 16px; background: var(--surface);
+      border-radius: 8px; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px; margin-bottom: 24px; }
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px;
+      padding: 16px; box-shadow: var(--shadow-4); transition: box-shadow 0.1s; }
+    .card:hover { box-shadow: var(--shadow-8); }
+    .card .label { font-size: 12px; color: var(--text-dim); font-weight: 400; }
+    .card .value { font-size: 28px; font-weight: 600; margin-top: 4px; }
+    .card .value.green { color: var(--green); } .card .value.red { color: var(--red); }
+    .card .value.yellow { color: var(--yellow); } .card .value.accent { color: var(--accent); }
+    .card .value.purple { color: var(--purple); }
+    .card .value.teal { color: var(--teal); }
+    .sparkline { display: block; margin-top: 6px; overflow: visible; opacity: 0.9; }
+    .sparkline-label { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+    .section { margin-bottom: 24px; }
+    .section h2 { font-size: 16px; font-weight: 600; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px; }
+    .badge { font-size: 12px; padding: 2px 8px; border-radius: 999px; font-weight: 600; }
+    .badge-green { background: var(--green-bg); color: var(--green); }
+    .badge-red { background: var(--red-bg); color: var(--red); }
+    .badge-yellow { background: var(--yellow-bg); color: var(--yellow); }
+    .badge-accent { background: var(--accent-bg); color: var(--accent); }
+    .badge-purple { background: var(--purple-bg); color: var(--purple); }
+    .badge-teal { background: var(--teal-bg); color: var(--teal); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface);
+      border-radius: 8px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    thead { background: var(--surface2); }
+    th { text-align: left; padding: 8px 12px; font-weight: 600; color: var(--text-dim);
+      font-size: 12px; cursor: pointer; user-select: none; border-bottom: 1px solid var(--border); }
+    th:hover { color: var(--accent); }
+    td { padding: 8px 12px; border-top: 1px solid var(--border); }
+    tr:hover td { background: var(--surface2); }
+    .old-val { color: var(--red); text-decoration: line-through; }
+    .new-val { color: var(--green); }
+    .arrow-val { color: var(--text-dim); text-align: center; white-space: nowrap; }
+    .map-link { display: inline-flex; align-items: center; margin-left: 0.4em;
+      color: var(--accent); vertical-align: middle; white-space: nowrap; font-size: 12px; }
+    .map-link:hover { color: var(--accent-hover); }
+    .map-link svg { width: 14px; height: 14px; }
+    .change-field { color: var(--yellow); font-weight: 600; }
+    .bar-chart { margin-top: 8px; }
+    .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 12px; }
+    .bar-label { width: 180px; text-align: right; color: var(--text-secondary); flex-shrink: 0;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .bar-track { flex: 1; height: 8px; background: var(--surface2); border-radius: 4px;
+      overflow: hidden; position: relative; }
+    .bar-fill { height: 100%; border-radius: 4px; transition: width 0.15s ease; }
+    .bar-fill.green { background: var(--green); } .bar-fill.red { background: var(--red); }
+    .bar-count { width: 40px; font-size: 12px; color: var(--text-dim); }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+    .empty { color: var(--text-dim); font-style: italic; padding: 16px; }
+    .truncated { color: var(--text-dim); font-size: 12px; margin-top: 8px; }
+    .collapsible-toggle { background: transparent; border: 1px solid var(--border);
+      color: var(--accent); padding: 5px 12px; border-radius: 4px; cursor: pointer;
+      font-size: 12px; font-family: inherit; margin-bottom: 12px; transition: background 0.1s; }
+    .collapsible-toggle:hover { background: var(--surface2); }
+    details.rename-group { background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; margin-bottom: 8px; box-shadow: var(--shadow-4); }
+    details.rename-group summary { padding: 10px 14px; cursor: pointer; font-size: 13px; }
+    details.rename-group[open] summary { border-bottom: 1px solid var(--border); }
+    details.rename-group table { border: none; box-shadow: none; border-radius: 0; }
+    details.rename-group .truncated { padding: 0 14px 10px; margin-top: 0; }
+    .rename-count { color: var(--text-dim); font-size: 12px; margin-left: 6px; }
+    .no-changes-banner { background: var(--green-bg); border: 1px solid var(--green-tint);
+      color: var(--green); padding: 16px; border-radius: 8px; margin-bottom: 24px;
+      text-align: center; font-weight: 600; font-size: 14px; }
+    .baseline-banner { background: var(--accent-bg); border: 1px solid var(--accent);
+      color: var(--accent); padding: 16px; border-radius: 8px; margin-bottom: 24px; font-size: 13px; }
+    .generated-at { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-dim); }
+    .history { font-size: 12.5px; color: var(--text-secondary); white-space: nowrap; }
+    .history .a { color: var(--green); font-weight: 500; }
+    .history .r { color: var(--red); font-weight: 500; }
+    .history .dot { color: var(--text-dim); margin: 0 4px; }
+    .history-none { color: var(--text-dim); font-style: italic; font-size: 12.5px; }
+    .info-wrap { position: relative; display: inline-flex; vertical-align: middle; }
+    .info-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+      height: 18px; padding: 0 8px 0 7px; border-radius: 999px; border: none;
+      color: #fff; background: var(--accent); cursor: help; font-size: 11px; font-weight: 600;
+      font-style: normal; font-family: inherit; line-height: 1; white-space: nowrap; }
+    .info-btn .glyph { font-style: italic; font-weight: 700;
+      font-family: Georgia, 'Times New Roman', serif; }
+    .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn,
+    .info-wrap:focus .info-btn { background: var(--accent-hover); }
+    .info-pop { display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 20;
+      width: 320px; max-width: 80vw; padding: 12px 14px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-8);
+      font-size: 12.5px; font-weight: 400; color: var(--text-secondary); line-height: 1.5; }
+    .info-wrap:hover .info-pop, .info-wrap:focus-within .info-pop,
+    .info-wrap:focus .info-pop { display: block; }
+    .info-pop strong { display: block; color: var(--text); font-size: 12px; margin-bottom: 4px; }
+    .info-pop ul { list-style: none; margin: 0 0 10px; padding: 0; }
+    .info-pop li { padding: 1px 0 1px 14px; position: relative; }
+    .info-pop li::before { content: "·"; position: absolute; left: 4px; color: var(--text-dim); }
+    .info-pop .note { color: var(--text-dim); font-size: 11.5px; margin: 0 0 10px; }
+    .info-pop .muted { color: var(--text-dim); font-style: italic; }
+  </style>
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+
+  <a class="back-link" href="index.html">← Back to City of Brampton reports</a>
+
+  <h1>City of Brampton — Address Changes</h1>
+  <p class="subtitle">
+    Changes between  and Sunday, Aug 09, 2026
+    · 249,084 total addresses
+  </p>
+
+  
+
+  <div class="cards">
+    <div class="card"><div class="label">Total Addresses</div>
+      <div class="value accent">249,084</div></div>
+    <div class="card"><div class="label">New Addresses</div>
+      <div class="value green">+0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#107c10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,15.8 55.0,15.0 72.7,12.3 90.3,2.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#107c10"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Retired Addresses</div>
+      <div class="value red">−0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#c50f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,2.0 72.7,2.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#c50f1f"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Updated Addresses <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (CIVIC_NUMBER)</li><li>Street name (STREET_NAME)</li><li>Unit (UNIT_NO)</li><li>Full address (FULL_ADDRESS)</li><li>Coordinates (latitude, longitude)</li><li>ADDRESS_ID</li><li>ADDRESS_TYPE</li><li>BLOCK_PLAN</li><li>CITY</li><li>CITY_FILE</li><li>CITY_GRID</li><li>CONDO_PLAN_NUMBER</li><li>CON_NUM</li><li>C_OF_A</li><li>DRAFT_PLAN_NUMBER</li><li>GIS_ID</li><li>HERITAGE</li><li>LOT_NUM</li><li>OCCUPANCY_DATE</li><li>PERMIT_ISSUEDATE</li><li>PERMIT_NO</li><li>PERMIT_TYPE</li><li>POSTAL_CODE</li><li>PROP_CODE_DESC</li><li>PROVINCE</li><li>REG_PLAN_ASSUMP_DATE</li><li>REG_PLAN_NUMBER</li><li>SEC_PLAN_AREA</li><li>SITE_PLAN_NUMBER</li><li>STREET_DIRECTION</li><li>STREET_TYPE</li><li>SUB_TYPE</li><li>TOWNSHIP</li><li>WARD</li><li>WORK_TYPE</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span></div>
+      <div class="value yellow">143</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,17.0 19.7,17.9 37.3,15.9 55.0,16.1 72.7,15.8 90.3,15.4 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Renumbered</div>
+      <div class="value accent">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#0078d4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#0078d4"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Street Renames</div>
+      <div class="value purple">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#9141ac" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#9141ac"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    
+    <div class="card"><div class="label">Boundary Changes</div>
+      <div class="value teal">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#038387" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#038387"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    <div class="card"><div class="label">Location Adjustments</div>
+      <div class="value" style="color: var(--text-dim)">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#808080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,13.2 37.3,18.0 55.0,2.0 72.7,18.0 90.3,15.6 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#808080"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+  </div>
+
+  
+  <div class="section">
+    <h2>Change Breakdown</h2>
+    <div class="stats-grid">
+      
+      
+      
+      <div class="card"><div class="label">Most Frequently Updated Fields</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">C_OF_A</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">82</span></div>
+        <div class="bar-row"><span class="bar-label">DRAFT_PLAN_NUMBER</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:35.0%"></div></div>
+          <span class="bar-count">29</span></div>
+        <div class="bar-row"><span class="bar-label">OCCUPANCY_DATE</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:20.0%"></div></div>
+          <span class="bar-count">16</span></div>
+        <div class="bar-row"><span class="bar-label">Address Number</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:10.0%"></div></div>
+          <span class="bar-count">8</span></div>
+        <div class="bar-row"><span class="bar-label">Unit</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:9.0%"></div></div>
+          <span class="bar-count">7</span></div>
+        <div class="bar-row"><span class="bar-label">PERMIT_ISSUEDATE</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:7.0%"></div></div>
+          <span class="bar-count">6</span></div>
+        <div class="bar-row"><span class="bar-label">PERMIT_NO</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:7.0%"></div></div>
+          <span class="bar-count">6</span></div>
+        <div class="bar-row"><span class="bar-label">PERMIT_TYPE</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:7.0%"></div></div>
+          <span class="bar-count">6</span></div>
+        <div class="bar-row"><span class="bar-label">SUB_TYPE</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:7.0%"></div></div>
+          <span class="bar-count">6</span></div>
+        <div class="bar-row"><span class="bar-label">WORK_TYPE</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:7.0%"></div></div>
+          <span class="bar-count">6</span></div>
+      </div></div>
+    </div>
+  </div>
+  
+
+  <div class="section">
+    <h2>New Addresses <span class="badge badge-green">0</span></h2>
+    <p class="empty">No new addresses.</p>
+  </div>
+
+  <div class="section">
+    <h2>Retired Addresses <span class="badge badge-red">0</span></h2>
+    <p class="empty">No addresses retired.</p>
+  </div>
+
+  <div class="section">
+    <h2>Updated Addresses <span class="badge badge-yellow">143</span>
+      <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (CIVIC_NUMBER)</li><li>Street name (STREET_NAME)</li><li>Unit (UNIT_NO)</li><li>Full address (FULL_ADDRESS)</li><li>Coordinates (latitude, longitude)</li><li>ADDRESS_ID</li><li>ADDRESS_TYPE</li><li>BLOCK_PLAN</li><li>CITY</li><li>CITY_FILE</li><li>CITY_GRID</li><li>CONDO_PLAN_NUMBER</li><li>CON_NUM</li><li>C_OF_A</li><li>DRAFT_PLAN_NUMBER</li><li>GIS_ID</li><li>HERITAGE</li><li>LOT_NUM</li><li>OCCUPANCY_DATE</li><li>PERMIT_ISSUEDATE</li><li>PERMIT_NO</li><li>PERMIT_TYPE</li><li>POSTAL_CODE</li><li>PROP_CODE_DESC</li><li>PROVINCE</li><li>REG_PLAN_ASSUMP_DATE</li><li>REG_PLAN_NUMBER</li><li>SEC_PLAN_AREA</li><li>SITE_PLAN_NUMBER</li><li>STREET_DIRECTION</li><li>STREET_TYPE</li><li>SUB_TYPE</li><li>TOWNSHIP</li><li>WARD</li><li>WORK_TYPE</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span></h2>
+    
+  <details class="rename-group">
+    <summary><span class="change-field">C_OF_A</span> updated in bulk<span class="rename-count">82 addresses</span></summary>
+    <table>
+      <thead><tr><th>Address</th><th>What Changed</th><th>Before</th><th></th><th>After</th><th>Map</th></tr></thead>
+      <tbody>
+        
+  <tr><td rowspan="1">128 ABELL DR</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">A-2025-0060</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70883&mlon=-79.76415#map=18/43.70883/-79.76415" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">2-128 ABELL DR</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">A-2025-0060</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70879&mlon=-79.76410#map=18/43.70879/-79.76410" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">60 DAIRYMAID RD</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B15-023</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">A15-163</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64907&mlon=-79.81833#map=18/43.64907/-79.81833" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">62 DAIRYMAID RD</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B15-023</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">A15-163</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64890&mlon=-79.81839#map=18/43.64890/-79.81839" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">63 DAIRYMAID RD</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B15-023</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">A15-163</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64841&mlon=-79.81784#map=18/43.64841/-79.81784" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">64 DAIRYMAID RD</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B15-023</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">A15-163</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64874&mlon=-79.81838#map=18/43.64874/-79.81838" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">65 DAIRYMAID RD</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B15-023</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">A15-163</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64828&mlon=-79.81785#map=18/43.64828/-79.81785" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">66 DAIRYMAID RD</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B15-023</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">A15-163</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64861&mlon=-79.81838#map=18/43.64861/-79.81838" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">67 DAIRYMAID RD</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B15-023</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">A15-163</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64817&mlon=-79.81784#map=18/43.64817/-79.81784" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">68 DAIRYMAID RD</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B15-023</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">A15-163</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64847&mlon=-79.81839#map=18/43.64847/-79.81839" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">69 DAIRYMAID RD</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B15-023</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">A15-163</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64807&mlon=-79.81784#map=18/43.64807/-79.81784" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">70 DAIRYMAID RD</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B15-023</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">A15-163</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64830&mlon=-79.81840#map=18/43.64830/-79.81840" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">2-70 DAIRYMAID RD</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B15-023</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">A15-163</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64832&mlon=-79.81833#map=18/43.64832/-79.81833" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">71 DAIRYMAID RD</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B15-023</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">A15-163</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64796&mlon=-79.81784#map=18/43.64796/-79.81784" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">72 DAIRYMAID RD</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B15-023</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">A15-163</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64816&mlon=-79.81839#map=18/43.64816/-79.81839" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">74 DAIRYMAID RD</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B15-023</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">A15-163</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64802&mlon=-79.81840#map=18/43.64802/-79.81840" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">76 DAIRYMAID RD</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B15-023</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">A15-163</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64788&mlon=-79.81838#map=18/43.64788/-79.81838" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">78 DAIRYMAID RD</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B15-023</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">A15-163</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64767&mlon=-79.81826#map=18/43.64767/-79.81826" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">80 DAIRYMAID RD</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B15-023</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">A15-163</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64760&mlon=-79.81808#map=18/43.64760/-79.81808" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">2-80 DAIRYMAID RD</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B15-023</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">A15-163</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64754&mlon=-79.81812#map=18/43.64754/-79.81812" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">82 DAIRYMAID RD</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B15-023</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">A15-163</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64754&mlon=-79.81792#map=18/43.64754/-79.81792" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">84 DAIRYMAID RD</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B15-023</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">A15-163</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64747&mlon=-79.81771#map=18/43.64747/-79.81771" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">86 DAIRYMAID RD</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B15-023</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">A15-163</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64742&mlon=-79.81751#map=18/43.64742/-79.81751" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">88 DAIRYMAID RD</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B15-023</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">A15-163</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64739&mlon=-79.81729#map=18/43.64739/-79.81729" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">90 DAIRYMAID RD</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B15-023</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">A15-163</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64739&mlon=-79.81703#map=18/43.64739/-79.81703" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">92 DAIRYMAID RD</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B15-023</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">A15-163</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64747&mlon=-79.81684#map=18/43.64747/-79.81684" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">2-92 DAIRYMAID RD</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B15-023</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">A15-163</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64741&mlon=-79.81678#map=18/43.64741/-79.81678" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">94 DAIRYMAID RD</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B15-023</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">A15-163</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64763&mlon=-79.81671#map=18/43.64763/-79.81671" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">2-94 DAIRYMAID RD</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B15-023</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">A15-163</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64761&mlon=-79.81665#map=18/43.64761/-79.81665" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">96 DAIRYMAID RD</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B15-023</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">A15-163</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64778&mlon=-79.81671#map=18/43.64778/-79.81671" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">2-96 DAIRYMAID RD</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B15-023</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">A15-163</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64779&mlon=-79.81661#map=18/43.64779/-79.81661" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">98 DAIRYMAID RD</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B15-023</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">A15-163</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64791&mlon=-79.81670#map=18/43.64791/-79.81670" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">100 DAIRYMAID RD</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B15-023</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">A15-163</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64806&mlon=-79.81672#map=18/43.64806/-79.81672" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">205 DELTA PARK BLVD</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">A-2020-0051</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">B-2020-0010</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74558&mlon=-79.69110#map=18/43.74558/-79.69110" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">215 DELTA PARK BLVD</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">A-2020-0051</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">B-2020-0010</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74618&mlon=-79.69145#map=18/43.74618/-79.69145" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">10-215 DELTA PARK BLVD</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">A-2020-0051</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">B-2020-0010</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74599&mlon=-79.69122#map=18/43.74599/-79.69122" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">11-215 DELTA PARK BLVD</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">A-2020-0051</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">B-2020-0010</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74594&mlon=-79.69119#map=18/43.74594/-79.69119" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">4-215 DELTA PARK BLVD</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">A-2020-0051</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">B-2020-0010</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74621&mlon=-79.69159#map=18/43.74621/-79.69159" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">5-215 DELTA PARK BLVD</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">A-2020-0051</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">B-2020-0010</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74615&mlon=-79.69149#map=18/43.74615/-79.69149" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">8-215 DELTA PARK BLVD</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">A-2020-0051</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">B-2020-0010</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74603&mlon=-79.69131#map=18/43.74603/-79.69131" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">9463 HERITAGE RD</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B15-023</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">A15-163</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64695&mlon=-79.82503#map=18/43.64695/-79.82503" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">9497 HERITAGE RD</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B15-023</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">A15-163</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64750&mlon=-79.82612#map=18/43.64750/-79.82612" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">9541 HERITAGE RD</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B15-023</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">A15-163</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64825&mlon=-79.82696#map=18/43.64825/-79.82696" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">10015 HURONTARIO ST</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B08-012</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">B08-011</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70773&mlon=-79.78562#map=18/43.70773/-79.78562" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">11 KINTYRE ST</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B08-012</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">B08-011</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70812&mlon=-79.78581#map=18/43.70812/-79.78581" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">13 KINTYRE ST</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B08-012</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">B08-011</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70807&mlon=-79.78587#map=18/43.70807/-79.78587" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">15 KINTYRE ST</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B08-012</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">B08-011</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70802&mlon=-79.78592#map=18/43.70802/-79.78592" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">17 KINTYRE ST</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B08-012</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">B08-011</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70797&mlon=-79.78598#map=18/43.70797/-79.78598" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">19 KINTYRE ST</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B08-012</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">B08-011</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70792&mlon=-79.78604#map=18/43.70792/-79.78604" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">2-19 KINTYRE ST</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B08-012</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">B08-011</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70790&mlon=-79.78599#map=18/43.70790/-79.78599" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">21 KINTYRE ST</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B08-012</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">B08-011</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70787&mlon=-79.78610#map=18/43.70787/-79.78610" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">23 KINTYRE ST</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B08-012</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">B08-011</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70782&mlon=-79.78615#map=18/43.70782/-79.78615" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">25 KINTYRE ST</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B08-012</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">B08-011</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70777&mlon=-79.78622#map=18/43.70777/-79.78622" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">27 KINTYRE ST</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B08-012</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">B08-011</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70773&mlon=-79.78627#map=18/43.70773/-79.78627" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">29 KINTYRE ST</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B08-012</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">B08-011</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70767&mlon=-79.78633#map=18/43.70767/-79.78633" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">2-29 KINTYRE ST</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B08-012</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">B08-011</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70764&mlon=-79.78629#map=18/43.70764/-79.78629" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">31 KINTYRE ST</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B08-012</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">B08-011</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70762&mlon=-79.78638#map=18/43.70762/-79.78638" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">33 KINTYRE ST</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B08-012</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">B08-011</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70757&mlon=-79.78645#map=18/43.70757/-79.78645" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">2-33 KINTYRE ST</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B08-012</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">B08-011</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70754&mlon=-79.78639#map=18/43.70754/-79.78639" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">35 KINTYRE ST</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B08-012</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">B08-011</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70753&mlon=-79.78650#map=18/43.70753/-79.78650" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">37 KINTYRE ST</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B08-012</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">B08-011</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70747&mlon=-79.78656#map=18/43.70747/-79.78656" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">39 KINTYRE ST</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B08-012</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">B08-011</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70743&mlon=-79.78661#map=18/43.70743/-79.78661" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">41 KINTYRE ST</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B08-012</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">B08-011</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70737&mlon=-79.78668#map=18/43.70737/-79.78668" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">43 KINTYRE ST</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B08-012</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">B08-011</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70733&mlon=-79.78673#map=18/43.70733/-79.78673" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">76 MAIN ST S</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">A-2024-0179</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">A-2024-0180</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68237&mlon=-79.75429#map=18/43.68237/-79.75429" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">3455 QUEEN ST E</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">A-2024-0233</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">B-2024-0012</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75176&mlon=-79.68536#map=18/43.75176/-79.68536" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">0 SUN PAC BLVD</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B10-004</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">B10-003</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75146&mlon=-79.68901#map=18/43.75146/-79.68901" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">31 SUN PAC BLVD</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">A09-036</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">B09-008</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75990&mlon=-79.69767#map=18/43.75990/-79.69767" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">10300 THE GORE RD</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">A-2022-0323</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">B-2022-0015</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.79715&mlon=-79.69833#map=18/43.79715/-79.69833" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">2-10300 THE GORE RD</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">A-2022-0323</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">B-2022-0015</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.79737&mlon=-79.69808#map=18/43.79737/-79.69808" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">15 TIGERLILY PL</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">A-2023-0297</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">A-2023-0298</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74435&mlon=-79.76607#map=18/43.74435/-79.76607" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">2-15 TIGERLILY PL</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">A-2023-0297</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">A-2023-0298</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74440&mlon=-79.76600#map=18/43.74440/-79.76600" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">6 TRACEY BLVD</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">A-2020-0051</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">B-2020-0010</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74634&mlon=-79.69089#map=18/43.74634/-79.69089" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">UNASSIGNED</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">A-2024-0233</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">B-2024-0012</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75123&mlon=-79.68458#map=18/43.75123/-79.68458" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">UNASSIGNED</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B15-023</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">A15-163</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65038&mlon=-79.81926#map=18/43.65038/-79.81926" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">UNASSIGNED</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B10-004</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">B10-003</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75063&mlon=-79.68799#map=18/43.75063/-79.68799" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">UNASSIGNED</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B10-004</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">B10-003</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75156&mlon=-79.69054#map=18/43.75156/-79.69054" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">UNASSIGNED</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B08-012</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">B08-011</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70743&mlon=-79.78545#map=18/43.70743/-79.78545" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">UNASSIGNED</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B15-023</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">A15-163</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64861&mlon=-79.81808#map=18/43.64861/-79.81808" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">UNASSIGNED</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B15-023</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">A15-163</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64714&mlon=-79.81668#map=18/43.64714/-79.81668" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">UNASSIGNED</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B15-023</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">A15-163</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64425&mlon=-79.81742#map=18/43.64425/-79.81742" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">14 WALKERCLEAVE DR</td>
+    <td class="change-field">C_OF_A</td>
+    <td class="old-val">B15-023</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">A15-163</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65011&mlon=-79.81882#map=18/43.65011/-79.81882" target="_blank" rel="noopener">View ↗</a></td></tr>
+      </tbody>
+    </table>
+    
+  </details>
+  
+    
+    <table>
+      <thead><tr><th>Address</th><th>What Changed</th><th>Before</th><th></th><th>After</th><th>Map</th></tr></thead>
+      <tbody>
+        
+  <tr><td rowspan="1">9 ALOMA CRES</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1568678400000</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70676&mlon=-79.70079#map=18/43.70676/-79.70079" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="6">53 ALOMA CRES</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1453075200000</td>
+    <td rowspan="6"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70878&mlon=-79.70281#map=18/43.70878/-79.70281" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1434499200000</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">15-122252-P01-00-CO</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Commercial</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">D: Business/Services</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">New Complete Building</td>
+    </tr>
+  <tr><td rowspan="2">51-67 ARDGLEN DR</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">67</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">51-67</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68950&mlon=-79.74782#map=18/43.68950/-79.74782" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Unit</td>
+    <td class="old-val">51</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr><td rowspan="2">5-15 ASHBY FIELD RD</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">15</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">5-15</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67270&mlon=-79.82127#map=18/43.67270/-79.82127" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Unit</td>
+    <td class="old-val">5</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr><td rowspan="4">0 BRAMALEA RD</td>
+    <td class="change-field">Street</td>
+    <td class="old-val">DAVISELM</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">BRAMALEA</td>
+    <td rowspan="4"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64819&mlon=-79.76663#map=18/43.64819/-79.76663" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">0 DAVISELM DR</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">0 BRAMALEA RD</td>
+    </tr>
+  <tr>
+    <td class="change-field">POSTAL_CODE</td>
+    <td class="old-val">L6X0Z3</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">L6R1W6</td>
+    </tr>
+  <tr>
+    <td class="change-field">STREET_TYPE</td>
+    <td class="old-val">DR</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">RD</td>
+    </tr>
+  <tr><td rowspan="5">43 BRIARCROFT RD</td>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">973123200000</td>
+    <td rowspan="5"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69545&mlon=-79.80587#map=18/43.69545/-79.80587" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">00-113255-000-00-RR</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Repeat Residential</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Single Family Detached</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">New Complete Building</td>
+    </tr>
+  <tr><td rowspan="2">5-25 CHERRYCREST DR</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">5-25</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">25</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.76425&mlon=-79.66994#map=18/43.76425/-79.66994" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Unit</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">5</td>
+    </tr>
+  <tr><td rowspan="1">7558 CREDITVIEW RD</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1785974400000</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.62791&mlon=-79.75404#map=18/43.62791/-79.75404" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="6">28 CULTURE CRES</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1600300800000</td>
+    <td rowspan="6"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68446&mlon=-79.80305#map=18/43.68446/-79.80305" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">982800000000</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">01-100901-000-00-RR</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Repeat Residential</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Single Family Detached</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">New Complete Building</td>
+    </tr>
+  <tr><td rowspan="6">98 EMERALD COAST TRAIL</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1785456000000</td>
+    <td rowspan="6"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69272&mlon=-79.86275#map=18/43.69272/-79.86275" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1521590400000</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">18-101752-000-00-RR</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Repeat Residential</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Semi Detached Dwelling</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">New Complete Building</td>
+    </tr>
+  <tr><td rowspan="6">13-15A FISHERMAN DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1475712000000</td>
+    <td rowspan="6"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71332&mlon=-79.80061#map=18/43.71332/-79.80061" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1435276800000</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">15-112598-P01-00-IS</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Institutional</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">A2: Churches</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Change of Use</td>
+    </tr>
+  <tr><td rowspan="1">132A-150 GREAT LAKES DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1785456000000</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73040&mlon=-79.76537#map=18/43.73040/-79.76537" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">8331 HERITAGE RD</td>
+    <td class="change-field">CITY_FILE</td>
+    <td class="old-val">C05W05.006</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">C05W02.008</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.62434&mlon=-79.79462#map=18/43.62434/-79.79462" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="2">2-12 NEWHAVEN MANOR</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">2-12</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">12</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72691&mlon=-79.75538#map=18/43.72691/-79.75538" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Unit</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">2</td>
+    </tr>
+  <tr><td rowspan="1">25 PENNSYLVANIA AVE</td>
+    <td class="change-field">CITY_FILE</td>
+    <td class="old-val">CH-GS-2024-0014</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64708&mlon=-79.74897#map=18/43.64708/-79.74897" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">2-25 PENNSYLVANIA AVE</td>
+    <td class="change-field">CITY_FILE</td>
+    <td class="old-val">CH-GS-2024-0014</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64711&mlon=-79.74898#map=18/43.64711/-79.74898" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">4-25 PENNSYLVANIA AVE</td>
+    <td class="change-field">CITY_FILE</td>
+    <td class="old-val">CH-GS-2024-0014</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.64716&mlon=-79.74899#map=18/43.64716/-79.74899" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="6">12 RAE AVE</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1785801600000</td>
+    <td rowspan="6"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78607&mlon=-79.71436#map=18/43.78607/-79.71436" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1681862400000</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">22-325524-000-00-HO</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">House</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Single Family Detached</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">New Complete Building</td>
+    </tr>
+  <tr><td rowspan="2">11-17 RAY LAWSON BLVD</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">11-17</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">17</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65747&mlon=-79.72403#map=18/43.65747/-79.72403" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Unit</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">11</td>
+    </tr>
+  <tr><td rowspan="2">5-85 RESOLUTION DR</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">5-85</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">85</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68010&mlon=-79.71828#map=18/43.68010/-79.71828" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Unit</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">5</td>
+    </tr>
+  <tr><td rowspan="2">2-63 SEACHART PL</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">2-63</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">63</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.77534&mlon=-79.65453#map=18/43.77534/-79.65453" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Unit</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">2</td>
+    </tr>
+  <tr><td rowspan="5">0 SELBY RD</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">0</td>
+    <td rowspan="5"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69349&mlon=-79.72403#map=18/43.69349/-79.72403" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Street</td>
+    <td class="old-val">UNASSIGNED</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">SELBY</td>
+    </tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">UNASSIGNED</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">0 SELBY RD</td>
+    </tr>
+  <tr>
+    <td class="change-field">POSTAL_CODE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">L6W1K5</td>
+    </tr>
+  <tr>
+    <td class="change-field">STREET_TYPE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">RD</td>
+    </tr>
+  <tr><td rowspan="1">28 STRAND CIR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1786320000000</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.76720&mlon=-79.78577#map=18/43.76720/-79.78577" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">22 SWEET BRIAR LANE</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1785801600000</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73732&mlon=-79.82623#map=18/43.73732/-79.82623" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">58 THORNBIRD CRES</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1786320000000</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66729&mlon=-79.83989#map=18/43.66729/-79.83989" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">60 THORNBIRD CRES</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1786060800000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1786320000000</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66726&mlon=-79.83993#map=18/43.66726/-79.83993" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">62 THORNBIRD CRES</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1786320000000</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66723&mlon=-79.83998#map=18/43.66723/-79.83998" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">64 THORNBIRD CRES</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1786060800000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1786320000000</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66718&mlon=-79.84004#map=18/43.66718/-79.84004" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">29 THOROLD DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1786320000000</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.76782&mlon=-79.78319#map=18/43.76782/-79.78319" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">UNASSIGNED</td>
+    <td class="change-field">CITY_FILE</td>
+    <td class="old-val">C05W05.006</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">C05W02.008</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.62442&mlon=-79.79522#map=18/43.62442/-79.79522" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="4">UNASSIGNED</td>
+    <td class="change-field">Street</td>
+    <td class="old-val">QUEEN</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">UNASSIGNED</td>
+    <td rowspan="4"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75435&mlon=-79.68422#map=18/43.75435/-79.68422" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">QUEEN ST E</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">UNASSIGNED</td>
+    </tr>
+  <tr>
+    <td class="change-field">STREET_DIRECTION</td>
+    <td class="old-val">E</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">STREET_TYPE</td>
+    <td class="old-val">ST</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr><td rowspan="1">25 WILLIAM ST</td>
+    <td class="change-field">DRAFT_PLAN_NUMBER</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">21CDM-24007B</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69156&mlon=-79.76481#map=18/43.69156/-79.76481" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">1-25 WILLIAM ST</td>
+    <td class="change-field">DRAFT_PLAN_NUMBER</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">21CDM-24007B</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69159&mlon=-79.76488#map=18/43.69159/-79.76488" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">10-25 WILLIAM ST</td>
+    <td class="change-field">DRAFT_PLAN_NUMBER</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">21CDM-24007B</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69153&mlon=-79.76492#map=18/43.69153/-79.76492" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">11-25 WILLIAM ST</td>
+    <td class="change-field">DRAFT_PLAN_NUMBER</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">21CDM-24007B</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69152&mlon=-79.76489#map=18/43.69152/-79.76489" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">12-25 WILLIAM ST</td>
+    <td class="change-field">DRAFT_PLAN_NUMBER</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">21CDM-24007B</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69151&mlon=-79.76487#map=18/43.69151/-79.76487" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">2-25 WILLIAM ST</td>
+    <td class="change-field">DRAFT_PLAN_NUMBER</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">21CDM-24007B</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69158&mlon=-79.76486#map=18/43.69158/-79.76486" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">3-25 WILLIAM ST</td>
+    <td class="change-field">DRAFT_PLAN_NUMBER</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">21CDM-24007B</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69156&mlon=-79.76484#map=18/43.69156/-79.76484" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">4-25 WILLIAM ST</td>
+    <td class="change-field">DRAFT_PLAN_NUMBER</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">21CDM-24007B</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69154&mlon=-79.76481#map=18/43.69154/-79.76481" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">5-25 WILLIAM ST</td>
+    <td class="change-field">DRAFT_PLAN_NUMBER</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">21CDM-24007B</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69156&mlon=-79.76491#map=18/43.69156/-79.76491" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">6-25 WILLIAM ST</td>
+    <td class="change-field">DRAFT_PLAN_NUMBER</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">21CDM-24007B</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69155&mlon=-79.76489#map=18/43.69155/-79.76489" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">7-25 WILLIAM ST</td>
+    <td class="change-field">DRAFT_PLAN_NUMBER</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">21CDM-24007B</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69154&mlon=-79.76487#map=18/43.69154/-79.76487" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">8-25 WILLIAM ST</td>
+    <td class="change-field">DRAFT_PLAN_NUMBER</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">21CDM-24007B</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69152&mlon=-79.76484#map=18/43.69152/-79.76484" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">9-25 WILLIAM ST</td>
+    <td class="change-field">DRAFT_PLAN_NUMBER</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">21CDM-24007B</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69155&mlon=-79.76493#map=18/43.69155/-79.76493" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">148 WILLOW PARK DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1785369600000</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74940&mlon=-79.75249#map=18/43.74940/-79.75249" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">80 ZAMEK ST</td>
+    <td class="change-field">DRAFT_PLAN_NUMBER</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">21CDM-26001B</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75522&mlon=-79.78168#map=18/43.75522/-79.78168" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">1-80 ZAMEK ST</td>
+    <td class="change-field">DRAFT_PLAN_NUMBER</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">21CDM-26001B</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75517&mlon=-79.78181#map=18/43.75517/-79.78181" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">10-80 ZAMEK ST</td>
+    <td class="change-field">DRAFT_PLAN_NUMBER</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">21CDM-26001B</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75500&mlon=-79.78156#map=18/43.75500/-79.78156" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">11-80 ZAMEK ST</td>
+    <td class="change-field">DRAFT_PLAN_NUMBER</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">21CDM-26001B</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75513&mlon=-79.78187#map=18/43.75513/-79.78187" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">12-80 ZAMEK ST</td>
+    <td class="change-field">DRAFT_PLAN_NUMBER</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">21CDM-26001B</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75509&mlon=-79.78181#map=18/43.75509/-79.78181" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">13-80 ZAMEK ST</td>
+    <td class="change-field">DRAFT_PLAN_NUMBER</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">21CDM-26001B</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75505&mlon=-79.78173#map=18/43.75505/-79.78173" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">14-80 ZAMEK ST</td>
+    <td class="change-field">DRAFT_PLAN_NUMBER</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">21CDM-26001B</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75502&mlon=-79.78165#map=18/43.75502/-79.78165" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">15-80 ZAMEK ST</td>
+    <td class="change-field">DRAFT_PLAN_NUMBER</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">21CDM-26001B</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75498&mlon=-79.78158#map=18/43.75498/-79.78158" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">2-80 ZAMEK ST</td>
+    <td class="change-field">DRAFT_PLAN_NUMBER</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">21CDM-26001B</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75513&mlon=-79.78176#map=18/43.75513/-79.78176" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">3-80 ZAMEK ST</td>
+    <td class="change-field">DRAFT_PLAN_NUMBER</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">21CDM-26001B</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75509&mlon=-79.78167#map=18/43.75509/-79.78167" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">4-80 ZAMEK ST</td>
+    <td class="change-field">DRAFT_PLAN_NUMBER</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">21CDM-26001B</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75506&mlon=-79.78160#map=18/43.75506/-79.78160" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">5-80 ZAMEK ST</td>
+    <td class="change-field">DRAFT_PLAN_NUMBER</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">21CDM-26001B</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75501&mlon=-79.78153#map=18/43.75501/-79.78153" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">6-80 ZAMEK ST</td>
+    <td class="change-field">DRAFT_PLAN_NUMBER</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">21CDM-26001B</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75515&mlon=-79.78184#map=18/43.75515/-79.78184" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">7-80 ZAMEK ST</td>
+    <td class="change-field">DRAFT_PLAN_NUMBER</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">21CDM-26001B</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75511&mlon=-79.78178#map=18/43.75511/-79.78178" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">8-80 ZAMEK ST</td>
+    <td class="change-field">DRAFT_PLAN_NUMBER</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">21CDM-26001B</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75507&mlon=-79.78170#map=18/43.75507/-79.78170" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">9-80 ZAMEK ST</td>
+    <td class="change-field">DRAFT_PLAN_NUMBER</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">21CDM-26001B</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75504&mlon=-79.78163#map=18/43.75504/-79.78163" target="_blank" rel="noopener">View ↗</a></td></tr>
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Renumbered Addresses <span class="badge badge-accent">0</span></h2>
+    
+    <p class="empty">No addresses renumbered.</p>
+  </div>
+
+  <div class="section">
+    <h2>Street Renames <span class="badge badge-purple">0</span></h2>
+    <p class="empty">No street renames.</p>
+  </div>
+
+  
+
+  
+
+  
+  <div class="section">
+    <h2>Boundary Changes <span class="badge badge-teal">0</span></h2>
+    <p class="empty">No ward or municipality reassignments.</p>
+  </div>
+  
+
+  <div class="section">
+    <h2>Location Adjustments <span class="badge" style="background: var(--surface2); color: var(--text-dim)">0</span></h2>
+    
+    <p class="empty">No location adjustments.</p>
+  </div>
+
+  <div class="generated-at">Report generated Aug 09, 2026 at 01:23 PM · source licence: Creative Commons Attribution 4.0 (CC BY 4.0)</div>
+
+  <script>
+    function sortTable(tbodyId, col) {
+      const tbody = document.getElementById(tbodyId);
+      if (!tbody) return;
+      const rows = Array.from(tbody.rows);
+      const dir = tbody.dataset.sortDir === 'asc' ? 'desc' : 'asc';
+      tbody.dataset.sortDir = dir;
+      rows.sort((a, b) => {
+        const av = a.cells[col]?.textContent.trim() || '';
+        const bv = b.cells[col]?.textContent.trim() || '';
+        const an = parseFloat(av), bn = parseFloat(bv);
+        if (!isNaN(an) && !isNaN(bn)) return dir === 'asc' ? an - bn : bn - an;
+        return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+      });
+      rows.forEach(r => tbody.appendChild(r));
+    }
+  </script>
+</body>
+
+</html>
