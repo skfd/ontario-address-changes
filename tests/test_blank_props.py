@@ -58,6 +58,44 @@ def test_globalid_1_is_volatile():
     assert a["payload_hash"] == b["payload_hash"]
 
 
+def test_padded_values_are_stripped():
+    """A source that re-pads a real value must not churn the prop.
+
+    renfrew's Full_Address did it on 1,060 rows, while the canonical `full` sat
+    still because _clean already strips it.
+    """
+    ds = _ds()
+    padded = normalize.canonical(ds, _feat(ADDR="2502 Calabogie Road "))
+    tight = normalize.canonical(ds, _feat(ADDR="2502 Calabogie Road"))
+
+    assert json.loads(padded["props"])["ADDR"] == "2502 Calabogie Road"
+    assert padded["payload_hash"] == tight["payload_hash"]
+
+
+def test_objectid_spellings_are_volatile():
+    """Numbered ESRI id spellings churn like the unnumbered ones.
+
+    hastings publishes OBJECTID_12 (its alias is literally "OBJECTID_1"); listing
+    the spellings one by one missed it until 2026-08-08.
+    """
+    ds = _ds()
+    for key in ("OBJECTID_12", "FID_1", "fid_003"):
+        a = normalize.canonical(ds, _feat(**{key: 1}))
+        b = normalize.canonical(ds, _feat(**{key: 2}))
+        assert key not in json.loads(a["props"]), key
+        assert a["payload_hash"] == b["payload_hash"], key
+
+
+def test_objectid_pattern_is_anchored():
+    """Only the id spellings go; a real column that merely starts that way stays."""
+    ds = _ds()
+    props = json.loads(normalize.canonical(
+        ds, _feat(OBJECTID_SOURCE="MPAC", FIDUCIARY="Y", FID_A="x"))["props"])
+    assert props["OBJECTID_SOURCE"] == "MPAC"
+    assert props["FIDUCIARY"] == "Y"
+    assert props["FID_A"] == "x"
+
+
 def test_dropped_padding_does_not_open_a_new_span():
     """The regression: source stops padding a column -> must not read as modified."""
     ds = _ds("_test_blank_scd2")

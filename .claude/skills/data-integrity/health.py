@@ -213,11 +213,11 @@ def drift(datasets):
         # Only fields we could have stored count either way: ignore_fields, the
         # volatile ESRI ids and the edit-metadata timestamps never reach props, so
         # neither their absence nor their presence is news.
-        never = (normalize._VOLATILE_KEYS | normalize.EDIT_METADATA_FIELDS
+        never = (normalize.EDIT_METADATA_FIELDS
                  | {f.lower() for f in ds.ignore_fields})
         gone = sorted((stored | set(ds.fields.values())) - live)
         new = sorted(f for f in live - stored - set(ds.fields.values())
-                     if f.lower() not in never)
+                     if f.lower() not in never and not normalize.is_volatile(f))
         note = f"{len(live)} fields"
         if gone:
             note += f"  DROPPED: {', '.join(gone)}"

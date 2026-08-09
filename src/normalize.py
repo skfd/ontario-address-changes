@@ -10,17 +10,32 @@ Canonical record keys:
 
 import hashlib
 import json
+import re
 from functools import lru_cache
 
 # ESRI / shapefile housekeeping keys that churn on republish and must not
 # influence identity or change-detection.
 _VOLATILE_KEYS = {
-    "objectid", "objectid_1", "object_id", "fid", "oid",
+    "object_id", "oid",
     "globalid", "globalid_1", "global_id",
     "shape", "shape_length", "shape_area", "shape__length", "shape__area",
     "se_anno_cad_data",
     "_id",  # CKAN row-sequence id (Toronto), reassigned on every republish
 }
+
+# The numbered spellings of the same two ids. A layer that has been joined or
+# re-exported carries OBJECTID_1, FID_1, and so on up -- hastings publishes
+# OBJECTID_12, whose alias is literally "OBJECTID_1". Listing the spellings one
+# at a time kept missing them, so match the shape instead. Anchored, so a real
+# column that merely starts this way (OBJECTID_SOURCE) is untouched.
+_VOLATILE_RE = re.compile(r"^(?:objectid|fid)(?:_\d+)?$")
+
+
+def is_volatile(key):
+    """True for a housekeeping key that must never reach props or payload_hash."""
+    kl = key.lower()
+    return kl in _VOLATILE_KEYS or bool(_VOLATILE_RE.match(kl))
+
 
 # Edit-metadata props ignored in every dataset (case-insensitive): timestamps and
 # editor names that change alongside any real edit (or on their own) and carry no
@@ -106,12 +121,19 @@ def _clean_props(props, ignore, keep=frozenset()):
     out = {}
     for k, v in props.items():
         kl = k.lower()
-        if kl in _VOLATILE_KEYS or kl in ignore:
+        if is_volatile(kl) or kl in ignore:
             continue
-        # whitespace-only strings are blanks the source pads out (" ", "\t"); they
-        # carry no value but would otherwise sit in props and in payload_hash
-        if v is None or (isinstance(v, str) and not v.strip()):
+        if v is None:
             continue
+        if isinstance(v, str):
+            # Strip, don't just drop the all-whitespace ones: a source that pads a
+            # column out (" ", "\t") carries no value, and a source that re-pads a
+            # real value ("2502 Calabogie Road " -> "2502 Calabogie Road", renfrew
+            # on 1,060 rows) churns the prop while the canonical field sits still,
+            # because _clean already strips those.
+            v = v.strip()
+            if not v:
+                continue
         if kl in keep and (v == 0 or v == "0"):
             # zero-encoded "absent" (Toronto stored HI_NUM=0 for non-ranges
             # until mid-2026); a stored 0 would read downstream as a real

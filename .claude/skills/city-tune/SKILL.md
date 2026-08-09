@@ -45,6 +45,17 @@ vanished still faked a 53k-row mass event in two Guelph reports.
    ```
    Then re-read the affected reports (strip `<style>`/`<script>`, then tags) and confirm
    the noise days went quiet *and the real one-off changes survived*.
+6. **If you edited `ignore_fields` or `keep_fields`, finish the job in the store** —
+   before that city's next import, or it is only half-applied:
+   ```
+   python tools/backfill_props_hash.py --reapply-ignore --city <slug>
+   ```
+   The reports go quiet immediately (both are report-time filters) while the stored
+   props and `payload_hash` still carry the old basis, so the next import re-hashes
+   every row at once and opens a fresh SCD-2 range for the whole city. Skipping this
+   step on 2026-08-08 left five cities in exactly that state — 282,583 rows, found
+   only by measuring. Back the city's DB up first: the flag rewrites history and the
+   values leave the store.
 
 ## Which reference
 
@@ -70,7 +81,9 @@ later decision is evaluated against the earlier ones.
   back.
 - **One-time SCD-2 churn on the next import.** Anything that changes what lands in
   `props` or in `payload_hash` re-hashes every row once, opening a fresh version range
-  for the whole city. Reports stay clean. `tools/backfill_props_hash.py` deliberately
-  does not re-apply today's config to stored history.
+  for the whole city. Reports stay clean, which is what makes this easy to miss.
+  `tools/backfill_props_hash.py` does not re-apply today's per-city config by default —
+  `--reapply-ignore` does, which is step 6 above and the only way to avoid the churn
+  rather than merely hide it.
 
 Always tell the user which of these applies to the change they just approved.

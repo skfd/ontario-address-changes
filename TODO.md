@@ -158,6 +158,18 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
 
 - [ ] **Re-probe `skipped.toml` quarterly** — endpoints come back or migrate
   (5 of 5 originally-dead cities were eventually recovered via ArcGIS Online).
+- [ ] **Delete the 2026-08-09 store backups** — 2.9 GB outside the repo, kept while the
+  prop-hashing migration settles (§5). Both passes verified idempotent and every
+  affected city's latest diff verified byte-identical the same day, so these are
+  belt-and-braces rather than a pending rollback:
+  - `C:\Users\kk\ontario-db-backup-2026-08-09\` — all 42, 2.7 GB, pre-migration
+  - `C:\Users\kk\ontario-db-backup-2026-08-09-preignore\` — the five `--reapply-ignore`
+    cities, 190 MB, post-global pass. The narrower rollback point, and the only one
+    that can undo `--reapply-ignore` alone.
+
+  Reasonable to drop once a daily run has imported cleanly on top of the migration
+  (i.e. after 2026-08-10 noon). Restoring either is a plain file copy over
+  `data/<slug>/<slug>.db` with the scheduled task idle.
 - [ ] **Watch the daily scheduled task** — check `logs/` and that the site
   commit/push ran; a silently failing source shows up as a stale "generated" date
   on its report. `data-integrity`'s `health.py` is the one command for this.
@@ -209,15 +221,98 @@ change at the boundary. Only one already-published row was ever wrong (a hamilto
 POSTAL_CODE `-> " "` on 2026-08-03); the bug was latent, not active, because a
 source that pads a column pads it identically on every republish.
 
-Two more of the same shape are open, detailed in `TODO-skills.md` §1. Batch them
-together and give them the same backfill treatment:
+Two more of the same shape shipped 2026-08-09 (`normalize.py` + tests +
+`backfill_props_hash.py`), and the migration **has been run**: 406,452 rows
+rewritten, re-run reports 0 (idempotent), row count unchanged at 4,964,901, 28
+tests green. Stores were backed up first to
+`C:\Users\kk\ontario-db-backup-2026-08-09\` (42 files, 2.7 GB). The scheduled task
+was not disabled this time and did not need to be — the migration ran at 13:45
+against a run that had finished at 13:41, with the next one 22 hours out.
 
-- [ ] Pattern-match the ESRI id spellings `_VOLATILE_KEYS` misses (`^objectid(_\d+)?$`,
-  `^fid(_\d+)?$`) — hastings' `OBJECTID_12` is ignored per-city today.
-- [ ] Strip whitespace *around* prop values, not just values that are entirely
+- [x] Pattern-match the ESRI id spellings `_VOLATILE_KEYS` misses (`^objectid(_\d+)?$`,
+  `^fid(_\d+)?$`) — hastings' `OBJECTID_12` is ignored per-city today. Now
+  `normalize.is_volatile()`, a predicate rather than a set, because `health.py --drift`
+  filtered "new" fields by set membership and would otherwise have started reporting
+  `OBJECTID_12` as a new field. Blast radius is hastings alone: 31,101 rows, the only
+  numbered spelling stored anywhere in the 42 stores.
+- [x] Strip whitespace *around* prop values, not just values that are entirely
   whitespace. Renfrew's `Full_Address` churned 1,060 rows on a trailing space the
   canonical `full` strips before comparing; it is ignored per-city today, which is a
-  workaround for a gap every city shares.
+  workaround for a gap every city shares. Blast radius is much wider than renfrew:
+  199,944 rows over 36 cities, led by huron `StreetName` (93,995 — every row in the
+  city), burlington `ADDRESS` (50,149), thunder-bay `ROOT` (34,590) and renfrew
+  `ADDRRANGE` (11,908). Renfrew's 1,060 was the smallest instance of the pattern, not
+  a typical one.
+
+Together the two fixes rewrite **230,302 rows**. Two checks worth keeping: no
+already-listed volatile key is still stored in any store (so generalizing the
+backfill's `_reclean` from a hardcoded delta to `normalize._clean_props` costs
+nothing retroactively), and zero whitespace-only values remain anywhere, which
+confirms the 2026-08-08 backfill held completely.
+
+### Found 2026-08-09 while measuring: five cities carry a pending whole-store re-hash
+
+Not caused by the two fixes, and the reason the dry run reports 406,452 rows rather
+than 230,302. Every per-city `ignore_fields`/`keep_fields` edit from the 2026-08-08
+city-tune passes landed *after* `backfill_props_hash.py` ran that day, so those
+cities' stored rows are still hashed on the pre-edit basis. On their next import
+every active row re-hashes at once:
+
+| city | active rows | reading as modified | cause |
+|---|---:|---:|---|
+| kitchener | 132,060 | 100% | `keep_fields`, plus stored `X_COORD`/`Y_COORD` |
+| renfrew | 39,050 | 100% | `keep_fields`, plus `Full_Address`/`Latitude`/`Longitude` |
+| burlington | 60,326 | 100% | `keep_fields`, plus `LATITUDE`/`LONGITUDE` |
+| hastings | 30,857 | 100% | stored `OBJECTID_12`, `ADDRESS_NU`, `X`, `LAT`, ... |
+| quinte-west | 20,290 | 100% | stored `long`/`lat`/`label` |
+
+Toronto is the control: it has five `keep_fields` and sits at 0%, because those
+predate the 08-08 migration and were absorbed by it.
+
+Severity is store-level only. `diff.field_changes` applies `ignore_fields` at report
+time too (`src/diff.py:83`), so a modification whose only changed props are ignored
+is discarded and **nothing phantom reaches the site**. What does happen is the thing
+the kitchener note in §1b calls not retroactively fixable: the whole city closes its
+SCD-2 spans and opens fresh ones on one day for no reason.
+
+The `keep_fields` half is **fixed** by the 2026-08-09 migration (the backfill
+re-applies today's `keep_fields` to the hash basis — see its docstring). Measured
+after it ran, the 37 other cities are at zero and these five are unchanged at 100%:
+
+| city | active rows | will churn on next import |
+|---|---:|---:|
+| kitchener | 132,060 | 132,060 (`X_COORD`, `Y_COORD`) |
+| burlington | 60,326 | 60,326 (`LATITUDE`, `LONGITUDE`) |
+| renfrew | 39,050 | 39,050 (`Full_Address`, `Latitude`, `Longitude`) |
+| hastings | 30,857 | 30,857 (`ADDRESS_NU`, `STREET_NAM`, `UNIQUE_ID`, `X`, `LAT`, `LONG`) |
+| quinte-west | 20,290 | 20,290 (`long`, `lat`, `label`) |
+| | | **282,583** |
+
+Hastings' `OBJECTID_12` dropped off that list — the new global pattern covers it —
+but its other five per-city ignores remained.
+
+- [x] Taught `backfill_props_hash.py` an opt-in `--reapply-ignore` and ran it on the
+  five, 2026-08-09: kitchener 133,514 rows, burlington 60,340, renfrew 45,700,
+  hastings 31,101, quinte-west 20,299 (290,954 total, whole stores — every row
+  carried the ignored props). Next-import churn across all 42 cities is now **0**,
+  down from 282,583. The flag rewrites history and the values leave the store,
+  recoverable only by re-importing the vault's snapshots, so it is opt-in and
+  per-city rather than a default. Backup taken first at
+  `C:\Users\kk\ontario-db-backup-2026-08-09-preignore\` (the five, post-global-
+  migration, 190 MB), which is the targeted rollback point — the full 2.7 GB backup
+  from the same day predates the global pass.
+- [x] Made it not recur: `city-tune`'s SKILL.md now ends its edit checklist with the
+  backfill step, because an `ignore_fields`/`keep_fields` edit is only half-applied
+  until it runs.
+
+**Verification that mattered most:** across 697,406 rewritten rows the latest diff of
+every affected city is byte-identical to what today's run logged before the
+migration — huron 43/32/0, thunder-bay 58/9/181, kitchener 156/8/354, renfrew
+65/38/46, burlington 0/0/1, hastings 1/0/0, quinte-west 1/0/0, guelph 0/0/0. That is
+the expected result rather than a lucky one: `diff.field_changes` was already
+filtering these props at report time, so the reports never saw them. The store is now
+consistent with what the reports have been showing all along. No regeneration or
+republish was needed; tomorrow's run publishes normally.
 
 **Ops lesson:** disable `kk-ontario-update` before migrating the stores. The noon
 run fired mid-migration on 2026-08-08, imported against un-migrated stores with the

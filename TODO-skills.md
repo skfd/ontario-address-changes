@@ -163,18 +163,11 @@ Remaining work on it:
   - **kawartha-lakes** — `Xlong`/`Ylat`, faithful, max 1.32 m at p99 over 44,204 rows,
     with 9 individually broken rows out of range.
 
-- [ ] Consider a global fix for ESRI id spellings `_VOLATILE_KEYS` misses. Hastings
-  publishes `OBJECTID_12` (its alias is literally "OBJECTID_1"), which was being
-  compared until 2026-08-08 and is now ignored per-city. A pattern match
-  (`^objectid(_\d+)?$`, `^fid(_\d+)?$`) in `normalize.py` would cover every city at
-  once — but it changes hashing for all 42 stores, so it needs the
-  `tools/backfill_props_hash.py` treatment, not a casual edit.
-- [ ] Consider a global fix for padded prop values. `_clean` strips the canonical fields
-  but `_clean_props` only drops values that are *entirely* whitespace, so a source that
-  re-pads a real value churns the prop while the canonical sits still — renfrew's
-  `Full_Address` did it on 1,060 rows ("2502 Calabogie Road " → "2502 Calabogie Road").
-  Same family as the whitespace-only fix in `TODO.md` §5 and the same cost: stripping
-  prop strings re-hashes all 42 stores, so it needs `tools/backfill_props_hash.py`.
+- [x] Global fix for the ESRI id spellings `_VOLATILE_KEYS` missed, and for padded prop
+  values. Both coded 2026-08-09 as `normalize.is_volatile()` and a `.strip()` in
+  `_clean_props`; migration not yet run. Measured blast radius, the per-city workarounds
+  they replace, and a pending whole-store re-hash in five cities that the measurement
+  turned up are all in `TODO.md` §5.
 - [ ] `audit.py --identity` reports flap history-wide, so damage predating a config fix
   still shows (muskoka: 16.75%). Add a per-snapshot breakdown, or teach the reference to
   always cross-check the per-diff summary for when the spikes stopped.
