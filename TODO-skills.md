@@ -27,10 +27,17 @@ Remaining work on it:
 - [ ] Work `TODO.md` §1 with it: waterloo's unparsed `CIVIC_ADDR`, lennox-addington's
   `ADD_LABEL`, the five cities with no full-address field, the unit-field verification
   pass starting with toronto. The skill exists; the decisions are still open.
-- [ ] Sweep the cities carrying unignored coordinate duplicates. A screen over all 42
-  (regex on prop names in the latest snapshot vs `ignore_fields`) found 8; none had ever
-  recorded a Location Adjustment. Three of them — elgin, peel-region, waterloo — have
-  only a baseline report, so their 0 is expected: flag the config, don't claim a bug.
+- [ ] Give every city one `city-tune` pass. This started narrower — a screen over all 42
+  (regex on prop names in the latest snapshot vs `ignore_fields`) found 8 carrying
+  unignored coordinate duplicates, none of which had ever recorded a Location Adjustment.
+  Six audits in, the duplicate has never been the city's largest noise source; it was a
+  tripwire that got the city looked at, and the real find was elsewhere every time
+  (hastings' `RnoTXT2`, kitchener's `ROLL_REFERENCE`, renfrew's `report._category` bug,
+  which was mislabelling four *other* cities). So the remaining 34 are worth a pass too,
+  not only the ones the regex flagged. A city with just a baseline report cannot be
+  swept — there is no diff to tally — which is what currently blocks elgin, peel-region
+  and waterloo, behind the frozen-vault bug in `TODO.md` §4 rather than behind anyone's
+  attention: flag the config, don't claim a bug.
 
   - [x] **guelph** (2026-08-08) — masking pattern: real coordinate moves demoted to
     generic updates because `LAT/LONG/UTM_X/UTM_Y` rode along. 520 moves on one day
@@ -81,7 +88,9 @@ Remaining work on it:
     `street` is (lennox-addington), and otherwise a generic update. Four other cities were
     carrying the same mislabel: brantford (12 reports), frontenac (6), barrie (5),
     thunder-bay (1), every one of them a restyle, a backfill or a spelling fix.
-  - [ ] elgin / peel-region / waterloo — baseline only; revisit once each has a diff.
+  - [ ] elgin / peel-region / waterloo — baseline only, blocked on the frozen vault;
+    revisit once each has a diff.
+  - [ ] the other 34 — no coordinate duplicate flagged, never given a full pass.
 
   **Which pattern to expect is predictable from `[identity]`** (found 2026-08-08, and it
   retro-explains guelph and hastings). Synthesized identity includes the 5 dp geometry
@@ -103,9 +112,7 @@ Remaining work on it:
   wandered 530 m before the county re-synced it.
 
   This narrows what to look for but does not replace the churn tally (`audit.py --tags`),
-  which is still what shows whether the duplicate has actually moved — and in every city
-  so far the *larger* noise source turned out to be something else the audit surfaced on
-  the way past.
+  which is still what shows whether the duplicate has actually moved.
 
 - [ ] Consider a global fix for ESRI id spellings `_VOLATILE_KEYS` misses. Hastings
   publishes `OBJECTID_12` (its alias is literally "OBJECTID_1"), which was being

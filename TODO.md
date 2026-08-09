@@ -140,11 +140,11 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
   Because no row is written, this failure is invisible to `logs/runs.csv` (which has
   reported success every day) — worth a staleness check that reads max snapshot age
   per city rather than run exit codes.
-- [ ] **After a few weeks of real diffs** — review each city's "modified" noise and
-  pick `ignore_fields` (Toronto needed this — 387→3 modified). Needs a human eye on
-  which fields are meaningless churn. Same pass: check whether the `[classes]`
-  assignments (2026-06-12, sampled from one snapshot each) hold up against real
-  transitions, and whether unclassed cities grew class-worthy fields.
+- [ ] **Per-city tuning pass** — reviewing each city's "modified" noise to pick
+  `ignore_fields` (Toronto needed this — 387→3 modified), and checking whether the
+  `[classes]` assignments (2026-06-12, sampled from one snapshot each) hold up against
+  real transitions. This is the `city-tune` sweep tracked in `TODO-skills.md` §1, six
+  cities done; it still needs a human eye per city. Don't run it as a separate pass.
 
 ## 5. Hand to coding agent when convenient
 
