@@ -20,8 +20,13 @@ is a config question. Report it, hand it over, stop.
   disappearing field re-hashes every row and fakes a mass event covering the whole city
   (guelph's `AMAID` cost one report 53,796 fake updates). `ignore_fields` it in
   `city-tune` before the next import, not after.
-- **new (n)** — fields the layer publishes that we do not store. Mostly uninteresting,
-  with three exceptions worth scanning for:
+- **new (n)** — fields the layer publishes that we do not store. **Check whether the
+  column is actually populated before reading anything into it** — `returnCountOnly=true`
+  with `where=<FIELD> IS NOT NULL` costs one request. Both cities whose new fields looked
+  most urgent on 2026-08-08 (kitchener `LATITUDE`/`LONGITUDE`, windsor `X`/`Y`) turned
+  out to be empty schema slots, 0 rows populated out of 132,060 and 133,331. That does
+  not make them harmless — see below — but it makes them a different problem. Mostly
+  uninteresting otherwise, with three exceptions worth scanning for:
   - a **coordinate pair** (`X`/`Y`, `LATITUDE`/`LONGITUDE`) — a fresh duplicate that will
     start churning; run `audit.py --coords` and ignore it.
   - a **unit or full-address column** — several cities are recorded as "source publishes
@@ -30,6 +35,17 @@ is a config question. Report it, hand it over, stop.
 
 Volatile ESRI ids, edit-metadata timestamps and anything already in `ignore_fields` are
 subtracted, so what is listed is genuinely unstored.
+
+## An empty new column is still worth ignoring
+
+Pre-emptively, and for a narrower reason than report noise. While it stays null it never
+reaches `props`, so it changes nothing — ignoring kitchener's and windsor's left every
+count and the entire `compared_fields` list byte-identical. But on the day the publisher
+backfills it, every row gains a prop, every `payload_hash` changes, and the city opens a
+fresh SCD-2 range for itself. **The report-time half of that is retroactively fixable by
+adding the ignore and regenerating; the store churn is not** — it needs
+`tools/backfill_props_hash.py`. So the ignore is cheap now and awkward later, which is
+the whole argument for doing it while the column is empty.
 
 ## Two things that will mislead you
 

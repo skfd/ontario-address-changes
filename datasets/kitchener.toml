@@ -20,6 +20,15 @@ ignore_fields = [
   # coordinate moves on 2026-08-03 alone, against a category that had never fired. Five
   # further rows were pure jitter and now report nothing.
   "X_COORD", "Y_COORD",
+  # A second coordinate duplicate, added by the source between 2026-08-03 and 2026-08-08
+  # and empty so far: 0 of 132,060 rows populated, and typed as strings rather than
+  # numbers. Ignored pre-emptively. Nothing is being suppressed while they stay null -
+  # an all-null prop never reaches props at all - but the day the city backfills them,
+  # every row's payload_hash changes and the whole city opens a fresh SCD-2 range. That
+  # half is not retroactively fixable; the report-time noise would be. Kitchener keys on
+  # a real key_field, so a populated coordinate echo would also demote genuine moves out
+  # of Location Adjustments, which is what X_COORD/Y_COORD were doing above.
+  "LATITUDE", "LONGITUDE",
   # 15-digit MPAC assessment roll number, backfilled in batches: of 798 rows where it was
   # the only change, 610 were a null -> roll fill (mostly condo units, which share a roll)
   # and 188 a re-roll. It also masked status changes - 94 of the 103 Active -> Pending

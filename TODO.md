@@ -54,18 +54,24 @@ These cities are imported and tracking, but their field maps need a human decisi
 
 Found 2026-08-08 by `data-integrity`'s `health.py --drift`, which compares each live
 ArcGIS layer against what the store actually holds. Nothing was *dropped* anywhere,
-which is the case that would have been urgent (a vanishing field fakes a
-whole-city mass event). These are all additions, so they cost nothing until the next
-import — but two of them will start churning the moment one happens:
+which is the case that would have been urgent (a vanishing field fakes a whole-city mass
+event). These are all additions.
 
-- [ ] **kitchener** — the source now publishes `LATITUDE`/`LONGITUDE`, on top of the
-  `X_COORD`/`Y_COORD` already ignored. A second coordinate duplicate, and kitchener is a
-  real-`key_field` city, so it will *mask* real moves rather than only invent them.
-  Measure with `audit.py --coords` and ignore before the city unfreezes.
-- [ ] **windsor** — same shape: new `X`, `Y`, plus `JOIN_FID`, `Join_Count`,
-  `TARGET_FID` (join artefacts, ignore candidates).
+- [x] **kitchener** (`LATITUDE`, `LONGITUDE`) and **windsor** (`X`, `Y`, `JOIN_FID`,
+  `Join_Count`, `TARGET_FID`) — done 2026-08-08, `ignore_fields` on both. Worth knowing
+  *why*, because the first reading was wrong: these are not columns about to start
+  churning, they are **empty schema slots** — 0 of 132,060 rows and 0 of 133,331
+  respectively, checked with `returnCountOnly` against the live layers, and kitchener's
+  are typed as strings rather than numbers. An all-null prop never reaches `props`, so
+  ignoring them suppressed nothing: regenerating both cities left every count and the
+  whole `compared_fields` list byte-identical. It is pre-emptive, and the thing being
+  pre-empted is narrower than report noise: on the day a publisher backfills one of
+  these, every row's `payload_hash` changes and the city opens a fresh SCD-2 range for
+  itself. Report-time noise could be fixed afterwards by regenerating; that store churn
+  could not.
 - [ ] **oakville** — a `SUITE` column alongside the `UNIT` it already maps. Decide which
-  is the real unit field, or whether `SUITE` is an echo to ignore.
+  is the real unit field, or whether `SUITE` is an echo to ignore. Check whether it is
+  populated first — the two above were not.
 - [ ] Single new props, each worth one look for whether it is a class candidate, an echo,
   or nothing: burlington `PROPERTYDESCASSESS`, greater-sudbury `STREETPREFIX`, hamilton
   `SETTLEMENT` (hamilton has no full-address field selected — see §1), niagara-falls
