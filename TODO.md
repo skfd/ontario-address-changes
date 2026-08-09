@@ -128,6 +128,18 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
 - [ ] **Watch the daily scheduled task** — check `logs/` and that the site
   commit/push ran; a silently failing source shows up as a stale "generated" date
   on its report.
+- [ ] **Eight cities have been frozen since 2026-06-27/28** (found 2026-08-08 while
+  working the coordinate sweep): waterloo, dufferin, elgin, lambton, peel-region,
+  sarnia, windsor, and renfrew (06-29). The vault hands back the same dated file every
+  day, so `run.py`'s filename check short-circuits before `db.already_imported` and no
+  snapshot row is written at all — not even a skip. That is why the log reads
+  `already imported: elgin-2026-06-27.geojson` six weeks on, and why elgin,
+  peel-region and waterloo are still baseline-only and unauditable. Not one dead
+  server: the eight sit on eight different hosts, and the refusal guards only landed
+  2026-08-08, so this predates them. Next step is the vault side, not this repo.
+  Because no row is written, this failure is invisible to `logs/runs.csv` (which has
+  reported success every day) — worth a staleness check that reads max snapshot age
+  per city rather than run exit codes.
 - [ ] **After a few weeks of real diffs** — review each city's "modified" noise and
   pick `ignore_fields` (Toronto needed this — 387→3 modified). Needs a human eye on
   which fields are meaningless churn. Same pass: check whether the `[classes]`
