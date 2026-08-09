@@ -148,8 +148,8 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
 
 ## 5. Hand to coding agent when convenient
 
-Two small code fixes found during the audit (both change payload hashes → one-time
-"modified" spike, so batch them):
+Code fixes found during the audits. Every one of them changes payload hashes → a
+one-time "modified" spike, so batch them:
 
 - [x] Add `objectid_1`/`globalid_1` variants to `_VOLATILE_KEYS` (normalize.py) —
   present in 7 cities' stored props; mass-modify risk if a provider reassigns them.
@@ -167,6 +167,16 @@ report is rebuilt from the store on each run and a partial pass would invent a
 change at the boundary. Only one already-published row was ever wrong (a hamilton
 POSTAL_CODE `-> " "` on 2026-08-03); the bug was latent, not active, because a
 source that pads a column pads it identically on every republish.
+
+Two more of the same shape are open, detailed in `TODO-skills.md` §1. Batch them
+together and give them the same backfill treatment:
+
+- [ ] Pattern-match the ESRI id spellings `_VOLATILE_KEYS` misses (`^objectid(_\d+)?$`,
+  `^fid(_\d+)?$`) — hastings' `OBJECTID_12` is ignored per-city today.
+- [ ] Strip whitespace *around* prop values, not just values that are entirely
+  whitespace. Renfrew's `Full_Address` churned 1,060 rows on a trailing space the
+  canonical `full` strips before comparing; it is ignored per-city today, which is a
+  workaround for a gap every city shares.
 
 **Ops lesson:** disable `kk-ontario-update` before migrating the stores. The noon
 run fired mid-migration on 2026-08-08, imported against un-migrated stores with the
