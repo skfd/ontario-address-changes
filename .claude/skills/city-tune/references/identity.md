@@ -19,6 +19,11 @@ past is keyed one way while its future is keyed another.
 A `key_field` that is blank on some rows silently produces a mixed keyspace — those rows
 fall through to the synthesized basis.
 
+Which mode a city is in also predicts what its *reports* will look like — whether real
+coordinate moves arrive as modifications at all, and therefore whether a duplicate
+coordinate pair masks real changes or manufactures fake ones. Read that off `[identity]`
+before auditing noise: `references/ignore-fields.md`, "Which noise pattern to expect".
+
 ## Reading `audit.py --identity`
 
 - **collisions** (`rows` minus `distinct` in the latest snapshot) — the key is 1:many

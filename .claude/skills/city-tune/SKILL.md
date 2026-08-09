@@ -22,10 +22,11 @@ vanished still faked a 53k-row mass event in two Guelph reports.
    ```
    python .claude/skills/city-tune/audit.py <slug>
    ```
-   Sections: `tags` (inventory + churn), `identity`, `fields`, `classes`. Narrow with
-   `--tags` / `--identity` / `--fields` / `--classes`. `--tags` runs one diff per
-   snapshot pair and dominates runtime — seconds for a mid-size city, minutes for
-   toronto; the rest are single passes.
+   Sections: `tags` (inventory + churn), `identity`, `coords`, `fields`, `classes`.
+   Narrow with `--tags` / `--identity` / `--coords` / `--fields` / `--classes`. `--tags`
+   runs one diff per snapshot pair and dominates runtime — seconds for a mid-size city,
+   minutes for toronto; the rest are single passes. A baseline-only city can still be
+   audited with `--coords` / `--fields` / `--classes`, which need no diff.
 3. **Cross-check the live source** when a field's meaning or existence is in question:
    ```
    python -c "import json,urllib.request;d=json.load(urllib.request.urlopen('<data_url>?f=json',timeout=60));[print(f['name'],'|',f.get('alias')) for f in d['fields']]"

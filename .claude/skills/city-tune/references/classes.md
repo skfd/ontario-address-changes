@@ -13,6 +13,16 @@ Valid class names (`registry._VALID_CLASSES`, anything else raises):
 The built-in categories need no config: Location Adjustments (`{latitude, longitude}`),
 Renumbered (`{number, full}`), Street Renames (`{street, full}`).
 
+`full` changing **alone** is read against the field map (`report._category` takes
+`has_number` / `has_street`): a renumber only where no `number` is mapped (waterloo), a
+rename only where no `street` is (lennox-addington), and otherwise a generic update —
+because with both components mapped and neither moved, the publisher is restyling the
+string. Before that rule landed (2026-08-08) full-only counted as Renumbered everywhere,
+which mislabelled renfrew's 1,104-row highway restyle ("17883 Highway 60" → "17883 60
+Highway") plus restyles, backfills and spelling fixes in brantford, frontenac, barrie and
+thunder-bay. **A category firing on a city whose source cannot produce it is the same
+class of bug as one stuck at 0** — check both directions.
+
 ## The subset rule
 
 `report._category` assigns a class only when the row's **entire** changed-field set fits

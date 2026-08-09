@@ -25,9 +25,12 @@ strip them for every dataset. Never re-list those per city.
   fakes a 100%-of-dataset mass event. Guelph: `STATION_RESPONSE_ORDER` existed in exactly
   one pull (2026-07-24) and cost two reports 53,796 and 53,795 fake updates; `AMAID`
   disappeared on 2026-08-04 for another 53,796.
-- **Coordinate duplicates** — `LAT`/`LONG`/`UTM_X`/`UTM_Y`/`Xcoord`/`Ycoord`. The geometry
-  is already tracked as `latitude`/`longitude` rounded to 5 dp; these carry more precision,
-  so they also fire on the sub-metre jitter the rounding exists to absorb.
+- **Coordinate duplicates** — `LAT`/`LONG`/`UTM_X`/`UTM_Y`/`Xcoord`/`Ycoord`, including a
+  pair reprojected into the layer's own CRS (kitchener's `X_COORD, Y_COORD` are the
+  geometry in UTM 17N metres). The geometry is already tracked as `latitude`/`longitude`
+  rounded to 5 dp; these carry more precision, so they also fire on the sub-metre jitter
+  the rounding exists to absorb. What that costs the city depends on `[identity]` — see
+  below.
 - **Derived echoes of the mapped canonical fields** — a legacy or abbreviated full address,
   a map label, street-name components. `diff.field_changes` suppresses only the *directly*
   mapped source names from `[fields]`; companions still surface as extra rows on every
@@ -39,6 +42,58 @@ strip them for every dataset. Never re-list those per city.
 
 Keep comparing: status, place/ward, postcode, unit flags, qualifiers, landmark and
 occupant names, and any date field that is real address data rather than edit metadata.
+
+## Which noise pattern to expect, from `[identity]`
+
+A coordinate duplicate does one of two things, and `[identity]` says which before you
+look (six for six across the 2026-08-08 audits):
+
+- **Synthesized identity with `use_geometry`** — the 5 dp geometry is *in* the key
+  (`normalize._identity`), so a real move past ~1.1 m mints a new key and reports as
+  retired + added, never as a modification. `report._category` only ever labels a
+  *modified* row, so Location Adjustments is structurally unreachable for these cities
+  and its 0 is correct. A duplicate here can only **manufacture** updates that no real
+  move underlies — the *phantom* pattern (hastings, quinte-west, burlington, renfrew;
+  elgin predicted).
+- **A real `key_field`** — moves arrive as modifications, so the duplicate rides along
+  with them and demotes them to generic updates: the *masking* pattern (guelph,
+  kitchener; peel-region `ROPADRID` and waterloo `ADDRESS_ID` predicted).
+
+Within the phantom half, only the churn tally separates two mechanisms — and it decides
+whether the field is worth pre-emptive ignoring:
+
+- **Faithful echo** at finer precision than the 5 dp compare (hastings; burlington's
+  worst deviation 1.35e-5 deg over 60,326 rows). Moves only on jitter. Low cost.
+- **Stale copy** that drifts free of the geometry and fires whenever the publisher
+  re-syncs it. Worth ignoring before it bites: renfrew's `Latitude, Longitude` had
+  wandered 6.7e-3 deg (~530 m) on 720 rows before the county recomputed them, and the
+  re-sync alone produced 1,547 updates with the geometry standing still.
+
+`audit.py --coords` measures this: it finds the pair by name, works out whether it is
+geographic or projected (fitting the CRS and reporting which one, so a wrong guess cannot
+pass), and prints the deviation from the geometry across five snapshots.
+
+Read the **p99**, not the max. A stale copy has a *bulk* of drifted rows, which is what
+makes the publisher's re-sync a mass event — renfrew p99 16.7 m, quinte-west 439 m. A
+faithful echo sits near the floor even when a few rows are wild: guelph shows 315 rows
+over 11 m against a p99 of 6.8 m, hastings 13 against 1.6 m, and those are individually
+broken rows, not drift. The floor is ~1–2 m, not zero: the geometry is stored at 5 dp and
+the source pair often carries a NAD83/WGS84 datum offset on top.
+
+Five snapshots, not just the latest, because a stale copy reads clean the day after a
+re-sync — renfrew's had wandered 797 m on 2026-06-15 and was back within 2.4 m by 06-29.
+
+Two things it surfaces that are worth a look on their own: **two CRSs in one column**
+(elgin's `x`/`y` — 18,716 rows of degrees, 2,720 of UTM 17N metres) and rows that fit no
+CRS at all, reported as `unmeasurable`.
+
+A city can publish more than one pair, in which case they are paired within a family —
+geographic names together, projected names together — never by position. Dufferin
+publishes `LONGITUDEX`, `LATITUDEY`, `EASTINGX` and `NORTHINGY` at once, and pairing its
+two x-names against its two y-names in order matches an easting against a latitude.
+
+This narrows what to look for; it does not replace `audit.py --tags`, which is still
+what shows whether the duplicate has actually moved.
 
 ## keep_fields
 
@@ -58,7 +113,9 @@ set fits that category — `{latitude, longitude}` for Location Adjustments, the
 "Updated Address". Guelph's Location Adjustments counter had never once fired in three
 months because `LAT/LONG/UTM_X/UTM_Y` rode along with every move: 2026-06-25's 520
 genuine coordinate moves were reported as 771 generic updates. **If a city shows 0 in a
-category that should be firing, suspect echoes before anything else.**
+category that should be firing, suspect echoes before anything else** — except for
+Location Adjustments on a synth + `use_geometry` city, where 0 is structurally correct
+and not a config bug (see above). Say so rather than "fixing" it.
 
 ## Applying
 
