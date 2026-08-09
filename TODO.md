@@ -50,6 +50,33 @@ These cities are imported and tracking, but their field maps need a human decisi
   - [ ] brant — number/street/full ~95%
   - [ ] windsor — street 99%
 
+## 1b. Fields the sources have added since we last looked
+
+Found 2026-08-08 by `data-integrity`'s `health.py --drift`, which compares each live
+ArcGIS layer against what the store actually holds. Nothing was *dropped* anywhere,
+which is the case that would have been urgent (a vanishing field fakes a
+whole-city mass event). These are all additions, so they cost nothing until the next
+import — but two of them will start churning the moment one happens:
+
+- [ ] **kitchener** — the source now publishes `LATITUDE`/`LONGITUDE`, on top of the
+  `X_COORD`/`Y_COORD` already ignored. A second coordinate duplicate, and kitchener is a
+  real-`key_field` city, so it will *mask* real moves rather than only invent them.
+  Measure with `audit.py --coords` and ignore before the city unfreezes.
+- [ ] **windsor** — same shape: new `X`, `Y`, plus `JOIN_FID`, `Join_Count`,
+  `TARGET_FID` (join artefacts, ignore candidates).
+- [ ] **oakville** — a `SUITE` column alongside the `UNIT` it already maps. Decide which
+  is the real unit field, or whether `SUITE` is an echo to ignore.
+- [ ] Single new props, each worth one look for whether it is a class candidate, an echo,
+  or nothing: burlington `PROPERTYDESCASSESS`, greater-sudbury `STREETPREFIX`, hamilton
+  `SETTLEMENT` (hamilton has no full-address field selected — see §1), niagara-falls
+  `StreetNoUpper`, sdg `LabelFullMod`, kawartha-lakes `StreetDirectionPrefix`,
+  `StreetNameAlt2`, `StreetParity`.
+- [ ] **renfrew** — 71 fields live against far fewer stored, but renfrew is frozen at
+  06-29, so most of that is drift accumulated while we were not looking rather than a
+  real roster change. Re-run `--drift` once it unfreezes before acting on it.
+
+Static sources (toronto, waterloo) cannot be probed this way — no layer metadata to ask.
+
 ## 2. Find data sources for uncovered cities
 
 Cities/counties with no working source (full reasons in `skipped.toml`, shown on the
@@ -127,7 +154,10 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
   (5 of 5 originally-dead cities were eventually recovered via ArcGIS Online).
 - [ ] **Watch the daily scheduled task** — check `logs/` and that the site
   commit/push ran; a silently failing source shows up as a stale "generated" date
-  on its report.
+  on its report. `data-integrity`'s `health.py` is the one command for this.
+  Currently outstanding from it: 2026-07-31 exited 1 after three attempts, and
+  kingston's layer answers `?f=json` with "Error invoking service" (three
+  `ERROR (kingston)` lines in the last run's `update.log`).
 - [ ] **Eight cities have been frozen since 2026-06-27/28** (found 2026-08-08 while
   working the coordinate sweep): waterloo, dufferin, elgin, lambton, peel-region,
   sarnia, windsor, and renfrew (06-29). The vault hands back the same dated file every
@@ -138,8 +168,13 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
   server: the eight sit on eight different hosts, and the refusal guards only landed
   2026-08-08, so this predates them. Next step is the vault side, not this repo.
   Because no row is written, this failure is invisible to `logs/runs.csv` (which has
-  reported success every day) — worth a staleness check that reads max snapshot age
-  per city rather than run exit codes.
+  reported success every day). That staleness check now exists —
+  `python .claude/skills/data-integrity/health.py --stale` — and it says the problem is
+  **larger than these eight**: 18 of 42 cities are past their own p90 snapshot gap.
+  Behind the eight sit niagara-falls (36d), durham (25d), thunder-bay / london /
+  chatham-kent (15d), bruce / cornwall (10d). Some of those are a clean cliff and some
+  are a cadence that decayed over weeks; either way they were never on anyone's list.
+  Still a vault-side next step, just a bigger one.
 - [ ] **Per-city tuning pass** — reviewing each city's "modified" noise to pick
   `ignore_fields` (Toronto needed this — 387→3 modified), and checking whether the
   `[classes]` assignments (2026-06-12, sampled from one snapshot each) hold up against

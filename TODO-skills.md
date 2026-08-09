@@ -88,9 +88,23 @@ Remaining work on it:
     `street` is (lennox-addington), and otherwise a generic update. Four other cities were
     carrying the same mislabel: brantford (12 reports), frontenac (6), barrie (5),
     thunder-bay (1), every one of them a restyle, a backfill or a spelling fix.
-  - [ ] elgin / peel-region / waterloo — baseline only, blocked on the frozen vault;
-    revisit once each has a diff.
-  - [ ] the other 34 — no coordinate duplicate flagged, never given a full pass.
+  - [ ] elgin / peel-region / waterloo — baseline only, blocked on the frozen vault for
+    anything needing a diff. But `audit.py --coords` (added 2026-08-08) needs none, and
+    it has already read their coordinate duplicates off the single snapshot:
+    - **elgin** `x`/`y` — stale *and* mixed-CRS: 18,716 rows in degrees and 2,720 in
+      UTM 17N metres in the same column, 9,551 of 21,436 rows over 11 m from the
+      geometry, p99 585 m. The worst duplicate found in any city so far. Phantom-only
+      by the identity rule, so it can only manufacture updates — but a lot of them.
+    - **peel-region** `LATITUDE`/`LONGITUDE` — stale, p99 16.0 m, 5,871 of 503,920 rows
+      over 11 m. Worst combination available: a stale copy on a real-`key_field` city,
+      so the re-sync will *mask* real moves rather than only invent them.
+    - **waterloo** `LATITUDE`/`LONGITUDE` — faithful, max 0.69 m over 55,541 rows, the
+      cleanest of the nine. Ignore it, but there is no hurry.
+
+    Three for three on the identity rule's phantom/masking prediction is untested here —
+    that needs a diff. The faithful/stale call does not.
+  - [ ] the other 31 — no coordinate duplicate to find (see the sweep note below),
+    but never given a full pass on identity, field map or classes.
 
   **Which pattern to expect is predictable from `[identity]`** (found 2026-08-08, and it
   retro-explains guelph and hastings). Synthesized identity includes the 5 dp geometry
@@ -114,6 +128,41 @@ Remaining work on it:
   This narrows what to look for but does not replace the churn tally (`audit.py --tags`),
   which is still what shows whether the duplicate has actually moved.
 
+  Written into the skill 2026-08-08 (`references/ignore-fields.md` "Which noise pattern
+  to expect", cross-linked from `identity.md`), along with the correction it forces: the
+  reference used to say a category stuck at 0 always means echoes, which is wrong for
+  Location Adjustments on a synth + `use_geometry` city. `classes.md` picked up the
+  full-only rule at the same time.
+
+  The measurement behind faithful-vs-stale is now `audit.py --coords` (2026-08-08)
+  instead of a one-off script per city. It reproduces all six recorded verdicts. Three
+  things it got wrong before it did, all worth keeping in mind if it is ever retuned:
+
+  - Judging on the **max** deviation called guelph (315 wild rows of 53,889) and
+    hastings (13 of 30,815) stale when neither is. The p99 is what tracks a *bulk* of
+    drifted rows, which is what makes a re-sync a mass event.
+  - Measuring only the **latest snapshot** called renfrew faithful, because the county
+    had re-synced it on 06-29. It samples five snapshots across history for that reason.
+  - Matching prop names **exactly** missed two cities outright, and pairing the
+    survivors **by position** then matched an easting against a latitude. Names are now
+    tokenised (whole-name cover, so CITY and PARITY are not northings) and paired within
+    a family — geographic with geographic, projected with projected.
+
+  **The coordinate-duplicate sweep is now complete**, which the narrower regex screen it
+  started as could not have told us: 11 of the 42 cities publish a duplicate pair at all,
+  and every one has been measured. Stale: elgin, peel-region, quinte-west, renfrew.
+  Faithful: burlington, dufferin, guelph, hastings, kawartha-lakes, kitchener, waterloo.
+  The remaining 31 publish no coordinate column, so there is nothing there to find — the
+  rest of their `city-tune` pass is still open, just not this part of it.
+
+  Two cities came in on the fixed detector and had never been looked at:
+  - **dufferin** — two faithful pairs, `LONGITUDEX`/`LATITUDEY` (deviation exactly 0.00 m:
+    stored at the same 5 dp as the geometry) and `EASTINGX`/`NORTHINGY` (UTM 17N, max
+    6.83 m, tightly clustered). Ignore both; no hurry. Config is still completely bare —
+    no `ignore_fields`, no `classes` — and it is one of the eight frozen cities.
+  - **kawartha-lakes** — `Xlong`/`Ylat`, faithful, max 1.32 m at p99 over 44,204 rows,
+    with 9 individually broken rows out of range.
+
 - [ ] Consider a global fix for ESRI id spellings `_VOLATILE_KEYS` misses. Hastings
   publishes `OBJECTID_12` (its alias is literally "OBJECTID_1"), which was being
   compared until 2026-08-08 and is now ignored per-city. A pattern match
@@ -132,10 +181,33 @@ Remaining work on it:
 
 ## 2. data-integrity — ends in a trust decision about a snapshot or a run
 
-Not built yet. Triggered by "the daily run did something weird", takes logs and HTTP
-rather than the field config, and never edits a dataset.
+Shipped 2026-08-08 (`.claude/skills/data-integrity/`). Triggered by "the daily run did
+something weird", takes logs and HTTP rather than the field config, and never edits a
+dataset. `health.py` has four sections — `stale`, `blocks`, `runs` (local, the default
+set) and `--drift` (the one network pass) — with a reference per decision.
 
-- [ ] **Corrupt-pull triage.** Decide whether a mass event is a real upstream change or
+First run found two things nobody was looking for:
+
+- **The frozen list is bigger than eight.** Ranking every city against its own gap
+  history (p90, 3-day floor) flags 18 of 42, and the eight in `TODO.md` §4 are only the
+  worst. Behind them: niagara-falls 36d, durham 25d, thunder-bay / london / chatham-kent
+  15d, bruce / cornwall 10d. Two distinct shapes — a clean cliff (niagara-falls: daily,
+  then nothing, after a max gap of 5) and a *degrading cadence* (cornwall 1→6→7→8,
+  london 1→11→15). The degrading kind raises its own p90 as it decays, so it ranks lower
+  than a cliff of the same age; rank is not severity.
+- **kingston's layer is erroring.** `--drift` gets "Error invoking service" from the
+  layer json, and `update.log` carries three `ERROR (kingston)` lines from the same run.
+  Neither on its own would have been convincing.
+
+`--drift` also turned up city-tune work, all of it new fields the sources added: a fresh
+coordinate duplicate in **kitchener** (`LATITUDE, LONGITUDE`, on top of the `X_COORD,
+Y_COORD` already ignored) and in **windsor** (`X, Y`), a `SUITE` column in **oakville**
+sitting alongside the `UNIT` it already maps (so: a second unit column, echo or
+otherwise), and single new props in burlington, greater-sudbury, hamilton,
+niagara-falls, sdg and kawartha-lakes. Nothing was DROPPED anywhere, which is the one
+that would have been urgent.
+
+- [x] **Corrupt-pull triage.** Decide whether a mass event is a real upstream change or
   a degraded pull. Signatures already seen: a row count that is an exact multiple of 2000
   (address-vault's ArcGIS paging loop ending on a transient blank page — kitchener
   102,000 of 131,912, huron 20,000 of 38,300), an attribute-stripped pull where every
@@ -144,11 +216,19 @@ rather than the field config, and never edits a dataset.
   fetch/import time (TODO.md §5), so the skill's job is the leftovers — a degraded
   pull small enough to pass the thresholds, and deciding whether a city failing on
   the guard every day is damage or a real source change that needs a config edit.
-- [ ] **Repair.** Generalize `tools/repair_bad_snapshots.py` from a one-shot script into
-  an on-demand tool: drop the bad snapshot, rebuild the store's SCD-2 history, regenerate.
-- [ ] **Run-log triage.** Read `logs/runs.csv` and the daily log; separate genuine
-  failures from expected skips (`offline`, `metered`, F5 connection rate-limits on
-  ottawa) and report only what needs a human.
-- [ ] **Source drift.** Periodic health check across all 42 `data_url`s: URL rot, schema
-  drift (fields added or dropped since the last audit), licence text changes. Feeds
-  city-tune rather than duplicating it.
+- [x] **Repair.** `tools/repair_bad_snapshots.py` is now `--city <slug> --drop <filename>
+  [--rekey] [--dry-run]` instead of a hardcoded three-city dict; the SCD-2 rebuild and
+  content-hash recompute are untouched. The 2026-08-08 one-shot it started as is kept in
+  the docstring, since it is the only worked example of `--rekey`.
+- [x] **Run-log triage.** `health.py --runs`, with `references/runs.md` carrying which
+  outcomes are deliberate (`offline`, `metered`, retries, laptop-off days, ottawa's F5)
+  and which are real.
+- [x] **Source drift.** `health.py --drift`. Subtracts volatile ids, edit-metadata and
+  `ignore_fields` so what it lists is genuinely unstored.
+
+Open on it:
+
+- [ ] `--drift` cannot probe `access = "static"` cities (toronto, waterloo) — no layer
+  metadata to ask. Their drift needs a file in `data/<slug>/` inspected instead.
+- [ ] The `stale` flag is deliberately sensitive and has no way to tell "we stopped
+  recording" from "the source stopped publishing". Confirming that is vault-side.
