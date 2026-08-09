@@ -126,6 +126,14 @@ def test_categories():
     assert report._category(m("location", "PLACE_NAME")) == "significant"
     assert report._category(m("NOTE")) == "significant"
 
+    # 'full' alone is read against what the source maps: the unmapped component is the
+    # one that must have moved, and where both are mapped it is a restyled string
+    assert report._category(m("full")) == "renumbered"                    # no number (waterloo)
+    assert report._category(m("full"), has_number=True) == "renamed"      # no street (lennox)
+    assert report._category(m("full"), has_number=True, has_street=True) == "significant"
+    assert report._category(m("number", "full"), has_number=True, has_street=True) == "renumbered"
+    assert report._category(m("street", "full"), has_number=True, has_street=True) == "renamed"
+
     # per-dataset classes (Dataset.classes): all changed fields inside ONE class
     classes = {"place_name": ["PLACE_NAME", "PLACE_NAME_ALL"],
                "status": ["MAINT_STAGE"], "boundary": ["WARD", "WARD_NAME"]}

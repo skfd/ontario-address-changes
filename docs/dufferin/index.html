@@ -76,6 +76,17 @@
     .info-pop li::before { content:"·"; position:absolute; left:4px; color:var(--text-dim); }
     .info-pop .note { color:var(--text-dim); font-size:11.5px; margin:0 0 10px; }
     .info-pop .muted { color:var(--text-dim); font-style:italic; }
+    /* A refused pull: deliberately louder than the amber "no changes yet" state,
+       because this one does not resolve itself by waiting. */
+    .blocked { background:var(--surface); border:1px solid var(--red);
+      border-left:4px solid var(--red); border-radius:8px; padding:14px 16px;
+      margin-bottom:32px; box-shadow:var(--shadow-4); }
+    .blocked .title { font-size:12px; font-weight:600; color:var(--red);
+      text-transform:uppercase; letter-spacing:0.04em; margin-bottom:8px; }
+    .blocked .reason { font-size:13px; color:var(--text); margin-bottom:6px; }
+    .blocked .reason code { font-family:'Cascadia Mono',Consolas,monospace; font-size:12px;
+      background:var(--surface2); border-radius:4px; padding:1px 5px; }
+    .blocked .detail { font-size:12px; color:var(--text-dim); }
   </style>
 </head>
 
@@ -90,6 +101,8 @@
         open civic-address data over time.</p>
       <a class="dataset-link" href="https://services5.arcgis.com/C0BEdgagVaXzcw0W/arcgis/rest/services/Dufferin_County_Entrances/FeatureServer/0">View the source dataset →</a>
     </div>
+
+    
 
     
 

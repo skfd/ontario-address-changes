@@ -10,11 +10,44 @@ format = "geojson"
 license_name = "Not identified"
 osm_compatible = "unknown-review"
 
-# Effective is a static effective-date re-encoded with a shifting UTC offset each
-# republish (e.g. 1553576400000 -> 1553572800000 = same 2019-03-26, one hour apart):
-# churns ~25k rows/day with no real change. Edit-metadata timestamps/users on this
-# layer (DateUpdate, created_date/user, last_edited_user) are handled globally.
-ignore_fields = ["Effective"]
+# Source props whose changes are noise. Edit-metadata timestamps/users on this layer
+# (DateUpdate, created_date/user, last_edited_user, LASTEDITOR) are handled globally.
+ignore_fields = [
+  # A static effective-date re-encoded with a shifting UTC offset each republish
+  # (e.g. 1553576400000 -> 1553572800000 = same 2019-03-26, one hour apart): churns
+  # ~25k rows/day with no real change.
+  "Effective",
+  # The county's own copy of the coordinates, and a stale one - on 2026-06-15 it had 720
+  # rows more than 1e-4 deg from the geometry, worst 6.7e-3 (~530 m). The county
+  # recomputed it on 2026-06-29: of the 1,498 rows it edited, 1,484 moved *closer* to the
+  # geometry and none further, leaving the whole layer within 2e-5. The geometry itself
+  # never moved across any snapshot, so those 1,547 updates were the copy catching up. It
+  # can never carry a real move either: identity is synthesized from the 5 dp geometry
+  # (use_geometry), so a genuine relocation mints a new key and reports as retired +
+  # added, which is why Location Adjustments is unreachable here and its 0 is correct.
+  "Latitude", "Longitude",
+  # The source column behind `full`, which the canonical field already tracks - stripped,
+  # where the raw prop is not. All 1,060 rows where it changed alone on 2026-06-13 were a
+  # trailing space going away ("2502 Calabogie Road " -> "2502 Calabogie Road").
+  "Full_Address",
+  # Assessment roll, and the placeholder it replaces: 28 rows went "NewAddress" -> a real
+  # 15-digit roll on 2026-06-13, and 21 of those were riding on a status flip and demoted
+  # it out of Status Changes.
+  "RollNumber",
+  # NENA global id, "urn:emergency:uid:gis:SSAP:{<guid>}:countyofrenfrew.on.ca". The
+  # identity comment below already distrusts these GUIDs as regenerable; one row proved
+  # it on 2026-06-29.
+  "NGUID",
+  # The county's operational notes on its own addressing work, not a property of the
+  # address: "MV to confirm if address location is correct" -> "MV confirmed correct
+  # address locations". 26 of the 32 rows it touched were riding on a status flip.
+  "Comment",
+]
+
+# Ignored for change detection (above) but still written to props: the roll number is the
+# only link to the tax roll, the NENA id the only link to the 911 system, and the comments
+# are the county's own explanation of why an address is the way it is.
+keep_fields = ["RollNumber", "NGUID", "Comment"]
 
 [identity]
 # No integer stable id (OBJECTID sequential; GlobalID/NGUID are GUIDs that can regenerate). Synthesize.

@@ -64,7 +64,23 @@ Remaining work on it:
     Adjustments went 0 → 192. The larger find was again elsewhere: `ROLL_REFERENCE` (MPAC
     roll, 610 null→roll backfills + 188 re-rolls) and the `ROADSEGMENTID`/`PARCELID` join
     keys, all three `keep_fields`. 2026-08-03 generic Updated 1410 → 56, Status 9 → 103.
-  - [ ] renfrew (4 reports) — `Latitude, Longitude`
+  - [x] **renfrew** (2026-08-08) — phantom pattern, and the *stale* variety, caught
+    mid-repair: on 2026-06-15 the county's `Latitude, Longitude` sat more than 1e-4 deg
+    from the geometry on 720 rows (worst 6.7e-3, ~530 m), and on 2026-06-29 the county
+    recomputed them — 1,484 of the 1,498 edited rows moved closer to the geometry, none
+    further, leaving the layer within 2e-5. The geometry never moved, so all 1,547
+    updates that day were the copy catching up. Also ignored `Full_Address` (the mapped
+    column behind `full`, churning on trailing spaces the canonical strips, 1,060 rows),
+    `RollNumber`/`NGUID`/`Comment` (`keep_fields`; between them they demoted 47 status
+    flips). 06-29 generic Updated 1573 → 4, 06-13 3062 → 1974 — what is left there is the
+    real `UnitPreTyp` vocabulary sweep, which already collapses to one bulk line.
+    Renfrew also turned up a `report._category` bug: a change to `full` *alone* counted as
+    Renumbered, which mislabelled the county's 1,104-row highway restyling ("17883 Highway
+    60" → "17883 60 Highway", `Add_Number` untouched). Now read against the field map —
+    full-only is a renumber only where no `number` is mapped (waterloo), a rename where no
+    `street` is (lennox-addington), and otherwise a generic update. Four other cities were
+    carrying the same mislabel: brantford (12 reports), frontenac (6), barrie (5),
+    thunder-bay (1), every one of them a restyle, a backfill or a spelling fix.
   - [ ] elgin / peel-region / waterloo — baseline only; revisit once each has a diff.
 
   **Which pattern to expect is predictable from `[identity]`** (found 2026-08-08, and it
@@ -74,10 +90,17 @@ Remaining work on it:
   to a *modified* row (`report._category`), so for those cities Location Adjustments is
   structurally unreachable and its 0 is correct, not a config bug. Coordinate duplicates
   there can only manufacture updates.
-  - synth + geometry, phantom-only: **quinte-west**, **burlington**, **renfrew**,
-    **elgin** (+ hastings, confirmed)
-  - real `key_field`, masking possible: **kitchener** (`PROPERTY_UNIT_ID`),
-    **peel-region** (`ROPADRID`), **waterloo** (`ADDRESS_ID`) (+ guelph, confirmed)
+  - synth + geometry, phantom-only: **elgin** (+ hastings, quinte-west, burlington,
+    renfrew, all confirmed)
+  - real `key_field`, masking possible: **peel-region** (`ROPADRID`), **waterloo**
+    (`ADDRESS_ID`) (+ guelph, kitchener, both confirmed)
+
+  Six for six so far. Within the phantom half there are two mechanisms, and only the
+  churn tally separates them: a *faithful* echo at finer precision than the 5 dp compare
+  (hastings, burlington, kitchener's projected pair) moves only on jitter, while a
+  *stale* copy (quinte-west, renfrew) drifts freely and fires whenever the publisher
+  recomputes it. The stale kind is the one worth ignoring pre-emptively — renfrew's had
+  wandered 530 m before the county re-synced it.
 
   This narrows what to look for but does not replace the churn tally (`audit.py --tags`),
   which is still what shows whether the duplicate has actually moved — and in every city
@@ -90,6 +113,12 @@ Remaining work on it:
   (`^objectid(_\d+)?$`, `^fid(_\d+)?$`) in `normalize.py` would cover every city at
   once — but it changes hashing for all 42 stores, so it needs the
   `tools/backfill_props_hash.py` treatment, not a casual edit.
+- [ ] Consider a global fix for padded prop values. `_clean` strips the canonical fields
+  but `_clean_props` only drops values that are *entirely* whitespace, so a source that
+  re-pads a real value churns the prop while the canonical sits still — renfrew's
+  `Full_Address` did it on 1,060 rows ("2502 Calabogie Road " → "2502 Calabogie Road").
+  Same family as the whitespace-only fix in `TODO.md` §5 and the same cost: stripping
+  prop strings re-hashes all 42 stores, so it needs `tools/backfill_props_hash.py`.
 - [ ] `audit.py --identity` reports flap history-wide, so damage predating a config fix
   still shows (muskoka: 16.75%). Add a per-snapshot breakdown, or teach the reference to
   always cross-check the per-diff summary for when the spikes stopped.

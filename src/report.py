@@ -148,7 +148,7 @@ def _sparkline_svg(values, color, width=110, height=20, pad=2):
 _env.globals["sparkline_svg"] = _sparkline_svg
 
 
-def _category(m, classes=None):
+def _category(m, classes=None, has_number=False, has_street=False):
     """Classify a modified row by its changed-field set.
 
     Works both before and after _combine_location (raw latitude/longitude or the
@@ -156,15 +156,28 @@ def _category(m, classes=None):
     rides along with either; number takes precedence (matches the sibling Toronto
     tracker's renumbered category).
 
+    'full' changing *alone* is read against what the dataset actually maps
+    (`has_number` / `has_street`). Where a component is unmapped, a real edit to it can
+    only ever surface in the assembled string - waterloo publishes no number column, so
+    a renumber there is a full-only change. Where both are mapped, neither moved, and
+    the row is the publisher restyling the string: renfrew reformatted 1,104 highway
+    addresses from "17883 Highway 60" to "17883 60 Highway" on 2026-06-13, with
+    Add_Number and St_Name untouched.
+
     `classes` is Dataset.classes: per-city class -> source prop names. A row whose
     changes all fall inside one class lands in that class; any mix stays significant.
     """
     fields = {c["field"] for c in m["changes"]}
     if fields <= {"latitude", "longitude", "location"}:
         return "location"
-    if fields <= {"number", "full"}:
+    if fields == {"full"}:
+        if not has_number:
+            return "renumbered"
+        if not has_street:
+            return "renamed"
+    elif fields <= {"number", "full"}:
         return "renumbered"
-    if fields <= {"street", "full"}:
+    elif fields <= {"street", "full"}:
         return "renamed"
     for cls, srcs in (classes or {}).items():
         if fields <= set(srcs):
@@ -247,7 +260,8 @@ def _prepare(ds, d, new_id):
     cats = {"significant": [], "location": [], "renumbered": [], "renamed": [],
             "place_name": [], "status": [], "boundary": []}
     for m in d["modified"]:
-        cats[_category(m, ds.classes)].append(m)
+        cats[_category(m, ds.classes, bool(ds.fields.get("number")),
+                       bool(ds.fields.get("street")))].append(m)
 
     counts = {"added": len(d["added"]), "removed": len(d["removed"]),
               "modified": len(cats["significant"]),
@@ -387,13 +401,19 @@ def generate_all(datasets):
         new_by_snap = diff.new_streets_by_snapshot(ds)
         pkeys = diff.prop_keys(ds, snaps[-1]["id"])
         compared = _compared_fields(ds, pkeys)
-        ignored = sorted(set(ds.ignore_fields) |
+        # A mapped source column can be ignored as a prop (renfrew's Full_Address churns
+        # on padding the canonical strips) while the canonical field it feeds is still
+        # compared. Listing it as ignored would contradict the compared list above it.
+        mapped = {src.lower() for src in ds.fields.values() if src}
+        ignored = sorted({f for f in ds.ignore_fields if f.lower() not in mapped} |
                          {k for k in pkeys if k.lower() in diff.EDIT_METADATA_FIELDS})
 
         series = {k: [] for k in SPARK_KEYS}  # filled as we render, for sparklines
         meta = []
         for idx, (snap, d, is_base) in enumerate(diffs):
-            cat = Counter(_category(m, ds.classes) for m in d["modified"])
+            cat = Counter(_category(m, ds.classes, bool(ds.fields.get("number")),
+                                    bool(ds.fields.get("street")))
+                          for m in d["modified"])
             series["added"].append(len(d["added"]))
             series["removed"].append(len(d["removed"]))
             series["modified"].append(cat["significant"])
