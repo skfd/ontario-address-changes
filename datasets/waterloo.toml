@@ -7,6 +7,12 @@ format = "shapefile"
 license_name = "Open Government Licence – City of Waterloo"
 osm_compatible = "green-lwg"
 
+# LATITUDE/LONGITUDE are a FAITHFUL echo of the geometry (audit.py --coords, 2026-08-10):
+# max deviation 0.69 m over 55,541 rows, p99 0.64 m, nothing past 11 m — the cleanest of
+# the eleven duplicates in the 42. Finer than the 5 dp everything is compared at, so it
+# can only move on jitter below that resolution. Ignored for tidiness, not urgency.
+ignore_fields = ["LATITUDE", "LONGITUDE"]
+
 [identity]
 key_field = "ADDRESS_ID"       # stable address id (OBJECTID_1 is sequential, untrusted)
 synth_fields = ["full"]

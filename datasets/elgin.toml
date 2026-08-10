@@ -6,6 +6,15 @@ format = "geojson"
 license_name = "Not identified"
 osm_compatible = "unknown-review"
 
+# x/y are the worst coordinate duplicate found in any of the 42 (audit.py --coords,
+# 2026-08-10). Broken on their own terms before drift even enters: 18,716 rows hold
+# degrees and 2,720 hold UTM 17N metres IN THE SAME COLUMN. On top of that they are a
+# stale copy — median 7.76 m off the geometry, p99 584.74 m, max 1,837 m, 9,551 of 21,436
+# rows past 11 m. Phantom-only (synth identity + use_geometry, so a real move re-keys and
+# never reports as a modification), which means this can only ever manufacture updates —
+# but it would manufacture a lot of them the day the county re-syncs.
+ignore_fields = ["x", "y"]
+
 [identity]
 # Region-wide (all Elgin lower-tier munis in MUNI). ARN is an assessment roll number that can be
 # 1:many with civic addresses, so synthesize from the (clean) address components instead.

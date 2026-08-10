@@ -6,6 +6,14 @@ format = "geojson"
 license_name = "Open Government Licence - County of Dufferin"
 osm_compatible = "yellow-ogl"
 
+# Two faithful coordinate echoes, both measured 2026-08-10 (audit.py --coords):
+# LONGITUDEX/LATITUDEY deviate from the geometry by exactly 0.00 m at every percentile —
+# stored at the same 5 dp the comparison rounds to — and EASTINGX/NORTHINGY are the same
+# points in UTM 17N, max 6.83 m and tightly clustered. Neither can move except on jitter
+# below the compare resolution, so this is tidiness rather than urgency; ignored while
+# the city was being looked at anyway.
+ignore_fields = ["LONGITUDEX", "LATITUDEY", "EASTINGX", "NORTHINGY"]
+
 [identity]
 key_field = "ID"                               # stable id, 100% populated and order-independent (FID/OBJECTID are sequential)
 synth_fields = ["number", "street"]            # fallback; no unit field in this layer

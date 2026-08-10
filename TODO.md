@@ -24,20 +24,59 @@ These cities are imported and tracking, but their field maps need a human decisi
   remapping re-keys all 31k addresses and cannot be applied retroactively (one report
   showing the whole city retired and re-added). Found 2026-08-08 while ignoring
   `ADDRESS_NU` as a duplicate; it is a duplicate *of the wrong column*.
+- [ ] **waterloo — the key_field only covers 29% of the city.** Found 2026-08-10 while
+  ignoring its coordinate duplicate. `ADDRESS_ID` is populated on 15,861 of 55,541 rows;
+  the other 39,680 fall through to `synth_fields = ["full"]`, so the city runs on two
+  identity regimes at once (`95099.0` vs `syn:d19669…`). Nothing is wrong today — 55,541
+  distinct keys, zero collisions — but the day the city backfills `ADDRESS_ID` on the
+  rest, all 39,680 switch key form and report as retired + re-added on one day. Two
+  choices, both re-keying and neither retroactive: leave it and accept the risk, or set
+  `key_field = ""` so the whole city synthesizes (uniform and immune, but it re-keys the
+  15,861 today and gives up a stable id where the source does provide one). Note also the
+  ids are stored float-formatted (`95099.0`, out of the shapefile), so a source switch to
+  integer formatting re-keys those 15,861 by itself.
+- [ ] **dufferin — `FULLADDY` disagrees with its own components on 857 rows (3.2%).**
+  Found 2026-08-10. It is the mapped `full`, so it is what the reports display, and it is
+  hand-maintained rather than derived: 359 rows carry a *different house number* than
+  `STREETNUM` (many in runs where `FULLADDY` holds the neighbour's number — 713051 shown
+  as 713053, 713053 as 713055, 713055 as 713057, the signature of a spreadsheet fill off
+  by one row), 466 disagree on the street text (mostly styling — "30 SIDEROAD" vs "30TH
+  SIDE ROAD" — but some name a different road outright: "10 SIDEROAD" vs "10TH LINE"),
+  and 4 lost the separating space ("58744810 SIDEROAD"). The remaining 26,214 match.
+  Decide whether to keep publishing the county's string as-is, or unmap `full` and let
+  reports compose "number street" from the cleaner components. Not urgent and not an
+  identity risk (`key_field = "ID"`, and `full` is not in `synth_fields`), but it means
+  ~1.3% of displayed dufferin addresses show a number that belongs to a neighbour.
+- [ ] **elgin — `StrNum2` is the hastings trap in miniature.** Found 2026-08-10. It
+  duplicates the mapped `StrNUM` on 21,771 of 21,785 rows, and on the 14 where they
+  differ it is sometimes the *better* value — it keeps the house suffix that `StrNUM`
+  drops and that `full` shows ("1" vs "1B CHATHAM ST", "47" vs "47B MILTON STREET") — but
+  not reliably: on others `StrNUM` is right and `StrNum2` is the broken one (`33220
+  TALBOT LINE` vs `0`, `33711 FIRST LINE` vs `33609`). So it is not simply the column we
+  should have mapped, and remapping would re-key the city anyway (synth from
+  number/street/unit). The open call is narrower: leave it compared, or add it to
+  `ignore_fields` + `keep_fields` so its echo cannot manufacture updates while the values
+  stay in `props`. Left alone for now — it is 14 rows, and unlike hastings' 2,721 there
+  is no volume argument either way.
 - [ ] No full-address field selected — reports fall back to "number street" (works,
   but omits units). Check each source layer for a full-address column; select it if
   one exists, otherwise note "source has none" in the TOML comment:
   - [ ] durham
   - [ ] hamilton
   - [ ] niagara-falls
-  - [ ] peel-region
+  - [x] peel-region — source has none, confirmed 2026-08-10 against the live field list
+    (every prop and its fill rate; nothing address-like beyond STREETNUM/STREETNAME/
+    UNIT_IDENTIFIER). Noted in the TOML.
   - [ ] wellington
 - [ ] No unit field selected — most were recorded as "source publishes no unit field"
   during onboarding; do one verification pass over each source schema:
   - [ ] toronto (especially — the old importer never looked)
   - [ ] brantford
   - [ ] chatham-kent
-  - [ ] dufferin
+  - [x] dufferin — verified 2026-08-10 against the live layer: 9 fields total (ID,
+    STREETNUM, FULLADDY, STREETNAME, EASTINGX, NORTHINGY, LONGITUDEX, LATITUDEY, FID).
+    No unit column exists, and nothing else is unstored either — the bare config is a
+    bare source, not an oversight.
   - [ ] lambton
   - [ ] peterborough-county
   - [ ] sarnia
@@ -45,8 +84,16 @@ These cities are imported and tracking, but their field maps need a human decisi
 - [ ] Spot-check low coverage — open a handful of the blank rows and judge: wrong
   column selected, or genuinely unaddressed points (towers, outbuildings)? Note the
   verdict in each TOML:
-  - [ ] dufferin — number 88% (~3.2k blank)
-  - [ ] elgin — street 94% (~1.3k blank)
+  - [x] dufferin — number 88% (~3.2k blank). Checked 2026-08-10: **genuinely
+    unaddressed, same shape as elgin.** On all 3,270 blank-number rows `FULLADDY` equals
+    `STREETNAME` exactly ("20 SIDEROAD" as the whole address), so no number exists
+    anywhere on the row to have been missed. The layer is `Dufferin_County_Entrances` —
+    driveway/field entrances, many of which have no civic number to carry.
+  - [x] elgin — street 94% (~1.3k blank). Checked 2026-08-10: **genuinely unaddressed
+    points, not a wrong column.** All 1,253 blank-street rows carry `Condition` values
+    like "No Sign" and either `StrNUM = '0'` (275 rows, so `full` reads "0" too) or a
+    real number with no street at all (1,040, mostly Southwold). These are located
+    parcels awaiting a civic address, which is what the column should say about them.
   - [ ] brant — number/street/full ~95%
   - [ ] windsor — street 99%
 
@@ -69,9 +116,15 @@ event). These are all additions.
   these, every row's `payload_hash` changes and the city opens a fresh SCD-2 range for
   itself. Report-time noise could be fixed afterwards by regenerating; that store churn
   could not.
-- [ ] **oakville** — a `SUITE` column alongside the `UNIT` it already maps. Decide which
-  is the real unit field, or whether `SUITE` is an echo to ignore. Check whether it is
-  populated first — the two above were not.
+- [x] **oakville** — a `SUITE` column alongside the `UNIT` it already maps. Done
+  2026-08-10, and the answer was "check whether it is populated first": **0 of 71,049
+  rows**, same empty-schema-slot shape as kitchener and windsor above. Never reached the
+  store in any of the 7 snapshots either. So it is not a second unit column at all, and
+  the re-key trap the item was written around does not apply. Documented in the TOML,
+  deliberately *not* ignored — an ignore is right for an empty coordinate slot and wrong
+  here, because a backfill of a unit column is content we want. Seven more columns in
+  that layer are empty the same way (TOP_ALIAS, ADDR_ALIAS, POSTAL, CITY, PROV,
+  STREET_TYPE_PREFIX, STREET_DIR_PREFIX).
 - [ ] Single new props, each worth one look for whether it is a class candidate, an echo,
   or nothing: burlington `PROPERTYDESCASSESS`, greater-sudbury `STREETPREFIX`, hamilton
   `SETTLEMENT` (hamilton has no full-address field selected — see §1), niagara-falls
@@ -170,18 +223,27 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
   Reasonable to drop once a daily run has imported cleanly on top of the migration
   (i.e. after 2026-08-10 noon). Restoring either is a plain file copy over
   `data/<slug>/<slug>.db` with the scheduled task idle.
+
+  **That gate is met** (2026-08-10): `logs/runs.csv` records 12:00:02 → 12:33:26, one
+  attempt, exit 0 — the first full daily run against the migrated stores. Both
+  directories were confirmed intact and matching what this note claims (126 files /
+  2.69 GB, 5 files / 0.19 GB). Deletion itself is the operator's to run; tick this off
+  once it has.
 - [ ] **Watch the daily scheduled task** — check `logs/` and that the site commit/push
   ran. `addressvault report` is the first command (per-city-per-day: checked, unchanged,
   failed, or no attempt); `health.py --blocks --runs` is the project-side second.
-  Currently outstanding: 2026-07-31 exited 1 after three attempts, and kingston has been
-  failing since 2026-08-08 (below).
-- [ ] **kingston: source down since 2026-08-08** — seven pull attempts across 08-08 and
-  08-09, every one `arcgis error 500: Error invoking service`. The layer answered
-  normally when probed late on 08-09 (count 77,294, first page fine), so it is
-  intermittent on their side, not URL rot. Nothing to fix here and no config to change:
-  `utility.arcgis.com/usrsvcs/servers/<guid>/` is AGOL proxying to Kingston's on-prem
-  server, and there is no hosted alternative — the AGOL search returns only this one
-  Civic Address Points service. Watch it; if the 500s persist past a week, ask the city.
+  Currently outstanding: 2026-07-31 exited 1 after three attempts.
+  (Kingston, below, cleared itself on 2026-08-10.)
+- [x] ~~**kingston: source down since 2026-08-08**~~ — **recovered on its own 2026-08-10.**
+  Seven pull attempts across 08-08 and 08-09, every one `arcgis error 500: Error invoking
+  service`; today's noon run pulled it normally (`expect=77,294`, no ERROR line, and
+  `docs/kingston/report-2026-08-10.html` published). Intermittent on their side, as the
+  08-09 probe suggested, not URL rot — nothing was changed here. Worth noting for the
+  08-17 review: the recovery was spotted by reading `logs/update.log`, not from
+  `addressvault report`, which is question 2 of that review answered the wrong way round.
+  If the 500s return and persist past a week, ask the city; there is no hosted
+  alternative (`utility.arcgis.com/usrsvcs/servers/<guid>/` is AGOL proxying to
+  Kingston's on-prem server, and the AGOL search returns only this one service).
 - [ ] ~~Eight cities frozen since 2026-06-27/28~~ — **wrong, retracted 2026-08-10.**
   waterloo, dufferin, elgin, lambton, peel-region, sarnia, windsor and renfrew were
   never frozen: the vault has pulled and verified all eight every day throughout, e.g.

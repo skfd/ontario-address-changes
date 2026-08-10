@@ -6,6 +6,16 @@ format = "geojson"
 license_name = "Not identified"
 osm_compatible = "unknown-review"
 
+# LATITUDE/LONGITUDE are a STALE copy of the geometry, not a faithful echo (audit.py
+# --coords, 2026-08-10): median 1.05 m but p99 16.04 m and max 649.69 m, with 5,871 of
+# 503,920 rows more than 11 m off the point they are attached to. The day Peel recomputes
+# them, every drifted row changes. Worse here than in the phantom-only cities, because
+# ROPADRID is a real key_field: a real move keeps the key and reports as a modification,
+# so this copy riding along would MASK genuine relocations rather than merely invent
+# updates. Ignored outright rather than kept — the geometry itself is stored, so nothing
+# is lost.
+ignore_fields = ["LATITUDE", "LONGITUDE"]
+
 [identity]
 # Region-wide: Mississauga (264k), Brampton (207k), Caledon (32k). NOTE: the Brampton points here
 # are the Region's own layer, a SEPARATE source from the City of Brampton dataset (brampton.toml);
@@ -17,6 +27,8 @@ synth_fields = ["number", "street", "unit"]    # fallback only
 number = "STREETNUM"
 street = "STREETNAME"                           # STREETDIRECTION/STREETTYPE/MUNICIPALITY tracked via the props blob
 unit   = "UNIT_IDENTIFIER"
+# full: the layer publishes no combined address column (confirmed 2026-08-10 against the
+# live field list); reports fall back to "number street".
 
 # Change classes (field values verified against the latest snapshot): a
 # modification touching only these fields is reported in its humanized section

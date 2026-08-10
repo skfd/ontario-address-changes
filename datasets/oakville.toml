@@ -13,5 +13,15 @@ synth_fields = ["number", "street", "unit"]
 [fields]                                        # source property -> canonical name
 number = "STREET_NUM"
 street = "SNAME"                                # full street name incl. type/dir; components also tracked via the props blob
-unit   = "UNIT"
+unit   = "UNIT"                                 # 5,896 of 71,049 rows; NOT to be remapped to SUITE, see below
 full   = "ADDRESS"
+
+# SUITE (checked 2026-08-10): an empty schema slot, not a second unit column. 0 of 71,049
+# rows populated on the live layer (returnCountOnly), and it has never reached the store
+# in any of the 7 snapshots since 2026-06-10 — an all-null prop is dropped before props.
+# So it is neither an echo of UNIT nor a better column to map `unit` to; mapping it would
+# blank the unit slot and re-key all 71k rows for nothing. Deliberately NOT in
+# ignore_fields: unlike the empty coordinate slots ignored pre-emptively in kitchener and
+# windsor, a backfill here would be real address content we want to see, not noise.
+# Seven other columns are empty the same way: TOP_ALIAS, ADDR_ALIAS, POSTAL, CITY, PROV,
+# STREET_TYPE_PREFIX, STREET_DIR_PREFIX.

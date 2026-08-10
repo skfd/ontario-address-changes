@@ -88,7 +88,44 @@ Remaining work on it:
     `street` is (lennox-addington), and otherwise a generic update. Four other cities were
     carrying the same mislabel: brantford (12 reports), frontenac (6), barrie (5),
     thunder-bay (1), every one of them a restyle, a backfill or a spelling fix.
-  - [ ] elgin / peel-region / waterloo — baseline only, blocked on the frozen vault for
+  - [x] **oakville** (2026-08-10) — swept on the way to the `SUITE` question above, and
+    the outcome is the first "nothing to change" pass: no `ignore_fields`, no `[classes]`,
+    and both correct. Identity is the cleanest seen — 71,049 keys for 71,049 rows, 0
+    collisions, 0 flap, 1.00 versions per key — and the city has recorded **zero
+    modifications in its entire history** (six diff pairs, all `~0`, only single-digit
+    adds and retires). That makes `[classes]` unevaluable rather than missing: with
+    `number`, `street`, `unit` *and* geometry all in the key, essentially every real edit
+    re-keys and reports as retired + added, so the generic Updated table it would tidy is
+    empty by construction.
+
+    One echo does exist and is deliberately left alone: `LABEL` is the map label, equal to
+    `unit or number` on 71,038 of 71,049 rows (the 11 exceptions are cartography errors —
+    four blanks, and labels showing a neighbour's number). Quinte-west's `label` was
+    ignored on exactly this reasoning, but the trade is different here. Because number and
+    unit are in the key, `LABEL` can never ride along with a real change — it can only
+    ever surface as a solo fix to one of those 11 rows. Paying a whole-store
+    `--reapply-ignore` rewrite (71k rows, values leave the store) to suppress at most 11
+    future one-row modifications is the wrong side of that trade. Revisit only if the town
+    starts churning the column.
+  - [x] **elgin / peel-region / waterloo** (2026-08-10) — all three coordinate ignores
+    applied, backfilled with `--reapply-ignore`, reports regenerated: peel-region 503,920
+    rows, waterloo 55,541, elgin 21,436 (580,897 total, backed up first to
+    `C:\Users\kk\ontario-db-backup-2026-08-10\`). Each re-run dry-runs at 0, and every
+    card still reads 0/0/0 with row counts unchanged — the only site diff is
+    `LATITUDE`/`LONGITUDE`/`x`/`y` moving from the compared list to the ignored list,
+    which is the expected result for cities that have only ever published a baseline.
+
+    Worth keeping from it: the "blocked on the frozen vault" framing below was half
+    wrong, in the way `TODO.md` §4 retracts. These three are not waiting on a bug — their
+    sources genuinely have not changed since June, so there is no second snapshot to diff
+    and there may not be one for a while. `--coords`, `--fields` and `--classes` are the
+    whole audit available for such a city, and they were enough to settle the urgent
+    question in all three.
+
+    Two finds outside the coordinates, both now decisions in `TODO.md` §1: waterloo's
+    `key_field` covers only 29% of its rows (39,680 silently synthesizing instead), and
+    elgin's `StrNum2` is a hastings-shaped second number column at 14 rows.
+  - [ ] ~~elgin / peel-region / waterloo~~ — baseline only, blocked on the frozen vault for
     anything needing a diff. But `audit.py --coords` (added 2026-08-08) needs none, and
     it has already read their coordinate duplicates off the single snapshot:
     - **elgin** `x`/`y` — stale *and* mixed-CRS: 18,716 rows in degrees and 2,720 in
@@ -103,8 +140,9 @@ Remaining work on it:
 
     Three for three on the identity rule's phantom/masking prediction is untested here —
     that needs a diff. The faithful/stale call does not.
-  - [ ] the other 31 — no coordinate duplicate to find (see the sweep note below),
-    but never given a full pass on identity, field map or classes.
+  - [ ] the other 30 — no coordinate duplicate to find (see the sweep note below),
+    but never given a full pass on identity, field map or classes. (31 until oakville,
+    which is the first of them done.)
 
   **Which pattern to expect is predictable from `[identity]`** (found 2026-08-08, and it
   retro-explains guelph and hastings). Synthesized identity includes the 5 dp geometry
@@ -152,25 +190,65 @@ Remaining work on it:
   started as could not have told us: 11 of the 42 cities publish a duplicate pair at all,
   and every one has been measured. Stale: elgin, peel-region, quinte-west, renfrew.
   Faithful: burlington, dufferin, guelph, hastings, kawartha-lakes, kitchener, waterloo.
+
+  **As of 2026-08-10 all four stale ones are ignored**, which was the urgent half — a
+  stale copy is the kind that fires en masse the day the publisher re-syncs it. Of the
+  faithful seven, only **kawartha-lakes** is still compared (`Xlong`/`Ylat`, max 1.32 m at
+  p99, plus 9 individually broken rows), and it is not urgent by the same reasoning: a
+  faithful echo at finer precision than the 5 dp compare can only move on jitter below
+  that resolution. Ten of the eleven are done.
   The remaining 31 publish no coordinate column, so there is nothing there to find — the
   rest of their `city-tune` pass is still open, just not this part of it.
 
   Two cities came in on the fixed detector and had never been looked at:
-  - **dufferin** — two faithful pairs, `LONGITUDEX`/`LATITUDEY` (deviation exactly 0.00 m:
-    stored at the same 5 dp as the geometry) and `EASTINGX`/`NORTHINGY` (UTM 17N, max
-    6.83 m, tightly clustered). Ignore both; no hurry. Config is still completely bare —
-    no `ignore_fields`, no `classes` — and it is one of the eight frozen cities.
+  - [x] **dufferin** — two faithful pairs, `LONGITUDEX`/`LATITUDEY` (deviation exactly
+    0.00 m: stored at the same 5 dp as the geometry) and `EASTINGX`/`NORTHINGY` (UTM 17N,
+    max 6.83 m, tightly clustered). Both ignored 2026-08-10, 27,075 rows backfilled, card
+    unchanged at 0/0/0.
+
+    Full pass done at the same time, and the headline is that **the bare config was
+    correct**: the live layer has 9 fields and the store already held all 8 non-volatile
+    ones, so there is no unit column to find, nothing unstored, and no low-cardinality
+    prop for `[classes]` to fire on. "Config is bare" was read as neglect in this note;
+    it was a bare source. Worth generalising — check the source's field list before
+    treating an empty config as a backlog item.
+
+    The real find was again elsewhere: `FULLADDY`, the mapped `full`, disagrees with its
+    own `STREETNUM`/`STREETNAME` on 857 rows, including 359 that show a neighbour's house
+    number. It is a display-quality decision rather than a noise one, so it is in
+    `TODO.md` §1 rather than fixed here.
   - **kawartha-lakes** — `Xlong`/`Ylat`, faithful, max 1.32 m at p99 over 44,204 rows,
     with 9 individually broken rows out of range.
 
 - [x] Global fix for the ESRI id spellings `_VOLATILE_KEYS` missed, and for padded prop
   values. Both coded 2026-08-09 as `normalize.is_volatile()` and a `.strip()` in
-  `_clean_props`; migration not yet run. Measured blast radius, the per-city workarounds
-  they replace, and a pending whole-store re-hash in five cities that the measurement
-  turned up are all in `TODO.md` §5.
+  `_clean_props`, and the migration **has since been run** (406,452 rows rewritten,
+  re-run idempotent, row count unchanged, tests green — `TODO.md` §5 has the numbers and
+  the backups). This line said "migration not yet run" until 2026-08-10; the two files
+  had drifted apart, so check §5 rather than this one for migration state.
 - [ ] `audit.py --identity` reports flap history-wide, so damage predating a config fix
   still shows (muskoka: 16.75%). Add a per-snapshot breakdown, or teach the reference to
   always cross-check the per-diff summary for when the spikes stopped.
+- [ ] Work the fields `health.py --drift` found the sources adding (§2). These are
+  config edits, so they belong on this track rather than that one, and each is a
+  `city-tune` pass on a city that already has history to tally:
+  - [x] kitchener `LATITUDE, LONGITUDE` and windsor `X, Y` — done in `02ea31d9`.
+  - [x] **oakville `SUITE`** — done 2026-08-10. None of the three options the item
+    offered: `SUITE` is **0 of 71,049 rows** live and has never reached the store, so it
+    is an empty schema slot rather than a second unit column, and the re-key trap does
+    not arise. The generalisable bit is that the pre-emptive `ignore_fields` applied to
+    kitchener's and windsor's empty slots is **wrong here**, for a reason the earlier
+    entries did not have to consider: those were coordinate duplicates, whose backfill
+    could only ever be noise, whereas a backfill of a unit column is address content we
+    want to report. "Empty slot → ignore pre-emptively" is therefore not a rule; it
+    depends on what the column would carry. Written into the TOML comment. Also: seven
+    further columns in that layer are empty the same way (TOP_ALIAS, ADDR_ALIAS, POSTAL,
+    CITY, PROV, STREET_TYPE_PREFIX, STREET_DIR_PREFIX) — a layer with a lot of unfilled
+    schema, worth remembering if oakville ever looks like it changed shape.
+  - [ ] Single new props in burlington, greater-sudbury, hamilton, niagara-falls, sdg
+    and kawartha-lakes — each needs one look to say echo, class candidate, or neither.
+    Low priority: a new prop cannot fake a mass event, since a field absent from the
+    older snapshot is not a change to it.
 
 ## 2. data-integrity — ends in a trust decision about a snapshot or a run
 
