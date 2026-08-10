@@ -1,7 +1,7 @@
 # Run-log triage
 
-`health.py --runs --stale`. The job is to report only what needs a human, which means
-knowing which failures are expected.
+`health.py --runs`, read next to `addressvault report`. The job is to report only what
+needs a human, which means knowing which failures are expected.
 
 ## Not failures
 
@@ -29,35 +29,27 @@ knowing which failures are expected.
 `update.log` is rewritten each run, so its ERROR lines only describe the last one. For
 anything historical, `runs.csv` and the per-city logs are what survive.
 
-## The failure the logs cannot show
+## What runs.csv cannot show, and what to read instead
 
-**`runs.csv` cannot see a frozen source.** `run.py:86` checks the snapshot filename before
-`db.already_imported`, so when the vault serves the same dated file every day the run
-short-circuits, writes no snapshot row — not even a skip — and exits clean. Eight cities
-sat on a June file for six weeks while every day reported success.
+`runs.csv` has one row per **run**, with one exit code. It cannot express "41 cities
+verified, 1 not," so a single city whose source is down looks identical to the pipeline
+breaking. It also under-records: on 2026-08-06 and 2026-08-08 the vault logged checks for
+every city on days `runs.csv` has no row for at all.
 
-So `--runs` alone is never a health check. Read `--stale` with it, always.
+Worse, this repo's store cannot fill the gap, because it records only *changes*. A city
+verified daily that never moves writes nothing, so counting snapshot ages here flags
+cities that are perfectly healthy. A `--stale` section that did this reported 21 of 42
+STALE against a true count of 1; it was deleted on 2026-08-10.
 
-## Reading --stale
+**`addressvault report` is the per-city-per-day ledger.** One row per city per day —
+`new`, `unchanged` (verified, did not move), `failed`, `refused`, or no attempt — with the
+cause on every failure. Two things to read off it:
 
-Age is judged against each city's own gap distribution (p90), not a flat threshold, plus
-a 3-day floor. A flat number cannot separate a weekly publisher from a daily one that
-stopped — and in this catalogue almost every city was on a 1-day cadence, so multi-day
-ages are worth looking at even for cities nobody has flagged.
+- **A gap with no row** — nobody checked that day. Laptop off, `offline`, `metered`.
+- **A run of `failed` on one city** — the source is down and it is theirs, not ours.
+  Kingston 2026-08-08 and 08-09, seven attempts, all `arcgis error 500: Error invoking
+  service`. Neither day appeared as a Kingston-shaped problem in `runs.csv`; one of them
+  had no `runs.csv` row at all.
 
-The list is ranked by how far past its own rhythm each city is; read from the top and
-stop where it stops being interesting. The flag is deliberately sensitive — 18 of 42 on
-2026-08-08 — because a missed freeze is invisible and a false positive costs one glance.
-
-What the section does **not** establish is *why*. It proves we stopped recording, not
-that the source stopped publishing. Confirming which is a vault-side question, and
-`--drift` is the quickest local hint: a layer that answers `?f=json` normally is
-publishing fine, so the break is between the vault and us.
-
-Two shapes worth telling apart in the age column:
-
-- **A cliff** — daily, daily, daily, then nothing. The eight frozen cities, and
-  niagara-falls (36d after a max gap of 5).
-- **A degrading cadence** — gaps stretching 1 → 6 → 7 → 8 before stopping (cornwall), or
-  1 → 11 → 15 (london). These raise their own p90 as they degrade, so they rank *lower*
-  than a clean cliff of the same age. Don't read rank as severity.
+`--drift` is the quickest confirmation for a single city: a layer that answers `?f=json`
+normally is publishing fine, so the break is between the source and us.

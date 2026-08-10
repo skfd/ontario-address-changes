@@ -1,6 +1,6 @@
 # Operator TODO — ontario-address-changes
 
-Last updated: 2026-08-08. Tasks for the human operator. Field-coverage numbers come
+Last updated: 2026-08-10. Tasks for the human operator. Field-coverage numbers come
 from an audit of all 42 tracked cities (latest snapshot in each city DB).
 
 ## 1. Complete field selection for tracked cities
@@ -170,29 +170,48 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
   Reasonable to drop once a daily run has imported cleanly on top of the migration
   (i.e. after 2026-08-10 noon). Restoring either is a plain file copy over
   `data/<slug>/<slug>.db` with the scheduled task idle.
-- [ ] **Watch the daily scheduled task** — check `logs/` and that the site
-  commit/push ran; a silently failing source shows up as a stale "generated" date
-  on its report. `data-integrity`'s `health.py` is the one command for this.
-  Currently outstanding from it: 2026-07-31 exited 1 after three attempts, and
-  kingston's layer answers `?f=json` with "Error invoking service" (three
-  `ERROR (kingston)` lines in the last run's `update.log`).
-- [ ] **Eight cities have been frozen since 2026-06-27/28** (found 2026-08-08 while
-  working the coordinate sweep): waterloo, dufferin, elgin, lambton, peel-region,
-  sarnia, windsor, and renfrew (06-29). The vault hands back the same dated file every
-  day, so `run.py`'s filename check short-circuits before `db.already_imported` and no
-  snapshot row is written at all — not even a skip. That is why the log reads
-  `already imported: elgin-2026-06-27.geojson` six weeks on, and why elgin,
-  peel-region and waterloo are still baseline-only and unauditable. Not one dead
-  server: the eight sit on eight different hosts, and the refusal guards only landed
-  2026-08-08, so this predates them. Next step is the vault side, not this repo.
-  Because no row is written, this failure is invisible to `logs/runs.csv` (which has
-  reported success every day). That staleness check now exists —
-  `python .claude/skills/data-integrity/health.py --stale` — and it says the problem is
-  **larger than these eight**: 18 of 42 cities are past their own p90 snapshot gap.
-  Behind the eight sit niagara-falls (36d), durham (25d), thunder-bay / london /
-  chatham-kent (15d), bruce / cornwall (10d). Some of those are a clean cliff and some
-  are a cadence that decayed over weeks; either way they were never on anyone's list.
-  Still a vault-side next step, just a bigger one.
+- [ ] **Watch the daily scheduled task** — check `logs/` and that the site commit/push
+  ran. `addressvault report` is the first command (per-city-per-day: checked, unchanged,
+  failed, or no attempt); `health.py --blocks --runs` is the project-side second.
+  Currently outstanding: 2026-07-31 exited 1 after three attempts, and kingston has been
+  failing since 2026-08-08 (below).
+- [ ] **kingston: source down since 2026-08-08** — seven pull attempts across 08-08 and
+  08-09, every one `arcgis error 500: Error invoking service`. The layer answered
+  normally when probed late on 08-09 (count 77,294, first page fine), so it is
+  intermittent on their side, not URL rot. Nothing to fix here and no config to change:
+  `utility.arcgis.com/usrsvcs/servers/<guid>/` is AGOL proxying to Kingston's on-prem
+  server, and there is no hosted alternative — the AGOL search returns only this one
+  Civic Address Points service. Watch it; if the 500s persist past a week, ask the city.
+- [ ] ~~Eight cities frozen since 2026-06-27/28~~ — **wrong, retracted 2026-08-10.**
+  waterloo, dufferin, elgin, lambton, peel-region, sarnia, windsor and renfrew were
+  never frozen: the vault has pulled and verified all eight every day throughout, e.g.
+  waterloo `2026-08-09 … unchanged_since='2026-06-27'`. Their sources genuinely have not
+  changed since June. What was frozen was the *measurement* — this repo's store records
+  only changes, so a verified-but-unmoved city writes no row and reads as months stale.
+  The `health.py --stale` section built to catch it inherited the same blind spot and
+  reported 21 of 42 STALE against a true count of 1; it has been deleted rather than
+  fixed. Use `addressvault report`. (The one real finding underneath, kingston, is the
+  item above — it went unnoticed for two days inside that false list.)
+- [ ] **Observe the failure-reporting split — review 2026-08-17** (one week after the
+  2026-08-10 change). Failures moved out of the public reports and into the vault report;
+  `health.py --stale` was deleted. Check, in order:
+  1. `addressvault report` — is the city×day matrix actually the thing you reach for?
+     Does every red cell carry a cause you can act on, or do some say only "failed"?
+  2. Did kingston recover on its own, and did you notice *from the report* rather than
+     from a nonzero exit code?
+  3. `logs/runs.csv` — still under-recording? It had no row for 2026-08-06 or 08-08
+     despite the vault logging checks for every city on both days. If it is still
+     dropping runs, that ledger is next.
+  4. Did anything reach for a staleness number and not find one? If the vault report
+     answered it instead, the deletion was right; if not, note what was missing rather
+     than rebuilding `--stale`.
+  5. Public site — confirm a failing city just shows its last good data, with nothing
+     about the failure anywhere in `docs/`.
+
+  Open question deliberately left undecided: whether a city failing for N days should
+  escalate beyond the vault report (a nonzero exit, a notification). Nothing escalates
+  today — kingston's two-day outage produced only a red run. Decide it with a week of
+  evidence, not now.
 - [ ] **Per-city tuning pass** — reviewing each city's "modified" noise to pick
   `ignore_fields` (Toronto needed this — 387→3 modified), and checking whether the
   `[classes]` assignments (2026-06-12, sampled from one snapshot each) hold up against

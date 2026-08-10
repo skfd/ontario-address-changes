@@ -143,15 +143,13 @@ def cmd_update(args):
         done, failed = _update_parallel(datasets, args)
     else:
         done, failed = _update_serial(datasets, args)
-    # A city refused by the quality guards is rendered too, even though it
-    # failed: the whole point of recording the refusal is that the site says so.
-    # (The parallel path only sees an exit code, so the standing refusal is read
-    # back from the city's own store rather than passed up from the worker.)
-    from src import db
-    blocked = [ds for ds in failed if db.active_block(ds)]
-    if (done or blocked) and not args.no_report:
+    # A city that failed is not re-rendered: its pages keep whatever the last
+    # good pull left there, which is all the report ever claims to show. Why it
+    # failed is an operator question, answered by `addressvault report` against
+    # the vault's jobs/leases -- the public report never carries it.
+    if done and not args.no_report:
         from src import report
-        report.generate_all(done + blocked)
+        report.generate_all(done)
     if failed:
         sys.exit(f"update failed for: {', '.join(ds.slug for ds in failed)}")
 

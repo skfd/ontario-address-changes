@@ -1,16 +1,11 @@
-"""Triage the daily run: what has gone stale, what was refused, what failed.
+"""Triage the daily run: what was refused, what failed.
 
-    python .claude/skills/data-integrity/health.py [--stale] [--blocks]
-                                                   [--runs] [--drift] [--city SLUG]
+    python .claude/skills/data-integrity/health.py [--blocks] [--runs] [--drift]
+                                                   [--city SLUG]
 
-With no flags: stale + blocks + runs, all of which read local state only. `--drift` is
-the one section that goes to the network, so it is never in the default set.
+With no flags: blocks + runs, both of which read local state only. `--drift` is the one
+section that goes to the network, so it is never in the default set.
 
-  stale   Days since each city's last snapshot, judged against that city's own gap
-          history rather than a flat threshold. This is the ONLY place the frozen-vault
-          failure is visible: run.py checks the filename before db.already_imported, so
-          a vault serving the same dated file every day writes no snapshot row at all -
-          not even a skip - and logs/runs.csv reports the day a success.
   blocks  Pulls the import guards refused (the `blocks` table). `attempts` - how many
           days running - is what separates a transient degraded pull from a source that
           really changed and now needs a config edit.
@@ -19,6 +14,14 @@ the one section that goes to the network, so it is never in the default set.
   drift   Each arcgis layer's current field roster and copyright text against what we
           actually store. Catches URL rot, a source adding or dropping a column, and a
           licence rewrite.
+
+Whether a city was actually checked on a given day is NOT answered here. This repo's
+store records only *changes*, so a city whose source is verified daily and never moves
+has no rows to count and reads as months stale (waterloo, 2026-08: verified every noon,
+44 days without a row). `addressvault report` is the ledger for that question - it holds
+one row per city per day, with `unchanged_since` for a verified no-op and a `jobs` row
+carrying the cause for a failure. Asking here instead is what produced 21 false STALEs
+against 1 real one.
 
 Read-only, and never edits a dataset. Deciding what to do about what it finds is the
 skill's job, not this script's.
@@ -42,80 +45,18 @@ from src import db, normalize, registry
 LOGS = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(
     os.path.dirname(os.path.abspath(__file__))))), "logs")
 
-# A city is only called stale once it is past BOTH its own p90 gap and this floor.
-# Without the floor, every city that normally updates daily reports stale the moment
-# a source takes a weekend off.
-STALE_MIN_DAYS = 3
 RUNS_SHOWN = 14
 DRIFT_TIMEOUT = 60
 
 _DATE = re.compile(r"(\d{4})-(\d{2})-(\d{2})")
 
 
-def _pct(xs, p):
-    """The p-th percentile of a sorted-able list, nearest-rank."""
-    xs = sorted(xs)
-    return xs[min(len(xs) - 1, int(len(xs) * p))]
-
-
-def _snapshot_dates(ds):
-    """Every distinct date this city has a snapshot for, oldest first.
-
-    Read from the filename, which carries the date the vault stamped the pull; the
-    `downloaded` column would instead date a backfill to the day it was run.
-    """
-    if not os.path.exists(ds.db_path):
-        return []
-    conn = db.init_db(ds)
-    names = [r[0] for r in conn.execute("SELECT filename FROM snapshots ORDER BY id")]
-    conn.close()
-    out = set()
-    for n in names:
-        m = _DATE.search(n)
-        if m:
-            out.add(datetime.date(*map(int, m.groups())))
-    return sorted(out)
-
-
-def stale(datasets, today):
-    rows = []
-    for ds in datasets:
-        dates = _snapshot_dates(ds)
-        if not dates:
-            rows.append((float("inf"), ds.slug, None, 0, 0, 0, 0))
-            continue
-        age = (today - dates[-1]).days
-        gaps = [(b - a).days for a, b in zip(dates, dates[1:])]
-        # p90 of the city's own gaps, so an irregular publisher is judged by its own
-        # rhythm: toronto runs 1-6 days between snapshots and is fine at 5, while a
-        # city that has never missed a day is not fine at 5.
-        p90 = _pct(gaps, 0.9) if gaps else 0
-        rows.append((age / max(p90, 1), ds.slug, dates[-1], age, p90,
-                     max(gaps or [0]), len(dates)))
-
-    print("=== stale (days since last snapshot, vs the city's own gap history) ===")
-    print("  A frozen vault leaves no other trace: no snapshot row, no skip row, and a")
-    print("  clean exit in runs.csv. Nothing here proves the source stopped publishing -")
-    print("  only that we stopped recording it. Confirm on the vault side.\n")
-    print(f"  {'':22} {'last':>11} {'age':>5} {'p90':>5} {'max':>5} {'dates':>6}")
-    flagged = 0
-    for ratio, slug, last, age, p90, mx, n in sorted(rows, reverse=True):
-        if last is None:
-            print(f"  {slug:22} {'no snapshots at all':>11}")
-            flagged += 1
-            continue
-        bad = age > p90 and age >= STALE_MIN_DAYS
-        flagged += bad
-        print(f"  {slug:22} {last.isoformat():>11} {age:4}d {p90:4}d {mx:4}d {n:6}"
-              f"{'   <- STALE' if bad else ''}")
-    print(f"\n  {flagged} of {len(rows)} cities past their own p90 gap.")
-
-
 def blocks(datasets):
     print("\n=== refused pulls (blocks table, unresolved) ===")
-    print("  A refusal already shows on the site as a red 'needs a look' badge. What it")
-    print("  cannot decide is whether the source is degraded or genuinely different -")
-    print("  read `attempts`, then references/corrupt-pulls.md.\n")
+    print("  A refusal is invisible to readers by design - the city's pages just keep")
+    print("  their last good data. This and `addressvault report` are where it surfaces.")
+    print("  What neither can decide is whether the source is degraded or genuinely")
+    print("  different - read `attempts`, then references/corrupt-pulls.md.\n")
     any_block = False
     for ds in datasets:
         b = db.active_block(ds)
@@ -233,20 +174,18 @@ def drift(datasets):
 def main():
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    for name in ("stale", "blocks", "runs", "drift"):
+    for name in ("blocks", "runs", "drift"):
         ap.add_argument(f"--{name}", action="store_true")
     ap.add_argument("--city", help="restrict the per-city sections to one slug")
     args = ap.parse_args()
 
-    picked = {n for n in ("stale", "blocks", "runs", "drift") if getattr(args, n)}
+    picked = {n for n in ("blocks", "runs", "drift") if getattr(args, n)}
     if not picked:
-        picked = {"stale", "blocks", "runs"}
+        picked = {"blocks", "runs"}
 
     datasets = [registry.load(args.city)] if args.city else registry.load_all()
     today = datetime.date.today()
 
-    if "stale" in picked:
-        stale(datasets, today)
     if "blocks" in picked:
         blocks(datasets)
     if "runs" in picked:

@@ -40,15 +40,6 @@
     .city-name { font-weight:600; font-size:15px; }
     .city-sub { font-size:12px; color:var(--text-dim); margin-top:2px; }
     .city-highlight { color:var(--accent); }
-    /* A city whose pull was refused by the quality guards. The stats stay --
-       the data is sound, it just stopped moving -- but the row has to be
-       findable while scanning 42 of them. */
-    .city-link.is-blocked { border-color:var(--red); border-left:4px solid var(--red);
-      padding-left:13px; }
-    .city-blocked { color:var(--red); }
-    .badge-blocked { display:inline-block; font-size:10px; font-weight:600; padding:1px 7px;
-      border-radius:999px; border:1px solid var(--red); color:var(--red);
-      text-transform:uppercase; letter-spacing:0.04em; margin-left:8px; vertical-align:1px; }
     .city-right { text-align:right; white-space:nowrap; }
     .city-count { font-weight:600; font-variant-numeric:tabular-nums; }
     .city-delta { font-size:12px; margin-top:2px; }
@@ -159,13 +150,11 @@
     <div class="cities">
       {% for c in cities %}
       <div class="city-row">
-        <a class="city-link{{ ' is-blocked' if c.blocked }}" href="{{ c.slug }}/index.html">
+        <a class="city-link" href="{{ c.slug }}/index.html">
           <div class="city-main">
-            <div class="city-name">{{ c.provider }}{% if c.blocked %}<span class="badge-blocked">needs a look</span>{% endif %}</div>
+            <div class="city-name">{{ c.provider }}</div>
             <div class="city-sub">{{ c.license_name }} · last snapshot {{ c.last_date }} · {{ c.report_count }} report{{ 's' if c.report_count != 1 else '' }}</div>
-            {% if c.blocked %}
-            <div class="city-sub city-blocked">updates paused since {{ c.blocked.since }}: {{ c.blocked.reason }}</div>
-            {% elif c.highlight %}<div class="city-sub city-highlight">latest: {{ c.highlight }}</div>{% endif %}
+            {% if c.highlight %}<div class="city-sub city-highlight">latest: {{ c.highlight }}</div>{% endif %}
           </div>
           <div class="city-right">
             <div class="city-count">{{ "{:,}".format(c.row_count) }}</div>

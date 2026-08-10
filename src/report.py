@@ -462,16 +462,10 @@ def generate_all(datasets):
             for m in meta for s in m["new_streets"]
         ][:15]
 
-        # A refused pull is the one state the report cannot infer from the store:
-        # the day it covers is deliberately absent. Carried onto both the city
-        # page and its landing row so a stalled city is visible without opening
-        # it, and stays visible until a good pull clears it.
-        blocked = db.active_block(ds)
-
         with open(os.path.join(DOCS_DIR, ds.slug, "index.html"), "w", encoding="utf-8") as f:
             f.write(_env.get_template("city_index.html").render(
                 provider=ds.provider, license_name=ds.license_name,
-                source_url=source_url, reports=meta, blocked=blocked,
+                source_url=source_url, reports=meta,
                 recent_new_streets=recent_new_streets,
                 compared_fields=compared, ignored_fields=ignored))
 
@@ -489,7 +483,6 @@ def generate_all(datasets):
             "report_count": sum(1 for m in meta if m["filename"]),
             "compared_fields": compared, "ignored_fields": ignored,
             "no_changes": no_changes, "hull": _hull_geometry(ds),
-            "blocked": blocked,
         }
         cities.append(card)
         # Persist the landing card so a single-city update still leaves the

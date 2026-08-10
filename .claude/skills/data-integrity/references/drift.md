@@ -49,10 +49,11 @@ the whole argument for doing it while the column is empty.
 
 ## Two things that will mislead you
 
-- **A frozen city accumulates drift that is not new.** Its store stopped in June, so
-  everything the source added since reads as new. Check `--stale` first and read the
-  drift of a frozen city as "what changed while we weren't looking", not "what changed
-  today".
+- **A city that stopped recording accumulates drift that is not new.** Its store stopped
+  in June, so everything the source added since reads as new. Check `addressvault report`
+  first: if the city has been pulled and `unchanged` all along, the drift is real and
+  today's. If it genuinely has not been pulled, read the drift as "what changed while we
+  weren't looking", not "what changed today".
 - **Static sources are not probed at all** (toronto, waterloo). `access = "static"` means
   a file download with no layer metadata to ask, so drift there has to be found by
   inspecting a file in `data/<slug>/`.

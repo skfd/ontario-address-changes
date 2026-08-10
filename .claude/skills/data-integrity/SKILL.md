@@ -1,6 +1,6 @@
 ---
 name: data-integrity
-description: Decide whether to trust a snapshot or a run - triage a mass event as a real upstream change or a degraded pull, repair a store that recorded a bad snapshot, separate genuine daily-run failures from expected skips, and check the 42 sources for URL rot, schema drift or licence changes. Use when the daily run did something weird, when a city shows a refusal badge or has stopped updating, when a report shows an implausible mass event, when logs/runs.csv or logs/update.log needs reading, or on any request to check the health of the pipeline rather than the config of a city.
+description: Decide whether to trust a snapshot or a run - triage a mass event as a real upstream change or a degraded pull, repair a store that recorded a bad snapshot, separate genuine daily-run failures from expected skips, and check the 42 sources for URL rot, schema drift or licence changes. Use when the daily run did something weird, when a city was refused by the guards or has stopped updating, when a report shows an implausible mass event, when logs/runs.csv or logs/update.log needs reading, or on any request to check the health of the pipeline rather than the config of a city.
 ---
 
 # Data integrity
@@ -13,15 +13,24 @@ and stop.
 
 ## Start here
 
+**"Was every city checked?" is a vault question.** Open the operator report — one row per
+city per day, `new` / `unchanged` / `failed` / `refused` / `no attempt`, each failure
+carrying its cause:
+
+```
+python -m addressvault.cli report      # writes <vault>/report.html; daily-update.ps1 runs it
+```
+
+Then, for the project-side questions:
+
 ```
 python .claude/skills/data-integrity/health.py
 ```
 
-Sections: `stale`, `blocks`, `runs` (all local). `--drift` adds the one network pass and
-is deliberately not in the default set. Narrow with `--city <slug>`.
+Sections: `blocks`, `runs` (both local). `--drift` adds the one network pass and is
+deliberately not in the default set. Narrow with `--city <slug>`.
 
-That one command covers three of the four questions below. Read the reference for
-whichever it turns up, then decide.
+Read the reference for whatever the two turn up, then decide.
 
 | What you are looking at | Read |
 |---|---|
@@ -48,8 +57,8 @@ Do not re-derive these; they landed 2026-08-08 and change what is worth looking 
 - **Row-count cliffs and stripped fields** — `db._check_sanity` refuses a snapshot more
   than 5% below the previous row count, or with a mapped field losing more than half its
   populated share. It writes the reason to the city's `blocks` table *before* raising,
-  so the refusal is visible on the site as a red "needs a look" badge rather than only
-  in a log.
+  so `health.py --blocks` can see it. It is deliberately **not** on the public site — see
+  below.
 - **Recovery** — a pull that passes clears the block by itself, including the unchanged
   republish that takes the content-hash skip path. Nobody has to clear it by hand.
 
@@ -57,15 +66,38 @@ So the leftovers are what this skill is for: a degraded pull small enough to pas
 thresholds, a city failing the guard every day because the source genuinely changed, and
 the failure modes the guards were never in a position to see.
 
-## The failure that is invisible everywhere else
+## Never ask this repo's store whether a city was checked
 
-`run.py:86` checks the snapshot filename before `db.already_imported`, so when the vault
-hands back the same dated file every day, **no snapshot row is written at all — not even
-a skip** — and `logs/runs.csv` records the day as a clean success. Eight cities sat
-frozen on a June file for six weeks without a single log line saying so.
+It does not know, and it will answer anyway. This store records only **changes**:
+`run.py:86` checks the snapshot filename before `db.already_imported`, so a city whose
+source is verified every day and simply never moves writes no row at all — not even a
+skip. Waterloo was pulled at noon every day through August 2026 and had not written a row
+since June 27. Measured here, it reads as 44 days stale. It was never stale.
 
-`health.py --stale` is the only place this surfaces. It reads max snapshot age per city
-and judges it against that city's own gap history, because a flat threshold cannot tell
-a weekly publisher from a daily one that stopped. Note what it does *not* prove: that the
-source stopped publishing. It proves only that we stopped recording. Confirming which is
-a vault-side question.
+A `health.py --stale` section used to do exactly that and reported **21 of 42 cities
+STALE when the true number was 1**. It was deleted on 2026-08-10 rather than fixed; two
+staleness implementations disagreeing is what let Kingston fail two days running without
+anyone noticing.
+
+The vault holds the real ledger — one row per city per day:
+
+```
+Snapshot(slug='waterloo', date='2026-08-09', unchanged_since='2026-06-27',
+         sha256='a1e0bb…', features=55543, fetched_at='2026-08-09T16:02:31Z')
+```
+
+`fetched_at` = we checked. `unchanged_since` = and it had not moved. A day with **no row**
+is a day nobody checked; a day with a `jobs` row in state `failed` / `refused` / `deferred`
+is a day somebody tried and it did not work, with the cause in `detail`. Read it through
+`addressvault report`.
+
+## Failures are back-office only
+
+The public reports never say a city failed. A city that fails is simply not re-rendered
+(`run.py`), so its pages keep the last good data and say nothing about why they stopped
+moving. Refusal badges and "updates paused" panels were removed from `cities.html` and
+`city_index.html` on 2026-08-10.
+
+So a reader cannot tell you a city is stuck — only `addressvault report` and
+`health.py --blocks` can. That is the intended trade: the operator's problem stays the
+operator's.
