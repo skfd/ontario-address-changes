@@ -58,29 +58,54 @@ These cities are imported and tracking, but their field maps need a human decisi
   `ignore_fields` + `keep_fields` so its echo cannot manufacture updates while the values
   stay in `props`. Left alone for now — it is 14 rows, and unlike hastings' 2,721 there
   is no volume argument either way.
-- [ ] No full-address field selected — reports fall back to "number street" (works,
-  but omits units). Check each source layer for a full-address column; select it if
-  one exists, otherwise note "source has none" in the TOML comment:
-  - [ ] durham
-  - [ ] hamilton
-  - [ ] niagara-falls
-  - [x] peel-region — source has none, confirmed 2026-08-10 against the live field list
-    (every prop and its fill rate; nothing address-like beyond STREETNUM/STREETNAME/
-    UNIT_IDENTIFIER). Noted in the TOML.
-  - [ ] wellington
-- [ ] No unit field selected — most were recorded as "source publishes no unit field"
-  during onboarding; do one verification pass over each source schema:
-  - [ ] toronto (especially — the old importer never looked)
-  - [ ] brantford
-  - [ ] chatham-kent
-  - [x] dufferin — verified 2026-08-10 against the live layer: 9 fields total (ID,
-    STREETNUM, FULLADDY, STREETNAME, EASTINGX, NORTHINGY, LONGITUDEX, LATITUDEY, FID).
-    No unit column exists, and nothing else is unstored either — the bare config is a
-    bare source, not an oversight.
-  - [ ] lambton
-  - [ ] peterborough-county
-  - [ ] sarnia
-  - [ ] thunder-bay
+- [x] **No full-address field selected — all five checked 2026-08-10, all five confirmed
+  "source has none."** Every layer's live field list was read in full and every candidate
+  column's fill rate measured; each TOML now says so in a comment rather than leaving the
+  silence ambiguous. Reports keep falling back to "number street", which is correct here.
+  - [x] durham (21 fields), hamilton (13), niagara-falls (15), peel-region, wellington (13)
+
+  One consequence found on the way, in durham only: `CIVIC_SFX`, the house-number suffix,
+  is a separate column populated on 1,173 of 253,570 rows (0.5%), and with no `full` to
+  fall back on those addresses display without it. Not fixable in config — the field map
+  is 1:1, not a concatenation — and not an identity risk, since `MXADDRESSCODE` is a real
+  `key_field`. The value is stored and compared in `props` either way. Noted, not open.
+- [x] **No unit field selected — all eight checked 2026-08-10.** Seven confirm "source
+  publishes no unit column"; one does not, and is the new item below. Each source's field
+  list was read live (toronto from its geojson, having no layer metadata to query), and
+  because a missing *column* does not mean missing *data*, every city's number/full column
+  was also scanned for units embedded as `<unit>-<number>`. Ranges were separated from
+  units by a test a range cannot pass: many distinct left parts sharing one right part.
+  - [x] toronto — 37 properties, nothing unit-like, `unit` null on all 525,473 rows. Its
+    1,635 hyphenated numbers are all LO_NUM-HI_NUM ranges, which is what the `keep_fields`
+    range gate already assumes. The "old importer never looked" worry is now closed.
+  - [x] **brantford — the exception: units exist, and we are not tracking them.** See below.
+  - [x] chatham-kent (10 fields, 2 hyphens, one a range), dufferin (9 fields — verified
+    2026-08-10; the bare config is a bare source, not an oversight), lambton (11 fields,
+    7 embedded `<number>-<unit>`), peterborough-county (9 fields, ~31 embedded),
+    sarnia (15 fields; its 11 hyphens are all ranges), thunder-bay (17 fields, 14 embedded)
+  - Of the embedded stragglers, none exceeds 0.1% of its city, so all are noted in the
+    TOMLs rather than parsed. Two thunder-bay fields that look like unit candidates are
+    not: `ADDRESS_QUALIFIER` is a house-number suffix (A, B, 1/2) and `SPLITLOC` is which
+    side of a split street the point is on (part of the street name, "FREDERICA ST E").
+- [ ] **brantford — units are published, embedded in the number, and unmapped.** Found
+  2026-08-10 by the pass above. 2,213 of 38,981 rows (5.7%) carry `STREETNUM` /
+  `FULLADDRESS` in `<unit>-<number>` form, and they are unambiguously units rather than
+  ranges: 177 distinct left parts share the right part "77", 138 share "21", 116 share
+  "20" — no house-number range can repeat its high end across 177 low ends. (The other
+  436 hyphenated rows read left>=right and are ranges proper.) So this is waterloo's
+  decision, not dufferin's: have the unit parsed out of `STREETNUM`, or accept that 5.7%
+  of brantford displays as "12-73 MORTON AVE W" with no unit field. Note the cost either
+  way — identity synthesizes from `["number", "street"]`, so adding `unit` re-keys all
+  38,981 rows and cannot be applied retroactively.
+- [ ] **thunder-bay — `number` drops the house suffix on 347 rows.** Found 2026-08-10, the
+  hastings trap in a third city. `number` maps to `ADDRESS_NUMBER`, an Integer, so it holds
+  "688" where the String `ADDRESS` column holds "688B" and `full` (`COMPLETE`) shows "688B
+  CITY RD"; the two disagree on 347 of 45,098 rows. `ADDRESS` is the column that should
+  have been mapped. Weaker than hastings on both sides of the trade: only 347 rows rather
+  than 2,721, but also cheaper to live with, because `full` already displays the suffix and
+  `ADDRESS` is stored and compared in `props` regardless. Remapping re-keys all 45,098
+  (synth from `["number", "street"]`) and is not retroactive. Leave it unless the display
+  gap starts mattering.
 - [ ] Spot-check low coverage — open a handful of the blank rows and judge: wrong
   column selected, or genuinely unaddressed points (towers, outbuildings)? Note the
   verdict in each TOML:
@@ -125,11 +150,31 @@ event). These are all additions.
   here, because a backfill of a unit column is content we want. Seven more columns in
   that layer are empty the same way (TOP_ALIAS, ADDR_ALIAS, POSTAL, CITY, PROV,
   STREET_TYPE_PREFIX, STREET_DIR_PREFIX).
-- [ ] Single new props, each worth one look for whether it is a class candidate, an echo,
-  or nothing: burlington `PROPERTYDESCASSESS`, greater-sudbury `STREETPREFIX`, hamilton
-  `SETTLEMENT` (hamilton has no full-address field selected — see §1), niagara-falls
-  `StreetNoUpper`, sdg `LabelFullMod`, kawartha-lakes `StreetDirectionPrefix`,
-  `StreetNameAlt2`, `StreetParity`.
+- [x] **Single new props — all eight looked at 2026-08-10, and the answer is the same for
+  every one: an empty schema slot.** burlington `PROPERTYDESCASSESS` (0 of 60,326),
+  greater-sudbury `STREETPREFIX` (0 of 70,100), hamilton `SETTLEMENT` (0 of 273,459),
+  niagara-falls `StreetNoUpper` (0 of 207,958), sdg `LabelFullMod` (0 of 33,630),
+  kawartha-lakes `StreetDirectionPrefix` / `StreetNameAlt2` / `StreetParity` (0 of 44,213
+  each). Live counts by `returnCountOnly`, cross-checked against every store: not one has
+  ever reached `props`, over 191 snapshots between them. So none is an echo, none is a
+  class candidate *yet*, and none can fake anything today.
+
+  **None was ignored**, which is the point worth keeping. The pre-emptive `ignore_fields`
+  that kitchener's and windsor's empty slots got is right for a coordinate duplicate and
+  wrong for all eight of these, by the rule oakville's `SUITE` established: it depends on
+  what the column would carry if filled, and every one of these would carry address
+  content (street prefixes, a full-address variant, a range's upper bound) or a real
+  boundary. Suppressing that backfill is exactly what we would not want.
+
+  One config edit came out of it: hamilton's `SETTLEMENT` joined `[classes] boundary`,
+  ahead of any data, on the same reasoning as burlington's `NAME` — `[classes]` is
+  report-time and retroactive, so carrying it costs nothing and it keeps a settlement
+  backfill out of the generic Updated table. Grouped as boundary on the sdg precedent.
+  Verified: regenerating all 21 hamilton reports changed nothing but the timestamp line.
+
+  Nearly-empty siblings noticed alongside, all subsumed by mapped fields and left alone:
+  greater-sudbury `STREETSUFFIX` (12 rows), `ADDRESSNUMBERPREFIX` (17),
+  `ADDRESSNUMBERSUFFIX` (372).
 - [ ] **renfrew** — 71 fields live against far fewer stored, but renfrew is frozen at
   06-29, so most of that is drift accumulated while we were not looking rather than a
   real roster change. Re-run `--drift` once it unfreezes before acting on it.
@@ -261,9 +306,10 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
      Does every red cell carry a cause you can act on, or do some say only "failed"?
   2. Did kingston recover on its own, and did you notice *from the report* rather than
      from a nonzero exit code?
-  3. `logs/runs.csv` — still under-recording? It had no row for 2026-08-06 or 08-08
-     despite the vault logging checks for every city on both days. If it is still
-     dropping runs, that ledger is next.
+  3. `logs/runs.csv` — still under-recording? **Half of this premise was wrong; see the
+     item below.** Of the two rowless days, 08-06 is a genuine ledger drop (machine awake
+     across noon, 3 vault snapshots pulled, no row) and 08-08 is not (machine asleep
+     through noon, so no run existed to record). Judge the ledger on 08-06's shape only.
   4. Did anything reach for a staleness number and not find one? If the vault report
      answered it instead, the deletion was right; if not, note what was missing rather
      than rebuilding `--stale`.
@@ -274,6 +320,37 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
   escalate beyond the vault report (a nonzero exit, a notification). Nothing escalates
   today — kingston's two-day outage produced only a red run. Decide it with a week of
   evidence, not now.
+- [ ] **A sleeping laptop skips the day silently — half fixed 2026-08-12.** Found while
+  checking why 08-12 had no run at all: no `runs.csv` row, zero lines in `update.log`, no
+  vault snapshots pulled, and the task itself reporting `LastRunTime = 08-11 12:00` with
+  `NextRunTime = 08-13 12:00`. The cause is in the System log's Kernel-Power events, not
+  in this repo: the machine entered Modern Standby at 05:33 and did not exit until 21:51,
+  so noon fell inside the sleep and `WakeToRun = False` meant nothing woke it. The same
+  power log explains 08-08 (asleep 02:11–13:16). It does *not* explain 08-06, which was
+  awake across noon — that one is a real `runs.csv` drop, and is now the only evidence for
+  the ledger question in the review item above.
+
+  `StartWhenAvailable = True` does **not** rescue this. The machine woke at 21:51 and 12
+  minutes later no catch-up had fired and `NextRunTime` still read 08-13, so a missed noon
+  is simply lost. Worth knowing because that setting reads like it covers exactly this.
+
+  Fixed the direct cause the same day: `WakeToRun = True` on `kk-ontario-update`. **The
+  remaining hole is `DisallowStartIfOnBatteries`, still `True`** — a wake at noon on
+  battery skips just as silently as the sleep did, and this is a laptop. Left alone
+  deliberately rather than cleared: a ~30-minute network job on battery is its own
+  problem, and the existing script already treats power-ish conditions as first-class
+  (`offline`, `metered` are recorded as run outcomes, not failures). The right fix is
+  probably to record a battery skip the same way instead of allowing the run — but that
+  is a change to `daily-update.ps1`, and the task-level skip happens *before* the script
+  gets to say anything, so it cannot see it. Decide at the 08-17 review.
+
+  The broader point for that review: this failure mode is invisible to every surface we
+  have. `addressvault report` shows "no attempt", which is also what a metered skip shows;
+  `runs.csv` shows nothing at all; the site just goes stale. It is the same blind spot the
+  deleted `health.py --stale` had, arriving from the opposite direction — that one
+  measured the store and missed unchanged cities, this one misses days the pipeline never
+  ran. Question 4 of the review ("did anything reach for a staleness number") should be
+  read with this in mind.
 - [ ] **Per-city tuning pass** — reviewing each city's "modified" noise to pick
   `ignore_fields` (Toronto needed this — 387→3 modified), and checking whether the
   `[classes]` assignments (2026-06-12, sampled from one snapshot each) hold up against
