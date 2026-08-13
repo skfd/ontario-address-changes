@@ -24,9 +24,20 @@ change classes, ignore/keep fields, and onboarding, over one `audit.py` pass.
 
 Remaining work on it:
 
-- [ ] Work `TODO.md` §1 with it: waterloo's unparsed `CIVIC_ADDR`, lennox-addington's
-  `ADD_LABEL`, the five cities with no full-address field, the unit-field verification
-  pass starting with toronto. The skill exists; the decisions are still open.
+- [ ] Work `TODO.md` §1 with it. **The two schema sweeps are done (2026-08-10)** — the
+  five cities with no full-address field (all five confirmed the source has none) and the
+  unit-field verification pass across all eight including toronto. What is left on this
+  line is the two parsing decisions, waterloo's unparsed `CIVIC_ADDR` and
+  lennox-addington's `ADD_LABEL`, plus the one the sweep added: **brantford publishes
+  units embedded in `STREETNUM` as `<unit>-<number>` on 5.7% of rows**, which is waterloo's
+  question again in a second city.
+
+  Worth generalising from it: "the source has no unit column" and "the source has no units"
+  are different claims, and onboarding recorded the first as if it were the second. Six of
+  the seven cities were fine; brantford was not, and would not have been caught by reading
+  the field list alone. The cheap test is to scan the number/full column for
+  `<a>-<b>` and check whether many distinct left parts share one right part — a house-number
+  range cannot do that, so the pattern separates units from ranges without judgement.
 - [ ] Give every city one `city-tune` pass. This started narrower — a screen over all 42
   (regex on prop names in the latest snapshot vs `ignore_fields`) found 8 carrying
   unignored coordinate duplicates, none of which had ever recorded a Location Adjustment.
@@ -245,10 +256,21 @@ Remaining work on it:
     further columns in that layer are empty the same way (TOP_ALIAS, ADDR_ALIAS, POSTAL,
     CITY, PROV, STREET_TYPE_PREFIX, STREET_DIR_PREFIX) — a layer with a lot of unfilled
     schema, worth remembering if oakville ever looks like it changed shape.
-  - [ ] Single new props in burlington, greater-sudbury, hamilton, niagara-falls, sdg
-    and kawartha-lakes — each needs one look to say echo, class candidate, or neither.
-    Low priority: a new prop cannot fake a mass event, since a field absent from the
-    older snapshot is not a change to it.
+  - [x] Single new props in burlington, greater-sudbury, hamilton, niagara-falls, sdg
+    and kawartha-lakes — done 2026-08-10, and all eight are the same answer: **empty
+    schema slots**, 0 rows live apiece and never once present in `props` across the 191
+    snapshots between them. So the "echo, class candidate, or neither" question does not
+    resolve yet for any of them, and the right move for all eight was to document and
+    leave them compared, per the oakville `SUITE` rule — an empty slot is only worth a
+    pre-emptive ignore when a backfill could carry nothing but noise, which is true of a
+    coordinate duplicate and false of every one of these. One edit: hamilton `SETTLEMENT`
+    joined `[classes] boundary` ahead of any data (report-time, retroactive, free to
+    carry). Numbers in `TODO.md` §1b.
+
+    The low-priority reasoning in this item held up, and is now sharper than "a new prop
+    cannot fake a mass event": all eight are *unfillable* today, so they cannot even churn.
+    What they can do is arrive, which is why each is documented in its TOML with the
+    verdict to apply if it does.
 
 ## 2. data-integrity — ends in a trust decision about a snapshot or a run
 

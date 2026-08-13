@@ -18,6 +18,9 @@ synth_fields = ["number", "street"]
 number = "ADDRESS_NUMBER"
 street = "STREET_NAME"                          # STREET_DIR/COMMUNITY_NAME tracked via the props blob
 full   = "BASE_ADDRESS"
+# unit: source has none, confirmed 2026-08-10 against the live field list (10 fields, all
+# accounted for) — and none embedded either: exactly 2 of 58,809 ADDRESS_NUMBER values
+# carry a hyphen, one of them a range ("27-29"). Unlike brantford, nothing to parse out.
 
 # Change classes (field values verified against the latest snapshot): a
 # modification touching only these fields is reported in its humanized section

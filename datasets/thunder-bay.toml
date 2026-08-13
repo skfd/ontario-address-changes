@@ -15,9 +15,23 @@ key_field = ""                                 # synthesize
 synth_fields = ["number", "street"]
 
 [fields]                                        # source property -> canonical name
-number = "ADDRESS_NUMBER"
+number = "ADDRESS_NUMBER"                       # the bare integer; ADDRESS carries the combined form
 street = "STREET"                               # ROWTYPE/ROOT/TYPE/PCL_PIN tracked via the props blob
 full   = "COMPLETE"
+# unit: source has none, confirmed 2026-08-10 against the live field list (17 fields, all
+# accounted for). Two fields look like candidates and are not: ADDRESS_QUALIFIER (339 rows)
+# is a HOUSE-NUMBER suffix — 'A', 'B', '1/2', '-1' — and SPLITLOC (10,150 rows) is which
+# side of a split street the point sits on, E/N/S/W, i.e. part of the street name
+# ("FREDERICA ST E"). 14 of 45,098 ADDRESS values embed a unit as "<number>-<unit>"
+# (270-1 .. 270-5), which at 0.03% is noted rather than parsed.
+#
+# NOTE, the hastings shape (found 2026-08-10): `number` maps to ADDRESS_NUMBER, an Integer,
+# so it DROPS the house suffix on the 347 rows where the two disagree — "688" as the number
+# vs "688B CITY RD" as the full address. The String ADDRESS column carries the combined
+# form and is the column that should have been mapped. Not changed here, and not urgent:
+# `full` (COMPLETE) keeps the suffix so the reports display it, ADDRESS is stored and
+# compared in props either way, and identity synthesizes from ["number", "street"] — so a
+# remap re-keys all 45,098 rows and cannot be applied retroactively. Decision in TODO.md §1.
 
 # Change classes (field values verified against the latest snapshot): a
 # modification touching only these fields is reported in its humanized section

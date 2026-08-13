@@ -17,6 +17,13 @@ synth_fields = ["number", "street", "unit"]   # fallback only if a row ever lack
 number = "CIVIC_NUM"
 street = "ROAD_NAME"              # ROAD_TYPE/ROAD_DIR are separate source fields, tracked via the props blob
 unit   = "UNIT_NUM"              # real suite value (e.g. "2-61"); UNIT is just a Y/N has-unit flag
+# full: the layer publishes no combined address column (confirmed 2026-08-10 against the
+# live field list, 21 fields); reports fall back to "number street". One consequence worth
+# knowing: CIVIC_SFX, the house-number suffix, is a separate column populated on 1,173 of
+# 253,570 rows (0.5%), so those addresses display without their suffix. Nothing here can
+# fix that — the field map is 1:1, not a concatenation — and the value is stored and
+# compared in props regardless. Unlike hastings/thunder-bay it is at least not an identity
+# risk: MXADDRESSCODE is a real key_field, so number is a fallback only.
 
 # Change classes (field values verified against the latest snapshot): a
 # modification touching only these fields is reported in its humanized section

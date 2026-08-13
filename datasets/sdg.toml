@@ -17,6 +17,11 @@ number = "Address_Nu"
 street = "Street_Nam"                           # StrNamAlia/Unit_Type/Settlement tracked via the props blob
 unit   = "UnitNum"
 full   = "LabelFull"
+# LabelFullMod is the field health.py --drift saw the source add on 2026-08-08. Checked
+# 2026-08-10: an EMPTY SCHEMA SLOT — 0 of 33,630 rows live, never present in props across
+# all 30 snapshots. Not ignored (cf. oakville's SUITE): the name says it is a modified
+# LabelFull, so a backfill would be a competing full-address string rather than noise —
+# worth seeing, and worth revisiting which of the two `full` should map to if it fills.
 
 # Change classes (field values verified against the latest snapshot): a
 # modification touching only these fields is reported in its humanized section

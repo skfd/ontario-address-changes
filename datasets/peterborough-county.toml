@@ -17,6 +17,10 @@ synth_fields = ["number", "street"]            # fallback; no unit field publish
 number = "ADDRNUM"
 street = "FULLNAME"                             # PLACENAME/MUNICIPALI/AddressCla tracked via the props blob
 full   = "FULLADDR"
+# unit: source has none, confirmed 2026-08-10 against the live field list (9 fields, all
+# accounted for). 54 of 40,532 ADDRNUM values carry a hyphen; ~31 of those are
+# "<number>-<unit>" (1579-1 .. 1579-18, one building) and the rest are ranges. 0.08% —
+# noted rather than parsed, cf. brantford where the same pattern covers 5.7%.
 
 # Change classes (field values verified against the latest snapshot): a
 # modification touching only these fields is reported in its humanized section

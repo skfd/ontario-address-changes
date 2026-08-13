@@ -18,7 +18,16 @@ synth_fields = ["number", "street", "unit"]   # fallback only if a row ever lack
 number = "Full_StreetNo"
 street = "StreetName"             # StreetType/StreetDir are separate source fields, tracked via the props blob
 unit   = "Unit"
-# No combined full-address field is published; `full` stays empty.
+# No combined full-address field is published; `full` stays empty. Re-confirmed 2026-08-10
+# against the live field list (15 fields, all accounted for).
+#
+# StreetNoUpper is the field health.py --drift saw the source add on 2026-08-08. Checked
+# 2026-08-10: an EMPTY SCHEMA SLOT — 0 of 207,958 rows live, never present in props across
+# all 20 snapshots. Deliberately NOT added to ignore_fields alongside its neighbour
+# StreetNo, for the reason oakville's SUITE established: the pre-emptive ignore is right
+# for a coordinate echo and wrong for a column that would carry address content. StreetNo
+# is ignored because it duplicates the mapped number; StreetNoUpper, if the city ever
+# fills it, is the top of a house-number range, which is content we would want to see.
 
 # Change classes (field values verified against the latest snapshot): a
 # modification touching only these fields is reported in its humanized section

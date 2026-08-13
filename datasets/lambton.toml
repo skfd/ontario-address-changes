@@ -14,6 +14,9 @@ synth_fields = ["number", "street"]     # no unit field is published
 number = "STNUM"
 street = "STNAME"                        # STTYPE/STDIR (and abbreviations) tracked via the props blob
 full   = "ADDRESS"
+# unit: source has none, confirmed 2026-08-10 against the live field list (11 fields, all
+# accounted for). 7 of 56,903 STNUM values embed one as "<number>-<unit>" (1140-1 .. 1140-4)
+# — the reverse order from brantford's, and at 0.01% not worth parsing for.
 
 # Change classes (field values verified against the latest snapshot): a
 # modification touching only these fields is reported in its humanized section

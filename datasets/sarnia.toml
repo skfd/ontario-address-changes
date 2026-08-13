@@ -17,6 +17,10 @@ synth_fields = ["number", "street"]
 number = "STNUM"
 street = "STNAME"                               # STTYPE/STDIR components tracked via the props blob
 full   = "ADDRESS"
+# unit: source has none, confirmed 2026-08-10 against the live field list (15 fields, all
+# accounted for). The 11 hyphenated STNUM values of 26,932 are all house-number RANGES
+# ("1111-1115", "80-120") — every one reads low-to-high and no right part repeats, so
+# there is nothing embedded here to parse, unlike brantford.
 
 # Change classes (field values verified against the latest snapshot): a
 # modification touching only these fields is reported in its humanized section

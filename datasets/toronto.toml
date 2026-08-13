@@ -51,7 +51,14 @@ synth_fields = ["full"]         # fallback when key_field is null on a row
 number = "ADDRESS_NUMBER"
 street = "LINEAR_NAME_FULL"
 full   = "ADDRESS_FULL"
-# Toronto address points carry no unit field
+# Toronto address points carry no unit field. VERIFIED 2026-08-10 rather than assumed —
+# this was the "the old importer never looked" item in TODO.md §1. The source is static,
+# so there is no layer metadata to query: the check was the property list of a real
+# feature in toronto-2026-06-24.geojson (37 properties, all accounted for; nothing
+# unit-like) plus the store, where `unit` is null on all 525,473 rows of the latest
+# snapshot. Nothing is embedded in the number either — 1,635 hyphenated ADDRESS_NUMBER
+# values exist and every one is a LO_NUM-HI_NUM range ("2208-2210 Kingston Rd"), which is
+# what the range safety gate in keep_fields above is built around.
 
 # Change classes (field values verified against the latest snapshot): a
 # modification touching only these fields is reported in its humanized section

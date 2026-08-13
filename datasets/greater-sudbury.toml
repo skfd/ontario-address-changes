@@ -17,6 +17,13 @@ number = "ADDRESSNUMBER"
 street = "FULLSTREETNAME"                        # BASESTREETNAME/STREETTYPE/COMMUNITY tracked via the props blob
 unit   = "UNIT_OR_AMENITY"
 full   = "FULLADDRESSTEXT"
+# STREETPREFIX is the field health.py --drift saw the source add on 2026-08-08. Checked
+# 2026-08-10: an EMPTY SCHEMA SLOT — 0 of 70,100 rows live, never present in props across
+# all 58 snapshots. Not ignored (cf. oakville's SUITE): a filled street prefix is part of
+# the street name, i.e. content, not an echo. Three sibling columns are near-empty the
+# same way — STREETSUFFIX 12 rows, ADDRESSNUMBERPREFIX 17, ADDRESSNUMBERSUFFIX 372 — and
+# all four are subsumed by the mapped FULLSTREETNAME / FULLADDRESSTEXT, so nothing is lost
+# in display today.
 
 # Change classes (field values verified against the latest snapshot): a
 # modification touching only these fields is reported in its humanized section

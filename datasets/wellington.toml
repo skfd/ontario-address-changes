@@ -17,6 +17,9 @@ synth_fields = ["number", "street", "unit"]
 number = "Address"
 street = "WC_FullNam"                           # WC_Name/Suffix/Dir/Municipality/UrbanCentre tracked via the props blob
 unit   = "Unit"
+# full: source has none, confirmed 2026-08-10 against the live field list (13 fields, all
+# accounted for — the WC_* set are road-name components, not a combined address); reports
+# fall back to "number street". Matches what the [identity] comment above already assumed.
 
 # Change classes (field values verified against the latest snapshot): a
 # modification touching only these fields is reported in its humanized section

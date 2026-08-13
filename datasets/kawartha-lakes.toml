@@ -15,6 +15,13 @@ number = "StreetNumber"
 street = "StreetNameFull"                        # StreetType/Direction components tracked via the props blob
 unit   = "UnitNumber"
 full   = "FullAddress"
+# StreetDirectionPrefix, StreetNameAlt2 and StreetParity are the fields health.py --drift
+# saw the source add on 2026-08-08. Checked 2026-08-10: all three are EMPTY SCHEMA SLOTS —
+# 0 of 44,213 rows live apiece, and none has ever been present in props across all 24
+# snapshots. Not ignored (cf. oakville's SUITE): the first two are street-name content if
+# they ever fill, and StreetParity (odd/even side) would be a class candidate rather than
+# an echo. The city's one open item remains the Xlong/Ylat pair — a faithful coordinate
+# echo, max 1.32 m at p99, left compared deliberately (see TODO-skills.md §1).
 
 # Change classes (field values verified against the latest snapshot): a
 # modification touching only these fields is reported in its humanized section

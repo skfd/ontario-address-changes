@@ -12,6 +12,14 @@ key_field = ""                                 # synthesize from address + round
 synth_fields = ["number", "street"]            # no unit field in this layer (cf. lambton)
 
 [fields]                                        # source property -> canonical name
-number = "STREETNUM"
+number = "STREETNUM"                            # the COMBINED form ("197E"); STREETNUMIN is the bare integer
 street = "STREETNAME"                           # STREETTYPE/STNUMSUFF tracked via the props blob
 full   = "FULLADDRESS"
+# unit: no unit COLUMN exists (verified 2026-08-10 against the live layer — 9 fields
+# total). But units are published, embedded in STREETNUM/FULLADDRESS as "<unit>-<number>"
+# on 2,213 of 38,981 rows (5.7%): 177 distinct left parts share the right part "77", 138
+# share "21", 116 share "20", which no house-number RANGE can do. The other 436 hyphenated
+# rows read left>=right and are ranges proper. So the choice here is waterloo's, not
+# dufferin's — parse the unit out of STREETNUM, or accept unit-less display — and it is
+# recorded in TODO.md §1 rather than decided here, because adding `unit` to synth_fields
+# would re-key all 38,981 rows.

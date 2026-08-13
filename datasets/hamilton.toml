@@ -14,10 +14,19 @@ synth_fields = ["number", "street", "unit"]   # unit needed: multi-unit building
 number = "NUMBER_COMPLETE"
 street = "FULL_STREET_NAME"
 unit   = "UNIT_NUMBER_COMPLETE"
+# full: the layer publishes no combined address column (confirmed 2026-08-10 against the
+# live field list, 13 fields); reports fall back to "number street". The three canonical
+# slots are all mapped to the source's own COMPLETE variants, so nothing is being dropped.
 
 # Change classes (field values verified against the latest snapshot): a
 # modification touching only these fields is reported in its humanized section
 # (place renames / status changes / boundary reassignments) instead of the
 # generic Updated Addresses table.
 [classes]
-boundary = ["MUNICIPALITY", "COMMUNITY"]
+# SETTLEMENT is the field health.py --drift saw the source add on 2026-08-08. Checked
+# 2026-08-10: an EMPTY SCHEMA SLOT — 0 of 273,459 rows live, and never present in props
+# across all 34 snapshots — so it does nothing today. Classed ahead of a backfill anyway,
+# the way burlington's NAME was: [classes] is report-time only and retroactive, so it
+# costs nothing to carry and saves the settlement column arriving as generic Updated
+# noise. Grouped with the other two on the sdg precedent, where Settlement is boundary.
+boundary = ["MUNICIPALITY", "COMMUNITY", "SETTLEMENT"]
