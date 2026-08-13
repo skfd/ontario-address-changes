@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>City of Brantford Address Changes — Wednesday, Aug 12, 2026</title>
+  <style>
+    :root {
+      --bg: #fafafa; --surface: #ffffff; --surface2: #f5f5f5; --surface3: #ebebeb;
+      --border: #e0e0e0; --border-strong: #d1d1d1; --text: #242424;
+      --text-secondary: #424242; --text-dim: #616161; --accent: #0078d4;
+      --accent-hover: #106ebe; --accent-bg: #eff6fc; --green: #107c10;
+      --green-bg: #f1faf1; --green-tint: #9fd89f; --red: #c50f1f; --red-bg: #fdf3f4;
+      --red-tint: #eeacb2; --yellow: #eaa300; --yellow-bg: #fefbf4; --yellow-tint: #f9e2ae;
+      --purple: #881798; --purple-bg: #f9f3fb; --teal: #038387; --teal-bg: #f0fafa;
+      --shadow-4: 0 2px 4px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --shadow-8: 0 4px 8px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --card-bg: #ffffff; --card-hover: #f5f5f5; color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1f1f1f; --surface: #292929; --surface2: #333333; --surface3: #3d3d3d;
+        --border: #525252; --border-strong: #666666; --text: #ffffff;
+        --text-secondary: #d6d6d6; --text-dim: #adadad; --accent: #2899f5;
+        --accent-hover: #3aa0f3; --accent-bg: #002848; --green: #54b054;
+        --green-bg: #052505; --green-tint: #107c10; --red: #dc626d; --red-bg: #3b0509;
+        --red-tint: #c50f1f; --yellow: #f2c661; --yellow-bg: #463100; --yellow-tint: #eaa300;
+        --purple: #d29ddb; --purple-bg: #3a1040; --teal: #58c0c4; --teal-bg: #013638;
+        --shadow-4: 0 2px 4px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --shadow-8: 0 4px 8px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --card-bg: #333333; --card-hover: #3d3d3d; color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI Variable','Segoe UI',system-ui,-apple-system,sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.5; padding: 2rem;
+      max-width: 1100px; margin: 0 auto; font-size: 14px; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; color: var(--accent-hover); }
+    .back-link { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 12px;
+      color: var(--text-dim); margin-bottom: 1.5rem; transition: color 0.1s; }
+    .back-link:hover { color: var(--accent); text-decoration: none; }
+    h1 { font-size: 24px; font-weight: 600; margin-bottom: 4px; }
+    .subtitle { color: var(--text-secondary); font-size: 14px; margin-bottom: 12px; }
+    .explainer { color: var(--text-secondary); font-size: 13px; line-height: 1.5;
+      margin-bottom: 24px; padding: 12px 16px; background: var(--surface);
+      border-radius: 8px; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px; margin-bottom: 24px; }
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px;
+      padding: 16px; box-shadow: var(--shadow-4); transition: box-shadow 0.1s; }
+    .card:hover { box-shadow: var(--shadow-8); }
+    .card .label { font-size: 12px; color: var(--text-dim); font-weight: 400; }
+    .card .value { font-size: 28px; font-weight: 600; margin-top: 4px; }
+    .card .value.green { color: var(--green); } .card .value.red { color: var(--red); }
+    .card .value.yellow { color: var(--yellow); } .card .value.accent { color: var(--accent); }
+    .card .value.purple { color: var(--purple); }
+    .card .value.teal { color: var(--teal); }
+    .sparkline { display: block; margin-top: 6px; overflow: visible; opacity: 0.9; }
+    .sparkline-label { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+    .section { margin-bottom: 24px; }
+    .section h2 { font-size: 16px; font-weight: 600; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px; }
+    .badge { font-size: 12px; padding: 2px 8px; border-radius: 999px; font-weight: 600; }
+    .badge-green { background: var(--green-bg); color: var(--green); }
+    .badge-red { background: var(--red-bg); color: var(--red); }
+    .badge-yellow { background: var(--yellow-bg); color: var(--yellow); }
+    .badge-accent { background: var(--accent-bg); color: var(--accent); }
+    .badge-purple { background: var(--purple-bg); color: var(--purple); }
+    .badge-teal { background: var(--teal-bg); color: var(--teal); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface);
+      border-radius: 8px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    thead { background: var(--surface2); }
+    th { text-align: left; padding: 8px 12px; font-weight: 600; color: var(--text-dim);
+      font-size: 12px; cursor: pointer; user-select: none; border-bottom: 1px solid var(--border); }
+    th:hover { color: var(--accent); }
+    td { padding: 8px 12px; border-top: 1px solid var(--border); }
+    tr:hover td { background: var(--surface2); }
+    .old-val { color: var(--red); text-decoration: line-through; }
+    .new-val { color: var(--green); }
+    .arrow-val { color: var(--text-dim); text-align: center; white-space: nowrap; }
+    .map-link { display: inline-flex; align-items: center; margin-left: 0.4em;
+      color: var(--accent); vertical-align: middle; white-space: nowrap; font-size: 12px; }
+    .map-link:hover { color: var(--accent-hover); }
+    .map-link svg { width: 14px; height: 14px; }
+    .change-field { color: var(--yellow); font-weight: 600; }
+    .bar-chart { margin-top: 8px; }
+    .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 12px; }
+    .bar-label { width: 180px; text-align: right; color: var(--text-secondary); flex-shrink: 0;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .bar-track { flex: 1; height: 8px; background: var(--surface2); border-radius: 4px;
+      overflow: hidden; position: relative; }
+    .bar-fill { height: 100%; border-radius: 4px; transition: width 0.15s ease; }
+    .bar-fill.green { background: var(--green); } .bar-fill.red { background: var(--red); }
+    .bar-count { width: 40px; font-size: 12px; color: var(--text-dim); }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+    .empty { color: var(--text-dim); font-style: italic; padding: 16px; }
+    .truncated { color: var(--text-dim); font-size: 12px; margin-top: 8px; }
+    .collapsible-toggle { background: transparent; border: 1px solid var(--border);
+      color: var(--accent); padding: 5px 12px; border-radius: 4px; cursor: pointer;
+      font-size: 12px; font-family: inherit; margin-bottom: 12px; transition: background 0.1s; }
+    .collapsible-toggle:hover { background: var(--surface2); }
+    details.rename-group { background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; margin-bottom: 8px; box-shadow: var(--shadow-4); }
+    details.rename-group summary { padding: 10px 14px; cursor: pointer; font-size: 13px; }
+    details.rename-group[open] summary { border-bottom: 1px solid var(--border); }
+    details.rename-group table { border: none; box-shadow: none; border-radius: 0; }
+    details.rename-group .truncated { padding: 0 14px 10px; margin-top: 0; }
+    .rename-count { color: var(--text-dim); font-size: 12px; margin-left: 6px; }
+    .no-changes-banner { background: var(--green-bg); border: 1px solid var(--green-tint);
+      color: var(--green); padding: 16px; border-radius: 8px; margin-bottom: 24px;
+      text-align: center; font-weight: 600; font-size: 14px; }
+    .baseline-banner { background: var(--accent-bg); border: 1px solid var(--accent);
+      color: var(--accent); padding: 16px; border-radius: 8px; margin-bottom: 24px; font-size: 13px; }
+    .generated-at { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-dim); }
+    .history { font-size: 12.5px; color: var(--text-secondary); white-space: nowrap; }
+    .history .a { color: var(--green); font-weight: 500; }
+    .history .r { color: var(--red); font-weight: 500; }
+    .history .dot { color: var(--text-dim); margin: 0 4px; }
+    .history-none { color: var(--text-dim); font-style: italic; font-size: 12.5px; }
+    .info-wrap { position: relative; display: inline-flex; vertical-align: middle; }
+    .info-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+      height: 18px; padding: 0 8px 0 7px; border-radius: 999px; border: none;
+      color: #fff; background: var(--accent); cursor: help; font-size: 11px; font-weight: 600;
+      font-style: normal; font-family: inherit; line-height: 1; white-space: nowrap; }
+    .info-btn .glyph { font-style: italic; font-weight: 700;
+      font-family: Georgia, 'Times New Roman', serif; }
+    .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn,
+    .info-wrap:focus .info-btn { background: var(--accent-hover); }
+    .info-pop { display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 20;
+      width: 320px; max-width: 80vw; padding: 12px 14px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-8);
+      font-size: 12.5px; font-weight: 400; color: var(--text-secondary); line-height: 1.5; }
+    .info-wrap:hover .info-pop, .info-wrap:focus-within .info-pop,
+    .info-wrap:focus .info-pop { display: block; }
+    .info-pop strong { display: block; color: var(--text); font-size: 12px; margin-bottom: 4px; }
+    .info-pop ul { list-style: none; margin: 0 0 10px; padding: 0; }
+    .info-pop li { padding: 1px 0 1px 14px; position: relative; }
+    .info-pop li::before { content: "·"; position: absolute; left: 4px; color: var(--text-dim); }
+    .info-pop .note { color: var(--text-dim); font-size: 11.5px; margin: 0 0 10px; }
+    .info-pop .muted { color: var(--text-dim); font-style: italic; }
+  </style>
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+
+  <a class="back-link" href="index.html">← Back to City of Brantford reports</a>
+
+  <h1>City of Brantford — Address Changes</h1>
+  <p class="subtitle">
+    Changes between  and Wednesday, Aug 12, 2026
+    · 38,982 total addresses
+  </p>
+
+  
+
+  <div class="cards">
+    <div class="card"><div class="label">Total Addresses</div>
+      <div class="value accent">38,982</div></div>
+    <div class="card"><div class="label">New Addresses</div>
+      <div class="value green">+162</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#107c10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,17.7 19.7,17.2 37.3,17.7 55.0,18.0 72.7,17.7 90.3,17.8 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#107c10"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Retired Addresses</div>
+      <div class="value red">−162</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#c50f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,17.5 19.7,17.2 37.3,17.7 55.0,18.0 72.7,17.7 90.3,17.9 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#c50f1f"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Updated Addresses <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (STREETNUM)</li><li>Street name (STREETNAME)</li><li>Full address (FULLADDRESS)</li><li>Coordinates (latitude, longitude)</li><li>POSTALCODE</li><li>STNUMSUFF</li><li>STREETNUMIN</li><li>STREETTYPE</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span></div>
+      <div class="value yellow">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Renumbered</div>
+      <div class="value accent">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#0078d4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#0078d4"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Street Renames</div>
+      <div class="value purple">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#9141ac" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#9141ac"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    
+    <div class="card"><div class="label">Location Adjustments</div>
+      <div class="value" style="color: var(--text-dim)">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#808080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#808080"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+  </div>
+
+  
+  <div class="section">
+    <h2>Change Breakdown</h2>
+    <div class="stats-grid">
+      
+      <div class="card"><div class="label">Top Streets by New Addresses</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">MEMORIAL</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">36</span></div>
+        <div class="bar-row"><span class="bar-label">ELLENSON</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:72.0%"></div></div>
+          <span class="bar-count">26</span></div>
+        <div class="bar-row"><span class="bar-label">ALLANTON</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:61.0%"></div></div>
+          <span class="bar-count">22</span></div>
+        <div class="bar-row"><span class="bar-label">WESTBRIER</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:61.0%"></div></div>
+          <span class="bar-count">22</span></div>
+        <div class="bar-row"><span class="bar-label">ROBROY</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:39.0%"></div></div>
+          <span class="bar-count">14</span></div>
+        <div class="bar-row"><span class="bar-label">BELVEDERE</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:36.0%"></div></div>
+          <span class="bar-count">13</span></div>
+        <div class="bar-row"><span class="bar-label">BUCKINGHAM</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:31.0%"></div></div>
+          <span class="bar-count">11</span></div>
+        <div class="bar-row"><span class="bar-label">FRONTENAC</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:22.0%"></div></div>
+          <span class="bar-count">8</span></div>
+        <div class="bar-row"><span class="bar-label">CARENE</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:17.0%"></div></div>
+          <span class="bar-count">6</span></div>
+      </div></div>
+      
+      <div class="card"><div class="label">Top Streets by Retired Addresses</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">MEMORIAL</span>
+          <div class="bar-track"><div class="bar-fill red" style="width:100.0%"></div></div>
+          <span class="bar-count">36</span></div>
+        <div class="bar-row"><span class="bar-label">ELLENSON</span>
+          <div class="bar-track"><div class="bar-fill red" style="width:72.0%"></div></div>
+          <span class="bar-count">26</span></div>
+        <div class="bar-row"><span class="bar-label">ALLANTON</span>
+          <div class="bar-track"><div class="bar-fill red" style="width:61.0%"></div></div>
+          <span class="bar-count">22</span></div>
+        <div class="bar-row"><span class="bar-label">WESTBRIER</span>
+          <div class="bar-track"><div class="bar-fill red" style="width:61.0%"></div></div>
+          <span class="bar-count">22</span></div>
+        <div class="bar-row"><span class="bar-label">ROBROY</span>
+          <div class="bar-track"><div class="bar-fill red" style="width:39.0%"></div></div>
+          <span class="bar-count">14</span></div>
+        <div class="bar-row"><span class="bar-label">BELVEDERE</span>
+          <div class="bar-track"><div class="bar-fill red" style="width:36.0%"></div></div>
+          <span class="bar-count">13</span></div>
+        <div class="bar-row"><span class="bar-label">BUCKINGHAM</span>
+          <div class="bar-track"><div class="bar-fill red" style="width:31.0%"></div></div>
+          <span class="bar-count">11</span></div>
+        <div class="bar-row"><span class="bar-label">FRONTENAC</span>
+          <div class="bar-track"><div class="bar-fill red" style="width:22.0%"></div></div>
+          <span class="bar-count">8</span></div>
+        <div class="bar-row"><span class="bar-label">CARENE</span>
+          <div class="bar-track"><div class="bar-fill red" style="width:17.0%"></div></div>
+          <span class="bar-count">6</span></div>
+      </div></div>
+      
+    </div>
+  </div>
+  
+
+  <div class="section">
+    <h2>New Addresses <span class="badge badge-green">162</span></h2>
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-added',0)">Address</th><th onclick="sortTable('t-added',1)">Street</th>
+        <th onclick="sortTable('t-added',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-added">
+        
+        <tr><td>14 ALLANTON BLVD</td><td>ALLANTON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17392&mlon=-80.26652#map=18/43.17392/-80.26652" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>16 ALLANTON BLVD</td><td>ALLANTON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17393&mlon=-80.26633#map=18/43.17393/-80.26633" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>18 ALLANTON BLVD</td><td>ALLANTON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17392&mlon=-80.26616#map=18/43.17392/-80.26616" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>19 ALLANTON BLVD</td><td>ALLANTON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17434&mlon=-80.26630#map=18/43.17434/-80.26630" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>20 ALLANTON BLVD</td><td>ALLANTON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17390&mlon=-80.26599#map=18/43.17390/-80.26599" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>21 ALLANTON BLVD</td><td>ALLANTON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17433&mlon=-80.26613#map=18/43.17433/-80.26613" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>22 ALLANTON BLVD</td><td>ALLANTON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17390&mlon=-80.26580#map=18/43.17390/-80.26580" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>23 ALLANTON BLVD</td><td>ALLANTON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17432&mlon=-80.26593#map=18/43.17432/-80.26593" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>24 ALLANTON BLVD</td><td>ALLANTON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17391&mlon=-80.26558#map=18/43.17391/-80.26558" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>25 ALLANTON BLVD</td><td>ALLANTON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17432&mlon=-80.26574#map=18/43.17432/-80.26574" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>26 ALLANTON BLVD</td><td>ALLANTON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17393&mlon=-80.26539#map=18/43.17393/-80.26539" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>27 ALLANTON BLVD</td><td>ALLANTON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17433&mlon=-80.26553#map=18/43.17433/-80.26553" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>28 ALLANTON BLVD</td><td>ALLANTON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17395&mlon=-80.26520#map=18/43.17395/-80.26520" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>29 ALLANTON BLVD</td><td>ALLANTON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17435&mlon=-80.26534#map=18/43.17435/-80.26534" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>30 ALLANTON BLVD</td><td>ALLANTON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17399&mlon=-80.26503#map=18/43.17399/-80.26503" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>31 ALLANTON BLVD</td><td>ALLANTON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17438&mlon=-80.26515#map=18/43.17438/-80.26515" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>32 ALLANTON BLVD</td><td>ALLANTON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17403&mlon=-80.26479#map=18/43.17403/-80.26479" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>33 ALLANTON BLVD</td><td>ALLANTON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17441&mlon=-80.26496#map=18/43.17441/-80.26496" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>34 ALLANTON BLVD</td><td>ALLANTON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17405&mlon=-80.26461#map=18/43.17405/-80.26461" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>35 ALLANTON BLVD</td><td>ALLANTON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17443&mlon=-80.26478#map=18/43.17443/-80.26478" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>36 ALLANTON BLVD</td><td>ALLANTON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17409&mlon=-80.26443#map=18/43.17409/-80.26443" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>37 ALLANTON BLVD</td><td>ALLANTON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17447&mlon=-80.26461#map=18/43.17447/-80.26461" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>5 BELVEDERE BLVD</td><td>BELVEDERE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17116&mlon=-80.26442#map=18/43.17116/-80.26442" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6 BELVEDERE BLVD</td><td>BELVEDERE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17146&mlon=-80.26410#map=18/43.17146/-80.26410" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>7 BELVEDERE BLVD</td><td>BELVEDERE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17123&mlon=-80.26461#map=18/43.17123/-80.26461" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>8 BELVEDERE BLVD</td><td>BELVEDERE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17153&mlon=-80.26427#map=18/43.17153/-80.26427" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>9 BELVEDERE BLVD</td><td>BELVEDERE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17131&mlon=-80.26480#map=18/43.17131/-80.26480" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 BELVEDERE BLVD</td><td>BELVEDERE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17161&mlon=-80.26445#map=18/43.17161/-80.26445" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>11 BELVEDERE BLVD</td><td>BELVEDERE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17141&mlon=-80.26497#map=18/43.17141/-80.26497" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>12 BELVEDERE BLVD</td><td>BELVEDERE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17169&mlon=-80.26460#map=18/43.17169/-80.26460" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>14 BELVEDERE BLVD</td><td>BELVEDERE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17177&mlon=-80.26477#map=18/43.17177/-80.26477" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>15 BELVEDERE BLVD</td><td>BELVEDERE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17154&mlon=-80.26520#map=18/43.17154/-80.26520" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>16 BELVEDERE BLVD</td><td>BELVEDERE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17187&mlon=-80.26491#map=18/43.17187/-80.26491" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>17 BELVEDERE BLVD</td><td>BELVEDERE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17166&mlon=-80.26540#map=18/43.17166/-80.26540" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>18 BELVEDERE BLVD</td><td>BELVEDERE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17196&mlon=-80.26507#map=18/43.17196/-80.26507" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>21 BUCKINGHAM ST</td><td>BUCKINGHAM</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17209&mlon=-80.26625#map=18/43.17209/-80.26625" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>23 BUCKINGHAM ST</td><td>BUCKINGHAM</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17218&mlon=-80.26609#map=18/43.17218/-80.26609" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>25 BUCKINGHAM ST</td><td>BUCKINGHAM</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17226&mlon=-80.26594#map=18/43.17226/-80.26594" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>27 BUCKINGHAM ST</td><td>BUCKINGHAM</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17235&mlon=-80.26578#map=18/43.17235/-80.26578" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>29 BUCKINGHAM ST</td><td>BUCKINGHAM</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17243&mlon=-80.26563#map=18/43.17243/-80.26563" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>31 BUCKINGHAM ST</td><td>BUCKINGHAM</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17251&mlon=-80.26549#map=18/43.17251/-80.26549" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>33 BUCKINGHAM ST</td><td>BUCKINGHAM</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17259&mlon=-80.26534#map=18/43.17259/-80.26534" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>35 BUCKINGHAM ST</td><td>BUCKINGHAM</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17267&mlon=-80.26519#map=18/43.17267/-80.26519" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>37 BUCKINGHAM ST</td><td>BUCKINGHAM</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17275&mlon=-80.26505#map=18/43.17275/-80.26505" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>45 BUCKINGHAM ST</td><td>BUCKINGHAM</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17312&mlon=-80.26436#map=18/43.17312/-80.26436" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>47 BUCKINGHAM ST</td><td>BUCKINGHAM</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17321&mlon=-80.26421#map=18/43.17321/-80.26421" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3 CARENE CRT</td><td>CARENE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17694&mlon=-80.26391#map=18/43.17694/-80.26391" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>5 CARENE CRT</td><td>CARENE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17702&mlon=-80.26404#map=18/43.17702/-80.26404" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>7 CARENE CRT</td><td>CARENE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17713&mlon=-80.26416#map=18/43.17713/-80.26416" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>9 CARENE CRT</td><td>CARENE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17723&mlon=-80.26428#map=18/43.17723/-80.26428" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>11 CARENE CRT</td><td>CARENE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17732&mlon=-80.26440#map=18/43.17732/-80.26440" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>15 CARENE CRT</td><td>CARENE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17743&mlon=-80.26456#map=18/43.17743/-80.26456" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>113 DUNSDON ST</td><td>DUNSDON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17920&mlon=-80.26678#map=18/43.17920/-80.26678" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17336&mlon=-80.26412#map=18/43.17336/-80.26412" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>4 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17362&mlon=-80.26375#map=18/43.17362/-80.26375" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>5 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17348&mlon=-80.26429#map=18/43.17348/-80.26429" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17376&mlon=-80.26381#map=18/43.17376/-80.26381" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>8 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17390&mlon=-80.26388#map=18/43.17390/-80.26388" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17403&mlon=-80.26390#map=18/43.17403/-80.26390" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>12 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17416&mlon=-80.26398#map=18/43.17416/-80.26398" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>14 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17430&mlon=-80.26400#map=18/43.17430/-80.26400" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>18 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17449&mlon=-80.26408#map=18/43.17449/-80.26408" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>20 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17462&mlon=-80.26412#map=18/43.17462/-80.26412" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>22 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17477&mlon=-80.26416#map=18/43.17477/-80.26416" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>24 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17490&mlon=-80.26420#map=18/43.17490/-80.26420" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>26 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17504&mlon=-80.26426#map=18/43.17504/-80.26426" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>28 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17518&mlon=-80.26433#map=18/43.17518/-80.26433" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>30 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17533&mlon=-80.26441#map=18/43.17533/-80.26441" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>32 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17546&mlon=-80.26449#map=18/43.17546/-80.26449" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>34 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17559&mlon=-80.26457#map=18/43.17559/-80.26457" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>36 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17572&mlon=-80.26466#map=18/43.17572/-80.26466" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>38 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17585&mlon=-80.26477#map=18/43.17585/-80.26477" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>40 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17598&mlon=-80.26488#map=18/43.17598/-80.26488" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>42 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17610&mlon=-80.26500#map=18/43.17610/-80.26500" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>44 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17622&mlon=-80.26512#map=18/43.17622/-80.26512" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>46 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17633&mlon=-80.26525#map=18/43.17633/-80.26525" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>48 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17644&mlon=-80.26537#map=18/43.17644/-80.26537" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>50 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17654&mlon=-80.26549#map=18/43.17654/-80.26549" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>52 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17665&mlon=-80.26561#map=18/43.17665/-80.26561" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>128 EVELYN ST</td><td>EVELYN</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17686&mlon=-80.26525#map=18/43.17686/-80.26525" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>14 FRONTENAC AVE</td><td>FRONTENAC</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17296&mlon=-80.26602#map=18/43.17296/-80.26602" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>16 FRONTENAC AVE</td><td>FRONTENAC</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17307&mlon=-80.26616#map=18/43.17307/-80.26616" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>18 FRONTENAC AVE</td><td>FRONTENAC</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17318&mlon=-80.26627#map=18/43.17318/-80.26627" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>20 FRONTENAC AVE</td><td>FRONTENAC</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17329&mlon=-80.26639#map=18/43.17329/-80.26639" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>22 FRONTENAC AVE</td><td>FRONTENAC</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17343&mlon=-80.26644#map=18/43.17343/-80.26644" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>24 FRONTENAC AVE</td><td>FRONTENAC</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17354&mlon=-80.26654#map=18/43.17354/-80.26654" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>26 FRONTENAC AVE</td><td>FRONTENAC</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17368&mlon=-80.26663#map=18/43.17368/-80.26663" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>28 FRONTENAC AVE</td><td>FRONTENAC</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17391&mlon=-80.26673#map=18/43.17391/-80.26673" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>4 MARSHALL ST</td><td>MARSHALL</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17208&mlon=-80.26649#map=18/43.17208/-80.26649" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>92 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17384&mlon=-80.26335#map=18/43.17384/-80.26335" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>94 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17399&mlon=-80.26340#map=18/43.17399/-80.26340" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>96 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17412&mlon=-80.26344#map=18/43.17412/-80.26344" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>98 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17425&mlon=-80.26353#map=18/43.17425/-80.26353" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>100 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17438&mlon=-80.26355#map=18/43.17438/-80.26355" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>104 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17458&mlon=-80.26361#map=18/43.17458/-80.26361" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>106 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17472&mlon=-80.26366#map=18/43.17472/-80.26366" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>108 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17485&mlon=-80.26371#map=18/43.17485/-80.26371" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>110 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17498&mlon=-80.26376#map=18/43.17498/-80.26376" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>112 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17512&mlon=-80.26382#map=18/43.17512/-80.26382" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>114 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17526&mlon=-80.26389#map=18/43.17526/-80.26389" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>116 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17541&mlon=-80.26396#map=18/43.17541/-80.26396" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>118 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17554&mlon=-80.26403#map=18/43.17554/-80.26403" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>120 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17567&mlon=-80.26411#map=18/43.17567/-80.26411" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>122 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17579&mlon=-80.26420#map=18/43.17579/-80.26420" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>124 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17592&mlon=-80.26429#map=18/43.17592/-80.26429" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>126 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17605&mlon=-80.26440#map=18/43.17605/-80.26440" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>128 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17617&mlon=-80.26451#map=18/43.17617/-80.26451" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>130 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17629&mlon=-80.26463#map=18/43.17629/-80.26463" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>131 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17671&mlon=-80.26431#map=18/43.17671/-80.26431" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>132 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17641&mlon=-80.26475#map=18/43.17641/-80.26475" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>133 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17683&mlon=-80.26440#map=18/43.17683/-80.26440" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>134 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17653&mlon=-80.26488#map=18/43.17653/-80.26488" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>135 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17693&mlon=-80.26452#map=18/43.17693/-80.26452" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>136 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17663&mlon=-80.26500#map=18/43.17663/-80.26500" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>137 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17704&mlon=-80.26464#map=18/43.17704/-80.26464" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>138 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17674&mlon=-80.26512#map=18/43.17674/-80.26512" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>139 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17714&mlon=-80.26476#map=18/43.17714/-80.26476" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>141 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17724&mlon=-80.26490#map=18/43.17724/-80.26490" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>143 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17734&mlon=-80.26501#map=18/43.17734/-80.26501" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>145 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17747&mlon=-80.26516#map=18/43.17747/-80.26516" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>148 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17733&mlon=-80.26575#map=18/43.17733/-80.26575" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>150 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17744&mlon=-80.26587#map=18/43.17744/-80.26587" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>164 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17814&mlon=-80.26665#map=18/43.17814/-80.26665" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>166 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17824&mlon=-80.26680#map=18/43.17824/-80.26680" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>178 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17896&mlon=-80.26758#map=18/43.17896/-80.26758" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1 ROBROY CRT</td><td>ROBROY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17291&mlon=-80.26491#map=18/43.17291/-80.26491" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2 ROBROY CRT</td><td>ROBROY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17309&mlon=-80.26461#map=18/43.17309/-80.26461" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>4 ROBROY CRT</td><td>ROBROY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17327&mlon=-80.26468#map=18/43.17327/-80.26468" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>5 ROBROY CRT</td><td>ROBROY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17314&mlon=-80.26517#map=18/43.17314/-80.26517" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6 ROBROY CRT</td><td>ROBROY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17339&mlon=-80.26479#map=18/43.17339/-80.26479" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>8 ROBROY CRT</td><td>ROBROY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17348&mlon=-80.26494#map=18/43.17348/-80.26494" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>9 ROBROY CRT</td><td>ROBROY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17310&mlon=-80.26542#map=18/43.17310/-80.26542" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 ROBROY CRT</td><td>ROBROY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17353&mlon=-80.26512#map=18/43.17353/-80.26512" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>11 ROBROY CRT</td><td>ROBROY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17312&mlon=-80.26563#map=18/43.17312/-80.26563" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>12 ROBROY CRT</td><td>ROBROY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17356&mlon=-80.26531#map=18/43.17356/-80.26531" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>14 ROBROY CRT</td><td>ROBROY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17354&mlon=-80.26552#map=18/43.17354/-80.26552" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>15 ROBROY CRT</td><td>ROBROY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17322&mlon=-80.26577#map=18/43.17322/-80.26577" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>16 ROBROY CRT</td><td>ROBROY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17350&mlon=-80.26570#map=18/43.17350/-80.26570" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>17 ROBROY CRT</td><td>ROBROY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17338&mlon=-80.26579#map=18/43.17338/-80.26579" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>129 TRANQUILITY ST</td><td>TRANQUILITY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17774&mlon=-80.26680#map=18/43.17774/-80.26680" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3 WESTBRIER KNOLL</td><td>WESTBRIER</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17988&mlon=-80.26550#map=18/43.17988/-80.26550" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6 WESTBRIER KNOLL</td><td>WESTBRIER</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.18017&mlon=-80.26523#map=18/43.18017/-80.26523" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>7 WESTBRIER KNOLL</td><td>WESTBRIER</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.18001&mlon=-80.26571#map=18/43.18001/-80.26571" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 WESTBRIER KNOLL</td><td>WESTBRIER</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.18033&mlon=-80.26541#map=18/43.18033/-80.26541" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>14 WESTBRIER KNOLL</td><td>WESTBRIER</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.18048&mlon=-80.26558#map=18/43.18048/-80.26558" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>18 WESTBRIER KNOLL</td><td>WESTBRIER</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.18063&mlon=-80.26576#map=18/43.18063/-80.26576" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>22 WESTBRIER KNOLL</td><td>WESTBRIER</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.18078&mlon=-80.26593#map=18/43.18078/-80.26593" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>25 WESTBRIER KNOLL</td><td>WESTBRIER</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.18100&mlon=-80.26682#map=18/43.18100/-80.26682" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>26 WESTBRIER KNOLL</td><td>WESTBRIER</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.18093&mlon=-80.26609#map=18/43.18093/-80.26609" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>29 WESTBRIER KNOLL</td><td>WESTBRIER</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.18113&mlon=-80.26697#map=18/43.18113/-80.26697" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>30 WESTBRIER KNOLL</td><td>WESTBRIER</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.18108&mlon=-80.26626#map=18/43.18108/-80.26626" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>33 WESTBRIER KNOLL</td><td>WESTBRIER</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.18126&mlon=-80.26716#map=18/43.18126/-80.26716" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>34 WESTBRIER KNOLL</td><td>WESTBRIER</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.18123&mlon=-80.26643#map=18/43.18123/-80.26643" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>35 WESTBRIER KNOLL</td><td>WESTBRIER</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.18146&mlon=-80.26727#map=18/43.18146/-80.26727" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>37 WESTBRIER KNOLL</td><td>WESTBRIER</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.18165&mlon=-80.26733#map=18/43.18165/-80.26733" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>38 WESTBRIER KNOLL</td><td>WESTBRIER</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.18137&mlon=-80.26660#map=18/43.18137/-80.26660" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>39 WESTBRIER KNOLL</td><td>WESTBRIER</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.18188&mlon=-80.26736#map=18/43.18188/-80.26736" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>40 WESTBRIER KNOLL</td><td>WESTBRIER</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.18150&mlon=-80.26675#map=18/43.18150/-80.26675" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>41 WESTBRIER KNOLL</td><td>WESTBRIER</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.18206&mlon=-80.26747#map=18/43.18206/-80.26747" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>42 WESTBRIER KNOLL</td><td>WESTBRIER</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.18170&mlon=-80.26683#map=18/43.18170/-80.26683" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>44 WESTBRIER KNOLL</td><td>WESTBRIER</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.18190&mlon=-80.26687#map=18/43.18190/-80.26687" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>46 WESTBRIER KNOLL</td><td>WESTBRIER</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.18209&mlon=-80.26694#map=18/43.18209/-80.26694" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Retired Addresses <span class="badge badge-red">162</span></h2>
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-removed',0)">Address</th><th onclick="sortTable('t-removed',1)">Street</th>
+        <th onclick="sortTable('t-removed',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-removed">
+        
+        <tr><td>14 ALLANTON BLVD</td><td>ALLANTON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17390&mlon=-80.26648#map=18/43.17390/-80.26648" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>16 ALLANTON BLVD</td><td>ALLANTON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17391&mlon=-80.26629#map=18/43.17391/-80.26629" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>18 ALLANTON BLVD</td><td>ALLANTON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17389&mlon=-80.26610#map=18/43.17389/-80.26610" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>19 ALLANTON BLVD</td><td>ALLANTON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17435&mlon=-80.26626#map=18/43.17435/-80.26626" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>20 ALLANTON BLVD</td><td>ALLANTON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17387&mlon=-80.26592#map=18/43.17387/-80.26592" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>21 ALLANTON BLVD</td><td>ALLANTON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17434&mlon=-80.26608#map=18/43.17434/-80.26608" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>22 ALLANTON BLVD</td><td>ALLANTON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17387&mlon=-80.26573#map=18/43.17387/-80.26573" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>23 ALLANTON BLVD</td><td>ALLANTON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17433&mlon=-80.26588#map=18/43.17433/-80.26588" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>24 ALLANTON BLVD</td><td>ALLANTON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17388&mlon=-80.26551#map=18/43.17388/-80.26551" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>25 ALLANTON BLVD</td><td>ALLANTON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17433&mlon=-80.26569#map=18/43.17433/-80.26569" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>26 ALLANTON BLVD</td><td>ALLANTON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17390&mlon=-80.26532#map=18/43.17390/-80.26532" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>27 ALLANTON BLVD</td><td>ALLANTON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17434&mlon=-80.26548#map=18/43.17434/-80.26548" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>28 ALLANTON BLVD</td><td>ALLANTON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17392&mlon=-80.26513#map=18/43.17392/-80.26513" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>29 ALLANTON BLVD</td><td>ALLANTON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17437&mlon=-80.26530#map=18/43.17437/-80.26530" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>30 ALLANTON BLVD</td><td>ALLANTON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17396&mlon=-80.26495#map=18/43.17396/-80.26495" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>31 ALLANTON BLVD</td><td>ALLANTON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17439&mlon=-80.26511#map=18/43.17439/-80.26511" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>32 ALLANTON BLVD</td><td>ALLANTON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17400&mlon=-80.26476#map=18/43.17400/-80.26476" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>33 ALLANTON BLVD</td><td>ALLANTON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17442&mlon=-80.26491#map=18/43.17442/-80.26491" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>34 ALLANTON BLVD</td><td>ALLANTON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17402&mlon=-80.26458#map=18/43.17402/-80.26458" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>35 ALLANTON BLVD</td><td>ALLANTON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17445&mlon=-80.26473#map=18/43.17445/-80.26473" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>36 ALLANTON BLVD</td><td>ALLANTON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17406&mlon=-80.26440#map=18/43.17406/-80.26440" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>37 ALLANTON BLVD</td><td>ALLANTON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17448&mlon=-80.26456#map=18/43.17448/-80.26456" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>5 BELVEDERE BLVD</td><td>BELVEDERE</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17110&mlon=-80.26443#map=18/43.17110/-80.26443" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6 BELVEDERE BLVD</td><td>BELVEDERE</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17145&mlon=-80.26403#map=18/43.17145/-80.26403" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>7 BELVEDERE BLVD</td><td>BELVEDERE</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17118&mlon=-80.26463#map=18/43.17118/-80.26463" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>8 BELVEDERE BLVD</td><td>BELVEDERE</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17152&mlon=-80.26422#map=18/43.17152/-80.26422" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>9 BELVEDERE BLVD</td><td>BELVEDERE</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17125&mlon=-80.26480#map=18/43.17125/-80.26480" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 BELVEDERE BLVD</td><td>BELVEDERE</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17160&mlon=-80.26440#map=18/43.17160/-80.26440" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>11 BELVEDERE BLVD</td><td>BELVEDERE</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17137&mlon=-80.26498#map=18/43.17137/-80.26498" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>12 BELVEDERE BLVD</td><td>BELVEDERE</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17168&mlon=-80.26455#map=18/43.17168/-80.26455" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>14 BELVEDERE BLVD</td><td>BELVEDERE</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17176&mlon=-80.26472#map=18/43.17176/-80.26472" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>15 BELVEDERE BLVD</td><td>BELVEDERE</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17150&mlon=-80.26521#map=18/43.17150/-80.26521" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>16 BELVEDERE BLVD</td><td>BELVEDERE</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17186&mlon=-80.26485#map=18/43.17186/-80.26485" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>17 BELVEDERE BLVD</td><td>BELVEDERE</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17162&mlon=-80.26543#map=18/43.17162/-80.26543" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>18 BELVEDERE BLVD</td><td>BELVEDERE</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17195&mlon=-80.26498#map=18/43.17195/-80.26498" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>21 BUCKINGHAM ST</td><td>BUCKINGHAM</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17210&mlon=-80.26622#map=18/43.17210/-80.26622" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>23 BUCKINGHAM ST</td><td>BUCKINGHAM</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17219&mlon=-80.26607#map=18/43.17219/-80.26607" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>25 BUCKINGHAM ST</td><td>BUCKINGHAM</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17228&mlon=-80.26592#map=18/43.17228/-80.26592" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>27 BUCKINGHAM ST</td><td>BUCKINGHAM</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17236&mlon=-80.26576#map=18/43.17236/-80.26576" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>29 BUCKINGHAM ST</td><td>BUCKINGHAM</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17244&mlon=-80.26561#map=18/43.17244/-80.26561" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>31 BUCKINGHAM ST</td><td>BUCKINGHAM</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17252&mlon=-80.26546#map=18/43.17252/-80.26546" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>33 BUCKINGHAM ST</td><td>BUCKINGHAM</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17260&mlon=-80.26532#map=18/43.17260/-80.26532" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>35 BUCKINGHAM ST</td><td>BUCKINGHAM</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17268&mlon=-80.26517#map=18/43.17268/-80.26517" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>37 BUCKINGHAM ST</td><td>BUCKINGHAM</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17277&mlon=-80.26502#map=18/43.17277/-80.26502" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>45 BUCKINGHAM ST</td><td>BUCKINGHAM</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17314&mlon=-80.26433#map=18/43.17314/-80.26433" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>47 BUCKINGHAM ST</td><td>BUCKINGHAM</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17322&mlon=-80.26418#map=18/43.17322/-80.26418" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3 CARENE CRT</td><td>CARENE</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17690&mlon=-80.26389#map=18/43.17690/-80.26389" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>5 CARENE CRT</td><td>CARENE</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17698&mlon=-80.26402#map=18/43.17698/-80.26402" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>7 CARENE CRT</td><td>CARENE</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17709&mlon=-80.26414#map=18/43.17709/-80.26414" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>9 CARENE CRT</td><td>CARENE</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17719&mlon=-80.26426#map=18/43.17719/-80.26426" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>11 CARENE CRT</td><td>CARENE</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17728&mlon=-80.26438#map=18/43.17728/-80.26438" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>15 CARENE CRT</td><td>CARENE</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17739&mlon=-80.26454#map=18/43.17739/-80.26454" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>113 DUNSDON ST</td><td>DUNSDON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17918&mlon=-80.26683#map=18/43.17918/-80.26683" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17331&mlon=-80.26403#map=18/43.17331/-80.26403" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>4 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17361&mlon=-80.26366#map=18/43.17361/-80.26366" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>5 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17345&mlon=-80.26426#map=18/43.17345/-80.26426" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17375&mlon=-80.26371#map=18/43.17375/-80.26371" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>8 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17389&mlon=-80.26378#map=18/43.17389/-80.26378" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17402&mlon=-80.26381#map=18/43.17402/-80.26381" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>12 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17414&mlon=-80.26392#map=18/43.17414/-80.26392" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>14 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17428&mlon=-80.26394#map=18/43.17428/-80.26394" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>18 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17448&mlon=-80.26403#map=18/43.17448/-80.26403" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>20 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17461&mlon=-80.26408#map=18/43.17461/-80.26408" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>22 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17476&mlon=-80.26411#map=18/43.17476/-80.26411" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>24 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17489&mlon=-80.26416#map=18/43.17489/-80.26416" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>26 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17502&mlon=-80.26419#map=18/43.17502/-80.26419" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>28 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17517&mlon=-80.26425#map=18/43.17517/-80.26425" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>30 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17531&mlon=-80.26433#map=18/43.17531/-80.26433" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>32 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17545&mlon=-80.26441#map=18/43.17545/-80.26441" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>34 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17558&mlon=-80.26449#map=18/43.17558/-80.26449" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>36 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17570&mlon=-80.26459#map=18/43.17570/-80.26459" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>38 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17583&mlon=-80.26469#map=18/43.17583/-80.26469" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>40 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17596&mlon=-80.26480#map=18/43.17596/-80.26480" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>42 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17608&mlon=-80.26492#map=18/43.17608/-80.26492" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>44 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17620&mlon=-80.26505#map=18/43.17620/-80.26505" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>46 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17631&mlon=-80.26517#map=18/43.17631/-80.26517" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>48 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17642&mlon=-80.26529#map=18/43.17642/-80.26529" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>50 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17653&mlon=-80.26541#map=18/43.17653/-80.26541" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>52 ELLENSON DR</td><td>ELLENSON</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17663&mlon=-80.26553#map=18/43.17663/-80.26553" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>128 EVELYN ST</td><td>EVELYN</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17682&mlon=-80.26526#map=18/43.17682/-80.26526" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>14 FRONTENAC AVE</td><td>FRONTENAC</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17295&mlon=-80.26597#map=18/43.17295/-80.26597" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>16 FRONTENAC AVE</td><td>FRONTENAC</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17309&mlon=-80.26608#map=18/43.17309/-80.26608" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>18 FRONTENAC AVE</td><td>FRONTENAC</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17319&mlon=-80.26620#map=18/43.17319/-80.26620" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>20 FRONTENAC AVE</td><td>FRONTENAC</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17330&mlon=-80.26632#map=18/43.17330/-80.26632" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>22 FRONTENAC AVE</td><td>FRONTENAC</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17344&mlon=-80.26637#map=18/43.17344/-80.26637" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>24 FRONTENAC AVE</td><td>FRONTENAC</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17353&mlon=-80.26647#map=18/43.17353/-80.26647" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>26 FRONTENAC AVE</td><td>FRONTENAC</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17368&mlon=-80.26651#map=18/43.17368/-80.26651" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>28 FRONTENAC AVE</td><td>FRONTENAC</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17390&mlon=-80.26669#map=18/43.17390/-80.26669" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>4 MARSHALL ST</td><td>MARSHALL</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17202&mlon=-80.26638#map=18/43.17202/-80.26638" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>92 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17380&mlon=-80.26335#map=18/43.17380/-80.26335" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>94 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17395&mlon=-80.26340#map=18/43.17395/-80.26340" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>96 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17408&mlon=-80.26344#map=18/43.17408/-80.26344" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>98 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17421&mlon=-80.26353#map=18/43.17421/-80.26353" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>100 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17434&mlon=-80.26355#map=18/43.17434/-80.26355" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>104 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17454&mlon=-80.26361#map=18/43.17454/-80.26361" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>106 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17468&mlon=-80.26366#map=18/43.17468/-80.26366" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>108 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17481&mlon=-80.26371#map=18/43.17481/-80.26371" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>110 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17495&mlon=-80.26376#map=18/43.17495/-80.26376" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>112 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17508&mlon=-80.26382#map=18/43.17508/-80.26382" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>114 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17523&mlon=-80.26392#map=18/43.17523/-80.26392" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>116 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17537&mlon=-80.26396#map=18/43.17537/-80.26396" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>118 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17550&mlon=-80.26403#map=18/43.17550/-80.26403" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>120 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17563&mlon=-80.26411#map=18/43.17563/-80.26411" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>122 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17575&mlon=-80.26420#map=18/43.17575/-80.26420" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>124 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17588&mlon=-80.26429#map=18/43.17588/-80.26429" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>126 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17601&mlon=-80.26440#map=18/43.17601/-80.26440" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>128 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17613&mlon=-80.26451#map=18/43.17613/-80.26451" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>130 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17625&mlon=-80.26463#map=18/43.17625/-80.26463" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>131 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17668&mlon=-80.26423#map=18/43.17668/-80.26423" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>132 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17637&mlon=-80.26475#map=18/43.17637/-80.26475" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>133 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17680&mlon=-80.26433#map=18/43.17680/-80.26433" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>134 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17649&mlon=-80.26488#map=18/43.17649/-80.26488" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>135 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17690&mlon=-80.26445#map=18/43.17690/-80.26445" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>136 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17659&mlon=-80.26500#map=18/43.17659/-80.26500" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>137 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17701&mlon=-80.26456#map=18/43.17701/-80.26456" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>138 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17670&mlon=-80.26512#map=18/43.17670/-80.26512" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>139 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17711&mlon=-80.26468#map=18/43.17711/-80.26468" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>141 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17721&mlon=-80.26482#map=18/43.17721/-80.26482" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>143 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17734&mlon=-80.26493#map=18/43.17734/-80.26493" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>145 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17747&mlon=-80.26508#map=18/43.17747/-80.26508" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>148 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17725&mlon=-80.26579#map=18/43.17725/-80.26579" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>150 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17736&mlon=-80.26591#map=18/43.17736/-80.26591" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>164 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17809&mlon=-80.26665#map=18/43.17809/-80.26665" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>166 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17818&mlon=-80.26681#map=18/43.17818/-80.26681" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>178 MEMORIAL DR</td><td>MEMORIAL</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17892&mlon=-80.26760#map=18/43.17892/-80.26760" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1 ROBROY CRT</td><td>ROBROY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17285&mlon=-80.26487#map=18/43.17285/-80.26487" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2 ROBROY CRT</td><td>ROBROY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17305&mlon=-80.26449#map=18/43.17305/-80.26449" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>4 ROBROY CRT</td><td>ROBROY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17327&mlon=-80.26460#map=18/43.17327/-80.26460" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>5 ROBROY CRT</td><td>ROBROY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17307&mlon=-80.26512#map=18/43.17307/-80.26512" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6 ROBROY CRT</td><td>ROBROY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17339&mlon=-80.26471#map=18/43.17339/-80.26471" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>8 ROBROY CRT</td><td>ROBROY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17351&mlon=-80.26485#map=18/43.17351/-80.26485" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>9 ROBROY CRT</td><td>ROBROY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17306&mlon=-80.26536#map=18/43.17306/-80.26536" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 ROBROY CRT</td><td>ROBROY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17356&mlon=-80.26503#map=18/43.17356/-80.26503" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>11 ROBROY CRT</td><td>ROBROY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17307&mlon=-80.26562#map=18/43.17307/-80.26562" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>12 ROBROY CRT</td><td>ROBROY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17359&mlon=-80.26523#map=18/43.17359/-80.26523" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>14 ROBROY CRT</td><td>ROBROY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17358&mlon=-80.26550#map=18/43.17358/-80.26550" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>15 ROBROY CRT</td><td>ROBROY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17320&mlon=-80.26579#map=18/43.17320/-80.26579" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>16 ROBROY CRT</td><td>ROBROY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17352&mlon=-80.26571#map=18/43.17352/-80.26571" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>17 ROBROY CRT</td><td>ROBROY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17341&mlon=-80.26586#map=18/43.17341/-80.26586" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>129 TRANQUILITY ST</td><td>TRANQUILITY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17779&mlon=-80.26681#map=18/43.17779/-80.26681" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3 WESTBRIER KNOLL</td><td>WESTBRIER</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17980&mlon=-80.26551#map=18/43.17980/-80.26551" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6 WESTBRIER KNOLL</td><td>WESTBRIER</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.18014&mlon=-80.26516#map=18/43.18014/-80.26516" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>7 WESTBRIER KNOLL</td><td>WESTBRIER</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17992&mlon=-80.26571#map=18/43.17992/-80.26571" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 WESTBRIER KNOLL</td><td>WESTBRIER</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.18030&mlon=-80.26534#map=18/43.18030/-80.26534" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>14 WESTBRIER KNOLL</td><td>WESTBRIER</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.18046&mlon=-80.26552#map=18/43.18046/-80.26552" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>18 WESTBRIER KNOLL</td><td>WESTBRIER</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.18061&mlon=-80.26569#map=18/43.18061/-80.26569" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>22 WESTBRIER KNOLL</td><td>WESTBRIER</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.18076&mlon=-80.26586#map=18/43.18076/-80.26586" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>25 WESTBRIER KNOLL</td><td>WESTBRIER</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.18092&mlon=-80.26684#map=18/43.18092/-80.26684" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>26 WESTBRIER KNOLL</td><td>WESTBRIER</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.18091&mlon=-80.26603#map=18/43.18091/-80.26603" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>29 WESTBRIER KNOLL</td><td>WESTBRIER</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.18105&mlon=-80.26698#map=18/43.18105/-80.26698" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>30 WESTBRIER KNOLL</td><td>WESTBRIER</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.18106&mlon=-80.26620#map=18/43.18106/-80.26620" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>33 WESTBRIER KNOLL</td><td>WESTBRIER</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.18120&mlon=-80.26717#map=18/43.18120/-80.26717" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>34 WESTBRIER KNOLL</td><td>WESTBRIER</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.18120&mlon=-80.26637#map=18/43.18120/-80.26637" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>35 WESTBRIER KNOLL</td><td>WESTBRIER</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.18140&mlon=-80.26728#map=18/43.18140/-80.26728" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>37 WESTBRIER KNOLL</td><td>WESTBRIER</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.18159&mlon=-80.26734#map=18/43.18159/-80.26734" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>38 WESTBRIER KNOLL</td><td>WESTBRIER</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.18134&mlon=-80.26653#map=18/43.18134/-80.26653" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>39 WESTBRIER KNOLL</td><td>WESTBRIER</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.18182&mlon=-80.26737#map=18/43.18182/-80.26737" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>40 WESTBRIER KNOLL</td><td>WESTBRIER</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.18147&mlon=-80.26669#map=18/43.18147/-80.26669" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>41 WESTBRIER KNOLL</td><td>WESTBRIER</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.18202&mlon=-80.26749#map=18/43.18202/-80.26749" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>42 WESTBRIER KNOLL</td><td>WESTBRIER</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.18164&mlon=-80.26676#map=18/43.18164/-80.26676" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>44 WESTBRIER KNOLL</td><td>WESTBRIER</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.18184&mlon=-80.26680#map=18/43.18184/-80.26680" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>46 WESTBRIER KNOLL</td><td>WESTBRIER</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.18203&mlon=-80.26687#map=18/43.18203/-80.26687" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Updated Addresses <span class="badge badge-yellow">0</span>
+      <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (STREETNUM)</li><li>Street name (STREETNAME)</li><li>Full address (FULLADDRESS)</li><li>Coordinates (latitude, longitude)</li><li>POSTALCODE</li><li>STNUMSUFF</li><li>STREETNUMIN</li><li>STREETTYPE</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span></h2>
+    
+    <p class="empty">No addresses updated.</p>
+  </div>
+
+  <div class="section">
+    <h2>Renumbered Addresses <span class="badge badge-accent">0</span></h2>
+    
+    <p class="empty">No addresses renumbered.</p>
+  </div>
+
+  <div class="section">
+    <h2>Street Renames <span class="badge badge-purple">0</span></h2>
+    <p class="empty">No street renames.</p>
+  </div>
+
+  
+
+  
+
+  
+
+  <div class="section">
+    <h2>Location Adjustments <span class="badge" style="background: var(--surface2); color: var(--text-dim)">0</span></h2>
+    
+    <p class="empty">No location adjustments.</p>
+  </div>
+
+  <div class="generated-at">Report generated Aug 12, 2026 at 10:27 PM · source licence: Open Government Licence - Brantford</div>
+
+  <script>
+    function sortTable(tbodyId, col) {
+      const tbody = document.getElementById(tbodyId);
+      if (!tbody) return;
+      const rows = Array.from(tbody.rows);
+      const dir = tbody.dataset.sortDir === 'asc' ? 'desc' : 'asc';
+      tbody.dataset.sortDir = dir;
+      rows.sort((a, b) => {
+        const av = a.cells[col]?.textContent.trim() || '';
+        const bv = b.cells[col]?.textContent.trim() || '';
+        const an = parseFloat(av), bn = parseFloat(bv);
+        if (!isNaN(an) && !isNaN(bn)) return dir === 'asc' ? an - bn : bn - an;
+        return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+      });
+      rows.forEach(r => tbody.appendChild(r));
+    }
+  </script>
+</body>
+
+</html>
