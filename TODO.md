@@ -320,37 +320,63 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
   escalate beyond the vault report (a nonzero exit, a notification). Nothing escalates
   today — kingston's two-day outage produced only a red run. Decide it with a week of
   evidence, not now.
-- [ ] **A sleeping laptop skips the day silently — half fixed 2026-08-12.** Found while
-  checking why 08-12 had no run at all: no `runs.csv` row, zero lines in `update.log`, no
-  vault snapshots pulled, and the task itself reporting `LastRunTime = 08-11 12:00` with
-  `NextRunTime = 08-13 12:00`. The cause is in the System log's Kernel-Power events, not
-  in this repo: the machine entered Modern Standby at 05:33 and did not exit until 21:51,
-  so noon fell inside the sleep and `WakeToRun = False` meant nothing woke it. The same
-  power log explains 08-08 (asleep 02:11–13:16). It does *not* explain 08-06, which was
-  awake across noon — that one is a real `runs.csv` drop, and is now the only evidence for
-  the ledger question in the review item above.
+- [ ] **A Windows Update restart skips the day silently — diagnosed 2026-08-12, left
+  unfixed by choice.** Found while checking why 08-12 had no run at all: no `runs.csv`
+  row, zero lines in `update.log`, no vault snapshots pulled, and the task itself
+  reporting `LastRunTime = 08-11 12:00` with `NextRunTime = 08-13 12:00`.
 
-  `StartWhenAvailable = True` does **not** rescue this. The machine woke at 21:51 and 12
-  minutes later no catch-up had fired and `NextRunTime` still read 08-13, so a missed noon
-  is simply lost. Worth knowing because that setting reads like it covers exactly this.
+  The trigger is a Windows Update restart, not ordinary sleep — the first reading here
+  was "the laptop was asleep", and that was the symptom. The System log shows two
+  `system initiated reboot from Modern Standby` events at 05:29–05:33 with
+  `LastBootUpTime = 05:33:09`, after which the machine went straight back into Modern
+  Standby and stayed there past noon. The same shape explains 08-08 (asleep 02:11–13:16).
+  It does *not* explain 08-06, which was awake across noon — that one is a real
+  `runs.csv` drop, and is now the only evidence for the ledger question in the item above.
 
-  Fixed the direct cause the same day: `WakeToRun = True` on `kk-ontario-update`. **The
-  remaining hole is `DisallowStartIfOnBatteries`, still `True`** — a wake at noon on
-  battery skips just as silently as the sleep did, and this is a laptop. Left alone
-  deliberately rather than cleared: a ~30-minute network job on battery is its own
-  problem, and the existing script already treats power-ish conditions as first-class
-  (`offline`, `metered` are recorded as run outcomes, not failures). The right fix is
-  probably to record a battery skip the same way instead of allowing the run — but that
-  is a change to `daily-update.ps1`, and the task-level skip happens *before* the script
-  gets to say anything, so it cannot see it. Decide at the 08-17 review.
+  **The mechanism that actually matters is `LogonType: Interactive`** on
+  `kk-ontario-update`. An Interactive task can only run while `kk` is logged on, so after
+  an unattended reboot there is no session for it to run in and the trigger cannot fire at
+  all — no power setting changes that. `StartWhenAvailable = True` does not rescue it
+  either: the machine woke at 21:51 and 12 minutes later no catch-up had fired and
+  `NextRunTime` still read 08-13. That setting reads like it covers exactly this case and
+  does not.
 
-  The broader point for that review: this failure mode is invisible to every surface we
-  have. `addressvault report` shows "no attempt", which is also what a metered skip shows;
-  `runs.csv` shows nothing at all; the site just goes stale. It is the same blind spot the
-  deleted `health.py --stale` had, arriving from the opposite direction — that one
-  measured the store and missed unchanged cities, this one misses days the pipeline never
-  ran. Question 4 of the review ("did anything reach for a staleness number") should be
-  read with this in mind.
+  `WakeToRun = True` was tried on 08-12 and **reverted the same evening** — decided
+  against having code wake the machine. So the task is back at its original settings
+  (`WakeToRun` and `DisallowStartIfOnBatteries` both as they were) and this failure mode
+  is open by choice, not oversight. The options that do not involve waking anything, if it
+  ever becomes worth fixing: a today-guard in `daily-update.ps1` keyed on `runs.csv` (it
+  already writes one row per run, so "did today succeed?" is a two-line check) which would
+  make the trigger safe to repeat through the afternoon or fire on logon; or switching
+  `LogonType` to `Password`, the only variant that both survives an unattended reboot and
+  keeps `git push` working, since a real logon unlocks the DPAPI key behind Credential
+  Manager and S4U does not.
+
+  The broader point for the 08-17 review: this failure mode is invisible to every surface
+  we have. `addressvault report` shows "no attempt", which is also what a metered skip
+  shows; `runs.csv` shows nothing at all; the site just goes stale. It is the same blind
+  spot the deleted `health.py --stale` had, arriving from the opposite direction — that
+  one measured the store and missed unchanged cities, this one misses days the pipeline
+  never ran. Question 4 of the review ("did anything reach for a staleness number") should
+  be read with this in mind.
+- [ ] **Watch for more `index.lock` publish failures — observing, deliberately not fixed.**
+  The manually-triggered 08-12 run updated all 42 cities cleanly and then lost the publish
+  to a 0-byte `.git/index.lock`: `git add docs` failed, so nothing was staged, committed or
+  pushed, and the run ended `publish-failed` with the site a day stale. Recovered by hand
+  the same evening (`e22515ad`) — the lock was removed and the run's own `docs/` output
+  committed unmodified.
+
+  The lock was orphaned at 22:12 and hit at 22:50, i.e. 38 minutes old with no git process
+  holding it. `daily-update.ps1:132` only sweeps locks older than **60 minutes**, so it
+  correctly left this one alone and had no retry behind it. A lower threshold, or one retry
+  of the `add` after clearing a lock with no live process behind it, would have made it
+  self-healing.
+
+  **Deliberately unchanged pending more cases.** The one observation is contaminated: a
+  human/agent was running `git` in the repo during that run, which is not what happens at
+  noon, so this may be self-inflicted rather than a real recurring fault. Collect further
+  instances before touching the constant — if they only ever appear on manually-triggered
+  runs with someone working in the repo, the sweep is fine as written.
 - [ ] **Per-city tuning pass** — reviewing each city's "modified" noise to pick
   `ignore_fields` (Toronto needed this — 387→3 modified), and checking whether the
   `[classes]` assignments (2026-06-12, sampled from one snapshot each) hold up against
