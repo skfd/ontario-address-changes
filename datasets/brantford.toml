@@ -1,5 +1,15 @@
 slug = "brantford"
 provider = "City of Brantford"
+# BETTER-LAYER FINDING (onboarding probe, 2026-08-17): the same org publishes
+#   SiteAddress_pub/FeatureServer/0  (38,603 pts, verified 2026-08-17)
+# which solves BOTH of this dataset's open problems at the source:
+#   - ADDPTKEYNUM is a stable key (identity here is synthetic);
+#   - STNUMPRE/STREETNUMINT decompose the "<unit>-<number>" fusion this
+#     file's unit note documents (2,198 rows with STNUMPRE ≈ the 2,213
+#     fused rows here), so the deferred unit-parse question disappears.
+# Also adds MUNINAME, STDIRSUFF, PROVINCE. Re-pointing re-keys the history
+# (a tracker decision, exactly like dufferin's). The brantford checkout is
+# PARKED until this is resolved (engine onboarding-queue.md).
 data_url = "https://services.arcgis.com/aji2lCmjXt0KpGzI/arcgis/rest/services/OP_Site_Addresses2/FeatureServer/0"
 access = "arcgis"
 format = "geojson"
