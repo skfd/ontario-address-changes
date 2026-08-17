@@ -1,5 +1,17 @@
 slug = "dufferin"
 provider = "County of Dufferin"
+# WRONG-LAYER FINDING (onboarding probe, 2026-08-16): this dataset tracks the
+# county's ENTRANCES layer — driveway entrance points. 3,270 of 27,075 rows
+# (12%) have no housenumber (unnumbered field/laneway entrances), 444 civic
+# keys repeat (multi-entrance parcels), and FULLADDY is misaligned with
+# STREETNUM on ~466 rows (off-by-one-row generation, incl. a digit
+# transposition). The same org publishes a proper open-data address layer:
+#   Address_Points_DufferinCounty_Open_Data/FeatureServer/0
+#   (28,297 points; CIVIC_NO, STREETNAME typed, ST_TYPE, TOWN = all 8
+#   municipalities, UNIT, CIVICFULL, ADDYALIAS — verified 2026-08-16)
+# Re-pointing means a new identity mapping and a fresh snapshot history, so
+# it is a tracker decision, not a city-config workaround. The dufferin
+# checkout is PARKED until this is resolved (engine onboarding-queue.md).
 data_url = "https://services5.arcgis.com/C0BEdgagVaXzcw0W/arcgis/rest/services/Dufferin_County_Entrances/FeatureServer/0"
 access = "arcgis"
 format = "geojson"
