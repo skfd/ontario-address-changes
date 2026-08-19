@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>City of Kitchener Address Changes — Wednesday, Aug 19, 2026</title>
+  <style>
+    :root {
+      --bg: #fafafa; --surface: #ffffff; --surface2: #f5f5f5; --surface3: #ebebeb;
+      --border: #e0e0e0; --border-strong: #d1d1d1; --text: #242424;
+      --text-secondary: #424242; --text-dim: #616161; --accent: #0078d4;
+      --accent-hover: #106ebe; --accent-bg: #eff6fc; --green: #107c10;
+      --green-bg: #f1faf1; --green-tint: #9fd89f; --red: #c50f1f; --red-bg: #fdf3f4;
+      --red-tint: #eeacb2; --yellow: #eaa300; --yellow-bg: #fefbf4; --yellow-tint: #f9e2ae;
+      --purple: #881798; --purple-bg: #f9f3fb; --teal: #038387; --teal-bg: #f0fafa;
+      --shadow-4: 0 2px 4px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --shadow-8: 0 4px 8px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --card-bg: #ffffff; --card-hover: #f5f5f5; color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1f1f1f; --surface: #292929; --surface2: #333333; --surface3: #3d3d3d;
+        --border: #525252; --border-strong: #666666; --text: #ffffff;
+        --text-secondary: #d6d6d6; --text-dim: #adadad; --accent: #2899f5;
+        --accent-hover: #3aa0f3; --accent-bg: #002848; --green: #54b054;
+        --green-bg: #052505; --green-tint: #107c10; --red: #dc626d; --red-bg: #3b0509;
+        --red-tint: #c50f1f; --yellow: #f2c661; --yellow-bg: #463100; --yellow-tint: #eaa300;
+        --purple: #d29ddb; --purple-bg: #3a1040; --teal: #58c0c4; --teal-bg: #013638;
+        --shadow-4: 0 2px 4px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --shadow-8: 0 4px 8px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --card-bg: #333333; --card-hover: #3d3d3d; color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI Variable','Segoe UI',system-ui,-apple-system,sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.5; padding: 2rem;
+      max-width: 1100px; margin: 0 auto; font-size: 14px; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; color: var(--accent-hover); }
+    .back-link { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 12px;
+      color: var(--text-dim); margin-bottom: 1.5rem; transition: color 0.1s; }
+    .back-link:hover { color: var(--accent); text-decoration: none; }
+    h1 { font-size: 24px; font-weight: 600; margin-bottom: 4px; }
+    .subtitle { color: var(--text-secondary); font-size: 14px; margin-bottom: 12px; }
+    .explainer { color: var(--text-secondary); font-size: 13px; line-height: 1.5;
+      margin-bottom: 24px; padding: 12px 16px; background: var(--surface);
+      border-radius: 8px; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px; margin-bottom: 24px; }
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px;
+      padding: 16px; box-shadow: var(--shadow-4); transition: box-shadow 0.1s; }
+    .card:hover { box-shadow: var(--shadow-8); }
+    .card .label { font-size: 12px; color: var(--text-dim); font-weight: 400; }
+    .card .value { font-size: 28px; font-weight: 600; margin-top: 4px; }
+    .card .value.green { color: var(--green); } .card .value.red { color: var(--red); }
+    .card .value.yellow { color: var(--yellow); } .card .value.accent { color: var(--accent); }
+    .card .value.purple { color: var(--purple); }
+    .card .value.teal { color: var(--teal); }
+    .sparkline { display: block; margin-top: 6px; overflow: visible; opacity: 0.9; }
+    .sparkline-label { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+    .section { margin-bottom: 24px; }
+    .section h2 { font-size: 16px; font-weight: 600; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px; }
+    .badge { font-size: 12px; padding: 2px 8px; border-radius: 999px; font-weight: 600; }
+    .badge-green { background: var(--green-bg); color: var(--green); }
+    .badge-red { background: var(--red-bg); color: var(--red); }
+    .badge-yellow { background: var(--yellow-bg); color: var(--yellow); }
+    .badge-accent { background: var(--accent-bg); color: var(--accent); }
+    .badge-purple { background: var(--purple-bg); color: var(--purple); }
+    .badge-teal { background: var(--teal-bg); color: var(--teal); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface);
+      border-radius: 8px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    thead { background: var(--surface2); }
+    th { text-align: left; padding: 8px 12px; font-weight: 600; color: var(--text-dim);
+      font-size: 12px; cursor: pointer; user-select: none; border-bottom: 1px solid var(--border); }
+    th:hover { color: var(--accent); }
+    td { padding: 8px 12px; border-top: 1px solid var(--border); }
+    tr:hover td { background: var(--surface2); }
+    .old-val { color: var(--red); text-decoration: line-through; }
+    .new-val { color: var(--green); }
+    .arrow-val { color: var(--text-dim); text-align: center; white-space: nowrap; }
+    .map-link { display: inline-flex; align-items: center; margin-left: 0.4em;
+      color: var(--accent); vertical-align: middle; white-space: nowrap; font-size: 12px; }
+    .map-link:hover { color: var(--accent-hover); }
+    .map-link svg { width: 14px; height: 14px; }
+    .change-field { color: var(--yellow); font-weight: 600; }
+    .bar-chart { margin-top: 8px; }
+    .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 12px; }
+    .bar-label { width: 180px; text-align: right; color: var(--text-secondary); flex-shrink: 0;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .bar-track { flex: 1; height: 8px; background: var(--surface2); border-radius: 4px;
+      overflow: hidden; position: relative; }
+    .bar-fill { height: 100%; border-radius: 4px; transition: width 0.15s ease; }
+    .bar-fill.green { background: var(--green); } .bar-fill.red { background: var(--red); }
+    .bar-count { width: 40px; font-size: 12px; color: var(--text-dim); }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+    .empty { color: var(--text-dim); font-style: italic; padding: 16px; }
+    .truncated { color: var(--text-dim); font-size: 12px; margin-top: 8px; }
+    .collapsible-toggle { background: transparent; border: 1px solid var(--border);
+      color: var(--accent); padding: 5px 12px; border-radius: 4px; cursor: pointer;
+      font-size: 12px; font-family: inherit; margin-bottom: 12px; transition: background 0.1s; }
+    .collapsible-toggle:hover { background: var(--surface2); }
+    details.rename-group { background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; margin-bottom: 8px; box-shadow: var(--shadow-4); }
+    details.rename-group summary { padding: 10px 14px; cursor: pointer; font-size: 13px; }
+    details.rename-group[open] summary { border-bottom: 1px solid var(--border); }
+    details.rename-group table { border: none; box-shadow: none; border-radius: 0; }
+    details.rename-group .truncated { padding: 0 14px 10px; margin-top: 0; }
+    .rename-count { color: var(--text-dim); font-size: 12px; margin-left: 6px; }
+    .no-changes-banner { background: var(--green-bg); border: 1px solid var(--green-tint);
+      color: var(--green); padding: 16px; border-radius: 8px; margin-bottom: 24px;
+      text-align: center; font-weight: 600; font-size: 14px; }
+    .baseline-banner { background: var(--accent-bg); border: 1px solid var(--accent);
+      color: var(--accent); padding: 16px; border-radius: 8px; margin-bottom: 24px; font-size: 13px; }
+    .generated-at { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-dim); }
+    .history { font-size: 12.5px; color: var(--text-secondary); white-space: nowrap; }
+    .history .a { color: var(--green); font-weight: 500; }
+    .history .r { color: var(--red); font-weight: 500; }
+    .history .dot { color: var(--text-dim); margin: 0 4px; }
+    .history-none { color: var(--text-dim); font-style: italic; font-size: 12.5px; }
+    .info-wrap { position: relative; display: inline-flex; vertical-align: middle; }
+    .info-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+      height: 18px; padding: 0 8px 0 7px; border-radius: 999px; border: none;
+      color: #fff; background: var(--accent); cursor: help; font-size: 11px; font-weight: 600;
+      font-style: normal; font-family: inherit; line-height: 1; white-space: nowrap; }
+    .info-btn .glyph { font-style: italic; font-weight: 700;
+      font-family: Georgia, 'Times New Roman', serif; }
+    .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn,
+    .info-wrap:focus .info-btn { background: var(--accent-hover); }
+    .info-pop { display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 20;
+      width: 320px; max-width: 80vw; padding: 12px 14px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-8);
+      font-size: 12.5px; font-weight: 400; color: var(--text-secondary); line-height: 1.5; }
+    .info-wrap:hover .info-pop, .info-wrap:focus-within .info-pop,
+    .info-wrap:focus .info-pop { display: block; }
+    .info-pop strong { display: block; color: var(--text); font-size: 12px; margin-bottom: 4px; }
+    .info-pop ul { list-style: none; margin: 0 0 10px; padding: 0; }
+    .info-pop li { padding: 1px 0 1px 14px; position: relative; }
+    .info-pop li::before { content: "·"; position: absolute; left: 4px; color: var(--text-dim); }
+    .info-pop .note { color: var(--text-dim); font-size: 11.5px; margin: 0 0 10px; }
+    .info-pop .muted { color: var(--text-dim); font-style: italic; }
+  </style>
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+
+  <a class="back-link" href="index.html">← Back to City of Kitchener reports</a>
+
+  <h1>City of Kitchener — Address Changes</h1>
+  <p class="subtitle">
+    Changes between  and Wednesday, Aug 19, 2026
+    · 132,066 total addresses
+  </p>
+
+  
+
+  <div class="cards">
+    <div class="card"><div class="label">Total Addresses</div>
+      <div class="value accent">132,066</div></div>
+    <div class="card"><div class="label">New Addresses</div>
+      <div class="value green">+6</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#107c10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,2.0 28.5,18.0 55.0,18.0 81.5,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#107c10"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Retired Addresses</div>
+      <div class="value red">−0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#c50f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 28.5,18.0 55.0,18.0 81.5,2.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#c50f1f"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Updated Addresses <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (CIVIC_NO)</li><li>Street name (STREET)</li><li>Unit (UNIT)</li><li>Full address (ADDRESS)</li><li>Coordinates (latitude, longitude)</li><li>POLL</li><li>PROPERTY_UNIT_ID</li><li>STATUS</li><li>UNIT_TYPE</li><li>WARD</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>LATITUDE</li><li>LONGITUDE</li><li>PARCELID</li><li>ROADSEGMENTID</li><li>ROLL_REFERENCE</li><li>X_COORD</li><li>Y_COORD</li></ul>
+      
+    </span>
+  </span></div>
+      <div class="value yellow">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 28.5,18.0 55.0,14.3 81.5,2.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Renumbered</div>
+      <div class="value accent">1</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#0078d4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 28.5,18.0 55.0,18.0 81.5,2.0 108.0,12.7"/><circle cx="108.0" cy="12.7" r="2" fill="#0078d4"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Street Renames</div>
+      <div class="value purple">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#9141ac" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 28.5,18.0 55.0,18.0 81.5,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#9141ac"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    <div class="card"><div class="label">Status Changes</div>
+      <div class="value teal">1</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#038387" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 28.5,16.6 55.0,17.7 81.5,2.0 108.0,17.8"/><circle cx="108.0" cy="17.8" r="2" fill="#038387"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    <div class="card"><div class="label">Boundary Changes</div>
+      <div class="value teal">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#038387" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 28.5,18.0 55.0,18.0 81.5,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#038387"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    <div class="card"><div class="label">Location Adjustments</div>
+      <div class="value" style="color: var(--text-dim)">67</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#808080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 28.5,18.0 55.0,17.9 81.5,2.0 108.0,12.4"/><circle cx="108.0" cy="12.4" r="2" fill="#808080"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+  </div>
+
+  
+  <div class="section">
+    <h2>Change Breakdown</h2>
+    <div class="stats-grid">
+      
+      <div class="card"><div class="label">Top Streets by New Addresses</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">AHRENS ST W</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">4</span></div>
+      </div></div>
+      
+      
+      <div class="card"><div class="label">Most Frequently Updated Fields</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">Location</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">67</span></div>
+        <div class="bar-row"><span class="bar-label">Address Number</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:1.0%"></div></div>
+          <span class="bar-count">1</span></div>
+        <div class="bar-row"><span class="bar-label">Full Address</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:1.0%"></div></div>
+          <span class="bar-count">1</span></div>
+        <div class="bar-row"><span class="bar-label">STATUS</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:1.0%"></div></div>
+          <span class="bar-count">1</span></div>
+      </div></div>
+    </div>
+  </div>
+  
+
+  <div class="section">
+    <h2>New Addresses <span class="badge badge-green">6</span></h2>
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-added',0)">Address</th><th onclick="sortTable('t-added',1)">Street</th>
+        <th onclick="sortTable('t-added',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-added">
+        
+        <tr><td>1-180 AHRENS ST W</td><td>AHRENS ST W</td><td>1</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45997&mlon=-80.49450#map=18/43.45997/-80.49450" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2-180 AHRENS ST W</td><td>AHRENS ST W</td><td>2</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45997&mlon=-80.49450#map=18/43.45997/-80.49450" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3-180 AHRENS ST W</td><td>AHRENS ST W</td><td>3</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45997&mlon=-80.49450#map=18/43.45997/-80.49450" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>4-180 AHRENS ST W</td><td>AHRENS ST W</td><td>4</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45997&mlon=-80.49450#map=18/43.45997/-80.49450" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>100 WILHELM ST</td><td>WILHELM ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46002&mlon=-80.49439#map=18/43.46002/-80.49439" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>102 WILHELM ST</td><td>WILHELM ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46007&mlon=-80.49429#map=18/43.46007/-80.49429" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Retired Addresses <span class="badge badge-red">0</span></h2>
+    <p class="empty">No addresses retired.</p>
+  </div>
+
+  <div class="section">
+    <h2>Updated Addresses <span class="badge badge-yellow">0</span>
+      <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (CIVIC_NO)</li><li>Street name (STREET)</li><li>Unit (UNIT)</li><li>Full address (ADDRESS)</li><li>Coordinates (latitude, longitude)</li><li>POLL</li><li>PROPERTY_UNIT_ID</li><li>STATUS</li><li>UNIT_TYPE</li><li>WARD</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>LATITUDE</li><li>LONGITUDE</li><li>PARCELID</li><li>ROADSEGMENTID</li><li>ROLL_REFERENCE</li><li>X_COORD</li><li>Y_COORD</li></ul>
+      
+    </span>
+  </span></h2>
+    
+    <p class="empty">No addresses updated.</p>
+  </div>
+
+  <div class="section">
+    <h2>Renumbered Addresses <span class="badge badge-accent">1</span></h2>
+    
+    
+    <table>
+      <thead><tr><th>Address</th><th>What Changed</th><th>Before</th><th></th><th>After</th><th>Map</th></tr></thead>
+      <tbody>
+        
+  <tr><td rowspan="2">26 CHARLES ST W</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">24</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">26</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.44993&mlon=-80.49202#map=18/43.44993/-80.49202" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">24 CHARLES ST W</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">26 CHARLES ST W</td>
+    </tr>
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Street Renames <span class="badge badge-purple">0</span></h2>
+    <p class="empty">No street renames.</p>
+  </div>
+
+  
+
+  
+  <div class="section">
+    <h2>Status Changes <span class="badge badge-teal">1</span></h2>
+    
+  <details class="rename-group">
+    <summary><span class="change-field">STATUS:</span> <span class="old-val">PENDING</span> <span class="arrow-val">→</span> <span class="new-val">ACTIVE</span><span class="rename-count">1 address</span></summary>
+    <table>
+      <tbody>
+        
+        <tr><td>H-RIDGEWATER TRAIL</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.40357&mlon=-80.49585#map=18/43.40357/-80.49585" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+  </details>
+  
+    
+  </div>
+  
+
+  
+  <div class="section">
+    <h2>Boundary Changes <span class="badge badge-teal">0</span></h2>
+    <p class="empty">No ward or municipality reassignments.</p>
+  </div>
+  
+
+  <div class="section">
+    <h2>Location Adjustments <span class="badge" style="background: var(--surface2); color: var(--text-dim)">67</span></h2>
+    
+    <p class="explainer">67 addresses had only their map position adjusted — median shift 37.6&nbsp;m, largest 454.5&nbsp;m. The street addresses themselves did not change.</p>
+    
+    
+    <details class="rename-group">
+      <summary>Per-address detail<span class="rename-count">67 addresses</span></summary>
+    <table>
+      <thead><tr><th>Address</th><th>Before</th><th></th><th>After</th></tr></thead>
+      <tbody>
+        
+        <tr><td>162 AHRENS ST W</td>
+          
+          <td class="old-val">43.45935, -80.49397<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45935&mlon=-80.49397#map=19/43.45935/-80.49397" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 2.7m</td>
+          <td class="new-val">43.45934, -80.49394<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45934&mlon=-80.49394#map=19/43.45934/-80.49394" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>167 AHRENS ST W</td>
+          
+          <td class="old-val">43.45929, -80.49446<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45929&mlon=-80.49446#map=19/43.45929/-80.49446" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 2.7m</td>
+          <td class="new-val">43.45930, -80.49449<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45930&mlon=-80.49449#map=19/43.45930/-80.49449" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>172 AHRENS ST W</td>
+          
+          <td class="old-val">43.45967, -80.49422<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45967&mlon=-80.49422#map=19/43.45967/-80.49422" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">← 4.2m</td>
+          <td class="new-val">43.45966, -80.49427<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45966&mlon=-80.49427#map=19/43.45966/-80.49427" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>180 AHRENS ST W</td>
+          
+          <td class="old-val">43.46003, -80.49445<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46003&mlon=-80.49445#map=19/43.46003/-80.49445" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 7.8m</td>
+          <td class="new-val">43.45997, -80.49450<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45997&mlon=-80.49450#map=19/43.45997/-80.49450" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>UPPER-180 AHRENS ST W</td>
+          
+          <td class="old-val">43.46003, -80.49445<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46003&mlon=-80.49445#map=19/43.46003/-80.49445" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 7.8m</td>
+          <td class="new-val">43.45997, -80.49450<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45997&mlon=-80.49450#map=19/43.45997/-80.49450" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>184 AHRENS ST W</td>
+          
+          <td class="old-val">43.46011, -80.49460<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46011&mlon=-80.49460#map=19/43.46011/-80.49460" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↗ 2.0m</td>
+          <td class="new-val">43.46012, -80.49458<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46012&mlon=-80.49458#map=19/43.46012/-80.49458" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>188 AHRENS ST W</td>
+          
+          <td class="old-val">43.46022, -80.49472<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46022&mlon=-80.49472#map=19/43.46022/-80.49472" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">→ 1.6m</td>
+          <td class="new-val">43.46022, -80.49470<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46022&mlon=-80.49470#map=19/43.46022/-80.49470" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>827 AMAND DR</td>
+          
+          <td class="old-val">43.39297, -80.50824<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39297&mlon=-80.50824#map=19/43.39297/-80.50824" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↗ 1.4m</td>
+          <td class="new-val">43.39298, -80.50823<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39298&mlon=-80.50823#map=19/43.39298/-80.50823" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>831 AMAND DR</td>
+          
+          <td class="old-val">43.39308, -80.50828<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39308&mlon=-80.50828#map=19/43.39308/-80.50828" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">→ 0.8m</td>
+          <td class="new-val">43.39308, -80.50827<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39308&mlon=-80.50827#map=19/43.39308/-80.50827" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>835 AMAND DR</td>
+          
+          <td class="old-val">43.39318, -80.50830<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39318&mlon=-80.50830#map=19/43.39318/-80.50830" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 1.4m</td>
+          <td class="new-val">43.39317, -80.50829<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39317&mlon=-80.50829#map=19/43.39317/-80.50829" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>899 AMAND DR</td>
+          
+          <td class="old-val">43.39453, -80.50873<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39453&mlon=-80.50873#map=19/43.39453/-80.50873" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↗ 1.4m</td>
+          <td class="new-val">43.39454, -80.50872<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39454&mlon=-80.50872#map=19/43.39454/-80.50872" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>906 AMAND DR</td>
+          
+          <td class="old-val">43.39489, -80.50816<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39489&mlon=-80.50816#map=19/43.39489/-80.50816" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">← 0.8m</td>
+          <td class="new-val">43.39489, -80.50817<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39489&mlon=-80.50817#map=19/43.39489/-80.50817" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>907 AMAND DR</td>
+          
+          <td class="old-val">43.39472, -80.50879<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39472&mlon=-80.50879#map=19/43.39472/-80.50879" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↑ 2.2m</td>
+          <td class="new-val">43.39474, -80.50879<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39474&mlon=-80.50879#map=19/43.39474/-80.50879" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>914 AMAND DR</td>
+          
+          <td class="old-val">43.39508, -80.50822<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39508&mlon=-80.50822#map=19/43.39508/-80.50822" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">← 0.8m</td>
+          <td class="new-val">43.39508, -80.50823<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39508&mlon=-80.50823#map=19/43.39508/-80.50823" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>930 AMAND DR</td>
+          
+          <td class="old-val">43.39545, -80.50834<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39545&mlon=-80.50834#map=19/43.39545/-80.50834" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 2.0m</td>
+          <td class="new-val">43.39544, -80.50836<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39544&mlon=-80.50836#map=19/43.39544/-80.50836" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>934 AMAND DR</td>
+          
+          <td class="old-val">43.39552, -80.50836<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39552&mlon=-80.50836#map=19/43.39552/-80.50836" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 1.4m</td>
+          <td class="new-val">43.39553, -80.50837<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39553&mlon=-80.50837#map=19/43.39553/-80.50837" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>42 CANTERHOME ST</td>
+          
+          <td class="old-val">43.39739, -80.51125<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39739&mlon=-80.51125#map=19/43.39739/-80.51125" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 4.5m</td>
+          <td class="new-val">43.39735, -80.51126<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39735&mlon=-80.51126#map=19/43.39735/-80.51126" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>19 CANYON HILL DR</td>
+          
+          <td class="old-val">43.39934, -80.50881<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39934&mlon=-80.50881#map=19/43.39934/-80.50881" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↗ 1.4m</td>
+          <td class="new-val">43.39935, -80.50880<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39935&mlon=-80.50880#map=19/43.39935/-80.50880" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>21 CANYON HILL DR</td>
+          
+          <td class="old-val">43.39939, -80.50882<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39939&mlon=-80.50882#map=19/43.39939/-80.50882" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↑ 1.1m</td>
+          <td class="new-val">43.39940, -80.50882<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39940&mlon=-80.50882#map=19/43.39940/-80.50882" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>23 CANYON HILL DR</td>
+          
+          <td class="old-val">43.39944, -80.50884<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39944&mlon=-80.50884#map=19/43.39944/-80.50884" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↗ 1.4m</td>
+          <td class="new-val">43.39945, -80.50883<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39945&mlon=-80.50883#map=19/43.39945/-80.50883" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>25 CANYON HILL DR</td>
+          
+          <td class="old-val">43.39950, -80.50886<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39950&mlon=-80.50886#map=19/43.39950/-80.50886" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↗ 1.4m</td>
+          <td class="new-val">43.39951, -80.50885<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39951&mlon=-80.50885#map=19/43.39951/-80.50885" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>27 CANYON HILL DR</td>
+          
+          <td class="old-val">43.39955, -80.50886<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39955&mlon=-80.50886#map=19/43.39955/-80.50886" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 1.4m</td>
+          <td class="new-val">43.39956, -80.50887<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39956&mlon=-80.50887#map=19/43.39956/-80.50887" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>14 HETT AVE</td>
+          
+          <td class="old-val">43.45986, -80.49641<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45986&mlon=-80.49641#map=19/43.45986/-80.49641" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 2.0m</td>
+          <td class="new-val">43.45987, -80.49643<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45987&mlon=-80.49643#map=19/43.45987/-80.49643" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>OTTAWA ST S</td>
+          
+          <td class="old-val">43.39862, -80.53620<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39862&mlon=-80.53620#map=19/43.39862/-80.53620" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 196.4m</td>
+          <td class="new-val">43.39971, -80.53811<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39971&mlon=-80.53811#map=19/43.39971/-80.53811" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>OTTAWA ST S</td>
+          
+          <td class="old-val">43.40166, -80.53548<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.40166&mlon=-80.53548#map=19/43.40166/-80.53548" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↗ 61.3m</td>
+          <td class="new-val">43.40193, -80.53482<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.40193&mlon=-80.53482#map=19/43.40193/-80.53482" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>OTTAWA ST S</td>
+          
+          <td class="old-val">43.40151, -80.53545<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.40151&mlon=-80.53545#map=19/43.40151/-80.53545" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 133.8m</td>
+          <td class="new-val">43.40060, -80.53437<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.40060&mlon=-80.53437#map=19/43.40060/-80.53437" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>OTTAWA ST S</td>
+          
+          <td class="old-val">43.40125, -80.53544<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.40125&mlon=-80.53544#map=19/43.40125/-80.53544" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 302.9m</td>
+          <td class="new-val">43.39878, -80.53387<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39878&mlon=-80.53387#map=19/43.39878/-80.53387" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>OTTAWA ST S</td>
+          
+          <td class="old-val">43.40101, -80.53542<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.40101&mlon=-80.53542#map=19/43.40101/-80.53542" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 388.7m</td>
+          <td class="new-val">43.39780, -80.53353<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39780&mlon=-80.53353#map=19/43.39780/-80.53353" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>OTTAWA ST S</td>
+          
+          <td class="old-val">43.40084, -80.53541<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.40084&mlon=-80.53541#map=19/43.40084/-80.53541" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 374.6m</td>
+          <td class="new-val">43.39750, -80.53485<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39750&mlon=-80.53485#map=19/43.39750/-80.53485" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>OTTAWA ST S</td>
+          
+          <td class="old-val">43.40065, -80.53538<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.40065&mlon=-80.53538#map=19/43.40065/-80.53538" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 226.6m</td>
+          <td class="new-val">43.39862, -80.53558<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39862&mlon=-80.53558#map=19/43.39862/-80.53558" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>OTTAWA ST S</td>
+          
+          <td class="old-val">43.40040, -80.53538<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.40040&mlon=-80.53538#map=19/43.40040/-80.53538" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 233.1m</td>
+          <td class="new-val">43.39834, -80.53486<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39834&mlon=-80.53486#map=19/43.39834/-80.53486" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>OTTAWA ST S</td>
+          
+          <td class="old-val">43.40017, -80.53535<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.40017&mlon=-80.53535#map=19/43.40017/-80.53535" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 216.8m</td>
+          <td class="new-val">43.39833, -80.53447<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39833&mlon=-80.53447#map=19/43.39833/-80.53447" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>OTTAWA ST S</td>
+          
+          <td class="old-val">43.40158, -80.53486<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.40158&mlon=-80.53486#map=19/43.40158/-80.53486" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 226.6m</td>
+          <td class="new-val">43.39965, -80.53575<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39965&mlon=-80.53575#map=19/43.39965/-80.53575" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>OTTAWA ST S</td>
+          
+          <td class="old-val">43.40132, -80.53478<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.40132&mlon=-80.53478#map=19/43.40132/-80.53478" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 139.9m</td>
+          <td class="new-val">43.40008, -80.53506<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.40008&mlon=-80.53506#map=19/43.40008/-80.53506" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>OTTAWA ST S</td>
+          
+          <td class="old-val">43.40113, -80.53474<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.40113&mlon=-80.53474#map=19/43.40113/-80.53474" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 61.4m</td>
+          <td class="new-val">43.40063, -80.53506<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.40063&mlon=-80.53506#map=19/43.40063/-80.53506" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>OTTAWA ST S</td>
+          
+          <td class="old-val">43.40093, -80.53470<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.40093&mlon=-80.53470#map=19/43.40093/-80.53470" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">← 76.8m</td>
+          <td class="new-val">43.40069, -80.53559<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.40069&mlon=-80.53559#map=19/43.40069/-80.53559" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>OTTAWA ST S</td>
+          
+          <td class="old-val">43.40077, -80.53462<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.40077&mlon=-80.53462#map=19/43.40077/-80.53462" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 137.5m</td>
+          <td class="new-val">43.40139, -80.53609<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.40139&mlon=-80.53609#map=19/43.40139/-80.53609" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>OTTAWA ST S</td>
+          
+          <td class="old-val">43.40056, -80.53456<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.40056&mlon=-80.53456#map=19/43.40056/-80.53456" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 118.5m</td>
+          <td class="new-val">43.40140, -80.53546<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.40140&mlon=-80.53546#map=19/43.40140/-80.53546" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>OTTAWA ST S</td>
+          
+          <td class="old-val">43.40038, -80.53453<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.40038&mlon=-80.53453#map=19/43.40038/-80.53453" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">← 233.0m</td>
+          <td class="new-val">43.40090, -80.53732<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.40090&mlon=-80.53732#map=19/43.40090/-80.53732" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>OTTAWA ST S</td>
+          
+          <td class="old-val">43.40021, -80.53447<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.40021&mlon=-80.53447#map=19/43.40021/-80.53447" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 168.7m</td>
+          <td class="new-val">43.39951, -80.53632<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39951&mlon=-80.53632#map=19/43.39951/-80.53632" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>OTTAWA ST S</td>
+          
+          <td class="old-val">43.40007, -80.53444<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.40007&mlon=-80.53444#map=19/43.40007/-80.53444" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">← 166.9m</td>
+          <td class="new-val">43.40034, -80.53647<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.40034&mlon=-80.53647#map=19/43.40034/-80.53647" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>OTTAWA ST S</td>
+          
+          <td class="old-val">43.39991, -80.53438<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39991&mlon=-80.53438#map=19/43.39991/-80.53438" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 156.0m</td>
+          <td class="new-val">43.40053, -80.53611<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.40053&mlon=-80.53611#map=19/43.40053/-80.53611" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>OTTAWA ST S</td>
+          
+          <td class="old-val">43.39976, -80.53434<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39976&mlon=-80.53434#map=19/43.39976/-80.53434" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 50.6m</td>
+          <td class="new-val">43.39953, -80.53488<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39953&mlon=-80.53488#map=19/43.39953/-80.53488" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>OTTAWA ST S</td>
+          
+          <td class="old-val">43.40051, -80.53799<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.40051&mlon=-80.53799#map=19/43.40051/-80.53799" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 219.0m</td>
+          <td class="new-val">43.39895, -80.53634<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39895&mlon=-80.53634#map=19/43.39895/-80.53634" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>OTTAWA ST S</td>
+          
+          <td class="old-val">43.40035, -80.53784<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.40035&mlon=-80.53784#map=19/43.40035/-80.53784" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 70.0m</td>
+          <td class="new-val">43.39999, -80.53713<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39999&mlon=-80.53713#map=19/43.39999/-80.53713" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>OTTAWA ST S</td>
+          
+          <td class="old-val">43.40021, -80.53772<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.40021&mlon=-80.53772#map=19/43.40021/-80.53772" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 454.5m</td>
+          <td class="new-val">43.39738, -80.53367<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39738&mlon=-80.53367#map=19/43.39738/-80.53367" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>OTTAWA ST S</td>
+          
+          <td class="old-val">43.40009, -80.53760<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.40009&mlon=-80.53760#map=19/43.40009/-80.53760" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↗ 323.3m</td>
+          <td class="new-val">43.40229, -80.53499<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.40229&mlon=-80.53499#map=19/43.40229/-80.53499" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>OTTAWA ST S</td>
+          
+          <td class="old-val">43.39995, -80.53747<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39995&mlon=-80.53747#map=19/43.39995/-80.53747" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↗ 253.2m</td>
+          <td class="new-val">43.40186, -80.53577<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.40186&mlon=-80.53577#map=19/43.40186/-80.53577" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>OTTAWA ST S</td>
+          
+          <td class="old-val">43.39983, -80.53733<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39983&mlon=-80.53733#map=19/43.39983/-80.53733" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↗ 221.7m</td>
+          <td class="new-val">43.40166, -80.53625<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.40166&mlon=-80.53625#map=19/43.40166/-80.53625" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>OTTAWA ST S</td>
+          
+          <td class="old-val">43.39970, -80.53721<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39970&mlon=-80.53721#map=19/43.39970/-80.53721" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 150.3m</td>
+          <td class="new-val">43.40065, -80.53853<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.40065&mlon=-80.53853#map=19/43.40065/-80.53853" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>OTTAWA ST S</td>
+          
+          <td class="old-val">43.39956, -80.53707<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39956&mlon=-80.53707#map=19/43.39956/-80.53707" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">← 37.6m</td>
+          <td class="new-val">43.39961, -80.53753<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39961&mlon=-80.53753#map=19/43.39961/-80.53753" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>OTTAWA ST S</td>
+          
+          <td class="old-val">43.39943, -80.53692<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39943&mlon=-80.53692#map=19/43.39943/-80.53692" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 90.0m</td>
+          <td class="new-val">43.39867, -80.53654<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39867&mlon=-80.53654#map=19/43.39867/-80.53654" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>OTTAWA ST S</td>
+          
+          <td class="old-val">43.39928, -80.53682<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39928&mlon=-80.53682#map=19/43.39928/-80.53682" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 162.9m</td>
+          <td class="new-val">43.39801, -80.53582<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39801&mlon=-80.53582#map=19/43.39801/-80.53582" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>OTTAWA ST S</td>
+          
+          <td class="old-val">43.39914, -80.53668<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39914&mlon=-80.53668#map=19/43.39914/-80.53668" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↗ 254.9m</td>
+          <td class="new-val">43.40058, -80.53423<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.40058&mlon=-80.53423#map=19/43.40058/-80.53423" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>OTTAWA ST S</td>
+          
+          <td class="old-val">43.39903, -80.53658<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39903&mlon=-80.53658#map=19/43.39903/-80.53658" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 72.8m</td>
+          <td class="new-val">43.39868, -80.53582<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39868&mlon=-80.53582#map=19/43.39868/-80.53582" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>OTTAWA ST S</td>
+          
+          <td class="old-val">43.39887, -80.53644<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39887&mlon=-80.53644#map=19/43.39887/-80.53644" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 153.5m</td>
+          <td class="new-val">43.39960, -80.53805<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39960&mlon=-80.53805#map=19/43.39960/-80.53805" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>OTTAWA ST S</td>
+          
+          <td class="old-val">43.39876, -80.53632<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39876&mlon=-80.53632#map=19/43.39876/-80.53632" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 193.0m</td>
+          <td class="new-val">43.39979, -80.53824<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39979&mlon=-80.53824#map=19/43.39979/-80.53824" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>14 PINE WARBLER ST</td>
+          
+          <td class="old-val">43.36668, -80.44417<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36668&mlon=-80.44417#map=19/43.36668/-80.44417" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 1.1m</td>
+          <td class="new-val">43.36667, -80.44417<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36667&mlon=-80.44417#map=19/43.36667/-80.44417" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>364 ROSENBERG WAY</td>
+          
+          <td class="old-val">43.39730, -80.51098<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39730&mlon=-80.51098#map=19/43.39730/-80.51098" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 4.6m</td>
+          <td class="new-val">43.39727, -80.51102<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39727&mlon=-80.51102#map=19/43.39727/-80.51102" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>368 ROSENBERG WAY</td>
+          
+          <td class="old-val">43.39734, -80.51110<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39734&mlon=-80.51110#map=19/43.39734/-80.51110" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 4.6m</td>
+          <td class="new-val">43.39731, -80.51114<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39731&mlon=-80.51114#map=19/43.39731/-80.51114" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>443 SANDYMOUNT ST</td>
+          
+          <td class="old-val">43.39368, -80.50738<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39368&mlon=-80.50738#map=19/43.39368/-80.50738" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">→ 3.2m</td>
+          <td class="new-val">43.39368, -80.50734<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39368&mlon=-80.50734#map=19/43.39368/-80.50734" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>459 SANDYMOUNT ST</td>
+          
+          <td class="old-val">43.39335, -80.50728<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39335&mlon=-80.50728#map=19/43.39335/-80.50728" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">→ 2.4m</td>
+          <td class="new-val">43.39335, -80.50725<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39335&mlon=-80.50725#map=19/43.39335/-80.50725" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>463 SANDYMOUNT ST</td>
+          
+          <td class="old-val">43.39325, -80.50726<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39325&mlon=-80.50726#map=19/43.39325/-80.50726" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">→ 2.4m</td>
+          <td class="new-val">43.39325, -80.50723<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39325&mlon=-80.50723#map=19/43.39325/-80.50723" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>73 WILD CHICORY ST</td>
+          
+          <td class="old-val">43.36597, -80.44633<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36597&mlon=-80.44633#map=19/43.36597/-80.44633" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 2.4m</td>
+          <td class="new-val">43.36595, -80.44632<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36595&mlon=-80.44632#map=19/43.36595/-80.44632" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>57 WILHELM ST</td>
+          
+          <td class="old-val">43.45911, -80.49589<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45911&mlon=-80.49589#map=19/43.45911/-80.49589" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">← 6.6m</td>
+          <td class="new-val">43.45912, -80.49597<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45912&mlon=-80.49597#map=19/43.45912/-80.49597" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>83 WILHELM ST</td>
+          
+          <td class="old-val">43.45947, -80.49506<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45947&mlon=-80.49506#map=19/43.45947/-80.49506" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↑ 2.4m</td>
+          <td class="new-val">43.45949, -80.49505<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45949&mlon=-80.49505#map=19/43.45949/-80.49505" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>86 WILHELM ST</td>
+          
+          <td class="old-val">43.45978, -80.49512<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45978&mlon=-80.49512#map=19/43.45978/-80.49512" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↑ 2.4m</td>
+          <td class="new-val">43.45980, -80.49513<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45980&mlon=-80.49513#map=19/43.45980/-80.49513" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+      </tbody>
+    </table>
+    
+    </details>
+    
+  </div>
+
+  <div class="generated-at">Report generated Aug 19, 2026 at 12:20 PM · source licence: Open Government Licence - The Corporation of the City of Kitchener</div>
+
+  <script>
+    function sortTable(tbodyId, col) {
+      const tbody = document.getElementById(tbodyId);
+      if (!tbody) return;
+      const rows = Array.from(tbody.rows);
+      const dir = tbody.dataset.sortDir === 'asc' ? 'desc' : 'asc';
+      tbody.dataset.sortDir = dir;
+      rows.sort((a, b) => {
+        const av = a.cells[col]?.textContent.trim() || '';
+        const bv = b.cells[col]?.textContent.trim() || '';
+        const an = parseFloat(av), bn = parseFloat(bv);
+        if (!isNaN(an) && !isNaN(bn)) return dir === 'asc' ? an - bn : bn - an;
+        return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+      });
+      rows.forEach(r => tbody.appendChild(r));
+    }
+  </script>
+</body>
+
+</html>

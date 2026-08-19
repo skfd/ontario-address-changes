@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>City of Brampton Address Changes — Wednesday, Aug 19, 2026</title>
+  <style>
+    :root {
+      --bg: #fafafa; --surface: #ffffff; --surface2: #f5f5f5; --surface3: #ebebeb;
+      --border: #e0e0e0; --border-strong: #d1d1d1; --text: #242424;
+      --text-secondary: #424242; --text-dim: #616161; --accent: #0078d4;
+      --accent-hover: #106ebe; --accent-bg: #eff6fc; --green: #107c10;
+      --green-bg: #f1faf1; --green-tint: #9fd89f; --red: #c50f1f; --red-bg: #fdf3f4;
+      --red-tint: #eeacb2; --yellow: #eaa300; --yellow-bg: #fefbf4; --yellow-tint: #f9e2ae;
+      --purple: #881798; --purple-bg: #f9f3fb; --teal: #038387; --teal-bg: #f0fafa;
+      --shadow-4: 0 2px 4px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --shadow-8: 0 4px 8px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --card-bg: #ffffff; --card-hover: #f5f5f5; color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1f1f1f; --surface: #292929; --surface2: #333333; --surface3: #3d3d3d;
+        --border: #525252; --border-strong: #666666; --text: #ffffff;
+        --text-secondary: #d6d6d6; --text-dim: #adadad; --accent: #2899f5;
+        --accent-hover: #3aa0f3; --accent-bg: #002848; --green: #54b054;
+        --green-bg: #052505; --green-tint: #107c10; --red: #dc626d; --red-bg: #3b0509;
+        --red-tint: #c50f1f; --yellow: #f2c661; --yellow-bg: #463100; --yellow-tint: #eaa300;
+        --purple: #d29ddb; --purple-bg: #3a1040; --teal: #58c0c4; --teal-bg: #013638;
+        --shadow-4: 0 2px 4px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --shadow-8: 0 4px 8px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --card-bg: #333333; --card-hover: #3d3d3d; color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI Variable','Segoe UI',system-ui,-apple-system,sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.5; padding: 2rem;
+      max-width: 1100px; margin: 0 auto; font-size: 14px; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; color: var(--accent-hover); }
+    .back-link { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 12px;
+      color: var(--text-dim); margin-bottom: 1.5rem; transition: color 0.1s; }
+    .back-link:hover { color: var(--accent); text-decoration: none; }
+    h1 { font-size: 24px; font-weight: 600; margin-bottom: 4px; }
+    .subtitle { color: var(--text-secondary); font-size: 14px; margin-bottom: 12px; }
+    .explainer { color: var(--text-secondary); font-size: 13px; line-height: 1.5;
+      margin-bottom: 24px; padding: 12px 16px; background: var(--surface);
+      border-radius: 8px; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px; margin-bottom: 24px; }
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px;
+      padding: 16px; box-shadow: var(--shadow-4); transition: box-shadow 0.1s; }
+    .card:hover { box-shadow: var(--shadow-8); }
+    .card .label { font-size: 12px; color: var(--text-dim); font-weight: 400; }
+    .card .value { font-size: 28px; font-weight: 600; margin-top: 4px; }
+    .card .value.green { color: var(--green); } .card .value.red { color: var(--red); }
+    .card .value.yellow { color: var(--yellow); } .card .value.accent { color: var(--accent); }
+    .card .value.purple { color: var(--purple); }
+    .card .value.teal { color: var(--teal); }
+    .sparkline { display: block; margin-top: 6px; overflow: visible; opacity: 0.9; }
+    .sparkline-label { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+    .section { margin-bottom: 24px; }
+    .section h2 { font-size: 16px; font-weight: 600; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px; }
+    .badge { font-size: 12px; padding: 2px 8px; border-radius: 999px; font-weight: 600; }
+    .badge-green { background: var(--green-bg); color: var(--green); }
+    .badge-red { background: var(--red-bg); color: var(--red); }
+    .badge-yellow { background: var(--yellow-bg); color: var(--yellow); }
+    .badge-accent { background: var(--accent-bg); color: var(--accent); }
+    .badge-purple { background: var(--purple-bg); color: var(--purple); }
+    .badge-teal { background: var(--teal-bg); color: var(--teal); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface);
+      border-radius: 8px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    thead { background: var(--surface2); }
+    th { text-align: left; padding: 8px 12px; font-weight: 600; color: var(--text-dim);
+      font-size: 12px; cursor: pointer; user-select: none; border-bottom: 1px solid var(--border); }
+    th:hover { color: var(--accent); }
+    td { padding: 8px 12px; border-top: 1px solid var(--border); }
+    tr:hover td { background: var(--surface2); }
+    .old-val { color: var(--red); text-decoration: line-through; }
+    .new-val { color: var(--green); }
+    .arrow-val { color: var(--text-dim); text-align: center; white-space: nowrap; }
+    .map-link { display: inline-flex; align-items: center; margin-left: 0.4em;
+      color: var(--accent); vertical-align: middle; white-space: nowrap; font-size: 12px; }
+    .map-link:hover { color: var(--accent-hover); }
+    .map-link svg { width: 14px; height: 14px; }
+    .change-field { color: var(--yellow); font-weight: 600; }
+    .bar-chart { margin-top: 8px; }
+    .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 12px; }
+    .bar-label { width: 180px; text-align: right; color: var(--text-secondary); flex-shrink: 0;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .bar-track { flex: 1; height: 8px; background: var(--surface2); border-radius: 4px;
+      overflow: hidden; position: relative; }
+    .bar-fill { height: 100%; border-radius: 4px; transition: width 0.15s ease; }
+    .bar-fill.green { background: var(--green); } .bar-fill.red { background: var(--red); }
+    .bar-count { width: 40px; font-size: 12px; color: var(--text-dim); }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+    .empty { color: var(--text-dim); font-style: italic; padding: 16px; }
+    .truncated { color: var(--text-dim); font-size: 12px; margin-top: 8px; }
+    .collapsible-toggle { background: transparent; border: 1px solid var(--border);
+      color: var(--accent); padding: 5px 12px; border-radius: 4px; cursor: pointer;
+      font-size: 12px; font-family: inherit; margin-bottom: 12px; transition: background 0.1s; }
+    .collapsible-toggle:hover { background: var(--surface2); }
+    details.rename-group { background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; margin-bottom: 8px; box-shadow: var(--shadow-4); }
+    details.rename-group summary { padding: 10px 14px; cursor: pointer; font-size: 13px; }
+    details.rename-group[open] summary { border-bottom: 1px solid var(--border); }
+    details.rename-group table { border: none; box-shadow: none; border-radius: 0; }
+    details.rename-group .truncated { padding: 0 14px 10px; margin-top: 0; }
+    .rename-count { color: var(--text-dim); font-size: 12px; margin-left: 6px; }
+    .no-changes-banner { background: var(--green-bg); border: 1px solid var(--green-tint);
+      color: var(--green); padding: 16px; border-radius: 8px; margin-bottom: 24px;
+      text-align: center; font-weight: 600; font-size: 14px; }
+    .baseline-banner { background: var(--accent-bg); border: 1px solid var(--accent);
+      color: var(--accent); padding: 16px; border-radius: 8px; margin-bottom: 24px; font-size: 13px; }
+    .generated-at { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-dim); }
+    .history { font-size: 12.5px; color: var(--text-secondary); white-space: nowrap; }
+    .history .a { color: var(--green); font-weight: 500; }
+    .history .r { color: var(--red); font-weight: 500; }
+    .history .dot { color: var(--text-dim); margin: 0 4px; }
+    .history-none { color: var(--text-dim); font-style: italic; font-size: 12.5px; }
+    .info-wrap { position: relative; display: inline-flex; vertical-align: middle; }
+    .info-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+      height: 18px; padding: 0 8px 0 7px; border-radius: 999px; border: none;
+      color: #fff; background: var(--accent); cursor: help; font-size: 11px; font-weight: 600;
+      font-style: normal; font-family: inherit; line-height: 1; white-space: nowrap; }
+    .info-btn .glyph { font-style: italic; font-weight: 700;
+      font-family: Georgia, 'Times New Roman', serif; }
+    .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn,
+    .info-wrap:focus .info-btn { background: var(--accent-hover); }
+    .info-pop { display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 20;
+      width: 320px; max-width: 80vw; padding: 12px 14px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-8);
+      font-size: 12.5px; font-weight: 400; color: var(--text-secondary); line-height: 1.5; }
+    .info-wrap:hover .info-pop, .info-wrap:focus-within .info-pop,
+    .info-wrap:focus .info-pop { display: block; }
+    .info-pop strong { display: block; color: var(--text); font-size: 12px; margin-bottom: 4px; }
+    .info-pop ul { list-style: none; margin: 0 0 10px; padding: 0; }
+    .info-pop li { padding: 1px 0 1px 14px; position: relative; }
+    .info-pop li::before { content: "·"; position: absolute; left: 4px; color: var(--text-dim); }
+    .info-pop .note { color: var(--text-dim); font-size: 11.5px; margin: 0 0 10px; }
+    .info-pop .muted { color: var(--text-dim); font-style: italic; }
+  </style>
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+
+  <a class="back-link" href="index.html">← Back to City of Brampton reports</a>
+
+  <h1>City of Brampton — Address Changes</h1>
+  <p class="subtitle">
+    Changes between  and Wednesday, Aug 19, 2026
+    · 249,193 total addresses
+  </p>
+
+  
+
+  <div class="cards">
+    <div class="card"><div class="label">Total Addresses</div>
+      <div class="value accent">249,193</div></div>
+    <div class="card"><div class="label">New Addresses</div>
+      <div class="value green">+1</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#107c10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,13.0 19.7,4.2 37.3,2.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,17.7"/><circle cx="108.0" cy="17.7" r="2" fill="#107c10"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Retired Addresses</div>
+      <div class="value red">−1</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#c50f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,2.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,2.0 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#c50f1f"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Updated Addresses <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (CIVIC_NUMBER)</li><li>Street name (STREET_NAME)</li><li>Unit (UNIT_NO)</li><li>Full address (FULL_ADDRESS)</li><li>Coordinates (latitude, longitude)</li><li>ADDRESS_ID</li><li>ADDRESS_TYPE</li><li>BLOCK_PLAN</li><li>CITY</li><li>CITY_FILE</li><li>CITY_GRID</li><li>CONDO_PLAN_NUMBER</li><li>CON_NUM</li><li>C_OF_A</li><li>DRAFT_PLAN_NUMBER</li><li>GIS_ID</li><li>HERITAGE</li><li>LOT_NUM</li><li>OCCUPANCY_DATE</li><li>PERMIT_ISSUEDATE</li><li>PERMIT_NO</li><li>PERMIT_TYPE</li><li>POSTAL_CODE</li><li>PROP_CODE_DESC</li><li>PROVINCE</li><li>REG_PLAN_ASSUMP_DATE</li><li>REG_PLAN_NUMBER</li><li>SEC_PLAN_AREA</li><li>SITE_PLAN_NUMBER</li><li>STREET_DIRECTION</li><li>STREET_TYPE</li><li>SUB_TYPE</li><li>TOWNSHIP</li><li>WARD</li><li>WORK_TYPE</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span></div>
+      <div class="value yellow">13</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,17.5 19.7,16.4 37.3,17.5 55.0,2.0 72.7,17.8 90.3,17.5 108.0,17.5"/><circle cx="108.0" cy="17.5" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Renumbered</div>
+      <div class="value accent">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#0078d4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#0078d4"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Street Renames</div>
+      <div class="value purple">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#9141ac" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#9141ac"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    
+    <div class="card"><div class="label">Boundary Changes</div>
+      <div class="value teal">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#038387" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#038387"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    <div class="card"><div class="label">Location Adjustments</div>
+      <div class="value" style="color: var(--text-dim)">54</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#808080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,2.0 19.7,17.3 37.3,17.9 55.0,18.0 72.7,18.0 90.3,18.0 108.0,11.6"/><circle cx="108.0" cy="11.6" r="2" fill="#808080"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+  </div>
+
+  
+  <div class="section">
+    <h2>Change Breakdown</h2>
+    <div class="stats-grid">
+      
+      
+      
+      <div class="card"><div class="label">Most Frequently Updated Fields</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">Location</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">54</span></div>
+        <div class="bar-row"><span class="bar-label">OCCUPANCY_DATE</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:22.0%"></div></div>
+          <span class="bar-count">12</span></div>
+        <div class="bar-row"><span class="bar-label">PERMIT_ISSUEDATE</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:9.0%"></div></div>
+          <span class="bar-count">5</span></div>
+        <div class="bar-row"><span class="bar-label">PERMIT_NO</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:9.0%"></div></div>
+          <span class="bar-count">5</span></div>
+        <div class="bar-row"><span class="bar-label">PERMIT_TYPE</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:9.0%"></div></div>
+          <span class="bar-count">5</span></div>
+        <div class="bar-row"><span class="bar-label">SUB_TYPE</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:9.0%"></div></div>
+          <span class="bar-count">5</span></div>
+        <div class="bar-row"><span class="bar-label">WORK_TYPE</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:9.0%"></div></div>
+          <span class="bar-count">5</span></div>
+      </div></div>
+    </div>
+  </div>
+  
+
+  <div class="section">
+    <h2>New Addresses <span class="badge badge-green">1</span></h2>
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-added',0)">Address</th><th onclick="sortTable('t-added',1)">Street</th>
+        <th onclick="sortTable('t-added',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-added">
+        
+        <tr><td>UNASSIGNED</td><td>UNASSIGNED</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span><span class="dot">·</span><span class="r">− 2026-08-18</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70134&mlon=-79.79769#map=18/43.70134/-79.79769" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Retired Addresses <span class="badge badge-red">1</span></h2>
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-removed',0)">Address</th><th onclick="sortTable('t-removed',1)">Street</th>
+        <th onclick="sortTable('t-removed',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-removed">
+        
+        <tr><td>4-345 QUEEN ST W</td><td>QUEEN</td><td>4</td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67643&mlon=-79.76954#map=18/43.67643/-79.76954" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Updated Addresses <span class="badge badge-yellow">13</span>
+      <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (CIVIC_NUMBER)</li><li>Street name (STREET_NAME)</li><li>Unit (UNIT_NO)</li><li>Full address (FULL_ADDRESS)</li><li>Coordinates (latitude, longitude)</li><li>ADDRESS_ID</li><li>ADDRESS_TYPE</li><li>BLOCK_PLAN</li><li>CITY</li><li>CITY_FILE</li><li>CITY_GRID</li><li>CONDO_PLAN_NUMBER</li><li>CON_NUM</li><li>C_OF_A</li><li>DRAFT_PLAN_NUMBER</li><li>GIS_ID</li><li>HERITAGE</li><li>LOT_NUM</li><li>OCCUPANCY_DATE</li><li>PERMIT_ISSUEDATE</li><li>PERMIT_NO</li><li>PERMIT_TYPE</li><li>POSTAL_CODE</li><li>PROP_CODE_DESC</li><li>PROVINCE</li><li>REG_PLAN_ASSUMP_DATE</li><li>REG_PLAN_NUMBER</li><li>SEC_PLAN_AREA</li><li>SITE_PLAN_NUMBER</li><li>STREET_DIRECTION</li><li>STREET_TYPE</li><li>SUB_TYPE</li><li>TOWNSHIP</li><li>WARD</li><li>WORK_TYPE</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span></h2>
+    
+    
+    <table>
+      <thead><tr><th>Address</th><th>What Changed</th><th>Before</th><th></th><th>After</th><th>Map</th></tr></thead>
+      <tbody>
+        
+  <tr><td rowspan="1">99 BAFFIN CRES</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1447718400000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1787011200000</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71656&mlon=-79.82738#map=18/43.71656/-79.82738" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">34 BANTING CRES</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1787011200000</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65743&mlon=-79.74611#map=18/43.65743/-79.74611" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">88 FREDERICK ST</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1787011200000</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67681&mlon=-79.75898#map=18/43.67681/-79.75898" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">1 KETTLEWELL CRES</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1219190400000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1787011200000</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.77850&mlon=-79.74630#map=18/43.77850/-79.74630" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">26 MANDERLEY PL</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1787011200000</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73791&mlon=-79.74130#map=18/43.73791/-79.74130" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="6">10-345 QUEEN ST W</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1190764800000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="6"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67621&mlon=-79.76925#map=18/43.67621/-79.76925" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">976752000000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">00-115428-000-00-IS</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Institutional</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">A2: Community Centre</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr><td rowspan="6">3-345 QUEEN ST W</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1616112000000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="6"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67646&mlon=-79.76959#map=18/43.67646/-79.76959" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1607299200000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">20-277758-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">D: Business/Services</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr><td rowspan="5">7-345 QUEEN ST W</td>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1498435200000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="5"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67631&mlon=-79.76939#map=18/43.67631/-79.76939" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">17-124625-P01-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">E: Restaurants</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Interior/Unit Finish</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr><td rowspan="6">8-345 QUEEN ST W</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">1200441600000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    <td rowspan="6"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67627&mlon=-79.76935#map=18/43.67627/-79.76935" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">1200355200000</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">07-127407-000-00-CO</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">Commercial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">E: Retail</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">Change of Use</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr><td rowspan="6">9-345 QUEEN ST W</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1200441600000</td>
+    <td rowspan="6"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67623&mlon=-79.76929#map=18/43.67623/-79.76929" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PERMIT_ISSUEDATE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1200355200000</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_NO</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">07-127407-000-00-CO</td>
+    </tr>
+  <tr>
+    <td class="change-field">PERMIT_TYPE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Commercial</td>
+    </tr>
+  <tr>
+    <td class="change-field">SUB_TYPE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">E: Retail</td>
+    </tr>
+  <tr>
+    <td class="change-field">WORK_TYPE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Change of Use</td>
+    </tr>
+  <tr><td rowspan="1">6 SOPHIA ST</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1787011200000</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69419&mlon=-79.75663#map=18/43.69419/-79.75663" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">30 SWAN CRES</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1787011200000</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.76662&mlon=-79.78444#map=18/43.76662/-79.78444" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">97 WINTERFOLD DR</td>
+    <td class="change-field">OCCUPANCY_DATE</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1787011200000</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71444&mlon=-79.76836#map=18/43.71444/-79.76836" target="_blank" rel="noopener">View ↗</a></td></tr>
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Renumbered Addresses <span class="badge badge-accent">0</span></h2>
+    
+    <p class="empty">No addresses renumbered.</p>
+  </div>
+
+  <div class="section">
+    <h2>Street Renames <span class="badge badge-purple">0</span></h2>
+    <p class="empty">No street renames.</p>
+  </div>
+
+  
+
+  
+
+  
+  <div class="section">
+    <h2>Boundary Changes <span class="badge badge-teal">0</span></h2>
+    <p class="empty">No ward or municipality reassignments.</p>
+  </div>
+  
+
+  <div class="section">
+    <h2>Location Adjustments <span class="badge" style="background: var(--surface2); color: var(--text-dim)">54</span></h2>
+    
+    <p class="explainer">54 addresses had only their map position adjusted — median shift 3.9&nbsp;m, largest 11.5&nbsp;m. The street addresses themselves did not change.</p>
+    
+    
+    <details class="rename-group">
+      <summary>Per-address detail<span class="rename-count">54 addresses</span></summary>
+    <table>
+      <thead><tr><th>Address</th><th>Before</th><th></th><th>After</th></tr></thead>
+      <tbody>
+        
+        <tr><td>1-2074 STEELES AVE E</td>
+          
+          <td class="old-val">43.71096, -79.68703<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71096&mlon=-79.68703#map=19/43.71096/-79.68703" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 10.6m</td>
+          <td class="new-val">43.71103, -79.68712<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71103&mlon=-79.68712#map=19/43.71103/-79.68712" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>10-2074 STEELES AVE E</td>
+          
+          <td class="old-val">43.71042, -79.68623<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71042&mlon=-79.68623#map=19/43.71042/-79.68623" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 8.7m</td>
+          <td class="new-val">43.71048, -79.68630<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71048&mlon=-79.68630#map=19/43.71048/-79.68630" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>11-2074 STEELES AVE E</td>
+          
+          <td class="old-val">43.71034, -79.68611<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71034&mlon=-79.68611#map=19/43.71034/-79.68611" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 11.2m</td>
+          <td class="new-val">43.71041, -79.68621<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71041&mlon=-79.68621#map=19/43.71041/-79.68621" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>12-2074 STEELES AVE E</td>
+          
+          <td class="old-val">43.71027, -79.68601<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71027&mlon=-79.68601#map=19/43.71027/-79.68601" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 11.0m</td>
+          <td class="new-val">43.71035, -79.68609<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71035&mlon=-79.68609#map=19/43.71035/-79.68609" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>13-2074 STEELES AVE E</td>
+          
+          <td class="old-val">43.71022, -79.68594<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71022&mlon=-79.68594#map=19/43.71022/-79.68594" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 10.1m</td>
+          <td class="new-val">43.71029, -79.68602<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71029&mlon=-79.68602#map=19/43.71029/-79.68602" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>14-2074 STEELES AVE E</td>
+          
+          <td class="old-val">43.71016, -79.68587<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71016&mlon=-79.68587#map=19/43.71016/-79.68587" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↑ 8.4m</td>
+          <td class="new-val">43.71023, -79.68591<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71023&mlon=-79.68591#map=19/43.71023/-79.68591" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>15-2074 STEELES AVE E</td>
+          
+          <td class="old-val">43.71011, -79.68577<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71011&mlon=-79.68577#map=19/43.71011/-79.68577" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 7.8m</td>
+          <td class="new-val">43.71017, -79.68582<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71017&mlon=-79.68582#map=19/43.71017/-79.68582" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>16-2074 STEELES AVE E</td>
+          
+          <td class="old-val">43.71051, -79.68513<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71051&mlon=-79.68513#map=19/43.71051/-79.68513" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 2.4m</td>
+          <td class="new-val">43.71049, -79.68512<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71049&mlon=-79.68512#map=19/43.71049/-79.68512" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>17-2074 STEELES AVE E</td>
+          
+          <td class="old-val">43.71045, -79.68518<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71045&mlon=-79.68518#map=19/43.71045/-79.68518" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 4.1m</td>
+          <td class="new-val">43.71042, -79.68521<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71042&mlon=-79.68521#map=19/43.71042/-79.68521" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>18-2074 STEELES AVE E</td>
+          
+          <td class="old-val">43.71040, -79.68523<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71040&mlon=-79.68523#map=19/43.71040/-79.68523" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 4.6m</td>
+          <td class="new-val">43.71037, -79.68527<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71037&mlon=-79.68527#map=19/43.71037/-79.68527" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>19-2074 STEELES AVE E</td>
+          
+          <td class="old-val">43.71033, -79.68531<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71033&mlon=-79.68531#map=19/43.71033/-79.68531" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 2.7m</td>
+          <td class="new-val">43.71031, -79.68533<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71031&mlon=-79.68533#map=19/43.71031/-79.68533" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>2-2074 STEELES AVE E</td>
+          
+          <td class="old-val">43.71088, -79.68694<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71088&mlon=-79.68694#map=19/43.71088/-79.68694" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 11.5m</td>
+          <td class="new-val">43.71096, -79.68703<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71096&mlon=-79.68703#map=19/43.71096/-79.68703" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>20-2074 STEELES AVE E</td>
+          
+          <td class="old-val">43.71028, -79.68536<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71028&mlon=-79.68536#map=19/43.71028/-79.68536" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 4.1m</td>
+          <td class="new-val">43.71025, -79.68539<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71025&mlon=-79.68539#map=19/43.71025/-79.68539" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>21-2074 STEELES AVE E</td>
+          
+          <td class="old-val">43.71023, -79.68542<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71023&mlon=-79.68542#map=19/43.71023/-79.68542" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 4.1m</td>
+          <td class="new-val">43.71020, -79.68545<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71020&mlon=-79.68545#map=19/43.71020/-79.68545" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>22-2074 STEELES AVE E</td>
+          
+          <td class="old-val">43.71016, -79.68548<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71016&mlon=-79.68548#map=19/43.71016/-79.68548" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 2.7m</td>
+          <td class="new-val">43.71015, -79.68551<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71015&mlon=-79.68551#map=19/43.71015/-79.68551" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>24-2074 STEELES AVE E</td>
+          
+          <td class="old-val">43.71004, -79.68562<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71004&mlon=-79.68562#map=19/43.71004/-79.68562" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 2.0m</td>
+          <td class="new-val">43.71003, -79.68564<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71003&mlon=-79.68564#map=19/43.71003/-79.68564" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>25-2074 STEELES AVE E</td>
+          
+          <td class="old-val">43.70999, -79.68568<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70999&mlon=-79.68568#map=19/43.70999/-79.68568" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 1.4m</td>
+          <td class="new-val">43.70998, -79.68569<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70998&mlon=-79.68569#map=19/43.70998/-79.68569" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>26-2074 STEELES AVE E</td>
+          
+          <td class="old-val">43.70993, -79.68574<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70993&mlon=-79.68574#map=19/43.70993/-79.68574" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 3.3m</td>
+          <td class="new-val">43.70991, -79.68577<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70991&mlon=-79.68577#map=19/43.70991/-79.68577" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>3-2074 STEELES AVE E</td>
+          
+          <td class="old-val">43.71083, -79.68686<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71083&mlon=-79.68686#map=19/43.71083/-79.68686" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 11.5m</td>
+          <td class="new-val">43.71091, -79.68695<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71091&mlon=-79.68695#map=19/43.71091/-79.68695" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>4-2074 STEELES AVE E</td>
+          
+          <td class="old-val">43.71077, -79.68676<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71077&mlon=-79.68676#map=19/43.71077/-79.68676" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 11.5m</td>
+          <td class="new-val">43.71085, -79.68685<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71085&mlon=-79.68685#map=19/43.71085/-79.68685" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>5-2074 STEELES AVE E</td>
+          
+          <td class="old-val">43.71072, -79.68668<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71072&mlon=-79.68668#map=19/43.71072/-79.68668" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 8.7m</td>
+          <td class="new-val">43.71078, -79.68675<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71078&mlon=-79.68675#map=19/43.71078/-79.68675" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>6-2074 STEELES AVE E</td>
+          
+          <td class="old-val">43.71066, -79.68658<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71066&mlon=-79.68658#map=19/43.71066/-79.68658" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 7.9m</td>
+          <td class="new-val">43.71071, -79.68665<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71071&mlon=-79.68665#map=19/43.71071/-79.68665" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>7-2074 STEELES AVE E</td>
+          
+          <td class="old-val">43.71060, -79.68651<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71060&mlon=-79.68651#map=19/43.71060/-79.68651" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 7.9m</td>
+          <td class="new-val">43.71065, -79.68658<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71065&mlon=-79.68658#map=19/43.71065/-79.68658" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>8-2074 STEELES AVE E</td>
+          
+          <td class="old-val">43.71053, -79.68641<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71053&mlon=-79.68641#map=19/43.71053/-79.68641" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 8.7m</td>
+          <td class="new-val">43.71059, -79.68648<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71059&mlon=-79.68648#map=19/43.71059/-79.68648" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>9-2074 STEELES AVE E</td>
+          
+          <td class="old-val">43.71047, -79.68631<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71047&mlon=-79.68631#map=19/43.71047/-79.68631" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 9.6m</td>
+          <td class="new-val">43.71054, -79.68638<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71054&mlon=-79.68638#map=19/43.71054/-79.68638" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>10-2080 STEELES AVE E</td>
+          
+          <td class="old-val">43.71102, -79.68612<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71102&mlon=-79.68612#map=19/43.71102/-79.68612" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 3.9m</td>
+          <td class="new-val">43.71100, -79.68608<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71100&mlon=-79.68608#map=19/43.71100/-79.68608" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>11-2080 STEELES AVE E</td>
+          
+          <td class="old-val">43.71098, -79.68606<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71098&mlon=-79.68606#map=19/43.71098/-79.68606" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 3.3m</td>
+          <td class="new-val">43.71096, -79.68603<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71096&mlon=-79.68603#map=19/43.71096/-79.68603" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>12-2080 STEELES AVE E</td>
+          
+          <td class="old-val">43.71093, -79.68598<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71093&mlon=-79.68598#map=19/43.71093/-79.68598" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 3.3m</td>
+          <td class="new-val">43.71091, -79.68595<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71091&mlon=-79.68595#map=19/43.71091/-79.68595" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>13-2080 STEELES AVE E</td>
+          
+          <td class="old-val">43.71089, -79.68591<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71089&mlon=-79.68591#map=19/43.71089/-79.68591" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 3.3m</td>
+          <td class="new-val">43.71087, -79.68588<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71087&mlon=-79.68588#map=19/43.71087/-79.68588" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>14-2080 STEELES AVE E</td>
+          
+          <td class="old-val">43.71085, -79.68585<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71085&mlon=-79.68585#map=19/43.71085/-79.68585" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 3.9m</td>
+          <td class="new-val">43.71083, -79.68581<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71083&mlon=-79.68581#map=19/43.71083/-79.68581" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>15-2080 STEELES AVE E</td>
+          
+          <td class="old-val">43.71082, -79.68577<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71082&mlon=-79.68577#map=19/43.71082/-79.68577" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 2.7m</td>
+          <td class="new-val">43.71080, -79.68575<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71080&mlon=-79.68575#map=19/43.71080/-79.68575" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>2-2080 STEELES AVE E</td>
+          
+          <td class="old-val">43.71137, -79.68668<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71137&mlon=-79.68668#map=19/43.71137/-79.68668" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 3.3m</td>
+          <td class="new-val">43.71135, -79.68665<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71135&mlon=-79.68665#map=19/43.71135/-79.68665" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>3-2080 STEELES AVE E</td>
+          
+          <td class="old-val">43.71132, -79.68662<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71132&mlon=-79.68662#map=19/43.71132/-79.68662" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 3.3m</td>
+          <td class="new-val">43.71130, -79.68659<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71130&mlon=-79.68659#map=19/43.71130/-79.68659" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>4-2080 STEELES AVE E</td>
+          
+          <td class="old-val">43.71128, -79.68655<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71128&mlon=-79.68655#map=19/43.71128/-79.68655" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 3.3m</td>
+          <td class="new-val">43.71126, -79.68652<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71126&mlon=-79.68652#map=19/43.71126/-79.68652" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>5-2080 STEELES AVE E</td>
+          
+          <td class="old-val">43.71123, -79.68647<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71123&mlon=-79.68647#map=19/43.71123/-79.68647" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 3.3m</td>
+          <td class="new-val">43.71121, -79.68644<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71121&mlon=-79.68644#map=19/43.71121/-79.68644" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>6-2080 STEELES AVE E</td>
+          
+          <td class="old-val">43.71119, -79.68640<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71119&mlon=-79.68640#map=19/43.71119/-79.68640" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 3.9m</td>
+          <td class="new-val">43.71117, -79.68636<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71117&mlon=-79.68636#map=19/43.71117/-79.68636" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>7-2080 STEELES AVE E</td>
+          
+          <td class="old-val">43.71115, -79.68634<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71115&mlon=-79.68634#map=19/43.71115/-79.68634" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 3.9m</td>
+          <td class="new-val">43.71113, -79.68630<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71113&mlon=-79.68630#map=19/43.71113/-79.68630" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>8-2080 STEELES AVE E</td>
+          
+          <td class="old-val">43.71110, -79.68626<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71110&mlon=-79.68626#map=19/43.71110/-79.68626" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 3.9m</td>
+          <td class="new-val">43.71108, -79.68622<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71108&mlon=-79.68622#map=19/43.71108/-79.68622" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>9-2080 STEELES AVE E</td>
+          
+          <td class="old-val">43.71106, -79.68619<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71106&mlon=-79.68619#map=19/43.71106/-79.68619" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 4.6m</td>
+          <td class="new-val">43.71103, -79.68615<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71103&mlon=-79.68615#map=19/43.71103/-79.68615" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>1-2084 STEELES AVE E</td>
+          
+          <td class="old-val">43.71174, -79.68628<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71174&mlon=-79.68628#map=19/43.71174/-79.68628" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 2.0m</td>
+          <td class="new-val">43.71175, -79.68630<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71175&mlon=-79.68630#map=19/43.71175/-79.68630" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>10-2084 STEELES AVE E</td>
+          
+          <td class="old-val">43.71123, -79.68536<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71123&mlon=-79.68536#map=19/43.71123/-79.68536" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 5.2m</td>
+          <td class="new-val">43.71126, -79.68541<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71126&mlon=-79.68541#map=19/43.71126/-79.68541" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>11-2084 STEELES AVE E</td>
+          
+          <td class="old-val">43.71116, -79.68523<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71116&mlon=-79.68523#map=19/43.71116/-79.68523" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 9.1m</td>
+          <td class="new-val">43.71121, -79.68532<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71121&mlon=-79.68532#map=19/43.71121/-79.68532" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>12-2084 STEELES AVE E</td>
+          
+          <td class="old-val">43.71112, -79.68514<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71112&mlon=-79.68514#map=19/43.71112/-79.68514" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 7.2m</td>
+          <td class="new-val">43.71116, -79.68521<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71116&mlon=-79.68521#map=19/43.71116/-79.68521" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>13-2084 STEELES AVE E</td>
+          
+          <td class="old-val">43.71106, -79.68503<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71106&mlon=-79.68503#map=19/43.71106/-79.68503" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 8.5m</td>
+          <td class="new-val">43.71110, -79.68512<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71110&mlon=-79.68512#map=19/43.71110/-79.68512" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>14-2084 STEELES AVE E</td>
+          
+          <td class="old-val">43.71100, -79.68491<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71100&mlon=-79.68491#map=19/43.71100/-79.68491" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 10.5m</td>
+          <td class="new-val">43.71105, -79.68502<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71105&mlon=-79.68502#map=19/43.71105/-79.68502" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>15-2084 STEELES AVE E</td>
+          
+          <td class="old-val">43.71092, -79.68479<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71092&mlon=-79.68479#map=19/43.71092/-79.68479" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 6.6m</td>
+          <td class="new-val">43.71096, -79.68485<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71096&mlon=-79.68485#map=19/43.71096/-79.68485" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>2-2084 STEELES AVE E</td>
+          
+          <td class="old-val">43.71169, -79.68619<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71169&mlon=-79.68619#map=19/43.71169/-79.68619" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 2.0m</td>
+          <td class="new-val">43.71170, -79.68621<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71170&mlon=-79.68621#map=19/43.71170/-79.68621" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>3-2084 STEELES AVE E</td>
+          
+          <td class="old-val">43.71164, -79.68609<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71164&mlon=-79.68609#map=19/43.71164/-79.68609" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 2.0m</td>
+          <td class="new-val">43.71165, -79.68611<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71165&mlon=-79.68611#map=19/43.71165/-79.68611" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>4-2084 STEELES AVE E</td>
+          
+          <td class="old-val">43.71159, -79.68600<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71159&mlon=-79.68600#map=19/43.71159/-79.68600" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 1.4m</td>
+          <td class="new-val">43.71160, -79.68601<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71160&mlon=-79.68601#map=19/43.71160/-79.68601" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>5-2084 STEELES AVE E</td>
+          
+          <td class="old-val">43.71153, -79.68591<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71153&mlon=-79.68591#map=19/43.71153/-79.68591" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↑ 1.1m</td>
+          <td class="new-val">43.71154, -79.68591<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71154&mlon=-79.68591#map=19/43.71154/-79.68591" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>6-2084 STEELES AVE E</td>
+          
+          <td class="old-val">43.71147, -79.68578<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71147&mlon=-79.68578#map=19/43.71147/-79.68578" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 2.7m</td>
+          <td class="new-val">43.71148, -79.68581<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71148&mlon=-79.68581#map=19/43.71148/-79.68581" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>7-2084 STEELES AVE E</td>
+          
+          <td class="old-val">43.71141, -79.68569<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71141&mlon=-79.68569#map=19/43.71141/-79.68569" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 2.7m</td>
+          <td class="new-val">43.71143, -79.68571<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71143&mlon=-79.68571#map=19/43.71143/-79.68571" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>8-2084 STEELES AVE E</td>
+          
+          <td class="old-val">43.71134, -79.68558<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71134&mlon=-79.68558#map=19/43.71134/-79.68558" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 2.7m</td>
+          <td class="new-val">43.71136, -79.68560<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71136&mlon=-79.68560#map=19/43.71136/-79.68560" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>9-2084 STEELES AVE E</td>
+          
+          <td class="old-val">43.71129, -79.68548<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71129&mlon=-79.68548#map=19/43.71129/-79.68548" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 2.7m</td>
+          <td class="new-val">43.71131, -79.68550<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71131&mlon=-79.68550#map=19/43.71131/-79.68550" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+      </tbody>
+    </table>
+    
+    </details>
+    
+  </div>
+
+  <div class="generated-at">Report generated Aug 19, 2026 at 12:16 PM · source licence: Creative Commons Attribution 4.0 (CC BY 4.0)</div>
+
+  <script>
+    function sortTable(tbodyId, col) {
+      const tbody = document.getElementById(tbodyId);
+      if (!tbody) return;
+      const rows = Array.from(tbody.rows);
+      const dir = tbody.dataset.sortDir === 'asc' ? 'desc' : 'asc';
+      tbody.dataset.sortDir = dir;
+      rows.sort((a, b) => {
+        const av = a.cells[col]?.textContent.trim() || '';
+        const bv = b.cells[col]?.textContent.trim() || '';
+        const an = parseFloat(av), bn = parseFloat(bv);
+        if (!isNaN(an) && !isNaN(bn)) return dir === 'asc' ? an - bn : bn - an;
+        return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+      });
+      rows.forEach(r => tbody.appendChild(r));
+    }
+  </script>
+</body>
+
+</html>
