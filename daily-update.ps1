@@ -135,7 +135,9 @@ foreach ($lock in @(Get-ChildItem $gitDir -Filter '*.lock' -Recurse -Force -File
     }
 }
 
-Invoke-Logged "git add docs"
+# flags.toml rides along: report generation appends newly flagged events to it,
+# and the append is only durable history once committed.
+Invoke-Logged "git add docs flags.toml"
 $publishExit = $LASTEXITCODE
 if ($publishExit -eq 0) {
     git diff --cached --quiet

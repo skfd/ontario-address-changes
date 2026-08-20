@@ -73,6 +73,22 @@ def cmd_report(args):
     report.generate_all(_resolve(args))
 
 
+def cmd_flags(args):
+    """Console view of the flag ledger + regenerate logs/flags.html."""
+    from src import flags, report
+    ledger = flags.load_ledger()
+    open_flags = [f for f in ledger if f.get("status", "open") != "reviewed"]
+    if not open_flags:
+        print("no open flags")
+    else:
+        print(f"{len(open_flags)} open flag(s):\n")
+        for f in sorted(open_flags, key=lambda f: (f.get("detected", ""), f["slug"])):
+            fields = f": {', '.join(f['fields'])}" if f.get("fields") else ""
+            print(f"  {f['slug']:<16} {f['date']}  {f['signature']}{fields}")
+            print(f"  {'':<16} {f['scope']}")
+    report.generate_flags_page()
+
+
 def _update_serial(datasets, args):
     from src import db, diff, fetch
     done = []
@@ -167,6 +183,7 @@ def main():
                             help="re-fetch even if unchanged")
 
     sub.add_parser("list").set_defaults(func=cmd_list)
+    sub.add_parser("flags").set_defaults(func=cmd_flags)
     add_target(sub.add_parser("download")); sub.choices["download"].set_defaults(func=cmd_download)
     add_target(sub.add_parser("import")); sub.choices["import"].set_defaults(func=cmd_import)
     add_target(sub.add_parser("diff", )); sub.choices["diff"].set_defaults(func=cmd_diff)

@@ -20,11 +20,12 @@ from jinja2 import Environment, FileSystemLoader
 from shapely import MultiPoint, concave_hull
 from shapely.geometry import mapping, shape
 
-from src import db, diff
+from src import db, diff, flags
 
 ROOT_DIR = os.path.dirname(os.path.dirname(__file__))
 TEMPLATES_DIR = os.path.join(ROOT_DIR, "templates")
 DOCS_DIR = os.path.join(ROOT_DIR, "docs")
+LOGS_DIR = os.path.join(ROOT_DIR, "logs")
 SKIPPED_PATH = os.path.join(ROOT_DIR, "skipped.toml")
 
 MAX_RENDER = 1000          # cap rows rendered per table (true counts still shown)
@@ -384,6 +385,7 @@ def generate_all(datasets):
     os.makedirs(DOCS_DIR, exist_ok=True)
     open(os.path.join(DOCS_DIR, ".nojekyll"), "w").close()
     cities = []
+    ledger = flags.load_ledger()
 
     for ds in datasets:
         snaps = diff.nonskipped(ds)
@@ -398,7 +400,37 @@ def generate_all(datasets):
             diffs.append((snaps[i + 1],
                           diff.compute_diff(ds, snaps[i]["id"], snaps[i + 1]["id"]), False))
 
+        # Flag suspicious events (idempotent by key, so a full re-render also
+        # retro-flags history), then hold flagged events off the public pages.
+        # Holds run before series/counts so sparklines match what is shown.
+        detected = []
+        for i in range(len(snaps) - 1):
+            found = flags.detect(ds, diffs[i + 1][1], snaps[i]["row_count"])
+            detected += flags.stamp(found, ds.slug, diff.snap_date(snaps[i + 1]))
+        appended = flags.record(detected)
+        if appended:
+            ledger = flags.load_ledger()
+            for fl in appended:
+                print(f"  FLAGGED {fl['slug']} {fl['date']}: "
+                      f"{fl['signature']} — {fl['scope']}")
+
+        added_held_sids = set()
+        held_diffs = [diffs[0]]
+        for snap, d, _ in diffs[1:]:
+            held = flags.holds_for(ledger, ds.slug, diff.snap_date(snap))
+            d, notes = flags.apply_holds(d, held)
+            for sig, text in notes:
+                print(f"  {ds.slug} {diff.snap_date(snap)}: {text}")
+                if sig == "mass-added":
+                    added_held_sids.add(snap["id"])
+            held_diffs.append((snap, d, False))
+        diffs = held_diffs
+
         new_by_snap = diff.new_streets_by_snapshot(ds)
+        # Street debuts come from the store, not the diff, so a held mass-add
+        # would still leak its streets into the city index without this.
+        for sid in added_held_sids:
+            new_by_snap.pop(sid, None)
         pkeys = diff.prop_keys(ds, snaps[-1]["id"])
         compared = _compared_fields(ds, pkeys)
         # A mapped source column can be ignored as a prop (renfrew's Full_Address churns
@@ -506,6 +538,43 @@ def generate_all(datasets):
             cities=cities, skipped=_load_skipped(),
             total_addresses=total_addresses, map_features=map_features))
     print(f"\nwrote site for {len(cities)} dataset(s) to {DOCS_DIR}")
+    generate_flags_page()
+
+
+def generate_flags_page():
+    """Back-office flags page (logs/flags.html): open flags oldest-first, then
+    reviewed history. Deliberately outside docs/ — suspicions are the
+    operator's, the public site carries only verified claims (same line the
+    vault report and refusal blocks live behind)."""
+    ledger = flags.load_ledger()
+    today = datetime.now().date()
+
+    def age(fl):
+        try:
+            return (today - datetime.strptime(fl.get("detected", ""), "%Y-%m-%d").date()).days
+        except ValueError:
+            return None
+
+    open_flags = sorted((f for f in ledger if f.get("status", "open") != "reviewed"),
+                        key=lambda f: (f.get("detected", ""), f.get("slug", "")))
+    for f in open_flags:
+        f["age_days"] = age(f)
+    reviewed = sorted((f for f in ledger if f.get("status") == "reviewed"),
+                      key=lambda f: (f.get("reviewed", ""), f.get("slug", "")),
+                      reverse=True)
+    by_city = Counter(f["slug"] for f in ledger)
+    verdicts = Counter(f.get("verdict", "") for f in reviewed)
+
+    os.makedirs(LOGS_DIR, exist_ok=True)
+    out = os.path.join(LOGS_DIR, "flags.html")
+    with open(out, "w", encoding="utf-8") as f:
+        f.write(_env.get_template("flags.html").render(
+            open_flags=open_flags, reviewed=reviewed,
+            by_city=by_city.most_common(), verdicts=verdicts,
+            generated=datetime.now().strftime("%b %d, %Y at %I:%M %p")))
+    if open_flags:
+        print(f"{len(open_flags)} open flag(s) awaiting review -> {out}")
+    return len(open_flags)
 
 
 def _map_features(cities):

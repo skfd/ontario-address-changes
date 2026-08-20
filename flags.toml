@@ -1,0 +1,721 @@
+# Flag ledger: change events held off the public site pending review.
+#
+# The pipeline appends entries with status = "open" (see src/flags.py for the
+# signatures). A review closes one by editing it in place:
+#
+#   status  = "reviewed"
+#   verdict = "business"   the city really changed -> the event publishes
+#           | "technical"  the feed changed, the city didn't -> held forever;
+#                          `rule` must name the config change that prevents
+#                          the same flag recurring (ignore_fields, [classes])
+#           | "bug"        the data is wrong -> held forever; `rule` names the
+#                          vault verdict / store repair that resolved it
+#   reviewed = "YYYY-MM-DD"
+#   rule     = what was changed so this never needs review again ("" for
+#              business verdicts - a one-off publish needs no rule)
+#   note     = one line of evidence for the verdict
+#
+# An OPEN flag holds its event off the public pages. Holds apply at render
+# time, so re-running `python run.py report` after a review is what makes a
+# verdict take effect. Never delete entries: reviewed history is the
+# calibration record for the signatures.
+
+[[flag]]
+slug = "brant"
+date = "2026-06-17"
+signature = "mass-modified"
+fields = ["STREET_TYPE", "full"]
+scope = "83 rows changed the same field set [STREET_TYPE, full] (100% of the day's 83 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "barrie"
+date = "2026-07-06"
+signature = "mass-modified"
+fields = ["COMMENT", "STATUS"]
+scope = "182 rows changed the same field set [COMMENT, STATUS] (93% of the day's 196 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "brampton"
+date = "2026-06-17"
+signature = "mass-modified"
+fields = ["location"]
+scope = "114 rows changed the same field set [location] (81% of the day's 140 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "brampton"
+date = "2026-06-19"
+signature = "mass-modified"
+fields = ["location"]
+scope = "102 rows changed the same field set [location] (73% of the day's 139 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "brampton"
+date = "2026-06-20"
+signature = "mass-modified"
+fields = ["PERMIT_ISSUEDATE", "PERMIT_NO", "PERMIT_TYPE", "SUB_TYPE", "WORK_TYPE"]
+scope = "69 rows changed the same field set [PERMIT_ISSUEDATE, PERMIT_NO, PERMIT_TYPE, SUB_TYPE, WORK_TYPE] (62% of the day's 112 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "brampton"
+date = "2026-06-21"
+signature = "mass-modified"
+fields = ["CITY_FILE", "DRAFT_PLAN_NUMBER"]
+scope = "122 rows changed the same field set [CITY_FILE, DRAFT_PLAN_NUMBER] (34% of the day's 357 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "brampton"
+date = "2026-06-21"
+signature = "mass-modified"
+fields = ["C_OF_A"]
+scope = "105 rows changed the same field set [C_OF_A] (29% of the day's 357 modifications)"
+detail = "top: 'A-2025-0090' -> 'A-2026-0027' (27), 'A-2020-0065' -> 'B-2020-0013' (19), None -> 'A-2026-0024' (13)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "brampton"
+date = "2026-06-25"
+signature = "mass-modified"
+fields = ["CONDO_PLAN_NUMBER"]
+scope = "668 rows changed the same field set [CONDO_PLAN_NUMBER] (47% of the day's 1,430 modifications)"
+detail = "top: None -> 'PCP-1214' (668)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "brampton"
+date = "2026-06-25"
+signature = "mass-modified"
+fields = ["location"]
+scope = "580 rows changed the same field set [location] (41% of the day's 1,430 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "brampton"
+date = "2026-06-30"
+signature = "mass-modified"
+fields = ["location"]
+scope = "478 rows changed the same field set [location] (92% of the day's 521 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "brampton"
+date = "2026-07-05"
+signature = "mass-modified"
+fields = ["OCCUPANCY_DATE", "PERMIT_ISSUEDATE", "PERMIT_NO", "PERMIT_TYPE", "SUB_TYPE", "WORK_TYPE"]
+scope = "127 rows changed the same field set [OCCUPANCY_DATE, PERMIT_ISSUEDATE, PERMIT_NO, PERMIT_TYPE, SUB_TYPE, WORK_TYPE] (58% of the day's 220 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "brampton"
+date = "2026-07-07"
+signature = "mass-modified"
+fields = ["location"]
+scope = "459 rows changed the same field set [location] (97% of the day's 472 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "brampton"
+date = "2026-07-08"
+signature = "mass-modified"
+fields = ["location"]
+scope = "145 rows changed the same field set [location] (79% of the day's 183 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "brampton"
+date = "2026-07-09"
+signature = "mass-modified"
+fields = ["location"]
+scope = "76 rows changed the same field set [location] (84% of the day's 91 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "brampton"
+date = "2026-07-12"
+signature = "mass-modified"
+fields = ["CITY_FILE", "DRAFT_PLAN_NUMBER"]
+scope = "122 rows changed the same field set [CITY_FILE, DRAFT_PLAN_NUMBER] (54% of the day's 226 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "brampton"
+date = "2026-07-12"
+signature = "mass-modified"
+fields = ["C_OF_A"]
+scope = "76 rows changed the same field set [C_OF_A] (34% of the day's 226 modifications)"
+detail = "top: 'B15-023' -> 'A15-163' (39), 'B-2020-0013' -> 'A-2020-0065' (19), 'B10-010' -> 'B10-011' (5)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "brampton"
+date = "2026-07-20"
+signature = "mass-modified"
+fields = ["C_OF_A"]
+scope = "212 rows changed the same field set [C_OF_A] (82% of the day's 258 modifications)"
+detail = "top: None -> 'A-2026-0033' (75), 'A-2023-0331' -> 'A-2026-0030' (36), 'A16-193' -> 'A-2026-0032' (35)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "brampton"
+date = "2026-07-26"
+signature = "mass-modified"
+fields = ["C_OF_A"]
+scope = "395 rows changed the same field set [C_OF_A] (94% of the day's 420 modifications)"
+detail = "top: 'A-2022-0345' -> 'A-2022-0346' (292), 'A15-163' -> 'B15-023' (39), 'B08-018' -> 'B08-012' (22)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "brampton"
+date = "2026-07-30"
+signature = "mass-modified"
+fields = ["location"]
+scope = "53 rows changed the same field set [location] (74% of the day's 72 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "brampton"
+date = "2026-07-31"
+signature = "mass-modified"
+fields = ["C_OF_A"]
+scope = "405 rows changed the same field set [C_OF_A] (89% of the day's 454 modifications)"
+detail = "top: 'A-2022-0346' -> 'A-2022-0345' (292), 'B15-023' -> 'A15-163' (39), 'A15-182' -> 'A15-183' (30)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "brampton"
+date = "2026-08-02"
+signature = "mass-modified"
+fields = ["C_OF_A"]
+scope = "379 rows changed the same field set [C_OF_A] (76% of the day's 496 modifications)"
+detail = "top: 'A-2022-0345' -> 'A-2022-0346' (292), 'A15-163' -> 'B15-023' (39), 'A15-001' -> 'B15-002' (25)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "brampton"
+date = "2026-08-09"
+signature = "mass-modified"
+fields = ["C_OF_A"]
+scope = "82 rows changed the same field set [C_OF_A] (57% of the day's 143 modifications)"
+detail = "top: 'B15-023' -> 'A15-163' (39), 'B08-012' -> 'B08-011' (22), 'A-2020-0051' -> 'B-2020-0010' (8)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "brampton"
+date = "2026-08-11"
+signature = "mass-modified"
+fields = ["location"]
+scope = "135 rows changed the same field set [location] (91% of the day's 149 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "brampton"
+date = "2026-08-16"
+signature = "mass-modified"
+fields = ["C_OF_A"]
+scope = "382 rows changed the same field set [C_OF_A] (91% of the day's 422 modifications)"
+detail = "top: 'A-2022-0346' -> 'A-2022-0345' (292), 'B15-002' -> 'A15-001' (25), 'B08-011' -> 'B08-012' (22)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "brampton"
+date = "2026-08-19"
+signature = "mass-modified"
+fields = ["location"]
+scope = "54 rows changed the same field set [location] (81% of the day's 67 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "durham"
+date = "2026-08-18"
+signature = "mass-modified"
+fields = ["POSTAL_CODE"]
+scope = "957 rows changed the same field set [POSTAL_CODE] (99% of the day's 969 modifications)"
+detail = "top: None -> 'L1M 0N1' (70), None -> 'L1E 0M3' (66), None -> 'L1X 0V6' (47)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "guelph"
+date = "2026-06-24"
+signature = "mass-modified"
+fields = ["location"]
+scope = "172 rows changed the same field set [location] (100% of the day's 172 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "guelph"
+date = "2026-06-25"
+signature = "mass-modified"
+fields = ["location"]
+scope = "520 rows changed the same field set [location] (100% of the day's 520 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "huron"
+date = "2026-07-25"
+signature = "mass-modified"
+fields = ["A3"]
+scope = "4,592 rows changed the same field set [A3] (12% of the day's 38,293 modifications)"
+detail = "top: 'ACW' -> None (4,592)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "huron"
+date = "2026-07-25"
+signature = "mass-modified"
+fields = ["A3", "FullAddress_Mun", "Mun"]
+scope = "12,750 rows changed the same field set [A3, FullAddress_Mun, Mun] (33% of the day's 38,293 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "huron"
+date = "2026-07-25"
+signature = "mass-modified"
+fields = ["A3", "Mun"]
+scope = "20,950 rows changed the same field set [A3, Mun] (55% of the day's 38,293 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "huron"
+date = "2026-07-29"
+signature = "mass-modified"
+fields = ["FullAddress_Mun"]
+scope = "12,752 rows changed the same field set [FullAddress_Mun] (74% of the day's 17,344 modifications)"
+detail = "top: '63 MILL ROAD WEST (Bluewaterewater)' -> '63 MILL ROAD WEST (Bluewater)' (2), '87 NORTH STREET (Godericherich)' -> '87 NORTH STREET (Goderich)' (2), '45467 GOUGH ROAD (Howickick)' -> '45467 GOUGH ROAD (Howick)' (1)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "huron"
+date = "2026-07-29"
+signature = "mass-modified"
+fields = ["FullAddress_Mun", "Mun"]
+scope = "4,592 rows changed the same field set [FullAddress_Mun, Mun] (26% of the day's 17,344 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "kingston"
+date = "2026-06-12"
+signature = "mass-modified"
+fields = ["full", "unit"]
+scope = "114 rows changed the same field set [full, unit] (100% of the day's 114 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "kingston"
+date = "2026-06-17"
+signature = "mass-modified"
+fields = ["UNIT_TYPE"]
+scope = "94 rows changed the same field set [UNIT_TYPE] (95% of the day's 99 modifications)"
+detail = "top: 'HORIZONTAL' -> 'UNIT' (70), 'VERTICAL' -> 'UNIT' (24)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "kingston"
+date = "2026-06-26"
+signature = "mass-modified"
+fields = ["POSTAL_CODE", "full", "unit"]
+scope = "52 rows changed the same field set [POSTAL_CODE, full, unit] (95% of the day's 55 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "kingston"
+date = "2026-07-21"
+signature = "mass-modified"
+fields = ["COLLECTION_TYPE"]
+scope = "146 rows changed the same field set [COLLECTION_TYPE] (99% of the day's 147 modifications)"
+detail = "top: None -> 'Cart Collection' (143), None -> 'Curbside Collection' (3)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "kingston"
+date = "2026-08-06"
+signature = "mass-modified"
+fields = ["location"]
+scope = "167 rows changed the same field set [location] (59% of the day's 284 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "kingston"
+date = "2026-08-10"
+signature = "mass-modified"
+fields = ["location"]
+scope = "180 rows changed the same field set [location] (60% of the day's 300 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "kingston"
+date = "2026-08-11"
+signature = "mass-modified"
+fields = ["COLLECTION_TYPE"]
+scope = "356 rows changed the same field set [COLLECTION_TYPE] (100% of the day's 356 modifications)"
+detail = "top: 'Curbside Collection' -> 'Cart Collection' (356)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "kingston"
+date = "2026-08-13"
+signature = "mass-modified"
+fields = ["COLLECTION_TYPE"]
+scope = "84 rows changed the same field set [COLLECTION_TYPE] (90% of the day's 93 modifications)"
+detail = "top: None -> 'Curbside Collection' (84)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "kingston"
+date = "2026-08-18"
+signature = "mass-modified"
+fields = ["location"]
+scope = "124 rows changed the same field set [location] (61% of the day's 202 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "kingston"
+date = "2026-08-19"
+signature = "mass-modified"
+fields = ["STREET_BODY_NAME", "STREET_TYPE_SUFFIX", "full", "street"]
+scope = "181 rows changed the same field set [STREET_BODY_NAME, STREET_TYPE_SUFFIX, full, street] (40% of the day's 456 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "kingston"
+date = "2026-08-19"
+signature = "mass-modified"
+fields = ["location"]
+scope = "128 rows changed the same field set [location] (28% of the day's 456 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "kitchener"
+date = "2026-08-03"
+signature = "mass-modified"
+fields = ["location"]
+scope = "192 rows changed the same field set [location] (54% of the day's 354 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "kitchener"
+date = "2026-08-19"
+signature = "mass-modified"
+fields = ["location"]
+scope = "67 rows changed the same field set [location] (97% of the day's 69 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "leeds-grenville"
+date = "2026-07-07"
+signature = "mass-modified"
+fields = ["location"]
+scope = "206 rows changed the same field set [location] (84% of the day's 245 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "muskoka"
+date = "2026-07-01"
+signature = "mass-modified"
+fields = ["location"]
+scope = "28,540 rows changed the same field set [location] (100% of the day's 28,550 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "muskoka"
+date = "2026-07-31"
+signature = "mass-modified"
+fields = ["location"]
+scope = "148 rows changed the same field set [location] (94% of the day's 157 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "muskoka"
+date = "2026-08-08"
+signature = "mass-modified"
+fields = ["location"]
+scope = "101 rows changed the same field set [location] (90% of the day's 112 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "niagara-falls"
+date = "2026-06-10"
+signature = "mass-modified"
+fields = ["location"]
+scope = "59 rows changed the same field set [location] (34% of the day's 174 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "ottawa"
+date = "2026-06-22"
+signature = "mass-modified"
+fields = ["ADDRTYPE"]
+scope = "52 rows changed the same field set [ADDRTYPE] (98% of the day's 53 modifications)"
+detail = "top: 'SUBORD' -> 'MAIN' (52)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "ottawa"
+date = "2026-06-29"
+signature = "mass-modified"
+fields = ["ADDRTYPE"]
+scope = "64 rows changed the same field set [ADDRTYPE] (88% of the day's 73 modifications)"
+detail = "top: 'SUBORD' -> 'MAIN' (64)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "ottawa"
+date = "2026-08-03"
+signature = "mass-modified"
+fields = ["ADDRTYPE"]
+scope = "145 rows changed the same field set [ADDRTYPE] (97% of the day's 149 modifications)"
+detail = "top: 'SUBORD' -> 'MAIN' (145)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "ottawa"
+date = "2026-08-05"
+signature = "mass-modified"
+fields = ["ADDRTYPE"]
+scope = "104 rows changed the same field set [ADDRTYPE] (99% of the day's 105 modifications)"
+detail = "top: 'SUBORD' -> 'MAIN' (104)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "ottawa"
+date = "2026-08-17"
+signature = "mass-modified"
+fields = ["ADDRTYPE"]
+scope = "120 rows changed the same field set [ADDRTYPE] (100% of the day's 120 modifications)"
+detail = "top: 'SUBORD' -> 'MAIN' (120)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "renfrew"
+date = "2026-06-13"
+signature = "mass-added"
+scope = "5,896 added in one day (17.8% of 33,130)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "renfrew"
+date = "2026-06-13"
+signature = "mass-modified"
+fields = ["UnitPreTyp"]
+scope = "1,854 rows changed the same field set [UnitPreTyp] (60% of the day's 3,107 modifications)"
+detail = "top: 'Bldg' -> None (1,582), 'Bldg' -> 'Building' (111), 'Trlr' -> None (105)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "renfrew"
+date = "2026-06-13"
+signature = "mass-modified"
+fields = ["full"]
+scope = "1,105 rows changed the same field set [full] (36% of the day's 3,107 modifications)"
+detail = "top: '2581 Highway 132' -> '2581 132 Highway' (2), '2912 Highway 132' -> '2912 132 Highway' (2), '4473 Highway 132' -> '4473 132 Highway' (2); 91% value-preserving restyle"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "sdg"
+date = "2026-06-12"
+signature = "mass-modified"
+fields = ["location"]
+scope = "52 rows changed the same field set [location] (100% of the day's 52 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "thunder-bay"
+date = "2026-07-24"
+signature = "mass-modified"
+fields = ["CTB_TYPE"]
+scope = "129 rows changed the same field set [CTB_TYPE] (71% of the day's 181 modifications)"
+detail = "top: None -> 'OTHER CITY LANDS' (105), 'OTHER CITY LANDS' -> None (20), None -> 'PARKS/OPEN SPACE' (2)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "toronto"
+date = "2025-09-09"
+signature = "mass-modified"
+fields = ["location"]
+scope = "3,233 rows changed the same field set [location] (85% of the day's 3,820 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "toronto"
+date = "2026-02-12"
+signature = "mass-modified"
+fields = ["location"]
+scope = "2,233 rows changed the same field set [location] (94% of the day's 2,388 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "toronto"
+date = "2026-02-20"
+signature = "mass-modified"
+fields = ["location"]
+scope = "175 rows changed the same field set [location] (99% of the day's 176 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "toronto"
+date = "2026-03-03"
+signature = "mass-modified"
+fields = ["location"]
+scope = "74 rows changed the same field set [location] (100% of the day's 74 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "toronto"
+date = "2026-03-17"
+signature = "mass-modified"
+fields = ["location"]
+scope = "762 rows changed the same field set [location] (57% of the day's 1,335 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "toronto"
+date = "2026-04-23"
+signature = "mass-modified"
+fields = ["location"]
+scope = "64 rows changed the same field set [location] (100% of the day's 64 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "toronto"
+date = "2026-04-24"
+signature = "mass-modified"
+fields = ["location"]
+scope = "54 rows changed the same field set [location] (100% of the day's 54 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "toronto"
+date = "2026-05-01"
+signature = "mass-modified"
+fields = ["location"]
+scope = "98 rows changed the same field set [location] (100% of the day's 98 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "toronto"
+date = "2026-07-09"
+signature = "mass-modified"
+fields = ["location"]
+scope = "1,480 rows changed the same field set [location] (69% of the day's 2,140 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "toronto"
+date = "2026-07-24"
+signature = "mass-modified"
+fields = ["location"]
+scope = "61 rows changed the same field set [location] (90% of the day's 68 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "toronto"
+date = "2026-07-28"
+signature = "mass-modified"
+fields = ["location"]
+scope = "56 rows changed the same field set [location] (60% of the day's 93 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "toronto"
+date = "2026-08-07"
+signature = "mass-modified"
+fields = ["location"]
+scope = "58 rows changed the same field set [location] (100% of the day's 58 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "toronto"
+date = "2026-08-17"
+signature = "mass-modified"
+fields = ["location"]
+scope = "50 rows changed the same field set [location] (68% of the day's 73 modifications)"
+detected = "2026-08-20"
+status = "open"
+
+[[flag]]
+slug = "york"
+date = "2026-08-15"
+signature = "mass-modified"
+fields = ["PARID"]
+scope = "249 rows changed the same field set [PARID] (100% of the day's 250 modifications)"
+detail = "top: 82691 -> 419661 (247), 74125 -> 419656 (1), 364757 -> 419657 (1)"
+detected = "2026-08-20"
+status = "open"
+
