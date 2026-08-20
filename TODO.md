@@ -264,6 +264,10 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
   - `C:\Users\kk\ontario-db-backup-2026-08-09-preignore\` — the five `--reapply-ignore`
     cities, 190 MB, post-global pass. The narrower rollback point, and the only one
     that can undo `--reapply-ignore` alone.
+  - `C:\Users\kk\ontario-db-backup-2026-08-20-preignore\` — the 17 cities whose
+    ignore_fields changed in the 2026-08-20 flag-review + tuning pass, 1.2 GB, taken
+    before that day's `--reapply-ignore` run. Same drop rule: safe once a daily run
+    has imported cleanly on top (after 2026-08-21).
 
   Reasonable to drop once a daily run has imported cleanly on top of the migration
   (i.e. after 2026-08-10 noon). Restoring either is a plain file copy over
@@ -377,11 +381,19 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
   noon, so this may be self-inflicted rather than a real recurring fault. Collect further
   instances before touching the constant — if they only ever appear on manually-triggered
   runs with someone working in the repo, the sweep is fine as written.
-- [ ] **Per-city tuning pass** — reviewing each city's "modified" noise to pick
-  `ignore_fields` (Toronto needed this — 387→3 modified), and checking whether the
-  `[classes]` assignments (2026-06-12, sampled from one snapshot each) hold up against
-  real transitions. This is the `city-tune` sweep tracked in `TODO-skills.md` §1, six
-  cities done; it still needs a human eye per city. Don't run it as a separate pass.
+- [x] **Per-city tuning pass** — DONE 2026-08-20 across all 42: 17 cities via the
+  flag-review session (ignore_fields/classes debts + the new `location_min_move_m`
+  floor), the other 25 via a full `audit.py` sweep the same day (commit `4f2e77b8`).
+  Nine of the 25 took config (bruce ARN, cornwall LAST_EDIT, elgin Condition + MUNI
+  class, greater-sudbury components + NAME place_name class, hamilton street
+  components, kawartha-lakes Xlong/Ylat + composites, london composites, milton
+  DISPLAY_NAME/LABEL_ANGLE/ASSIGNED_BY/PROP_RSN, lennox-addington ADD_LABEL +
+  BELL_MUNIC class); the rest were clean, frozen at one snapshot, or already tuned.
+  `--reapply-ignore` run same day for all 17 ignore-touched cities (the nine plus
+  the eight from the flag review). The §1 field-map remaps stay open — this pass
+  deliberately did not touch identity or field maps. Watch item from the sweep:
+  chatham-kent shrank ~500 rows over July and has not republished since
+  2026-07-24 — a data-integrity look, not a config one.
 
 ## 5. Hand to coding agent when convenient
 
