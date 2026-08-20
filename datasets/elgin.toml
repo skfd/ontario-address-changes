@@ -13,7 +13,14 @@ osm_compatible = "unknown-review"
 # rows past 11 m. Phantom-only (synth identity + use_geometry, so a real move re-keys and
 # never reports as a modification), which means this can only ever manufacture updates —
 # but it would manufacture a lot of them the day the county re-syncs.
-ignore_fields = ["x", "y"]
+ignore_fields = [
+  "x", "y",
+  # 911-sign condition survey ('Good', 'Damaged', 'No Sign', 'in swamp', ...) - the
+  # county's field notes on its sign hardware, not a property of the address
+  # (renfrew Comment precedent). The source has been frozen since 2026-06-11; the
+  # day it wakes, a re-survey would sweep this column en masse.
+  "Condition",
+]
 
 [identity]
 # Region-wide (all Elgin lower-tier munis in MUNI). ARN is an assessment roll number that can be
@@ -26,3 +33,9 @@ number = "StrNUM"
 street = "StrFULL"                              # ARN/MUNI/Condition tracked via the props blob
 unit   = "StrUNIT"
 full   = "StrNUM_StrFULL"
+
+# Change classes (field values verified against the latest snapshot, 2026-08-20):
+# MUNI holds the lower-tier municipality (Aylmer, Bayham, Central Elgin, ... plus
+# one dirty '3408' row) - a reassignment publishes humanized as a boundary change.
+[classes]
+boundary = ["MUNI"]

@@ -8,6 +8,13 @@ format = "geojson"
 license_name = "BGDISC Open Data Licence"
 osm_compatible = "yellow-review"
 
+# ARN is the MPAC assessment roll number - a foreign-system join key that rekeys on
+# the assessor's schedule, not the county's (one solo rewrite 2026-08-10; guelph
+# ROLL_NO / renfrew RollNumber / kitchener ROLL_REFERENCE are the same family and
+# all produced batch churn). Kept in props as the only link to the tax roll.
+ignore_fields = ["ARN"]
+keep_fields = ["ARN"]
+
 [identity]
 # Region-wide (Bruce munis in Municipality). ARN is an assessment roll number (1:many), so synthesize.
 key_field = ""                                 # synthesize from address + rounded lon/lat

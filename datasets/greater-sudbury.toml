@@ -8,6 +8,19 @@ format = "geojson"
 license_name = "Open Data Licence - City of Greater Sudbury"
 osm_compatible = "green-lwg"
 
+ignore_fields = [
+  # Components of the mapped FULLSTREETNAME ('130 Copper Street' carries
+  # BASESTREETNAME='Copper', STREETTYPE='Street'): 44 rides, 0 solo changes across
+  # 63 snapshots - every street edit dragged both in as echo rows (toronto
+  # LINEAR_NAME precedent).
+  "BASESTREETNAME", "STREETTYPE",
+  # Internal link from a secondary address to its assigned primary; rewritten
+  # wholesale whenever a record is re-parented (44 rides, 0 solo). Kept in props
+  # as the only primary-secondary linkage once ingested.
+  "ASSIGNEDADDRESSID",
+]
+keep_fields = ["ASSIGNEDADDRESSID"]
+
 [identity]
 key_field = "ADDRESSID"                        # stable address id, 100% populated, order-independent (OBJECTID is sequential)
 synth_fields = ["number", "street", "unit"]    # fallback only
@@ -32,3 +45,7 @@ full   = "FULLADDRESSTEXT"
 [classes]
 status = ["ADDRESSLIFECYCLESTATUS"]
 boundary = ["COMMUNITY"]
+# NAME is the occupant/landmark name on the point ('Tim Hortons', 'Stack
+# Brewhouse', 'Main Street Lift Station'; sampled 2026-08-20) and changes alone
+# when a business turns over (7 solo changes) - the hastings Landmark_Name shape.
+place_name = ["NAME"]

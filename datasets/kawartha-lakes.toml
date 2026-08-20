@@ -6,6 +6,25 @@ format = "geojson"
 license_name = "Not identified"
 osm_compatible = "unknown-review"
 
+ignore_fields = [
+  # Faithful coordinate echo of the geometry (p99 1.32 m; measured 2026-08-10 and
+  # again 2026-08-20), deferred then as "not urgent". No longer: with a real
+  # key_field, moves arrive as modifications, and the pair rode along with 10 of
+  # the 11 real coordinate moves ever recorded, demoting them out of Location
+  # Adjustments - the same masking kitchener's X_COORD/Y_COORD were doing.
+  "Xlong", "Ylat",
+  # Composites/components of the mapped fields ('22 Starr Boulevard' carries
+  # StreetAddress='22 Starr Boulevard', StreetNameBody='Starr',
+  # StreetTypeSuffix='Boulevard'/'Blvd', StreetNumSuffixConcat='22'; sampled
+  # 2026-08-20). All solo=0 - they only ever ride as echo rows.
+  "StreetAddress", "StreetNumSuffixConcat",
+  "StreetNameBody", "StreetTypeSuffix", "StreetTypeSuffixAbrv",
+  "StreetDirectionSuffix", "StreetDirectionAbrv",
+  # Centreline join key, re-linked on the road network's schedule (kitchener
+  # ROADSEGMENTID precedent) - and 0 on 44,014 of 44,205 rows anyway.
+  "StreetSegmentID",
+]
+
 [identity]
 key_field = "AddressID"                        # persistent address id, 100% populated, has gaps (not a contiguous OBJECTID-style row sequence)
 synth_fields = ["number", "street", "unit"]    # fallback only
@@ -20,8 +39,8 @@ full   = "FullAddress"
 # 0 of 44,213 rows live apiece, and none has ever been present in props across all 24
 # snapshots. Not ignored (cf. oakville's SUITE): the first two are street-name content if
 # they ever fill, and StreetParity (odd/even side) would be a class candidate rather than
-# an echo. The city's one open item remains the Xlong/Ylat pair — a faithful coordinate
-# echo, max 1.32 m at p99, left compared deliberately (see TODO-skills.md §1).
+# an echo. (Xlong/Ylat, deferred by TODO-skills.md §1 as not-urgent, were ignored in the
+# 2026-08-20 tuning pass once the churn tally showed them masking real moves - see above.)
 
 # Change classes (field values verified against the latest snapshot): a
 # modification touching only these fields is reported in its humanized section

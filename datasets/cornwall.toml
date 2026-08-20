@@ -7,6 +7,12 @@ format = "geojson"
 license_name = "Open Government Licence - City of Cornwall"
 osm_compatible = "green-lwg"
 
+# LAST_EDIT is an edit-metadata timestamp under a name the global
+# normalize.EDIT_METADATA_FIELDS list does not cover: it bumped alone on 2 rows
+# and rode along with 8 of the 10 modifications ever recorded here (audit
+# 2026-08-20). Promote to the global list if it ever shows up in a second city.
+ignore_fields = ["LAST_EDIT"]
+
 [identity]
 key_field = "AddressID"                        # persistent address id, 100% populated, has gaps (OBJECTID is sequential)
 synth_fields = ["number", "street", "unit"]    # fallback only

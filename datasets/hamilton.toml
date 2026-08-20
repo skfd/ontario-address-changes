@@ -6,6 +6,12 @@ format = "geojson"
 license_name = "Open Data Licence – Hamilton"
 osm_compatible = "green-lwg"
 
+# Components of the mapped FULL_STREET_NAME ('Wentworth Street South' carries
+# STREET_NAME='Wentworth', STREET_SUFFIX_TYPE='Street', STREET_SUFFIX_DIRECTION=
+# 'South'; sampled 2026-08-20). No churn observed yet in 26 snapshots, but every
+# future rename would drag three echo rows apiece (toronto LINEAR_NAME precedent).
+ignore_fields = ["STREET_NAME", "STREET_SUFFIX_TYPE", "STREET_SUFFIX_DIRECTION"]
+
 [identity]
 key_field = ""                                # only a sequential OBJECTID exists; synthesize instead
 synth_fields = ["number", "street", "unit"]   # unit needed: multi-unit buildings share number+street+location
