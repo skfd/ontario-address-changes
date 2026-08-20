@@ -87,6 +87,7 @@ def main():
 
     test_field_changes()
     test_categories()
+    test_splits()
     print("\nALL ASSERTIONS PASSED")
 
 
@@ -151,6 +152,46 @@ def test_categories():
     c = {"changes": [{"field": "WARD", "old": "18", "new": "06"}], "addr": "3 A St"}
     groups = report._group_transitions([a, b, c])
     assert [(g["count"], g["changes"][0]["old"]) for g in groups] == [(2, "06"), (1, "18")], groups
+
+
+def test_splits():
+    """Added rows collapse into split events: suffixed siblings (127 -> 127A+127B)
+    and unit explosions (127 -> N units), with the base address's fate attached."""
+    from src import report
+
+    def row(num, st, unit=None, key=None):
+        return {"number": num, "street": st, "unit": unit, "full": f"{num} {st}",
+                "identity_key": key or f"{num}|{st}|{unit}"}
+
+    added = [row("127A", "Main St"), row("127B", "Main St"),   # suffix split, parent retired
+             row("53A", "Elm St"), row("53B", "Elm St"),       # suffix split, parent remains
+             row("9C", "Oak Ave"),                             # lone suffixed add -> no group
+             row("40", "Pine Rd", unit="1"), row("40", "Pine Rd", unit="2"),
+             row("40", "Pine Rd", unit="3"),                   # unit split, contiguous
+             row("200", "Birch St")]                           # plain add
+    removed = [row("127", "Main St")]
+    groups, rest = report._group_splits(
+        added, removed, lambda pairs: {("53", "Elm St")})
+
+    by_base = {g["base_addr"]: g for g in groups}
+    assert set(by_base) == {"127 Main St", "53 Elm St", "40 Pine Rd"}, by_base
+    assert by_base["127 Main St"]["parent"] == "retired"
+    assert by_base["127 Main St"]["children_label"] == "127A, 127B"
+    assert by_base["53 Elm St"]["parent"] == "remains"
+    assert by_base["40 Pine Rd"]["parent"] == "none"
+    assert by_base["40 Pine Rd"]["kind"] == "unit"
+    assert by_base["40 Pine Rd"]["children_label"] == "3 units (1–3)", by_base["40 Pine Rd"]
+    # ungrouped rows fall back to the plain table, sorted
+    assert sorted(r["full"] for r in rest) == ["200 Birch St", "9C Oak Ave"], rest
+
+    # non-contiguous units list instead of ranging; half-numbers count as suffixes
+    g2, r2 = report._group_splits(
+        [row("7", "King St", unit="2"), row("7", "King St", unit="5"),
+         row("88 1/2", "Queen St"), row("88A", "Queen St")],
+        [], lambda pairs: set())
+    labels = {g["base_addr"]: g["children_label"] for g in g2}
+    assert labels == {"7 King St": "2 units (2, 5)", "88 Queen St": "88 1/2, 88A"}, labels
+    assert r2 == [], r2
 
 
 def test_history_coverage():

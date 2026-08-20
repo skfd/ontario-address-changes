@@ -206,6 +206,27 @@ def compute_histories(ds, keys, before_id):
     return hist
 
 
+def bases_active(ds, pairs, snapshot_id):
+    """Subset of (number, street) base pairs with an active unit-less row at
+    snapshot_id. Used by the report layer to tell a subdivision (base address
+    retired) from an infill (base address remains) when suffixed or unit
+    siblings appear."""
+    if not pairs:
+        return set()
+    conn = db.init_db(ds)
+    out = set()
+    for number, street in pairs:
+        row = conn.execute(
+            "SELECT 1 FROM addresses WHERE number = ? AND street IS ? "
+            "AND (unit IS NULL OR unit = '') "
+            "AND min_snapshot_id <= ? AND max_snapshot_id >= ? LIMIT 1",
+            (number, street, snapshot_id, snapshot_id)).fetchone()
+        if row:
+            out.add((number, street))
+    conn.close()
+    return out
+
+
 # ---- new streets ----
 
 def new_streets_by_snapshot(ds):

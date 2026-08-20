@@ -306,6 +306,20 @@
 
   <div class="section">
     <h2>New Addresses <span class="badge badge-green">{{ "{:,}".format(added_count) }}</span></h2>
+    {% for g in split_groups|default([]) %}
+    <details class="rename-group">
+      <summary>{% if g.parent == 'retired' %}<span class="old-val">{{ g.base_addr }}</span>{% else %}{{ g.base_addr }}{% endif %} <span class="arrow-val">→</span> <span class="new-val">{{ g.children_label }}</span><span class="rename-count">{{ "{:,}".format(g.count) }} new address{{ 'es' if g.count != 1 }}{% if g.parent == 'retired' %} · original address retired{% elif g.parent == 'remains' %} · original address remains{% endif %}</span></summary>
+      <table>
+        <thead><tr><th>Address</th><th>Unit</th><th>History</th><th>Map</th></tr></thead>
+        <tbody>
+          {% for r in g.rows %}
+          <tr><td>{{ r.addr }}</td><td>{{ r.unit or '' }}</td>
+            <td>{{ render_history(r.history) }}</td><td>{{ maplink(r) }}</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </details>
+    {% endfor %}
     {% if added %}
     <table>
       <thead><tr><th onclick="sortTable('t-added',0)">Address</th><th onclick="sortTable('t-added',1)">Street</th>
@@ -317,8 +331,8 @@
         {% endfor %}
       </tbody>
     </table>
-    {% if added_count > added|length %}<p class="truncated">Showing first {{ added|length }} of {{ "{:,}".format(added_count) }}.</p>{% endif %}
-    {% else %}<p class="empty">No new addresses.</p>{% endif %}
+    {% if added_rest_count|default(added_count) > added|length %}<p class="truncated">Showing first {{ added|length }} of {{ "{:,}".format(added_rest_count|default(added_count)) }}.</p>{% endif %}
+    {% elif not split_groups|default([]) %}<p class="empty">No new addresses.</p>{% endif %}
   </div>
 
   <div class="section">

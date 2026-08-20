@@ -11,6 +11,7 @@ import glob
 import json
 import math
 import os
+import re
 import statistics
 import tomllib
 from collections import Counter
@@ -199,6 +200,80 @@ def _group_renames(renamed):
     return out
 
 
+# A child of a split: the base civic number plus a short letter suffix ("127A",
+# "127 B", "12AA") or the Ontario half-number ("127 1/2").
+_SPLIT_SUFFIX_RE = re.compile(r"^(\d+)\s*([A-Za-z]{1,2}|1/2)$")
+
+
+def _unit_sort_key(r):
+    u = str(r.get("unit") or "")
+    return (0, int(u), u) if u.isdigit() else (1, 0, u)
+
+
+def _split_children_label(kind, rows):
+    if kind == "suffix":
+        nums = [str(r.get("number") or "") for r in rows]
+        return ", ".join(nums[:8]) + (", …" if len(nums) > 8 else "")
+    units = [str(r.get("unit") or "") for r in sorted(rows, key=_unit_sort_key)]
+    ints = sorted(int(u) for u in units) if all(u.isdigit() for u in units) else None
+    if ints and len(ints) > 2 and ints == list(range(ints[0], ints[-1] + 1)):
+        return f"{len(units)} units ({ints[0]}–{ints[-1]})"
+    listed = ", ".join(units[:8]) + (", …" if len(units) > 8 else "")
+    return f"{len(units)} units ({listed})"
+
+
+def _group_splits(added, removed, bases_active_fn):
+    """Group added rows into address-split events: one base address turning into
+    suffixed siblings (127 -> 127A + 127B) or into units (127 -> units 1-30).
+
+    Display-level only, like _category: the rows keep their place in the added
+    count, they just render as one event instead of N disconnected table rows.
+    `bases_active_fn(pairs)` reports which (number, street) bases still exist in
+    the new snapshot, so the event can say whether the original address was
+    retired (subdivision), remains (infill/severance), or was never on record
+    (new multi-unit building).
+    """
+    suffix, units, rest = {}, {}, []
+    for r in added:
+        number = str(r.get("number") or "").strip()
+        if r.get("unit") and number:
+            units.setdefault((number, r.get("street")), []).append(r)
+            continue
+        m = _SPLIT_SUFFIX_RE.match(number)
+        if m and r.get("street"):
+            suffix.setdefault((m.group(1), r.get("street")), []).append(r)
+        else:
+            rest.append(r)
+
+    cands = []
+    for (base, street), rows in suffix.items():
+        if len(rows) >= 2:
+            cands.append(("suffix", base, street, sorted(rows, key=diff.addr_sort_key)))
+        else:
+            rest.extend(rows)
+    for (base, street), rows in units.items():
+        if len({r.get("unit") for r in rows}) >= 2:
+            cands.append(("unit", base, street, sorted(rows, key=_unit_sort_key)))
+        else:
+            rest.extend(rows)
+
+    removed_bases = {(str(r.get("number") or "").strip(), r.get("street"))
+                     for r in removed if not r.get("unit")}
+    pending = [(b, s) for _, b, s, _ in cands if (b, s) not in removed_bases]
+    still_active = bases_active_fn(pending) if pending else set()
+
+    groups = []
+    for kind, base, street, rows in cands:
+        parent = ("retired" if (base, street) in removed_bases
+                  else "remains" if (base, street) in still_active else "none")
+        groups.append({"kind": kind, "base_addr": f"{base} {street or ''}".strip(),
+                       "count": len(rows), "rows": rows, "parent": parent,
+                       "children_label": _split_children_label(kind, rows)})
+    groups.sort(key=lambda g: (-g["count"], g["base_addr"]))
+    rest.sort(key=diff.addr_sort_key)
+    return groups, rest
+
+
 def _group_transitions(mods):
     """Group status/boundary modifications by their exact change signature: one
     upstream decision (redistricting, lifecycle stage flip) covers many addresses,
@@ -250,10 +325,19 @@ def _location_mass(rows):
             "max_m": max(dists) if dists else None}
 
 
-def _prepare(ds, d, new_id):
+def _prepare(ds, d, new_id, is_baseline=False):
     """Cap rows, attach addr + history, split modifications into categories."""
     for r in d["added"] + d["removed"]:
         r["addr"] = _addr(r)
+
+    # Split events (127 -> 127A + 127B, or 127 -> 30 units) are meaningless on a
+    # baseline, where every suffixed address that ever existed arrives at once.
+    if is_baseline:
+        split_groups, added_rest = [], d["added"]
+    else:
+        split_groups, added_rest = _group_splits(
+            d["added"], d["removed"],
+            lambda pairs: diff.bases_active(ds, pairs, new_id))
     for m in d["modified"]:
         m["addr"] = _addr(m)
         _combine_location(m)
@@ -271,9 +355,10 @@ def _prepare(ds, d, new_id):
               "renamed": len(cats["renamed"]),
               "place_name": len(cats["place_name"]),
               "status": len(cats["status"]),
-              "boundary": len(cats["boundary"])}
+              "boundary": len(cats["boundary"]),
+              "split": len(split_groups)}
 
-    added = d["added"][:MAX_RENDER]
+    added = added_rest[:MAX_RENDER]
     removed = d["removed"][:MAX_RENDER]
     modified_mass, modified_rest = _collapse_mass(cats["significant"])
     modified = modified_rest[:MAX_RENDER]
@@ -287,12 +372,14 @@ def _prepare(ds, d, new_id):
     boundary_groups = _group_transitions(cats["boundary"])
 
     # history only for the rows we actually render
-    keys = [r["identity_key"] for r in added + removed]
+    split_children = [r for g in split_groups for r in g["rows"]]
+    keys = [r["identity_key"] for r in added + removed + split_children]
     hist = diff.compute_histories(ds, keys, new_id)
-    for r in added + removed:
+    for r in added + removed + split_children:
         r["history"] = hist.get(r["identity_key"], [])
 
     return {"added": added, "removed": removed, "modified": modified,
+            "split_groups": split_groups, "added_rest_count": len(added_rest),
             "modified_mass": modified_mass, "modified_rest_count": len(modified_rest),
             "location": location_only, "location_mass": location_mass,
             "renumbered": renumbered, "renumbered_mass": renumbered_mass,
@@ -306,7 +393,10 @@ _CANON_LABEL = {"number": "Street number", "street": "Street name",
                 "unit": "Unit", "full": "Full address"}
 
 # Humanized index labels for the category counts, in display priority order.
+# "split" counts events (one base address -> N children), not rows; the child
+# rows are already inside the added count, so it never feeds the changed sum.
 _CAT_LABELS = (
+    ("split", "address split", "address splits"),
     ("renamed", "street rename", "street renames"),
     ("place_name", "place rename", "place renames"),
     ("boundary", "boundary change", "boundary changes"),
@@ -343,7 +433,7 @@ def _compared_fields(ds, prop_keys):
 
 
 def _render_report(ds, snap, d, is_baseline, spark, source_url, compared, ignored):
-    p = _prepare(ds, d, snap["id"])
+    p = _prepare(ds, d, snap["id"], is_baseline)
     counts = p["counts"]
     date = diff.snap_date(snap)
     ctx = {
@@ -353,6 +443,7 @@ def _render_report(ds, snap, d, is_baseline, spark, source_url, compared, ignore
         "new_snapshot": snap, "new_date_friendly": _friendly_date(date),
         "old_date_friendly": "", "is_baseline": is_baseline,
         "added": p["added"], "removed": p["removed"], "modified": p["modified"],
+        "split_groups": p["split_groups"], "added_rest_count": p["added_rest_count"],
         "modified_mass": p["modified_mass"], "modified_rest_count": p["modified_rest_count"],
         "modified_location": p["location"], "location_mass": p["location_mass"],
         "renumbered": p["renumbered"], "renumbered_mass": p["renumbered_mass"],
