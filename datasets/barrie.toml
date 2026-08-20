@@ -8,6 +8,11 @@ format = "geojson"
 license_name = "Open Government Licence - Barrie"
 osm_compatible = "green-lwg"
 
+# Clerks' workflow annotations prefixed onto the record ('CURRENT 0014538; Added
+# Condo Suite units...'); they ride along with real STATUS flips (2026-07-06)
+# and would otherwise keep pulling class-exempt status sweeps into the flag queue.
+ignore_fields = ["COMMENT"]
+
 [identity]
 key_field = "ADDRESSID"                        # stable address id, 100% populated, order-independent (OBJECTID_1 is sequential)
 synth_fields = ["number", "street", "unit"]    # fallback only

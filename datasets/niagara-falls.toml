@@ -6,6 +6,10 @@ format = "geojson"
 license_name = "Open Government Licence - Niagara Region"
 osm_compatible = "green-lwg"
 
+# Street-block nudges of 1-5 m (Bentley St rows moved together, 2026-06-10);
+# sub-parcel cartographic maintenance, not moves.
+location_min_move_m = 25
+
 # Xcoord/Ycoord duplicate the point geometry (tracked as coordinates already);
 # StreetNo duplicates the mapped number field (Full_StreetNo = StreetNo + suffix).
 ignore_fields = ["Xcoord", "Ycoord", "StreetNo"]

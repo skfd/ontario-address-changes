@@ -9,7 +9,13 @@ osm_compatible = "green-lwg"
 # PRO_DATE is a batch processing/publication stamp (String YYYYMMDD) rewritten to
 # ~yesterday on every republish for all 431k rows -- pure republish churn, no
 # address meaning (distinct from the real CREATE_DATE/MODDATE edit timestamps).
-ignore_fields = ["PRO_DATE"]
+ignore_fields = [
+  "PRO_DATE",
+  # Assessment-parcel join key, rewritten in blocks when parcels re-register
+  # (82691 -> 419661 on 247 rows of one parcel, 2026-08-15); registry rekey,
+  # not an address change.
+  "PARID",
+]
 
 [identity]
 # Region-wide layer (431k rows, all nine York municipalities incl. Vaughan/Markham);

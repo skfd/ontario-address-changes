@@ -9,6 +9,11 @@ format = "geojson"
 license_name = "Open Government Licence – City of Oshawa"
 osm_compatible = "green-lwg"
 
+# Canada Post postal codes backfilled in area batches (957 null->code rows on
+# 2026-08-18 alone, L1M/L1E/L1X blocks); enrichment rollout by the region, not
+# an address change, and more batches are expected as it sweeps the map.
+ignore_fields = ["POSTAL_CODE"]
+
 [identity]
 key_field = "MXADDRESSCODE"       # Maximo asset id, 100% populated, one per unit (untrusted OBJECTID is sequential)
 synth_fields = ["number", "street", "unit"]   # fallback only if a row ever lacks MXADDRESSCODE

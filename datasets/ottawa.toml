@@ -15,3 +15,10 @@ number = "ADDRNUM"
 street = "FULLNAME"
 unit   = "UNITID"
 full   = "FULLADDR"
+
+# Change classes: ADDRTYPE flips SUBORD -> MAIN when new-subdivision addresses
+# are promoted to main addresses (five 50-145 row sweeps Jun-Aug 2026, always
+# that direction, contiguous ranges like Bankside Way) - real address lifecycle,
+# published humanized as status changes instead of flagging every batch.
+[classes]
+status = ["ADDRTYPE"]

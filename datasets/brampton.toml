@@ -6,6 +6,21 @@ format = "geojson"
 license_name = "Creative Commons Attribution 4.0 (CC BY 4.0)"
 osm_compatible = "orange-ccby-waiver"
 
+# Sub-parcel cartographic maintenance: near-weekly sweeps nudge 50-600 points
+# 1-15 m, rotating through different streets each time (ten flags 2026-06-17..
+# 08-19). No address moved; drop location-only changes under 25 m.
+location_min_move_m = 25
+
+# Planning/permit metadata joined onto address points; it churns on its own
+# schedule and oscillates (C_OF_A flipped A-2022-0345<->0346 on 292 rows in each
+# direction twice over July-August 2026). None of it says anything about the
+# address itself (flags 2026-06-20..08-16).
+ignore_fields = [
+  "C_OF_A", "CITY_FILE", "DRAFT_PLAN_NUMBER", "CONDO_PLAN_NUMBER",
+  "PERMIT_ISSUEDATE", "PERMIT_NO", "PERMIT_TYPE", "SUB_TYPE", "WORK_TYPE",
+  "OCCUPANCY_DATE",
+]
+
 [identity]
 key_field = "ADDRESS_ID"                       # stable municipal address id, 100% populated (GIS_ID/OBJECTID are sequential)
 synth_fields = ["number", "street", "unit"]    # fallback only if a row ever lacks ADDRESS_ID

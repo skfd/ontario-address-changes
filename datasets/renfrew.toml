@@ -42,6 +42,10 @@ ignore_fields = [
   # address: "MV to confirm if address location is correct" -> "MV confirmed correct
   # address locations". 26 of the 32 rows it touched were riding on a status flip.
   "Comment",
+  # Unit-prefix vocabulary, restyled once in the 2026-06-13 NENA normalization
+  # (Bldg -> Building/None, Trlr -> Trailer/None on 1,854 rows); styling of the
+  # unit the canonical field already tracks.
+  "UnitPreTyp",
 ]
 
 # Ignored for change detection (above) but still written to props: the roll number is the

@@ -8,6 +8,10 @@ format = "geojson"
 license_name = "City of Thunder Bay Open Data Licence"
 osm_compatible = "green-lwg"
 
+# City land-inventory classification, flapping in batches (None <-> 'OTHER CITY
+# LANDS' in both directions on 2026-07-24 alone); asset metadata, not addresses.
+ignore_fields = ["CTB_TYPE"]
+
 [identity]
 # RSN carries a 0/null sentinel on ~378 rows (would collapse if keyed); ADDRESS_NUMBER is clean
 # (only 17 missing). No unit field published. Synthesize from address components + lon/lat.

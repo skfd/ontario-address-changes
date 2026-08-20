@@ -5,6 +5,7 @@ field-level diff + per-identity history that the HTML reports consume.
 """
 
 import json
+import math
 import re
 
 from src import db
@@ -88,6 +89,35 @@ def field_changes(old, new, ignore=(), field_map=None):
     return out
 
 
+def _move_m(old, new):
+    """Metres between two rows' points (equirectangular, same formula as
+    report._combine_location). None when either point is unusable."""
+    pts = (old.get("latitude"), old.get("longitude"),
+           new.get("latitude"), new.get("longitude"))
+    if any(p is None for p in pts):
+        return None
+    olat, olon, nlat, nlon = (float(p) for p in pts)
+    if not (abs(olat) <= 90 and abs(nlat) <= 90 and abs(olon) <= 180 and abs(nlon) <= 180):
+        return None  # projected coords from an old snapshot; degree math explodes
+    mid = math.radians((olat + nlat) / 2)
+    return math.hypot((nlon - olon) * 111_320 * math.cos(mid),
+                      (nlat - olat) * 111_320)
+
+
+def _below_location_floor(ds, old, new, changes):
+    """True when a modification is location-only and the move is under the
+    dataset's location_min_move_m noise floor (sub-parcel jitter: republish
+    wobble, oscillating geocode exports, cartographic nudges). Such rows are
+    not reported as modified at all; moves at or above the floor still
+    publish, as do location changes riding with any field change."""
+    if not ds.location_min_move_m:
+        return False
+    if any(c["field"] not in ("latitude", "longitude") for c in changes):
+        return False
+    d = _move_m(old, new)
+    return d is not None and d < ds.location_min_move_m
+
+
 # ---- diffs ----
 
 def addr_sort_key(r):
@@ -115,7 +145,7 @@ def compute_diff(ds, old_id, new_id):
     for k in old.keys() & new.keys():
         if old[k]["payload_hash"] != new[k]["payload_hash"]:
             ch = field_changes(old[k], new[k], ds.ignore_fields, ds.fields)
-            if ch:
+            if ch and not _below_location_floor(ds, old[k], new[k], ch):
                 m = dict(new[k])
                 m["changes"] = ch
                 modified.append(m)

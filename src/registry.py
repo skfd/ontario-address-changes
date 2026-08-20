@@ -22,6 +22,7 @@ class Dataset:
     license_name: str = ""
     osm_compatible: str = ""
     source_crs: str = ""  # e.g. "EPSG:2952"; reproject to WGS84 when coords are out of lon/lat range
+    location_min_move_m: float = 0.0  # drop location-only modifications moving less than this (metres); 0 = off
     key_field: str = ""
     synth_fields: list = field(default_factory=lambda: ["full"])
     synth_props: list = field(default_factory=list)  # source props added to the synth basis
@@ -65,6 +66,10 @@ def _parse(path):
     if stray:
         raise ValueError(f"{path}: keep_fields not in ignore_fields: {stray}")
 
+    floor = raw.get("location_min_move_m", 0.0)
+    if not isinstance(floor, (int, float)) or floor < 0:
+        raise ValueError(f"{path}: location_min_move_m must be a non-negative number")
+
     identity = raw.get("identity", {})
     # Geometry is the default disambiguator for a synthesized key. Dropping it
     # without adding another one would collapse every same-address row onto one
@@ -81,6 +86,7 @@ def _parse(path):
         license_name=raw.get("license_name", ""),
         osm_compatible=raw.get("osm_compatible", ""),
         source_crs=raw.get("source_crs", ""),
+        location_min_move_m=float(floor),
         key_field=identity.get("key_field", ""),
         synth_fields=identity.get("synth_fields", ["full"]),
         synth_props=identity.get("synth_props", []),

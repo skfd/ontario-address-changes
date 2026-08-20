@@ -6,6 +6,17 @@ format = "geojson"
 license_name = "Open Government Licence - The County of Huron"
 osm_compatible = "yellow-ogl"
 
+ignore_fields = [
+  # Dropped by the source in the 2026-07-25 schema migration ('ACW' -> None on
+  # 4,592 rows, then gone everywhere); the full names live in Mun now.
+  "A3",
+  # Composite of FullAddress + Mun, so pure echo. The 07-25 migration's
+  # find-replace also double-applied inside it ('45467 GOUGH ROAD (Howick)' ->
+  # '(Howickick)', 'Bluewaterewater') and upstream unwound it on 07-29 - 12,750
+  # corrupted display strings for four days, all churn the mapped fields don't share.
+  "FullAddress_Mun",
+]
+
 [identity]
 # HuronID is 100% populated but contiguous from 1 (looks like a reassigned row sequence,
 # not a stable id), so synthesize instead. Unit field is published here.
@@ -17,3 +28,10 @@ number = "StreetNumber"
 street = "StreetName"                           # St_* component fields tracked via the props blob
 unit   = "Unit"
 full   = "FullAddress"
+
+# Change classes (field values verified against the 2026-07-25+ snapshots): a
+# modification touching only these fields is reported in its humanized section
+# instead of the generic Updated Addresses table. Mun holds the full lower-tier
+# municipality name since the 07-25 recode (Bluewater, Goderich, Howick, ...).
+[classes]
+boundary = ["Mun"]

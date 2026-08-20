@@ -11,6 +11,12 @@ osm_compatible = "green-lwg"
 # projected ones so coordinates don't churn between the baseline and snapshot 2.
 source_crs = "EPSG:2952"
 
+# The export oscillates between two geocode sets: identical old->new moves recur
+# months apart (57 Acacia Ave and 58 Advance Rd carry the same transition on both
+# 2026-02-12 and 2026-07-09), on top of 1-ulp reprojection residue off the MTM
+# baseline. None of it is a move; drop location-only changes under 50 m.
+location_min_move_m = 50
+
 # Source props whose changes are noise (internal centreline geometry, classification
 # and join codes that churn daily) — excluded from change detection. Established by
 # diffing snapshots: these drove ~all "modified" rows with no real address change.

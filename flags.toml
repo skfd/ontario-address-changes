@@ -27,7 +27,11 @@ signature = "mass-modified"
 fields = ["STREET_TYPE", "full"]
 scope = "83 rows changed the same field set [STREET_TYPE, full] (100% of the day's 83 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "business"
+reviewed = "2026-08-20"
+rule = ""
+note = "117 TOM BROWN changed street type STREET->DRIVE across the building and all its units - one-street type correction with value change (not a restyle), vault clean."
 
 [[flag]]
 slug = "barrie"
@@ -36,7 +40,11 @@ signature = "mass-modified"
 fields = ["COMMENT", "STATUS"]
 scope = "182 rows changed the same field set [COMMENT, STATUS] (93% of the day's 196 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "business"
+reviewed = "2026-08-20"
+rule = ""
+note = "182 condo units at 681 Yonge St flipped Pending->Current (single-building cluster, vault clean) - real activation. COMMENT (clerk annotation that rode along) is now ignored, so future activations land class-exempt in Status Changes."
 
 [[flag]]
 slug = "brampton"
@@ -45,7 +53,11 @@ signature = "mass-modified"
 fields = ["location"]
 scope = "114 rows changed the same field set [location] (81% of the day's 140 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/brampton.toml: location_min_move_m = 25"
+note = "Near-weekly sweep of 1-15 m point nudges rotating through different streets; sub-parcel cartographic maintenance, no address moved. Below the new 25 m location noise floor."
 
 [[flag]]
 slug = "brampton"
@@ -54,7 +66,11 @@ signature = "mass-modified"
 fields = ["location"]
 scope = "102 rows changed the same field set [location] (73% of the day's 139 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/brampton.toml: location_min_move_m = 25"
+note = "Near-weekly sweep of 1-15 m point nudges rotating through different streets; sub-parcel cartographic maintenance, no address moved. Below the new 25 m location noise floor."
 
 [[flag]]
 slug = "brampton"
@@ -63,7 +79,11 @@ signature = "mass-modified"
 fields = ["PERMIT_ISSUEDATE", "PERMIT_NO", "PERMIT_TYPE", "SUB_TYPE", "WORK_TYPE"]
 scope = "69 rows changed the same field set [PERMIT_ISSUEDATE, PERMIT_NO, PERMIT_TYPE, SUB_TYPE, WORK_TYPE] (62% of the day's 112 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/brampton.toml: ignore_fields += PERMIT_ISSUEDATE, PERMIT_NO, PERMIT_TYPE, SUB_TYPE, WORK_TYPE, OCCUPANCY_DATE"
+note = "Building-permit metadata joined onto address points churns as permits progress; says nothing about the address."
 
 [[flag]]
 slug = "brampton"
@@ -72,7 +92,11 @@ signature = "mass-modified"
 fields = ["CITY_FILE", "DRAFT_PLAN_NUMBER"]
 scope = "122 rows changed the same field set [CITY_FILE, DRAFT_PLAN_NUMBER] (34% of the day's 357 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/brampton.toml: ignore_fields += CITY_FILE, DRAFT_PLAN_NUMBER"
+note = "Planning-file references recoded in lockstep (C04W01.012->013 / 21CDM-16011B->16012B on all 122 rows); join-code churn, not an address change."
 
 [[flag]]
 slug = "brampton"
@@ -82,7 +106,11 @@ fields = ["C_OF_A"]
 scope = "105 rows changed the same field set [C_OF_A] (29% of the day's 357 modifications)"
 detail = "top: 'A-2025-0090' -> 'A-2026-0027' (27), 'A-2020-0065' -> 'B-2020-0013' (19), None -> 'A-2026-0024' (13)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/brampton.toml: ignore_fields += C_OF_A"
+note = "Committee-of-adjustment file references oscillate (A-2022-0345<->0346 on 292 rows in each direction twice over July-August); unstable upstream join, not city activity."
 
 [[flag]]
 slug = "brampton"
@@ -92,7 +120,11 @@ fields = ["CONDO_PLAN_NUMBER"]
 scope = "668 rows changed the same field set [CONDO_PLAN_NUMBER] (47% of the day's 1,430 modifications)"
 detail = "top: None -> 'PCP-1214' (668)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/brampton.toml: ignore_fields += CONDO_PLAN_NUMBER"
+note = "None->PCP-1214 stamped on all 668 units of 15 Skyridge Dr; parcel-registry annotation on existing addresses, not an address change."
 
 [[flag]]
 slug = "brampton"
@@ -101,7 +133,11 @@ signature = "mass-modified"
 fields = ["location"]
 scope = "580 rows changed the same field set [location] (41% of the day's 1,430 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/brampton.toml: location_min_move_m = 25"
+note = "Near-weekly sweep of 1-15 m point nudges rotating through different streets; sub-parcel cartographic maintenance, no address moved. Below the new 25 m location noise floor."
 
 [[flag]]
 slug = "brampton"
@@ -110,7 +146,11 @@ signature = "mass-modified"
 fields = ["location"]
 scope = "478 rows changed the same field set [location] (92% of the day's 521 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/brampton.toml: location_min_move_m = 25"
+note = "Near-weekly sweep of 1-15 m point nudges rotating through different streets; sub-parcel cartographic maintenance, no address moved. Below the new 25 m location noise floor."
 
 [[flag]]
 slug = "brampton"
@@ -119,7 +159,11 @@ signature = "mass-modified"
 fields = ["OCCUPANCY_DATE", "PERMIT_ISSUEDATE", "PERMIT_NO", "PERMIT_TYPE", "SUB_TYPE", "WORK_TYPE"]
 scope = "127 rows changed the same field set [OCCUPANCY_DATE, PERMIT_ISSUEDATE, PERMIT_NO, PERMIT_TYPE, SUB_TYPE, WORK_TYPE] (58% of the day's 220 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/brampton.toml: ignore_fields += PERMIT_ISSUEDATE, PERMIT_NO, PERMIT_TYPE, SUB_TYPE, WORK_TYPE, OCCUPANCY_DATE"
+note = "Building-permit metadata joined onto address points churns as permits progress; says nothing about the address."
 
 [[flag]]
 slug = "brampton"
@@ -128,7 +172,11 @@ signature = "mass-modified"
 fields = ["location"]
 scope = "459 rows changed the same field set [location] (97% of the day's 472 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/brampton.toml: location_min_move_m = 25"
+note = "Near-weekly sweep of 1-15 m point nudges rotating through different streets; sub-parcel cartographic maintenance, no address moved. Below the new 25 m location noise floor."
 
 [[flag]]
 slug = "brampton"
@@ -137,7 +185,11 @@ signature = "mass-modified"
 fields = ["location"]
 scope = "145 rows changed the same field set [location] (79% of the day's 183 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/brampton.toml: location_min_move_m = 25"
+note = "Near-weekly sweep of 1-15 m point nudges rotating through different streets; sub-parcel cartographic maintenance, no address moved. Below the new 25 m location noise floor."
 
 [[flag]]
 slug = "brampton"
@@ -146,7 +198,11 @@ signature = "mass-modified"
 fields = ["location"]
 scope = "76 rows changed the same field set [location] (84% of the day's 91 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/brampton.toml: location_min_move_m = 25"
+note = "Near-weekly sweep of 1-15 m point nudges rotating through different streets; sub-parcel cartographic maintenance, no address moved. Below the new 25 m location noise floor."
 
 [[flag]]
 slug = "brampton"
@@ -155,7 +211,11 @@ signature = "mass-modified"
 fields = ["CITY_FILE", "DRAFT_PLAN_NUMBER"]
 scope = "122 rows changed the same field set [CITY_FILE, DRAFT_PLAN_NUMBER] (54% of the day's 226 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/brampton.toml: ignore_fields += CITY_FILE, DRAFT_PLAN_NUMBER"
+note = "Planning-file references recoded in lockstep (C04W01.012->013 / 21CDM-16011B->16012B on all 122 rows); join-code churn, not an address change."
 
 [[flag]]
 slug = "brampton"
@@ -165,7 +225,11 @@ fields = ["C_OF_A"]
 scope = "76 rows changed the same field set [C_OF_A] (34% of the day's 226 modifications)"
 detail = "top: 'B15-023' -> 'A15-163' (39), 'B-2020-0013' -> 'A-2020-0065' (19), 'B10-010' -> 'B10-011' (5)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/brampton.toml: ignore_fields += C_OF_A"
+note = "Committee-of-adjustment file references oscillate (A-2022-0345<->0346 on 292 rows in each direction twice over July-August); unstable upstream join, not city activity."
 
 [[flag]]
 slug = "brampton"
@@ -175,7 +239,11 @@ fields = ["C_OF_A"]
 scope = "212 rows changed the same field set [C_OF_A] (82% of the day's 258 modifications)"
 detail = "top: None -> 'A-2026-0033' (75), 'A-2023-0331' -> 'A-2026-0030' (36), 'A16-193' -> 'A-2026-0032' (35)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/brampton.toml: ignore_fields += C_OF_A"
+note = "Committee-of-adjustment file references oscillate (A-2022-0345<->0346 on 292 rows in each direction twice over July-August); unstable upstream join, not city activity."
 
 [[flag]]
 slug = "brampton"
@@ -185,7 +253,11 @@ fields = ["C_OF_A"]
 scope = "395 rows changed the same field set [C_OF_A] (94% of the day's 420 modifications)"
 detail = "top: 'A-2022-0345' -> 'A-2022-0346' (292), 'A15-163' -> 'B15-023' (39), 'B08-018' -> 'B08-012' (22)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/brampton.toml: ignore_fields += C_OF_A"
+note = "Committee-of-adjustment file references oscillate (A-2022-0345<->0346 on 292 rows in each direction twice over July-August); unstable upstream join, not city activity."
 
 [[flag]]
 slug = "brampton"
@@ -194,7 +266,11 @@ signature = "mass-modified"
 fields = ["location"]
 scope = "53 rows changed the same field set [location] (74% of the day's 72 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/brampton.toml: location_min_move_m = 25"
+note = "Near-weekly sweep of 1-15 m point nudges rotating through different streets; sub-parcel cartographic maintenance, no address moved. Below the new 25 m location noise floor."
 
 [[flag]]
 slug = "brampton"
@@ -204,7 +280,11 @@ fields = ["C_OF_A"]
 scope = "405 rows changed the same field set [C_OF_A] (89% of the day's 454 modifications)"
 detail = "top: 'A-2022-0346' -> 'A-2022-0345' (292), 'B15-023' -> 'A15-163' (39), 'A15-182' -> 'A15-183' (30)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/brampton.toml: ignore_fields += C_OF_A"
+note = "Committee-of-adjustment file references oscillate (A-2022-0345<->0346 on 292 rows in each direction twice over July-August); unstable upstream join, not city activity."
 
 [[flag]]
 slug = "brampton"
@@ -214,7 +294,11 @@ fields = ["C_OF_A"]
 scope = "379 rows changed the same field set [C_OF_A] (76% of the day's 496 modifications)"
 detail = "top: 'A-2022-0345' -> 'A-2022-0346' (292), 'A15-163' -> 'B15-023' (39), 'A15-001' -> 'B15-002' (25)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/brampton.toml: ignore_fields += C_OF_A"
+note = "Committee-of-adjustment file references oscillate (A-2022-0345<->0346 on 292 rows in each direction twice over July-August); unstable upstream join, not city activity."
 
 [[flag]]
 slug = "brampton"
@@ -224,7 +308,11 @@ fields = ["C_OF_A"]
 scope = "82 rows changed the same field set [C_OF_A] (57% of the day's 143 modifications)"
 detail = "top: 'B15-023' -> 'A15-163' (39), 'B08-012' -> 'B08-011' (22), 'A-2020-0051' -> 'B-2020-0010' (8)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/brampton.toml: ignore_fields += C_OF_A"
+note = "Committee-of-adjustment file references oscillate (A-2022-0345<->0346 on 292 rows in each direction twice over July-August); unstable upstream join, not city activity."
 
 [[flag]]
 slug = "brampton"
@@ -233,7 +321,11 @@ signature = "mass-modified"
 fields = ["location"]
 scope = "135 rows changed the same field set [location] (91% of the day's 149 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/brampton.toml: location_min_move_m = 25"
+note = "Near-weekly sweep of 1-15 m point nudges rotating through different streets; sub-parcel cartographic maintenance, no address moved. Below the new 25 m location noise floor."
 
 [[flag]]
 slug = "brampton"
@@ -243,7 +335,11 @@ fields = ["C_OF_A"]
 scope = "382 rows changed the same field set [C_OF_A] (91% of the day's 422 modifications)"
 detail = "top: 'A-2022-0346' -> 'A-2022-0345' (292), 'B15-002' -> 'A15-001' (25), 'B08-011' -> 'B08-012' (22)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/brampton.toml: ignore_fields += C_OF_A"
+note = "Committee-of-adjustment file references oscillate (A-2022-0345<->0346 on 292 rows in each direction twice over July-August); unstable upstream join, not city activity."
 
 [[flag]]
 slug = "brampton"
@@ -252,7 +348,11 @@ signature = "mass-modified"
 fields = ["location"]
 scope = "54 rows changed the same field set [location] (81% of the day's 67 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/brampton.toml: location_min_move_m = 25"
+note = "Near-weekly sweep of 1-15 m point nudges rotating through different streets; sub-parcel cartographic maintenance, no address moved. Below the new 25 m location noise floor."
 
 [[flag]]
 slug = "durham"
@@ -262,7 +362,11 @@ fields = ["POSTAL_CODE"]
 scope = "957 rows changed the same field set [POSTAL_CODE] (99% of the day's 969 modifications)"
 detail = "top: None -> 'L1M 0N1' (70), None -> 'L1E 0M3' (66), None -> 'L1X 0V6' (47)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/durham.toml: ignore_fields += POSTAL_CODE"
+note = "Null->postal-code backfill on 957 rows in one day (L1M/L1E/L1X blocks); enrichment rollout, not an address change; more area batches expected."
 
 [[flag]]
 slug = "guelph"
@@ -271,7 +375,11 @@ signature = "mass-modified"
 fields = ["location"]
 scope = "172 rows changed the same field set [location] (100% of the day's 172 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/guelph.toml: location_min_move_m = 25"
+note = "Street blocks translated together 5-9 m; segment-realignment maintenance, below the floor."
 
 [[flag]]
 slug = "guelph"
@@ -280,7 +388,11 @@ signature = "mass-modified"
 fields = ["location"]
 scope = "520 rows changed the same field set [location] (100% of the day's 520 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/guelph.toml: location_min_move_m = 25"
+note = "Second day of the same realignment (Emma St 95-113 all moved the same direction, 520 rows); below the floor."
 
 [[flag]]
 slug = "huron"
@@ -290,7 +402,11 @@ fields = ["A3"]
 scope = "4,592 rows changed the same field set [A3] (12% of the day's 38,293 modifications)"
 detail = "top: 'ACW' -> None (4,592)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/huron.toml: ignore_fields += A3"
+note = "A3 municipality code dropped upstream ('ACW'->None on all 4,592 ACW rows) in the 07-25 schema migration to full names in Mun."
 
 [[flag]]
 slug = "huron"
@@ -299,7 +415,11 @@ signature = "mass-modified"
 fields = ["A3", "FullAddress_Mun", "Mun"]
 scope = "12,750 rows changed the same field set [A3, FullAddress_Mun, Mun] (33% of the day's 38,293 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "bug"
+reviewed = "2026-08-20"
+rule = "datasets/huron.toml: ignore_fields += FullAddress_Mun (corrupt composite echo); no store repair needed - upstream unwound it 07-29 and the mapped fields never carried the corruption"
+note = "The migration's find-replace double-applied inside FullAddress_Mun ('45467 GOUGH ROAD (Howick)' -> '(Howickick)', 'Bluewaterewater'); 12,750 rows carried corrupted display strings for four days."
 
 [[flag]]
 slug = "huron"
@@ -308,7 +428,11 @@ signature = "mass-modified"
 fields = ["A3", "Mun"]
 scope = "20,950 rows changed the same field set [A3, Mun] (55% of the day's 38,293 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/huron.toml: ignore_fields += A3; [classes] boundary = Mun"
+note = "1:1 code->name recode (Blu->Bluewater, God->Goderich, HuE->Huron East) on 20,950 rows; no address changed municipality. Future Mun-only sweeps publish humanized as boundary changes."
 
 [[flag]]
 slug = "huron"
@@ -318,7 +442,11 @@ fields = ["FullAddress_Mun"]
 scope = "12,752 rows changed the same field set [FullAddress_Mun] (74% of the day's 17,344 modifications)"
 detail = "top: '63 MILL ROAD WEST (Bluewaterewater)' -> '63 MILL ROAD WEST (Bluewater)' (2), '87 NORTH STREET (Godericherich)' -> '87 NORTH STREET (Goderich)' (2), '45467 GOUGH ROAD (Howickick)' -> '45467 GOUGH ROAD (Howick)' (1)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "bug"
+reviewed = "2026-08-20"
+rule = "datasets/huron.toml: ignore_fields += FullAddress_Mun; this event is the upstream repair of the 07-25 corruption, not a change"
+note = "'Howickick'->'Howick' etc. on 12,752 rows - the county unwinding its own bad replace."
 
 [[flag]]
 slug = "huron"
@@ -327,7 +455,11 @@ signature = "mass-modified"
 fields = ["FullAddress_Mun", "Mun"]
 scope = "4,592 rows changed the same field set [FullAddress_Mun, Mun] (26% of the day's 17,344 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/huron.toml: ignore_fields += FullAddress_Mun; [classes] boundary = Mun"
+note = "The 4,592 ex-ACW rows completing the 07-25 code->name migration ('(ACW)' -> 'Ashfield-Colborne-Wawanosh')."
 
 [[flag]]
 slug = "kingston"
@@ -336,7 +468,11 @@ signature = "mass-modified"
 fields = ["full", "unit"]
 scope = "114 rows changed the same field set [full, unit] (100% of the day's 114 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "business"
+reviewed = "2026-08-20"
+rule = ""
+note = "1580 Bath Rd: 114 records assigned unit numbers 1001+ (unit null->number, full gains the prefix); new-building unit registration on a single site."
 
 [[flag]]
 slug = "kingston"
@@ -346,7 +482,11 @@ fields = ["UNIT_TYPE"]
 scope = "94 rows changed the same field set [UNIT_TYPE] (95% of the day's 99 modifications)"
 detail = "top: 'HORIZONTAL' -> 'UNIT' (70), 'VERTICAL' -> 'UNIT' (24)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/kingston.toml: ignore_fields += UNIT_TYPE"
+note = "Vocabulary collapse HORIZONTAL/VERTICAL->UNIT on 94 rows; classification restyle, no unit value changed."
 
 [[flag]]
 slug = "kingston"
@@ -355,7 +495,11 @@ signature = "mass-modified"
 fields = ["POSTAL_CODE", "full", "unit"]
 scope = "52 rows changed the same field set [POSTAL_CODE, full, unit] (95% of the day's 55 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "business"
+reviewed = "2026-08-20"
+rule = ""
+note = "186 Trailblazers Lane: 52 unit records folded back to the base address and given a postal code; single-site addressing operation, the mirror of 06-12."
 
 [[flag]]
 slug = "kingston"
@@ -365,7 +509,11 @@ fields = ["COLLECTION_TYPE"]
 scope = "146 rows changed the same field set [COLLECTION_TYPE] (99% of the day's 147 modifications)"
 detail = "top: None -> 'Cart Collection' (143), None -> 'Curbside Collection' (3)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/kingston.toml: ignore_fields += COLLECTION_TYPE"
+note = "Waste-collection service designation flipped in batches (Curbside<->Cart); service metadata, not an address change."
 
 [[flag]]
 slug = "kingston"
@@ -374,7 +522,11 @@ signature = "mass-modified"
 fields = ["location"]
 scope = "167 rows changed the same field set [location] (59% of the day's 284 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/kingston.toml: location_min_move_m = 25"
+note = "1-10 m point nudges in machine-cadence batches, whole unit stacks moving together; sub-parcel maintenance below the 25 m floor."
 
 [[flag]]
 slug = "kingston"
@@ -383,7 +535,11 @@ signature = "mass-modified"
 fields = ["location"]
 scope = "180 rows changed the same field set [location] (60% of the day's 300 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/kingston.toml: location_min_move_m = 25"
+note = "1-10 m point nudges in machine-cadence batches, whole unit stacks moving together; sub-parcel maintenance below the 25 m floor."
 
 [[flag]]
 slug = "kingston"
@@ -393,7 +549,11 @@ fields = ["COLLECTION_TYPE"]
 scope = "356 rows changed the same field set [COLLECTION_TYPE] (100% of the day's 356 modifications)"
 detail = "top: 'Curbside Collection' -> 'Cart Collection' (356)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/kingston.toml: ignore_fields += COLLECTION_TYPE"
+note = "Waste-collection service designation flipped in batches (Curbside<->Cart); service metadata, not an address change."
 
 [[flag]]
 slug = "kingston"
@@ -403,7 +563,11 @@ fields = ["COLLECTION_TYPE"]
 scope = "84 rows changed the same field set [COLLECTION_TYPE] (90% of the day's 93 modifications)"
 detail = "top: None -> 'Curbside Collection' (84)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/kingston.toml: ignore_fields += COLLECTION_TYPE"
+note = "Waste-collection service designation flipped in batches (Curbside<->Cart); service metadata, not an address change."
 
 [[flag]]
 slug = "kingston"
@@ -412,7 +576,11 @@ signature = "mass-modified"
 fields = ["location"]
 scope = "124 rows changed the same field set [location] (61% of the day's 202 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/kingston.toml: location_min_move_m = 25"
+note = "1-10 m point nudges in machine-cadence batches, whole unit stacks moving together; sub-parcel maintenance below the 25 m floor."
 
 [[flag]]
 slug = "kingston"
@@ -421,7 +589,11 @@ signature = "mass-modified"
 fields = ["STREET_BODY_NAME", "STREET_TYPE_SUFFIX", "full", "street"]
 scope = "181 rows changed the same field set [STREET_BODY_NAME, STREET_TYPE_SUFFIX, full, street] (40% of the day's 456 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "business"
+reviewed = "2026-08-20"
+rule = ""
+note = "Two real street renames: ROYAL ST->KINGSTON HEIGHTS DR (160 rows) and ANASTASIA AVE->HEARTHSTONE CRES (21). Component props are now ignored as echoes so future renames land cleanly in the renamed section."
 
 [[flag]]
 slug = "kingston"
@@ -430,7 +602,11 @@ signature = "mass-modified"
 fields = ["location"]
 scope = "128 rows changed the same field set [location] (28% of the day's 456 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/kingston.toml: location_min_move_m = 25"
+note = "1-10 m point nudges in machine-cadence batches, whole unit stacks moving together; sub-parcel maintenance below the 25 m floor."
 
 [[flag]]
 slug = "kitchener"
@@ -439,7 +615,11 @@ signature = "mass-modified"
 fields = ["location"]
 scope = "192 rows changed the same field set [location] (54% of the day's 354 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "business"
+reviewed = "2026-08-20"
+rule = ""
+note = "The real coordinate moves the X_COORD/Y_COORD echo cleanup restored to Location Adjustments (see kitchener.toml, 2026-08-08 note); organic maintenance pace, publishes collapsed."
 
 [[flag]]
 slug = "kitchener"
@@ -448,7 +628,11 @@ signature = "mass-modified"
 fields = ["location"]
 scope = "67 rows changed the same field set [location] (97% of the day's 69 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "business"
+reviewed = "2026-08-20"
+rule = ""
+note = "The real coordinate moves the X_COORD/Y_COORD echo cleanup restored to Location Adjustments (see kitchener.toml, 2026-08-08 note); organic maintenance pace, publishes collapsed."
 
 [[flag]]
 slug = "leeds-grenville"
@@ -457,7 +641,11 @@ signature = "mass-modified"
 fields = ["location"]
 scope = "206 rows changed the same field set [location] (84% of the day's 245 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "business"
+reviewed = "2026-08-20"
+rule = ""
+note = "206 rural points re-placed 30-110 m (structure snapping) across the counties over a 26-day interval; genuine repositioning, publishes as collapsed Location Adjustments."
 
 [[flag]]
 slug = "muskoka"
@@ -466,7 +654,11 @@ signature = "mass-modified"
 fields = ["location"]
 scope = "28,540 rows changed the same field set [location] (100% of the day's 28,550 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "bug"
+reviewed = "2026-08-20"
+rule = "vault verdict artifact (geometry outage recovery); datasets/muskoka.toml: location_min_move_m = 2 suppresses the sub-2 m republish-wobble class for good"
+note = "28,540 rows moved exactly one 5-dp step as geometry came back after the 06-30 drop; vault: rows rewritten in place, recovery not change."
 
 [[flag]]
 slug = "muskoka"
@@ -475,7 +667,11 @@ signature = "mass-modified"
 fields = ["location"]
 scope = "148 rows changed the same field set [location] (94% of the day's 157 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "business"
+reviewed = "2026-08-20"
+rule = ""
+note = "Rural points re-placed 5-110 m in active maintenance batches (Badger Hill Rd cluster etc.); genuine re-surveys, publish collapsed. Sub-2 m republish wobble is now floored (location_min_move_m = 2)."
 
 [[flag]]
 slug = "muskoka"
@@ -484,7 +680,11 @@ signature = "mass-modified"
 fields = ["location"]
 scope = "101 rows changed the same field set [location] (90% of the day's 112 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "business"
+reviewed = "2026-08-20"
+rule = ""
+note = "Rural points re-placed 5-110 m in active maintenance batches (Badger Hill Rd cluster etc.); genuine re-surveys, publish collapsed. Sub-2 m republish wobble is now floored (location_min_move_m = 2)."
 
 [[flag]]
 slug = "niagara-falls"
@@ -493,7 +693,11 @@ signature = "mass-modified"
 fields = ["location"]
 scope = "59 rows changed the same field set [location] (34% of the day's 174 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/niagara-falls.toml: location_min_move_m = 25"
+note = "Street-block nudges of 1-5 m (Bentley St rows moved together); sub-parcel maintenance below the floor."
 
 [[flag]]
 slug = "ottawa"
@@ -503,7 +707,11 @@ fields = ["ADDRTYPE"]
 scope = "52 rows changed the same field set [ADDRTYPE] (98% of the day's 53 modifications)"
 detail = "top: 'SUBORD' -> 'MAIN' (52)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "business"
+reviewed = "2026-08-20"
+rule = ""
+note = "Contiguous new-subdivision ranges promoted SUBORD->MAIN (e.g. Bankside Way), always that direction - real address lifecycle. ADDRTYPE is now in [classes] status, so future promotions publish humanized without flagging."
 
 [[flag]]
 slug = "ottawa"
@@ -513,7 +721,11 @@ fields = ["ADDRTYPE"]
 scope = "64 rows changed the same field set [ADDRTYPE] (88% of the day's 73 modifications)"
 detail = "top: 'SUBORD' -> 'MAIN' (64)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "business"
+reviewed = "2026-08-20"
+rule = ""
+note = "Contiguous new-subdivision ranges promoted SUBORD->MAIN (e.g. Bankside Way), always that direction - real address lifecycle. ADDRTYPE is now in [classes] status, so future promotions publish humanized without flagging."
 
 [[flag]]
 slug = "ottawa"
@@ -523,7 +735,11 @@ fields = ["ADDRTYPE"]
 scope = "145 rows changed the same field set [ADDRTYPE] (97% of the day's 149 modifications)"
 detail = "top: 'SUBORD' -> 'MAIN' (145)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "business"
+reviewed = "2026-08-20"
+rule = ""
+note = "Contiguous new-subdivision ranges promoted SUBORD->MAIN (e.g. Bankside Way), always that direction - real address lifecycle. ADDRTYPE is now in [classes] status, so future promotions publish humanized without flagging."
 
 [[flag]]
 slug = "ottawa"
@@ -533,7 +749,11 @@ fields = ["ADDRTYPE"]
 scope = "104 rows changed the same field set [ADDRTYPE] (99% of the day's 105 modifications)"
 detail = "top: 'SUBORD' -> 'MAIN' (104)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "business"
+reviewed = "2026-08-20"
+rule = ""
+note = "Contiguous new-subdivision ranges promoted SUBORD->MAIN (e.g. Bankside Way), always that direction - real address lifecycle. ADDRTYPE is now in [classes] status, so future promotions publish humanized without flagging."
 
 [[flag]]
 slug = "ottawa"
@@ -543,7 +763,11 @@ fields = ["ADDRTYPE"]
 scope = "120 rows changed the same field set [ADDRTYPE] (100% of the day's 120 modifications)"
 detail = "top: 'SUBORD' -> 'MAIN' (120)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "business"
+reviewed = "2026-08-20"
+rule = ""
+note = "Contiguous new-subdivision ranges promoted SUBORD->MAIN (e.g. Bankside Way), always that direction - real address lifecycle. ADDRTYPE is now in [classes] status, so future promotions publish humanized without flagging."
 
 [[flag]]
 slug = "renfrew"
@@ -551,7 +775,11 @@ date = "2026-06-13"
 signature = "mass-added"
 scope = "5,896 added in one day (17.8% of 33,130)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "one-time: the 2026-06-11 source-swap baseline caught the county's NENA layer mid-population; no recurrence in 68 days and the vault saw ordinary pulls"
+note = "5,896 adds spread thinly over 240 streets two days after re-baseline = upstream layer backfill, not construction; publishing would fabricate a growth story."
 
 [[flag]]
 slug = "renfrew"
@@ -561,7 +789,11 @@ fields = ["UnitPreTyp"]
 scope = "1,854 rows changed the same field set [UnitPreTyp] (60% of the day's 3,107 modifications)"
 detail = "top: 'Bldg' -> None (1,582), 'Bldg' -> 'Building' (111), 'Trlr' -> None (105)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/renfrew.toml: ignore_fields += UnitPreTyp"
+note = "NENA vocabulary normalization Bldg->Building/None, Trlr->Trailer/None on 1,854 rows; unit-prefix styling, unit numbers untouched."
 
 [[flag]]
 slug = "renfrew"
@@ -571,7 +803,11 @@ fields = ["full"]
 scope = "1,105 rows changed the same field set [full] (36% of the day's 3,107 modifications)"
 detail = "top: '2581 Highway 132' -> '2581 132 Highway' (2), '2912 Highway 132' -> '2912 132 Highway' (2), '4473 Highway 132' -> '4473 132 Highway' (2); 91% value-preserving restyle"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "one-time upstream restyle in the same 06-13 NENA normalization; canonical full has no ignore lever and needs none - no recurrence in 68 days"
+note = "'1019 Highway 132'->'1019 132 Highway' token reorder, 91% value-preserving; flags.py cites this very event as a fabricated story."
 
 [[flag]]
 slug = "sdg"
@@ -580,7 +816,11 @@ signature = "mass-modified"
 fields = ["location"]
 scope = "52 rows changed the same field set [location] (100% of the day's 52 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "business"
+reviewed = "2026-08-20"
+rule = ""
+note = "52 rural points re-placed 30-70 m (structure snapping) on scattered roads; genuine repositioning, publishes collapsed. One-off."
 
 [[flag]]
 slug = "thunder-bay"
@@ -590,7 +830,11 @@ fields = ["CTB_TYPE"]
 scope = "129 rows changed the same field set [CTB_TYPE] (71% of the day's 181 modifications)"
 detail = "top: None -> 'OTHER CITY LANDS' (105), 'OTHER CITY LANDS' -> None (20), None -> 'PARKS/OPEN SPACE' (2)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/thunder-bay.toml: ignore_fields += CTB_TYPE"
+note = "City-lands classification flapping (None<->'OTHER CITY LANDS' both directions in one day); land-inventory metadata, not addresses."
 
 [[flag]]
 slug = "toronto"
@@ -599,7 +843,11 @@ signature = "mass-modified"
 fields = ["location"]
 scope = "3,233 rows changed the same field set [location] (85% of the day's 3,820 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/toronto.toml: location_min_move_m = 50"
+note = "Reprojection residue of the MTM baseline: 3,233 of 525k rows at ~1 ulp - the rounding remainder the source_crs fix left behind. Floored at 50 m."
 
 [[flag]]
 slug = "toronto"
@@ -608,7 +856,11 @@ signature = "mass-modified"
 fields = ["location"]
 scope = "2,233 rows changed the same field set [location] (94% of the day's 2,388 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/toronto.toml: location_min_move_m = 50"
+note = "The export oscillates between two geocode sets - identical old->new transitions recur months apart (57 Acacia Ave / 58 Advance Rd on both 2026-02-12 and 2026-07-09); flip-flop noise, not moves. Floored at 50 m."
 
 [[flag]]
 slug = "toronto"
@@ -617,7 +869,11 @@ signature = "mass-modified"
 fields = ["location"]
 scope = "175 rows changed the same field set [location] (99% of the day's 176 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/toronto.toml: location_min_move_m = 50"
+note = "The export oscillates between two geocode sets - identical old->new transitions recur months apart (57 Acacia Ave / 58 Advance Rd on both 2026-02-12 and 2026-07-09); flip-flop noise, not moves. Floored at 50 m."
 
 [[flag]]
 slug = "toronto"
@@ -626,7 +882,11 @@ signature = "mass-modified"
 fields = ["location"]
 scope = "74 rows changed the same field set [location] (100% of the day's 74 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/toronto.toml: location_min_move_m = 50"
+note = "The export oscillates between two geocode sets - identical old->new transitions recur months apart (57 Acacia Ave / 58 Advance Rd on both 2026-02-12 and 2026-07-09); flip-flop noise, not moves. Floored at 50 m."
 
 [[flag]]
 slug = "toronto"
@@ -635,7 +895,11 @@ signature = "mass-modified"
 fields = ["location"]
 scope = "762 rows changed the same field set [location] (57% of the day's 1,335 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/toronto.toml: location_min_move_m = 50"
+note = "The export oscillates between two geocode sets - identical old->new transitions recur months apart (57 Acacia Ave / 58 Advance Rd on both 2026-02-12 and 2026-07-09); flip-flop noise, not moves. Floored at 50 m."
 
 [[flag]]
 slug = "toronto"
@@ -644,7 +908,11 @@ signature = "mass-modified"
 fields = ["location"]
 scope = "64 rows changed the same field set [location] (100% of the day's 64 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/toronto.toml: location_min_move_m = 50"
+note = "The export oscillates between two geocode sets - identical old->new transitions recur months apart (57 Acacia Ave / 58 Advance Rd on both 2026-02-12 and 2026-07-09); flip-flop noise, not moves. Floored at 50 m."
 
 [[flag]]
 slug = "toronto"
@@ -653,7 +921,11 @@ signature = "mass-modified"
 fields = ["location"]
 scope = "54 rows changed the same field set [location] (100% of the day's 54 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/toronto.toml: location_min_move_m = 50"
+note = "The export oscillates between two geocode sets - identical old->new transitions recur months apart (57 Acacia Ave / 58 Advance Rd on both 2026-02-12 and 2026-07-09); flip-flop noise, not moves. Floored at 50 m."
 
 [[flag]]
 slug = "toronto"
@@ -662,7 +934,11 @@ signature = "mass-modified"
 fields = ["location"]
 scope = "98 rows changed the same field set [location] (100% of the day's 98 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/toronto.toml: location_min_move_m = 50"
+note = "The export oscillates between two geocode sets - identical old->new transitions recur months apart (57 Acacia Ave / 58 Advance Rd on both 2026-02-12 and 2026-07-09); flip-flop noise, not moves. Floored at 50 m."
 
 [[flag]]
 slug = "toronto"
@@ -671,7 +947,11 @@ signature = "mass-modified"
 fields = ["location"]
 scope = "1,480 rows changed the same field set [location] (69% of the day's 2,140 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/toronto.toml: location_min_move_m = 50"
+note = "The export oscillates between two geocode sets - identical old->new transitions recur months apart (57 Acacia Ave / 58 Advance Rd on both 2026-02-12 and 2026-07-09); flip-flop noise, not moves. Floored at 50 m."
 
 [[flag]]
 slug = "toronto"
@@ -680,7 +960,11 @@ signature = "mass-modified"
 fields = ["location"]
 scope = "61 rows changed the same field set [location] (90% of the day's 68 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/toronto.toml: location_min_move_m = 50"
+note = "The export oscillates between two geocode sets - identical old->new transitions recur months apart (57 Acacia Ave / 58 Advance Rd on both 2026-02-12 and 2026-07-09); flip-flop noise, not moves. Floored at 50 m."
 
 [[flag]]
 slug = "toronto"
@@ -689,7 +973,11 @@ signature = "mass-modified"
 fields = ["location"]
 scope = "56 rows changed the same field set [location] (60% of the day's 93 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/toronto.toml: location_min_move_m = 50"
+note = "The export oscillates between two geocode sets - identical old->new transitions recur months apart (57 Acacia Ave / 58 Advance Rd on both 2026-02-12 and 2026-07-09); flip-flop noise, not moves. Floored at 50 m."
 
 [[flag]]
 slug = "toronto"
@@ -698,7 +986,11 @@ signature = "mass-modified"
 fields = ["location"]
 scope = "58 rows changed the same field set [location] (100% of the day's 58 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/toronto.toml: location_min_move_m = 50"
+note = "The export oscillates between two geocode sets - identical old->new transitions recur months apart (57 Acacia Ave / 58 Advance Rd on both 2026-02-12 and 2026-07-09); flip-flop noise, not moves. Floored at 50 m."
 
 [[flag]]
 slug = "toronto"
@@ -707,7 +999,11 @@ signature = "mass-modified"
 fields = ["location"]
 scope = "50 rows changed the same field set [location] (68% of the day's 73 modifications)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/toronto.toml: location_min_move_m = 50"
+note = "The export oscillates between two geocode sets - identical old->new transitions recur months apart (57 Acacia Ave / 58 Advance Rd on both 2026-02-12 and 2026-07-09); flip-flop noise, not moves. Floored at 50 m."
 
 [[flag]]
 slug = "york"
@@ -717,5 +1013,22 @@ fields = ["PARID"]
 scope = "249 rows changed the same field set [PARID] (100% of the day's 250 modifications)"
 detail = "top: 82691 -> 419661 (247), 74125 -> 419656 (1), 364757 -> 419657 (1)"
 detected = "2026-08-20"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-08-20"
+rule = "datasets/york.toml: ignore_fields += PARID"
+note = "Parcel join key rewritten (82691->419661 on 247 rows of one parcel); registry rekey, not an address change."
+
+[[flag]]
+slug = "kingston"
+date = "2026-08-19"
+signature = "mass-modified"
+fields = ["full", "street"]
+scope = "256 rows changed the same field set [full, street] (95% of the day's 270 modifications)"
+detected = "2026-08-20"
+status = "reviewed"
+verdict = "business"
+reviewed = "2026-08-20"
+rule = ""
+note = "Four real street renames in one batch: ROYAL ST->KINGSTON HEIGHTS DR (160), KOUKLA DR->CRESTVIEW DR (65), ANASTASIA AVE->HEARTHSTONE CRES (21), SIMION WAY->CANOPY WAY (10). Same event as the reviewed component-fieldset flag for this date; regrouped as [full, street] after the STREET_BODY_NAME/STREET_TYPE_SUFFIX echo cleanup."
 

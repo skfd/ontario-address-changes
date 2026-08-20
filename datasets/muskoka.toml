@@ -8,6 +8,12 @@ format = "geojson"
 license_name = "Not identified"
 osm_compatible = "unknown-review"
 
+# The service's republish wobble moves points up to ~1.4 m (one 5-dp step; see
+# the identity comment below - the same jitter that forced use_geometry off, and
+# what the 2026-07-01 outage-recovery day rewrote 28,540 rows with). Real
+# re-surveys here travel 5-110 m and still publish.
+location_min_move_m = 2
+
 [identity]
 # PropertyNum is an assessment roll number (1:many with addresses), so it can't be the
 # key on its own -- but it is the right disambiguator here, because geometry can't be.
