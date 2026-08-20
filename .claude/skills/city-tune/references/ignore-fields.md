@@ -95,6 +95,24 @@ two x-names against its two y-names in order matches an easting against a latitu
 This narrows what to look for; it does not replace `audit.py --tags`, which is still
 what shows whether the duplicate has actually moved.
 
+## Location jitter (`location_min_move_m`)
+
+`ignore_fields` cannot touch `latitude`/`longitude` — they come from the geometry, not
+props. The lever for coordinate noise is the per-city `location_min_move_m` (top-level
+TOML key, metres, 0/absent = off): `compute_diff` drops a modification whose only
+changes are latitude/longitude when the move is under the floor. Moves at or above it
+still publish, as does any location change riding with another field — so it is a noise
+floor, not a location mute.
+
+Calibrate it from what the sweeps actually measure, not a default: toronto 50 (the
+export oscillates between two geocode sets, identical old→new transitions recurring
+months apart), brampton/kingston/guelph/niagara-falls 25 (sub-parcel cartographic
+maintenance, 1–15 m), muskoka 2 (republish wobble ≤1.36 m; real re-surveys travel
+5–110 m and still publish). Cities whose location sweeps are genuine repositioning
+programs (leeds-grenville, sdg: 30–110 m structure snapping) take no floor — those
+publish as collapsed Location Adjustments. Report-time only: no re-hash, no SCD-2
+churn, retroactive across the archive on the next render.
+
 ## keep_fields
 
 For a field that should not drive change detection but must survive into `props` for a

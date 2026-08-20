@@ -8,10 +8,15 @@ format = "geojson"
 license_name = "Not identified"
 osm_compatible = "unknown-review"
 
-# ADD_LABEL is the map label - just the house number over again ('415' for
-# '415 PRATT DRIVE'; sampled 2026-08-20). Derived from the mapped Number, so it
-# can only ever echo (guelph LABEL precedent). No churn observed yet.
+# ADD_LABEL is the house number WITH its suffix ('137A' where Number='137') on
+# 3,733 of 26,163 rows, plain number on the rest (measured 2026-08-20). For
+# change detection it is an echo - the suffix is embedded in the mapped ADDRESS,
+# so any ADD_LABEL change rides with full - but it is the only structured
+# number+suffix column, so it is kept in props (toronto LO_NUM shape). The real
+# fix would be mapping number from ADD_LABEL instead of Number - a TODO.md par-1
+# display decision (14% of rows show a suffix-less number today), not taken here.
 ignore_fields = ["ADD_LABEL"]
+keep_fields = ["ADD_LABEL"]
 
 [identity]
 # No parsed street field (only Number + full ADDRESS) and no stable id; synthesize from the full

@@ -1,6 +1,6 @@
 # Skill backlog — ontario-address-changes
 
-Last updated: 2026-08-08. Claude Code skills for `.claude/skills/`, drawn from work that
+Last updated: 2026-08-20. Claude Code skills for `.claude/skills/`, drawn from work that
 has already recurred across the 42 tracked cities. Unlike `TODO.md` (per-city decisions
 for the human operator), these are tooling tasks: each turns a procedure we have run by
 hand into something repeatable.
@@ -32,13 +32,27 @@ Remaining work on it:
   units embedded in `STREETNUM` as `<unit>-<number>` on 5.7% of rows**, which is waterloo's
   question again in a second city.
 
+  ADD_LABEL half-resolved 2026-08-20: measured, it is the house number WITH its
+  suffix on 3,733 of 26,163 rows (14%) — the hastings house-suffix shape, since the
+  mapped `Number` drops it. Ignored+kept (echo of `ADDRESS` for change detection,
+  only structured number+suffix column for props). The open half is the display
+  decision: remap `number` to `ADD_LABEL` so 14% of rows stop showing a suffix-less
+  number. Identity synthesizes from `full` here, so the remap would NOT re-key —
+  but it would one-time-touch 3,733 payload hashes and read as a mass number
+  change on the next import, so it needs the flag review that would follow.
+
   Worth generalising from it: "the source has no unit column" and "the source has no units"
   are different claims, and onboarding recorded the first as if it were the second. Six of
   the seven cities were fine; brantford was not, and would not have been caught by reading
   the field list alone. The cheap test is to scan the number/full column for
   `<a>-<b>` and check whether many distinct left parts share one right part — a house-number
   range cannot do that, so the pattern separates units from ranges without judgement.
-- [ ] Give every city one `city-tune` pass. This started narrower — a screen over all 42
+- [x] Give every city one `city-tune` pass — **DONE 2026-08-20** (commit `4f2e77b8`
+  and the same-day flag-review session `f39c2052`): all 42 cities now audited. The
+  25 outside the flag review produced nine config edits (bruce, cornwall, elgin,
+  greater-sudbury, hamilton, kawartha-lakes, london, milton, lennox-addington —
+  evidence in each TOML) and sixteen clean/frozen/already-tuned passes. The
+  paragraph below is the original scoping, kept for the reasoning. This started narrower — a screen over all 42
   (regex on prop names in the latest snapshot vs `ignore_fields`) found 8 carrying
   unignored coordinate duplicates, none of which had ever recorded a Location Adjustment.
   Six audits in, the duplicate has never been the city's largest noise source; it was a
@@ -204,12 +218,14 @@ Remaining work on it:
 
   **As of 2026-08-10 all four stale ones are ignored**, which was the urgent half — a
   stale copy is the kind that fires en masse the day the publisher re-syncs it. Of the
-  faithful seven, only **kawartha-lakes** is still compared (`Xlong`/`Ylat`, max 1.32 m at
-  p99, plus 9 individually broken rows), and it is not urgent by the same reasoning: a
-  faithful echo at finer precision than the 5 dp compare can only move on jitter below
-  that resolution. Ten of the eleven are done.
-  The remaining 31 publish no coordinate column, so there is nothing there to find — the
-  rest of their `city-tune` pass is still open, just not this part of it.
+  faithful seven, only **kawartha-lakes** was still compared (`Xlong`/`Ylat`, max 1.32 m
+  at p99, plus 9 individually broken rows), deferred as not-urgent by the same reasoning:
+  a faithful echo at finer precision than the 5 dp compare can only move on jitter below
+  that resolution. **Ignored 2026-08-20**: the deferral reasoning held for phantom cities
+  but kawartha keys on a real `key_field`, and its churn tally showed the pair riding
+  with 10 of the city's 11 real coordinate moves — masking them out of Location
+  Adjustments, kitchener-style. Eleven of eleven now done.
+  The remaining 31 publish no coordinate column, so there is nothing there to find.
 
   Two cities came in on the fixed detector and had never been looked at:
   - [x] **dufferin** — two faithful pairs, `LONGITUDEX`/`LATITUDEY` (deviation exactly

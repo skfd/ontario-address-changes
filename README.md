@@ -5,6 +5,10 @@ municipalities. Each run fetches a fresh snapshot of a dataset, stores it as a
 **Slowly-Changing-Dimension Type-2** history, and reports which addresses were
 added, removed, or modified since the previous snapshot.
 
+**Live site:** <https://skfd.github.io/ontario-address-changes/> — 42 datasets
+covering every major Ontario population centre and most of the eastern, central
+and southwestern counties, refreshed daily.
+
 It generalizes the single-city
 [`toronto-addresses-import`](../toronto-addresses-import) tracker to a registry
 of many datasets. Adding a city is a config file, not code.
@@ -35,7 +39,18 @@ of many datasets. Adding a city is a config file, not code.
   a cross-city landing (`docs/index.html`), a per-city report list
   (`docs/<slug>/index.html`), and a dated report per snapshot
   (`docs/<slug>/report-<date>.html`). The first snapshot renders as a
-  "baseline" report where every address is listed as new.
+  "baseline" report where every address is listed as new. Modifications are
+  classified into humanized sections where the changed-field set allows it —
+  Location Adjustments, Renumbered, Street Renames built in; place / status /
+  boundary via each dataset's `[classes]` — with per-city noise config
+  (`ignore_fields`, `keep_fields`, a `location_min_move_m` floor for
+  sub-parcel coordinate jitter) deciding what counts as a change at all.
+- **Flags** (`src/flags.py`) — the site publishes on positive identification:
+  a homogeneous mass event (mass add, mass removal, same-field sweep) is held
+  off the public pages and recorded in `flags.toml` until a review files a
+  verdict — `business` publishes it, `technical`/`bug` hold it forever with a
+  rule that stops the recurrence. `python run.py flags` lists the open queue;
+  `logs/flags.html` is its human view (back-office only, never published).
 
 ## Identity (the important part)
 
@@ -43,7 +58,7 @@ Diffing needs a key that is *stable across republishes*. Each dataset config
 picks one:
 
 - `key_field` — a stable source id (e.g. Ottawa `PI_MUNICIPAL_ADDRESS_ID`,
-  Waterloo `ADDRESS_ID`, Renfrew `PROPNUM`).
+  Waterloo `ADDRESS_ID`, Toronto `ADDRESS_POINT_ID`).
 - empty → **synthesized** `sha1(synth_fields + rounded lon/lat)`. ESRI
   `OBJECTID` is sequential and reassigned on republish, so it is never used as
   the key. When synthesizing, include `unit` for multi-unit buildings (Hamilton)
@@ -66,21 +81,30 @@ python run.py list                  # show registered datasets
 python run.py update --city ottawa  # fetch -> import -> diff for one dataset
 python run.py update --all          # all datasets (per-city failures isolated)
 python run.py report --all          # (re)render HTML reports
+python run.py flags                 # list change events held pending review
 ```
 
 `download`, `import`, and `diff` are also available as individual steps.
 
-## Pilot datasets
+## Datasets
+
+42 registered, one TOML each in `datasets/` — from Toronto (525k address
+points) down to Brant County (19k). Region-wide layers cover their member
+municipalities (Peel covers Mississauga/Brampton/Caledon; York covers
+Vaughan/Markham; Durham, Niagara, and the rural counties likewise). A few
+representative shapes:
 
 | Slug | Source | Fetch path | Identity |
 |---|---|---|---|
 | `ottawa` | ArcGIS MapServer | `arcgis` | `PI_MUNICIPAL_ADDRESS_ID` |
+| `toronto` | CKAN static geojson | `static` | `ADDRESS_POINT_ID` |
 | `hamilton` | ArcGIS FeatureServer | `arcgis` | synthesized (number+street+unit) |
 | `waterloo` | ArcGIS Open Data shapefile export | `static` | `ADDRESS_ID` |
-| `renfrew` | OpenAddresses geojson cache (parcel polygons) | `static` | `PROPNUM` |
+| `renfrew` | County NENA address-point FeatureServer | `arcgis` | synthesized |
 
 To add a dataset, copy a TOML in `datasets/`, set its URL/field map/identity,
-and run `python run.py update --city <slug>`.
+and run `python run.py update --city <slug>` (the `city-tune` skill's
+onboarding reference documents the full procedure).
 
 ## Scheduling (Windows)
 
