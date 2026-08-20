@@ -65,6 +65,12 @@ the same flag recurring is an unfinished review.
      vault flagged the same day, file its verdict as `real` so the two
      ledgers agree.
 
+   If any rule edited `ignore_fields` or `keep_fields`, finish the job in the
+   store before that city's next import — back the DB up, then
+   `python tools/backfill_props_hash.py --reapply-ignore --city <slug>` — or
+   the change is half-applied and the next import re-hashes the whole city
+   (city-tune step 6; the 2026-08-20 review missed this for 8 cities).
+
 6. **Re-render and verify**: `python run.py report --city <slug>`, then check
    the console — a `business` verdict must stop printing `held ...` for that
    day, a `technical`/`bug` one must keep holding without the FLAGGED line
