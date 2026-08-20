@@ -8,13 +8,12 @@ format = "geojson"
 license_name = "Not identified"
 osm_compatible = "unknown-review"
 
-# ADD_LABEL is the house number WITH its suffix ('137A' where Number='137') on
-# 3,733 of 26,163 rows, plain number on the rest (measured 2026-08-20). For
-# change detection it is an echo - the suffix is embedded in the mapped ADDRESS,
-# so any ADD_LABEL change rides with full - but it is the only structured
-# number+suffix column, so it is kept in props (toronto LO_NUM shape). The real
-# fix would be mapping number from ADD_LABEL instead of Number - a TODO.md par-1
-# display decision (14% of rows show a suffix-less number today), not taken here.
+# ADD_LABEL (now the number source below) stays ignored+kept so its prop copy
+# remains outside payload_hash, exactly as it hashed before the remap - removing
+# it from this list would re-hash every row for nothing. Number, the old source,
+# is the suffix-stripped variant ('137' where ADD_LABEL='137A' on 3,733 of
+# 26,163 rows, and null on ~580 rows ADD_LABEL fills); it stays in props as an
+# ordinary compared field.
 ignore_fields = ["ADD_LABEL"]
 keep_fields = ["ADD_LABEL"]
 
@@ -25,7 +24,12 @@ key_field = ""                                 # synthesize
 synth_fields = ["full"]
 
 [fields]                                        # source property -> canonical name
-number = "Number"
+# number remapped Number -> ADD_LABEL 2026-08-20: ADD_LABEL carries the house
+# suffix Number drops ('137A' vs 137) and is better filled (~100% vs 98%). The
+# whole stored history was rewritten to the new mapping the same day
+# (tools/remap_canonical_from_prop.py, 3,741 rows) so the remap landed with no
+# phantom mass event. Identity synthesizes from `full`, so no row re-keyed.
+number = "ADD_LABEL"
 full   = "ADDRESS"                              # BELL_MUNIC tracked via the props blob
 
 # Change classes (field values verified against the latest snapshot, 2026-08-20):

@@ -32,14 +32,17 @@ Remaining work on it:
   units embedded in `STREETNUM` as `<unit>-<number>` on 5.7% of rows**, which is waterloo's
   question again in a second city.
 
-  ADD_LABEL half-resolved 2026-08-20: measured, it is the house number WITH its
-  suffix on 3,733 of 26,163 rows (14%) — the hastings house-suffix shape, since the
-  mapped `Number` drops it. Ignored+kept (echo of `ADDRESS` for change detection,
-  only structured number+suffix column for props). The open half is the display
-  decision: remap `number` to `ADD_LABEL` so 14% of rows stop showing a suffix-less
-  number. Identity synthesizes from `full` here, so the remap would NOT re-key —
-  but it would one-time-touch 3,733 payload hashes and read as a mass number
-  change on the next import, so it needs the flag review that would follow.
+  ADD_LABEL RESOLVED 2026-08-20: measured, it is the house number WITH its suffix
+  on 3,733 of 26,163 rows (14%) — the hastings house-suffix shape, since the mapped
+  `Number` dropped it. Same day, `number` was remapped to it via a full-history
+  migration (`tools/remap_canonical_from_prop.py`: rewrite every stored row to the
+  new mapping + recompute payload_hash + latest content_hash, THEN edit the TOML),
+  which is the pattern to prefer over letting the remap land as a phantom mass
+  event needing a technical flag review. Worked here because identity synthesizes
+  from `full`; the tool refuses cities whose identity basis contains the remapped
+  field (hastings, thunder-bay — see `TODO.md` §1 for what an event-free fix there
+  would additionally require). ADD_LABEL stays ignored+kept so its prop copy stays
+  outside the hash basis it was already outside of.
 
   Worth generalising from it: "the source has no unit column" and "the source has no units"
   are different claims, and onboarding recorded the first as if it were the second. Six of

@@ -10,10 +10,13 @@ These cities are imported and tracking, but their field maps need a human decisi
 - [ ] **waterloo** — no street-number field exists in the source (only the full
   `CIVIC_ADDR` string). Decide: have the number parsed out of `CIVIC_ADDR`, or
   accept full-address-only display.
-- [ ] **lennox-addington** — no parsed street field in the source. Look at what
-  `ADD_LABEL` contains (open a few rows in the report or the source layer); if it's
-  a usable street label, select it; otherwise decide whether parsing from `ADDRESS`
-  is worth it.
+- [ ] **lennox-addington** — no parsed street field in the source. `ADD_LABEL`
+  answered half of this on 2026-08-20: it is the house number WITH its suffix
+  ('137A'), not a street label — measured, then made the `number` source via a
+  full-history migration (`tools/remap_canonical_from_prop.py`, 3,741 rows, no
+  event; identity keys on `full`, so nothing re-keyed). What remains open is the
+  street half: decide whether parsing street out of `ADDRESS` is worth it, or
+  accept full-address-only street display.
 - [ ] **frontenac** — the source's `UnitNumber` column is 100% blank (22k rows, zero
   real values). Decide: unselect it, or keep it in case the county starts filling it.
 - [ ] **hastings** — `number` maps to `House_No`, which drops the house suffix that
@@ -24,6 +27,15 @@ These cities are imported and tracking, but their field maps need a human decisi
   remapping re-keys all 31k addresses and cannot be applied retroactively (one report
   showing the whole city retired and re-added). Found 2026-08-08 while ignoring
   `ADDRESS_NU` as a duplicate; it is a duplicate *of the wrong column*.
+  2026-08-20 update: lennox-addington's twin of this was fixed event-free with
+  `tools/remap_canonical_from_prop.py` (rewrite history to the new mapping before
+  the next import — the house rule is to prefer that over letting the phantom event
+  land). That tool refuses hastings because `number` is in the identity basis; an
+  event-free fix here would need a dedicated identity migration on top — rewrite
+  every historical row's synthesized key under the new number, verify zero key
+  collisions, keep each row's version chain paired. Derivable in principle (keys are
+  computed from stored fields), but it is surgery on the one non-retroactive layer;
+  spec it as its own tool with a collision dry-run if the display gap ever justifies it.
 - [ ] **waterloo — the key_field only covers 29% of the city.** Found 2026-08-10 while
   ignoring its coordinate duplicate. `ADDRESS_ID` is populated on 15,861 of 55,541 rows;
   the other 39,680 fall through to `synth_fields = ["full"]`, so the city runs on two
@@ -105,7 +117,9 @@ These cities are imported and tracking, but their field maps need a human decisi
   than 2,721, but also cheaper to live with, because `full` already displays the suffix and
   `ADDRESS` is stored and compared in `props` regardless. Remapping re-keys all 45,098
   (synth from `["number", "street"]`) and is not retroactive. Leave it unless the display
-  gap starts mattering.
+  gap starts mattering. (2026-08-20: same verdict as hastings above — an event-free fix
+  exists in principle via a history rewrite plus identity migration, see the hastings
+  entry; at 347 rows it is even further from justifying that surgery.)
 - [ ] Spot-check low coverage — open a handful of the blank rows and judge: wrong
   column selected, or genuinely unaddressed points (towers, outbuildings)? Note the
   verdict in each TOML:
