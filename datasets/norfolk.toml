@@ -1,0 +1,64 @@
+slug = "norfolk"
+provider = "Norfolk County"
+# The county's original CivicAddresses layer has been token-secured (HTTP 499) since the
+# first catalogue pass. This open sibling ("Civic Addresses", AGOL item
+# 05c74eeabb454f54b9f50ca1b0dd5326, owner andrew.cull_Norfolk, org norfolk.maps.arcgis.com)
+# appeared and was found 2026-08-20; 35,121 rows re-verified live the same day.
+# Layer is stored in Web Mercator (102100) but f=geojson exports WGS84 lon/lat (verified
+# on sample rows), so no source_crs is needed.
+data_url = "https://services1.arcgis.com/mSGV2hCLXHNsfQqK/arcgis/rest/services/Civic_Addresses/FeatureServer/0"
+access = "arcgis"
+format = "geojson"
+# Item licenseInfo (fetched 2026-08-20) is a bespoke "Open Data Licence Agreement":
+# "Norfolk County grants You a worldwide, royalty-free, perpetual, non-exclusive licence
+# to Use the Information subject to the conditions below" — free to copy, publish,
+# distribute, transmit, adapt and use commercially; credit is optional ("...but are not
+# required to"). OGL-style in substance but the text nowhere declares itself based on
+# OGL-Canada/Ontario, so yellow-review rather than yellow-ogl.
+license_name = "Norfolk County Open Data Licence Agreement"
+osm_compatible = "yellow-review"
+
+# The one allowed day-one ignore: LONG/LAT are coordinate-duplicate columns (house
+# precedent: 11-of-11 such pairs ignored — they only mask real moves or manufacture fake
+# ones). Here they are DMS *strings* with mojibake degree signs, and the labels are
+# swapped: LONG holds the latitude ("42° 59' 37.843\" N") and LAT holds the longitude
+# ("80° 19' 1.765\" W"). Sampled 2026-08-20.
+ignore_fields = ["LONG", "LAT"]
+
+[identity]
+# No usable source key (probed live 2026-08-20, 35,121 rows):
+# - FID is a sequential OID, volatile by definition (pipeline drops it).
+# - CityViewID (permitting-system id): 0 nulls but only 32,713 distinct — 2,301 rows are
+#   0 and real duplicate groups exist (49x id 26506, 14x id 9097, several 2-3x). Rejected.
+# - NGIS_RD_ID: a ROAD id as the name suggests — 3,226 distinct across 35,121 rows,
+#   constant along a street. Rejected.
+# - ROLLNUM: assessment parcel roll, 30,828 distinct — repeats across multi-address
+#   parcels (the windsor trap). Rejected.
+key_field = ""                                 # synthesize from address + rounded lon/lat
+synth_fields = ["number", "street", "unit"]
+
+[fields]                                        # source property -> canonical name
+# Coverage probed 2026-08-20: NUMBER_ 0 blanks; UnitNumber 3,657 of 35,121 non-blank
+# (10.4% — normal for unit; "blank" here is a single space, not NULL). CIVIC_ADD verified
+# on sample rows ("1939 OLD HIGHWAY 24" = NUMBER_ + ROAD_NAME); it omits the unit, hence
+# only 31,700 distinct — the duplicates are unit explosions (e.g. 5 YIN STREET units 1-6).
+number = "NUMBER_"                              # trailing underscore is part of the source name
+street = "ROAD_NAME"
+unit   = "UnitNumber"
+full   = "CIVIC_ADD"
+# Bell_Name/Bell_Suf/Bell_Dir are a second, abbreviated street-name decomposition
+# (Bell_Name = base name without type/direction, Bell_Suf = abbreviated type AV/RD/CR/ST...,
+# Bell_Dir = E/W...), i.e. telephone/911 MSAG-style naming — e.g. ROAD_NAME
+# "NORFOLK COUNTY ROAD 19 EAST" carries Bell_Name "NORFOLK COUNTY ROAD 19" + Bell_Dir "E".
+# Sampled 2026-08-20; tracked via the props blob, deliberately not mapped and not ignored
+# day one — revisit with churn evidence.
+
+# Change classes (field values sampled 2026-08-20 against the live layer): a modification
+# touching only these fields is reported in its humanized section instead of the generic
+# Updated Addresses table.
+[classes]
+# TYPE is a site-type vocabulary (RESIDENTIAL, COMMERCIAL, INDUSTRIAL, INSTITUTIONAL,
+# AGRICULTURAL, APARTMENT, CAMPSITE, BEACH ACCESS + typo "BEACH ACCES", DRY HYDRANT,
+# UTILITY, UNMAINTAINED, OTHER). Sparse — 1,725 of 35,121 non-blank (4.9%) — but a flip
+# is a genuine status-style change, the burlington PROPCODE/PROPDESC shape.
+status = ["TYPE"]

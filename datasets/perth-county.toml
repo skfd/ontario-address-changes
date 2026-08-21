@@ -1,0 +1,58 @@
+slug = "perth-county"
+provider = "County of Perth"
+# Previously "Not found"; NG911 public view found 2026-08-20 via ArcGIS Online search.
+# Public view of item 57ce9ab7b1914314ba4918c7725122c5 (owner cop.gisadmin, County of
+# Perth org), layer "SiteStructureAddressPoint", 18,605 rows, native WGS84 (wkid 4326).
+# Region-wide for the four lower-tier townships (Inc_Muni: North Perth 7,198 / West
+# Perth 4,583 / Perth East 4,996 / Perth South 1,828 — verified by groupBy 2026-08-20).
+# The separated cities Stratford and St. Marys are NOT in this layer; Stratford is being
+# onboarded separately from its own source. Slug is "perth-county" (not "perth") to
+# avoid confusion with the Town of Perth in Lanark County.
+data_url = "https://services3.arcgis.com/FkQ7EeWcZFoXIXH7/arcgis/rest/services/NG911_Addresses_and_Roads_Public_View/FeatureServer/0"
+access = "arcgis"
+format = "geojson"
+# Licence hunt 2026-08-20: item licenseInfo empty; every public item in the cop.gisadmin
+# org (15 checked) carries none; perthcounty.ca GIS & Maps page has no data terms and no
+# open-data portal; the sitewide Terms of Use is an "as is" website disclaimer, not a
+# data licence. Nothing restrictive published either — flagged for operator review.
+license_name = "None published (confirmed 2026-08-20)"
+osm_compatible = "unknown-review"
+
+# Longitude/Latitude are coordinate-duplicate columns echoing the point geometry — the
+# one day-one ignore the house allows without churn evidence (11 of 11 such pairs across
+# the 42 ended up ignored). Added BEFORE first import so the echo never enters a
+# payload_hash; deviation from geometry not yet measured (audit.py --coords after a few
+# snapshots), but with synthesized identity here a populated echo could only add noise.
+ignore_fields = ["Longitude", "Latitude"]
+
+[identity]
+# No stable source id in the 9-field schema (verified against the live field list
+# 2026-08-20): OBJECTID is sequential/volatile, no GlobalID, and Property_Number is a
+# 15-digit MPAC assessment roll — 1:many (16,627 distinct over 18,605 rows, e.g.
+# 312014000514900 covers both 1908 and 1912 PERTH ROAD 120A) and 1 blank, so not
+# identity-grade. It could serve as a Muskoka-style synth_props tiebreak later if
+# geometry jitter shows up; not added without churn evidence.
+key_field = ""                                 # synthesize from full address + rounded lon/lat
+synth_fields = ["full"]                        # Full_Add already carries number, street and unit
+
+[fields]                                        # source property -> canonical name
+# number: Full_AddNum, NOT Property_Number. The hastings-style check ran the other way
+# here — the two columns differ on 18,595 of 18,605 rows because Property_Number is the
+# assessment roll (15-digit ARN), not a civic number at all. Full_AddNum is the civic
+# number and keeps house suffixes (720 rows like 5083B); 9 of 18,605 blank.
+number = "Full_AddNum"
+# street: source has none — the public view exposes only 9 fields, with no St_Name-style
+# parsed NENA column; Full_Add is the only street carrier (the waterloo precedent:
+# accept full-address-only display rather than invent a parser).
+unit   = "Unit"                                 # 1,075 of 18,605 (~5.8%) populated, e.g. "UNIT 3E"
+full   = "Full_Add"                             # e.g. "5651 PERTH LINE 86 UNIT 2"
+
+# Change classes (field values verified against the live layer 2026-08-20): a
+# modification touching only these fields is reported in its humanized section
+# (boundary reassignments) instead of the generic Updated Addresses table.
+# Addtl_Loc (281 of 18,605 filled) is a landmark/complex label, not a boundary or
+# status field — sampled values: "Shakespeare Plaza", "Stratford Municipal Airport",
+# "Brodhagen Park", "The Village at Listowel Modular Home Park". Tracked via the
+# props blob; no class for it.
+[classes]
+boundary = ["Inc_Muni"]                         # North Perth / West Perth / Perth East / Perth South

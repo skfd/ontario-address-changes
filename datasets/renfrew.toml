@@ -7,8 +7,18 @@ provider = "County of Renfrew"
 data_url = "https://services2.arcgis.com/vIya1nhxTJuEecY0/arcgis/rest/services/SiteStructureAddressPoint/FeatureServer/0"
 access = "arcgis"
 format = "geojson"
-license_name = "Not identified"
-osm_compatible = "unknown-review"
+# Licence reviewed 2026-08-20, and it is RESTRICTIVE: the Renfrew County GIS & Mapping hub
+# Disclaimer (page item 3a3c7c017edf4fc2a1784e93f895bbc0) says "All contents of this site are
+# the property of the County of Renfrew or licensed partners, including the Ontario Geospatial
+# Data Exchange (OGDE)... Content may not be reproduced or redistributed without prior written
+# permission", and explicitly binds "any associated data". Nothing address-layer-specific
+# overrides it. Publishing diff reports is NOT cleared - operator decision needed. TODO.md §3.
+license_name = "Restrictive site disclaimer (no redistribution without permission)"
+osm_compatible = "red-review"
+# Operator decision 2026-08-20: keep tracking, publish nothing. Landing shows a "licence not
+# compatible" badge, no report link; report pages removed at render time. Flip back to true
+# if the county grants permission.
+publish_reports = false
 
 # Source props whose changes are noise. Edit-metadata timestamps/users on this layer
 # (DateUpdate, created_date/user, last_edited_user, LASTEDITOR) are handled globally.

@@ -482,6 +482,29 @@ def generate_all(datasets):
         snaps = diff.nonskipped(ds)
         if not snaps:
             continue
+        if not ds.publish_reports:
+            # Licence forbids republication: keep tracking, publish nothing.
+            # Any previously published pages are removed, and the landing card
+            # says why there is no link instead of linking a report.
+            city_dir = os.path.join(DOCS_DIR, ds.slug)
+            os.makedirs(city_dir, exist_ok=True)
+            for stale in glob.glob(os.path.join(city_dir, "report-*.html")) + \
+                         [os.path.join(city_dir, "index.html")]:
+                if os.path.exists(stale):
+                    os.remove(stale)
+            card = {
+                "slug": ds.slug, "provider": ds.provider, "license_name": ds.license_name,
+                "row_count": snaps[-1]["row_count"], "last_date": diff.snap_date(snaps[-1]),
+                "added": 0, "removed": 0, "modified": 0, "highlight": "",
+                "has_changes": False, "report_count": 0,
+                "compared_fields": [], "ignored_fields": [],
+                "no_changes": False, "hull": _hull_geometry(ds),
+                "license_blocked": True,
+            }
+            cities.append(card)
+            with open(os.path.join(city_dir, "_card.json"), "w", encoding="utf-8") as f:
+                json.dump(card, f)
+            continue
         os.makedirs(os.path.join(DOCS_DIR, ds.slug), exist_ok=True)
         source_url = _source_url(ds)
 
@@ -684,7 +707,8 @@ def _map_features(cities):
     feats = [(shape(c["hull"]).area,
               {"type": "Feature", "geometry": c["hull"],
                "properties": {"name": c["provider"], "slug": c["slug"],
-                              "no_changes": bool(c.get("no_changes"))}})
+                              "no_changes": bool(c.get("no_changes")),
+                              "blocked": bool(c.get("license_blocked"))}})
              for c in cities if c.get("hull")]
     feats.sort(key=lambda t: -t[0])     # largest first => smaller drawn on top & clickable
     return {"type": "FeatureCollection", "features": [f for _, f in feats]}

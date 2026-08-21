@@ -1,0 +1,63 @@
+slug = "halton-hills"
+provider = "Town of Halton Hills"
+# Previously "Not found" behind the no-region-wide-Halton-layer problem; the town's own
+# master dataset ("Civic Address", snippet "Master Town Civic Address Dataset", owner
+# tohhgis, item be687515dc994a98a4015270f4f024ef, hub opendata-haltonhills.hub.arcgis.com)
+# found 2026-08-20. Oakville, Milton, Burlington already tracked individually — this
+# completes Halton Region. NOTE the non-zero layer id 152: it is part of the URL.
+# Re-verified live 2026-08-20: 21,900 rows.
+data_url = "https://services3.arcgis.com/Nn3SWZrtm4WZaUtd/arcgis/rest/services/Civic_Address_(od)/FeatureServer/152"
+access = "arcgis"
+format = "geojson"
+# Native layer SR is EPSG:26917 (UTM 17N); the geojson export arrives already in WGS84
+# (verified on sample rows 2026-08-20), so this is a guard for a future export-CRS
+# switch (pass-through while in lon/lat range).
+source_crs = "EPSG:26917"
+# Licence found 2026-08-20: the town hub's "Open Data License" page (Hub Page item
+# dbba3472b78d42a19a2e640e2fda4dfa, owner tohhgis; the layer item's own licenseInfo is
+# empty). Bespoke municipal licence: "The Town of Halton Hills (The Town) grants you a
+# royalty-free, perpetual license to use this information for any lawful purpose. You
+# are free to copy, modify, publish and and use the information." [sic] Plus hold-harmless,
+# no implied official status/endorsement, as-is/no-liability; governed by Ontario law.
+# OGL-shaped but not OGL-derived and never LWG-reviewed, so yellow-review rather than
+# yellow-ogl. Contact for questions: gis@haltonhills.ca.
+license_name = "Open Data License - Town of Halton Hills"
+osm_compatible = "yellow-review"
+
+# Coordinate-duplicate columns, the dufferin pattern: Latitude/Longitude are a faithful
+# copy of the point geometry (worst deviation ~1e-5 deg across sample rows, i.e. below
+# the 5 dp ~1.1 m the tracker compares at) and ADDRE/ADDRN are the same points in UTM
+# 17N. House precedent: all 11 of 11 such pairs across the catalogue are ignored — they
+# can only ever manufacture jitter noise, never carry a real move — so these go in
+# before the first import rather than waiting for churn evidence.
+ignore_fields = ["Latitude", "Longitude", "ADDRE", "ADDRN"]
+
+[identity]
+# No stable source id. ADDR_ID looks like one but is a verbatim string copy of OBJECTID:
+# 0 of 21,900 rows differ from CAST(OBJECTID AS VARCHAR) (checked live 2026-08-20), and
+# the range (88946..833860) is the OBJECTID sequence. A republish that re-mints OBJECTIDs
+# re-mints ADDR_ID with it, so it fails the sequential-id rule. GlobalID may regenerate
+# on republish. Synthesize instead.
+key_field = ""                                 # synthesize from address + rounded lon/lat
+synth_fields = ["number", "street", "unit"]
+
+[fields]                                        # source property -> canonical name
+# Fill rates checked live 2026-08-20 against 21,900 rows: STR_NUM, STR_NAME and
+# ADDR_FULL 100% populated; STR_UNIT 756 rows (3.5%, normal for a unit column).
+number = "STR_NUM"
+street = "STR_NAME"                             # STR_PREF/STR_SUFF/STR_DIR and the combined STR_FULL tracked via the props blob
+unit   = "STR_UNIT"
+full   = "ADDR_FULL"                            # "58 Gamble Street" — number + full street only; the community
+                                                # ("Glen Williams") is NOT embedded, it lives in ADDR_COMM.
+
+# Change classes (field values verified against the live layer 2026-08-20): a
+# modification touching only these fields is reported in its humanized section
+# (status changes / boundary reassignments) instead of the generic Updated
+# Addresses table.
+[classes]
+# ADDR_STAT: Complete 21,730 / QC Draft 131 / QC Corner 36 / QC Misc 3 — a real
+# lifecycle vocabulary. ADDR_COMM: Georgetown 14,535 / Acton 3,423 / Esquesing 3,156 /
+# Glen Williams 645 / Norval 141 — community assignment, the brant PLACE_NAME shape.
+# (ADDR_TYPE is 94% blank/space and TOHH is uniformly "Yes"; neither is classed.)
+status   = ["ADDR_STAT"]
+boundary = ["ADDR_COMM"]

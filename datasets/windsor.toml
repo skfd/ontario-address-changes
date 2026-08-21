@@ -5,8 +5,16 @@ provider = "City of Windsor"
 data_url = "https://mappmycity.ca/arcgis/rest/services/MappMyCity/AllUniqueAddresses_Parcels/MapServer/0"
 access = "arcgis"
 format = "geojson"
-license_name = "City of Windsor Terms of Use"
-osm_compatible = "red-review"
+# Licence re-read 2026-08-20: NOT custom terms after all - the PDF at
+# opendata.citywindsor.ca/Documents/OpenDataTermsofUse.pdf is a full OGL-Canada-style licence
+# ("worldwide, royalty-free, perpetual, non-exclusive licence... including for commercial
+# purposes"; attribution "Contains information licensed under the Open Government Licence -
+# The Corporation of the City of Windsor"). The city's open-data portal binds its Address
+# Point/Polygon datasets to it. Caveat: we track mappmycity.ca (the city GIS server), not the
+# portal copy - same city address data, but the OGL is stated on the portal's items.
+# Change-tracking and diff-report publishing: both permitted under the OGL grant.
+license_name = "Open Government Licence - City of Windsor v1.0"
+osm_compatible = "yellow-ogl"
 
 # Source props whose changes are noise. All five were found by data-integrity's
 # `health.py --drift` on 2026-08-08 and are empty at the source - 0 of 133,331 rows
@@ -35,6 +43,13 @@ key_field = ""                                 # synthesize from address + round
 synth_fields = ["number", "street", "unit"]
 
 [fields]                                        # source property -> canonical name
+# Coverage spot-check 2026-08-20: the 696 blank-street rows (0.6%) are genuinely
+# unaddressed parcels — props carry only a legal description (Legal1 "PLAN 1056 LOTS ...").
+# Not a wrong column. On those same rows the source publishes the literal STRING "None"
+# for street_address/Address (its ETL leaks Python str(None); verified in the raw
+# geojson, e.g. Ward: "None" on 5,572 rows), so number/full coverage is really 99.4%,
+# not 100%. A global _clean_props fix for literal "None" values is queued in TODO.md §5
+# (toronto is the big holder at 525k rows).
 number = "street_address"
 street = "street_name"                          # street_suffix/street_direction/Ward tracked via the props blob
 unit   = "unit_number"

@@ -3,8 +3,13 @@ provider = "Town of Milton"
 data_url = "https://api.milton.ca/arcgis/rest/services/WebMaps/MGIS/MapServer/63"
 access = "arcgis"
 format = "geojson"
-license_name = "Not identified"
-osm_compatible = "unknown-review"
+# Licence found 2026-08-20: "Open Government Licence - Milton" (OGL-Canada-style grant) covers
+# "all material on the Discover Milton Open Data webpage". Caveat: the open-data Address Points
+# item points at api.milton.ca Datasets/Address_Pts, while we track api.milton.ca
+# WebMaps/MGIS/MapServer/63 - same host and publisher, but the tracked URL is not literally the
+# open-data item. https://discover-milton.hub.arcgis.com "Disclaimer and Terms of Use".
+license_name = "Open Government Licence - Milton"
+osm_compatible = "yellow-ogl"
 
 ignore_fields = [
   # Abbreviated display composite of the mapped FULL_ADDRESS ('162 DIXON DRIVE' ->

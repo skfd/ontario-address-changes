@@ -1,0 +1,48 @@
+slug = "amherstburg"
+provider = "Town of Amherstburg"
+# Previously skipped as "only parcel/assessment data" — this Address_Points layer is new
+# since that check, found 2026-08-20 on the town's own ArcGIS Server 10.81 (a MapServer
+# twin exists; the FeatureServer is preferred). Only Essex County municipality publishing
+# address points. Re-verified live 2026-08-20: 10,925 rows.
+# Native layer SR is EPSG:26917 (UTM 17N); the geojson export arrives already in WGS84
+# (verified on sample rows), so this is a guard for a future export-CRS switch
+# (pass-through while in lon/lat range) — the middlesex precedent.
+data_url = "https://mapamherstburg.ca/arcgis/rest/services/Address_Points/FeatureServer/0"
+access = "arcgis"
+format = "geojson"
+source_crs = "EPSG:26917"
+# Licence hunted 2026-08-20: confirmed NONE PUBLISHED. Layer copyrightText is empty,
+# mapamherstburg.ca root is a bare IIS landing page, amherstburg.ca has no open-data or
+# GIS-terms page (the Maps page links the Geocortex viewer with no licence text; the
+# viewer itself refuses anonymous fetches), and web search finds no data licence. Default
+# copyright applies until the town states a licence.
+license_name = "None published (confirmed 2026-08-20)"
+osm_compatible = "unknown-review"
+
+[identity]
+# No stable source id. GISID is the parcel/roll id, not an address id — the windsor
+# pattern: 67 dup groups / 138 rows share one across multi-address parcels (e.g.
+# 109/109B/109C GORE ST all on 372911000009400), plus 85 blank and stray leading spaces.
+# ARN is the same roll number with an "A_" prefix (10,844 filled, 10,775 distinct).
+# OBJECTID sequential. So synthesize; 1 collision across 10,925 rows on
+# number+street+5dp geometry (2026-08-20). No unit field published (cf. chatham-kent).
+key_field = ""                                 # synthesize from address + rounded lon/lat
+synth_fields = ["number", "street"]
+
+[fields]                                        # source property -> canonical name
+# Coverage 2026-08-20: 776 of 10,925 rows have blank Add1 — roll-number-only parcel
+# points (the brant/dufferin shape), genuinely unaddressed, not a wrong column.
+number = "Add1"                                 # civic number; keeps suffixes ("301A", "109B", "225-227")
+street = "FullStName"                           # Municipali (constant + typos) tracked via the props blob
+# unit: source has none, confirmed 2026-08-20 against the live field list (8 fields, all
+# accounted for). Add2 looked like a candidate and is not: on all 92 filled rows it is a
+# SECOND CIVIC NUMBER on the same parcel ("4561"/"4601" ALMA ST, "199"/"199B" SANDWICH
+# ST N) — an address-range end, not a unit. Tracked via the props blob.
+# full: source has none — no combined-address column among the 8 fields; reports fall
+# back to "number street".
+
+# [classes] deferred 2026-08-20 pending real transitions. Sampled candidates and rejected
+# both for day one: Municipali is a constant ("Amherstburg" on 10,798 rows) plus typo
+# variants ("Ahmerstburg" x52, "CRES" x1) — a typo cleanup is not a boundary
+# reassignment; Type is an internal edit-batch marker ("new2025", "New oct30_2024"),
+# not a status. No coordinate-duplicate columns exist, so no day-one ignore_fields.

@@ -1,0 +1,45 @@
+slug = "stratford"
+provider = "City of Stratford"
+# Previously "Not found": the old maps.stratford.ca/public Geocortex viewer is dead (404 re-checked
+# 2026-08-20). Resolved 2026-08-20 via the city's ArcGIS Enterprise server (owner portaladminstrat) —
+# Addressing/Civic_Address on the self-hosted gisserver. A MapServer twin exists; the FeatureServer is
+# preferred. Stratford is a separated city NOT covered by the Perth County layer (onboarded separately).
+data_url = "https://maps.stratford.ca/gisserver/rest/services/Addressing/Civic_Address/FeatureServer/0"
+access = "arcgis"
+format = "geojson"
+# Native SR is EPSG:26917 (UTM 17N) but f=geojson exports arrive in WGS84 lon/lat (verified
+# 2026-08-20), so no source_crs override is needed.
+# Licence: none published anywhere findable 2026-08-20 — layer copyrightText, iteminfo
+# licenseInfo and accessInformation all empty; stratford.ca has no open-data page and the old
+# termsofuse.aspx URL is dead; the Enterprise portal is not publicly reachable. Item snippet says
+# the layer "is intended for public use in mapping applications and address lookup services",
+# which is a purpose statement, not a licence.
+license_name = "None published (confirmed 2026-08-20)"
+osm_compatible = "unknown-review"
+
+[identity]
+# No stable source id in the public view: OBJECTID is sequential and sparse (values reach 45k+
+# for 14,873 rows — re-minted), globalIdField is empty, and the item snippet states internal
+# identifiers such as tax roll numbers are excluded from this public view.
+key_field = ""                                 # synthesize from address + rounded lon/lat
+synth_fields = ["number", "street", "unit"]
+
+[fields]                                        # source property -> canonical name
+# FULL_ADDRESS is the real full string: unit-inclusive ("3194-2 VIVIAN LINE 37"); Address is its
+# unit-stripped twin ("3194 VIVIAN LINE 37") — the two differ on exactly the 1,589 unit-populated
+# rows (of 14,873, checked 2026-08-20). Address stays in the props blob and is the obvious echo
+# companion once history shows it churning in lockstep.
+# 182 rows are placeholder points (ST_NUMBER 0, blank ST_NAME, FULL_ADDRESS "0 ") — the
+# brant/dufferin shape, not a wrong column.
+number = "ST_NUMBER"
+street = "ST_NAME"
+unit   = "UNIT"                                 # 1,589 of 14,873 populated (~11%) — normal
+full   = "FULL_ADDRESS"
+
+# G_COLL is the garbage-collection day (MONDAY..FRIDAY, TUESDAY & FRIDAY, PRIVATE, blank) —
+# service metadata riding on the address layer that may churn seasonally on route changes. Not
+# ignored day one (no churn evidence yet, house rule), but it is the likely first ignore_fields
+# candidate when history arrives.
+
+# [classes] deferred: no status / municipality / place-name style field in the source; nothing
+# obvious surfaced in sampling. Revisit after a couple of snapshots of observed transitions.

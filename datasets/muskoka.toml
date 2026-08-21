@@ -5,8 +5,13 @@ provider = "District Municipality of Muskoka"
 data_url = "https://utility.arcgis.com/usrsvcs/servers/21293eed759e41848ccb92619633de03/rest/services/Addressing/Addressing_Service_Public/FeatureServer/0"
 access = "arcgis"
 format = "geojson"
-license_name = "Not identified"
-osm_compatible = "unknown-review"
+# Licence reviewed 2026-08-20: custom terms with NO reuse grant. The terms page
+# (map.muskoka.on.ca/pages/terms-of-use) is a King's Printer copyright notice + disclaimer:
+# "Includes material (c) 2026 of the King's Printer for Ontario. All rights reserved... Any
+# party relying on this information does so at their own risk." Road data is ORN "used under
+# licence from the Government of Ontario". Not open; diff-report publishing not cleared.
+license_name = "Custom terms - no reuse grant (King's Printer copyright)"
+osm_compatible = "red-review"
 
 # The service's republish wobble moves points up to ~1.4 m (one 5-dp step; see
 # the identity comment below - the same jitter that forced use_geometry off, and

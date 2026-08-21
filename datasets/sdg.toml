@@ -3,8 +3,18 @@ provider = "United Counties of Stormont, Dundas and Glengarry"
 data_url = "https://services5.arcgis.com/zEv9BLFdYq38maPG/ArcGIS/rest/services/CivicAddress_Public/FeatureServer/0"
 access = "arcgis"
 format = "geojson"
-license_name = "Not identified"
-osm_compatible = "unknown-review"
+# Licence found 2026-08-20, and it is RESTRICTIVE: item licenseInfo (item
+# 423683e2b447410e88c84e0e1b8ed3be) says "No part of the information herein may be sold,
+# copied, distributed, or transmitted in any form without the prior written consent of the
+# County. All rights reserved. Copyright 2025 by the United Counties of Stormont, Dundas and
+# Glengarry." Publishing diff reports of this data is NOT cleared - operator decision needed
+# (ask the counties, or stop publishing sdg's reports). See TODO.md §3.
+license_name = "Proprietary - all rights reserved (item licenseInfo)"
+osm_compatible = "red-review"
+# Operator decision 2026-08-20: keep tracking, publish nothing. The landing page shows the
+# city as tracked with a "licence not compatible" badge and no report link; report pages are
+# removed at render time. Flip back to true if the counties grant permission.
+publish_reports = false
 
 [identity]
 # Region-wide layer: all six SDG townships (North/South Dundas, Glengarry, Stormont).

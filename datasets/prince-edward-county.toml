@@ -1,0 +1,76 @@
+slug = "prince-edward-county"
+provider = "The Corporation of the County of Prince Edward"
+# Previously skipped as "only a Property Info layer, not clean civic addresses" — the
+# address points were hiding inside it, found 2026-08-20. The service title
+# "HostedFeatures _ Property Info" is misleading: layer 0 is "Site Structure Address
+# Points - Unfiltered" (full NENA/NG911 schema); layer 2 is Parcels — not used. AGOL item
+# 045b8b47a0dc417085ffb5c5aeaefdaa, owner kvandijk_pec, org 4HnHVMMKSNypEIkS ("The
+# Corporation of the County of Prince Edward"). 27,580 rows re-verified live 2026-08-20.
+# "Unfiltered" measured 2026-08-20: STATUS_pec is "Current" on all 27,580 rows — zero
+# non-Current rows today, so importing everything (there is no row-filter mechanism)
+# currently equals importing the filtered set.
+data_url = "https://services1.arcgis.com/4HnHVMMKSNypEIkS/arcgis/rest/services/HostedFeatures___Property_Info/FeatureServer/0"
+access = "arcgis"
+format = "geojson"
+# Native layer SR is wkid 2149 / latestWkid 2959 (NAD83(CSRS) UTM 18N); the geojson
+# export arrives already in WGS84 (verified on sample rows 2026-08-20), so this is a
+# guard for a future export-CRS switch (pass-through while in lon/lat range).
+source_crs = "EPSG:2959"
+# The item itself carries no licenseInfo (checked 2026-08-20). Sibling PEC open-data
+# items (Parcel Boundaries 1e623a6606464c609053b25994dbc67e, Urban Boundary, Zoning
+# 140-2025) are all stamped "Use of this dataset is subject to the Open Government
+# Licence – The Corporation of the County of Prince Edward, Version 1.0", and the full
+# text (open-data-pec.hub.arcgis.com/pages/open-data-licence, effective 2023-02-01) is
+# OGL-Canada 2.0 with only the jurisdiction/public-body names changed: copy, modify,
+# publish, translate, adapt, distribute, commercial use allowed; attribution required.
+# yellow-review rather than yellow-ogl because the address-points item lacks the stamp —
+# whether the county considers this layer part of its open-data programme is inferred,
+# not stated. thecounty.ca has no open-data page (404s, checked 2026-08-20).
+license_name = "Open Government Licence - The Corporation of the County of Prince Edward v1.0 (sibling items; not stamped on this item)"
+osm_compatible = "yellow-review"
+
+[identity]
+# No verified-stable source key (probed live 2026-08-20, 27,580 rows):
+# - NGUID (NENA site id): 100% filled, 27,580 distinct — but it is literally the row's
+#   GlobalID wrapped in a urn ("urn:emergency:uid:gis:SSAP:{<GlobalID>}:pecounty.on.ca"),
+#   so it inherits GlobalID's regenerate-on-republish risk (brant precedent). All 27,580
+#   rows share a single created/last_edited timestamp (2026-08-17 14:12:31) — the layer
+#   is bulk truncate-and-reload published, so stability across republishes is unproven.
+#   Promotion candidate: if NGUID values survive the next reload unchanged, promote to
+#   key_field (that is an identity migration — full-history surgery, not a config edit).
+# - SADDGUID_pec: 27,497 of 27,580 filled, only 27,178 distinct (blanks + dupes). Rejected.
+# - OBJECTID sequential, volatile by definition.
+key_field = ""                                 # synthesize from address + rounded lon/lat
+synth_fields = ["number", "street", "unit"]
+
+[fields]                                        # source property -> canonical name
+# Coverage probed 2026-08-20: Add_Number 27,565 of 27,580 non-null; St_Name 27,573
+# non-blank; Unit 241 non-blank (0.9% — normal for unit). AddNum_Suf carries the house
+# suffix on 1,010 rows ("A", "1/2" — e.g. 44 1/2 Paul Street) and there is no combined
+# number+suffix column, so number drops it (the hastings trap); the suffix stays tracked
+# via the props blob. AddNum_Pre is 100% blank.
+number = "Add_Number"
+street = "St_Name"                              # St_PreTyp/St_PosTyp (19,028 filled)/St_PosDir tracked via the props blob
+unit   = "Unit"
+# St_PreTyp caveat: 8,285 rows carry "County Road" and 250 "Highway" as a PRE-type, so
+# 31% of streets display as a bare number ("190 35" = 190 County Road 35). No combined
+# street column exists; per house rule the parsed column is mapped and no parser is
+# invented — accept the display or decide on a composed street later (operator call).
+# full: source has none — the layer publishes only parsed NENA components, no combined
+# full-address column (the durham precedent). Reports render "number street".
+
+# Change classes (field values sampled 2026-08-20 against the live layer): a modification
+# touching only these fields is reported in its humanized section instead of the generic
+# Updated Addresses table.
+[classes]
+# STATUS_pec is the lifecycle flag — single value "Current" on all 27,580 rows today, so
+# this can only fire when a row flips to a non-Current state (which is exactly the event
+# worth humanizing on an "Unfiltered" layer). POINTTYPE_pec categorizes the point
+# (Building 15,063 / Other 10,803 / Parcel 1,172 / Farm 911 233 / Unit-Condo-Office 157 /
+# Utility Asset 65 / null 80) — the cobourg Point_Type precedent.
+status = ["STATUS_pec", "POINTTYPE_pec"]
+# No boundary class: Inc_Muni and County are constants (single-tier municipality, one
+# value on all 27,580 rows) and Uninc_Comm/Nbrhd_Comm are 100% null.
+# No day-one ignore_fields: no coordinate-duplicate columns in the schema. NGUID stays in
+# props — if it regenerates on the next bulk reload it will surface as a mass
+# modification event; decide ignore vs key-promotion then, with evidence.

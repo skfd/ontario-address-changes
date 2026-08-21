@@ -5,7 +5,17 @@ provider = "City of London"
 data_url = "https://maps.london.ca/server/rest/services/OpenData/OpenData_Community/MapServer/0"
 access = "arcgis"
 format = "geojson"
-license_name = "City of London Terms of Use"
+# Terms read 2026-08-20 ("Terms of Use - City of London Open Data", the PDF the DCAT feed
+# binds to the Addresses dataset). (1) Automated periodic retrieval: permitted by silence -
+# no clause restricts automated or repeated access; grant is "world-wide, royalty-free,
+# non-exclusive license to use, modify, and distribute the data sets in all current and future
+# media and formats for any lawful purpose"; no continuity promise, revocable at discretion.
+# (2) Publishing derived diff reports: YES, with pass-through - distribution "whether in
+# original or modified form" requires including a copy of or URL to the terms and binding
+# recipients without further restrictions. Credit optional; no-endorsement/no-logo clauses.
+# Operator action if desired: add the terms URL to london's published pages. OSM compatibility
+# (ODbL vs pass-through) still unresolved - stays red.
+license_name = "Terms of Use - City of London Open Data"
 osm_compatible = "red-review"
 
 # Composites/components of the mapped fields, all verified by sampling 2026-08-20

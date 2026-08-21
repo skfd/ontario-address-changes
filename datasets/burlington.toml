@@ -3,7 +3,17 @@ provider = "City of Burlington"
 data_url = "https://mapping.burlington.ca/arcgisweb/rest/services/COB/AddressPoints/MapServer/0"
 access = "arcgis"
 format = "geojson"
-license_name = "City of Burlington Terms of Use"
+# Terms read 2026-08-20 ("Terms of Use for Open Data Burlington", 2011-09-19; the tracked
+# layer's AGOL item says use is subject ONLY to these, displacing the restrictive website
+# disclaimer). (1) Automated periodic retrieval: permitted by silence - no clause on automated
+# access or frequency; grant is "worldwide, royalty-free, non-exclusive, REVOCABLE licence to
+# use, reproduce, modify, and distribute... for any lawful purpose", and the City may suspend
+# access "without notice and for any reason". (2) Publishing derived diff reports: YES, with
+# pass-through - distribution "whether in original or modified form" requires including a copy
+# of or URL to the terms and binding recipients to them without further restrictions.
+# Operator action if desired: add the terms URL to burlington's published pages. OSM
+# compatibility (ODbL vs the pass-through clause) still unresolved - stays red.
+license_name = "Terms of Use for Open Data Burlington (2011)"
 osm_compatible = "red-review"
 
 # Source props whose changes are noise. Nothing here has ever moved: across 10 snapshots

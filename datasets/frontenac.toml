@@ -5,8 +5,12 @@ provider = "County of Frontenac"
 data_url = "https://services2.arcgis.com/vJlmDE1PmdTcJF0N/arcgis/rest/services/Civic_Address_Points_View_2/FeatureServer/0"
 access = "arcgis"
 format = "geojson"
-license_name = "Not identified"
-osm_compatible = "unknown-review"
+# Licence found 2026-08-20: "County of Frontenac - Open Government Licence" v1.0, based on
+# OGL-Ontario 1.0 (copy/modify/publish/distribute, attribution required). PDF linked from the
+# Frontenac GIS hub Open-Data page (AGOL item b8d2d338adc240c9b7d78e5f615e0652). Oddity:
+# clause 5 says do not "rely on it for navigation, decision making or advising".
+license_name = "Open Government Licence - County of Frontenac v1.0"
+osm_compatible = "yellow-ogl"
 
 [identity]
 # No stable source id (OBJECTID sequential; GlobalID may regenerate on republish).
@@ -16,7 +20,10 @@ synth_fields = ["number", "street", "unit"]
 [fields]                                        # source property -> canonical name
 number = "StreetNumber"
 street = "StreetName"                           # Qualifier/UpperNumber/Municipality tracked via the props blob
-unit   = "UnitNumber"
+unit   = "UnitNumber"                           # 100% blank (0 of 22,381 active, re-checked 2026-08-20).
+                                                # Kept selected by the oakville SUITE rule: a unit backfill
+                                                # is address content we want, and a blank canonical field
+                                                # costs nothing meanwhile.
 full   = "Location"
 
 # Change classes (field values verified against the latest snapshot): a

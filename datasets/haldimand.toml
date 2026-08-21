@@ -1,0 +1,58 @@
+slug = "haldimand"
+provider = "Haldimand County"
+# Catalogued maps.haldimandcounty.on.ca died early (still redirects everything to a
+# maintenance page); the migrated self-hosted server gis.haldimandcounty.ca was found
+# 2026-08-20 via the county's AGOL hub (opendata-haldimand.hub.arcgis.com, org owner
+# MDhald — the hub's old "Civic Addresses" item still points at the dead host). Layer
+# "NG911AddressPoints", 26,602 rows re-verified live 2026-08-20. A sibling
+# Topo/NG911AddressPoints service serves the identical layer; this Topo/AddressPoints
+# path is the one used.
+data_url = "https://gis.haldimandcounty.ca/server/rest/services/Topo/AddressPoints/FeatureServer/0"
+access = "arcgis"
+format = "geojson"
+# Native layer SR is EPSG:26917 (UTM 17N); the geojson export arrives already in WGS84
+# (verified on sample rows 2026-08-20), so this is a guard for a future export-CRS
+# switch (pass-through while in lon/lat range).
+source_crs = "EPSG:26917"
+# Licence found 2026-08-20: "Open Government Licence - Haldimand County" v1.0, embedded
+# in the county's AGOL hub site config (item d16c768293b74ab29ca691487dfc68fa) and
+# indexed from the classic portal data1-haldimand.opendata.arcgis.com. Standard OGL
+# grant (copy/modify/publish/distribute for any lawful purpose, commercial included;
+# attribution statement "Contains information licensed under the Open Government
+# Licence – Haldimand County"). Per-dataset DCAT license fields are blank, so the
+# site-wide licence is the operative text.
+license_name = "Open Government Licence - Haldimand County v1.0"
+osm_compatible = "yellow-ogl"
+
+# CENTROID_X/CENTROID_Y duplicate the point geometry as WGS84 lon/lat (verified against
+# sample geometries 2026-08-20); tracked as coordinates already.
+ignore_fields = ["CENTROID_X", "CENTROID_Y"]
+
+[identity]
+# No stable source id. OBJECTID is sequential; PCL_RN is the parcel assessment roll and
+# 1:many with addresses (26,602 rows: 284 blank, 863 roll numbers shared across 2,655
+# rows, worst parcel carries 177 addresses — the windsor gisid trap), so it cannot key.
+key_field = ""                                 # synthesize from address + rounded lon/lat
+synth_fields = ["number", "street", "unit"]
+
+[fields]                                        # source property -> canonical name
+# Fill against the live layer 2026-08-20 (26,602 rows): ADDR_HN 24,176 (91%),
+# ADDR_SN 25,315 (95%), ADDR_UN 1,821 (7% — normal for unit), FullAddress 22,480 (85%).
+# FullAddress is fixed-width concatenated and carries trailing padding
+# ("17 CHURCH STREET     ").
+number = "ADDR_HN"
+street = "ADDR_SN"                              # ADDR_PD/ADDR_PT/ADDR_ST/ADDR_SD street parts tracked via the props blob
+unit   = "ADDR_UN"                              # ADDR_UT (unit type) tracked via the props blob
+full   = "FullAddress"
+
+# Change classes (field values verified against the live layer 2026-08-20): a
+# modification touching only these fields is reported in its humanized section
+# (place renames / status changes / boundary reassignments) instead of the
+# generic Updated Addresses table.
+[classes]
+# Status values: Existing / Proposed / Active / "Exsiting" (upstream typo) / blank —
+# real lifecycle states, typo included.
+status = ["Status"]
+# ZONE_MUN is the community/locality name (CALEDONIA, DUNNVILLE, JARVIS, RAINHAM +
+# typo'd "RAINHMA"; 64 distinct values), the frontenac Municipality shape.
+boundary = ["ZONE_MUN"]

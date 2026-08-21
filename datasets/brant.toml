@@ -18,6 +18,10 @@ key_field = ""                                 # synthesize from address + round
 synth_fields = ["number", "street", "unit"]
 
 [fields]                                        # source property -> canonical name
+# Coverage spot-check 2026-08-20: the ~5% blanks are genuinely unaddressed, not a wrong
+# column — 905 of 19,333 active rows are bare placeholder points (props hold only
+# CIVIC_ADDRESS_TYPE/PLACE_NAME/PROVINCE, no address content anywhere) and ~330 more are
+# street-only entrances (FULL_ADDRESS = "PARKSIDE DRIVE", no number), the dufferin shape.
 number = "STREET_NUMBER"
 street = "STREET_NAME"                          # STREET_TYPE/DIRECTION/PLACE_NAME tracked via the props blob
 unit   = "STREET_UNIT_NUMBER"

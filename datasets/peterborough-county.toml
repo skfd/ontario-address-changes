@@ -6,8 +6,18 @@ provider = "County of Peterborough"
 data_url = "https://services3.arcgis.com/08bk1ZSzqef9JX5q/arcgis/rest/services/Public_View_Site_Addresses_/FeatureServer/0"
 access = "arcgis"
 format = "geojson"
-license_name = "Not identified"
-osm_compatible = "unknown-review"
+# Licence reviewed 2026-08-20, and it is RESTRICTIVE: item licenseInfo is blank and there is
+# no open-data hub, so the county website Terms of Use govern: "The geospatial content... may
+# not be put to commercial use, be included in or with any product that is created or
+# distributed for a commercial use, or be copied onto any other website without the written
+# agreement of or licence by the County" (ptbocounty.ca/terms-of-use-disclaimers). Publishing
+# diff reports on a public site is NOT cleared - operator decision needed. TODO.md §3.
+license_name = "County website Terms of Use (restrictive - no copying to other websites)"
+osm_compatible = "red-review"
+# Operator decision 2026-08-20: keep tracking, publish nothing. Landing shows a "licence not
+# compatible" badge, no report link; report pages removed at render time. Flip back to true
+# if the county grants permission.
+publish_reports = false
 
 [identity]
 key_field = "SITEADDID"                        # stable site-address id, 100% populated, order-independent (OBJECTID is sequential)

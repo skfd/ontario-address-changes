@@ -4,104 +4,71 @@
 #
 # status is a short badge; keep to the existing set where possible:
 #   "Dead endpoint", "Empty / secured", "Proprietary licence",
-#   "No address layer", "Untrusted copy", "Unstable URL", "Not found"
+#   "No address layer", "Untrusted copy", "Unstable URL", "Not found",
+#   "Recovered - pending review"  (live verified layer found on a re-probe;
+#                                  awaiting licence check + onboarding)
 
 [[skipped]]
 name = "City of Peterborough"
 status = "Proprietary licence"
-detail = "Hosted layer is published 'Proprietary - All rights reserved' (OSM red); not republished. The surrounding County of Peterborough is added separately."
+detail = "Licence re-checked 2026-08-20: the Address item now carries custom Open Data Terms of Use instead of the old blanket proprietary label - but the grant covers copying the UNMODIFIED datasets only, so publishing derived diff reports is still not clearly licensed. Kept skipped. The surrounding County of Peterborough is tracked separately."
 
 [[skipped]]
 name = "City of Belleville"
 status = "Dead endpoint"
-detail = "gis.city.belleville.on.ca returns empty; no ArcGIS Online migration found."
-
-[[skipped]]
-name = "Norfolk County"
-status = "Empty / secured"
-detail = "services1.arcgis.com CivicAddresses layer is token-secured (HTTP 499)."
-
-[[skipped]]
-name = "Simcoe County"
-status = "Dead endpoint"
-detail = "maps.simcoe.ca Search_Layers_Dynamic/0 returns 404; no open address layer found via search."
+detail = "gis.city.belleville.on.ca services root is empty (and its TLS cert is broken). Re-probed 2026-08-20: the city's new AGOL org (BellevilleGIS, ~60 public services) has no address layer, and Hastings County's CivicAddresses excludes the separated city."
 
 [[skipped]]
 name = "Grey County"
 status = "No address layer"
-detail = "Official service_grey org publishes only boundary/reference layers (no civic address points); self-hosted geo.grey.ca / restgeo.grey.ca are dead (502)."
+detail = "Re-hunted 2026-08-20: maps.grey.ca turns out to be the county's Hub - full catalogue enumerated (roads, official plan, transit), no addresses or 911 layers. geo.grey.ca / restgeo.grey.ca still down; the outage is persistent, not transient."
 
 [[skipped]]
 name = "Oxford County"
-status = "Dead endpoint"
-detail = "public.oxfordcounty.ca 404s; an ArcGIS Online search for 'Oxford County Address Points' returns City of Oxford, MISSISSIPPI (wrong place) - not added."
+status = "Proprietary licence"
+detail = "Server recovered 2026-08-20 (56,658-row OXFORD_CivicAddress verified, folder literally named OpenData) but the county's published GIS-data terms say the data 'must not be used or posted on an external website' and site content 'cannot be duplicated... without express written permission'. Onboarding stopped at the licence gate; ask gis@oxfordcounty.ca whether the open-data channel has an actual open licence."
 
 [[skipped]]
 name = "Northumberland County"
-status = "Dead endpoint"
-detail = "maps.northumberlandcounty.ca 404s; search returns Union/Snyder County, Pennsylvania (wrong place)."
-
-[[skipped]]
-name = "Haldimand County"
-status = "Dead endpoint"
-detail = "maps.haldimandcounty.on.ca redirects to a maintenance page."
-
-[[skipped]]
-name = "Prince Edward County"
 status = "No address layer"
-detail = "maps.thecounty.ca returns empty; the county's ArcGIS Online org exposes only a 'Property Info' layer, not clean civic addresses."
-
-[[skipped]]
-name = "Town of Amherstburg"
-status = "No address layer"
-detail = "mapamherstburg.ca is live but the only layer is parcel/assessment data (mailing addresses, no parsed civic address points)."
-
-[[skipped]]
-name = "Middlesex County (Lucan Biddulph, Newbury, North Middlesex, Southwest Middlesex, Strathroy-Caradoc, Thames Centre)"
-status = "Dead endpoint"
-detail = "The shared maps.middlesex.ca ArcGIS server is entirely unreachable, taking all six member-municipality address layers with it."
-
-[[skipped]]
-name = "Town of Cobourg"
-status = "Dead endpoint"
-detail = "maps.cobourg.ca returns empty."
-
-[[skipped]]
-name = "West Parry Sound District"
-status = "Dead endpoint"
-detail = "wpsgn.ca ArcGIS server returns an HTML error page, not a queryable layer."
+detail = "Re-probed 2026-08-20: the server is back (moved /arcgis to /server) but the full service sweep shows roads/parks/wards only - no address points. Cobourg (recovered separately) now partially covers the county."
 
 [[skipped]]
 name = "City of Sault Ste. Marie"
-status = "Unstable URL"
-detail = "SSMIC publishes only date-versioned layers (Collection_Addresses_<month>_<year>); the URL would 404 on the next republish, so it can't be tracked over time."
-
-[[skipped]]
-name = "Perth County"
-status = "Not found"
-detail = "No official ArcGIS Online open-data address service located; the catalogued OpenAddresses cache is also dead."
+status = "Proprietary licence"
+detail = "A stable hosted view now exists (33,356 rows, actively maintained - the old date-versioned-URL objection is moot), but the only published terms are the SooMaps click-through: 'The data served through this interface is not for commercial use, this includes mapservices that the interface consumes.' Non-commercial-only; onboarding stopped 2026-08-20. Borderline - a free tracker is arguably non-commercial; operator may overrule, or ask the city GIS to stamp the view with an open licence."
 
 [[skipped]]
 name = "Lanark County"
 status = "Not found"
-detail = "No official ArcGIS Online open-data address service located via search."
+detail = "Re-hunted 2026-08-20: the public map is a CommunityPAL MapGuide viewer by vendor CGIS Spatial Solutions - no ArcGIS REST, no AGOL content, no downloads. Needs an inquiry to the county or the vendor (Timmins is on the same stack; one ask could unlock both)."
 
 [[skipped]]
 name = "Haliburton County"
-status = "Not found"
-detail = "No official ArcGIS Online open-data address service located via search."
-
-[[skipped]]
-name = "Halton Region (Halton Hills)"
-status = "Not found"
-detail = "No region-wide open address layer found; member towns Oakville, Milton and Burlington are tracked individually, leaving Halton Hills uncovered."
+status = "Proprietary licence"
+detail = "A usable polygon address fabric exists (33,980 rows; centroids work, verified 2026-08-20) but the GIS site's Terms of Use grant only 'view and print a single copy' and expressly prohibit copying, publishing, derivative works and 'screen scraping, database scraping' - the hardest terms seen in the catalogue. Stopped at the licence gate; a data-sharing ask to the county is the only path in."
 
 [[skipped]]
 name = "Essex County"
-status = "Not found"
-detail = "OpenAddresses cache is deprecated (0 bytes); ArcGIS Online search returns US/untrusted date-versioned copies."
+status = "No address layer"
+detail = "Re-hunted 2026-08-20: the county's real open-data hub was found (county + 7 municipalities) but holds centerlines/bridges/LiDAR - no address points in the full catalogue. Amherstburg (recovered separately) is the lone member with points."
 
 [[skipped]]
-name = "North Bay, Timmins, Collingwood, Owen Sound, Innisfil, Kenora, Stratford"
+name = "North Bay"
+status = "Proprietary licence"
+detail = "A public CivicAddress_Point layer exists (21,964 rows) but the city's terms at northbay.ca/legal - which the GIS hub's own Terms of Use link points to - say geospatial content may not 'be copied onto any other website without the written agreement of or licence by the City'. Stopped at the licence gate 2026-08-20. The data was also static since April 2023, so the loss is small; a waiver ask to the city is the path in."
+
+[[skipped]]
+name = "Timmins"
 status = "Not found"
-detail = "Off-catalogue cities probed via ArcGIS Online search: no official municipal open-data address service surfaced (only US/student/unrelated results)."
+detail = "Re-hunted 2026-08-20: only a CommunityPAL MapGuide viewer by vendor CGIS Spatial Solutions (same stack as Lanark County) - no ArcGIS REST, no AGOL org. One vendor/city inquiry could unlock both."
+
+[[skipped]]
+name = "Owen Sound"
+status = "No address layer"
+detail = "Re-hunted 2026-08-20: the city's new public GIS (PUBLIC_GIS_WFL1, 15 layers) has zoning/parks/transit/parcels but no address points; weak fallback is address attributes on the Parcels polygons."
+
+[[skipped]]
+name = "Kenora"
+status = "No address layer"
+detail = "Re-hunted 2026-08-20: city AGOL org is live (13 public services - zoning, roads, ownership) but publishes no address or parcel-address layer."

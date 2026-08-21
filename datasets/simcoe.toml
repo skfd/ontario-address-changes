@@ -1,0 +1,55 @@
+slug = "simcoe"
+provider = "County of Simcoe"
+# Catalogued Search_Layers_Dynamic endpoint is dead; recovered 2026-08-20 at the county's
+# on-prem MapServer (Public/Operational_Layers_Dynamic, layer 1 "Address Numbers", 190,207
+# rows, maxRecordCount 2000, pagination supported; re-verified live same day, stable across
+# repeated probes). County-wide: MUNI groupBy (2026-08-20) shows 18 lower-tier
+# municipalities incl. INNISFIL (20,540) and COLLINGWOOD (15,323) — covering those two is
+# why this source was onboarded. Overlap with separately-tracked Barrie checked: no BARRIE
+# value in MUNI (Barrie is a separated city outside county addressing), so no overlap —
+# the wellington/guelph precedent would have made overlap acceptable if noted anyway.
+data_url = "https://maps.simcoe.ca/arcgis/rest/services/Public/Operational_Layers_Dynamic/MapServer/1"
+access = "arcgis"
+format = "geojson"
+# Native layer SR is EPSG:26917 (UTM 17N); the geojson export arrives already in WGS84,
+# so this is a guard for a future export-CRS switch (pass-through while in lon/lat range).
+source_crs = "EPSG:26917"
+# Licence review 2026-08-20: the county publishes "Open Government Licence - Simcoe County"
+# (maps.simcoe.ca/openlicense.html; OGL-based — copy/modify/publish/distribute incl.
+# commercial, attribution "Contains information licensed under the Open Government Licence
+# - Simcoe County"). maps.simcoe.ca/terms.html is restrictive by default for the mapping
+# apps' "Site Products" but exempts "layers identified as open data", which fall under the
+# open licence. This MapServer layer carries no per-layer marking (copyrightText empty);
+# the same county-maintained address data is served on the public open-data GeoServer
+# (opengis.simcoe.ca, simcoe:Address_Number, WFS AccessConstraints NONE). Coverage of this
+# endpoint is inferred, not explicit — hence review, not yellow-ogl.
+license_name = "Open Government Licence - Simcoe County"
+osm_compatible = "yellow-review"
+
+# Faithful UTM 17N copies of the point geometry, already tracked as coordinates. The one
+# allowed day-one ignore: house precedent is 11-of-11 tracked cities' coordinate-duplicate
+# pairs ignored — they only ever mask real moves or manufacture phantom ones.
+ignore_fields = ["X_COORD", "Y_COORD"]
+
+[identity]
+# ADDRESSID (integer): 0 null, 0 <= 0, 0 duplicated values across all 190,207 rows
+# (live groupBy/having check 2026-08-20); range 1..248,476 — gappy, i.e. a persistent
+# municipal id with retired values, not a dense re-minted row sequence like OBJECTID.
+# Cross-snapshot stability unverifiable day one; re-check flap rate after a few snapshots.
+key_field = "ADDRESSID"
+
+[fields]                                        # source property -> canonical name
+number = "STNUM"                                # integer; 1 null of 190,207
+street = "FULLNAME"                             # assembled street name (99.99% filled; 15 blank).
+                                                # STNAME alone is a bare component ("4" for
+                                                # CONCESSION ROAD 4); DIRPREF/PREFIX/STNAME/
+                                                # SUFFIX/DIR/MUNI/ARN tracked via the props blob.
+unit   = "Unit"                                 # 12,267 of 190,207 filled (~6.4%) — normal for unit
+full   = "FULL_ADDRESS"                         # 100% filled, includes units ("200 DISSETTE STREET UNIT 8")
+
+# Change classes (field values verified against the live layer 2026-08-20): a
+# modification touching only these fields is reported in its humanized section
+# instead of the generic Updated Addresses table. MUNI is the lower-tier
+# municipality (18 values); reassignment is a boundary change (sdg/hamilton precedent).
+[classes]
+boundary = ["MUNI"]

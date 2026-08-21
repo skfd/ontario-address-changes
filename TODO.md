@@ -1,6 +1,6 @@
 # Operator TODO — ontario-address-changes
 
-Last updated: 2026-08-10. Tasks for the human operator. Field-coverage numbers come
+Last updated: 2026-08-20. Tasks for the human operator. Field-coverage numbers come
 from an audit of all 42 tracked cities (latest snapshot in each city DB).
 
 ## 1. Complete field selection for tracked cities
@@ -9,16 +9,32 @@ These cities are imported and tracking, but their field maps need a human decisi
 
 - [ ] **waterloo** — no street-number field exists in the source (only the full
   `CIVIC_ADDR` string). Decide: have the number parsed out of `CIVIC_ADDR`, or
-  accept full-address-only display.
+  accept full-address-only display. Measured 2026-08-20: **all 55,541 active full
+  values parse cleanly** as `<number>[suffix] <street>` (zero exceptions), so a
+  parse is mechanically safe. Identity synthesizes from `full` for the 71% without
+  `ADDRESS_ID`, so populating `number` does not re-key; it would need the
+  remap-style full-history rewrite (lennox ADD_LABEL precedent) to land event-free,
+  via a parse variant of `tools/remap_canonical_from_prop.py`.
 - [ ] **lennox-addington** — no parsed street field in the source. `ADD_LABEL`
   answered half of this on 2026-08-20: it is the house number WITH its suffix
   ('137A'), not a street label — measured, then made the `number` source via a
   full-history migration (`tools/remap_canonical_from_prop.py`, 3,741 rows, no
   event; identity keys on `full`, so nothing re-keyed). What remains open is the
   street half: decide whether parsing street out of `ADDRESS` is worth it, or
-  accept full-address-only street display.
-- [ ] **frontenac** — the source's `UnitNumber` column is 100% blank (22k rows, zero
+  accept full-address-only street display. Measured 2026-08-20: **97.0% of the
+  26,155 full values parse** as `<number>[suffix] <street>`. The 778 that don't
+  split two ways: **138 are embedded units in `<unit>-<number> <street>` form**
+  (`A1-291 Newburgh Road`; confirmed units by the shared-right-part test — 16
+  distinct units at 391 Dundas St W, 14 at 236 Newburgh Rd), the brantford
+  pattern in a second city at 0.5% of rows; the other 640 are campground sites
+  ("Site 14 Pickerel Park Rv Resort", "Site N/A …"), bare numbers ("70"), and
+  bare street names — genuinely non-standard rural addressing, not a parse gap.
+- [x] **frontenac** — the source's `UnitNumber` column is 100% blank (22k rows, zero
   real values). Decide: unselect it, or keep it in case the county starts filling it.
+  **Kept, closed 2026-08-20.** Re-measured: still 0 of 22,381 active rows. The
+  oakville `SUITE` rule decides it — a unit backfill is address content we want,
+  and keeping the selection costs nothing (a blank canonical field displays
+  nothing). Verdict noted in the TOML.
 - [ ] **hastings** — `number` maps to `House_No`, which drops the house suffix that
   `full` (`Full_Add`) keeps: "152 JAMIESON LN" as the number vs "152B JAMIESON LN" as
   the full address, on the 2,721 rows with a `House_Suf`. The source's `ADDRESS_NU`
@@ -55,6 +71,8 @@ These cities are imported and tracking, but their field maps need a human decisi
   by one row), 466 disagree on the street text (mostly styling — "30 SIDEROAD" vs "30TH
   SIDE ROAD" — but some name a different road outright: "10 SIDEROAD" vs "10TH LINE"),
   and 4 lost the separating space ("58744810 SIDEROAD"). The remaining 26,214 match.
+  Re-measured 2026-08-20: grown slightly to 873 disagreeing / 363 number mismatches —
+  the county is still hand-maintaining it, and the drift direction is worse, not better.
   Decide whether to keep publishing the county's string as-is, or unmap `full` and let
   reports compose "number street" from the cleaner components. Not urgent and not an
   identity risk (`key_field = "ID"`, and `full` is not in `synth_fields`), but it means
@@ -133,8 +151,20 @@ These cities are imported and tracking, but their field maps need a human decisi
     like "No Sign" and either `StrNUM = '0'` (275 rows, so `full` reads "0" too) or a
     real number with no street at all (1,040, mostly Southwold). These are located
     parcels awaiting a civic address, which is what the column should say about them.
-  - [ ] brant — number/street/full ~95%
-  - [ ] windsor — street 99%
+  - [x] brant — number/street/full ~95%. Checked 2026-08-20: **genuinely
+    unaddressed, no wrong column.** 905 of 19,333 active rows are bare placeholder
+    points whose props hold nothing but `CIVIC_ADDRESS_TYPE`/`PLACE_NAME`/
+    `PROVINCE` — no address content anywhere on the row to have been missed — and
+    ~330 more are street-only entrances (`full` = "PARKSIDE DRIVE", no number),
+    the dufferin shape. Verdict in the TOML.
+  - [x] windsor — street 99%. Checked 2026-08-20: **genuinely unaddressed
+    parcels, no wrong column.** The 696 blank-street rows carry only a legal
+    description (`Legal1` = "PLAN 1056 LOTS 314 TO 317 …") — parcels without a
+    civic address. But the check surfaced something else: those rows' `number`
+    and `full` are the literal string **"None"** — the source's ETL leaks
+    Python's `str(None)` (verified in the raw geojson: `"Ward": "None"`), so the
+    appendix's 100% number coverage is really 99.4%. The store-wide version of
+    this finding is in §5.
 
 ## 1b. Fields the sources have added since we last looked
 
@@ -197,80 +227,210 @@ Static sources (toronto, waterloo) cannot be probed this way — no layer metada
 
 ## 2. Find data sources for uncovered cities
 
+**OUTCOME 2026-08-20 — the onboarding wave ran the same day the probes below landed.**
+Eleven datasets imported with verified baselines: **simcoe** (190,207 — covers
+Innisfil 20,540 + Collingwood 15,323 + 16 more member munis; no Barrie overlap,
+verified), **norfolk** (35,119), **middlesex** (31,569 — all six dead-server munis
+plus Adelaide Metcalfe and Middlesex Centre; no London overlap), **prince-edward-county**
+(27,393), **haldimand** (26,597), **halton-hills** (21,900), **west-parry-sound**
+(21,703), **perth-county** (18,605), **stratford** (14,873), **amherstburg** (10,924),
+**cobourg** (7,837 — tracked but gated off the site: unmodified-only licence grant, see
+§3). Four refused at the licence gate and returned to skipped.toml with quotes:
+**oxford**, **north-bay**, **haliburton**, **sault-ste-marie** (SSM is borderline —
+non-commercial-only terms; a free tracker arguably qualifies, overrule if you disagree).
+Each new TOML documents identity/field-map evidence; all need a `city-tune` audit pass
+once they have 2+ snapshots. The per-city probe notes below are retained as the record.
+
 Cities/counties with no working source (full reasons in `skipped.toml`, shown on the
 landing page). ArcGIS Online search is exhausted for all of these — next steps are
 human ones: browse each municipality's own open-data/GIS page, check provincial
 portals (geohub.lio.gov.on.ca), or email the GIS department.
 
-- [ ] Dead endpoints — worth asking the municipality where the data moved:
-  - [ ] Belleville
-  - [ ] Simcoe County
-  - [ ] Oxford County
-  - [ ] Northumberland County
-  - [ ] Haldimand County (was a maintenance page — just retry first)
-  - [ ] Middlesex County (one server takes six member municipalities with it:
-        Lucan Biddulph, Newbury, North Middlesex, Southwest Middlesex,
-        Strathroy-Caradoc, Thames Centre)
-  - [ ] Cobourg
-  - [ ] West Parry Sound
-- [ ] No public address layer found at all — check muni portals / email GIS dept:
-  - [ ] Perth County
-  - [ ] Lanark County
-  - [ ] Haliburton County
-  - [ ] Essex County
-  - [ ] Grey County
-  - [ ] Prince Edward County
-  - [ ] Halton Hills
-  - [ ] North Bay
-  - [ ] Timmins
-  - [ ] Collingwood
-  - [ ] Owen Sound
-  - [ ] Innisfil
-  - [ ] Kenora
-  - [ ] Stratford
+- [ ] Dead endpoints — re-probed 2026-08-20, and the picture flipped: **6 of 8 have a
+  live, verified address layer again** (every URL below probed with a field-list read
+  and a returnCountOnly count). Each recovered one is now an onboarding decision
+  (licence + city-tune pass), not a search problem:
+  - [ ] Belleville — **still nothing.** Old server's services root is empty (and its
+        TLS cert is broken); the city now has an AGOL org (`BellevilleGIS`, hub
+        `opendata-bellevillegis.hub.arcgis.com`, ~60 public services) but no address
+        layer in it. Hastings County's `CivicAddresses` does NOT cover Belleville
+        (separated city; its MUNICIPALI codes are all rural townships).
+  - [ ] Simcoe County — **recovered**, different layer on the same server:
+        `https://maps.simcoe.ca/arcgis/rest/services/Public/Operational_Layers_Dynamic/MapServer/1`
+        ("Address Numbers"), 190,207 rows, paginated, full parsed schema (STNUM/STNAME/
+        Unit/MUNI/FULL_ADDRESS + ADDRESSID). The old Search_Layers_Dynamic went
+        token-secured. Licence not stated on the service. Big: would cover many member
+        municipalities — check overlap policy before onboarding.
+  - [ ] Oxford County — **recovered at the same server**:
+        `https://public.oxfordcounty.ca/arcgis/rest/services/OpenData/OXFORD_OpenData/MapServer/0`
+        ("OXFORD_CivicAddress"), 56,658 rows, maxRecordCount 100k (single-pull), rich
+        schema incl. UNIT and END_DATE/END_REASON (source-side retirement tracking —
+        count may include ended records; filter decision needed at onboarding).
+        Licence text not exposed via REST.
+  - [ ] Northumberland County — server back (`/arcgis` moved to `/server`) but the full
+        service sweep shows roads/parks/wards only — **no address layer.** (Cobourg
+        below now partially covers the county.)
+  - [ ] Haldimand County — **migrated to a new server**:
+        `https://gis.haldimandcounty.ca/server/rest/services/Topo/AddressPoints/FeatureServer/0`
+        (NG911AddressPoints), 26,602 rows, NG911-style parsed fields + unit + Status.
+        Old maps.haldimandcounty.on.ca still redirects everything to a maintenance page.
+        Licence not stated.
+  - [ ] Middlesex County — **migrated to ArcGIS Online**, one layer covers all six
+        member municipalities (MUNCODE confirms LB/NEWB/NMID/SWM/SC/THC, plus Adelaide
+        Metcalfe and some blank codes to watch):
+        `https://services.arcgis.com/vhh9rYcMiBEBPGYb/arcgis/rest/services/MiddlesexCountyAddressPoints/FeatureServer/0`
+        item `928ed74edad64e4aa65170fb49c46476`, 31,571 rows, parsed fields + UNIT.
+        Licence: county "as is" disclaimer terms on an open public item. (A slimmer
+        sibling `mc_address` without UNIT/MUNCODE also exists — prefer the full one.)
+  - [ ] Cobourg — **migrated to ArcGIS Online**:
+        `https://services5.arcgis.com/bD7yhukP2irPxz1v/arcgis/rest/services/Address_Points/FeatureServer/0`
+        item `8e0339a5814b4c84b097c983c7626572`, 7,837 rows, parsed schema and a real
+        source id (`ADD_ID` — good for identity). Terms of use at
+        `public-hub-townofcobourg.hub.arcgis.com/pages/terms-of-use` — read before adding.
+  - [ ] West Parry Sound — **recovered**, instance moved to `/s22`:
+        `https://www.wpsgn.ca/s22/rest/services/wpsgnPublic/wpsgn_opendata/FeatureServer/0`
+        ("Civic Address", official wpsgnet org), 21,705 rows, incl. unit, a `Retired`
+        flag and Verified/rollnumber fields. Licence not stated.
+- [ ] No public address layer found at all — hunted again 2026-08-20 (muni portals,
+  hubs, org sweeps, Ontario GeoHub), and **8 of the 14 now have a verified source**
+  (each probed live: field list read + returnCountOnly). One provincial fact settled
+  on the way: LIO's Address Point data class is NOT on the open GeoHub (only ORN
+  road ranges); it sits behind OGDE licensing, so no provincial layer can cover
+  these municipalities.
+  - [ ] Perth County — **found**: `https://services3.arcgis.com/FkQ7EeWcZFoXIXH7/arcgis/rest/services/NG911_Addresses_and_Roads_Public_View/FeatureServer/0`
+        (county org, NG911 public view), 18,605 rows, parsed fields + Unit + Inc_Muni
+        (North Perth / West Perth / Perth East / Perth South — Stratford and
+        St. Marys, separated cities, are NOT included). Licence unstated.
+  - [ ] Halton Hills — **found**: `https://services3.arcgis.com/Nn3SWZrtm4WZaUtd/arcgis/rest/services/Civic_Address_(od)/FeatureServer/152`
+        ("Master Town Civic Address Dataset", note layer id 152), 21,900 rows, rich
+        parsed schema + a real source id (`ADDR_ID`).
+  - [ ] Prince Edward County — **found, hiding inside "Property Info"**: layer 0 of
+        `https://services1.arcgis.com/4HnHVMMKSNypEIkS/arcgis/rest/services/HostedFeatures___Property_Info/FeatureServer/0`
+        is "Site Structure Address Points - Unfiltered" (NENA schema), 27,580 rows;
+        probably needs a `STATUS_pec = 'Current'` filter. Licence unstated.
+  - [ ] Innisfil + Collingwood — **found via the recovered Simcoe County layer**
+        (§ above): MUNI groupBy verified INNISFIL 20,540 and COLLINGWOOD 15,323 of
+        the 190,207 county-wide rows (16 more municipalities in there too — Bradford
+        West Gwillimbury, Wasaga Beach, Orillia, Midland...).
+  - [ ] North Bay — **found, with a staleness caveat**:
+        `https://services5.arcgis.com/ItUGraUlQOjvSGOV/arcgis/rest/services/CivicAddress_Point/FeatureServer/0`
+        (city org), 21,964 rows — but editingInfo says data last edited April 2023,
+        so it may be a static upload; verify it moves before onboarding.
+  - [ ] Stratford — **found** on the city's ArcGIS Enterprise:
+        `https://maps.stratford.ca/gisserver/rest/services/Addressing/Civic_Address/FeatureServer/0`,
+        14,873 rows, parsed fields + unit.
+  - [ ] Amherstburg — **found (new since last check)**, moved out of the special-cases
+        list: `https://mapamherstburg.ca/arcgis/rest/services/Address_Points/FeatureServer/0`,
+        10,925 rows, real address points (ARN, Add1 number, FullStName). Licence
+        unstated. This is also the only Essex County municipality with points.
+  - [ ] Haliburton County — **promising lead, polygon not points**:
+        `https://gis.haliburtoncounty.ca/arcgis/rest/services/Public/SearchLayers_2/MapServer/4`
+        ("Address", polygon, 33,980 rows, ARN/ADDNUM/STREET/TOWNSHIP). Usable only if
+        centroids are acceptable (cf. windsor's parcel centroids — precedent exists).
+  - [ ] Lanark County — still nothing machine-readable: public map is a CommunityPAL
+        **MapGuide** viewer by vendor CGIS Spatial Solutions (`cgis.com/cpal?map=Lanark`),
+        no REST, no AGOL content. Needs an email to the county or the vendor.
+  - [ ] Timmins — same CGIS/MapGuide situation (`cgis.com/cpal?map=Timmins`); one
+        vendor inquiry could unlock both it and Lanark.
+  - [ ] Essex County — still nothing: the county hub (data-essexcounty.opendata.arcgis.com,
+        county + 7 munis) holds centerlines/bridges/LiDAR but no address points
+        (full DCAT grepped). Amherstburg above is the lone exception.
+  - [ ] Grey County — still nothing, and a new fact: maps.grey.ca is their Hub
+        (catalogue enumerated — no addresses); geo.grey.ca / restgeo.grey.ca remain
+        down (522/timeout), a persistent outage rather than a transient one.
+  - [ ] Owen Sound — still nothing: new public GIS backed by `PUBLIC_GIS_WFL1`
+        (15 layers, no addresses); weak fallback is address attributes on the
+        Parcels polygons.
+  - [ ] Kenora — still nothing: city org live (13 public services), no address or
+        parcel-address layer.
 - [ ] Special cases — need a decision, not a search:
-  - [ ] **Norfolk County** — layer exists but is token-secured; ask the county for
-        access or an open mirror.
-  - [ ] **Sault Ste. Marie** — only date-versioned URLs
-        (`Collection_Addresses_<month>_<year>`). Decide: accept with a manual URL
-        refresh every republish, or keep skipping.
-  - [ ] **City of Peterborough** — data exists but licence is "Proprietary - All
-        rights reserved". Ask the city about tracking/republication, or leave it to
-        the County layer.
-  - [ ] **Amherstburg** — only parcel/assessment data published; ask if civic
-        address points exist.
+  - [ ] **Norfolk County** — resolved itself 2026-08-20: the county published an OPEN
+        sibling of the secured layer.
+        `https://services1.arcgis.com/mSGV2hCLXHNsfQqK/arcgis/rest/services/Civic_Addresses/FeatureServer/0`
+        item `05c74eeabb454f54b9f50ca1b0dd5326`, 35,121 rows, parsed fields + unit +
+        roll number, and an explicit "Open Data Licence Agreement" (OGL-style). The
+        old `CivicAddresses` is still token-secured. Ready to onboard.
+  - [ ] **Sault Ste. Marie** — a stable undated layer now exists, removing the reason
+        it was skipped: `https://services1.arcgis.com/nlLTq2Zj0Jwv1qft/arcgis/rest/services/SooMaps_Addresses_View/FeatureServer/0`
+        (item "SooMaps_Addresses View", owner City of SSM), 33,356 rows, clean civic
+        schema incl. unit + postal code, created 2026-03, data edited 2026-08-13 — a
+        continuously maintained hosted view, not a dated snapshot. Licence not stated
+        on the item.
+  - [ ] **City of Peterborough** — licence CHANGED (checked 2026-08-20): the Address
+        item now carries custom "Open Data Terms of Use" instead of the old blanket
+        proprietary label — but the grant is to "copy and use the **unmodified** Open
+        Datasets"; no modification right, so publishing *derived* diff reports is
+        still not clearly licensed. Keeping it skipped is defensible; skipped.toml
+        detail updated. Ask the city if it ever matters — the County layer's own terms
+        turned out restrictive too (§3), so "leave it to the County layer" is no
+        longer the easy answer it was.
+  - [x] **Amherstburg** — resolved 2026-08-20: civic address points now exist (moved
+        to the found-sources list above).
 
 ## 3. Licence review
 
-- [ ] Licence "Not identified" — find each one's actual licence on the publisher's
-  portal and update the TOML. Tracking is fine meanwhile; republication/OSM use is
-  not cleared:
-  - [ ] brant
-  - [ ] chatham-kent
-  - [ ] elgin
-  - [ ] frontenac
-  - [ ] kawartha-lakes
-  - [ ] leeds-grenville
-  - [ ] lennox-addington
-  - [ ] milton
-  - [ ] muskoka
-  - [ ] peel-region
-  - [ ] peterborough-county
-  - [ ] renfrew
-  - [ ] sarnia
-  - [ ] sdg
-  - [ ] wellington
-- [ ] Custom Terms of Use (OSM red) — read the terms; confirm change-tracking +
-  publishing diff reports is permitted:
-  - [ ] burlington
-  - [ ] london
-  - [ ] windsor
+- [x] Licence "Not identified" — **all 15 hunted 2026-08-20** (live item licenseInfo,
+  DCAT feeds, hub terms pages; every finding + source URL recorded in each TOML).
+  Outcome in four buckets:
+  - **Open licences found (7):** brant CC0 (was already in the TOML from 2026-08-16),
+    frontenac OGL-Frontenac v1.0, leeds-grenville OGL-UCLG v1.0, lennox-addington
+    OGL-L&A v2.0, milton OGL-Milton (with a layer-vs-open-data-item caveat in the
+    TOML), peel-region Open Data Licence Peel v1.0 (attribution optional), sarnia
+    OGL-Canada-2.0-based (found on the renamed service's item, §4's URL fix).
+  - **Confirmed none published (4):** chatham-kent, elgin, wellington, kawartha-lakes —
+    a real absence, verified across item/DCAT/hub in each case, not a failed search.
+    Default copyright applies; asking the municipality is the only move left.
+  - **RESTRICTIVE — new problem, operator decision needed (3):** **sdg** (item
+    licenseInfo: "No part... may be sold, copied, distributed, or transmitted...
+    without the prior written consent of the County. All rights reserved."),
+    **renfrew** (hub disclaimer: "Content may not be reproduced or redistributed
+    without prior written permission", explicitly binding "any associated data";
+    OGDE-encumbered), **peterborough-county** (county site ToU: geospatial content
+    "may not... be copied onto any other website without the written agreement...").
+    These three are *worse* than "Not identified": the project publicly published
+    diff reports of their data. **Decided 2026-08-20 (operator): keep tracking,
+    stop publishing.** Implemented the same day as `publish_reports = false` in
+    each TOML: report pages are deleted at render time, the landing row shows a
+    "licence not compatible" badge with no link, and the map hull goes red and
+    unclickable. Verified on all three. Reversible by flipping the flag if a
+    permission ask ever succeeds.
+  - **muskoka:** custom terms with no reuse grant at all (King's Printer copyright +
+    disclaimer) — not open, not explicitly prohibiting; grouped with the ask-the-muni
+    pile but flagged red in the TOML.
+- [x] Custom Terms of Use (OSM red) — all three read in full 2026-08-20, operative
+  quotes in the TOMLs:
+  - **burlington + london** — near-identical terms; both **permit** automated retrieval
+    (by silence; revocable, no continuity promise) and both **permit publishing derived
+    diff reports** — conditioned on pass-through: distributions "in original or modified
+    form" must include a copy of or URL to the terms. Operator follow-up if desired:
+    add each city's terms URL to its published pages. OSM/ODbL compatibility remains
+    unresolved (the pass-through clause), so both stay `red-review`.
+  - **windsor** — upgraded: the "Terms of Use" PDF is actually a full OGL-Canada-style
+    licence, and the city's open-data portal binds its Address datasets to it. Now
+    `yellow-ogl`; both tracking and diff publishing clearly permitted. Caveat in the
+    TOML: we track the mappmycity.ca server rather than the portal copy.
+- [ ] NEW follow-ups out of the review: ~~decide the sdg / renfrew /
+  peterborough-county publishing question~~ (decided + implemented 2026-08-20 —
+  gated, see above); optionally send permission asks to those three counties so the
+  gates can lift; add the five newly-found OGL variants (frontenac, leeds-grenville,
+  lennox-addington, milton, windsor) to the drafted LWG variant-review email
+  (gist in LICENSING.md) and send it — that email is the one OGL follow-up
+  actually waiting on a human; optionally add the burlington/london terms-URL
+  pass-through to their report pages; optionally re-point milton and windsor at
+  the URLs their open licences literally cover.
 
 ## 4. Periodic / ops chores
 
 - [ ] **Re-probe `skipped.toml` quarterly** — endpoints come back or migrate
   (5 of 5 originally-dead cities were eventually recovered via ArcGIS Online).
-- [ ] **Delete the 2026-08-09 store backups** — 2.9 GB outside the repo, kept while the
+- [x] **Delete the 2026-08-09 store backups** — DONE 2026-08-20: deleted
+  `ontario-db-backup-2026-08-09` (2.69 GB), `-2026-08-09-preignore` (0.19 GB) and
+  also `-2026-08-10` (0.24 GB, the elgin/peel/waterloo reapply backup this item
+  never listed but the same drop rule covered — clean runs had imported on top of
+  all three). **Still kept, gate not met:** `-2026-08-20-preignore` (1.15 GB, 17
+  cities) and `-2026-08-20-remap` (lennox), because today's tuning/remap landed
+  *after* today's noon run — droppable once the 2026-08-21 run imports cleanly.
+  Original note follows for the restore procedure. — 2.9 GB outside the repo, kept while the
   prop-hashing migration settles (§5). Both passes verified idempotent and every
   affected city's latest diff verified byte-identical the same day, so these are
   belt-and-braces rather than a pending rollback:
@@ -407,12 +567,41 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
   the eight from the flag review). The §1 field-map remaps stay open — this pass
   deliberately did not touch identity or field maps. Watch item from the sweep:
   chatham-kent shrank ~500 rows over July and has not republished since
-  2026-07-24 — a data-integrity look, not a config one.
+  2026-07-24 — a data-integrity look, not a config one. (Checked 2026-08-20: now
+  27 days without a new content hash; the July trajectory was 59,162 → 59,158 →
+  59,159 → 59,121 → 58,809, i.e. −353 net with the big step −312 on 07-24. Pulls
+  still succeed daily — the publisher went quiet, we didn't.)
 
 ## 5. Hand to coding agent when convenient
 
 Code fixes found during the audits. Every one of them changes payload hashes → a
 one-time "modified" spike, so batch them:
+
+- [ ] **Extend `EDIT_METADATA_FIELDS` with the `creationdate` / `modificationdate`
+  spellings.** Found 2026-08-20 during the west-parry-sound onboarding: the source
+  publishes esri editor-tracking as `CreationDate`/`ModificationDate`, which the
+  global set misses (it has `created_date`/`last_edited_date` family only). WPS
+  pre-ignored them per-city before its first import, so nothing is stored anywhere
+  under those spellings today — meaning the global add is currently free (no
+  backfill needed). Cheapest right after this wave, before any other source shows
+  up with the same spelling and gets history stored.
+- [ ] **Drop literal `"None"` string values in `_clean_props`, the way
+  whitespace-only values are dropped.** Found 2026-08-20 during the windsor
+  spot-check: sources whose ETL leaks Python's `str(None)` publish the text
+  "None" where they mean null (verified against windsor's raw geojson —
+  `"Ward": "None"` — so it is their export, not our importer). Measured across
+  all 42 stores' active rows: **toronto 525,469 rows** (essentially the whole
+  city: `ADDRESS_STATUS`, `HI_NUM_SUF`, `LO_NUM_SUF`, `PLACE_NAME`,
+  `PLACE_NAME_ALL`, `LINEAR_NAME_DESC`), **windsor 5,572** (`Ward`, plus 696
+  rows whose *canonical* `number`/`full` are "None" — those same 696 unaddressed
+  parcels, so cleaning also fixes their display and corrects the appendix's
+  windsor number coverage from 100% to 99.4%), **milton 1**. Stable today, so
+  no churn — the exposure is the kitchener-empty-slot shape: the day a publisher
+  fixes their export to emit real nulls, every affected row re-hashes at once
+  (toronto = a 525k-row store event). Same treatment as the earlier normalize
+  fixes: code change + `backfill_props_hash.py` in one batch, backup first,
+  scheduled task idle. Decide the value set consciously ("None" exact-match
+  only, or also "NULL"/"<Null>"/"N/A" — the latter were not measured).
 
 - [x] Add `objectid_1`/`globalid_1` variants to `_VOLATILE_KEYS` (normalize.py) —
   present in 7 cities' stored props; mass-modify risk if a provider reassigns them.

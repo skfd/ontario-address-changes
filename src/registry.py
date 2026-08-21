@@ -22,6 +22,7 @@ class Dataset:
     license_name: str = ""
     osm_compatible: str = ""
     source_crs: str = ""  # e.g. "EPSG:2952"; reproject to WGS84 when coords are out of lon/lat range
+    publish_reports: bool = True  # false: licence forbids republication — keep tracking, publish no report pages
     location_min_move_m: float = 0.0  # drop location-only modifications moving less than this (metres); 0 = off
     key_field: str = ""
     synth_fields: list = field(default_factory=lambda: ["full"])
@@ -86,6 +87,7 @@ def _parse(path):
         license_name=raw.get("license_name", ""),
         osm_compatible=raw.get("osm_compatible", ""),
         source_crs=raw.get("source_crs", ""),
+        publish_reports=raw.get("publish_reports", True),
         location_min_move_m=float(floor),
         key_field=identity.get("key_field", ""),
         synth_fields=identity.get("synth_fields", ["full"]),

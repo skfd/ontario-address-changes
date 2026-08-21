@@ -44,6 +44,10 @@
     .city-count { font-weight:600; font-variant-numeric:tabular-nums; }
     .city-delta { font-size:12px; margin-top:2px; }
     .delta-add { color:var(--green); } .delta-rem { color:var(--red); } .delta-mod { color:var(--yellow); }
+    .city-blocked { background:var(--surface2); cursor:default; }
+    .city-blocked:hover { border-color:var(--border); box-shadow:var(--shadow-4); }
+    .blocked-badge { font-size:11px; font-weight:600; padding:2px 8px; border-radius:999px;
+      color:var(--red); border:1px solid var(--red); white-space:nowrap; }
     .skipped { margin-top:40px; }
     .skip-row { display:flex; align-items:center; gap:12px; background:var(--surface2);
       border:1px solid var(--border); border-radius:8px; padding:12px 16px; }
@@ -144,12 +148,27 @@
       <div class="map-legend">
         <span><i style="background:#0078d4"></i> Active — changes observed</span>
         <span><i style="background:#eaa300"></i> Initial sync only — no changes yet</span>
+        <span><i style="background:#c50f1f"></i> Tracked — licence blocks publishing</span>
       </div>
     </div>
     <div class="panel panel-list">
     <div class="cities">
       {% for c in cities %}
       <div class="city-row">
+        {% if c.license_blocked %}
+        <div class="city-link city-blocked">
+          <div class="city-main">
+            <div class="city-name">{{ c.provider }}</div>
+            <div class="city-sub">{{ c.license_name }} · last snapshot {{ c.last_date }}</div>
+            <div class="city-sub">Tracked, but the publisher's licence does not permit republishing
+              reports — none are available here.</div>
+          </div>
+          <div class="city-right">
+            <div class="city-count">{{ "{:,}".format(c.row_count) }}</div>
+            <div class="city-delta"><span class="blocked-badge">licence not compatible</span></div>
+          </div>
+        </div>
+        {% else %}
         <a class="city-link" href="{{ c.slug }}/index.html">
           <div class="city-main">
             <div class="city-name">{{ c.provider }}</div>
@@ -167,7 +186,8 @@
             </div>
           </div>
         </a>
-        {{ ui.field_info(c.compared_fields, c.ignored_fields, 'right') }}
+        {% endif %}
+        {% if not c.license_blocked %}{{ ui.field_info(c.compared_fields, c.ignored_fields, 'right') }}{% endif %}
       </div>
       {% endfor %}
     </div>
@@ -205,16 +225,22 @@
       ).addTo(map);
 
       function style(f) {
-        var c = f.properties.no_changes ? '#eaa300' : '#0078d4';
+        var c = f.properties.blocked ? '#c50f1f'
+              : f.properties.no_changes ? '#eaa300' : '#0078d4';
         return { color: c, weight: 1.5, fillColor: c, fillOpacity: 0.18 };
       }
       var layer = L.geoJSON(data, {
         style: style,
         onEachFeature: function (f, lyr) {
-          lyr.bindTooltip(f.properties.name, { sticky: true });
+          var label = f.properties.blocked
+            ? f.properties.name + ' — tracked; licence does not permit publishing reports'
+            : f.properties.name;
+          lyr.bindTooltip(label, { sticky: true });
           lyr.on('mouseover', function () { lyr.setStyle({ fillOpacity: 0.4, weight: 2 }); });
           lyr.on('mouseout', function () { layer.resetStyle(lyr); });
-          lyr.on('click', function () { window.location = f.properties.slug + '/index.html'; });
+          if (!f.properties.blocked) {
+            lyr.on('click', function () { window.location = f.properties.slug + '/index.html'; });
+          }
         }
       }).addTo(map);
 

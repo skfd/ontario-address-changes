@@ -1,0 +1,60 @@
+slug = "cobourg"
+provider = "Town of Cobourg"
+# maps.cobourg.ca died; the town migrated to this AGOL hosted layer (item
+# 8e0339a5814b4c84b097c983c7626572, owner melanie.chatten, Town of Cobourg org),
+# found 2026-08-20. Layer "Address Points", 7,837 rows verified live 2026-08-20.
+# Layer description: built 2020 for 911/roll-number/labelling purposes, every point
+# hand-vetted; entrances and unit points included alongside buildings.
+data_url = "https://services5.arcgis.com/bD7yhukP2irPxz1v/arcgis/rest/services/Address_Points/FeatureServer/0"
+access = "arcgis"
+format = "geojson"
+# Native layer SR is EPSG:26917 (UTM 17N); the geojson export arrives already in WGS84,
+# so this is a guard for a future export-CRS switch (pass-through while in lon/lat range).
+source_crs = "EPSG:26917"
+# Bespoke terms (fetched 2026-08-20 from the hub Terms of Use page, revised 2021-11-01):
+# grant is "a non-exclusive, non-transferable, license to copy and use the unmodified Open
+# Datasets for any lawful purpose"; redistribution is allowed without prior permission but
+# viral — "you retain in the Open Dataset any copyright or other proprietary rights notices"
+# and you must "obtain the recipient's agreement to abide by" the terms; otherwise "all
+# rights in and to the Datasets are reserved by the Town", and the Town "may suspend or
+# terminate the license(s)" on its belief of breach/harm. The unmodified-only grant plus
+# mandatory recipient agreement is ODbL-incompatible without a waiver.
+license_name = "Town of Cobourg Open Data Terms of Use (revised November 1, 2021)"
+osm_compatible = "red-review"
+# Operator gate 2026-08-20: the grant covers copying/redistributing the UNMODIFIED datasets
+# only — the same shape that keeps City of Peterborough skipped — so publishing derived diff
+# reports is not clearly licensed. Tracked, unpublished (same treatment as sdg/renfrew/
+# peterborough-county). An ask to the town (terms name the GIS coordinator,
+# mchatten@cobourg.ca) could lift this; flip to true if granted.
+publish_reports = false
+
+[identity]
+# No stable source id: ADD_ID is dead weight — 7,827 of 7,837 rows hold 0 and the other
+# 10 are null (checked live 2026-08-20); OBJECTID is sequential; no GlobalID published
+# (globalIdFieldName is empty on the layer).
+key_field = ""                                 # synthesize from address + rounded lon/lat
+synth_fields = ["number", "street", "unit"]
+
+[fields]                                        # source property -> canonical name
+number = "ADDNUM"
+street = "STREETNAME"                           # PREFIX/STREETTYPE/SUFFIX tracked via the props blob
+unit   = "BLDG_UNIT"                            # 522 of 7,837 non-blank (~6.7%, checked 2026-08-20).
+                                                # Mixed semantics: real unit letters ("91B" -> "B") but
+                                                # also the range-end of a spanned address ("4-8 KING ST W"
+                                                # -> ADDNUM 4, BLDG_UNIT 8). Kept as the only unit-shaped
+                                                # column; blanks are a padded " " in the source.
+full   = "Complete_Add"                         # verified full address string ("325 DENSMORE RD");
+                                                # expands the street-type abbreviation (FOOTE CR ->
+                                                # "489 FOOTE CRES"), so it is not a pure concatenation.
+# LABEL and Add_Label are map-label echoes (the oakville/quinte-west pattern): LABEL is
+# uniformly "Y" across all 7,837 rows today (source docs say Y/No controls labelling) and
+# Add_Label echoes ADDNUM or the range ("325", "4-8"). Not ignored day one — precedent says
+# wait for churn evidence before adding ignore_fields.
+
+# Change classes (field values verified against the live layer 2026-08-20): a
+# modification touching only these fields is reported in its humanized section
+# instead of the generic Updated Addresses table.
+[classes]
+# Point_Type categorizes the point (Building 6,773 / Unit 474 / Other 401 / Label 178 /
+# null 11) — the ottawa ADDRTYPE precedent.
+status = ["Point_Type"]

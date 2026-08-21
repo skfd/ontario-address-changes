@@ -1,0 +1,68 @@
+slug = "west-parry-sound"
+provider = "West Parry Sound Geography Network"
+# District-wide layer covering the WPSGN member municipalities/townships/First Nations/
+# local roads boards (13 Municipality values incl. Seguin, Archipelago, Parry Sound,
+# McDougall, Whitestone, Carling, McKellar, Wasauksing) — the muskoka shape; each member
+# maintains its own rows via a designated editor. Resolved 2026-08-20: the old
+# wpsgn.ca/arcgis instance returns an HTML error page; the server moved to /s22. The
+# service folder is literally named "wpsgn_opendata". Official: AGOL item
+# c9053cbee22e47ceac167971a9963ed7 (owner wpsgnet, the official WPS Geography Network
+# org) points at exactly this URL. 21,705 rows re-verified live 2026-08-20.
+data_url = "https://www.wpsgn.ca/s22/rest/services/wpsgnPublic/wpsgn_opendata/FeatureServer/0"
+access = "arcgis"
+format = "geojson"
+# Native layer SR is EPSG:3395 (World Mercator — unusual); the geojson export arrives
+# already in WGS84 (verified on sample rows 2026-08-20), so this is a guard for a future
+# export-CRS switch (pass-through while in lon/lat range).
+source_crs = "EPSG:3395"
+# Licence found 2026-08-20: nothing on the service (copyrightText empty) or the AGOL item
+# (licenseInfo null) or the data-wpsgn.opendata.arcgis.com hub, but the network's re3data
+# entry (r3d100013016) links the licence PDF, live at
+# https://wpsgn.ca/OpenGovernmentLicense%E2%80%93TownshipofTheArchipelago.pdf — v2, based
+# on OGL-Canada 2.0 (copy/modify/publish/distribute incl. commercial, attribution
+# required). Oddity: the licence is issued in the name of one member (Township of The
+# Archipelago) while the layer covers all members; re3data lists it as the licence for
+# the whole WPSGN repository. Worth confirming scope with info@wpsgn.ca.
+license_name = "Open Government License - Township of The Archipelago (v2, based on OGL-Canada 2.0)"
+osm_compatible = "yellow-ogl"
+
+# CreationDate/ModificationDate are the esri editor-tracking timestamps of this service
+# (its twin pair created_user/created_date/last_edited_user/last_edited_date is already
+# stripped globally by EDIT_METADATA_FIELDS, which misses these two spellings). Same
+# class of field, no address content — ignored from day one so edit timestamps never
+# reach payload_hash.
+ignore_fields = ["CreationDate", "ModificationDate"]
+
+[identity]
+# No stable source id. Rollnumber is an assessment parcel roll, 1:many with addresses
+# (up to 47 rows per roll on 490301001375000, checked 2026-08-20) and dirty besides
+# (free-text values "na", "henvey", "condo", "boat ramp", "LOT 109"; 1 blank row) — the
+# windsor trap. GlobalID is 100% populated and unique within the snapshot but has no
+# cross-snapshot stability evidence yet and may regenerate on republish (brant
+# precedent). OBJECTID sequential.
+key_field = ""                                 # synthesize from address + rounded lon/lat
+synth_fields = ["number", "street", "unit"]
+
+[fields]                                        # source property -> canonical name
+# CivicAddress is the STREET NAME, not a full address — verified on sample rows
+# 2026-08-20 (CivicAddress "Emily Street" vs Civic_FullAddress "58 Emily Street").
+number = "CivicNumber"
+street = "CivicAddress"                         # Municipality/Rollnumber/CODE tracked via the props blob
+unit   = "CivicUnit"                            # sparse: 122 of 21,705 non-blank (2026-08-20); kept
+                                                # selected by the oakville SUITE rule
+full   = "Civic_FullAddress"
+# Questions (sparse numeric code 1-9, 16k blank) and Comments (free text, but genuinely
+# informative — carries street-rename history like "was Fire Route 152A pre 20231204")
+# stay tracked via the props blob; no churn evidence to justify ignoring them day one.
+
+# Change classes (field values verified against the live layer 2026-08-20): a
+# modification touching only these fields is reported in its humanized section
+# (status changes / boundary reassignments) instead of the generic Updated
+# Addresses table.
+[classes]
+boundary = ["Municipality"]                     # 13 member communities, see header comment
+# Retired is uniformly "A" (active) on all 21,705 rows as of 2026-08-20 — the layer
+# currently carries zero retired records, so this class fires only if the network starts
+# publishing flips. Verified is NOT classed: legacy junk (blank/N/2005 dates/editor
+# names like "BRIAN LE*"), not a live status field.
+status = ["Retired"]

@@ -5,9 +5,11 @@ municipalities. Each run fetches a fresh snapshot of a dataset, stores it as a
 **Slowly-Changing-Dimension Type-2** history, and reports which addresses were
 added, removed, or modified since the previous snapshot.
 
-**Live site:** <https://skfd.github.io/ontario-address-changes/> — 42 datasets
+**Live site:** <https://skfd.github.io/ontario-address-changes/> — 53 datasets
 covering every major Ontario population centre and most of the eastern, central
-and southwestern counties, refreshed daily.
+and southwestern counties, refreshed daily. Four of them are tracked but not
+published: their licences don't permit republication, and the landing page marks
+them "licence not compatible" instead of linking reports.
 
 It generalizes the single-city
 [`toronto-addresses-import`](../toronto-addresses-import) tracker to a registry
@@ -88,8 +90,8 @@ python run.py flags                 # list change events held pending review
 
 ## Datasets
 
-42 registered, one TOML each in `datasets/` — from Toronto (525k address
-points) down to Brant County (19k). Region-wide layers cover their member
+53 registered, one TOML each in `datasets/` — from Toronto (525k address
+points) down to Cobourg (7.8k). Region-wide layers cover their member
 municipalities (Peel covers Mississauga/Brampton/Caledon; York covers
 Vaughan/Markham; Durham, Niagara, and the rural counties likewise). A few
 representative shapes:

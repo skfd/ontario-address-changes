@@ -2,11 +2,21 @@ slug = "sarnia"
 provider = "City of Sarnia"
 # Found via ArcGIS Online search (not a separate catalogue note; Sarnia is a lower-tier muni in
 # Lambton County but publishes its own official address open data, owner richard.jackson_Sarnia).
-data_url = "https://services1.arcgis.com/ICybsLmBXrZCZV3x/arcgis/rest/services/Addresses_Open_Data/FeatureServer/0"
+# 2026-08-20: the service was RENAMED within the same org — the old
+# .../Addresses_Open_Data/FeatureServer/0 started returning 400 "Invalid URL" (three failed
+# attempts in that day's run). Replacement verified live: item 2ed254db85d6442a8b040213c0c6b097
+# "Addresses Open Data", 26,958 rows (26,932 on 2026-08-10 — matches), same schema except
+# UPDATED/UPDATEDBY swapped for esri created_*/last_edited_* editor fields, all of which
+# EDIT_METADATA_FIELDS already filters; stored props verified to match the new roster exactly,
+# so the swap re-hashes nothing. Two decoys in the org: "Addresses" (28,491, internal master)
+# and "Sarnia_Address_Points" (26,495, stale).
+data_url = "https://services1.arcgis.com/ICybsLmBXrZCZV3x/arcgis/rest/services/Addresses_Open_Data_AGOL/FeatureServer/0"
 access = "arcgis"
 format = "geojson"
-license_name = "Not identified"
-osm_compatible = "unknown-review"
+# Item page now states terms: "City of Sarnia Open Data - Terms of Use", based on
+# Open Government Licence - Canada 2.0 (found 2026-08-20; was "Not identified").
+license_name = "City of Sarnia Open Data Terms of Use (OGL-Canada 2.0 based)"
+osm_compatible = "yellow-ogl"
 
 [identity]
 # No stable source id (OBJECTID_1 sequential, GlobalID may regenerate); no unit field published.

@@ -1,0 +1,44 @@
+slug = "middlesex"
+provider = "County of Middlesex"
+# The shared maps.middlesex.ca server died, taking six member municipalities with it;
+# the county migrated to this AGOL hosted layer (item 928ed74edad64e4aa65170fb49c46476,
+# owner Colesberry, org middlesex.maps.arcgis.com — verified genuinely Middlesex County ON),
+# found 2026-08-20. County-wide: MUNCODE covers all eight member municipalities
+# (SCT/SC Strathroy-Caradoc, MIDC Middlesex Centre, THC Thames Centre, NMID North Middlesex,
+# SMID/SWM Southwest Middlesex, LBD/LBT/LB Lucan Biddulph, AMT Adelaide Metcalfe, NEWB Newbury)
+# plus 117 null / 15 blank / 1 "I" junk rows. No London-coded rows — London is separated and
+# tracked as its own dataset. The slimmer sibling mc_address/FeatureServer/0 (30,368 rows,
+# no UNIT/MUNCODE) was rejected in favour of this one.
+data_url = "https://services.arcgis.com/vhh9rYcMiBEBPGYb/arcgis/rest/services/MiddlesexCountyAddressPoints/FeatureServer/0"
+access = "arcgis"
+format = "geojson"
+# Native layer SR is EPSG:26917 (UTM 17N); the geojson export arrives already in WGS84,
+# so this is a guard for a future export-CRS switch (pass-through while in lon/lat range).
+source_crs = "EPSG:26917"
+# Item licenseInfo (fetched 2026-08-20) is a pure as-is disclaimer with no grant of rights:
+# "The Data is provided 'as is', without warranty, representation or condition of any kind. ...
+# The Data is provided for information purposes only."
+license_name = "None published beyond as-is disclaimer (confirmed 2026-08-20)"
+osm_compatible = "unknown-review"
+
+[identity]
+# No stable source id: OBJECTID_12/OBJECTID are sequential (volatile, dropped by the
+# pipeline); GlobalID is 100% populated and unique in the 2026-08-20 snapshot (31,571
+# distinct of 31,571) but may be regenerated on AGOL republish, so not trusted day one.
+key_field = ""                                 # synthesize from address + rounded lon/lat
+synth_fields = ["number", "street", "unit"]
+
+[fields]                                        # source property -> canonical name
+# Coverage 2026-08-20: MUNNUMBER 30,994/31,571 non-blank (~98%; the rest look like
+# street-only/placeholder points), FULLADDRES 31,518. UNIT non-blank on only 568 rows
+# (~1.8%) — normal for a unit column; blanks are padded single spaces, not nulls.
+number = "MUNNUMBER"
+street = "STREET_NAM"                           # STREET_TYP/STREET_DIR tracked via the props blob
+unit   = "UNIT"
+full   = "FULLADDRES"
+
+# Change classes (field values verified against the latest snapshot): a
+# modification touching only these fields is reported in its humanized section
+# (boundary reassignments) instead of the generic Updated Addresses table.
+[classes]
+boundary = ["MUNCODE"]
