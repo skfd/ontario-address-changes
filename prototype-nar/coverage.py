@@ -96,6 +96,8 @@ COVERED_CSDS = {
 
 
 def norm(name: str) -> str:
+    # NAR CSD names can be bilingual ("Greater Sudbury / Grand Sudbury")
+    name = name.split(" / ")[0]
     return " ".join(name.lower().replace("’", "'").split())
 
 
