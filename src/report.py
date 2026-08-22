@@ -21,7 +21,7 @@ from jinja2 import Environment, FileSystemLoader
 from shapely import MultiPoint, concave_hull
 from shapely.geometry import mapping, shape
 
-from src import db, diff, flags
+from src import db, diff, flags, registry
 
 ROOT_DIR = os.path.dirname(os.path.dirname(__file__))
 TEMPLATES_DIR = os.path.join(ROOT_DIR, "templates")
@@ -472,6 +472,32 @@ def _spark_series(history, idx):
     return {k: [history[k][j] for j in range(lo, idx + 1)] for k in SPARK_KEYS}
 
 
+def _chronological_diffs(ds, snaps):
+    """Baseline first, then each consecutive pair."""
+    diffs = [(snaps[0], diff.compute_baseline(ds, snaps[0]["id"]), True)]
+    for i in range(len(snaps) - 1):
+        diffs.append((snaps[i + 1],
+                      diff.compute_diff(ds, snaps[i]["id"], snaps[i + 1]["id"]), False))
+    return diffs
+
+
+def _detect_flags(ds, snaps, diffs):
+    """Flag suspicious events into the ledger; return the entries appended.
+
+    Idempotent by key, so a full re-render also retro-flags history rather than
+    duplicating what is already recorded.
+    """
+    detected = []
+    for i in range(len(snaps) - 1):
+        found = flags.detect(ds, diffs[i + 1][1], snaps[i]["row_count"])
+        detected += flags.stamp(found, ds.slug, diff.snap_date(snaps[i + 1]))
+    appended = flags.record(detected)
+    for fl in appended:
+        print(f"  FLAGGED {fl['slug']} {fl['date']}: "
+              f"{fl['signature']} — {fl['scope']}")
+    return appended
+
+
 def generate_all(datasets):
     os.makedirs(DOCS_DIR, exist_ok=True)
     open(os.path.join(DOCS_DIR, ".nojekyll"), "w").close()
@@ -482,6 +508,18 @@ def generate_all(datasets):
         snaps = diff.nonskipped(ds)
         if not snaps:
             continue
+
+        # Diffs and flag detection run for EVERY dataset, published or not.
+        # A licence-blocked city has no public pages for a hold to act on, but a
+        # mass event in one is still something the operator has to see, and flags
+        # are back-office (logs/flags.html, the vault report) rather than public.
+        # Detecting below the publish gate instead left the four blocked cities
+        # structurally invisible to the detector -- renfrew could have taken a
+        # 45k-row sweep and flags.toml would have stayed silent.
+        diffs = _chronological_diffs(ds, snaps)
+        if _detect_flags(ds, snaps, diffs):
+            ledger = flags.load_ledger()
+
         if not ds.publish_reports:
             # Licence forbids republication: keep tracking, publish nothing.
             # Any previously published pages are removed, and the landing card
@@ -508,26 +546,8 @@ def generate_all(datasets):
         os.makedirs(os.path.join(DOCS_DIR, ds.slug), exist_ok=True)
         source_url = _source_url(ds)
 
-        # chronological diffs: baseline first, then each consecutive pair
-        diffs = [(snaps[0], diff.compute_baseline(ds, snaps[0]["id"]), True)]
-        for i in range(len(snaps) - 1):
-            diffs.append((snaps[i + 1],
-                          diff.compute_diff(ds, snaps[i]["id"], snaps[i + 1]["id"]), False))
-
-        # Flag suspicious events (idempotent by key, so a full re-render also
-        # retro-flags history), then hold flagged events off the public pages.
-        # Holds run before series/counts so sparklines match what is shown.
-        detected = []
-        for i in range(len(snaps) - 1):
-            found = flags.detect(ds, diffs[i + 1][1], snaps[i]["row_count"])
-            detected += flags.stamp(found, ds.slug, diff.snap_date(snaps[i + 1]))
-        appended = flags.record(detected)
-        if appended:
-            ledger = flags.load_ledger()
-            for fl in appended:
-                print(f"  FLAGGED {fl['slug']} {fl['date']}: "
-                      f"{fl['signature']} — {fl['scope']}")
-
+        # Hold flagged events off the public pages. Holds run before series/counts
+        # so sparklines match what is shown.
         added_held_sids = set()
         held_diffs = [diffs[0]]
         for snap, d, _ in diffs[1:]:
@@ -662,6 +682,11 @@ def generate_flags_page():
     vault report and refusal blocks live behind)."""
     ledger = flags.load_ledger()
     today = datetime.now().date()
+    # A flag on a licence-blocked city has nothing to hold back — the city
+    # publishes no report pages at all — so a "business" verdict there releases
+    # nothing. Marked at render time from the registry rather than stored in the
+    # ledger, because a licence can be re-read and the verdict outlive it.
+    blocked = {ds.slug for ds in registry.load_all() if not ds.publish_reports}
 
     def age(fl):
         try:
@@ -669,6 +694,8 @@ def generate_flags_page():
         except ValueError:
             return None
 
+    for f in ledger:
+        f["licence_blocked"] = f.get("slug") in blocked
     open_flags = sorted((f for f in ledger if f.get("status", "open") != "reviewed"),
                         key=lambda f: (f.get("detected", ""), f.get("slug", "")))
     for f in open_flags:

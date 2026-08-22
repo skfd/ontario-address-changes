@@ -62,6 +62,13 @@ _HEADER = """\
 # time, so re-running `python run.py report` after a review is what makes a
 # verdict take effect. Never delete entries: reviewed history is the
 # calibration record for the signatures.
+#
+# Licence-blocked cities (publish_reports = false) are flagged too, and their
+# flags hold nothing back - those cities publish no report pages at all, so a
+# "business" verdict there releases nothing and needs no re-render. They are
+# detected anyway because a mass event is the operator's to see either way;
+# logs/flags.html marks them so a reviewer is not looking for a page that does
+# not exist.
 
 """
 

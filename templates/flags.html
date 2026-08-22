@@ -35,6 +35,8 @@
     .date { font-variant-numeric:tabular-nums; color:var(--text-secondary); }
     .sig { font-family:'Cascadia Code',Consolas,monospace; font-size:11.5px;
       background:var(--surface2); border:1px solid var(--border); border-radius:4px; padding:0 6px; }
+    .blocked { font-size:11px; color:var(--text-dim); border:1px dashed var(--border);
+      border-radius:999px; padding:1px 8px; }
     .badge { margin-left:auto; white-space:nowrap; font-size:11px; font-weight:600;
       padding:2px 9px; border-radius:999px; border:1px solid var(--border); }
     .badge.open { color:var(--red); }
@@ -76,6 +78,7 @@
       <span class="slug">{{ f.slug }}</span>
       <span class="date">{{ f.date }}</span>
       <span class="sig">{{ f.signature }}{% if f.fields %}: {{ f.fields|join(', ') }}{% endif %}</span>
+      {% if f.licence_blocked %}<span class="blocked" title="This city publishes no report pages (licence), so a flag here holds nothing back and a business verdict releases nothing — review it for the record.">licence-blocked · nothing to hold</span>{% endif %}
       <span class="badge open">open{% if f.age_days is not none %} · {{ f.age_days }}d{% endif %}</span>
     </div>
     <div class="scope">{{ f.scope }}</div>
@@ -92,6 +95,7 @@
       <span class="slug">{{ f.slug }}</span>
       <span class="date">{{ f.date }}</span>
       <span class="sig">{{ f.signature }}{% if f.fields %}: {{ f.fields|join(', ') }}{% endif %}</span>
+      {% if f.licence_blocked %}<span class="blocked" title="This city publishes no report pages (licence), so a flag here holds nothing back and a business verdict releases nothing — review it for the record.">licence-blocked · nothing to hold</span>{% endif %}
       <span class="badge {{ f.verdict }}">{{ f.verdict }} · {{ f.reviewed }}</span>
     </div>
     <div class="scope">{{ f.scope }}</div>
