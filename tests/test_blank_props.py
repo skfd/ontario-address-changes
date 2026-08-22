@@ -50,6 +50,50 @@ def test_non_string_falsy_values_kept():
     assert props["FLAG"] is False
 
 
+def test_literal_null_strings_dropped():
+    """A publisher whose ETL writes str(None) means null, not the word "None".
+
+    toronto ships it on ~525k rows (ADDRESS_STATUS, PLACE_NAME, ...), windsor on
+    Ward; ArcGIS writes "<Null>" for the same thing. Both must hash as absent, so
+    the day either export is fixed the city does not re-hash in one go.
+    """
+    ds = _ds()
+    leaked = normalize.canonical(ds, _feat(STATUS="None", WARD=" <Null> "))
+    absent = normalize.canonical(ds, _feat())
+
+    props = json.loads(leaked["props"])
+    assert "STATUS" not in props
+    assert "WARD" not in props
+    assert leaked["payload_hash"] == absent["payload_hash"]
+
+
+def test_real_words_that_only_look_null_are_kept():
+    """Only the exact-case serializer spellings go.
+
+    "Unknown" is a coded-domain value on 541,943 stored props (toronto GENERAL_USE,
+    kitchener UNIT_TYPE); "NA", "?" and an uppercase "NONE" are things a person
+    typed. Dropping any of them would delete meaning, not noise.
+    """
+    ds = _ds()
+    props = json.loads(normalize.canonical(ds, _feat(
+        USE="Unknown", TYPE="UNKNOWN", POSTAL="NA", UNIT="?", LOT="NONE",
+        NOTE="None of the above"))["props"])
+    assert props == {"ID": "1", "NUM": "1", "ST": "Main St", "FULL": "1 Main St",
+                     "USE": "Unknown", "TYPE": "UNKNOWN", "POSTAL": "NA",
+                     "UNIT": "?", "LOT": "NONE", "NOTE": "None of the above"}
+
+
+def test_esri_editor_tracking_spellings_ignored():
+    """CreationDate/ModificationDate are the newer esri editor-tracking columns
+    (west-parry-sound); they churn with every edit and carry no address content."""
+    ds = _ds()
+    a = normalize.canonical(ds, _feat(CreationDate="2026-01-01", ModificationDate="2026-01-02"))
+    b = normalize.canonical(ds, _feat(CreationDate="2020-05-05", ModificationDate="2026-08-21"))
+    assert "CreationDate" not in json.loads(a["props"])
+    assert "ModificationDate" not in json.loads(a["props"])
+    assert a["payload_hash"] == b["payload_hash"]
+
+
 def test_globalid_1_is_volatile():
     ds = _ds()
     a = normalize.canonical(ds, _feat(GlobalID_1="{AAA}"))

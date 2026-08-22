@@ -48,7 +48,27 @@ EDIT_METADATA_FIELDS = frozenset({
     "update_date", "updated", "lastupdate", "lasteditdate",
     "last_edited_date", "last_edited_user", "lasteditor",
     "modified_date", "moddate", "adddate",
+    # esri's newer editor-tracking spellings (west-parry-sound publishes these two;
+    # nothing is stored anywhere under them, so adding them cost no backfill)
+    "creationdate", "modificationdate",
 })
+
+# Literal null serializations: text a publisher's ETL emits where it means null.
+# "None" is Python's str(None) leaking out of an export script -- toronto ships it
+# on ~525k rows across six columns (ADDRESS_STATUS, PLACE_NAME, PLACE_NAME_ALL,
+# HI_NUM_SUF, LO_NUM_SUF, LINEAR_NAME_DESC), windsor on Ward and its unaddressed
+# parcels. "<Null>" is how ArcGIS renders an empty cell when a field calculator
+# writes one out as text. Both are the publisher's bug, not a value, and both are
+# latent mass events: the day either export is fixed to emit real nulls, every
+# affected row re-hashes at once. Dropping them makes the prop absent, which is
+# what it already means.
+#
+# Deliberately NOT here (measured across all 53 stores, 2026-08-21): "Unknown" /
+# "UNKNOWN" (541,943 occurrences -- a real coded-domain value: toronto GENERAL_USE,
+# kitchener UNIT_TYPE), "NA"/"na", "?", "-", "NONE". Those are things a person or a
+# domain author typed meaning something; only the exact-case serializer spellings
+# are machine artefacts, so the match is exact-case and not a fuzzy null-ish list.
+_NULL_LITERALS = frozenset({"None", "<Null>"})
 
 _CANONICAL = ("number", "street", "unit", "full")
 
@@ -130,9 +150,10 @@ def _clean_props(props, ignore, keep=frozenset()):
             # column out (" ", "\t") carries no value, and a source that re-pads a
             # real value ("2502 Calabogie Road " -> "2502 Calabogie Road", renfrew
             # on 1,060 rows) churns the prop while the canonical field sits still,
-            # because _clean already strips those.
+            # because _clean already strips those. A stripped value that is only a
+            # serializer's word for null goes the same way (see _NULL_LITERALS).
             v = v.strip()
-            if not v:
+            if not v or v in _NULL_LITERALS:
                 continue
         if kl in keep and (v == 0 or v == "0"):
             # zero-encoded "absent" (Toronto stored HI_NUM=0 for non-ranges

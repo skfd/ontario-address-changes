@@ -1,6 +1,6 @@
 # Operator TODO — ontario-address-changes
 
-Last updated: 2026-08-20. Tasks for the human operator. Field-coverage numbers come
+Last updated: 2026-08-21. Tasks for the human operator. Field-coverage numbers come
 from an audit of all 42 tracked cities (latest snapshot in each city DB).
 
 ## 1. Complete field selection for tracked cities
@@ -577,15 +577,18 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
 Code fixes found during the audits. Every one of them changes payload hashes → a
 one-time "modified" spike, so batch them:
 
-- [ ] **Extend `EDIT_METADATA_FIELDS` with the `creationdate` / `modificationdate`
+- [x] **Extend `EDIT_METADATA_FIELDS` with the `creationdate` / `modificationdate`
   spellings.** Found 2026-08-20 during the west-parry-sound onboarding: the source
   publishes esri editor-tracking as `CreationDate`/`ModificationDate`, which the
   global set misses (it has `created_date`/`last_edited_date` family only). WPS
   pre-ignored them per-city before its first import, so nothing is stored anywhere
   under those spellings today — meaning the global add is currently free (no
-  backfill needed). Cheapest right after this wave, before any other source shows
-  up with the same spelling and gets history stored.
-- [ ] **Drop literal `"None"` string values in `_clean_props`, the way
+  backfill needed). **DONE 2026-08-21**, and it was still free: re-checked all 53
+  stores immediately before the edit and no row anywhere carries a prop under those
+  two spellings (nor `Creator`/`Editor`, esri's matching newer name columns — those
+  are deliberately *not* added, since nothing publishes them and "Editor" is a
+  plausible real column name elsewhere).
+- [x] **Drop literal `"None"` string values in `_clean_props`, the way
   whitespace-only values are dropped.** Found 2026-08-20 during the windsor
   spot-check: sources whose ETL leaks Python's `str(None)` publish the text
   "None" where they mean null (verified against windsor's raw geojson —
@@ -602,6 +605,47 @@ one-time "modified" spike, so batch them:
   fixes: code change + `backfill_props_hash.py` in one batch, backup first,
   scheduled task idle. Decide the value set consciously ("None" exact-match
   only, or also "NULL"/"<Null>"/"N/A" — the latter were not measured).
+
+  **DONE 2026-08-21.** The value set was measured first, across all 53 stores and
+  all history rather than active rows only, and the answer narrowed the fix:
+  `_NULL_LITERALS = {"None", "<Null>"}`, exact case, nothing else. Only those two
+  are machine artefacts — Python's `str(None)` and ArcGIS's rendering of an empty
+  cell written out as text. The near misses were all real values and are kept:
+  **"Unknown"/"UNKNOWN" 541,943 occurrences** (toronto `GENERAL_USE` on every row,
+  kitchener `UNIT_TYPE` 2,395, west-parry-sound `CODE` 1,111 — a coded domain, not
+  a null), `na`/`NA` 70, `?` 17, `-` 1, `NONE` 1. "NULL" and "N/A" turned out not
+  to occur at all, so the question they posed was moot.
+
+  Migration ran the same evening (scheduled task idle, next run ~15 h out; all 53
+  stores backed up to `C:\Users\kk\ontario-db-backup-2026-08-21-nullliterals`,
+  2.9 GB): **544,003 rows rewritten** — toronto 538,407, windsor 5,572, norfolk 12,
+  muskoka 6, durham 5, leeds-grenville 1 (the last four are the `<Null>` holders,
+  all in unit columns). Re-run reports 0, row count unchanged at 5,377,178, zero
+  literal-null values left in any store, 41 tests green. Note the row counts are
+  *all history*, not the active-row figures the 2026-08-20 measurement quoted
+  (toronto 538,407 vs 525,469 active); milton's 1 is not in the list because its
+  value was `LOT = "NONE"`, uppercase, which is kept.
+
+- [ ] **Follow-up out of the above: windsor's 696 canonical `"None"` values are
+  still there, and clearing them needs an identity migration.** The props fix
+  cannot reach them: `normalize.canonical` derives `number`/`full` from the *raw*
+  feature via `_clean`, not from the cleaned props blob, so those 696 unaddressed
+  parcels still display number/full = "None" (`street_address`/`Address` are the
+  mapped columns and both carry the literal). Stable, not churning — `_clean` will
+  keep computing "None" on every import, so store and import agree and no event
+  lands. Fixing it means teaching `_clean` the same `_NULL_LITERALS` rule, and
+  that is the heavier surgery: windsor synthesizes identity from
+  `number + street + unit` + geometry, so blanking `number` re-keys all 696 rows —
+  `tools/remap_canonical_from_prop.py` explicitly refuses a canonical in the synth
+  basis, and it would land as 696 retired + 696 added. Needs an identity-rewriting
+  migration (rewrite `identity_key`, the canonical columns and `payload_hash`
+  across all history in one pass, the way the lennox `ADD_LABEL` remap did for a
+  non-identity column). Blast radius is windsor's 696 rows and nothing else: the
+  only other canonical literals anywhere are `<Null>`/`?`/`Unknown`/`NA` in unit
+  columns (muskoka 22, norfolk 12, durham 5, and one row each in amherstburg,
+  kingston, leeds-grenville, lennox-addington) — 41 rows total, and all but the 18
+  `<Null>` ones are values we deliberately keep. Worth doing when the appendix's
+  windsor number coverage (100% -> 99.4%) is next being corrected, not before.
 
 - [x] Add `objectid_1`/`globalid_1` variants to `_VOLATILE_KEYS` (normalize.py) —
   present in 7 cities' stored props; mass-modify risk if a provider reassigns them.
