@@ -89,6 +89,43 @@ def _sample_plain(rows, label):
           " at high counts reads like a subdivision or a real removal)")
 
 
+# A vault verdict answers the *flag*, and one day can be more than one thing.
+# renfrew 2026-06-29 was filed `schema` for editor-metadata fields appearing
+# while 27 new rows rode along unmentioned, and nobody noticed for two months.
+# It matters here because `schema` and `artifact` are the two that map to a
+# hold-forever verdict carrying a rule whose whole purpose is to stop anyone
+# reviewing the day again -- so real growth underneath one of them is buried
+# silently and permanently. The vault reports movement separately from the
+# verdict for exactly this reason; read both, and say so when they disagree.
+HOLDS_FOREVER = ("schema", "artifact")
+
+
+def _address_movement(c):
+    """What the vault says the addresses did, beside what it called the day."""
+    if "addresses" not in c:
+        return  # older vault: the prose in `why` is all there is
+    a = c["addresses"]
+    if a is None:
+        print("         addresses: no baseline that day to measure against")
+        return
+    # None is "could not tell" (one side predates sketching), not zero.
+    share = ("rewrite share unmeasured" if a.get("rewritten") is None
+             else f"{a['rewritten']:.3%} rewritten")
+    print(f"         addresses: {a['net']:+,} {a['unit']} net, {share}")
+
+    verdict = c.get("verdict")
+    if a["net"] and verdict in HOLDS_FOREVER:
+        gone = "left" if a["net"] < 0 else "arrived"
+        print(f"         ^^ CHECK: the vault called this `{verdict}`, which maps to "
+              f"technical/bug here")
+        print(f"            and holds forever -- but {abs(a['net']):,} {a['unit']} "
+              f"{gone} that day.")
+        print("            Suppressing the whole day buries them. If the movement is "
+              "a separate")
+        print("            event, it wants its own verdict rather than riding on this "
+              "one.")
+
+
 def _vault_verdict(slug, date):
     days = max((date_t.today() - datetime.strptime(date, "%Y-%m-%d").date()).days + 5, 14)
     try:
@@ -106,10 +143,12 @@ def _vault_verdict(slug, date):
         print(f"  vault has no anomaly row for {slug} {date} within {days} days "
               "(the pull itself looked ordinary at the wire)")
     for c in hits:
-        print(f"  vault: verdict={c.get('verdict') or 'null (unreviewed)'}  "
-              f"why={c.get('why', '')}")
+        print(f"  vault: verdict={c.get('verdict') or 'null (unreviewed)'}"
+              + (f"  test={c['test']}" if c.get("test") else "")
+              + f"  why={c.get('why', '')}")
         if c.get("note"):
             print(f"         note: {c['note']}")
+        _address_movement(c)
 
 
 def _brief(slug, date):
