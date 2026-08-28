@@ -26,7 +26,7 @@ we are not going to tell you why, because we don't know.
 | Place-name edits | 0 |
 | **Addresses on file, 30 April** | **525,416** (+29 over the month) |
 
-April is the cleanest month we have on record. In March the file rewrote 386 place
+April is the plainest month we have on record. In March the file rewrote 386 place
 names, restyled a street and moved eight houses between former municipalities. In April
 it did none of that. Every change in the table above is an address arriving or leaving.
 
