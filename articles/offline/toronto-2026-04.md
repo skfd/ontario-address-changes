@@ -60,8 +60,10 @@ All five addresses are filed as **reserved** rather than **regular** — assigne
 in service. That is the usual order of operations: the address exists before the
 building, and the tracker sees the paperwork months before anyone sees a door.
 
-A third new street, **Sandown Lane** in Scarborough Southwest, arrived on 2 April with
-numbers 170 and 172 — and those two came in as *regular*, not reserved.
+A third street new to the file, **Sandown Lane** in Scarborough Southwest, arrived on 2
+April with numbers 170 and 172 — and those two came in as *regular*, not reserved. Worth
+being careful with that phrasing: the file records when a street name first carries an
+address, which is not the same as when the street was built.
 
 ## When five addresses replace three of themselves
 
