@@ -673,6 +673,304 @@ that are not publicly codified. **No public Toronto document states this.**
 
 ---
 
-## Items still open
+## 2. 56 Broadway Ave — "Proposed residential building", added 16 June 2026
 
-(placeholder — filled in when the development-application research returns)
+**Searched:** `"56 Broadway Ave" Toronto development application residential`; `"56 Broadway Avenue"
+Toronto zoning amendment application storeys`; `"56 Broadway Ave" Toronto`; `"40-44 Broadway" OR
+"40 and 44 Broadway Avenue" Toronto urbantoronto storeys project 2025`. Then queried the City's own
+open datasets directly (all re-run and confirmed by me, 28 August 2026).
+
+### Verdict: `nothing found` — and it is a strong, verified negative
+
+Three City of Toronto open datasets were queried for `STREET_NAME = BROADWAY`, `STREET_NUM = 56`:
+
+| Dataset | Result at 56 Broadway |
+|---|---|
+| Development Applications (`8907d8ed-c515-4ce9-b674-9f8c6eefcf0d`) | **0 records** |
+| Building Permits – Active (`6d0229af-bc54-46de-9c2b-26759b01dd05`) | **0 records** |
+| Building Permits – Cleared since 2017 (`a96c0ba4-3026-402b-b09d-5b1268b8f810`) | **0 records** |
+| Committee of Adjustment — all 18 active + closed resources, 2001→present | **0 records** |
+
+The Development Applications dataset holds 60 Broadway rows in total. The distinct street numbers
+are: 7, 14, 40, 44, 55, 65, 66, 75, 85, 87, 89, 91, 93, 95, 99, 100, 107, 110, 114, 117, 120, 124,
+127, 136, 391. **56 is not among them**; the nearest even-side numbers with any record are **44** and
+**66**.
+
+- Dataset home: https://open.toronto.ca/dataset/development-applications/
+- API (reproducible): `https://ckan0.cf.opendata.inter.prod-toronto.ca/api/3/action/datastore_search?resource_id=8907d8ed-c515-4ce9-b674-9f8c6eefcf0d&filters=%7B%22STREET_NAME%22%3A%22BROADWAY%22%2C%22STREET_NUM%22%3A%2256%22%7D`
+- Committee of Adjustment dataset: https://open.toronto.ca/dataset/committee-of-adjustment-applications/
+
+**There is no planning application, no building permit and no Committee of Adjustment application
+at 56 Broadway Ave in any City of Toronto open dataset.** The honest line for the article: the
+address point appeared carrying "Proposed residential building" with **no corresponding public
+application record**.
+
+### The nearest real project is at 44 Broadway, NOT 56 — `confirmed`, and the link is unproven
+
+UrbanToronto project database, fields verbatim:
+
+> **Project Name:** "44 Broadway Avenue" · **Address:** "44 Broadway Ave, Toronto, Ontario, M4P 1T4"
+> · **Developer:** "Collecdev-Markee Developments" · **Architect:** "KPMB Architects" (Design
+> Architect) and "Rafael + Bigauskas Architects" (Architect of Record) · **Storeys:** "43" ·
+> **Units:** "470" · **Status:** "Pre-Construction"
+
+- https://urbantoronto.ca/database/projects/44-broadway-avenue.38137
+
+City file numbers for that site, all recorded against street numbers **40 and 44 only**:
+`19 194902 NNY 15 OZ` (2019-07-24, Closed), `21 232455 NNY 15 SB` (2021-10-31, Under Review),
+`22 132571 NNY 15 SA` (2022-04-08, Under Review).
+
+**INFERENCE — do not print as fact:** 56 Broadway could not be connected to the 44 Broadway
+project or to any other. **No causal link should be stated.**
+
+---
+
+## 3. 351–363 Royal York Rd — seven "reserved" points added 17 June 2026
+
+**Searched:** `"351-363 Royal York Road" Toronto development`; `"351 Royal York" Toronto Ontario
+Land Tribunal decision 2025 approved condos Mimico`; `Ontario Land Tribunal "OLT-22" "Royal York
+Road" Mimico 351 365 decision settlement`; `"Royal York Road" Mimico 351 condo 2026 construction
+approved`. Plus direct queries of the four City datasets. All PDFs and dataset queries below were
+re-fetched and confirmed by me.
+
+### Verdict: `confirmed` — an eight-property assembly for an 11-storey, 282-unit building
+
+**City of Toronto Preliminary Report, Etobicoke York Community Council, 27 January 2022.**
+Verbatim:
+
+> "Wards: 3 - Etobicoke-Lakeshore  Planning Application Number: 21 196590 WET 03 OZ  Related
+> Applications: 21 228022 WET 03 SA  Notice of Complete Application Issued: August 11, 2021"
+
+> "The development site is an assembly of eight properties municipally known as 351, 353, 355, 357,
+> 359, 361, 363 and 365 Royal York Road. Each property is currently occupied by a one-storey
+> detached dwelling with a driveway accessed off of Royal York Road. Six of the properties also
+> contain a rear detached garage."
+
+> "…the application to amend city-wide Zoning By-law 569-2013 for the lands municipally known as
+> 351 to 365 Royal York Road. The application proposes to permit a 10-storey mixed use building
+> (approximately 39.6 metres in height, including the mechanical penthouse) containing 282 dwelling
+> units, 870 square metres of retail space on the ground floor…"
+
+- https://www.toronto.ca/legdocs/mmis/2022/ey/bgrd/backgroundfile-199293.pdf
+
+**City of Toronto Request for Direction Report, 4 January 2023.** Verbatim:
+
+> "On August 11, 2021, a Zoning By-law Amendment application was submitted to permit the development
+> of an 11-storey residential building (the 11th storey contains only a small indoor amenity area
+> at mechanical penthouse level), 39.6 metres in height including mechanical penthouse, with 282
+> dwelling units at 351, 353, 355, 357, 359, 361, 363, and 365 Royal York Road. The existing eight
+> detached dwellings and associated garages were proposed to be demolished."
+
+> "On June 9, 2022, the applicant appealed the Zoning By-law Amendment application to the Ontario
+> Land Tribunal ("OLT") due to Council not making a decision within the prescribed time frames set
+> out in the Planning Act."
+
+> "A sun and shadow study was prepared by Graziani + Corazza Architects Inc., dated July 2021."
+
+(Note the two reports differ: the January 2022 preliminary report describes a **10-storey mixed
+use** building; the January 2023 report describes an **11-storey residential** building. Both say
+282 units and 39.6 m.)
+
+- https://www.toronto.ca/legdocs/mmis/2023/ey/bgrd/backgroundfile-230805.pdf
+
+**City Solicitor report, 31 May 2023.** Verbatim:
+
+> "The OLT held the first Case Management Conference on October 28, 2022. A hearing is scheduled for
+> July 10 to14, 2023."
+
+> "This matter is urgent and cannot be deferred as this is the final City Council Meeting prior to
+> the commencement of the hearing. Furthermore, a with-prejudice settlement offer has been made and
+> expires at the end of the City Council meeting commencing June 14, 2023."
+
+- https://www.toronto.ca/legdocs/mmis/2023/cc/bgrd/backgroundfile-237016.pdf
+
+### Current status — `confirmed` (dataset as at 28 August 2026)
+
+Development Applications dataset, identical pairs of rows at 351, 353, 355, 357, 359, 361, 363
+**and 365**:
+
+```
+OZ  21 196590 WET 03 OZ  2021-08-11  STATUS: OMB Appeal
+SA  21 228022 WET 03 SA  2021-10-20  STATUS: NOAC Issued
+```
+
+**The zoning file is still recorded as "OMB Appeal".** Searched for an OLT decision or order —
+**nothing found**. **Do not state the appeal was resolved.**
+
+### Demolition and building permits — the closest-fitting real-world events — `confirmed`
+
+Building Permits – Active dataset. Eight demolition permits, one per property, all applied
+**2025-11-26** and all issued **2026-02-23**:
+
+| Permit | Structure | Street number |
+|---|---|---|
+| `25 258765 DEM` | SFD - Detached | 351 |
+| `25 258801 DEM` | SFD - Detached | 353 |
+| `25 258753 DEM` | SFD - Detached | 355 |
+| `25 258690 DEM` | SFD - Detached | 357 |
+| `25 258715 DEM` | SFD - Detached | 359 |
+| `25 258731 DEM` | SFD - Detached | 361 |
+| `25 258738 DEM` | SFD - Detached | 363 |
+| `25 258811 DEM` | 2 Unit - Detached | 365 |
+
+Also at 351 Royal York (nine active permit records in total):
+`25 265403 BLD` New Building, "Mixed Use/Res w Non Res", applied **2025-12-11**, status
+"Examiner's Notice Sent"; `25 265403 SHO` Conditional Permit – Shoring, applied 2026-02-20,
+"Agreement in Progress"; plus site-service, drain, mechanical and plumbing files all applied
+2025-12-11.
+
+Building Permits – Cleared since 2017, one record at 351 Royal York:
+`26 176059 ALT`, "AS Alternative Solution", applied **2026-06-02**, completed 2026-07-23,
+status "Approved".
+
+- https://open.toronto.ca/dataset/building-permits-active-permits/
+- https://open.toronto.ca/dataset/building-permits-cleared-permits/
+
+### Date deltas relative to the 17 June 2026 file change
+
+| Event | Date | Distance from 17 June 2026 |
+|---|---|---|
+| Zoning By-law Amendment filed | 2021-08-11 | 4 yr 10 mo **before** |
+| Appealed to the OLT | 2022-06-09 | 4 yr **before** |
+| New Building permit applied | 2025-12-11 | ~6 mo **before** |
+| Eight demolition permits issued | 2026-02-23 | ~3.8 mo **before** |
+| Alternative Solution permit applied at 351 | 2026-06-02 | **15 days before** |
+
+**INFERENCE (label it):** the seven reserved points are *consistent with* the City reserving
+municipal numbers as the 351 Royal York building-permit process advanced. **No document states
+this.**
+
+### Two things to flag honestly
+
+1. **Seven versus eight.** The assembly, the zoning application, the site plan and the demolition
+   permits all cover **eight** properties, 351 through **365**. The address file gained only
+   **seven** reserved points (351–363). **365 is missing.** Note it; do not force-fit it.
+2. **A news source contradicts the permit record.** Toronto Newswire, publication date verbatim
+   "November 17, 2023", opening line verbatim: *"Demolition crews have begun removing rubble of a
+   small brick house which is one of eight being levelled to build a 11-storey condo building on
+   Royal York Road."* It places the site *"directly across from San Remo Bakery, at the
+   northwest-east corner of Royal York Road and Newcastle Street, in Mimico."* **But the City's
+   demolition permits were not issued until 2026-02-23, and no 2023 demolition permit at 351–365
+   exists in the cleared-permits dataset.** Rely on the permits; either omit this article or state
+   the discrepancy. https://torontonewswire.com/demolition-underway-to-build-11-storey-building-across-from-san-remo-on-royal-york-rd/
+
+### Proponent — `nothing found` reliably
+
+City reports never name the applicant. Trade and marketing sources disagree (UrbanToronto's forum
+thread title reads "Royal Art Collection Etobicoke | 41.32m | 11s | Country Homes | Graziani +
+Corazza" while the thread's own URL slug still says "tonlu-properties-graziani-corazza"):
+https://urbantoronto.ca/forum/threads/toronto-351-royal-york-39-6m-10s-tonlu-properties-graziani-corazza.32611/
+**Omit the developer name, or attribute it loosely.** The architect, Graziani + Corazza Architects
+Inc., *is* named in a City report and is safe to use.
+
+---
+
+## 7. Retired addresses: 707/709 Church St and 344 Dupont St
+
+### 707 and 709 Church St — `likely`, with an important caveat
+
+**Searched:** `"707 Church Street" Toronto development application demolition`; `urbantoronto "717
+Church Street" Toronto condo storeys 707 709`; `"707" "717 Church Street" "Collier Street" Toronto
+zoning by-law amendment final report 27-storey`; plus all City datasets for CHURCH 700–720.
+
+**City of Toronto Request for Direction Report, 20 August 2021.** Verbatim:
+
+> "717 Church Street, and 85-97 Collier Street - Zoning Amendment Application – Request for
+> Direction Report"
+
+> "Ward: University-Rosedale - Ward 11  Planning Application Number: 20 220898 STE 11 OZ"
+
+> "On November 20, 2020, a Zoning By-law Amendment application was submitted to permit a 30-storey
+> residential building with 300 dwelling units at 717 Church Street and 85-97 Collier Street. On
+> May 27, 2021, the Applicant appealed the application to the Ontario Land Tribunal ("OLT") due to
+> Council not making a decision within the 90-day time frame in the Planning Act."
+
+> "Existing Uses: A four storey office building is located at 717 Church Street, and two
+> three-storey semi-detached house form buildings containing residential and non-residential uses
+> are located at 85-97 Collier Street."
+
+> "The site is located at the northwest corner of the Church Street and Collier Street
+> intersection. The irregular shaped site is 944 square metres in size, and has a frontage of 61
+> metres on Collier Street and 18.5 metres on Park Road."
+
+- https://www.toronto.ca/legdocs/mmis/2021/te/bgrd/backgroundfile-170076.pdf
+
+**The project as built.** UrbanToronto project database, fields verbatim:
+
+> **Project Name:** "Park Road" · **Address:** "707-717 Church St, Toronto, Ontario, M4W 2M4" ·
+> **Developer:** "Capital Developments" · **Architect:** "Diamond Schmitt Architects" ·
+> **Storeys:** "28" · **Units:** "Total Number Of Units 303" · **Status:** "Under Construction"
+
+- https://urbantoronto.ca/database/projects/717-church-street.43708
+
+**Permits at 717 Church** (confirmed by me, both datasets):
+- `23 177932 DEM`, Demolition, structure type **Office**, applied 2023-07-21, **issued 2023-09-08**,
+  completed **2024-02-23**, Closed.
+- `23 195253 BLD`, New Building, Apartment Building, applied 2023-08-29, **issued 2026-03-17**,
+  status "Inspection". A revision (`rev 01`) applied 2026-07-13.
+- Conditional/partial permits for shoring (issued 2024-03-15), foundation (2024-09-11) and
+  structural framing (2025-07-22).
+
+Development Applications dataset at 717 Church: `20 220898 STE 11 OZ` (2020-11-20, Closed),
+`21 194034 STE 11 SA` (2021-08-05, Closed), `21 215499 STE 11 CD` (2021-09-21, "Draft Plan
+Approved"). The CD record's description, verbatim: *"*** Draft Plan of Condominium for 300
+residential dwelling units.There are concurrent rezoning and site plan control applications that
+are under review: 20 220898 STE 11 OZ and 21 194034 STE 11 SA"*.
+
+**THE CAVEAT — say "consistent with", not "because of".** Every City of Toronto document describes
+this site as **"717 Church Street and 85-97 Collier Street"**. None mentions 707 or 709. I queried
+the cleared-permits dataset for `STREET_NUM = 707` and `709` on CHURCH: **zero records, ever.** The
+**only** source tying 707/709 Church to this project is UrbanToronto's Address field,
+`"707-717 Church St"` — a real, quotable page, but not a City record.
+
+**Date deltas relative to the June 2026 retirement:**
+- Demolition permit issued 2023-09-08 → ~2 yr 9 mo before.
+- Demolition completed 2024-02-23 → ~2 yr 4 mo before.
+- **Full New Building permit issued 2026-03-17 → ~3 months before.** The closest-fitting event.
+
+### 344 Dupont St — `nothing found`
+
+**Searched:** `"344 Dupont Street" Toronto development application`; `"344 Dupont" Toronto
+redevelopment 2025 2026 condo demolished`; `"Freed ANX" Dupont Toronto 344 346 348 350 Dupont
+Street project`; `"344 Dupont" Toronto building permit demolition 2026 address`; plus all City
+datasets for DUPONT 336–356. A fetch of https://www.signetgroup.ca/commercial/344-dupont returned a
+generic landing page with no mention of the address.
+
+The only records that exist anywhere (confirmed by me):
+
+- Development Applications: two **closed** rezonings, both over a decade old, covering
+  344/346/348/350/352/354/356 Dupont as one assembly —
+  `10 184959 STE 20 OZ` (2010-05-31, Closed) and `15 110684 STE 20 OZ` (2015-01-30, Closed).
+- Building Permits – Active: **0 records**.
+- Building Permits – Cleared since 2017: **one record, ever** —
+  `19 185741 PSA`, Plumbing, "Backflow Prevention Devices (Water only)", applied 2019-07-09,
+  issued 2019-08-23, completed 2019-10-03, Closed.
+
+**No demolition permit. No new-building permit. No active application. No Committee of Adjustment
+application. Nothing found explaining the June 2026 retirement of 344 Dupont St.**
+
+Nearest recent activity on the street is at 328 Dupont (the Freed "ANX" project) and 374–390
+Dupont — different sites.
+
+**Deliberately excluded:** search-engine summaries twice asserted that "344 and 358 that were
+previously part of the redevelopment are staying as-is with renovations." That sentence could not
+be found on any page actually fetched — it appears to be a search-engine paraphrase of an old
+forum post about 2015-era plans. **It has no verifiable quote and must not be used.**
+
+---
+
+## Summary table
+
+| Item | Verdict | One line |
+|---|---|---|
+| 1. St Clair-Old Weston station | `confirmed` | Metrolinx/GO Expansion; under construction; tunnel excavation began June 2026; St Clair Ave W pedestrian access is in the design; opens 2031; renamed "Stockyards" in Aug 2026, after the file change |
+| 2. 56 Broadway Ave | `nothing found` | No application, permit or CofA record at 56 in any City dataset; nearest even-side records are 44 and 66 |
+| 3. 351–363 Royal York Rd | `confirmed` | `21 196590 WET 03 OZ` — 11 storeys, 282 units, 8-property assembly 351–365; still "OMB Appeal"; 8 demolition permits issued 2026-02-23 |
+| 4. Ethennonnhawahstihnen' CRC & Library | `confirmed` | Real, open; Wendat name gifted by the Huron-Wendat Nation, "where they had a good, beautiful life"; opened to public 2023, official opening 23 Mar 2024 |
+| 5a. Stanley G. Grizzle Park | `confirmed` | Renamed from Main Street Parkette, motion May 2007; Grizzle was a BSCP union officer and Canada's first Black citizenship judge |
+| 5b. Robert Leek Memorial Park | `confirmed` | Renamed from Hanover Park, 3 Hanover Rd, North York; Leek died at the 2008 Sunrise Propane explosion |
+| 5c. Irving W. Chapley Park | `nothing found` | Only that he was "a local alderman" (Wikipedia) and a 1986 Toronto Star photo; no naming decision, no biography |
+| 5d. Hannon-Shields Centre | `likely` | Named 2004 for Marcella Hannon and Eldon Shields; birthplace of the Children's Peace Theatre; no City naming decision found |
+| 6. Half-number policy | `nothing found` (verified) | Toronto's Ch. 598 is silent on number format; Hamilton has the explicit rule, Toronto does not |
+| 7a. 707/709 Church St | `likely` | "Park Road", 28 storeys, under construction — but City records name only 717 Church + 85-97 Collier |
+| 7b. 344 Dupont St | `nothing found` | Two closed 2010/2015 rezonings and a 2019 backflow-valve permit; nothing else, ever |
