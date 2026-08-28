@@ -17,17 +17,16 @@ This is a live comparison. One variant may be dropped after review; dropping it 
 
 ## The months
 
-| Month | Net | Lead (offline) |
-|---|---|---|
-| 2026-03 | +28 | A block of Queen East retires; the published file reverts to its April-2025 values |
-| 2026-04 | +29 | Eleven addresses off the even side of Secord Ave; rear (`R`) addresses |
-| 2026-05 | +19 | Chloe Cooley St debuts, reserved; BMO Field becomes Toronto Stadium |
-| 2026-06 | +15 | An address for an unbuilt SmartTrack station entrance; seven duplicate Royal York Rd points |
-| 2026-07 | +12 | Eglinton Crosstown West Extension gets its addresses; the March reversion undone |
+| Month | Net | Lead, offline | Lead, researched |
+|---|---|---|---|
+| 2026-03 | +28 | A block of Queen East retires — cause unknown | *Nothing was demolished*: ten consecutive point ids folded back into 1238, and the development is across the street |
+| 2026-04 | +29 | Eleven addresses off the even side of Secord Ave | The demolition permit was issued **25 Mar 2021** — the file is five years behind, and the surviving evens are the unpermitted next phase |
+| 2026-05 | +19 | Chloe Cooley St debuts, reserved | By-law 182-2026 names it; the City's own report repeats the wrong enslaver's name from a 2007 plaque |
+| 2026-06 | +15 | An address for an unbuilt station entrance | …under a name Metrolinx has since dropped; and Hamilton publishes the `R`-suffix and half-number rules Toronto doesn't |
+| 2026-07 | +12 | Crosstown West gets its addresses | Those nine addresses are a **contract's parts list**; and the park "renamings" are restorations of decisions up to ten years old |
 
-The researched versions may lead on something else — that is the point of the
-comparison, and the skill says to write the second one as its own piece rather than as
-an annotated diff.
+The researched versions lead on something else in four months out of five — which is
+most of what this comparison was set up to find out.
 
 February 2026 is deliberately absent: observation starts 2026-02-12, so its first
 fortnight was never seen. August 2026 is still open.
