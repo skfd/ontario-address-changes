@@ -9,10 +9,12 @@ and what the source properties said at the time.
     python .claude/skills/monthly-article/lookup.py toronto --street "Queen St E" --month 2026-03
     python .claude/skills/monthly-article/lookup.py toronto --place "Kennedy Station"
     python .claude/skills/monthly-article/lookup.py toronto --addr "6 Shorncliffe Rd" --props
+    python .claude/skills/monthly-article/lookup.py toronto --near "18 Chloe Cooley St"
 """
 
 import argparse
 import json
+import math
 import os
 import sys
 
@@ -44,6 +46,39 @@ def rows_for(ds, where, params):
     return rows
 
 
+def near(ds, conn, lat0, lon0, last_id, limit=12):
+    """Nearest active address on each *other* street, closest first.
+
+    Answers "where is this, actually" without leaving the store. A new street has
+    coordinates and nothing else; its neighbours are what place it. Written after
+    an article located Chloe Cooley St in the West Don Lands from memory when
+    33 Richardson St was sitting 28 m away in the same database.
+    """
+    box = conn.execute(
+        "SELECT full, street, latitude, longitude FROM addresses "
+        "WHERE min_snapshot_id <= ? AND max_snapshot_id >= ? "
+        "AND latitude BETWEEN ? AND ? AND longitude BETWEEN ? AND ?",
+        (last_id, last_id, lat0 - 0.0035, lat0 + 0.0035,
+         lon0 - 0.0045, lon0 + 0.0045)).fetchall()
+    out = []
+    for r in box:
+        if r["latitude"] is None or r["longitude"] is None:
+            continue
+        mid = math.radians((lat0 + r["latitude"]) / 2)
+        out.append((math.hypot((r["longitude"] - lon0) * 111_320 * math.cos(mid),
+                               (r["latitude"] - lat0) * 111_320), r))
+    out.sort(key=lambda x: x[0])
+    seen, rows = set(), []
+    for d, r in out:
+        if r["street"] in seen:
+            continue
+        seen.add(r["street"])
+        rows.append((round(d), r["full"]))
+        if len(rows) >= limit:
+            break
+    return rows
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -51,6 +86,8 @@ def main():
     p.add_argument("--addr", help="full address, exact or partial (LIKE)")
     p.add_argument("--street", help="street name, exact")
     p.add_argument("--place", help="PLACE_NAME value, exact or partial")
+    p.add_argument("--near", metavar="ADDR",
+                   help="locate an address: nearest active address on each other street")
     p.add_argument("--month", help="only rows whose span touches this YYYY-MM")
     p.add_argument("--props", action="store_true", help="dump the source properties too")
     a = p.parse_args()
@@ -59,6 +96,22 @@ def main():
     dates = _dates(ds)
     last_id = max(dates) if dates else 0
 
+    if a.near:
+        conn = db.init_db(ds)
+        anchor = conn.execute(
+            "SELECT full, latitude, longitude FROM addresses WHERE full = ? "
+            "AND min_snapshot_id <= ? AND max_snapshot_id >= ? LIMIT 1",
+            (a.near, last_id, last_id)).fetchone()
+        if not anchor:
+            conn.close()
+            raise SystemExit(f"no active address {a.near!r} in {ds.slug}")
+        sys.stdout.reconfigure(encoding="utf-8")
+        print(f"{anchor['full']}  ({anchor['latitude']}, {anchor['longitude']})\n")
+        for d, full in near(ds, conn, anchor["latitude"], anchor["longitude"], last_id):
+            print(f"  {d:>5} m  {full}")
+        conn.close()
+        return
+
     if a.addr:
         rows = rows_for(ds, "full LIKE ?", (f"%{a.addr}%",))
     elif a.street:
@@ -66,7 +119,7 @@ def main():
     elif a.place:
         rows = rows_for(ds, "props LIKE ?", (f'%"PLACE_NAME": "%{a.place}%',))
     else:
-        p.error("one of --addr / --street / --place is required")
+        p.error("one of --addr / --street / --place / --near is required")
 
     if a.month:
         rows = [r for r in rows

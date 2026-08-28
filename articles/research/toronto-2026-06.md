@@ -104,7 +104,11 @@ part of the station design. **INFERENCE**: the new address point is that access.
   contract (July 2023) to the *Junction Triangle (Bloor-Lansdowne)* station, not this one, and
   Metrolinx's own page still lists the major construction contract award as a future milestone.
   **Do not state a contractor for St Clair-Old Weston** — sources conflict. `nothing found`
-  (reliably).
+  (reliably). One clue, **UNVERIFIED**: the May 2026 CLC deck's vibration table records, verbatim,
+  *"Graham investigated the complaint"* for March 2026 — suggesting the firm currently on site for
+  early works is Graham. A plausible reconciliation of the conflict is that Grascan's 2022 award
+  covered design/early works while the "Major Construction contract" is still to come, but **no
+  source states this** and it should not be published.
 - Service: **UP Express only**, not Kitchener GO. Metrolinx page, verbatim: *"serviced by the UP
   Express"* and *"Single train connection to Union Station and Pearson International Airport"*.
   UrbanToronto, verbatim: *"St Clair-Old Weston station would be serviced by the Union Pearson

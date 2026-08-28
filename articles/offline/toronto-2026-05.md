@@ -1,9 +1,10 @@
 # Chloe Cooley Street arrives, with nobody living on it yet
 
 On 26 May 2026, a street that had never appeared in Toronto's address file appeared in
-it, with six addresses: 18, 20, 30, 32, 34 and 38 **Chloe Cooley Street**. The
-coordinates put it in the West Don Lands, a few hundred metres from Cherry Street, in
-Ward 10.
+it, with six addresses: 18, 20, 30, 32, 34 and 38 **Chloe Cooley Street**. Its nearest
+neighbours in the file place it exactly: 33 Richardson Street is 28 metres away, 185 Lake
+Shore Boulevard East 47 metres, and 162 Queens Quay East 49 metres. It is a new street on
+the east waterfront, between Lower Jarvis and Lower Sherbourne, in Ward 10.
 
 All six are filed as *reserved* — the City's flag for an address that has been assigned
 but is not yet in service. Nobody lives at 18 Chloe Cooley Street. The number exists

@@ -38,6 +38,20 @@ The tell is the shape of the change (spacing, punctuation, abbreviation, directi
 suffix) and the count — an editorial restyle hits every address on the street at once.
 Say "the file restyled the name", and check whether it reverts in a later month.
 
+**Where anything is.** Never name a neighbourhood from memory off a pair of
+coordinates. Ask the store what is next door:
+
+```
+python .claude/skills/monthly-article/lookup.py toronto --near "18 Chloe Cooley St"
+```
+
+It lists the nearest active address on each other street, closest first, which places a
+new street far better than a recalled neighbourhood name and is checkable. This exists
+because a draft put Chloe Cooley St in the West Don Lands while 33 Richardson St, 185
+Lake Shore Blvd E and 162 Queens Quay E sat 28, 47 and 49 metres away in the same
+database — it is on the east waterfront. Cross-streets from `--near` are always safe to
+print; a neighbourhood name never is unless a source says it.
+
 **A new street.** `new_streets` reports the first snapshot on which any address carried
 that street name. That is a *record* debut. Confirm it looks like a real new road (a
 handful of addresses appearing together, plausible suffix) rather than a spelling
