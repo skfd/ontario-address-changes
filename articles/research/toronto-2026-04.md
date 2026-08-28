@@ -360,13 +360,19 @@ The report is dated 30 January 2026 and community councils have delegated author
 a decision would normally follow at the next Etobicoke York Community Council meeting
 (meetings on 18 February 2026 and 31 March 2026 exist per the City's YouTube channel:
 https://www.youtube.com/watch?v=oFxSvyzQvZw and
-https://www.youtube.com/watch?v=OrYbhbFa6yg). I could not retrieve the agenda/decision
-item number — `secure.toronto.ca/council/report.do` returns 403 to automated fetches.
-**Do not state a decision date without checking that page in a browser.**
+https://www.youtube.com/watch?v=OrYbhbFa6yg; a communication filed for a
+February 2026 EY meeting: https://www.toronto.ca/legdocs/mmis/2026/ey/comm/communicationfile-205130.pdf).
+I could not retrieve the agenda/decision item number — `secure.toronto.ca/council/report.do`
+and `/council/agenda-item.do` both return 403 to automated fetches. A second search
+surfaced two Etobicoke York agenda-item URLs in the same result set
+(2026.EY31.3 and 2026.EY32.24) but **neither could be verified as this item** — do not
+use either. **Do not state a decision date or item number without checking
+`secure.toronto.ca` in a browser.**
 
 **Timing:** the naming report is dated 30 January 2026, ~10 weeks before the addresses
 appear in the file (13 April 2026). The addresses arrive as *reserved*, which is
-consistent with streets named but not yet built.
+consistent with streets named and under construction but not yet occupied — the townhouse
+construction permits were issued 16–22 January 2026 (see below).
 
 **Confidence: confirmed** for the street-naming report, its date, ward, the private-street
 status, the applicant rationale, and the 2650 St Clair development. **Nothing found** for
@@ -475,10 +481,15 @@ Rd has **no public-record explanation at all** in the City's own datasets.
 - 2017 City background report, *Laneway Suites: A new housing typology for Toronto*
   (26 May 2017) — https://www.toronto.ca/wp-content/uploads/2017/10/97ac-Laneway-Suits.pdf
 
-Neither program page was found to describe an addressing suffix. The City's own permit
-data uses the structure type "Laneway / Rear Yard Suite" — that phrase is the closest
-official language found to "rear address", and it comes from the permit dataset, not from
-an addressing policy.
+**Both program pages were fetched and checked.** Neither the Changing Lanes (laneway
+suites) page nor the Garden Suites page contains anything about how a suite gets a
+municipal address — no suffix, no separate-address rule, no "R", no municipal numbering
+at all. So the answer to "what does the laneway/garden-suite program say about how these
+get addressed?" is: **nothing**.
+
+The City's own permit data uses the structure type "Laneway / Rear Yard Suite" — that
+phrase is the closest official language found to "rear address", and it comes from the
+permit dataset, not from an addressing policy.
 
 **Confidence: confirmed** that 407 Arlington and 623 Broadview each have a City building
 permit for a laneway/rear-yard suite (and that 623 Broadview's is described as a garden
