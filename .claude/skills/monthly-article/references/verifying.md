@@ -81,10 +81,15 @@ untouched rows. To count arrivals, take the month's net `compute_diff` and filte
 
 ## Cross-checking outside the file
 
-The address file records paperwork. When the article wants to say *why*, the file
-cannot tell you and neither can this repo. Either attribute the cause to a source that
-does know (a city notice, a development application, a council decision) with a link,
-or write the sentence without a cause. There is no third option that is honest.
+The address file records paperwork. When the article wants to say *why*, the file cannot
+tell you and neither can this repo — the cause has to come from a source that does know
+(a council decision, a development application, a city notice), with a link, or the
+sentence goes out without a cause. Those are the only two honest options; a plausible
+guess is not a third.
+
+Finding those sources is step 5b of the loop and has its own reference:
+`references/research.md`. It applies to the researched variant of an article. The
+offline variant deliberately takes the second option every time.
 
 ## Numbers
 

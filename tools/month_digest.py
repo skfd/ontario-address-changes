@@ -332,6 +332,63 @@ def as_text(g):
     return "\n".join(o) + "\n"
 
 
+CLUSTER_MIN = 3     # net additions/removals on one street before it is worth researching
+
+
+def as_entities(g):
+    """The month's named things, as a research checklist.
+
+    The store records that eleven addresses left Queen St E; it cannot record why.
+    Everything in this list is a proper noun the outside world may have written
+    about - a council naming decision, a development application, a demolition
+    notice, a transit project - so it is what a search step should work through.
+    Ordered by how likely each kind is to have a public paper trail behind it.
+    """
+    m = g["meta"]
+    o = [f"# Research checklist - {m['provider']}, {m['month']}",
+         f"# window {m['opening_snapshot']} -> {m['closing_snapshot']}", ""]
+
+    def block(title, lines, why):
+        o.append(f"## {title}")
+        o.append(f"({why})")
+        o.extend(lines or ["  (none)"])
+        o.append("")
+
+    block("New streets", [f"  {x['street']} - {x['count']} address(es), debut {x['date']}"
+                          for x in g["new_streets"]],
+          "a street name is a council decision; search the naming and the development")
+    block("Streets gaining addresses", [f"  {x['street']} - {x['count']}"
+                                        for x in g["top_streets_added"]
+                                        if x["count"] >= CLUSTER_MIN],
+          f"{CLUSTER_MIN}+ net additions on one street is usually one project")
+    block("Streets losing addresses", [f"  {x['street']} - {x['count']}"
+                                       for x in g["top_streets_removed"]
+                                       if x["count"] >= CLUSTER_MIN],
+          f"{CLUSTER_MIN}+ net removals is usually one demolition or assembly")
+    block("Address splits", [f"  {x['base']} -> {x['children']} (parent {x['parent']})"
+                             for x in g["splits"]],
+          "severance, subdivision or a new multi-unit building")
+    block("Street renames", [f"  {x['old']} -> {x['new']} ({x['count']} addresses)"
+                             for x in g["renames"]],
+          "a real rename is a council item; a restyle is not - decide which first")
+    block("Place names given", [f"  {x['value']}" for x in
+                                g["place_name_summary"]["gained"]] +
+                               [f"  {x['value']} (on a new address)"
+                                for x in g["place_names_added"]],
+          "a named facility, park or station - the name is the search term")
+    block("Place names changed", [f"  {x['value']}" for x in
+                                  g["place_name_summary"]["changed"]],
+          "renamings and mergers; commemorative renamings have a council record")
+
+    o += ["## Rules", "",
+          "- Every fact taken from a search gets a link in the article. No link, no claim.",
+          "- A search that finds nothing is a result: say the record is silent, don't guess.",
+          "- The store says what changed and when. The web says why, and only sometimes.",
+          "  Where they disagree, the store wins on facts about the file and the web wins",
+          "  on facts about the world - and the article says which is which.", ""]
+    return "\n".join(o)
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -339,7 +396,7 @@ def main():
     p.add_argument("--month", help="YYYY-MM")
     p.add_argument("--months", action="store_true",
                    help="list observed months and which are complete")
-    p.add_argument("--format", choices=("text", "json"), default="text")
+    p.add_argument("--format", choices=("text", "json", "entities"), default="text")
     p.add_argument("--out", help="write to this path instead of stdout")
     a = p.parse_args()
 
@@ -352,7 +409,8 @@ def main():
         return
 
     g = digest(ds, a.month)
-    text = json.dumps(g, indent=2, ensure_ascii=False) if a.format == "json" else as_text(g)
+    text = (json.dumps(g, indent=2, ensure_ascii=False) if a.format == "json"
+            else as_entities(g) if a.format == "entities" else as_text(g))
     if a.out:
         os.makedirs(os.path.dirname(os.path.abspath(a.out)) or ".", exist_ok=True)
         with open(a.out, "w", encoding="utf-8") as f:

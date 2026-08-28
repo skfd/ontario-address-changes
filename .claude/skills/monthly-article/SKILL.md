@@ -9,8 +9,9 @@ One calendar month of a city's address file, written for a reader who likes thei
 but has never heard of a civic-address point. The tracker already knows what changed;
 this skill is about picking which of it is a story and refusing to invent the rest.
 
-Articles live in `articles/<slug>-<YYYY-MM>.md`, one per month, Markdown that pastes
-into Substack unchanged.
+Articles live in `articles/offline/` and `articles/researched/`, one file per month in
+each — `<slug>-<YYYY-MM>.md`, Markdown that pastes into Substack unchanged. See
+*Two variants* below for what separates them.
 
 ## The loop
 
@@ -48,8 +49,19 @@ into Substack unchanged.
    you cannot verify comes out of the article — a wrong street name is the one error
    a local reader will always catch.
 
-6. **Write it** to `articles/<slug>-<YYYY-MM>.md`, following the skeleton in
-   `references/house-style.md`. The attribution footer is not optional (step 8).
+5b. **Research the month's named things** — read `references/research.md`, then:
+   ```
+   python tools/month_digest.py --city toronto --month 2026-03 --format entities
+   ```
+   That prints the month's proper nouns as a search checklist. The store says eleven
+   addresses left Queen Street East; only the outside record says why. Every fact that
+   comes back gets a link in the article, and a search that finds nothing is written up
+   as the record being silent, never as a guess. File the findings in
+   `articles/research/<slug>-<YYYY-MM>.md` before drafting.
+
+6. **Write it.** Each month is currently written twice — see *Two variants* below.
+   Follow the skeleton in `references/house-style.md`. The attribution footer is not
+   optional (step 8).
 
 7. **Re-read it as the reader.** Every number in the piece must be traceable to a line
    in the brief. Cut any sentence that survives only because it was hard to research.
@@ -88,8 +100,27 @@ methodology footer states it.
 | Read | For |
 |---|---|
 | `references/house-style.md` | Voice, article skeleton, what counts as a lead, the quiet-month shape |
+| `references/research.md` | Step 5b: the search checklist, where Toronto's answers live, citation rules |
 | `references/verifying.md` | Queries that confirm a specific address, street, split or rename before it goes in print |
 | `references/publishing.md` | Where these go, cadence, cross-posting, licence obligations per venue |
+
+## Two variants
+
+Every month is written twice, and the only difference is step 5b:
+
+- **`articles/offline/<slug>-<YYYY-MM>.md`** — the store alone. No external facts, no
+  neighbourhood name that ward and coordinates don't give you, no acronym the file
+  doesn't spell out. Where a cause is unknown it says so and stops.
+- **`articles/researched/<slug>-<YYYY-MM>.md`** — the same month with step 5b applied:
+  sourced causes, links, and the outside record where it exists.
+
+Write the offline version first, from the brief. Then run step 5b and write the
+researched one as its own piece rather than as an annotated diff — the research usually
+changes which story leads, and a patched draft reads like a patched draft.
+
+This is a live comparison the repo owner is running, not a permanent arrangement. If one
+variant is dropped: delete its directory, delete this section, and put the survivor's
+path back into step 6.
 
 ## Other cities
 
