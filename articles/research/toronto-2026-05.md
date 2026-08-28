@@ -125,6 +125,7 @@ records, not the naming report).
 
 ---
 
+
 ## 1b. Chloe Cooley — the person
 
 **Searched:** `Chloe Cooley 1793 Upper Canada Act to Limit Slavery`; then read four
@@ -221,6 +222,7 @@ CBC on the Heritage Minute: https://www.cbc.ca/news/canada/toronto/heritage-minu
 
 ---
 
+
 ## 2. BMO Field → "Toronto Stadium, BMO Field" (170 Princes' Blvd, 2026-05-12)
 
 **Searched:** `BMO Field renamed "Toronto Stadium" FIFA World Cup 2026`; `Toronto Stadium BMO
@@ -274,92 +276,163 @@ the July or August 2026 snapshots — that would be a nice bookend for the newsl
 
 ---
 
-## 5. New / newly-named parks: 50 Queens Quay East Park and Adelaide Place Parkette
 
-**Searched:** `"50 Queens Quay East" park Toronto`; `"Adelaide Place Parkette" Toronto`;
-`"Adelaide Place Parkette" naming Toronto council`; `2018.TE34.83 "Official Naming" park
-"20 Adelaide Place"`; `"50 Queens Quay East Park" naming official park name Toronto council`;
-plus several variants.
+## 3. Freeland St 15/33/43/53 and Polson St 1/3/5 (retired 2026-05-07)
 
-### 50 Queens Quay East Park
+**Searched:** 18 web queries including `"Freeland Street" Toronto LCBO headquarters Sugar Wharf
+Menkes development`; `"33 Freeland Street" Toronto`; `"1 Polson Street" OR "3 Polson Street" OR
+"5 Polson Street" Toronto`; `Polson Street Toronto expropriation Villiers Island Port Lands flood
+protection address closed 2026`; `Polson Pier Rebel nightclub Toronto 2026 closing redevelopment`;
+`"2026 Road Openings and Closures in the Port Lands" Toronto report Polson`. Plus direct address
+lookups in the City's Application Information Centre map, and (by me, independently) queries
+against the City's CKAN open data for building permits and development applications.
 
-**FACT — City project page, "New Park at 50 Queens Quay East":**
-https://www.toronto.ca/city-government/planning-development/construction-new-facilities/park-facility-projects/new-park-at-50-queens-quay-east/
-- 10,000 m² park in the **Lower Yonge Precinct**, built in two phases.
-- The interim **"Park in Progress" opened November 10, 2025**; permanent park targeted for
-  **2030** (2026 engagement/design competition, 2027–28 detailed design, 2028 construction).
-- Interim features: lawn, meadow mounds, trees, pathways, picnic grove, pickleball courts,
-  off-leash dog area.
+### 15, 33, 43, 53 Freeland St — the former LCBO lands / Sugar Wharf
 
-**FACT — Menkes / Sugar Wharf.** blogTO: *"Menkes Developments and the City of Toronto unveiled
-the new 10,000 square-metre park"*, delivered as part of Menkes' Sugar Wharf community, designed
-by O2 Planning and Design: https://www.blogto.com/city/2025/11/50-queens-quay-east-park-toronto/
+**FACT — what the site is.** City of Toronto staff report, April 3, 2018: *"55 to 95 Lake Shore
+Boulevard East, 33 – 53 Freeland Street and 2 and 15 Cooper Street – Official Plan Amendment and
+Zoning Amendment Application – Request for Direction Report"*, reference **16 152742 STE 28 OZ**.
+It calls the site the **"LCBO lands"** in the **Lower Yonge Precinct**: one office/retail
+building, five mixed-use buildings and a public park, 4,419 residential units, 424,705 m² GFA,
+property divided into **four blocks**, plus a Harbour Street extension. It recommends heritage
+designation (Ontario Heritage Act Part IV s.29) of the existing LCBO **office** building and LCBO
+**warehouse** building.
+https://www.toronto.ca/legdocs/mmis/2018/te/bgrd/backgroundfile-113799.pdf
 
-**FACT — listed in the City's parks facility finder** as "50 Queens Quay East Park":
-https://www.toronto.ca/explore-enjoy/parks-recreation/places-spaces/parks-and-recreation-facilities/location/?id=3868&title=50-Queens-Quay-East-Park
-(JS app; the title is confirmed from search results, not fetched page body.)
+**FACT — all four retired numbers are component addresses of two City applications.** Confirmed
+twice, independently: via the AIC map, and via the City's Development Applications open data
+(dataset `0aa7e480-9b48-4919-98e0-6af7615b7809`,
+https://ckan0.cf.opendata.inter.prod-toronto.ca/datastore/dump/8907d8ed-c515-4ce9-b674-9f8c6eefcf0d),
+where 15, 33, 43 and 53 FREELAND ST each carry records for:
+- the OPA/Rezoning on the former LCBO lands (status Closed) — described as dividing the property
+  into 4 blocks with an eastward Harbour Street extension and a new north-south street between
+  Cooper St and Lower Jarvis St; related draft plan of subdivision `16-152754 STE 28 SB`;
+- **Block 1** Site Plan — 25-storey office building with retail in a 2-storey podium (Closed);
+- **Block 2** Site Plan — two mixed-use towers, 79 and 80 storeys, 12-storey podium (Closed);
+- **Block 4** Site Plan `19 218252 STE 10 SA`, submitted 2019-09-08, **still Under Review /
+  Open** — *"Site Plan Approval application to facilitate the development of Block 4 of the former
+  LCBO lands… Blocks 1 and 2 of the LCBO lands are already under development, and **Block 3 has
+  been conveyed as a City Park**. The proposal is comprised of 3 towers having heights of 70, 78,
+  and 85 storeys… a 990 m² daycare and space for a 5,613 m² elementary public school, both to be
+  located in the existing heritage building on site… 2,570 residential units including 178
+  affordable housing units."*
 
-**FACT — absent from the City's November 2024 citywide parks inventory**
-(AU6.1b Attachment 1, https://www.toronto.ca/legdocs/mmis/2024/cc/bgrd/backgroundfile-250430.pdf),
-which does list nearby "120 QUEENS QUAY E PARK", "AITKEN PLACE PARK" and "SUGAR BEACH PARK".
-Consistent with the park not existing when that list was compiled.
+Note: **Block 3 conveyed as a City park** is almost certainly 50 Queens Quay East Park (item 5) —
+the same land assembly produced both May 2026 events.
 
-**Other coverage:** TorontoToday https://www.torontotoday.ca/local/city-planning-development/toronto-new-park-in-progress-50-queens-quay-east-11480604 ;
-Waterfront BIA https://www.waterfrontbia.com/stories/50-queens-quay-east-park ;
-UrbanToronto https://urbantoronto.ca/forum/threads/50-queens-quay-east-park-m-s-city-of-toronto.42230/page-2
+**FACT — a land severance was filed one day before the retirement date.** AIC application
+detail: Application Number **26156500STE10CO**, File Number **B0037/26TEY**, type **Committee of
+Adjustment**, **date submitted 2026-05-06**. Description: *"To obtain consent to sever the lands
+(known as 'Block 4') into four lots (Rental Building Lands, School Lands, Daycare Lands and
+Future Development Lands), and to create various easements/rights-of-way. A Site Plan Control
+application (File Number 20 19218252 STE 10 SA) is currently under review."* (Results list shows
+status Open; the detail page shows Postponed.)
+https://www.toronto.ca/city-government/planning-development/application-details/?id=5827487&pid=579018&title=55-LAKESHORE-BLVD-E
 
-**Nothing found:** no council naming decision for "50 Queens Quay East Park". Searched twice.
-**INFERENCE:** the name is address-derived and provisional — it matches the City's own
-placeholder convention in the 2024 inventory ("120 QUEENS QUAY E PARK", "40 POWER ST PARK",
-"45 DALHOUSIE ST PARK") and the permanent park's design is still going to a 2026 competition.
+**FACT — project identity and build history.** Sugar Wharf, **Menkes Developments**, 11.5 acres
+at the northeast corner of Queens Quay East and Freeland Street; the LCBO Tower at 100 Queens Quay
+East completed 2021 as LCBO HQ. https://www.menkes.com/commercial/projects/100-queens-quay-east ,
+https://urbantoronto.ca/news/2022/02/menkes-sugar-wharf-welcomes-lcbo-flagship-while-towers-continue-rise.47344
+The **LCBO warehouse was demolished around March 2023** for Phase 2 (UrbanToronto photo dated
+2023-03-09; the article gives no street numbers):
+https://urbantoronto.ca/news/2023/03/wholesale-destruction.51599
+Phase 1 completed 2024 — two 64/65-storey condo towers, 1,400+ units, 205 affordable rental units,
+plus the 25-storey office tower; as of 2025-12-01 Menkes said it is "shovel-ready on the first
+tower" of Phase 2 but has no start date: https://renx.ca/sugar-wharf-phase-1-complete-menkes-phase-2-apartment-tower
+UrbanToronto database, Sugar Wharf Phase 2, Pre-Construction, "85, 78, 70 & 4-storey", primary
+address 55 Lake Shore Blvd E: https://urbantoronto.ca/database/projects/sugar-wharf-condominiums-phase-2.28462
 
-**Date gap:** opened **2025-11-10**, about **6 months before** the May 2026 place-name appeared
-in the address file.
+**FACT — no building permit exists at 15, 33, 43 or 53 Freeland St.** My own query of the City's
+Active Building Permits open data (dataset `108c2bd1-6945-46f6-af92-02f5658ee7f7`,
+https://ckan0.cf.opendata.inter.prod-toronto.ca/datastore/dump/6d0229af-bc54-46de-9c2b-26759b01dd05)
+for "Freeland" returns 4 records, all of them **28 Freeland St** (permit `24 149915 BLD`, interior
+alterations converting a vacant retail unit to a 30-seat 'Tahini Restaurant', issued 2024-06-18,
+revision issued 2025-11-14). Nothing at the four retired numbers.
 
-**Confidence: confirmed** (existence, opening, builder, City-park status).
-**Confidence: nothing found** (council naming decision).
+**FACT — the City's live address geocoder no longer resolves 33 Freeland St.** Typing
+`33 Freeland St` into the AIC address search returns "No search results found", while
+`11 Polson St` and `100 Queens Quay E` both resolve.
 
-### Adelaide Place Parkette
+**FACT — dated coincidence, no causal weight claimed.** A City construction notice dated
+**2026-05-06** covers watermain replacement on Freeland Street (Queens Quay to Lake Shore Blvd E),
+work "expected to be fully complete by the end of May 2026":
+https://www.toronto.ca/wp-content/uploads/2026/05/9607-25ECS-LU-03SU-w10-Freeland-Lakeshore-Blvd-E-Street-wm-con-05-06.pdf
+(earlier January 2026 notice for the same work:
+https://www.toronto.ca/wp-content/uploads/2026/01/8df8-25ECS-LU-03SU-Final-w10-Freeland-Lakeshore-Blvd-E-Street-wm-con.pdf).
+The PDF body did not render on extraction; the description is from the search-result snippet.
 
-**CORRECTION to the working brief:** it is **not** at the Adelaide Place office complex
-(181 University / 350 Adelaide St W). The park is at **20 Adelaide Place**, on **Adelaide Place,
-a short street running south from Adelaide Street West between Portland Street and Bathurst
-Street, in King-Spadina**.
+**INFERENCE (labelled, but tight):** the **2026-05-06 consent to sever Block 4 into four lots**
+is the mechanism that would cause the City to retire the old component addresses and plot new
+ones — filed **one day before** the 2026-05-07 retirement. The 2023 demolition is a necessary
+precondition but sits ~38 months earlier, so it is not the trigger by itself.
 
-**FACT — the naming item.** Item **2018.TE34.83**, "Proposed Official Naming of Future Park at
-20 Adelaide Place", **Toronto and East York Community Council, July 4, 2018** (Ward 20 at the
-time; Ward 10 today). Parks, Forestry and Recreation recommended the name **"Adelaide Place
-Parkette"**. A communication (TE34.83.1) from Jeff Ibsen, Vice Chair, GDNA, objected and proposed
-"William Clarke Parkette" instead (after the 1890 William Clarke Row Houses on the east side of
-Adelaide Place, per City by-law 1059-2017 Schedule A quoted in the same document):
-https://www.toronto.ca/legdocs/mmis/2018/te/comm/communicationfile-85404.pdf
+**Date deltas vs 2026-05-07:** warehouse demolition ~March 2023 (≈38 months before); Phase 1
+completion 2024 (≈18–24 months before); severance consent filed **2026-05-06 (1 day before)**;
+watermain notice 2026-05-06 (1 day before, non-causal).
 
-**FACT — the name is in the City's official inventory.** "ADELAIDE PLACE PARKETTE | 10 | Toronto
-East York" appears in the citywide parks list and classification (PDF created 2024-11-07):
-https://www.toronto.ca/legdocs/mmis/2024/cc/bgrd/backgroundfile-250430.pdf
+**Confidence: confirmed** (what the site is, that all four numbers belong to it, the severance
+filing and its date). **Inference** for the causal link.
 
-**FACT — facility finder listing:**
-https://www.toronto.ca/explore-enjoy/parks-recreation/places-spaces/parks-and-recreation-facilities/location/?id=3705&title=Adelaide-Place-Parkette
+### 1, 3, 5 Polson St — nothing found
 
-**INFERENCE:** the PFR name (not the GDNA counter-proposal) was adopted — the 2024 inventory
-carries "Adelaide Place Parkette". The TMMIS decision text itself could not be retrieved
-(secure.toronto.ca returned 403; the legacy app.toronto.ca decision-document endpoint refused
-the connection).
+**FACT — no occupant, business or building can be identified at 1, 3 or 5 Polson St.** Named
+searches return only **11 Polson St** (Polson Pier / the Rebel entertainment complex) and an
+11–63 Polson St commercial listing. https://en.wikipedia.org/wiki/Polson_Pier ,
+https://en.wikipedia.org/wiki/Rebel_(entertainment_complex) ,
+https://www.loopnet.com/Listing/11-63-Polson-St-Toronto-ON/34490398/
 
-**Date gap:** named **2018-07-04**, about **7 years 10 months before** the address file picked
-up the name; already in the City parks inventory by November 2024, ~18 months before.
+**FACT — no development application anywhere on Polson Street.** AIC search on `11 Polson St`
+returns "No information is available at this time." My own query of the City's Development
+Applications open data for "Polson" returns **zero records citywide**. The AIC search on the
+`Polson St and Cherry St` intersection returns exactly one nearby application — **190 Cherry St**,
+`24144833STE14SA`, submitted 2024-05-06, Closed, Statement of Approval Issued (the Porsche
+dealership): https://createto.ca/projects/190-cherry-street
 
-**Nothing found:** no opening date for Adelaide Place Parkette (two searches); no City project
-page for 20 Adelaide Place; no source stating POPS status for either park.
+**FACT — building permits on Polson Street exist only at 11 and 15**, none newer than 2016, none
+at 1/3/5. From the Active Building Permits open data: `98 019932 BLD` and `04 185147 BLD` at
+15 Polson St (interior alterations, 1998 and 2004); `15 124912 BLD` at 11 Polson St (2015–2016,
+second-storey addition, tenant "Guvernment"); `99 106411 COM` at 11 Polson St (a 1999 temporary
+tent).
 
-**INFERENCE worth using in the article:** these are not two new parks. One is genuinely new
-(Nov 2025); the other is a name the City has used since 2018. The May 2026 event looks like the
-address dataset catching up to Parks records, not two simultaneous park creations.
+**FACT — the City's live address geocoder no longer resolves 5 Polson St** ("No search results
+found"), while `11 Polson St` resolves as "11 Polson St, former Toronto".
 
-**Confidence: confirmed** (Adelaide Place Parkette naming item and location);
-**nothing found** (its opening date).
+**FACT — Port Lands road changes touch Polson Street but never name these addresses.** City
+report *"2025 Road Openings and Closures in the Port Lands"*, dated 2024-12-18, Ward 14
+Toronto-Danforth, recommends *"Dedication of the remaining eastern portion of the Cherry Street
+right-of-way from south of Commissioners Street to just south of Polson Street"*, renames Cherry
+Street segments to "Cherry Street", "Ookwemin Street" and "Lake Shore Boulevard East", and extends
+Villiers Street closures — all framed around the Port Lands Flood Protection Project reaching
+substantial completion at the end of 2024.
+https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-251768.pdf
+Its Attachment 1 key map shows Polson Street running west from the realigned Cherry Street, so the
+recorded coordinates (43.6411 / -79.3548) sit on the **western** segment, west of Cherry:
+https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-251748.pdf
+Port Lands Flood Protection Phase 4 tender scope includes *"site preparations and removals in the
+Cherry Street Right of Way from Commissioners Street to Polson Street"*:
+https://canada.constructconnect.com/dcn/canadian-construction-tenders/F2065FDE-3B1B-4399-8986-5361CAF5BBAF
+The Villiers Island rezoning notice names **72 Polson Street**, not 1/3/5 (page returned HTTP 403;
+only the title is verified): https://secure.toronto.ca/nm/api/individual/notice/5210.do
+
+**Nothing found:** no occupant, no development application, no demolition or expropriation record,
+no building permit, and no document connecting 1, 3 or 5 Polson St to anything. Rebel appears to
+still be operating (searched `Polson Pier Rebel nightclub Toronto 2026 closing redevelopment sold
+lease news` — nothing found). The nearest dated milestone, Port Lands Flood Protection substantial
+completion at end of 2024, sits **~17 months before** the 2026-05-07 retirement.
+
+**Do not print a causal claim for Polson St.** Port Lands revitalization is plausible context, not
+evidence.
+
+**Confidence: nothing found.**
+
+### General note
+
+No City document was found that states *why* any address was retired on 2026-05-07. The City does
+not appear to publish address-retirement notices at all — which is exactly why this dataset is
+worth watching.
 
 ---
+
 
 ## 4. "Rouge Community Park" → "Irma Burman Greenbelt Park"
 
@@ -451,3 +524,209 @@ Rouge Watershed or Rouge National Urban Park coverage mentioning her, across twe
 **Confidence: nothing found** ("Rouge Community Park" as an official name; any 2026 renaming).
 
 ---
+
+
+## 5. New / newly-named parks: 50 Queens Quay East Park and Adelaide Place Parkette
+
+**Searched:** `"50 Queens Quay East" park Toronto`; `"Adelaide Place Parkette" Toronto`;
+`"Adelaide Place Parkette" naming Toronto council`; `2018.TE34.83 "Official Naming" park
+"20 Adelaide Place"`; `"50 Queens Quay East Park" naming official park name Toronto council`;
+plus several variants.
+
+### 50 Queens Quay East Park
+
+**FACT — City project page, "New Park at 50 Queens Quay East":**
+https://www.toronto.ca/city-government/planning-development/construction-new-facilities/park-facility-projects/new-park-at-50-queens-quay-east/
+- 10,000 m² park in the **Lower Yonge Precinct**, built in two phases.
+- The interim **"Park in Progress" opened November 10, 2025**; permanent park targeted for
+  **2030** (2026 engagement/design competition, 2027–28 detailed design, 2028 construction).
+- Interim features: lawn, meadow mounds, trees, pathways, picnic grove, pickleball courts,
+  off-leash dog area.
+
+**FACT — Menkes / Sugar Wharf.** blogTO: *"Menkes Developments and the City of Toronto unveiled
+the new 10,000 square-metre park"*, delivered as part of Menkes' Sugar Wharf community, designed
+by O2 Planning and Design: https://www.blogto.com/city/2025/11/50-queens-quay-east-park-toronto/
+
+**FACT — listed in the City's parks facility finder** as "50 Queens Quay East Park":
+https://www.toronto.ca/explore-enjoy/parks-recreation/places-spaces/parks-and-recreation-facilities/location/?id=3868&title=50-Queens-Quay-East-Park
+(JS app; the title is confirmed from search results, not fetched page body.)
+
+**FACT — absent from the City's November 2024 citywide parks inventory**
+(AU6.1b Attachment 1, https://www.toronto.ca/legdocs/mmis/2024/cc/bgrd/backgroundfile-250430.pdf),
+which does list nearby "120 QUEENS QUAY E PARK", "AITKEN PLACE PARK" and "SUGAR BEACH PARK".
+Consistent with the park not existing when that list was compiled.
+
+**Other coverage:** TorontoToday https://www.torontotoday.ca/local/city-planning-development/toronto-new-park-in-progress-50-queens-quay-east-11480604 ;
+Waterfront BIA https://www.waterfrontbia.com/stories/50-queens-quay-east-park ;
+UrbanToronto https://urbantoronto.ca/forum/threads/50-queens-quay-east-park-m-s-city-of-toronto.42230/page-2
+
+**Nothing found:** no council naming decision for "50 Queens Quay East Park". Searched twice.
+**INFERENCE:** the name is address-derived and provisional — it matches the City's own
+placeholder convention in the 2024 inventory ("120 QUEENS QUAY E PARK", "40 POWER ST PARK",
+"45 DALHOUSIE ST PARK") and the permanent park's design is still going to a 2026 competition.
+
+**Date gap:** opened **2025-11-10**, about **6 months before** the May 2026 place-name appeared
+in the address file.
+
+**Confidence: confirmed** (existence, opening, builder, City-park status).
+**Confidence: nothing found** (council naming decision).
+
+### Adelaide Place Parkette
+
+**CORRECTION to the working brief:** it is **not** at the Adelaide Place office complex
+(181 University / 350 Adelaide St W). The park is at **20 Adelaide Place**, on **Adelaide Place,
+a short street running south from Adelaide Street West between Portland Street and Bathurst
+Street, in King-Spadina**.
+
+**FACT — the naming item.** Item **2018.TE34.83**, "Proposed Official Naming of Future Park at
+20 Adelaide Place", **Toronto and East York Community Council, July 4, 2018** (Ward 20 at the
+time; Ward 10 today). Parks, Forestry and Recreation recommended the name **"Adelaide Place
+Parkette"**. A communication (TE34.83.1) from Jeff Ibsen, Vice Chair, GDNA, objected and proposed
+"William Clarke Parkette" instead (after the 1890 William Clarke Row Houses on the east side of
+Adelaide Place, per City by-law 1059-2017 Schedule A quoted in the same document):
+https://www.toronto.ca/legdocs/mmis/2018/te/comm/communicationfile-85404.pdf
+
+**FACT — the name is in the City's official inventory.** "ADELAIDE PLACE PARKETTE | 10 | Toronto
+East York" appears in the citywide parks list and classification (PDF created 2024-11-07):
+https://www.toronto.ca/legdocs/mmis/2024/cc/bgrd/backgroundfile-250430.pdf
+
+**FACT — facility finder listing:**
+https://www.toronto.ca/explore-enjoy/parks-recreation/places-spaces/parks-and-recreation-facilities/location/?id=3705&title=Adelaide-Place-Parkette
+
+**INFERENCE:** the PFR name (not the GDNA counter-proposal) was adopted — the 2024 inventory
+carries "Adelaide Place Parkette". The TMMIS decision text itself could not be retrieved
+(secure.toronto.ca returned 403; the legacy app.toronto.ca decision-document endpoint refused
+the connection).
+
+**Date gap:** named **2018-07-04**, about **7 years 10 months before** the address file picked
+up the name; already in the City parks inventory by November 2024, ~18 months before.
+
+**Nothing found:** no opening date for Adelaide Place Parkette (two searches); no City project
+page for 20 Adelaide Place; no source stating POPS status for either park.
+
+**INFERENCE worth using in the article:** these are not two new parks. One is genuinely new
+(Nov 2025); the other is a name the City has used since 2018. The May 2026 event looks like the
+address dataset catching up to Parks records, not two simultaneous park creations.
+
+**Confidence: confirmed** (Adelaide Place Parkette naming item and location);
+**nothing found** (its opening date).
+
+---
+
+
+## 6. Markham Rd 2250–2288 and Kingston Rd 4630–4636 (reserved clusters)
+
+**Searched:** `"2280 Markham Road" Toronto development`; `"4630 Kingston Road" Toronto
+development application`; `urbantoronto "4630 Kingston Road" Scarborough`; `"2250 Markham Road"
+OR "2256 Markham Road" OR "2288 Markham Road" Scarborough Toronto`; `"Markham Road" Scarborough
+North development application 2025 townhouse "2280"`; `"2280 Markham Rd" OR "2252 Markham Road"
+Toronto rezoning committee of adjustment`; and four more. **Web search resolved neither
+cluster.** Both were resolved from the City of Toronto's CKAN open data — the Development
+Applications and Active Building Permits datasets — queried by address and coordinates.
+Two report PDFs spot-verified directly.
+
+### 2250 / 2252 / 2256 / 2280 / 2288 Markham Rd — Ward 23 Scarborough North
+
+**FACT — one site, one multi-building redevelopment, and it is NOT residential.** Green Storage
+self-storage plus warehouse, retail and a restaurant, replacing an existing plaza (McDonald's,
+Lindt outlet). Developer of record **2250 Markham Road Inc.**, architect **Paul Hastings
+Architect**; UrbanToronto records it topping out March 2026:
+https://urbantoronto.ca/forum/threads/toronto-2250-markham-m-6s.33614
+Existing plaza listing: https://www.loopnet.ca/Listing/2250-2290-Markham-Rd-Toronto-ON/13076886/
+
+**FACT — applications** (City Development Applications open data,
+https://ckan0.cf.opendata.inter.prod-toronto.ca/datastore/dump/8907d8ed-c515-4ce9-b674-9f8c6eefcf0d ;
+dataset `0aa7e480-9b48-4919-98e0-6af7615b7809`):
+- **`22 137816 ESC 23 SA`** — Site Plan Application, submitted **2022-04-25**, status Closed:
+  *"Site Plan Application to facilitate redevelopment of the Site with two single storey, multi
+  tenant warehouse buildings, a restaurant and a six storey self storage building."*
+  http://app.toronto.ca/AIC/index.do?folderRsn=Cjxy1HrHx26Ik6JlXgV7ig%3D%3D
+- **`26 107153 ESC 23 SA`** — Site Plan Amendment, submitted **2026-01-20**, Under Review.
+  Describes the approved scheme as a five-storey self-storage building (A), a one-storey
+  warehouse with mezzanine (B), a one-storey retail building (C) and a one-storey restaurant;
+  seeks to shrink Building C and add surface parking.
+  http://app.toronto.ca/AIC/index.do?folderRsn=mVHyg8p6mjTEb3G%2FEJ0ZNg%3D%3D
+- Dataset coordinates (MTM zone 10 X 325290.998 / Y 4852118.335 ≈ 43.8087 / -79.2453) sit ~250 m
+  from the address points' 43.8109 / -79.2444, inside a site UrbanToronto describes as ~20 acres.
+  Ward recorded as 23 – Scarborough North, matching.
+
+**FACT — the May 2026 trigger.** Building permit **`25 172298 BLD`**, *"Proposal to construct a
+new 5 storey self storage building"*, applied 2025-06-05, **ISSUED 2026-05-08**, status
+Inspection. Companion restaurant permit `25 219205 BLD` issued 2025-11-24; geothermal, drain,
+plumbing and HVAC permits ran Aug–Nov 2025. Source: Active Building Permits open data,
+https://ckan0.cf.opendata.inter.prod-toronto.ca/datastore/dump/6d0229af-bc54-46de-9c2b-26759b01dd05
+(dataset `108c2bd1-6945-46f6-af92-02f5658ee7f7`).
+
+**INFERENCE (strong):** the 2026-05-08 building permit is what caused the reserved address
+points to appear in May 2026, one per building on the redeveloped site.
+
+**CAVEAT — do not paper over the number mismatch.** The City's application records call this
+site **2250 / 2260 / 2270 / 2290** Markham Rd. The new reserved points are **2250 / 2252 / 2256 /
+2280 / 2288**. The number-to-building mapping is **unverified** — do not print "2288 = Building C".
+What supports the inference anyway: no other development application exists in the 2200–2350
+Markham Rd range, and no building permits exist at 2252, 2256, 2280 or 2288 — exactly what you
+expect of numbers newly reserved and not yet in use.
+
+### 4630 / 4632 / 4634 / 4636 Kingston Rd — Ward 25 Scarborough-Rouge Park
+
+**FACT — one project: "Everston"** (formerly "Park Central at 4630 Kingston Road"), by
+**LCH Developments** and **COGIR Real Estate**, architect **Turner Fleischer Architects**,
+13 storeys, **566 units**, Under Construction, and it includes **townhomes** alongside the
+mixed-use building. Northwest corner of Kingston Rd and Manse Rd, West Hill.
+https://urbantoronto.ca/database/projects/everston.47044 ·
+https://urbantoronto.ca/forum/threads/toronto-everston-43-25m-13s-lch-turner-fleischer.33257/ ·
+https://urbantoronto.ca/news/2022/01/textured-mid-rise-condo-proposed-kingston-road-west-hill.47051
+
+**FACT — application numbers** (report fetched and read directly to verify):
+*Preliminary Report – 4630 Kingston Road – Zoning Amendment Application*, May 4, 2022, to
+Scarborough Community Council, Wards: 25 – Scarborough-Rouge Park. Verbatim from the cover page:
+**"Planning Application Number: 21 250500 ESC 25 OZ"**, **"Related Applications: 21 250499 ESC
+25 SA"**, **"Notice of Complete Application Issued: January 31, 2022"**. Original proposal:
+13-storey mixed-use building, 417 residential units, 273.1 m² retail.
+https://www.toronto.ca/legdocs/mmis/2022/sc/bgrd/backgroundfile-225644.pdf
+Open-data status: `21 250500 ESC 25 OZ` Closed
+(http://app.toronto.ca/AIC/index.do?folderRsn=VVTr4EI4t96uIF1HSju%2FEw%3D%3D);
+`21 250499 ESC 25 SA` Final Approval Completed, now 13 storeys, GFA 34,344.2 m², 566 units
+(http://app.toronto.ca/AIC/index.do?folderRsn=jXvczrx9dyRy8%2FO5YqWr5Q%3D%3D).
+
+**FACT — approval timeline**, from *4630 Kingston Road – Ontario Land Tribunal Hearing – Request
+for Directions*, City Solicitor, October 31, 2024
+(https://www.toronto.ca/legdocs/mmis/2024/cc/bgrd/backgroundfile-249913.pdf):
+applications received 2021-12-29; applicant appealed non-decision to the OLT **2022-08-23**;
+City Council accepted a without-prejudice settlement at its **July 19–20, 2023** meeting
+(https://secure.toronto.ca/council/agenda-item.do?item=2023.CC8.16); one-day OLT hearing
+2023-09-25; **OLT interim Order approving the ZBA in principle 2024-02-14**; applicant's
+with-prejudice offer to modify the proposal (the conversion to a larger rental project)
+**2024-10-15** (https://www.toronto.ca/legdocs/mmis/2024/cc/bgrd/backgroundfile-249914.pdf).
+Developer-side account of the rental conversion:
+https://renx.ca/tas-new-proposal-scarborough-kingston-rd-development
+
+**FACT — the May 2026 trigger.** Building permit **`25 125575 BLD`**, *"Proposed 13-storey
+residential building with 566 rental units, commercial use spaces proposed on the ground floor
+and 2 storey below grade parking. See also 21-250499 SA."* Applied 2025-03-06, **ISSUED
+2026-05-21**, status Inspection, 566 dwelling units created. Preceded by shoring/excavation
+`25 124573 BLD` (2025-06-09), geothermal (2025-04-23), site services (2025-09-02), drain
+(2025-10-16), plumbing (2025-12-01), HVAC (2025-12-02).
+
+**INFERENCE (strong):** the 2026-05-21 building permit is what caused the reserved address
+points to appear in May 2026.
+
+**CAVEAT:** nothing ties **4632, 4634 or 4636** to a specific structure, and no permits exist at
+those numbers. The project includes townhomes and ground-floor commercial, so the sibling
+numbers are most likely townhome or grade-level entrance addresses — inference, not a sourced
+mapping. The AIC records list no separate townhouse-block application number.
+
+**The headline for this item:** in both clusters the City issued the new-building permit **inside
+the May 2026 window** — 2026-05-08 for Markham Rd, 2026-05-21 for Kingston Rd — which lines up
+with the reserved addresses far more tightly than the planning approvals (2022–2024) do.
+
+**Nothing found:** no development application, permit or Committee of Adjustment file at 2252,
+2256, 2280 or 2288 Markham Rd, or at 4632, 4634 or 4636 Kingston Rd, in either open dataset
+(207,582 active-permit rows and 26,432 development-application rows scanned). No web-search
+result for any of those addresses.
+
+**Confidence: confirmed** for both clusters (single site, project identity, application numbers,
+permit dates). **Unverified:** which reserved number goes with which building.
+
+---
+
