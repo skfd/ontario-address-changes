@@ -35,6 +35,24 @@ Search the **address with the street** (`"1226 Queen Street East" Toronto`), not
 number alone. For a range, search the corner or the assembly ("Queen Greenwood
 Leslieville development").
 
+### What actually works, from the first five months of doing this
+
+- **Toronto's CKAN open data beats web search for a single address.** `datastore_search`
+  against the development-applications, building-permit and Committee of Adjustment
+  resources answers "what is happening at 152 Pinegrove Ave" in one call, with an
+  application number and a date, where a web search returns nothing. Building permits
+  carry a `structure type` field that has resolved questions the program pages could
+  not — 407 Arlington Ave came back "Laneway / Rear Yard Suite".
+- **`secure.toronto.ca` 403s automated fetches.** Council agenda items are reachable via
+  search-engine caches and `toronto.ca` staff-report PDFs instead; a decision you can
+  only see through the council portal has to be checked by hand.
+- **The Application Information Centre is a JavaScript-only page.** Anything read off it
+  needs a browser confirmation before it goes in an article — flag it in the notes.
+- **Reverse-geocode before believing a gloss.** Read the file's coordinates against a
+  map rather than trusting a neighbourhood name in the brief or in your own head; then
+  cross-check with `lookup.py --near`, which names the streets next door from the store
+  itself.
+
 ## Rules
 
 1. **Every fact from a search gets a link in the article.** No link, no claim. This is
