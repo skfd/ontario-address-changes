@@ -218,10 +218,18 @@
       var data = JSON.parse(document.getElementById('city-polys').textContent);
       var dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
       var map = L.map('map', { scrollWheelZoom: true });
+      // Esri Gray Canvas, not CARTO Positron: CARTO now stamps "API KEY
+      // REQUIRED" across anonymous basemap tiles. Esri caches Gray Canvas to
+      // z16 only, so upscale past that rather than serving blank grey.
       L.tileLayer(
-        'https://{s}.basemaps.cartocdn.com/' + (dark ? 'dark_all' : 'light_all') +
-        '/{z}/{x}/{y}{r}.png',
-        { attribution: '&copy; OpenStreetMap contributors &copy; CARTO', maxZoom: 19 }
+        'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/' +
+        (dark ? 'World_Dark_Gray_Base' : 'World_Light_Gray_Base') +
+        '/MapServer/tile/{z}/{y}/{x}',
+        {
+          attribution: 'Tiles &copy; Esri &mdash; Esri, HERE, Garmin, ' +
+            '&copy; OpenStreetMap contributors, and the GIS user community',
+          maxZoom: 19, maxNativeZoom: 16
+        }
       ).addTo(map);
 
       function style(f) {
