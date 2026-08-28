@@ -127,9 +127,19 @@ YZD Lane" Toronto address`; `"YZD Lane" street naming Toronto council report tor
   https://www.livenation.com/venue/KovZ917ARzt/rogers-stadium-events
   Ticketmaster venue listing: https://www.ticketmaster.ca/rogers-stadium-tickets-toronto/venue/132627
 - **Address discrepancy, recorded not adjudicated:** Wikipedia gives Rogers Stadium's
-  address as "105 Carl Hall Road", operator Live Nation, opened **29 June 2025**, capacity
-  50,000, intended lifetime five years with demolition expected around 2030.
-  https://en.wikipedia.org/wiki/Rogers_Stadium
+  address as "105 Carl Hall Road", operator Live Nation, capacity 50,000, intended lifetime
+  five years with demolition expected around 2030. https://en.wikipedia.org/wiki/Rogers_Stadium
+  Live Nation and Ticketmaster (above) use 81 YZD Lane. Both are recorded; I did not
+  adjudicate which the City treats as the civic address.
+- **Opened 29 June 2025**, with Stray Kids as the first act; corroborated independently of
+  Wikipedia by UrbanToronto ("Rogers Stadium Opens Sunday in Downsview as Toronto's Largest
+  Outdoor Concert Venue", 2025-06) —
+  https://urbantoronto.ca/news/2025/06/rogers-stadium-opens-sunday-downsview-torontos-largest-outdoor-concert-venue.58877
+  — and by CTV News and blogTO coverage of the first concert on 2025-06-29/30:
+  https://www.ctvnews.ca/toronto/video/2025/06/30/first-ever-concert-at-the-rogers-stadium-draws-mixed-reviews-for-crowd-control/ ,
+  https://www.blogto.com/music/2025/06/reviews-first-concert-toronto-rogers-stadium/
+  The venue is temporary; the lands revert to Northcrest for a residential neighbourhood.
+  https://www.cbc.ca/news/canada/toronto/rogers-stadium-downsview-airport-live-nation-1.7334655
   *Date gap: the stadium opened ~8 months before 81 YZD Lane entered the address file
   (absent from the 2026-02-27 snapshot, present 2026-03-03).*
 - **YZD is the developer's brand for the whole district.** Northcrest Developments unveiled
