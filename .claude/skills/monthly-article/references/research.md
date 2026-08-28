@@ -48,6 +48,13 @@ Leslieville development").
   only see through the council portal has to be checked by hand.
 - **The Application Information Centre is a JavaScript-only page.** Anything read off it
   needs a browser confirmation before it goes in an article — flag it in the notes.
+- **A JavaScript-only page shows what exists, not always when.** The Application
+  Information Centre detail page confirms an application's number, file number, type,
+  status and description — and carries no submitted date at all. Take the date from the
+  Committee of Adjustment open data (`IN_DATE`), which is both authoritative and citable.
+  A research note here read "filed 2026-05-06" off a browser session; the open data says
+  `2026-05-07`, which changed the article's claim from "the day before" to "the same day",
+  and with it the direction of the story.
 - **Reverse-geocode before believing a gloss.** Read the file's coordinates against a
   map rather than trusting a neighbourhood name in the brief or in your own head; then
   cross-check with `lookup.py --near`, which names the streets next door from the store

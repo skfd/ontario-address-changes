@@ -102,12 +102,20 @@ up with a decision older than most of the neighbourhood.
 
 ## One severance, one day, and one silence
 
-Four addresses came off **Freeland Street** on 7 May — 15, 33, 43 and 53 — on the former
-LCBO headquarters lands off Queens Quay East, now Sugar Wharf. A Committee of Adjustment
-consent to sever that block into four lots was filed on **6 May 2026**, the day before.
-That is a tight enough coincidence to report and too tight to prove; the severance record
-sits on a JavaScript-only City page and should be confirmed in a browser before anyone
-leans on it.
+Four addresses came off **Freeland Street** — 15, 33, 43 and 53 — on the former LCBO
+headquarters lands off Queens Quay East, now Menkes' Sugar Wharf. They were present in the
+snapshot of 4 May and gone from the one on 7 May.
+
+On **7 May**, an application was filed to sever those same lands: Committee of Adjustment
+file `B0037/26TEY`, at 55 Lake Shore Boulevard East, "to obtain consent to sever the lands
+(known as 'Block 4') into four lots (Rental Building Lands, School Lands, Daycare Lands
+and Future Development Lands)". It is still marked Postponed.
+
+Same three-day window, then — but note the direction, because it is the opposite of what
+you would assume. The addresses did not come off *because* an application was filed; the
+application landed on the same day the file had already stopped carrying them. Block 4 is
+being cut into four lots with different futures, and the old component addresses stopped
+describing anything. Which came first is not something these records can settle.
 
 Three addresses came off **Polson Street** the same day — 1, 3 and 5, in the Port Lands.
 Here the record is simply empty: no occupant, no development application, no building

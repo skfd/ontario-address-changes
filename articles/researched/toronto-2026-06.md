@@ -13,16 +13,22 @@ design phase begins April 2022, early works construction starts May 2024, signal
 October 2024, track shift complete May 2026, and — **excavation begins for north and south
 tunnel, June 2026**. The same month the address appeared. The project page lists
 "pedestrian access to Gunns Road and St. Clair Avenue West" as a design feature, so the
-address is almost certainly that access. It opens in 2031, and will be served by the UP
-Express.
+address is almost certainly that access. It will be served by the UP Express.
+
+When it opens is another matter: neither Metrolinx's project page nor the City's states an
+opening date. What Council did decide, on 17–18 December 2024, was to confirm St
+Clair-Old Weston as one of three priority SmartTrack stations — with East Harbour and
+Bloor-Lansdowne — inside a $1.689 billion program budget, while asking the Province to
+find a funding solution for the two it could no longer afford. A widely-repeated 2031
+opening date traces back to that decision, which does not contain it.
 
 But the station is no longer called St. Clair-Old Weston. Metrolinx now calls it
 **Stockyards Station**; the City's own page, modified 19 August 2026, writes "The future
 Stockyards (formerly known as St. Clair-Old Weston) GO Station".
 
 So Toronto's address file is currently the place where a discontinued station name lives
-on, attached to a door that does not exist, for a station opening in five years. That is
-not a criticism of anybody. It is what happens when a database records intentions.
+on, attached to a door that does not exist, for a station with no published opening date.
+That is not a criticism of anybody. It is what happens when a database records intentions.
 
 ## By the numbers
 
@@ -158,12 +164,13 @@ one before it. This piece covers the stretch between the snapshots of **29 May 2
 as noise. June had no held events.
 
 Causes come from published records, linked below. Where the record is silent — 56 Broadway
-Avenue, Irving W. Chapley, the contractor for the St Clair-Old Weston works, the missing
-365 Royal York Road — this piece says so. Hamilton's addressing policy is quoted as
+Avenue, Irving W. Chapley, the contractor for the St Clair-Old Weston works, an opening date for
+that station, the missing 365 Royal York Road — this piece says so. Hamilton's addressing policy is quoted as
 Hamilton's; nothing here claims Toronto has adopted it.
 
 **Sources.** [Stockyards Station (formerly St. Clair-Old Weston), Metrolinx](https://www.metrolinx.com/en/projects-and-programs/kitchener-line-go-expansion/what-were-building/st-clair-old-weston-go-station) ·
 [SmartTrack Stations Program, City of Toronto](https://www.toronto.ca/services-payments/streets-parking-transportation/transit-in-toronto/transit-expansion/smarttrack-stations-program/) ·
+[Council item 2024.CC24.3, SmartTrack Stations Program Update](https://secure.toronto.ca/council/agenda-item.do?item=2024.CC24.3) ·
 [351–365 Royal York Rd, Preliminary Report (2022)](https://www.toronto.ca/legdocs/mmis/2022/ey/bgrd/backgroundfile-199293.pdf) ·
 [351–365 Royal York Rd, Request for Direction (2023)](https://www.toronto.ca/legdocs/mmis/2023/ey/bgrd/backgroundfile-230805.pdf) ·
 [Toronto Municipal Code Ch. 598, Numbering of Properties](https://www.toronto.ca/legdocs/municode/1184_598.pdf) ·
