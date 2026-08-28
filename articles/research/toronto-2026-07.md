@@ -500,6 +500,8 @@ cites "Ontario Municipal Board Decision issued on December 7, 2017 and the Ontar
 Tribunal Order issued on March 31, 2022 in File PL110543", permitting "a 13-storey
 mixed-use building on the lands municipally known in the year 2021 as 328-332 Dupont
 Street". <https://www.toronto.ca/legdocs/bylaws/2022/law0219.pdf>
+(By-law text fetched and grepped directly — PL110543 and "328-332 Dupont Street" both
+present verbatim.)
 
 **FACT.** UrbanToronto project page: **ANX**, 316 Dupont Street, developer **Freed
 Developments**, architect **Teeple Architects**, 13 storeys, 118 units, status
@@ -821,7 +823,8 @@ Cherry/Cooperage cause: **nothing found**; alias collapse is inference.
    sub-station" — the file's EEB1/4/5/6 and TPSS1 are that contract's parts list, and the
    two entrances each at Jane and Scarlett are Metrolinx's published station design. Four
    of the six EEBs and the only TPSS get municipal numbers here; EEB2 (Russell Rd) and
-   EEB3 (Wincott Dr) were already built under the advance-tunnel contract.
+   EEB3 (Wincott Dr) are the two whose *headwalls* were already built under the
+   advance-tunnel contract (the buildings themselves are SRS scope).
 3. **Two "separate" clusters are one block.** Old Foundry Rd and Palace St bracket the
    Dominion Foundry site (Aspen Ridge). And two "separate" retirements are one site:
    Wellesley 6–16 and Yonge 586/586A are the 8 Wellesley assembly.
