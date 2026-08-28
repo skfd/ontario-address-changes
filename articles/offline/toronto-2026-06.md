@@ -71,7 +71,7 @@ than a building moving.
 Nineteen place names changed in June and the pattern is the one that started in May: a
 park's name growing to include the facility inside it. *Wallace Emerson Park* became
 *Wallace Emerson Park, Wallace Emerson Community Recreation Centre*. *Fairbank Memorial
-Park*, *Banbury Park*, *Lytton Park*, *Dunlace Park* and *Weston Lions Park* all did the
+Park*, *Lytton Park*, *Dunlace Park*, *Maryland Park* and *Weston Lions Park* all did the
 same with their community centres, tennis clubs and pools.
 
 Eleven points were given a name for the first time, among them Riverdale Farm, the
