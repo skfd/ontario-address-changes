@@ -117,8 +117,7 @@ four Old Foundry points appear in the file, matching the four sites the renaming
 says were addressed off that stretch.
 
 The same collapsing happens downtown: **Wellesley Street West 6–16** and **Yonge Street
-586/586A**, which the offline piece listed as two separate sets of retirements, are one
-land assembly.
+586/586A** read as two unrelated sets of retirements and are one land assembly.
 
 ## How far behind, this month
 
@@ -132,9 +131,8 @@ land assembly.
 
 **Coneflower Crescent** deserves its own line. Thirty-seven addresses there flipped from
 *reserved* to *regular* on 22 July, having sat on the file since our first snapshot. It is
-Bloom Park Towns, off Bathurst in Westminster-Branson — not Dufferin and Finch, as I had
-it — on a plan of subdivision approved in **2013** and described as "newly constructed" in
-a 2017 City report. Thirteen years from subdivision to the file calling those addresses
+Bloom Park Towns, off Bathurst in Westminster-Branson, on a plan of subdivision approved
+in **2013** and described as "newly constructed" in a 2017 City report. Thirteen years from subdivision to the file calling those addresses
 current.
 
 ## One thing not to write
