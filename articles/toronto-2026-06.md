@@ -52,16 +52,16 @@ A smaller version happened on **Manning Avenue**: a reserved point that had been
 at 301 since our first snapshot moved to 303 on 8 June, where there is already a regular
 303.
 
-## The last half-address on Fern Avenue
+## A half-address leaves Fern Avenue
 
 On 12 June, **121½ Fern Avenue** in Parkdale became **121B Fern Avenue**. Same point,
 same coordinates, new number.
 
 Ontario half-numbers are a nineteenth-century habit — the address you assign when a lot
-gets divided and you have run out of integers. Toronto still has them, and they are
-slowly being converted to letter suffixes, which sort properly and fit in a database
-field. The same snapshot week converted **44A Magnolia Avenue** in the other direction,
-to plain **44**.
+gets divided and you have run out of integers. Toronto still has 545 of them on file, and
+they are slowly being converted to letter suffixes, which sort properly and fit in a
+database field. Fern Avenue itself is not finished: 123½ is still there. The same snapshot
+week converted **44A Magnolia Avenue** in the other direction, to plain **44**.
 
 Three renumberings in a month, and every one of them is a record being tidied rather
 than a building moving.

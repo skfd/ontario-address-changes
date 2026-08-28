@@ -61,6 +61,24 @@ was removed from that point, which usually means a layer was re-joined upstream,
 that a park closed. Check whether the same name reappears on another point in a later
 month before writing that anything was lost.
 
+## Row versions are not addresses
+
+The store is SCD-2: every modification closes one span and opens another, so one address
+can hold a dozen rows. Two counts that look the same and are not:
+
+```
+-- WRONG: counts row versions, and a bulk recode inflates it
+SELECT count(*) FROM addresses WHERE number LIKE '%R';
+-- RIGHT: distinct addresses active in the latest snapshot
+SELECT count(DISTINCT full) FROM addresses
+WHERE number LIKE '%R' AND min_snapshot_id <= :last AND max_snapshot_id >= :last;
+```
+
+The same trap bites "when did these arrive": grouping rows by their `min_snapshot_id`
+month counts *span starts*, and the July 2026 reversion opened a span on thousands of
+untouched rows. To count arrivals, take the month's net `compute_diff` and filter its
+`added` list — that is the only list that means "new to the file".
+
 ## Cross-checking outside the file
 
 The address file records paperwork. When the article wants to say *why*, the file

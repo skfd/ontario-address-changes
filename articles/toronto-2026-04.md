@@ -38,15 +38,15 @@ Three of April's new addresses share a shape that is worth pausing on:
 - **623R Broadview Avenue**, added the same day, just north of the Danforth.
 - **885R Caledonia Road**, added 3 April, north of Eglinton in old North York.
 
-The `R` is a suffix on the civic number, and the file places each of these points
-between 18 and 49 metres behind the point for the plain-numbered house on the same lot —
-407R sits 24 metres behind 407, 623R sits 18 metres behind 623, 885R sits 49 metres
-behind 885. Deeper into the lot, in other words, toward the lane.
+The `R` is a suffix on the civic number, and the file puts each of these points 18 to 49
+metres from the point for the plain-numbered house on the same lot — 407R is 24 metres
+from 407, 623R 18 metres from 623, 885R 49 metres from 885. In all three cases the
+offset runs roughly east, near enough perpendicular to a street that runs north–south:
+off the frontage, deeper into the lot, toward the lane.
 
-There are 1,049 R-suffixed addresses in Toronto's file altogether, and they arrive at a
-trickle: three in April, three in May, one in June, seventeen in July. If you want a
-single number for how fast the back halves of Toronto's lots are being addressed, that
-trickle is it.
+There are 997 R-suffixed addresses on Toronto's file today, and they arrive at a trickle:
+three in April, three in May, one in June, three in July. If you want a single number for
+how fast the back halves of Toronto's lots are being addressed, that trickle is it.
 
 ## Two new streets, one site
 
