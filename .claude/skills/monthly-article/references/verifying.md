@@ -61,6 +61,19 @@ variant of an existing street — search the street list for near-matches:
 python -c "import sqlite3;c=sqlite3.connect('data/toronto/toronto.db');print([r[0] for r in c.execute(\"select distinct street from addresses where street like '%Lane%'\")][:40])"
 ```
 
+**A block of retirements.** Before reading a demolition into it, look at the
+`identity_key`s. A run of *consecutive* ids means the points were issued together as one
+administrative act, and points issued together are usually retired together for
+administrative reasons too. Ten of the eleven addresses that left Queen St E in March
+2026 carried ids 14205472-14205481 in an unbroken descending run, while the one survivor
+on that stretch, 1238, sat in a much older id range - the shape of a set of unit-level
+civic numbers being folded back into the single number the building actually uses. A real
+demolition takes out whatever ids happen to be on the block, consecutive or not.
+
+```
+python -c "import sqlite3;c=sqlite3.connect('data/toronto/toronto.db');[print(r) for r in c.execute(\"select full, identity_key from addresses where street='Queen St E' and CAST(number AS INTEGER) between 1224 and 1252 order by CAST(number AS INTEGER)\")]"
+```
+
 **A retired address.** Check it stayed retired. Toronto's export has dropped and
 restored rows before; a row with a later span starting again is churn, not a demolition.
 The lookup shows every span, so a row that comes back is visible at a glance.
