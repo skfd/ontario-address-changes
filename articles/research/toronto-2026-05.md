@@ -78,8 +78,9 @@ Cherry Street and not in the Canary District / West Don Lands. This matches the 
 coordinates (43.6453–43.6456 N, -79.3678 to -79.3664 W). Source: the sketch and report above.
 
 **FACT — what is being built there.** 215 Lake Shore Boulevard East is the **Greenland Group**
-multi-phase site at Lake Shore Blvd E and Lower Sherbourne. Site area 1.35 ha, ~191 m frontage
-on Lake Shore Blvd E.
+multi-phase site at Lake Shore Blvd E and Lower Sherbourne. (A site area of 1.35 ha and ~191 m
+of Lake Shore Blvd E frontage appeared only in a search-engine summary, not on a page I fetched —
+unverified, do not print.)
 - **Phase 2 application file number: 21 110243 STE 10 OZ.** Proposal: a multi-tower mixed-use
   development of **70, 60 and 14 storeys, 1,390 residential units**, 347 m² retail, 635 car
   and 1,529 bicycle parking spaces, **180 affordable housing units**, 468 m² community space,
@@ -328,6 +329,11 @@ Future Development Lands), and to create various easements/rights-of-way. A Site
 application (File Number 20 19218252 STE 10 SA) is currently under review."* (Results list shows
 status Open; the detail page shows Postponed.)
 https://www.toronto.ca/city-government/planning-development/application-details/?id=5827487&pid=579018&title=55-LAKESHORE-BLVD-E
+*Provenance caveat:* this AIC detail page is a JavaScript app — a plain fetch returns only the
+nav shell. The record above was read out of a live browser session, not a fetchable document, so
+re-verify it in a browser before printing the "one day before" line. Everything else in this
+Freeland subsection is independently corroborated in the City's open data.
+
 
 **FACT — project identity and build history.** Sugar Wharf, **Menkes Developments**, 11.5 acres
 at the northeast corner of Queens Quay East and Freeland Street; the LCBO Tower at 100 Queens Quay
