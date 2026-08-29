@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>City of Ottawa Address Changes — Saturday, Aug 29, 2026</title>
+  <style>
+    :root {
+      --bg: #fafafa; --surface: #ffffff; --surface2: #f5f5f5; --surface3: #ebebeb;
+      --border: #e0e0e0; --border-strong: #d1d1d1; --text: #242424;
+      --text-secondary: #424242; --text-dim: #616161; --accent: #0078d4;
+      --accent-hover: #106ebe; --accent-bg: #eff6fc; --green: #107c10;
+      --green-bg: #f1faf1; --green-tint: #9fd89f; --red: #c50f1f; --red-bg: #fdf3f4;
+      --red-tint: #eeacb2; --yellow: #eaa300; --yellow-bg: #fefbf4; --yellow-tint: #f9e2ae;
+      --purple: #881798; --purple-bg: #f9f3fb; --teal: #038387; --teal-bg: #f0fafa;
+      --shadow-4: 0 2px 4px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --shadow-8: 0 4px 8px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --card-bg: #ffffff; --card-hover: #f5f5f5; color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1f1f1f; --surface: #292929; --surface2: #333333; --surface3: #3d3d3d;
+        --border: #525252; --border-strong: #666666; --text: #ffffff;
+        --text-secondary: #d6d6d6; --text-dim: #adadad; --accent: #2899f5;
+        --accent-hover: #3aa0f3; --accent-bg: #002848; --green: #54b054;
+        --green-bg: #052505; --green-tint: #107c10; --red: #dc626d; --red-bg: #3b0509;
+        --red-tint: #c50f1f; --yellow: #f2c661; --yellow-bg: #463100; --yellow-tint: #eaa300;
+        --purple: #d29ddb; --purple-bg: #3a1040; --teal: #58c0c4; --teal-bg: #013638;
+        --shadow-4: 0 2px 4px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --shadow-8: 0 4px 8px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --card-bg: #333333; --card-hover: #3d3d3d; color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI Variable','Segoe UI',system-ui,-apple-system,sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.5; padding: 2rem;
+      max-width: 1100px; margin: 0 auto; font-size: 14px; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; color: var(--accent-hover); }
+    .back-link { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 12px;
+      color: var(--text-dim); margin-bottom: 1.5rem; transition: color 0.1s; }
+    .back-link:hover { color: var(--accent); text-decoration: none; }
+    h1 { font-size: 24px; font-weight: 600; margin-bottom: 4px; }
+    .subtitle { color: var(--text-secondary); font-size: 14px; margin-bottom: 12px; }
+    .explainer { color: var(--text-secondary); font-size: 13px; line-height: 1.5;
+      margin-bottom: 24px; padding: 12px 16px; background: var(--surface);
+      border-radius: 8px; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px; margin-bottom: 24px; }
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px;
+      padding: 16px; box-shadow: var(--shadow-4); transition: box-shadow 0.1s; }
+    .card:hover { box-shadow: var(--shadow-8); }
+    .card .label { font-size: 12px; color: var(--text-dim); font-weight: 400; }
+    .card .value { font-size: 28px; font-weight: 600; margin-top: 4px; }
+    .card .value.green { color: var(--green); } .card .value.red { color: var(--red); }
+    .card .value.yellow { color: var(--yellow); } .card .value.accent { color: var(--accent); }
+    .card .value.purple { color: var(--purple); }
+    .card .value.teal { color: var(--teal); }
+    .sparkline { display: block; margin-top: 6px; overflow: visible; opacity: 0.9; }
+    .sparkline-label { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+    .section { margin-bottom: 24px; }
+    .section h2 { font-size: 16px; font-weight: 600; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px; }
+    .badge { font-size: 12px; padding: 2px 8px; border-radius: 999px; font-weight: 600; }
+    .badge-green { background: var(--green-bg); color: var(--green); }
+    .badge-red { background: var(--red-bg); color: var(--red); }
+    .badge-yellow { background: var(--yellow-bg); color: var(--yellow); }
+    .badge-accent { background: var(--accent-bg); color: var(--accent); }
+    .badge-purple { background: var(--purple-bg); color: var(--purple); }
+    .badge-teal { background: var(--teal-bg); color: var(--teal); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface);
+      border-radius: 8px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    thead { background: var(--surface2); }
+    th { text-align: left; padding: 8px 12px; font-weight: 600; color: var(--text-dim);
+      font-size: 12px; cursor: pointer; user-select: none; border-bottom: 1px solid var(--border); }
+    th:hover { color: var(--accent); }
+    td { padding: 8px 12px; border-top: 1px solid var(--border); }
+    tr:hover td { background: var(--surface2); }
+    .old-val { color: var(--red); text-decoration: line-through; }
+    .new-val { color: var(--green); }
+    .arrow-val { color: var(--text-dim); text-align: center; white-space: nowrap; }
+    .map-link { display: inline-flex; align-items: center; margin-left: 0.4em;
+      color: var(--accent); vertical-align: middle; white-space: nowrap; font-size: 12px; }
+    .map-link:hover { color: var(--accent-hover); }
+    .map-link svg { width: 14px; height: 14px; }
+    .change-field { color: var(--yellow); font-weight: 600; }
+    .bar-chart { margin-top: 8px; }
+    .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 12px; }
+    .bar-label { width: 180px; text-align: right; color: var(--text-secondary); flex-shrink: 0;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .bar-track { flex: 1; height: 8px; background: var(--surface2); border-radius: 4px;
+      overflow: hidden; position: relative; }
+    .bar-fill { height: 100%; border-radius: 4px; transition: width 0.15s ease; }
+    .bar-fill.green { background: var(--green); } .bar-fill.red { background: var(--red); }
+    .bar-count { width: 40px; font-size: 12px; color: var(--text-dim); }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+    .empty { color: var(--text-dim); font-style: italic; padding: 16px; }
+    .truncated { color: var(--text-dim); font-size: 12px; margin-top: 8px; }
+    .collapsible-toggle { background: transparent; border: 1px solid var(--border);
+      color: var(--accent); padding: 5px 12px; border-radius: 4px; cursor: pointer;
+      font-size: 12px; font-family: inherit; margin-bottom: 12px; transition: background 0.1s; }
+    .collapsible-toggle:hover { background: var(--surface2); }
+    details.rename-group { background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; margin-bottom: 8px; box-shadow: var(--shadow-4); }
+    details.rename-group summary { padding: 10px 14px; cursor: pointer; font-size: 13px; }
+    details.rename-group[open] summary { border-bottom: 1px solid var(--border); }
+    details.rename-group table { border: none; box-shadow: none; border-radius: 0; }
+    details.rename-group .truncated { padding: 0 14px 10px; margin-top: 0; }
+    .rename-count { color: var(--text-dim); font-size: 12px; margin-left: 6px; }
+    .no-changes-banner { background: var(--green-bg); border: 1px solid var(--green-tint);
+      color: var(--green); padding: 16px; border-radius: 8px; margin-bottom: 24px;
+      text-align: center; font-weight: 600; font-size: 14px; }
+    .baseline-banner { background: var(--accent-bg); border: 1px solid var(--accent);
+      color: var(--accent); padding: 16px; border-radius: 8px; margin-bottom: 24px; font-size: 13px; }
+    .generated-at { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-dim); }
+    .history { font-size: 12.5px; color: var(--text-secondary); white-space: nowrap; }
+    .history .a { color: var(--green); font-weight: 500; }
+    .history .r { color: var(--red); font-weight: 500; }
+    .history .dot { color: var(--text-dim); margin: 0 4px; }
+    .history-none { color: var(--text-dim); font-style: italic; font-size: 12.5px; }
+    .info-wrap { position: relative; display: inline-flex; vertical-align: middle; }
+    .info-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+      height: 18px; padding: 0 8px 0 7px; border-radius: 999px; border: none;
+      color: #fff; background: var(--accent); cursor: help; font-size: 11px; font-weight: 600;
+      font-style: normal; font-family: inherit; line-height: 1; white-space: nowrap; }
+    .info-btn .glyph { font-style: italic; font-weight: 700;
+      font-family: Georgia, 'Times New Roman', serif; }
+    .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn,
+    .info-wrap:focus .info-btn { background: var(--accent-hover); }
+    .info-pop { display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 20;
+      width: 320px; max-width: 80vw; padding: 12px 14px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-8);
+      font-size: 12.5px; font-weight: 400; color: var(--text-secondary); line-height: 1.5; }
+    .info-wrap:hover .info-pop, .info-wrap:focus-within .info-pop,
+    .info-wrap:focus .info-pop { display: block; }
+    .info-pop strong { display: block; color: var(--text); font-size: 12px; margin-bottom: 4px; }
+    .info-pop ul { list-style: none; margin: 0 0 10px; padding: 0; }
+    .info-pop li { padding: 1px 0 1px 14px; position: relative; }
+    .info-pop li::before { content: "·"; position: absolute; left: 4px; color: var(--text-dim); }
+    .info-pop .note { color: var(--text-dim); font-size: 11.5px; margin: 0 0 10px; }
+    .info-pop .muted { color: var(--text-dim); font-style: italic; }
+  </style>
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+
+  <a class="back-link" href="index.html">← Back to City of Ottawa reports</a>
+
+  <h1>City of Ottawa — Address Changes</h1>
+  <p class="subtitle">
+    Changes between  and Saturday, Aug 29, 2026
+    · 403,109 total addresses
+  </p>
+
+  
+
+  <div class="cards">
+    <div class="card"><div class="label">Total Addresses</div>
+      <div class="value accent">403,109</div></div>
+    <div class="card"><div class="label">New Addresses</div>
+      <div class="value green">+88</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#107c10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,17.3 19.7,13.9 37.3,17.4 55.0,2.0 72.7,17.6 90.3,17.5 108.0,10.7"/><circle cx="108.0" cy="10.7" r="2" fill="#107c10"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Retired Addresses</div>
+      <div class="value red">−5</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#c50f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,17.9 19.7,17.8 37.3,15.5 55.0,2.0 72.7,17.8 90.3,18.0 108.0,17.6"/><circle cx="108.0" cy="17.6" r="2" fill="#c50f1f"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Updated Addresses <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRNUM)</li><li>Street name (FULLNAME)</li><li>Unit (UNITID)</li><li>Full address (FULLADDR)</li><li>Coordinates (latitude, longitude)</li><li>ADDRTYPE</li><li>PI_MUNICIPAL_ADDRESS_ID</li><li>QUALIFIER</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span></div>
+      <div class="value yellow">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,15.3 19.7,18.0 37.3,2.0 55.0,12.7 72.7,10.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Renumbered</div>
+      <div class="value accent">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#0078d4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#0078d4"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Street Renames</div>
+      <div class="value purple">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#9141ac" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#9141ac"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    <div class="card"><div class="label">Status Changes</div>
+      <div class="value teal">40</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#038387" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,16.9 19.7,2.0 37.3,16.7 55.0,17.7 72.7,17.9 90.3,17.1 108.0,12.7"/><circle cx="108.0" cy="12.7" r="2" fill="#038387"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    <div class="card"><div class="label">Location Adjustments</div>
+      <div class="value" style="color: var(--text-dim)">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#808080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,2.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#808080"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+  </div>
+
+  
+  <div class="section">
+    <h2>Change Breakdown</h2>
+    <div class="stats-grid">
+      
+      <div class="card"><div class="label">Top Streets by New Addresses</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">OTHELLO AVE</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">72</span></div>
+        <div class="bar-row"><span class="bar-label">STARWOOD RD</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:6.0%"></div></div>
+          <span class="bar-count">4</span></div>
+      </div></div>
+      
+      <div class="card"><div class="label">Top Streets by Retired Addresses</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">BEAUDRY ST</span>
+          <div class="bar-track"><div class="bar-fill red" style="width:100.0%"></div></div>
+          <span class="bar-count">3</span></div>
+      </div></div>
+      
+      <div class="card"><div class="label">Most Frequently Updated Fields</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">ADDRTYPE</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">40</span></div>
+      </div></div>
+    </div>
+  </div>
+  
+
+  <div class="section">
+    <h2>New Addresses <span class="badge badge-green">88</span></h2>
+    
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-added',0)">Address</th><th onclick="sortTable('t-added',1)">Street</th>
+        <th onclick="sortTable('t-added',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-added">
+        
+        <tr><td>963 A BEAUDRY ST</td><td>BEAUDRY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.42862&mlon=-75.65598#map=18/45.42862/-75.65598" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>963 B BEAUDRY ST</td><td>BEAUDRY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.42863&mlon=-75.65591#map=18/45.42863/-75.65591" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>7 B DEERCHASE CRT</td><td>DEERCHASE CRT</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.27765&mlon=-75.85292#map=18/45.27765/-75.85292" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6054 B FERNBANK RD</td><td>FERNBANK RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25272&mlon=-75.90354#map=18/45.25272/-75.90354" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>295 FICTION DR</td><td>FICTION DR</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25721&mlon=-75.90748#map=18/45.25721/-75.90748" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>480 GRANARY GROVE</td><td>GRANARY GROVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25813&mlon=-75.90266#map=18/45.25813/-75.90266" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1028 B KILBIRNIE DR</td><td>KILBIRNIE DR</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.23942&mlon=-75.73739#map=18/45.23942/-75.73739" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>443 LYON ST N</td><td>LYON ST N</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.41081&mlon=-75.69787#map=18/45.41081/-75.69787" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2021 A OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39691&mlon=-75.62347#map=18/45.39691/-75.62347" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2021 B OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39691&mlon=-75.62343#map=18/45.39691/-75.62343" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2021 C OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39691&mlon=-75.62339#map=18/45.39691/-75.62339" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2021 D OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39692&mlon=-75.62334#map=18/45.39692/-75.62334" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2021 W OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39705&mlon=-75.62344#map=18/45.39705/-75.62344" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2021 X OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39705&mlon=-75.62349#map=18/45.39705/-75.62349" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2021 E OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39692&mlon=-75.62330#map=18/45.39692/-75.62330" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2021 F OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39692&mlon=-75.62327#map=18/45.39692/-75.62327" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2021 G OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39692&mlon=-75.62323#map=18/45.39692/-75.62323" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2021 H OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39693&mlon=-75.62318#map=18/45.39693/-75.62318" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2021 I OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39693&mlon=-75.62314#map=18/45.39693/-75.62314" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2021 J OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39693&mlon=-75.62310#map=18/45.39693/-75.62310" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2021 K OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39694&mlon=-75.62306#map=18/45.39694/-75.62306" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2021 L OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39694&mlon=-75.62302#map=18/45.39694/-75.62302" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2021 M OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39708&mlon=-75.62304#map=18/45.39708/-75.62304" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2021 N OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39708&mlon=-75.62308#map=18/45.39708/-75.62308" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2021 O OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39707&mlon=-75.62312#map=18/45.39707/-75.62312" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2021 P OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39707&mlon=-75.62316#map=18/45.39707/-75.62316" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2021 Q OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39707&mlon=-75.62320#map=18/45.39707/-75.62320" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2021 R OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39706&mlon=-75.62324#map=18/45.39706/-75.62324" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2021 S OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39706&mlon=-75.62328#map=18/45.39706/-75.62328" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2021 T OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39706&mlon=-75.62332#map=18/45.39706/-75.62332" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2021 U OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39706&mlon=-75.62336#map=18/45.39706/-75.62336" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2021 V OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39705&mlon=-75.62340#map=18/45.39705/-75.62340" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2031 G OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39609&mlon=-75.62338#map=18/45.39609/-75.62338" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2031 A OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39626&mlon=-75.62345#map=18/45.39626/-75.62345" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2031 B OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39623&mlon=-75.62344#map=18/45.39623/-75.62344" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2031 C OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39620&mlon=-75.62343#map=18/45.39620/-75.62343" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2031 X OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39630&mlon=-75.62326#map=18/45.39630/-75.62326" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2031 D OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39617&mlon=-75.62342#map=18/45.39617/-75.62342" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2031 E OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39615&mlon=-75.62340#map=18/45.39615/-75.62340" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2031 F OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39612&mlon=-75.62339#map=18/45.39612/-75.62339" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2031 H OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39607&mlon=-75.62336#map=18/45.39607/-75.62336" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2031 I OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39604&mlon=-75.62335#map=18/45.39604/-75.62335" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2031 J OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39601&mlon=-75.62334#map=18/45.39601/-75.62334" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2031 K OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39598&mlon=-75.62332#map=18/45.39598/-75.62332" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2031 L OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39595&mlon=-75.62331#map=18/45.39595/-75.62331" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2031 M OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39600&mlon=-75.62311#map=18/45.39600/-75.62311" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2031 N OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39604&mlon=-75.62313#map=18/45.39604/-75.62313" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2031 O OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39606&mlon=-75.62314#map=18/45.39606/-75.62314" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2031 P OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39609&mlon=-75.62315#map=18/45.39609/-75.62315" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2031 Q OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39612&mlon=-75.62316#map=18/45.39612/-75.62316" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2031 R OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39614&mlon=-75.62318#map=18/45.39614/-75.62318" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2031 S OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39617&mlon=-75.62319#map=18/45.39617/-75.62319" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2031 T OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39620&mlon=-75.62320#map=18/45.39620/-75.62320" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2031 U OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39622&mlon=-75.62322#map=18/45.39622/-75.62322" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2031 V OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39625&mlon=-75.62323#map=18/45.39625/-75.62323" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2031 W OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39628&mlon=-75.62324#map=18/45.39628/-75.62324" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2041 T OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39567&mlon=-75.62297#map=18/45.39567/-75.62297" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2041 K OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39546&mlon=-75.62309#map=18/45.39546/-75.62309" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2041 L OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39543&mlon=-75.62307#map=18/45.39543/-75.62307" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2041 M OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39548&mlon=-75.62288#map=18/45.39548/-75.62288" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2041 N OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39550&mlon=-75.62289#map=18/45.39550/-75.62289" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2041 O OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39553&mlon=-75.62291#map=18/45.39553/-75.62291" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2041 P OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39556&mlon=-75.62292#map=18/45.39556/-75.62292" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2041 Q OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39559&mlon=-75.62293#map=18/45.39559/-75.62293" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2041 R OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39562&mlon=-75.62294#map=18/45.39562/-75.62294" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2041 S OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39564&mlon=-75.62296#map=18/45.39564/-75.62296" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2041 U OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39569&mlon=-75.62298#map=18/45.39569/-75.62298" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2041 V OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39572&mlon=-75.62300#map=18/45.39572/-75.62300" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2041 W OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39575&mlon=-75.62301#map=18/45.39575/-75.62301" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2041 X OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39578&mlon=-75.62303#map=18/45.39578/-75.62303" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2041 A OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39573&mlon=-75.62322#map=18/45.39573/-75.62322" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2041 B OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39570&mlon=-75.62320#map=18/45.39570/-75.62320" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2041 C OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39567&mlon=-75.62319#map=18/45.39567/-75.62319" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2041 D OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39564&mlon=-75.62318#map=18/45.39564/-75.62318" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2041 E OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39562&mlon=-75.62316#map=18/45.39562/-75.62316" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2041 F OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39559&mlon=-75.62315#map=18/45.39559/-75.62315" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2041 G OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39557&mlon=-75.62314#map=18/45.39557/-75.62314" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2041 H OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39554&mlon=-75.62313#map=18/45.39554/-75.62313" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2041 I OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39551&mlon=-75.62311#map=18/45.39551/-75.62311" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2041 J OTHELLO AVE</td><td>OTHELLO AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39549&mlon=-75.62310#map=18/45.39549/-75.62310" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6312 B PROVEN LINE RD</td><td>PROVEN LINE RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.11728&mlon=-75.78960#map=18/45.11728/-75.78960" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6202 RENAUD RD</td><td>RENAUD RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.43135&mlon=-75.51281#map=18/45.43135/-75.51281" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>35 B ROUNDHAY DR</td><td>ROUNDHAY DR</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32707&mlon=-75.76441#map=18/45.32707/-75.76441" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>17 B STARWOOD RD</td><td>STARWOOD RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.35860&mlon=-75.74074#map=18/45.35860/-75.74074" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>17 C STARWOOD RD</td><td>STARWOOD RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.35864&mlon=-75.74077#map=18/45.35864/-75.74077" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>19 B STARWOOD RD</td><td>STARWOOD RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.35864&mlon=-75.74088#map=18/45.35864/-75.74088" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>19 C STARWOOD RD</td><td>STARWOOD RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.35868&mlon=-75.74092#map=18/45.35868/-75.74092" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1248 B TOMPKINS ST</td><td>TOMPKINS ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.34666&mlon=-75.78176#map=18/45.34666/-75.78176" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Retired Addresses <span class="badge badge-red">5</span></h2>
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-removed',0)">Address</th><th onclick="sortTable('t-removed',1)">Street</th>
+        <th onclick="sortTable('t-removed',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-removed">
+        
+        <tr><td>6 B BARNSTABLE DR</td><td>BARNSTABLE DR</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.28785&mlon=-75.75405#map=18/45.28785/-75.75405" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>961 2 A BEAUDRY ST</td><td>BEAUDRY ST</td><td>2</td>
+          <td><span class="history"><span class="a">+ 2026-06-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.42868&mlon=-75.65597#map=18/45.42868/-75.65597" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>961 2 B BEAUDRY ST</td><td>BEAUDRY ST</td><td>2</td>
+          <td><span class="history"><span class="a">+ 2026-06-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.42862&mlon=-75.65596#map=18/45.42862/-75.65596" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>963 BEAUDRY ST</td><td>BEAUDRY ST</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-08-24</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.42863&mlon=-75.65584#map=18/45.42863/-75.65584" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>433 LYON ST N</td><td>LYON ST N</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.41083&mlon=-75.69784#map=18/45.41083/-75.69784" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Updated Addresses <span class="badge badge-yellow">0</span>
+      <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRNUM)</li><li>Street name (FULLNAME)</li><li>Unit (UNITID)</li><li>Full address (FULLADDR)</li><li>Coordinates (latitude, longitude)</li><li>ADDRTYPE</li><li>PI_MUNICIPAL_ADDRESS_ID</li><li>QUALIFIER</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span></h2>
+    
+    <p class="empty">No addresses updated.</p>
+  </div>
+
+  <div class="section">
+    <h2>Renumbered Addresses <span class="badge badge-accent">0</span></h2>
+    
+    <p class="empty">No addresses renumbered.</p>
+  </div>
+
+  <div class="section">
+    <h2>Street Renames <span class="badge badge-purple">0</span></h2>
+    <p class="empty">No street renames.</p>
+  </div>
+
+  
+
+  
+  <div class="section">
+    <h2>Status Changes <span class="badge badge-teal">40</span></h2>
+    
+  <details class="rename-group">
+    <summary><span class="change-field">ADDRTYPE:</span> <span class="old-val">SUBORD</span> <span class="arrow-val">→</span> <span class="new-val">MAIN</span><span class="rename-count">40 addresses</span></summary>
+    <table>
+      <tbody>
+        
+        <tr><td>212 CATNIP CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.36635&mlon=-75.94014#map=18/45.36635/-75.94014" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>214 CATNIP CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.36639&mlon=-75.94019#map=18/45.36639/-75.94019" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>216 CATNIP CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.36643&mlon=-75.94025#map=18/45.36643/-75.94025" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>218 CATNIP CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.36650&mlon=-75.94032#map=18/45.36650/-75.94032" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>798 FAIRLINE ROW</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.27717&mlon=-75.89818#map=18/45.27717/-75.89818" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>800 FAIRLINE ROW</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.27711&mlon=-75.89818#map=18/45.27711/-75.89818" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>749 HAFLINGER ROW</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.18833&mlon=-75.85182#map=18/45.18833/-75.85182" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>751 HAFLINGER ROW</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.18829&mlon=-75.85189#map=18/45.18829/-75.85189" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>755 HAFLINGER ROW</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.18820&mlon=-75.85204#map=18/45.18820/-75.85204" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>757 HAFLINGER ROW</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.18816&mlon=-75.85209#map=18/45.18816/-75.85209" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>759 HAFLINGER ROW</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.18812&mlon=-75.85214#map=18/45.18812/-75.85214" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>652 MOONGLADE CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25614&mlon=-75.74534#map=18/45.25614/-75.74534" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>654 MOONGLADE CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25620&mlon=-75.74537#map=18/45.25620/-75.74537" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>656 MOONGLADE CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25624&mlon=-75.74541#map=18/45.25624/-75.74541" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>658 MOONGLADE CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25630&mlon=-75.74544#map=18/45.25630/-75.74544" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>660 MOONGLADE CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25634&mlon=-75.74549#map=18/45.25634/-75.74549" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>95 PLOUGHSHARE RD</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.29335&mlon=-75.91088#map=18/45.29335/-75.91088" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>383 SEGUN RAJI ST</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32324&mlon=-75.61247#map=18/45.32324/-75.61247" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>385 SEGUN RAJI ST</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32321&mlon=-75.61254#map=18/45.32321/-75.61254" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>387 SEGUN RAJI ST</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32317&mlon=-75.61261#map=18/45.32317/-75.61261" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>799 SOLARIUM AVE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25853&mlon=-75.68911#map=18/45.25853/-75.68911" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>801 SOLARIUM AVE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25853&mlon=-75.68918#map=18/45.25853/-75.68918" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>803 SOLARIUM AVE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25852&mlon=-75.68926#map=18/45.25852/-75.68926" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>715 TADPOLE CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25709&mlon=-75.74508#map=18/45.25709/-75.74508" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>717 TADPOLE CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25705&mlon=-75.74504#map=18/45.25705/-75.74504" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>719 TADPOLE CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25700&mlon=-75.74500#map=18/45.25700/-75.74500" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>721 TADPOLE CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25695&mlon=-75.74496#map=18/45.25695/-75.74496" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>723 TADPOLE CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25690&mlon=-75.74492#map=18/45.25690/-75.74492" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>724 TADPOLE CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25675&mlon=-75.74535#map=18/45.25675/-75.74535" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>726 TADPOLE CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25670&mlon=-75.74531#map=18/45.25670/-75.74531" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>728 TADPOLE CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25666&mlon=-75.74529#map=18/45.25666/-75.74529" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>730 TADPOLE CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25660&mlon=-75.74523#map=18/45.25660/-75.74523" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>732 TADPOLE CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25656&mlon=-75.74519#map=18/45.25656/-75.74519" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>763 TADPOLE CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25694&mlon=-75.74480#map=18/45.25694/-75.74480" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>765 TADPOLE CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25698&mlon=-75.74484#map=18/45.25698/-75.74484" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>767 TADPOLE CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25704&mlon=-75.74487#map=18/45.25704/-75.74487" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>769 TADPOLE CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25709&mlon=-75.74492#map=18/45.25709/-75.74492" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>771 TADPOLE CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25714&mlon=-75.74495#map=18/45.25714/-75.74495" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>773 TADPOLE CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25718&mlon=-75.74499#map=18/45.25718/-75.74499" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3987 YORKS CORNERS RD</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.20029&mlon=-75.39358#map=18/45.20029/-75.39358" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+  </details>
+  
+    
+  </div>
+  
+
+  
+
+  <div class="section">
+    <h2>Location Adjustments <span class="badge" style="background: var(--surface2); color: var(--text-dim)">0</span></h2>
+    
+    <p class="empty">No location adjustments.</p>
+  </div>
+
+  <div class="generated-at">Report generated Aug 29, 2026 at 01:35 PM · source licence: Open Government Licence – City of Ottawa 2.0</div>
+
+  <script>
+    function sortTable(tbodyId, col) {
+      const tbody = document.getElementById(tbodyId);
+      if (!tbody) return;
+      const rows = Array.from(tbody.rows);
+      const dir = tbody.dataset.sortDir === 'asc' ? 'desc' : 'asc';
+      tbody.dataset.sortDir = dir;
+      rows.sort((a, b) => {
+        const av = a.cells[col]?.textContent.trim() || '';
+        const bv = b.cells[col]?.textContent.trim() || '';
+        const an = parseFloat(av), bn = parseFloat(bv);
+        if (!isNaN(an) && !isNaN(bn)) return dir === 'asc' ? an - bn : bn - an;
+        return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+      });
+      rows.forEach(r => tbody.appendChild(r));
+    }
+  </script>
+</body>
+
+</html>
