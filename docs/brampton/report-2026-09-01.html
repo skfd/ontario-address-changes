@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>City of Brampton Address Changes — Tuesday, Sep 01, 2026</title>
+  <style>
+    :root {
+      --bg: #fafafa; --surface: #ffffff; --surface2: #f5f5f5; --surface3: #ebebeb;
+      --border: #e0e0e0; --border-strong: #d1d1d1; --text: #242424;
+      --text-secondary: #424242; --text-dim: #616161; --accent: #0078d4;
+      --accent-hover: #106ebe; --accent-bg: #eff6fc; --green: #107c10;
+      --green-bg: #f1faf1; --green-tint: #9fd89f; --red: #c50f1f; --red-bg: #fdf3f4;
+      --red-tint: #eeacb2; --yellow: #eaa300; --yellow-bg: #fefbf4; --yellow-tint: #f9e2ae;
+      --purple: #881798; --purple-bg: #f9f3fb; --teal: #038387; --teal-bg: #f0fafa;
+      --shadow-4: 0 2px 4px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --shadow-8: 0 4px 8px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --card-bg: #ffffff; --card-hover: #f5f5f5; color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1f1f1f; --surface: #292929; --surface2: #333333; --surface3: #3d3d3d;
+        --border: #525252; --border-strong: #666666; --text: #ffffff;
+        --text-secondary: #d6d6d6; --text-dim: #adadad; --accent: #2899f5;
+        --accent-hover: #3aa0f3; --accent-bg: #002848; --green: #54b054;
+        --green-bg: #052505; --green-tint: #107c10; --red: #dc626d; --red-bg: #3b0509;
+        --red-tint: #c50f1f; --yellow: #f2c661; --yellow-bg: #463100; --yellow-tint: #eaa300;
+        --purple: #d29ddb; --purple-bg: #3a1040; --teal: #58c0c4; --teal-bg: #013638;
+        --shadow-4: 0 2px 4px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --shadow-8: 0 4px 8px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --card-bg: #333333; --card-hover: #3d3d3d; color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI Variable','Segoe UI',system-ui,-apple-system,sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.5; padding: 2rem;
+      max-width: 1100px; margin: 0 auto; font-size: 14px; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; color: var(--accent-hover); }
+    .back-link { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 12px;
+      color: var(--text-dim); margin-bottom: 1.5rem; transition: color 0.1s; }
+    .back-link:hover { color: var(--accent); text-decoration: none; }
+    h1 { font-size: 24px; font-weight: 600; margin-bottom: 4px; }
+    .subtitle { color: var(--text-secondary); font-size: 14px; margin-bottom: 12px; }
+    .explainer { color: var(--text-secondary); font-size: 13px; line-height: 1.5;
+      margin-bottom: 24px; padding: 12px 16px; background: var(--surface);
+      border-radius: 8px; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px; margin-bottom: 24px; }
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px;
+      padding: 16px; box-shadow: var(--shadow-4); transition: box-shadow 0.1s; }
+    .card:hover { box-shadow: var(--shadow-8); }
+    .card .label { font-size: 12px; color: var(--text-dim); font-weight: 400; }
+    .card .value { font-size: 28px; font-weight: 600; margin-top: 4px; }
+    .card .value.green { color: var(--green); } .card .value.red { color: var(--red); }
+    .card .value.yellow { color: var(--yellow); } .card .value.accent { color: var(--accent); }
+    .card .value.purple { color: var(--purple); }
+    .card .value.teal { color: var(--teal); }
+    .sparkline { display: block; margin-top: 6px; overflow: visible; opacity: 0.9; }
+    .sparkline-label { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+    .section { margin-bottom: 24px; }
+    .section h2 { font-size: 16px; font-weight: 600; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px; }
+    .badge { font-size: 12px; padding: 2px 8px; border-radius: 999px; font-weight: 600; }
+    .badge-green { background: var(--green-bg); color: var(--green); }
+    .badge-red { background: var(--red-bg); color: var(--red); }
+    .badge-yellow { background: var(--yellow-bg); color: var(--yellow); }
+    .badge-accent { background: var(--accent-bg); color: var(--accent); }
+    .badge-purple { background: var(--purple-bg); color: var(--purple); }
+    .badge-teal { background: var(--teal-bg); color: var(--teal); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface);
+      border-radius: 8px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    thead { background: var(--surface2); }
+    th { text-align: left; padding: 8px 12px; font-weight: 600; color: var(--text-dim);
+      font-size: 12px; cursor: pointer; user-select: none; border-bottom: 1px solid var(--border); }
+    th:hover { color: var(--accent); }
+    td { padding: 8px 12px; border-top: 1px solid var(--border); }
+    tr:hover td { background: var(--surface2); }
+    .old-val { color: var(--red); text-decoration: line-through; }
+    .new-val { color: var(--green); }
+    .arrow-val { color: var(--text-dim); text-align: center; white-space: nowrap; }
+    .map-link { display: inline-flex; align-items: center; margin-left: 0.4em;
+      color: var(--accent); vertical-align: middle; white-space: nowrap; font-size: 12px; }
+    .map-link:hover { color: var(--accent-hover); }
+    .map-link svg { width: 14px; height: 14px; }
+    .change-field { color: var(--yellow); font-weight: 600; }
+    .bar-chart { margin-top: 8px; }
+    .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 12px; }
+    .bar-label { width: 180px; text-align: right; color: var(--text-secondary); flex-shrink: 0;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .bar-track { flex: 1; height: 8px; background: var(--surface2); border-radius: 4px;
+      overflow: hidden; position: relative; }
+    .bar-fill { height: 100%; border-radius: 4px; transition: width 0.15s ease; }
+    .bar-fill.green { background: var(--green); } .bar-fill.red { background: var(--red); }
+    .bar-count { width: 40px; font-size: 12px; color: var(--text-dim); }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+    .empty { color: var(--text-dim); font-style: italic; padding: 16px; }
+    .truncated { color: var(--text-dim); font-size: 12px; margin-top: 8px; }
+    .collapsible-toggle { background: transparent; border: 1px solid var(--border);
+      color: var(--accent); padding: 5px 12px; border-radius: 4px; cursor: pointer;
+      font-size: 12px; font-family: inherit; margin-bottom: 12px; transition: background 0.1s; }
+    .collapsible-toggle:hover { background: var(--surface2); }
+    details.rename-group { background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; margin-bottom: 8px; box-shadow: var(--shadow-4); }
+    details.rename-group summary { padding: 10px 14px; cursor: pointer; font-size: 13px; }
+    details.rename-group[open] summary { border-bottom: 1px solid var(--border); }
+    details.rename-group table { border: none; box-shadow: none; border-radius: 0; }
+    details.rename-group .truncated { padding: 0 14px 10px; margin-top: 0; }
+    .rename-count { color: var(--text-dim); font-size: 12px; margin-left: 6px; }
+    .no-changes-banner { background: var(--green-bg); border: 1px solid var(--green-tint);
+      color: var(--green); padding: 16px; border-radius: 8px; margin-bottom: 24px;
+      text-align: center; font-weight: 600; font-size: 14px; }
+    .baseline-banner { background: var(--accent-bg); border: 1px solid var(--accent);
+      color: var(--accent); padding: 16px; border-radius: 8px; margin-bottom: 24px; font-size: 13px; }
+    .generated-at { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-dim); }
+    .history { font-size: 12.5px; color: var(--text-secondary); white-space: nowrap; }
+    .history .a { color: var(--green); font-weight: 500; }
+    .history .r { color: var(--red); font-weight: 500; }
+    .history .dot { color: var(--text-dim); margin: 0 4px; }
+    .history-none { color: var(--text-dim); font-style: italic; font-size: 12.5px; }
+    .info-wrap { position: relative; display: inline-flex; vertical-align: middle; }
+    .info-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+      height: 18px; padding: 0 8px 0 7px; border-radius: 999px; border: none;
+      color: #fff; background: var(--accent); cursor: help; font-size: 11px; font-weight: 600;
+      font-style: normal; font-family: inherit; line-height: 1; white-space: nowrap; }
+    .info-btn .glyph { font-style: italic; font-weight: 700;
+      font-family: Georgia, 'Times New Roman', serif; }
+    .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn,
+    .info-wrap:focus .info-btn { background: var(--accent-hover); }
+    .info-pop { display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 20;
+      width: 320px; max-width: 80vw; padding: 12px 14px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-8);
+      font-size: 12.5px; font-weight: 400; color: var(--text-secondary); line-height: 1.5; }
+    .info-wrap:hover .info-pop, .info-wrap:focus-within .info-pop,
+    .info-wrap:focus .info-pop { display: block; }
+    .info-pop strong { display: block; color: var(--text); font-size: 12px; margin-bottom: 4px; }
+    .info-pop ul { list-style: none; margin: 0 0 10px; padding: 0; }
+    .info-pop li { padding: 1px 0 1px 14px; position: relative; }
+    .info-pop li::before { content: "·"; position: absolute; left: 4px; color: var(--text-dim); }
+    .info-pop .note { color: var(--text-dim); font-size: 11.5px; margin: 0 0 10px; }
+    .info-pop .muted { color: var(--text-dim); font-style: italic; }
+  </style>
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+
+  <a class="back-link" href="index.html">← Back to City of Brampton reports</a>
+
+  <h1>City of Brampton — Address Changes</h1>
+  <p class="subtitle">
+    Changes between  and Tuesday, Sep 01, 2026
+    · 249,441 total addresses
+  </p>
+
+  
+
+  <div class="cards">
+    <div class="card"><div class="label">Total Addresses</div>
+      <div class="value accent">249,441</div></div>
+    <div class="card"><div class="label">New Addresses</div>
+      <div class="value green">+130</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#107c10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,16.2 19.7,16.5 37.3,15.9 55.0,16.3 72.7,18.0 90.3,18.0 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#107c10"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Retired Addresses</div>
+      <div class="value red">−0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#c50f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,2.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#c50f1f"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Updated Addresses <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (CIVIC_NUMBER)</li><li>Street name (STREET_NAME)</li><li>Unit (UNIT_NO)</li><li>Full address (FULL_ADDRESS)</li><li>Coordinates (latitude, longitude)</li><li>ADDRESS_ID</li><li>ADDRESS_TYPE</li><li>BLOCK_PLAN</li><li>CITY</li><li>CITY_GRID</li><li>CON_NUM</li><li>GIS_ID</li><li>HERITAGE</li><li>LOT_NUM</li><li>POSTAL_CODE</li><li>PROP_CODE_DESC</li><li>PROVINCE</li><li>REG_PLAN_ASSUMP_DATE</li><li>REG_PLAN_NUMBER</li><li>SEC_PLAN_AREA</li><li>SITE_PLAN_NUMBER</li><li>STREET_DIRECTION</li><li>STREET_TYPE</li><li>TOWNSHIP</li><li>WARD</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>CITY_FILE</li><li>CONDO_PLAN_NUMBER</li><li>C_OF_A</li><li>DRAFT_PLAN_NUMBER</li><li>OCCUPANCY_DATE</li><li>PERMIT_ISSUEDATE</li><li>PERMIT_NO</li><li>PERMIT_TYPE</li><li>SUB_TYPE</li><li>WORK_TYPE</li></ul>
+      
+    </span>
+  </span></div>
+      <div class="value yellow">1</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,2.0 90.3,16.0 108.0,16.0"/><circle cx="108.0" cy="16.0" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Renumbered</div>
+      <div class="value accent">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#0078d4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#0078d4"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Street Renames</div>
+      <div class="value purple">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#9141ac" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#9141ac"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    
+    <div class="card"><div class="label">Boundary Changes</div>
+      <div class="value teal">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#038387" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#038387"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    <div class="card"><div class="label">Location Adjustments</div>
+      <div class="value" style="color: var(--text-dim)">1</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#808080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,2.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,17.4"/><circle cx="108.0" cy="17.4" r="2" fill="#808080"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+  </div>
+
+  
+  <div class="section">
+    <h2>Change Breakdown</h2>
+    <div class="stats-grid">
+      
+      <div class="card"><div class="label">Top Streets by New Addresses</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">MAHA</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">43</span></div>
+        <div class="bar-row"><span class="bar-label">MAXMARA</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:63.0%"></div></div>
+          <span class="bar-count">27</span></div>
+        <div class="bar-row"><span class="bar-label">ORANGEVALLEY</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:51.0%"></div></div>
+          <span class="bar-count">22</span></div>
+        <div class="bar-row"><span class="bar-label">SINDH</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:47.0%"></div></div>
+          <span class="bar-count">20</span></div>
+        <div class="bar-row"><span class="bar-label">ACRES</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:19.0%"></div></div>
+          <span class="bar-count">8</span></div>
+      </div></div>
+      
+      
+      <div class="card"><div class="label">Most Frequently Updated Fields</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">Location</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">2</span></div>
+        <div class="bar-row"><span class="bar-label">ADDRESS_TYPE</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:50.0%"></div></div>
+          <span class="bar-count">1</span></div>
+        <div class="bar-row"><span class="bar-label">GIS_ID</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:50.0%"></div></div>
+          <span class="bar-count">1</span></div>
+        <div class="bar-row"><span class="bar-label">PROP_CODE_DESC</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:50.0%"></div></div>
+          <span class="bar-count">1</span></div>
+      </div></div>
+    </div>
+  </div>
+  
+
+  <div class="section">
+    <h2>New Addresses <span class="badge badge-green">130</span></h2>
+    
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-added',0)">Address</th><th onclick="sortTable('t-added',1)">Street</th>
+        <th onclick="sortTable('t-added',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-added">
+        
+        <tr><td>2 ACRES CRT</td><td>ACRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78751&mlon=-79.76270#map=18/43.78751/-79.76270" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>4 ACRES CRT</td><td>ACRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78772&mlon=-79.76251#map=18/43.78772/-79.76251" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6 ACRES CRT</td><td>ACRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78782&mlon=-79.76238#map=18/43.78782/-79.76238" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>8 ACRES CRT</td><td>ACRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78785&mlon=-79.76214#map=18/43.78785/-79.76214" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 ACRES CRT</td><td>ACRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78775&mlon=-79.76194#map=18/43.78775/-79.76194" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>12 ACRES CRT</td><td>ACRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78760&mlon=-79.76186#map=18/43.78760/-79.76186" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>14 ACRES CRT</td><td>ACRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78745&mlon=-79.76185#map=18/43.78745/-79.76185" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>16 ACRES CRT</td><td>ACRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78736&mlon=-79.76199#map=18/43.78736/-79.76199" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2-185 BRISDALE DR</td><td>BRISDALE</td><td>2</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68977&mlon=-79.82457#map=18/43.68977/-79.82457" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2-1 DINOSAUR ST</td><td>DINOSAUR</td><td>2</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.81101&mlon=-79.72664#map=18/43.81101/-79.72664" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2-24 DUNSTER CRES</td><td>DUNSTER</td><td>2</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71643&mlon=-79.69119#map=18/43.71643/-79.69119" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2-87 FAIRWOOD CIR</td><td>FAIRWOOD</td><td>2</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75537&mlon=-79.76666#map=18/43.75537/-79.76666" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2-30 KESSLER DR</td><td>KESSLER</td><td>2</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.76479&mlon=-79.77681#map=18/43.76479/-79.77681" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>9 MAHA CRES</td><td>MAHA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78648&mlon=-79.76334#map=18/43.78648/-79.76334" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 MAHA CRES</td><td>MAHA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78671&mlon=-79.76303#map=18/43.78671/-79.76303" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>11 MAHA CRES</td><td>MAHA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78656&mlon=-79.76344#map=18/43.78656/-79.76344" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>12 MAHA CRES</td><td>MAHA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78679&mlon=-79.76314#map=18/43.78679/-79.76314" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>13 MAHA CRES</td><td>MAHA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78663&mlon=-79.76354#map=18/43.78663/-79.76354" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>14 MAHA CRES</td><td>MAHA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78687&mlon=-79.76323#map=18/43.78687/-79.76323" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>15 MAHA CRES</td><td>MAHA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78670&mlon=-79.76365#map=18/43.78670/-79.76365" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>16 MAHA CRES</td><td>MAHA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78694&mlon=-79.76333#map=18/43.78694/-79.76333" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>17 MAHA CRES</td><td>MAHA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78679&mlon=-79.76379#map=18/43.78679/-79.76379" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>18 MAHA CRES</td><td>MAHA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78701&mlon=-79.76343#map=18/43.78701/-79.76343" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>19 MAHA CRES</td><td>MAHA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78687&mlon=-79.76389#map=18/43.78687/-79.76389" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>20 MAHA CRES</td><td>MAHA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78709&mlon=-79.76354#map=18/43.78709/-79.76354" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>21 MAHA CRES</td><td>MAHA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78695&mlon=-79.76404#map=18/43.78695/-79.76404" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>22 MAHA CRES</td><td>MAHA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78720&mlon=-79.76366#map=18/43.78720/-79.76366" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>23 MAHA CRES</td><td>MAHA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78702&mlon=-79.76419#map=18/43.78702/-79.76419" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>24 MAHA CRES</td><td>MAHA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78728&mlon=-79.76377#map=18/43.78728/-79.76377" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>25 MAHA CRES</td><td>MAHA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78679&mlon=-79.76448#map=18/43.78679/-79.76448" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>26 MAHA CRES</td><td>MAHA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78742&mlon=-79.76389#map=18/43.78742/-79.76389" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>27 MAHA CRES</td><td>MAHA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78671&mlon=-79.76436#map=18/43.78671/-79.76436" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>28 MAHA CRES</td><td>MAHA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78749&mlon=-79.76412#map=18/43.78749/-79.76412" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>29 MAHA CRES</td><td>MAHA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78662&mlon=-79.76424#map=18/43.78662/-79.76424" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>30 MAHA CRES</td><td>MAHA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78743&mlon=-79.76436#map=18/43.78743/-79.76436" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>31 MAHA CRES</td><td>MAHA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78654&mlon=-79.76412#map=18/43.78654/-79.76412" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>33 MAHA CRES</td><td>MAHA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78645&mlon=-79.76400#map=18/43.78645/-79.76400" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>35 MAHA CRES</td><td>MAHA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78636&mlon=-79.76390#map=18/43.78636/-79.76390" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>36 MAHA CRES</td><td>MAHA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78727&mlon=-79.76460#map=18/43.78727/-79.76460" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>37 MAHA CRES</td><td>MAHA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78629&mlon=-79.76381#map=18/43.78629/-79.76381" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>38 MAHA CRES</td><td>MAHA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78718&mlon=-79.76472#map=18/43.78718/-79.76472" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>39 MAHA CRES</td><td>MAHA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78622&mlon=-79.76369#map=18/43.78622/-79.76369" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>40 MAHA CRES</td><td>MAHA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78709&mlon=-79.76483#map=18/43.78709/-79.76483" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>42 MAHA CRES</td><td>MAHA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78702&mlon=-79.76493#map=18/43.78702/-79.76493" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>44 MAHA CRES</td><td>MAHA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78690&mlon=-79.76507#map=18/43.78690/-79.76507" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>46 MAHA CRES</td><td>MAHA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78677&mlon=-79.76519#map=18/43.78677/-79.76519" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>48 MAHA CRES</td><td>MAHA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78660&mlon=-79.76503#map=18/43.78660/-79.76503" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>50 MAHA CRES</td><td>MAHA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78650&mlon=-79.76490#map=18/43.78650/-79.76490" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>52 MAHA CRES</td><td>MAHA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78643&mlon=-79.76480#map=18/43.78643/-79.76480" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>54 MAHA CRES</td><td>MAHA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78636&mlon=-79.76469#map=18/43.78636/-79.76469" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>56 MAHA CRES</td><td>MAHA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78629&mlon=-79.76459#map=18/43.78629/-79.76459" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>58 MAHA CRES</td><td>MAHA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78621&mlon=-79.76448#map=18/43.78621/-79.76448" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>60 MAHA CRES</td><td>MAHA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78613&mlon=-79.76439#map=18/43.78613/-79.76439" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>62 MAHA CRES</td><td>MAHA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78606&mlon=-79.76429#map=18/43.78606/-79.76429" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>64 MAHA CRES</td><td>MAHA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78599&mlon=-79.76418#map=18/43.78599/-79.76418" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>66 MAHA CRES</td><td>MAHA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78592&mlon=-79.76408#map=18/43.78592/-79.76408" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1 MAXMARA ST</td><td>MAXMARA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78810&mlon=-79.76352#map=18/43.78810/-79.76352" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3 MAXMARA ST</td><td>MAXMARA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78803&mlon=-79.76345#map=18/43.78803/-79.76345" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>5 MAXMARA ST</td><td>MAXMARA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78796&mlon=-79.76333#map=18/43.78796/-79.76333" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>7 MAXMARA ST</td><td>MAXMARA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78789&mlon=-79.76323#map=18/43.78789/-79.76323" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>9 MAXMARA ST</td><td>MAXMARA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78782&mlon=-79.76311#map=18/43.78782/-79.76311" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>11 MAXMARA ST</td><td>MAXMARA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78774&mlon=-79.76302#map=18/43.78774/-79.76302" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>13 MAXMARA ST</td><td>MAXMARA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78766&mlon=-79.76292#map=18/43.78766/-79.76292" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>15 MAXMARA ST</td><td>MAXMARA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78758&mlon=-79.76283#map=18/43.78758/-79.76283" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>21 MAXMARA ST</td><td>MAXMARA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78720&mlon=-79.76228#map=18/43.78720/-79.76228" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>23 MAXMARA ST</td><td>MAXMARA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78712&mlon=-79.76217#map=18/43.78712/-79.76217" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>25 MAXMARA ST</td><td>MAXMARA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78706&mlon=-79.76206#map=18/43.78706/-79.76206" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>27 MAXMARA ST</td><td>MAXMARA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78698&mlon=-79.76196#map=18/43.78698/-79.76196" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>29 MAXMARA ST</td><td>MAXMARA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78691&mlon=-79.76185#map=18/43.78691/-79.76185" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>31 MAXMARA ST</td><td>MAXMARA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78683&mlon=-79.76177#map=18/43.78683/-79.76177" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>33 MAXMARA ST</td><td>MAXMARA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78677&mlon=-79.76163#map=18/43.78677/-79.76163" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>35 MAXMARA ST</td><td>MAXMARA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78667&mlon=-79.76151#map=18/43.78667/-79.76151" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>37 MAXMARA ST</td><td>MAXMARA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78660&mlon=-79.76139#map=18/43.78660/-79.76139" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>54 MAXMARA ST</td><td>MAXMARA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78661&mlon=-79.76217#map=18/43.78661/-79.76217" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>56 MAXMARA ST</td><td>MAXMARA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78657&mlon=-79.76212#map=18/43.78657/-79.76212" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>58 MAXMARA ST</td><td>MAXMARA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78653&mlon=-79.76207#map=18/43.78653/-79.76207" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>60 MAXMARA ST</td><td>MAXMARA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78649&mlon=-79.76201#map=18/43.78649/-79.76201" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>62 MAXMARA ST</td><td>MAXMARA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78642&mlon=-79.76189#map=18/43.78642/-79.76189" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>64 MAXMARA ST</td><td>MAXMARA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78634&mlon=-79.76176#map=18/43.78634/-79.76176" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>66 MAXMARA ST</td><td>MAXMARA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78625&mlon=-79.76165#map=18/43.78625/-79.76165" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>68 MAXMARA ST</td><td>MAXMARA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78615&mlon=-79.76153#map=18/43.78615/-79.76153" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>70 MAXMARA ST</td><td>MAXMARA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78606&mlon=-79.76143#map=18/43.78606/-79.76143" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>72 MAXMARA ST</td><td>MAXMARA</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78595&mlon=-79.76130#map=18/43.78595/-79.76130" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1 ORANGEVALLEY ST</td><td>ORANGEVALLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78586&mlon=-79.76313#map=18/43.78586/-79.76313" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2 ORANGEVALLEY ST</td><td>ORANGEVALLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78559&mlon=-79.76352#map=18/43.78559/-79.76352" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3 ORANGEVALLEY ST</td><td>ORANGEVALLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78582&mlon=-79.76308#map=18/43.78582/-79.76308" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>4 ORANGEVALLEY ST</td><td>ORANGEVALLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78555&mlon=-79.76347#map=18/43.78555/-79.76347" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>5 ORANGEVALLEY ST</td><td>ORANGEVALLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78579&mlon=-79.76303#map=18/43.78579/-79.76303" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6 ORANGEVALLEY ST</td><td>ORANGEVALLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78552&mlon=-79.76341#map=18/43.78552/-79.76341" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>7 ORANGEVALLEY ST</td><td>ORANGEVALLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78575&mlon=-79.76297#map=18/43.78575/-79.76297" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>8 ORANGEVALLEY ST</td><td>ORANGEVALLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78547&mlon=-79.76335#map=18/43.78547/-79.76335" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>9 ORANGEVALLEY ST</td><td>ORANGEVALLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78569&mlon=-79.76287#map=18/43.78569/-79.76287" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 ORANGEVALLEY ST</td><td>ORANGEVALLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78540&mlon=-79.76326#map=18/43.78540/-79.76326" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>11 ORANGEVALLEY ST</td><td>ORANGEVALLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78560&mlon=-79.76275#map=18/43.78560/-79.76275" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>12 ORANGEVALLEY ST</td><td>ORANGEVALLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78532&mlon=-79.76316#map=18/43.78532/-79.76316" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>13 ORANGEVALLEY ST</td><td>ORANGEVALLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78551&mlon=-79.76268#map=18/43.78551/-79.76268" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>14 ORANGEVALLEY ST</td><td>ORANGEVALLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78523&mlon=-79.76308#map=18/43.78523/-79.76308" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>15 ORANGEVALLEY ST</td><td>ORANGEVALLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78542&mlon=-79.76258#map=18/43.78542/-79.76258" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>16 ORANGEVALLEY ST</td><td>ORANGEVALLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78512&mlon=-79.76299#map=18/43.78512/-79.76299" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>17 ORANGEVALLEY ST</td><td>ORANGEVALLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78533&mlon=-79.76251#map=18/43.78533/-79.76251" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>18 ORANGEVALLEY ST</td><td>ORANGEVALLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78501&mlon=-79.76292#map=18/43.78501/-79.76292" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>19 ORANGEVALLEY ST</td><td>ORANGEVALLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78523&mlon=-79.76245#map=18/43.78523/-79.76245" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>20 ORANGEVALLEY ST</td><td>ORANGEVALLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78489&mlon=-79.76284#map=18/43.78489/-79.76284" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>21 ORANGEVALLEY ST</td><td>ORANGEVALLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78513&mlon=-79.76240#map=18/43.78513/-79.76240" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>22 ORANGEVALLEY ST</td><td>ORANGEVALLEY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78478&mlon=-79.76276#map=18/43.78478/-79.76276" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>255B RUTHERFORD RD S</td><td>RUTHERFORD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span><span class="dot">·</span><span class="r">− 2026-08-22</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68711&mlon=-79.73013#map=18/43.68711/-79.73013" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1 SINDH DR</td><td>SINDH</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78638&mlon=-79.76248#map=18/43.78638/-79.76248" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2 SINDH DR</td><td>SINDH</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78609&mlon=-79.76283#map=18/43.78609/-79.76283" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3 SINDH DR</td><td>SINDH</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78634&mlon=-79.76242#map=18/43.78634/-79.76242" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>4 SINDH DR</td><td>SINDH</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78605&mlon=-79.76279#map=18/43.78605/-79.76279" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>5 SINDH DR</td><td>SINDH</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78630&mlon=-79.76237#map=18/43.78630/-79.76237" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6 SINDH DR</td><td>SINDH</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78602&mlon=-79.76273#map=18/43.78602/-79.76273" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>7 SINDH DR</td><td>SINDH</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78627&mlon=-79.76231#map=18/43.78627/-79.76231" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>8 SINDH DR</td><td>SINDH</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78598&mlon=-79.76267#map=18/43.78598/-79.76267" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>9 SINDH DR</td><td>SINDH</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78620&mlon=-79.76220#map=18/43.78620/-79.76220" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 SINDH DR</td><td>SINDH</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78590&mlon=-79.76259#map=18/43.78590/-79.76259" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>11 SINDH DR</td><td>SINDH</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78610&mlon=-79.76208#map=18/43.78610/-79.76208" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>12 SINDH DR</td><td>SINDH</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78580&mlon=-79.76247#map=18/43.78580/-79.76247" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>13 SINDH DR</td><td>SINDH</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78600&mlon=-79.76197#map=18/43.78600/-79.76197" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>14 SINDH DR</td><td>SINDH</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78570&mlon=-79.76236#map=18/43.78570/-79.76236" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>15 SINDH DR</td><td>SINDH</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78590&mlon=-79.76186#map=18/43.78590/-79.76186" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>16 SINDH DR</td><td>SINDH</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78560&mlon=-79.76225#map=18/43.78560/-79.76225" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>17 SINDH DR</td><td>SINDH</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78580&mlon=-79.76176#map=18/43.78580/-79.76176" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>18 SINDH DR</td><td>SINDH</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78548&mlon=-79.76215#map=18/43.78548/-79.76215" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>19 SINDH DR</td><td>SINDH</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78571&mlon=-79.76169#map=18/43.78571/-79.76169" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>20 SINDH DR</td><td>SINDH</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78539&mlon=-79.76206#map=18/43.78539/-79.76206" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2-44 SPRINGTOWN TRAIL</td><td>SPRINGTOWN</td><td>2</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74459&mlon=-79.76566#map=18/43.74459/-79.76566" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2-318 SUNNY MEADOW BLVD</td><td>SUNNY MEADOW</td><td>2</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.76234&mlon=-79.75757#map=18/43.76234/-79.75757" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>UNASSIGNED</td><td>UNASSIGNED</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70365&mlon=-79.78970#map=18/43.70365/-79.78970" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2-7 WANDERING TRAIL DR</td><td>WANDERING TRAIL</td><td>2</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71529&mlon=-79.82043#map=18/43.71529/-79.82043" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Retired Addresses <span class="badge badge-red">0</span></h2>
+    <p class="empty">No addresses retired.</p>
+  </div>
+
+  <div class="section">
+    <h2>Updated Addresses <span class="badge badge-yellow">1</span>
+      <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (CIVIC_NUMBER)</li><li>Street name (STREET_NAME)</li><li>Unit (UNIT_NO)</li><li>Full address (FULL_ADDRESS)</li><li>Coordinates (latitude, longitude)</li><li>ADDRESS_ID</li><li>ADDRESS_TYPE</li><li>BLOCK_PLAN</li><li>CITY</li><li>CITY_GRID</li><li>CON_NUM</li><li>GIS_ID</li><li>HERITAGE</li><li>LOT_NUM</li><li>POSTAL_CODE</li><li>PROP_CODE_DESC</li><li>PROVINCE</li><li>REG_PLAN_ASSUMP_DATE</li><li>REG_PLAN_NUMBER</li><li>SEC_PLAN_AREA</li><li>SITE_PLAN_NUMBER</li><li>STREET_DIRECTION</li><li>STREET_TYPE</li><li>TOWNSHIP</li><li>WARD</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>CITY_FILE</li><li>CONDO_PLAN_NUMBER</li><li>C_OF_A</li><li>DRAFT_PLAN_NUMBER</li><li>OCCUPANCY_DATE</li><li>PERMIT_ISSUEDATE</li><li>PERMIT_NO</li><li>PERMIT_TYPE</li><li>SUB_TYPE</li><li>WORK_TYPE</li></ul>
+      
+    </span>
+  </span></h2>
+    
+    
+    <table>
+      <thead><tr><th>Address</th><th>What Changed</th><th>Before</th><th></th><th>After</th><th>Map</th></tr></thead>
+      <tbody>
+        
+  <tr><td rowspan="4">6-255B RUTHERFORD RD S</td>
+    <td class="change-field">ADDRESS_TYPE</td>
+    <td class="old-val">FRONTDOOR</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">PRIMARY</td>
+    <td rowspan="4"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68707&mlon=-79.73005#map=18/43.68707/-79.73005" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">GIS_ID</td>
+    <td class="old-val">1667</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1711804</td>
+    </tr>
+  <tr>
+    <td class="change-field">PROP_CODE_DESC</td>
+    <td class="old-val">Industrial</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Commercial</td>
+    </tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">43.68711, -79.73013<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68711&mlon=-79.73013#map=19/43.68711/-79.73013" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↘ 7.8m</td>
+    <td class="new-val">43.68707, -79.73005<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68707&mlon=-79.73005#map=19/43.68707/-79.73005" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Renumbered Addresses <span class="badge badge-accent">0</span></h2>
+    
+    <p class="empty">No addresses renumbered.</p>
+  </div>
+
+  <div class="section">
+    <h2>Street Renames <span class="badge badge-purple">0</span></h2>
+    <p class="empty">No street renames.</p>
+  </div>
+
+  
+
+  
+
+  
+  <div class="section">
+    <h2>Boundary Changes <span class="badge badge-teal">0</span></h2>
+    <p class="empty">No ward or municipality reassignments.</p>
+  </div>
+  
+
+  <div class="section">
+    <h2>Location Adjustments <span class="badge" style="background: var(--surface2); color: var(--text-dim)">1</span></h2>
+    
+    
+    
+    <table>
+      <thead><tr><th>Address</th><th>Before</th><th></th><th>After</th></tr></thead>
+      <tbody>
+        
+        <tr><td>181 RUTHERFORD RD S</td>
+          
+          <td class="old-val">43.68874, -79.73036<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68874&mlon=-79.73036#map=19/43.68874/-79.73036" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 25.5m</td>
+          <td class="new-val">43.68860, -79.73061<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68860&mlon=-79.73061#map=19/43.68860/-79.73061" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+      </tbody>
+    </table>
+    
+    
+    
+  </div>
+
+  <div class="generated-at">Report generated Sep 01, 2026 at 12:17 PM · source licence: Creative Commons Attribution 4.0 (CC BY 4.0)</div>
+
+  <script>
+    function sortTable(tbodyId, col) {
+      const tbody = document.getElementById(tbodyId);
+      if (!tbody) return;
+      const rows = Array.from(tbody.rows);
+      const dir = tbody.dataset.sortDir === 'asc' ? 'desc' : 'asc';
+      tbody.dataset.sortDir = dir;
+      rows.sort((a, b) => {
+        const av = a.cells[col]?.textContent.trim() || '';
+        const bv = b.cells[col]?.textContent.trim() || '';
+        const an = parseFloat(av), bn = parseFloat(bv);
+        if (!isNaN(an) && !isNaN(bn)) return dir === 'asc' ? an - bn : bn - an;
+        return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+      });
+      rows.forEach(r => tbody.appendChild(r));
+    }
+  </script>
+</body>
+
+</html>
