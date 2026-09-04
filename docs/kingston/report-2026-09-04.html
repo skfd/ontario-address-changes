@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>City of Kingston Address Changes — Friday, Sep 04, 2026</title>
+  <style>
+    :root {
+      --bg: #fafafa; --surface: #ffffff; --surface2: #f5f5f5; --surface3: #ebebeb;
+      --border: #e0e0e0; --border-strong: #d1d1d1; --text: #242424;
+      --text-secondary: #424242; --text-dim: #616161; --accent: #0078d4;
+      --accent-hover: #106ebe; --accent-bg: #eff6fc; --green: #107c10;
+      --green-bg: #f1faf1; --green-tint: #9fd89f; --red: #c50f1f; --red-bg: #fdf3f4;
+      --red-tint: #eeacb2; --yellow: #eaa300; --yellow-bg: #fefbf4; --yellow-tint: #f9e2ae;
+      --purple: #881798; --purple-bg: #f9f3fb; --teal: #038387; --teal-bg: #f0fafa;
+      --shadow-4: 0 2px 4px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --shadow-8: 0 4px 8px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --card-bg: #ffffff; --card-hover: #f5f5f5; color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1f1f1f; --surface: #292929; --surface2: #333333; --surface3: #3d3d3d;
+        --border: #525252; --border-strong: #666666; --text: #ffffff;
+        --text-secondary: #d6d6d6; --text-dim: #adadad; --accent: #2899f5;
+        --accent-hover: #3aa0f3; --accent-bg: #002848; --green: #54b054;
+        --green-bg: #052505; --green-tint: #107c10; --red: #dc626d; --red-bg: #3b0509;
+        --red-tint: #c50f1f; --yellow: #f2c661; --yellow-bg: #463100; --yellow-tint: #eaa300;
+        --purple: #d29ddb; --purple-bg: #3a1040; --teal: #58c0c4; --teal-bg: #013638;
+        --shadow-4: 0 2px 4px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --shadow-8: 0 4px 8px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --card-bg: #333333; --card-hover: #3d3d3d; color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI Variable','Segoe UI',system-ui,-apple-system,sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.5; padding: 2rem;
+      max-width: 1100px; margin: 0 auto; font-size: 14px; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; color: var(--accent-hover); }
+    .back-link { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 12px;
+      color: var(--text-dim); margin-bottom: 1.5rem; transition: color 0.1s; }
+    .back-link:hover { color: var(--accent); text-decoration: none; }
+    h1 { font-size: 24px; font-weight: 600; margin-bottom: 4px; }
+    .subtitle { color: var(--text-secondary); font-size: 14px; margin-bottom: 12px; }
+    .explainer { color: var(--text-secondary); font-size: 13px; line-height: 1.5;
+      margin-bottom: 24px; padding: 12px 16px; background: var(--surface);
+      border-radius: 8px; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px; margin-bottom: 24px; }
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px;
+      padding: 16px; box-shadow: var(--shadow-4); transition: box-shadow 0.1s; }
+    .card:hover { box-shadow: var(--shadow-8); }
+    .card .label { font-size: 12px; color: var(--text-dim); font-weight: 400; }
+    .card .value { font-size: 28px; font-weight: 600; margin-top: 4px; }
+    .card .value.green { color: var(--green); } .card .value.red { color: var(--red); }
+    .card .value.yellow { color: var(--yellow); } .card .value.accent { color: var(--accent); }
+    .card .value.purple { color: var(--purple); }
+    .card .value.teal { color: var(--teal); }
+    .sparkline { display: block; margin-top: 6px; overflow: visible; opacity: 0.9; }
+    .sparkline-label { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+    .section { margin-bottom: 24px; }
+    .section h2 { font-size: 16px; font-weight: 600; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px; }
+    .badge { font-size: 12px; padding: 2px 8px; border-radius: 999px; font-weight: 600; }
+    .badge-green { background: var(--green-bg); color: var(--green); }
+    .badge-red { background: var(--red-bg); color: var(--red); }
+    .badge-yellow { background: var(--yellow-bg); color: var(--yellow); }
+    .badge-accent { background: var(--accent-bg); color: var(--accent); }
+    .badge-purple { background: var(--purple-bg); color: var(--purple); }
+    .badge-teal { background: var(--teal-bg); color: var(--teal); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface);
+      border-radius: 8px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    thead { background: var(--surface2); }
+    th { text-align: left; padding: 8px 12px; font-weight: 600; color: var(--text-dim);
+      font-size: 12px; cursor: pointer; user-select: none; border-bottom: 1px solid var(--border); }
+    th:hover { color: var(--accent); }
+    td { padding: 8px 12px; border-top: 1px solid var(--border); }
+    tr:hover td { background: var(--surface2); }
+    .old-val { color: var(--red); text-decoration: line-through; }
+    .new-val { color: var(--green); }
+    .arrow-val { color: var(--text-dim); text-align: center; white-space: nowrap; }
+    .map-link { display: inline-flex; align-items: center; margin-left: 0.4em;
+      color: var(--accent); vertical-align: middle; white-space: nowrap; font-size: 12px; }
+    .map-link:hover { color: var(--accent-hover); }
+    .map-link svg { width: 14px; height: 14px; }
+    .change-field { color: var(--yellow); font-weight: 600; }
+    .bar-chart { margin-top: 8px; }
+    .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 12px; }
+    .bar-label { width: 180px; text-align: right; color: var(--text-secondary); flex-shrink: 0;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .bar-track { flex: 1; height: 8px; background: var(--surface2); border-radius: 4px;
+      overflow: hidden; position: relative; }
+    .bar-fill { height: 100%; border-radius: 4px; transition: width 0.15s ease; }
+    .bar-fill.green { background: var(--green); } .bar-fill.red { background: var(--red); }
+    .bar-count { width: 40px; font-size: 12px; color: var(--text-dim); }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+    .empty { color: var(--text-dim); font-style: italic; padding: 16px; }
+    .truncated { color: var(--text-dim); font-size: 12px; margin-top: 8px; }
+    .collapsible-toggle { background: transparent; border: 1px solid var(--border);
+      color: var(--accent); padding: 5px 12px; border-radius: 4px; cursor: pointer;
+      font-size: 12px; font-family: inherit; margin-bottom: 12px; transition: background 0.1s; }
+    .collapsible-toggle:hover { background: var(--surface2); }
+    details.rename-group { background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; margin-bottom: 8px; box-shadow: var(--shadow-4); }
+    details.rename-group summary { padding: 10px 14px; cursor: pointer; font-size: 13px; }
+    details.rename-group[open] summary { border-bottom: 1px solid var(--border); }
+    details.rename-group table { border: none; box-shadow: none; border-radius: 0; }
+    details.rename-group .truncated { padding: 0 14px 10px; margin-top: 0; }
+    .rename-count { color: var(--text-dim); font-size: 12px; margin-left: 6px; }
+    .no-changes-banner { background: var(--green-bg); border: 1px solid var(--green-tint);
+      color: var(--green); padding: 16px; border-radius: 8px; margin-bottom: 24px;
+      text-align: center; font-weight: 600; font-size: 14px; }
+    .baseline-banner { background: var(--accent-bg); border: 1px solid var(--accent);
+      color: var(--accent); padding: 16px; border-radius: 8px; margin-bottom: 24px; font-size: 13px; }
+    .generated-at { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-dim); }
+    .history { font-size: 12.5px; color: var(--text-secondary); white-space: nowrap; }
+    .history .a { color: var(--green); font-weight: 500; }
+    .history .r { color: var(--red); font-weight: 500; }
+    .history .dot { color: var(--text-dim); margin: 0 4px; }
+    .history-none { color: var(--text-dim); font-style: italic; font-size: 12.5px; }
+    .info-wrap { position: relative; display: inline-flex; vertical-align: middle; }
+    .info-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+      height: 18px; padding: 0 8px 0 7px; border-radius: 999px; border: none;
+      color: #fff; background: var(--accent); cursor: help; font-size: 11px; font-weight: 600;
+      font-style: normal; font-family: inherit; line-height: 1; white-space: nowrap; }
+    .info-btn .glyph { font-style: italic; font-weight: 700;
+      font-family: Georgia, 'Times New Roman', serif; }
+    .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn,
+    .info-wrap:focus .info-btn { background: var(--accent-hover); }
+    .info-pop { display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 20;
+      width: 320px; max-width: 80vw; padding: 12px 14px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-8);
+      font-size: 12.5px; font-weight: 400; color: var(--text-secondary); line-height: 1.5; }
+    .info-wrap:hover .info-pop, .info-wrap:focus-within .info-pop,
+    .info-wrap:focus .info-pop { display: block; }
+    .info-pop strong { display: block; color: var(--text); font-size: 12px; margin-bottom: 4px; }
+    .info-pop ul { list-style: none; margin: 0 0 10px; padding: 0; }
+    .info-pop li { padding: 1px 0 1px 14px; position: relative; }
+    .info-pop li::before { content: "·"; position: absolute; left: 4px; color: var(--text-dim); }
+    .info-pop .note { color: var(--text-dim); font-size: 11.5px; margin: 0 0 10px; }
+    .info-pop .muted { color: var(--text-dim); font-style: italic; }
+  </style>
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+
+  <a class="back-link" href="index.html">← Back to City of Kingston reports</a>
+
+  <h1>City of Kingston — Address Changes</h1>
+  <p class="subtitle">
+    Changes between  and Friday, Sep 04, 2026
+    · 77,508 total addresses
+  </p>
+
+  
+
+  <div class="cards">
+    <div class="card"><div class="label">Total Addresses</div>
+      <div class="value accent">77,508</div></div>
+    <div class="card"><div class="label">New Addresses</div>
+      <div class="value green">+46</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#107c10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,3.4 37.3,2.3 55.0,18.0 72.7,18.0 90.3,11.4 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#107c10"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Retired Addresses</div>
+      <div class="value red">−62</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#c50f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,17.7 37.3,8.5 55.0,3.5 72.7,16.7 90.3,17.7 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#c50f1f"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Updated Addresses <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (STREET)</li><li>Unit (UNIT)</li><li>Full address (FULL_ADDRESS)</li><li>Coordinates (latitude, longitude)</li><li>ADDRESS_ID</li><li>ADDRESS_NUMBER_SUFFIX</li><li>DIRECTION_SUFFIX</li><li>ELECTORAL_DISTRICT_NAME</li><li>GARBAGE_DAY</li><li>MUNICIPALITY</li><li>NEIGHBOURHOOD</li><li>POSTAL_CODE</li><li>RECYCLING_DAY</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>COLLECTION_TYPE</li><li>STREET_BODY_NAME</li><li>STREET_TYPE_SUFFIX</li><li>UNIT_TYPE</li></ul>
+      
+    </span>
+  </span></div>
+      <div class="value yellow">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,16.1 19.7,5.8 37.3,16.1 55.0,8.6 72.7,11.4 90.3,2.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Renumbered</div>
+      <div class="value accent">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#0078d4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#0078d4"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Street Renames</div>
+      <div class="value purple">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#9141ac" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#9141ac"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    
+    <div class="card"><div class="label">Boundary Changes</div>
+      <div class="value teal">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#038387" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#038387"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    <div class="card"><div class="label">Location Adjustments</div>
+      <div class="value" style="color: var(--text-dim)">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#808080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#808080"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+  </div>
+
+  
+  <div class="section">
+    <h2>Change Breakdown</h2>
+    <div class="stats-grid">
+      
+      <div class="card"><div class="label">Top Streets by New Addresses</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">AKI RD</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">44</span></div>
+      </div></div>
+      
+      <div class="card"><div class="label">Top Streets by Retired Addresses</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">INDIAN RD</span>
+          <div class="bar-track"><div class="bar-fill red" style="width:100.0%"></div></div>
+          <span class="bar-count">62</span></div>
+      </div></div>
+      
+    </div>
+  </div>
+  
+
+  <div class="section">
+    <h2>New Addresses <span class="badge badge-green">46</span></h2>
+    
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-added',0)">Address</th><th onclick="sortTable('t-added',1)">Street</th>
+        <th onclick="sortTable('t-added',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-added">
+        
+        <tr><td>81 AKI RD</td><td>AKI RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25134&mlon=-76.52744#map=18/44.25134/-76.52744" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>85 AKI RD</td><td>AKI RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25159&mlon=-76.52728#map=18/44.25159/-76.52728" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>89 AKI RD</td><td>AKI RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25174&mlon=-76.52726#map=18/44.25174/-76.52726" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>94 AKI RD</td><td>AKI RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25188&mlon=-76.52779#map=18/44.25188/-76.52779" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>95 AKI RD</td><td>AKI RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25192&mlon=-76.52721#map=18/44.25192/-76.52721" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>100 AKI RD</td><td>AKI RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25211&mlon=-76.52779#map=18/44.25211/-76.52779" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>101 AKI RD</td><td>AKI RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25222&mlon=-76.52725#map=18/44.25222/-76.52725" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>118 AKI RD</td><td>AKI RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25268&mlon=-76.52784#map=18/44.25268/-76.52784" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>122 AKI RD</td><td>AKI RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25285&mlon=-76.52782#map=18/44.25285/-76.52782" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>123 AKI RD</td><td>AKI RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25290&mlon=-76.52728#map=18/44.25290/-76.52728" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>128 AKI RD</td><td>AKI RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25301&mlon=-76.52781#map=18/44.25301/-76.52781" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>129 AKI RD</td><td>AKI RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25303&mlon=-76.52726#map=18/44.25303/-76.52726" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>132 AKI RD</td><td>AKI RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25317&mlon=-76.52783#map=18/44.25317/-76.52783" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>133 AKI RD</td><td>AKI RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25321&mlon=-76.52728#map=18/44.25321/-76.52728" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>139 AKI RD</td><td>AKI RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25338&mlon=-76.52731#map=18/44.25338/-76.52731" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>143 AKI RD</td><td>AKI RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25358&mlon=-76.52730#map=18/44.25358/-76.52730" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>148 AKI RD</td><td>AKI RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25373&mlon=-76.52785#map=18/44.25373/-76.52785" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>149 AKI RD</td><td>AKI RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25376&mlon=-76.52730#map=18/44.25376/-76.52730" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>152 AKI RD</td><td>AKI RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25396&mlon=-76.52780#map=18/44.25396/-76.52780" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>156 AKI RD</td><td>AKI RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25410&mlon=-76.52778#map=18/44.25410/-76.52778" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>160 AKI RD</td><td>AKI RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25425&mlon=-76.52767#map=18/44.25425/-76.52767" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>166 AKI RD</td><td>AKI RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25439&mlon=-76.52761#map=18/44.25439/-76.52761" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>167 AKI RD</td><td>AKI RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25431&mlon=-76.52707#map=18/44.25431/-76.52707" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>170 AKI RD</td><td>AKI RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25455&mlon=-76.52753#map=18/44.25455/-76.52753" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>171 AKI RD</td><td>AKI RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25448&mlon=-76.52699#map=18/44.25448/-76.52699" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>174 AKI RD</td><td>AKI RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25468&mlon=-76.52748#map=18/44.25468/-76.52748" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>175 AKI RD</td><td>AKI RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25462&mlon=-76.52690#map=18/44.25462/-76.52690" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>178 AKI RD</td><td>AKI RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25487&mlon=-76.52740#map=18/44.25487/-76.52740" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>179 AKI RD</td><td>AKI RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25477&mlon=-76.52686#map=18/44.25477/-76.52686" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>183 AKI RD</td><td>AKI RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25491&mlon=-76.52679#map=18/44.25491/-76.52679" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>187 AKI RD</td><td>AKI RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25506&mlon=-76.52672#map=18/44.25506/-76.52672" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>189 AKI RD</td><td>AKI RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25520&mlon=-76.52661#map=18/44.25520/-76.52661" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>193 AKI RD</td><td>AKI RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25534&mlon=-76.52652#map=18/44.25534/-76.52652" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>196 AKI RD</td><td>AKI RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25549&mlon=-76.52702#map=18/44.25549/-76.52702" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>200 AKI RD</td><td>AKI RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25563&mlon=-76.52693#map=18/44.25563/-76.52693" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>201 AKI RD</td><td>AKI RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25546&mlon=-76.52639#map=18/44.25546/-76.52639" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>205 AKI RD</td><td>AKI RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25562&mlon=-76.52627#map=18/44.25562/-76.52627" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>211 AKI RD</td><td>AKI RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25570&mlon=-76.52612#map=18/44.25570/-76.52612" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>216 AKI RD</td><td>AKI RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25605&mlon=-76.52656#map=18/44.25605/-76.52656" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>220 AKI RD</td><td>AKI RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25620&mlon=-76.52644#map=18/44.25620/-76.52644" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>226 AKI RD</td><td>AKI RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25634&mlon=-76.52630#map=18/44.25634/-76.52630" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>227 AKI RD</td><td>AKI RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25618&mlon=-76.52572#map=18/44.25618/-76.52572" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>230 AKI RD</td><td>AKI RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25646&mlon=-76.52619#map=18/44.25646/-76.52619" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>236 AKI RD</td><td>AKI RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25661&mlon=-76.52611#map=18/44.25661/-76.52611" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>14B RED PATCH AVE</td><td>RED PATCH AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.24737&mlon=-76.44585#map=18/44.24737/-76.44585" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>14C RED PATCH AVE</td><td>RED PATCH AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.24675&mlon=-76.44617#map=18/44.24675/-76.44617" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Retired Addresses <span class="badge badge-red">62</span></h2>
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-removed',0)">Address</th><th onclick="sortTable('t-removed',1)">Street</th>
+        <th onclick="sortTable('t-removed',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-removed">
+        
+        <tr><td>81 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25139&mlon=-76.52756#map=18/44.25139/-76.52756" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>85 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25157&mlon=-76.52727#map=18/44.25157/-76.52727" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>89 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25172&mlon=-76.52726#map=18/44.25172/-76.52726" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>94 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25185&mlon=-76.52779#map=18/44.25185/-76.52779" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>95 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25190&mlon=-76.52720#map=18/44.25190/-76.52720" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>100 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25210&mlon=-76.52778#map=18/44.25210/-76.52778" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>101 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25219&mlon=-76.52724#map=18/44.25219/-76.52724" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>118 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25266&mlon=-76.52784#map=18/44.25266/-76.52784" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>122 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25282&mlon=-76.52782#map=18/44.25282/-76.52782" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>123 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25288&mlon=-76.52724#map=18/44.25288/-76.52724" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>128 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25302&mlon=-76.52783#map=18/44.25302/-76.52783" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>129 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25303&mlon=-76.52724#map=18/44.25303/-76.52724" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>132 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25315&mlon=-76.52782#map=18/44.25315/-76.52782" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>133 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25319&mlon=-76.52726#map=18/44.25319/-76.52726" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>139 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25336&mlon=-76.52729#map=18/44.25336/-76.52729" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>143 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25356&mlon=-76.52730#map=18/44.25356/-76.52730" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>148 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25373&mlon=-76.52787#map=18/44.25373/-76.52787" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>149 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25374&mlon=-76.52729#map=18/44.25374/-76.52729" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>152 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25393&mlon=-76.52780#map=18/44.25393/-76.52780" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>156 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25408&mlon=-76.52776#map=18/44.25408/-76.52776" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>160 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25423&mlon=-76.52767#map=18/44.25423/-76.52767" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>166 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25437&mlon=-76.52762#map=18/44.25437/-76.52762" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>167 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25430&mlon=-76.52705#map=18/44.25430/-76.52705" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>170 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25453&mlon=-76.52754#map=18/44.25453/-76.52754" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>171 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25446&mlon=-76.52697#map=18/44.25446/-76.52697" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>174 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25467&mlon=-76.52748#map=18/44.25467/-76.52748" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>175 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25460&mlon=-76.52690#map=18/44.25460/-76.52690" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>178 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25487&mlon=-76.52742#map=18/44.25487/-76.52742" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>179 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25474&mlon=-76.52685#map=18/44.25474/-76.52685" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>183 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25489&mlon=-76.52679#map=18/44.25489/-76.52679" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>187 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25503&mlon=-76.52672#map=18/44.25503/-76.52672" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>189 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25518&mlon=-76.52661#map=18/44.25518/-76.52661" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>193 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25532&mlon=-76.52653#map=18/44.25532/-76.52653" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>196 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25549&mlon=-76.52703#map=18/44.25549/-76.52703" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>200 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25562&mlon=-76.52693#map=18/44.25562/-76.52693" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>201 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25546&mlon=-76.52640#map=18/44.25546/-76.52640" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>205 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25561&mlon=-76.52627#map=18/44.25561/-76.52627" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>208 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25586&mlon=-76.52682#map=18/44.25586/-76.52682" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>211 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25569&mlon=-76.52610#map=18/44.25569/-76.52610" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>216 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25604&mlon=-76.52657#map=18/44.25604/-76.52657" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>219 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25589&mlon=-76.52594#map=18/44.25589/-76.52594" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>220 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25620&mlon=-76.52645#map=18/44.25620/-76.52645" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>226 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25633&mlon=-76.52632#map=18/44.25633/-76.52632" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>227 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25618&mlon=-76.52570#map=18/44.25618/-76.52570" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>230 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25646&mlon=-76.52620#map=18/44.25646/-76.52620" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>236 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25660&mlon=-76.52612#map=18/44.25660/-76.52612" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>244 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25676&mlon=-76.52611#map=18/44.25676/-76.52611" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>260 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25729&mlon=-76.52616#map=18/44.25729/-76.52616" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>264 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25746&mlon=-76.52615#map=18/44.25746/-76.52615" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>266 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25762&mlon=-76.52615#map=18/44.25762/-76.52615" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>269 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25748&mlon=-76.52558#map=18/44.25748/-76.52558" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>271 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25763&mlon=-76.52559#map=18/44.25763/-76.52559" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>275 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25779&mlon=-76.52559#map=18/44.25779/-76.52559" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>281 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25798&mlon=-76.52562#map=18/44.25798/-76.52562" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>284 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25815&mlon=-76.52619#map=18/44.25815/-76.52619" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>285 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25816&mlon=-76.52562#map=18/44.25816/-76.52562" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>290 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25831&mlon=-76.52621#map=18/44.25831/-76.52621" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>291 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25833&mlon=-76.52563#map=18/44.25833/-76.52563" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>294 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25848&mlon=-76.52620#map=18/44.25848/-76.52620" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>295 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25849&mlon=-76.52564#map=18/44.25849/-76.52564" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>300 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25862&mlon=-76.52630#map=18/44.25862/-76.52630" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>301 INDIAN RD</td><td>INDIAN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25865&mlon=-76.52565#map=18/44.25865/-76.52565" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Updated Addresses <span class="badge badge-yellow">0</span>
+      <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (STREET)</li><li>Unit (UNIT)</li><li>Full address (FULL_ADDRESS)</li><li>Coordinates (latitude, longitude)</li><li>ADDRESS_ID</li><li>ADDRESS_NUMBER_SUFFIX</li><li>DIRECTION_SUFFIX</li><li>ELECTORAL_DISTRICT_NAME</li><li>GARBAGE_DAY</li><li>MUNICIPALITY</li><li>NEIGHBOURHOOD</li><li>POSTAL_CODE</li><li>RECYCLING_DAY</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>COLLECTION_TYPE</li><li>STREET_BODY_NAME</li><li>STREET_TYPE_SUFFIX</li><li>UNIT_TYPE</li></ul>
+      
+    </span>
+  </span></h2>
+    
+    <p class="empty">No addresses updated.</p>
+  </div>
+
+  <div class="section">
+    <h2>Renumbered Addresses <span class="badge badge-accent">0</span></h2>
+    
+    <p class="empty">No addresses renumbered.</p>
+  </div>
+
+  <div class="section">
+    <h2>Street Renames <span class="badge badge-purple">0</span></h2>
+    <p class="empty">No street renames.</p>
+  </div>
+
+  
+
+  
+
+  
+  <div class="section">
+    <h2>Boundary Changes <span class="badge badge-teal">0</span></h2>
+    <p class="empty">No ward or municipality reassignments.</p>
+  </div>
+  
+
+  <div class="section">
+    <h2>Location Adjustments <span class="badge" style="background: var(--surface2); color: var(--text-dim)">0</span></h2>
+    
+    <p class="empty">No location adjustments.</p>
+  </div>
+
+  <div class="generated-at">Report generated Sep 04, 2026 at 12:20 PM · source licence: Open Data Licence - City of Kingston</div>
+
+  <script>
+    function sortTable(tbodyId, col) {
+      const tbody = document.getElementById(tbodyId);
+      if (!tbody) return;
+      const rows = Array.from(tbody.rows);
+      const dir = tbody.dataset.sortDir === 'asc' ? 'desc' : 'asc';
+      tbody.dataset.sortDir = dir;
+      rows.sort((a, b) => {
+        const av = a.cells[col]?.textContent.trim() || '';
+        const bv = b.cells[col]?.textContent.trim() || '';
+        const an = parseFloat(av), bn = parseFloat(bv);
+        if (!isNaN(an) && !isNaN(bn)) return dir === 'asc' ? an - bn : bn - an;
+        return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+      });
+      rows.forEach(r => tbody.appendChild(r));
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>City of Barrie Address Changes — Wednesday, Sep 02, 2026</title>
+  <style>
+    :root {
+      --bg: #fafafa; --surface: #ffffff; --surface2: #f5f5f5; --surface3: #ebebeb;
+      --border: #e0e0e0; --border-strong: #d1d1d1; --text: #242424;
+      --text-secondary: #424242; --text-dim: #616161; --accent: #0078d4;
+      --accent-hover: #106ebe; --accent-bg: #eff6fc; --green: #107c10;
+      --green-bg: #f1faf1; --green-tint: #9fd89f; --red: #c50f1f; --red-bg: #fdf3f4;
+      --red-tint: #eeacb2; --yellow: #eaa300; --yellow-bg: #fefbf4; --yellow-tint: #f9e2ae;
+      --purple: #881798; --purple-bg: #f9f3fb; --teal: #038387; --teal-bg: #f0fafa;
+      --shadow-4: 0 2px 4px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --shadow-8: 0 4px 8px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --card-bg: #ffffff; --card-hover: #f5f5f5; color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1f1f1f; --surface: #292929; --surface2: #333333; --surface3: #3d3d3d;
+        --border: #525252; --border-strong: #666666; --text: #ffffff;
+        --text-secondary: #d6d6d6; --text-dim: #adadad; --accent: #2899f5;
+        --accent-hover: #3aa0f3; --accent-bg: #002848; --green: #54b054;
+        --green-bg: #052505; --green-tint: #107c10; --red: #dc626d; --red-bg: #3b0509;
+        --red-tint: #c50f1f; --yellow: #f2c661; --yellow-bg: #463100; --yellow-tint: #eaa300;
+        --purple: #d29ddb; --purple-bg: #3a1040; --teal: #58c0c4; --teal-bg: #013638;
+        --shadow-4: 0 2px 4px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --shadow-8: 0 4px 8px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --card-bg: #333333; --card-hover: #3d3d3d; color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI Variable','Segoe UI',system-ui,-apple-system,sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.5; padding: 2rem;
+      max-width: 1100px; margin: 0 auto; font-size: 14px; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; color: var(--accent-hover); }
+    .back-link { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 12px;
+      color: var(--text-dim); margin-bottom: 1.5rem; transition: color 0.1s; }
+    .back-link:hover { color: var(--accent); text-decoration: none; }
+    h1 { font-size: 24px; font-weight: 600; margin-bottom: 4px; }
+    .subtitle { color: var(--text-secondary); font-size: 14px; margin-bottom: 12px; }
+    .explainer { color: var(--text-secondary); font-size: 13px; line-height: 1.5;
+      margin-bottom: 24px; padding: 12px 16px; background: var(--surface);
+      border-radius: 8px; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px; margin-bottom: 24px; }
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px;
+      padding: 16px; box-shadow: var(--shadow-4); transition: box-shadow 0.1s; }
+    .card:hover { box-shadow: var(--shadow-8); }
+    .card .label { font-size: 12px; color: var(--text-dim); font-weight: 400; }
+    .card .value { font-size: 28px; font-weight: 600; margin-top: 4px; }
+    .card .value.green { color: var(--green); } .card .value.red { color: var(--red); }
+    .card .value.yellow { color: var(--yellow); } .card .value.accent { color: var(--accent); }
+    .card .value.purple { color: var(--purple); }
+    .card .value.teal { color: var(--teal); }
+    .sparkline { display: block; margin-top: 6px; overflow: visible; opacity: 0.9; }
+    .sparkline-label { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+    .section { margin-bottom: 24px; }
+    .section h2 { font-size: 16px; font-weight: 600; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px; }
+    .badge { font-size: 12px; padding: 2px 8px; border-radius: 999px; font-weight: 600; }
+    .badge-green { background: var(--green-bg); color: var(--green); }
+    .badge-red { background: var(--red-bg); color: var(--red); }
+    .badge-yellow { background: var(--yellow-bg); color: var(--yellow); }
+    .badge-accent { background: var(--accent-bg); color: var(--accent); }
+    .badge-purple { background: var(--purple-bg); color: var(--purple); }
+    .badge-teal { background: var(--teal-bg); color: var(--teal); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface);
+      border-radius: 8px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    thead { background: var(--surface2); }
+    th { text-align: left; padding: 8px 12px; font-weight: 600; color: var(--text-dim);
+      font-size: 12px; cursor: pointer; user-select: none; border-bottom: 1px solid var(--border); }
+    th:hover { color: var(--accent); }
+    td { padding: 8px 12px; border-top: 1px solid var(--border); }
+    tr:hover td { background: var(--surface2); }
+    .old-val { color: var(--red); text-decoration: line-through; }
+    .new-val { color: var(--green); }
+    .arrow-val { color: var(--text-dim); text-align: center; white-space: nowrap; }
+    .map-link { display: inline-flex; align-items: center; margin-left: 0.4em;
+      color: var(--accent); vertical-align: middle; white-space: nowrap; font-size: 12px; }
+    .map-link:hover { color: var(--accent-hover); }
+    .map-link svg { width: 14px; height: 14px; }
+    .change-field { color: var(--yellow); font-weight: 600; }
+    .bar-chart { margin-top: 8px; }
+    .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 12px; }
+    .bar-label { width: 180px; text-align: right; color: var(--text-secondary); flex-shrink: 0;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .bar-track { flex: 1; height: 8px; background: var(--surface2); border-radius: 4px;
+      overflow: hidden; position: relative; }
+    .bar-fill { height: 100%; border-radius: 4px; transition: width 0.15s ease; }
+    .bar-fill.green { background: var(--green); } .bar-fill.red { background: var(--red); }
+    .bar-count { width: 40px; font-size: 12px; color: var(--text-dim); }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+    .empty { color: var(--text-dim); font-style: italic; padding: 16px; }
+    .truncated { color: var(--text-dim); font-size: 12px; margin-top: 8px; }
+    .collapsible-toggle { background: transparent; border: 1px solid var(--border);
+      color: var(--accent); padding: 5px 12px; border-radius: 4px; cursor: pointer;
+      font-size: 12px; font-family: inherit; margin-bottom: 12px; transition: background 0.1s; }
+    .collapsible-toggle:hover { background: var(--surface2); }
+    details.rename-group { background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; margin-bottom: 8px; box-shadow: var(--shadow-4); }
+    details.rename-group summary { padding: 10px 14px; cursor: pointer; font-size: 13px; }
+    details.rename-group[open] summary { border-bottom: 1px solid var(--border); }
+    details.rename-group table { border: none; box-shadow: none; border-radius: 0; }
+    details.rename-group .truncated { padding: 0 14px 10px; margin-top: 0; }
+    .rename-count { color: var(--text-dim); font-size: 12px; margin-left: 6px; }
+    .no-changes-banner { background: var(--green-bg); border: 1px solid var(--green-tint);
+      color: var(--green); padding: 16px; border-radius: 8px; margin-bottom: 24px;
+      text-align: center; font-weight: 600; font-size: 14px; }
+    .baseline-banner { background: var(--accent-bg); border: 1px solid var(--accent);
+      color: var(--accent); padding: 16px; border-radius: 8px; margin-bottom: 24px; font-size: 13px; }
+    .generated-at { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-dim); }
+    .history { font-size: 12.5px; color: var(--text-secondary); white-space: nowrap; }
+    .history .a { color: var(--green); font-weight: 500; }
+    .history .r { color: var(--red); font-weight: 500; }
+    .history .dot { color: var(--text-dim); margin: 0 4px; }
+    .history-none { color: var(--text-dim); font-style: italic; font-size: 12.5px; }
+    .info-wrap { position: relative; display: inline-flex; vertical-align: middle; }
+    .info-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+      height: 18px; padding: 0 8px 0 7px; border-radius: 999px; border: none;
+      color: #fff; background: var(--accent); cursor: help; font-size: 11px; font-weight: 600;
+      font-style: normal; font-family: inherit; line-height: 1; white-space: nowrap; }
+    .info-btn .glyph { font-style: italic; font-weight: 700;
+      font-family: Georgia, 'Times New Roman', serif; }
+    .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn,
+    .info-wrap:focus .info-btn { background: var(--accent-hover); }
+    .info-pop { display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 20;
+      width: 320px; max-width: 80vw; padding: 12px 14px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-8);
+      font-size: 12.5px; font-weight: 400; color: var(--text-secondary); line-height: 1.5; }
+    .info-wrap:hover .info-pop, .info-wrap:focus-within .info-pop,
+    .info-wrap:focus .info-pop { display: block; }
+    .info-pop strong { display: block; color: var(--text); font-size: 12px; margin-bottom: 4px; }
+    .info-pop ul { list-style: none; margin: 0 0 10px; padding: 0; }
+    .info-pop li { padding: 1px 0 1px 14px; position: relative; }
+    .info-pop li::before { content: "·"; position: absolute; left: 4px; color: var(--text-dim); }
+    .info-pop .note { color: var(--text-dim); font-size: 11.5px; margin: 0 0 10px; }
+    .info-pop .muted { color: var(--text-dim); font-style: italic; }
+  </style>
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+
+  <a class="back-link" href="index.html">← Back to City of Barrie reports</a>
+
+  <h1>City of Barrie — Address Changes</h1>
+  <p class="subtitle">
+    Changes between  and Wednesday, Sep 02, 2026
+    · 63,353 total addresses
+  </p>
+
+  
+
+  <div class="cards">
+    <div class="card"><div class="label">Total Addresses</div>
+      <div class="value accent">63,353</div></div>
+    <div class="card"><div class="label">New Addresses</div>
+      <div class="value green">+1</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#107c10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,3.6 37.3,18.0 55.0,2.0 72.7,8.4 90.3,6.8 108.0,16.4"/><circle cx="108.0" cy="16.4" r="2" fill="#107c10"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Retired Addresses</div>
+      <div class="value red">−0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#c50f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,16.4 72.7,2.0 90.3,16.4 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#c50f1f"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Updated Addresses <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRNUMBER)</li><li>Street name (SSTRNAME)</li><li>Unit (UNITNUMBER)</li><li>Full address (FULLADDR)</li><li>Coordinates (latitude, longitude)</li><li>ADDRESSID</li><li>PARCELID</li><li>SSTRDIR</li><li>SSTRSUFF</li><li>STATUS</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>COMMENT</li></ul>
+      
+    </span>
+  </span></div>
+      <div class="value yellow">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,2.0 19.7,18.0 37.3,17.2 55.0,18.0 72.7,2.0 90.3,10.8 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Renumbered</div>
+      <div class="value accent">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#0078d4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#0078d4"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Street Renames</div>
+      <div class="value purple">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#9141ac" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#9141ac"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    <div class="card"><div class="label">Status Changes</div>
+      <div class="value teal">175</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#038387" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,15.9 19.7,18.0 37.3,18.0 55.0,18.0 72.7,17.3 90.3,18.0 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#038387"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    <div class="card"><div class="label">Location Adjustments</div>
+      <div class="value" style="color: var(--text-dim)">1</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#808080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#808080"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+  </div>
+
+  
+  <div class="section">
+    <h2>Change Breakdown</h2>
+    <div class="stats-grid">
+      
+      
+      
+      <div class="card"><div class="label">Most Frequently Updated Fields</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">STATUS</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">175</span></div>
+        <div class="bar-row"><span class="bar-label">Location</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:1.0%"></div></div>
+          <span class="bar-count">1</span></div>
+      </div></div>
+    </div>
+  </div>
+  
+
+  <div class="section">
+    <h2>New Addresses <span class="badge badge-green">1</span></h2>
+    
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-added',0)">Address</th><th onclick="sortTable('t-added',1)">Street</th>
+        <th onclick="sortTable('t-added',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-added">
+        
+        <tr><td>141 LILLIAN CRES UNIT 3</td><td>LILLIAN</td><td>3</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.40437&mlon=-79.71823#map=18/44.40437/-79.71823" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Retired Addresses <span class="badge badge-red">0</span></h2>
+    <p class="empty">No addresses retired.</p>
+  </div>
+
+  <div class="section">
+    <h2>Updated Addresses <span class="badge badge-yellow">0</span>
+      <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRNUMBER)</li><li>Street name (SSTRNAME)</li><li>Unit (UNITNUMBER)</li><li>Full address (FULLADDR)</li><li>Coordinates (latitude, longitude)</li><li>ADDRESSID</li><li>PARCELID</li><li>SSTRDIR</li><li>SSTRSUFF</li><li>STATUS</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>COMMENT</li></ul>
+      
+    </span>
+  </span></h2>
+    
+    <p class="empty">No addresses updated.</p>
+  </div>
+
+  <div class="section">
+    <h2>Renumbered Addresses <span class="badge badge-accent">0</span></h2>
+    
+    <p class="empty">No addresses renumbered.</p>
+  </div>
+
+  <div class="section">
+    <h2>Street Renames <span class="badge badge-purple">0</span></h2>
+    <p class="empty">No street renames.</p>
+  </div>
+
+  
+
+  
+  <div class="section">
+    <h2>Status Changes <span class="badge badge-teal">175</span></h2>
+    
+  <details class="rename-group">
+    <summary><span class="change-field">STATUS:</span> <span class="old-val">Current</span> <span class="arrow-val">→</span> <span class="new-val">Pending</span><span class="rename-count">174 addresses</span></summary>
+    <table>
+      <tbody>
+        
+        <tr><td>155 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35365&mlon=-79.62301#map=18/44.35365/-79.62301" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>157 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35367&mlon=-79.62309#map=18/44.35367/-79.62309" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>159 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35369&mlon=-79.62316#map=18/44.35369/-79.62316" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>161 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35371&mlon=-79.62324#map=18/44.35371/-79.62324" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>162 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35432&mlon=-79.62394#map=18/44.35432/-79.62394" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>163 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35373&mlon=-79.62331#map=18/44.35373/-79.62331" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>164 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35408&mlon=-79.62323#map=18/44.35408/-79.62323" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>165 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35375&mlon=-79.62339#map=18/44.35375/-79.62339" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>166 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35410&mlon=-79.62330#map=18/44.35410/-79.62330" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>167 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35377&mlon=-79.62350#map=18/44.35377/-79.62350" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>168 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35412&mlon=-79.62337#map=18/44.35412/-79.62337" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>169 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35379&mlon=-79.62357#map=18/44.35379/-79.62357" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>170 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35414&mlon=-79.62345#map=18/44.35414/-79.62345" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>171 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35381&mlon=-79.62365#map=18/44.35381/-79.62365" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>172 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35416&mlon=-79.62351#map=18/44.35416/-79.62351" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>173 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35383&mlon=-79.62373#map=18/44.35383/-79.62373" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>174 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35418&mlon=-79.62358#map=18/44.35418/-79.62358" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>175 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35385&mlon=-79.62381#map=18/44.35385/-79.62381" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>177 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35387&mlon=-79.62388#map=18/44.35387/-79.62388" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>179 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35389&mlon=-79.62396#map=18/44.35389/-79.62396" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>181 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35391&mlon=-79.62404#map=18/44.35391/-79.62404" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>226 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35328&mlon=-79.62473#map=18/44.35328/-79.62473" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>232 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35314&mlon=-79.62475#map=18/44.35314/-79.62475" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>234 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35309&mlon=-79.62478#map=18/44.35309/-79.62478" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>236 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35305&mlon=-79.62481#map=18/44.35305/-79.62481" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>238 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35299&mlon=-79.62484#map=18/44.35299/-79.62484" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>240 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35295&mlon=-79.62487#map=18/44.35295/-79.62487" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>242 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35290&mlon=-79.62491#map=18/44.35290/-79.62491" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>244 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35285&mlon=-79.62494#map=18/44.35285/-79.62494" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>246 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35280&mlon=-79.62497#map=18/44.35280/-79.62497" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>248 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35273&mlon=-79.62502#map=18/44.35273/-79.62502" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>250 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35268&mlon=-79.62505#map=18/44.35268/-79.62505" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>252 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35263&mlon=-79.62508#map=18/44.35263/-79.62508" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>254 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35258&mlon=-79.62511#map=18/44.35258/-79.62511" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>256 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35253&mlon=-79.62514#map=18/44.35253/-79.62514" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>258 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35248&mlon=-79.62518#map=18/44.35248/-79.62518" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>260 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35241&mlon=-79.62522#map=18/44.35241/-79.62522" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>262 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35236&mlon=-79.62525#map=18/44.35236/-79.62525" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>264 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35231&mlon=-79.62528#map=18/44.35231/-79.62528" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>266 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35227&mlon=-79.62532#map=18/44.35227/-79.62532" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>268 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35222&mlon=-79.62535#map=18/44.35222/-79.62535" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>270 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35217&mlon=-79.62538#map=18/44.35217/-79.62538" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>271 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35209&mlon=-79.62489#map=18/44.35209/-79.62489" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>272 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35210&mlon=-79.62539#map=18/44.35210/-79.62539" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>273 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35207&mlon=-79.62482#map=18/44.35207/-79.62482" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>275 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35205&mlon=-79.62474#map=18/44.35205/-79.62474" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>277 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35203&mlon=-79.62466#map=18/44.35203/-79.62466" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>279 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35200&mlon=-79.62455#map=18/44.35200/-79.62455" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>281 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35198&mlon=-79.62448#map=18/44.35198/-79.62448" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>283 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35196&mlon=-79.62440#map=18/44.35196/-79.62440" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>285 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35194&mlon=-79.62432#map=18/44.35194/-79.62432" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>287 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35192&mlon=-79.62425#map=18/44.35192/-79.62425" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>289 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35189&mlon=-79.62414#map=18/44.35189/-79.62414" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>291 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35187&mlon=-79.62406#map=18/44.35187/-79.62406" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>293 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35185&mlon=-79.62398#map=18/44.35185/-79.62398" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>295 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35183&mlon=-79.62391#map=18/44.35183/-79.62391" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>297 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35181&mlon=-79.62383#map=18/44.35181/-79.62383" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>299 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35179&mlon=-79.62375#map=18/44.35179/-79.62375" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>301 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35177&mlon=-79.62368#map=18/44.35177/-79.62368" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>303 BLUE FOREST CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35175&mlon=-79.62360#map=18/44.35175/-79.62360" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35329&mlon=-79.62433#map=18/44.35329/-79.62433" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35301&mlon=-79.62434#map=18/44.35301/-79.62434" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35327&mlon=-79.62425#map=18/44.35327/-79.62425" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>4 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35299&mlon=-79.62427#map=18/44.35299/-79.62427" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>5 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35325&mlon=-79.62418#map=18/44.35325/-79.62418" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35297&mlon=-79.62419#map=18/44.35297/-79.62419" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>7 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35323&mlon=-79.62410#map=18/44.35323/-79.62410" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>8 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35295&mlon=-79.62412#map=18/44.35295/-79.62412" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>9 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35321&mlon=-79.62403#map=18/44.35321/-79.62403" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35293&mlon=-79.62405#map=18/44.35293/-79.62405" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>11 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35319&mlon=-79.62395#map=18/44.35319/-79.62395" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>12 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35291&mlon=-79.62397#map=18/44.35291/-79.62397" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>13 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35317&mlon=-79.62387#map=18/44.35317/-79.62387" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>14 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35289&mlon=-79.62390#map=18/44.35289/-79.62390" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>15 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35315&mlon=-79.62380#map=18/44.35315/-79.62380" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>16 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35287&mlon=-79.62382#map=18/44.35287/-79.62382" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>17 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35313&mlon=-79.62369#map=18/44.35313/-79.62369" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>18 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35284&mlon=-79.62371#map=18/44.35284/-79.62371" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>19 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35311&mlon=-79.62362#map=18/44.35311/-79.62362" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>20 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35282&mlon=-79.62364#map=18/44.35282/-79.62364" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>21 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35309&mlon=-79.62355#map=18/44.35309/-79.62355" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>22 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35281&mlon=-79.62357#map=18/44.35281/-79.62357" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>23 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35307&mlon=-79.62347#map=18/44.35307/-79.62347" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>24 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35279&mlon=-79.62349#map=18/44.35279/-79.62349" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>25 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35305&mlon=-79.62340#map=18/44.35305/-79.62340" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>26 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35277&mlon=-79.62342#map=18/44.35277/-79.62342" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>27 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35303&mlon=-79.62332#map=18/44.35303/-79.62332" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>28 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35275&mlon=-79.62334#map=18/44.35275/-79.62334" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>29 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35301&mlon=-79.62325#map=18/44.35301/-79.62325" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>30 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35273&mlon=-79.62327#map=18/44.35273/-79.62327" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>31 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35299&mlon=-79.62317#map=18/44.35299/-79.62317" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>32 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35271&mlon=-79.62319#map=18/44.35271/-79.62319" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>33 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35308&mlon=-79.62313#map=18/44.35308/-79.62313" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>35 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35311&mlon=-79.62320#map=18/44.35311/-79.62320" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>36 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35338&mlon=-79.62313#map=18/44.35338/-79.62313" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>37 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35312&mlon=-79.62328#map=18/44.35312/-79.62328" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>38 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35339&mlon=-79.62320#map=18/44.35339/-79.62320" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>39 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35314&mlon=-79.62335#map=18/44.35314/-79.62335" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>40 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35341&mlon=-79.62327#map=18/44.35341/-79.62327" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>41 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35316&mlon=-79.62342#map=18/44.35316/-79.62342" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>42 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35343&mlon=-79.62335#map=18/44.35343/-79.62335" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>43 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35318&mlon=-79.62350#map=18/44.35318/-79.62350" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>44 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35345&mlon=-79.62341#map=18/44.35345/-79.62341" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>45 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35320&mlon=-79.62357#map=18/44.35320/-79.62357" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>46 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35347&mlon=-79.62349#map=18/44.35347/-79.62349" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>47 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35322&mlon=-79.62365#map=18/44.35322/-79.62365" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>48 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35349&mlon=-79.62356#map=18/44.35349/-79.62356" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>49 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35325&mlon=-79.62375#map=18/44.35325/-79.62375" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>50 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35351&mlon=-79.62363#map=18/44.35351/-79.62363" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>51 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35327&mlon=-79.62383#map=18/44.35327/-79.62383" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>52 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35353&mlon=-79.62373#map=18/44.35353/-79.62373" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>53 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35329&mlon=-79.62390#map=18/44.35329/-79.62390" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>54 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35355&mlon=-79.62381#map=18/44.35355/-79.62381" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>55 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35331&mlon=-79.62398#map=18/44.35331/-79.62398" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>56 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35357&mlon=-79.62387#map=18/44.35357/-79.62387" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>57 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35333&mlon=-79.62405#map=18/44.35333/-79.62405" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>58 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35359&mlon=-79.62395#map=18/44.35359/-79.62395" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>59 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35335&mlon=-79.62413#map=18/44.35335/-79.62413" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>60 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35361&mlon=-79.62402#map=18/44.35361/-79.62402" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>61 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35336&mlon=-79.62420#map=18/44.35336/-79.62420" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>62 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35363&mlon=-79.62409#map=18/44.35363/-79.62409" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>63 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35338&mlon=-79.62427#map=18/44.35338/-79.62427" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>64 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35364&mlon=-79.62416#map=18/44.35364/-79.62416" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>66 STRAWBERRY LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35366&mlon=-79.62423#map=18/44.35366/-79.62423" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35259&mlon=-79.62458#map=18/44.35259/-79.62458" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35234&mlon=-79.62476#map=18/44.35234/-79.62476" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35257&mlon=-79.62451#map=18/44.35257/-79.62451" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>4 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35232&mlon=-79.62468#map=18/44.35232/-79.62468" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>5 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35255&mlon=-79.62443#map=18/44.35255/-79.62443" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35230&mlon=-79.62462#map=18/44.35230/-79.62462" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>7 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35253&mlon=-79.62436#map=18/44.35253/-79.62436" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>8 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35228&mlon=-79.62455#map=18/44.35228/-79.62455" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>9 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35251&mlon=-79.62429#map=18/44.35251/-79.62429" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35226&mlon=-79.62448#map=18/44.35226/-79.62448" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>11 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35249&mlon=-79.62421#map=18/44.35249/-79.62421" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>12 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35224&mlon=-79.62440#map=18/44.35224/-79.62440" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>13 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35247&mlon=-79.62414#map=18/44.35247/-79.62414" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>14 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35222&mlon=-79.62430#map=18/44.35222/-79.62430" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>15 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35245&mlon=-79.62406#map=18/44.35245/-79.62406" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>16 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35220&mlon=-79.62422#map=18/44.35220/-79.62422" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>17 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35242&mlon=-79.62396#map=18/44.35242/-79.62396" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>18 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35218&mlon=-79.62416#map=18/44.35218/-79.62416" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>19 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35240&mlon=-79.62388#map=18/44.35240/-79.62388" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>20 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35216&mlon=-79.62409#map=18/44.35216/-79.62409" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>21 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35238&mlon=-79.62381#map=18/44.35238/-79.62381" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>22 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35214&mlon=-79.62402#map=18/44.35214/-79.62402" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>23 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35236&mlon=-79.62373#map=18/44.35236/-79.62373" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>24 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35212&mlon=-79.62394#map=18/44.35212/-79.62394" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>25 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35234&mlon=-79.62366#map=18/44.35234/-79.62366" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>26 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35210&mlon=-79.62384#map=18/44.35210/-79.62384" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>27 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35232&mlon=-79.62359#map=18/44.35232/-79.62359" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>28 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35208&mlon=-79.62377#map=18/44.35208/-79.62377" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>29 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35230&mlon=-79.62351#map=18/44.35230/-79.62351" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>30 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35206&mlon=-79.62370#map=18/44.35206/-79.62370" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>31 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35228&mlon=-79.62344#map=18/44.35228/-79.62344" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>32 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35204&mlon=-79.62363#map=18/44.35204/-79.62363" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>34 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35202&mlon=-79.62356#map=18/44.35202/-79.62356" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>36 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35201&mlon=-79.62349#map=18/44.35201/-79.62349" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>41 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35237&mlon=-79.62340#map=18/44.35237/-79.62340" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>43 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35239&mlon=-79.62347#map=18/44.35239/-79.62347" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>45 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35241&mlon=-79.62354#map=18/44.35241/-79.62354" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>47 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35243&mlon=-79.62362#map=18/44.35243/-79.62362" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>49 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35245&mlon=-79.62369#map=18/44.35245/-79.62369" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>51 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35247&mlon=-79.62377#map=18/44.35247/-79.62377" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>53 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35248&mlon=-79.62384#map=18/44.35248/-79.62384" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>55 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35250&mlon=-79.62392#map=18/44.35250/-79.62392" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>57 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35253&mlon=-79.62402#map=18/44.35253/-79.62402" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>59 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35255&mlon=-79.62410#map=18/44.35255/-79.62410" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>61 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35257&mlon=-79.62417#map=18/44.35257/-79.62417" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>63 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35259&mlon=-79.62425#map=18/44.35259/-79.62425" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>65 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35261&mlon=-79.62432#map=18/44.35261/-79.62432" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>67 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35263&mlon=-79.62440#map=18/44.35263/-79.62440" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>69 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35265&mlon=-79.62447#map=18/44.35265/-79.62447" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>71 SUNFLOWER LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35267&mlon=-79.62454#map=18/44.35267/-79.62454" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+  </details>
+  
+  <details class="rename-group">
+    <summary><span class="change-field">STATUS:</span> <span class="old-val">Pending</span> <span class="arrow-val">→</span> <span class="new-val">Current</span><span class="rename-count">1 address</span></summary>
+    <table>
+      <tbody>
+        
+        <tr><td>141 LILLIAN CRES UNIT 2</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.40445&mlon=-79.71816#map=18/44.40445/-79.71816" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+  </details>
+  
+    
+  </div>
+  
+
+  
+
+  <div class="section">
+    <h2>Location Adjustments <span class="badge" style="background: var(--surface2); color: var(--text-dim)">1</span></h2>
+    
+    
+    
+    <table>
+      <thead><tr><th>Address</th><th>Before</th><th></th><th>After</th></tr></thead>
+      <tbody>
+        
+        <tr><td>105 ST PAUL&#39;S CRES</td>
+          
+          <td class="old-val">44.34603, -79.62359<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.34603&mlon=-79.62359#map=19/44.34603/-79.62359" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">← 67.5m</td>
+          <td class="new-val">44.34585, -79.62440<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.34585&mlon=-79.62440#map=19/44.34585/-79.62440" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+      </tbody>
+    </table>
+    
+    
+    
+  </div>
+
+  <div class="generated-at">Report generated Sep 04, 2026 at 12:13 PM · source licence: Open Government Licence - Barrie</div>
+
+  <script>
+    function sortTable(tbodyId, col) {
+      const tbody = document.getElementById(tbodyId);
+      if (!tbody) return;
+      const rows = Array.from(tbody.rows);
+      const dir = tbody.dataset.sortDir === 'asc' ? 'desc' : 'asc';
+      tbody.dataset.sortDir = dir;
+      rows.sort((a, b) => {
+        const av = a.cells[col]?.textContent.trim() || '';
+        const bv = b.cells[col]?.textContent.trim() || '';
+        const an = parseFloat(av), bn = parseFloat(bv);
+        if (!isNaN(an) && !isNaN(bn)) return dir === 'asc' ? an - bn : bn - an;
+        return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+      });
+      rows.forEach(r => tbody.appendChild(r));
+    }
+  </script>
+</body>
+
+</html>
