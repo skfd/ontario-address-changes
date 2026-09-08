@@ -2,8 +2,8 @@
 
 On 15 August 2026, Toronto's address file retired 1994, 2000 and 2008 Yonge Street and
 17 Glebe Road West, and put 1996, 2000 and 2008 Yonge Street and 23 Glebe Road West into
-service. The offline version of this piece could say only that the frontage had been
-restated and that the file did not say why. The City's own record does.
+service. The file itself says only that the frontage was restated, and nothing about
+why. The City's own record does.
 
 In July 2010, planning staff recommended approving a rezoning for a proposal "to demolish
 a senior's residence building at 17 Glebe Street West [sic] and several retail buildings,
@@ -265,8 +265,8 @@ approved a sale to Cogir Real Estate in March 2026, and RENX reported that Cogir
 say whether it intends to build the approved scheme. The addresses outlived the buildings
 by two and a half years. 3775 and 3803, the other two, are still on the file.
 
-**What *reserved* means.** The offline version of this piece called a reserved point "a
-number that has been assigned but is not yet in service". That is a reading of the word.
+**What *reserved* means.** It is tempting to gloss a reserved point as "a number that
+has been assigned but is not yet in service". That is a reading of the word.
 The City publishes no definition: the dataset's notes describe its fields only in general
 terms, every field description in the data store is empty, the map layer declares no value
 list for the field, and the only readme concerns a different column that was blanked in

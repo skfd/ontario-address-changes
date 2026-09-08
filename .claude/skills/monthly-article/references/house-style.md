@@ -98,8 +98,18 @@ completing, not of construction happening, and paperwork has slow months.
 A quiet month is also the right place to explain one mechanic properly (what a
 retired address means, why a number goes backwards) since there is room for it.
 
+## Length
+
+The series runs 900-1,200 words offline and 1,300-1,700 words researched (March to
+July 2026). A month that comes out at twice that is not twice as interesting; it is a
+piece that kept every finding. Cut supporting items before cutting sentences from the
+lead, and keep the research file as the place where everything found gets to stay.
+
 ## Traps
 
+- **Mentioning the other variant.** The researched piece never says "the offline
+  version of this piece could only..." - a reader gets one piece, and it stands alone.
+  Say what the file itself does and does not say, then what the record adds.
 - **Gross quoted as net.** See SKILL.md. The single most likely factual error.
 - **Held events.** Anything under `HELD` in the brief is excluded from the numbers by
   design. Never write it in as news, and never quietly restore it.
