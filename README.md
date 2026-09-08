@@ -115,7 +115,10 @@ onboarding reference documents the full procedure).
 .\schedule-remove.ps1
 ```
 
-After the update, `daily-update.ps1` regenerates the address-vault status page
+`daily-update.ps1` pulls every city (`update --all --jobs 6 --no-report`, up to
+three attempts 15 min apart), then renders the site once (`report --all`, about
+30 min for the full history of 53 datasets) before committing and pushing
+`docs\`. After the update, it also regenerates the address-vault status page
 (`addressvault report` → `<ADDRESSVAULT_DIR>\report.html`) — a local file about
 the vault, not part of the published site. It runs on every outcome, including
 offline/metered ones, since it reads only the catalog and disk; if it fails the

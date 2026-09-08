@@ -73,7 +73,11 @@ $runStart = Get-Date
 
 # Retry here, not in Task Scheduler: RestartCount never fires on a nonzero
 # exit code (it only covers launch failures). Reruns are cheap because
-# already-updated cities short-circuit (cached download + already-imported).
+# already-updated cities short-circuit (cached download + already-imported)
+# and --no-report keeps the site render out of the loop: rendering every
+# report page takes ~30 min for 53 datasets, and doing it after each attempt
+# (observed 2026-09-08, simcoe 503 all day) ran past the task's 2 h limit,
+# so attempt 3 was killed mid-render with no END line and no commit.
 $updateExit = 1
 $ranUpdate  = $false
 $skipReason = 'offline'
@@ -97,7 +101,7 @@ foreach ($attempt in 1..3) {
         $skipReason = 'metered'
         continue
     }
-    Invoke-Logged "python run.py update --all --jobs 6"
+    Invoke-Logged "python run.py update --all --jobs 6 --no-report"
     $updateExit = $LASTEXITCODE
     $ranUpdate  = $true
     if ($updateExit -eq 0) { break }
@@ -110,6 +114,21 @@ if ($updateExit -ne 0) {
     if (-not $ranUpdate)        { $outcome = $skipReason }
     elseif (-not (Test-Online)) { $outcome = 'offline' }
     elseif (Test-Metered)       { $outcome = 'metered' }
+}
+
+# Render the site once, after the retry loop. Skipped when no attempt ran
+# (offline/metered all day): docs\ stays untouched and the commit gate below
+# keeps the day commit-free, as before. A partially failed day still renders:
+# `report --all` re-renders the failed cities too (from their last good
+# snapshot, so every page still shows its snapshot's date; only the
+# "generated" stamp moves, which happens daily anyway). A render failure
+# leaves the cities updated but the site stale, i.e. publish-failed.
+$renderExit = 0
+if ($ranUpdate) {
+    Log "RENDER $(Get-Date -Format o)"
+    Invoke-Logged "python run.py report --all"
+    $renderExit = $LASTEXITCODE
+    if ($renderExit -ne 0) { Log "RENDER-FAILED $(Get-Date -Format o) exit=$renderExit" }
 }
 
 # The vault's status page, regenerated from the catalog the update just wrote.
@@ -153,12 +172,12 @@ if ($publishExit -eq 0) {
     }
 }
 
-# A failed add/commit/push leaves docs\ staged and the site stale, but every
-# step above is fire-and-forget, so the run used to exit 0 and look healthy
+# A failed render or add/commit/push leaves the site stale, but every step
+# above is fire-and-forget, so the run used to exit 0 and look healthy
 # (observed 2026-08-05). Report it -- but never over-write a real update
 # failure or an offline/metered skip: those are the bigger news, and the first
 # already exits nonzero.
-if ($publishExit -ne 0 -and $outcome -eq 0) { $outcome = 'publish-failed' }
+if (($renderExit -ne 0 -or $publishExit -ne 0) -and $outcome -eq 0) { $outcome = 'publish-failed' }
 
 # Final log line marks the run as over for progress.ps1.
 Log "END $(Get-Date -Format o) exit=$outcome attempts=$attempt"

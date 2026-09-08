@@ -106,15 +106,18 @@ function Show-Progress {
     $seen    = $ok.Count + $failed.Count
     $pending = [math]::Max($total - $seen, 0)
     # daily-update.ps1 writes an END line when the run (incl. retries) is over;
-    # a RETRY line without it means an attempt is still in flight. Logs without
-    # retries fall back to "wrote site" (prints once every city is done) or,
+    # a RETRY or RENDER line without it means an attempt or the site render
+    # (~30 min, once after the retry loop) is still in flight. Logs without
+    # either fall back to "wrote site" (prints once every city is done) or,
     # with zero successes, all-cities-seen.
     $finished = if ($raw -match '(?m)^END ') { $true }
-                elseif ($raw -match '(?m)^RETRY ') { $false }
+                elseif ($raw -match '(?m)^(RETRY|RENDER) ') { $false }
                 else { ($raw -match 'wrote site for \d+ dataset') -or ($seen -ge $total) }
 
     $status = if (-not $finished) {
-                  if ($raw -match '(?m)^RETRY ') { 'Retrying failures' } else { 'Running' }
+                  if ($raw -match '(?m)^RENDER ') { 'Rendering site' }
+                  elseif ($raw -match '(?m)^RETRY ') { 'Retrying failures' }
+                  else { 'Running' }
               }
               # daily-update.ps1 stamps exit=offline/metered when the machine
               # had no usable network -- failures below are noise, not real.
