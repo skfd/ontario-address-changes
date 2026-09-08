@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>County of Perth Address Changes — Tuesday, Sep 08, 2026</title>
+  <style>
+    :root {
+      --bg: #fafafa; --surface: #ffffff; --surface2: #f5f5f5; --surface3: #ebebeb;
+      --border: #e0e0e0; --border-strong: #d1d1d1; --text: #242424;
+      --text-secondary: #424242; --text-dim: #616161; --accent: #0078d4;
+      --accent-hover: #106ebe; --accent-bg: #eff6fc; --green: #107c10;
+      --green-bg: #f1faf1; --green-tint: #9fd89f; --red: #c50f1f; --red-bg: #fdf3f4;
+      --red-tint: #eeacb2; --yellow: #eaa300; --yellow-bg: #fefbf4; --yellow-tint: #f9e2ae;
+      --purple: #881798; --purple-bg: #f9f3fb; --teal: #038387; --teal-bg: #f0fafa;
+      --shadow-4: 0 2px 4px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --shadow-8: 0 4px 8px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --card-bg: #ffffff; --card-hover: #f5f5f5; color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1f1f1f; --surface: #292929; --surface2: #333333; --surface3: #3d3d3d;
+        --border: #525252; --border-strong: #666666; --text: #ffffff;
+        --text-secondary: #d6d6d6; --text-dim: #adadad; --accent: #2899f5;
+        --accent-hover: #3aa0f3; --accent-bg: #002848; --green: #54b054;
+        --green-bg: #052505; --green-tint: #107c10; --red: #dc626d; --red-bg: #3b0509;
+        --red-tint: #c50f1f; --yellow: #f2c661; --yellow-bg: #463100; --yellow-tint: #eaa300;
+        --purple: #d29ddb; --purple-bg: #3a1040; --teal: #58c0c4; --teal-bg: #013638;
+        --shadow-4: 0 2px 4px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --shadow-8: 0 4px 8px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --card-bg: #333333; --card-hover: #3d3d3d; color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI Variable','Segoe UI',system-ui,-apple-system,sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.5; padding: 2rem;
+      max-width: 1100px; margin: 0 auto; font-size: 14px; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; color: var(--accent-hover); }
+    .back-link { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 12px;
+      color: var(--text-dim); margin-bottom: 1.5rem; transition: color 0.1s; }
+    .back-link:hover { color: var(--accent); text-decoration: none; }
+    h1 { font-size: 24px; font-weight: 600; margin-bottom: 4px; }
+    .subtitle { color: var(--text-secondary); font-size: 14px; margin-bottom: 12px; }
+    .explainer { color: var(--text-secondary); font-size: 13px; line-height: 1.5;
+      margin-bottom: 24px; padding: 12px 16px; background: var(--surface);
+      border-radius: 8px; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px; margin-bottom: 24px; }
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px;
+      padding: 16px; box-shadow: var(--shadow-4); transition: box-shadow 0.1s; }
+    .card:hover { box-shadow: var(--shadow-8); }
+    .card .label { font-size: 12px; color: var(--text-dim); font-weight: 400; }
+    .card .value { font-size: 28px; font-weight: 600; margin-top: 4px; }
+    .card .value.green { color: var(--green); } .card .value.red { color: var(--red); }
+    .card .value.yellow { color: var(--yellow); } .card .value.accent { color: var(--accent); }
+    .card .value.purple { color: var(--purple); }
+    .card .value.teal { color: var(--teal); }
+    .sparkline { display: block; margin-top: 6px; overflow: visible; opacity: 0.9; }
+    .sparkline-label { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+    .section { margin-bottom: 24px; }
+    .section h2 { font-size: 16px; font-weight: 600; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px; }
+    .badge { font-size: 12px; padding: 2px 8px; border-radius: 999px; font-weight: 600; }
+    .badge-green { background: var(--green-bg); color: var(--green); }
+    .badge-red { background: var(--red-bg); color: var(--red); }
+    .badge-yellow { background: var(--yellow-bg); color: var(--yellow); }
+    .badge-accent { background: var(--accent-bg); color: var(--accent); }
+    .badge-purple { background: var(--purple-bg); color: var(--purple); }
+    .badge-teal { background: var(--teal-bg); color: var(--teal); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface);
+      border-radius: 8px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    thead { background: var(--surface2); }
+    th { text-align: left; padding: 8px 12px; font-weight: 600; color: var(--text-dim);
+      font-size: 12px; cursor: pointer; user-select: none; border-bottom: 1px solid var(--border); }
+    th:hover { color: var(--accent); }
+    td { padding: 8px 12px; border-top: 1px solid var(--border); }
+    tr:hover td { background: var(--surface2); }
+    .old-val { color: var(--red); text-decoration: line-through; }
+    .new-val { color: var(--green); }
+    .arrow-val { color: var(--text-dim); text-align: center; white-space: nowrap; }
+    .map-link { display: inline-flex; align-items: center; margin-left: 0.4em;
+      color: var(--accent); vertical-align: middle; white-space: nowrap; font-size: 12px; }
+    .map-link:hover { color: var(--accent-hover); }
+    .map-link svg { width: 14px; height: 14px; }
+    .change-field { color: var(--yellow); font-weight: 600; }
+    .bar-chart { margin-top: 8px; }
+    .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 12px; }
+    .bar-label { width: 180px; text-align: right; color: var(--text-secondary); flex-shrink: 0;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .bar-track { flex: 1; height: 8px; background: var(--surface2); border-radius: 4px;
+      overflow: hidden; position: relative; }
+    .bar-fill { height: 100%; border-radius: 4px; transition: width 0.15s ease; }
+    .bar-fill.green { background: var(--green); } .bar-fill.red { background: var(--red); }
+    .bar-count { width: 40px; font-size: 12px; color: var(--text-dim); }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+    .empty { color: var(--text-dim); font-style: italic; padding: 16px; }
+    .truncated { color: var(--text-dim); font-size: 12px; margin-top: 8px; }
+    .collapsible-toggle { background: transparent; border: 1px solid var(--border);
+      color: var(--accent); padding: 5px 12px; border-radius: 4px; cursor: pointer;
+      font-size: 12px; font-family: inherit; margin-bottom: 12px; transition: background 0.1s; }
+    .collapsible-toggle:hover { background: var(--surface2); }
+    details.rename-group { background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; margin-bottom: 8px; box-shadow: var(--shadow-4); }
+    details.rename-group summary { padding: 10px 14px; cursor: pointer; font-size: 13px; }
+    details.rename-group[open] summary { border-bottom: 1px solid var(--border); }
+    details.rename-group table { border: none; box-shadow: none; border-radius: 0; }
+    details.rename-group .truncated { padding: 0 14px 10px; margin-top: 0; }
+    .rename-count { color: var(--text-dim); font-size: 12px; margin-left: 6px; }
+    .no-changes-banner { background: var(--green-bg); border: 1px solid var(--green-tint);
+      color: var(--green); padding: 16px; border-radius: 8px; margin-bottom: 24px;
+      text-align: center; font-weight: 600; font-size: 14px; }
+    .baseline-banner { background: var(--accent-bg); border: 1px solid var(--accent);
+      color: var(--accent); padding: 16px; border-radius: 8px; margin-bottom: 24px; font-size: 13px; }
+    .generated-at { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-dim); }
+    .history { font-size: 12.5px; color: var(--text-secondary); white-space: nowrap; }
+    .history .a { color: var(--green); font-weight: 500; }
+    .history .r { color: var(--red); font-weight: 500; }
+    .history .dot { color: var(--text-dim); margin: 0 4px; }
+    .history-none { color: var(--text-dim); font-style: italic; font-size: 12.5px; }
+    .info-wrap { position: relative; display: inline-flex; vertical-align: middle; }
+    .info-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+      height: 18px; padding: 0 8px 0 7px; border-radius: 999px; border: none;
+      color: #fff; background: var(--accent); cursor: help; font-size: 11px; font-weight: 600;
+      font-style: normal; font-family: inherit; line-height: 1; white-space: nowrap; }
+    .info-btn .glyph { font-style: italic; font-weight: 700;
+      font-family: Georgia, 'Times New Roman', serif; }
+    .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn,
+    .info-wrap:focus .info-btn { background: var(--accent-hover); }
+    .info-pop { display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 20;
+      width: 320px; max-width: 80vw; padding: 12px 14px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-8);
+      font-size: 12.5px; font-weight: 400; color: var(--text-secondary); line-height: 1.5; }
+    .info-wrap:hover .info-pop, .info-wrap:focus-within .info-pop,
+    .info-wrap:focus .info-pop { display: block; }
+    .info-pop strong { display: block; color: var(--text); font-size: 12px; margin-bottom: 4px; }
+    .info-pop ul { list-style: none; margin: 0 0 10px; padding: 0; }
+    .info-pop li { padding: 1px 0 1px 14px; position: relative; }
+    .info-pop li::before { content: "·"; position: absolute; left: 4px; color: var(--text-dim); }
+    .info-pop .note { color: var(--text-dim); font-size: 11.5px; margin: 0 0 10px; }
+    .info-pop .muted { color: var(--text-dim); font-style: italic; }
+  </style>
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+
+  <a class="back-link" href="index.html">← Back to County of Perth reports</a>
+
+  <h1>County of Perth — Address Changes</h1>
+  <p class="subtitle">
+    Changes between  and Tuesday, Sep 08, 2026
+    · 18,701 total addresses
+  </p>
+
+  
+
+  <div class="cards">
+    <div class="card"><div class="label">Total Addresses</div>
+      <div class="value accent">18,701</div></div>
+    <div class="card"><div class="label">New Addresses</div>
+      <div class="value green">+112</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#107c10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,2.0 108.0,17.9"/><circle cx="108.0" cy="17.9" r="2" fill="#107c10"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Retired Addresses</div>
+      <div class="value red">−16</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#c50f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#c50f1f"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Updated Addresses <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (Full_AddNum)</li><li>Unit (Unit)</li><li>Full address (Full_Add)</li><li>Coordinates (latitude, longitude)</li><li>Addtl_Loc</li><li>Inc_Muni</li><li>Property_Number</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>Latitude</li><li>Longitude</li></ul>
+      
+    </span>
+  </span></div>
+      <div class="value yellow">18</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Renumbered</div>
+      <div class="value accent">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#0078d4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#0078d4"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Street Renames</div>
+      <div class="value purple">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#9141ac" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#9141ac"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    
+    <div class="card"><div class="label">Boundary Changes</div>
+      <div class="value teal">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#038387" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#038387"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    <div class="card"><div class="label">Location Adjustments</div>
+      <div class="value" style="color: var(--text-dim)">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#808080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#808080"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+  </div>
+
+  
+  <div class="section">
+    <h2>Change Breakdown</h2>
+    <div class="stats-grid">
+      
+      
+      
+      <div class="card"><div class="label">Most Frequently Updated Fields</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">Property_Number</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">18</span></div>
+      </div></div>
+    </div>
+  </div>
+  
+
+  <div class="section">
+    <h2>New Addresses <span class="badge badge-green">112</span></h2>
+    
+    <details class="rename-group">
+      <summary>11 <span class="arrow-val">→</span> <span class="new-val">2 units (UNIT A, UNIT B)</span><span class="rename-count">2 new addresses · original address remains</span></summary>
+      <table>
+        <thead><tr><th>Address</th><th>Unit</th><th>History</th><th>Map</th></tr></thead>
+        <tbody>
+          
+          <tr><td>11 NAPIER STREET UNIT A</td><td>UNIT A</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46322&mlon=-81.20966#map=18/43.46322/-81.20966" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>11 NAPIER STREET UNIT B</td><td>UNIT B</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46326&mlon=-81.20962#map=18/43.46326/-81.20962" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+    </details>
+    
+    <details class="rename-group">
+      <summary>13 <span class="arrow-val">→</span> <span class="new-val">2 units (UNIT A, UNIT B)</span><span class="rename-count">2 new addresses · original address remains</span></summary>
+      <table>
+        <thead><tr><th>Address</th><th>Unit</th><th>History</th><th>Map</th></tr></thead>
+        <tbody>
+          
+          <tr><td>13 NAPIER STREET UNIT A</td><td>UNIT A</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46336&mlon=-81.20953#map=18/43.46336/-81.20953" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>13 NAPIER STREET UNIT B</td><td>UNIT B</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46340&mlon=-81.20949#map=18/43.46340/-81.20949" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+    </details>
+    
+    <details class="rename-group">
+      <summary>15 <span class="arrow-val">→</span> <span class="new-val">2 units (UNIT A, UNIT B)</span><span class="rename-count">2 new addresses · original address remains</span></summary>
+      <table>
+        <thead><tr><th>Address</th><th>Unit</th><th>History</th><th>Map</th></tr></thead>
+        <tbody>
+          
+          <tr><td>15 NAPIER STREET UNIT A</td><td>UNIT A</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46350&mlon=-81.20942#map=18/43.46350/-81.20942" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>15 NAPIER STREET UNIT B</td><td>UNIT B</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46354&mlon=-81.20938#map=18/43.46354/-81.20938" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+    </details>
+    
+    <details class="rename-group">
+      <summary>17 <span class="arrow-val">→</span> <span class="new-val">2 units (UNIT A, UNIT B)</span><span class="rename-count">2 new addresses · original address remains</span></summary>
+      <table>
+        <thead><tr><th>Address</th><th>Unit</th><th>History</th><th>Map</th></tr></thead>
+        <tbody>
+          
+          <tr><td>17 NAPIER STREET UNIT A</td><td>UNIT A</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46364&mlon=-81.20930#map=18/43.46364/-81.20930" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>17 NAPIER STREET UNIT B</td><td>UNIT B</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46368&mlon=-81.20926#map=18/43.46368/-81.20926" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+    </details>
+    
+    <details class="rename-group">
+      <summary>19 <span class="arrow-val">→</span> <span class="new-val">2 units (UNIT A, UNIT B)</span><span class="rename-count">2 new addresses · original address remains</span></summary>
+      <table>
+        <thead><tr><th>Address</th><th>Unit</th><th>History</th><th>Map</th></tr></thead>
+        <tbody>
+          
+          <tr><td>19 NAPIER STREET UNIT A</td><td>UNIT A</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46379&mlon=-81.20917#map=18/43.46379/-81.20917" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>19 NAPIER STREET UNIT B</td><td>UNIT B</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46383&mlon=-81.20914#map=18/43.46383/-81.20914" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+    </details>
+    
+    <details class="rename-group">
+      <summary>21 <span class="arrow-val">→</span> <span class="new-val">2 units (UNIT A, UNIT B)</span><span class="rename-count">2 new addresses · original address remains</span></summary>
+      <table>
+        <thead><tr><th>Address</th><th>Unit</th><th>History</th><th>Map</th></tr></thead>
+        <tbody>
+          
+          <tr><td>21 NAPIER STREET UNIT A</td><td>UNIT A</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46393&mlon=-81.20905#map=18/43.46393/-81.20905" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>21 NAPIER STREET UNIT B</td><td>UNIT B</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46397&mlon=-81.20902#map=18/43.46397/-81.20902" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+    </details>
+    
+    <details class="rename-group">
+      <summary>23 <span class="arrow-val">→</span> <span class="new-val">2 units (UNIT A, UNIT B)</span><span class="rename-count">2 new addresses · original address remains</span></summary>
+      <table>
+        <thead><tr><th>Address</th><th>Unit</th><th>History</th><th>Map</th></tr></thead>
+        <tbody>
+          
+          <tr><td>23 NAPIER STREET UNIT A</td><td>UNIT A</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46407&mlon=-81.20893#map=18/43.46407/-81.20893" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>23 NAPIER STREET UNIT B</td><td>UNIT B</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46411&mlon=-81.20890#map=18/43.46411/-81.20890" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+    </details>
+    
+    <details class="rename-group">
+      <summary>25 <span class="arrow-val">→</span> <span class="new-val">2 units (UNIT A, UNIT B)</span><span class="rename-count">2 new addresses · original address remains</span></summary>
+      <table>
+        <thead><tr><th>Address</th><th>Unit</th><th>History</th><th>Map</th></tr></thead>
+        <tbody>
+          
+          <tr><td>25 NAPIER STREET UNIT A</td><td>UNIT A</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46421&mlon=-81.20881#map=18/43.46421/-81.20881" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>25 NAPIER STREET UNIT B</td><td>UNIT B</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46425&mlon=-81.20878#map=18/43.46425/-81.20878" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+    </details>
+    
+    <details class="rename-group">
+      <summary>27 <span class="arrow-val">→</span> <span class="new-val">2 units (UNIT A, UNIT B)</span><span class="rename-count">2 new addresses · original address remains</span></summary>
+      <table>
+        <thead><tr><th>Address</th><th>Unit</th><th>History</th><th>Map</th></tr></thead>
+        <tbody>
+          
+          <tr><td>27 NAPIER STREET UNIT A</td><td>UNIT A</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46435&mlon=-81.20869#map=18/43.46435/-81.20869" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>27 NAPIER STREET UNIT B</td><td>UNIT B</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46439&mlon=-81.20866#map=18/43.46439/-81.20866" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+    </details>
+    
+    <details class="rename-group">
+      <summary>29 <span class="arrow-val">→</span> <span class="new-val">2 units (UNIT A, UNIT B)</span><span class="rename-count">2 new addresses · original address remains</span></summary>
+      <table>
+        <thead><tr><th>Address</th><th>Unit</th><th>History</th><th>Map</th></tr></thead>
+        <tbody>
+          
+          <tr><td>29 NAPIER STREET UNIT A</td><td>UNIT A</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46451&mlon=-81.20855#map=18/43.46451/-81.20855" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>29 NAPIER STREET UNIT B</td><td>UNIT B</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46455&mlon=-81.20852#map=18/43.46455/-81.20852" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+    </details>
+    
+    <details class="rename-group">
+      <summary>693 <span class="arrow-val">→</span> <span class="new-val">2 units (UNIT A, UNIT B)</span><span class="rename-count">2 new addresses</span></summary>
+      <table>
+        <thead><tr><th>Address</th><th>Unit</th><th>History</th><th>Map</th></tr></thead>
+        <tbody>
+          
+          <tr><td>693 CONNERS DRIVE UNIT A</td><td>UNIT A</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72694&mlon=-80.96008#map=18/43.72694/-80.96008" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>693 CONNERS DRIVE UNIT B</td><td>UNIT B</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72697&mlon=-80.96010#map=18/43.72697/-80.96010" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+    </details>
+    
+    <details class="rename-group">
+      <summary>695 <span class="arrow-val">→</span> <span class="new-val">2 units (UNIT A, UNIT B)</span><span class="rename-count">2 new addresses · original address remains</span></summary>
+      <table>
+        <thead><tr><th>Address</th><th>Unit</th><th>History</th><th>Map</th></tr></thead>
+        <tbody>
+          
+          <tr><td>695 CONNERS DRIVE UNIT A</td><td>UNIT A</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72685&mlon=-80.96022#map=18/43.72685/-80.96022" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>695 CONNERS DRIVE UNIT B</td><td>UNIT B</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72687&mlon=-80.96027#map=18/43.72687/-80.96027" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+    </details>
+    
+    <details class="rename-group">
+      <summary>7 <span class="arrow-val">→</span> <span class="new-val">2 units (UNIT A, UNIT B)</span><span class="rename-count">2 new addresses · original address remains</span></summary>
+      <table>
+        <thead><tr><th>Address</th><th>Unit</th><th>History</th><th>Map</th></tr></thead>
+        <tbody>
+          
+          <tr><td>7 NAPIER STREET UNIT A</td><td>UNIT A</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46290&mlon=-81.20993#map=18/43.46290/-81.20993" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>7 NAPIER STREET UNIT B</td><td>UNIT B</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46294&mlon=-81.20990#map=18/43.46294/-81.20990" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+    </details>
+    
+    <details class="rename-group">
+      <summary>9 <span class="arrow-val">→</span> <span class="new-val">2 units (UNIT A, UNIT B)</span><span class="rename-count">2 new addresses · original address remains</span></summary>
+      <table>
+        <thead><tr><th>Address</th><th>Unit</th><th>History</th><th>Map</th></tr></thead>
+        <tbody>
+          
+          <tr><td>9 NAPIER STREET UNIT A</td><td>UNIT A</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46308&mlon=-81.20978#map=18/43.46308/-81.20978" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>9 NAPIER STREET UNIT B</td><td>UNIT B</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46312&mlon=-81.20974#map=18/43.46312/-81.20974" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+    </details>
+    
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-added',0)">Address</th><th onclick="sortTable('t-added',1)">Street</th>
+        <th onclick="sortTable('t-added',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-added">
+        
+        <tr><td>6 AREND STREET</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46272&mlon=-81.20953#map=18/43.46272/-81.20953" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>7 AREND STREET</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46246&mlon=-81.20895#map=18/43.46246/-81.20895" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>8 AREND STREET</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46286&mlon=-81.20941#map=18/43.46286/-81.20941" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>9 AREND STREET</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46260&mlon=-81.20883#map=18/43.46260/-81.20883" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 AREND STREET</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46297&mlon=-81.20933#map=18/43.46297/-81.20933" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 ROSE LANE</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46271&mlon=-81.18615#map=18/43.46271/-81.18615" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>11 AREND STREET</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46271&mlon=-81.20875#map=18/43.46271/-81.20875" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>11 ROSE LANE</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46283&mlon=-81.18644#map=18/43.46283/-81.18644" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>12 AREND STREET</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46309&mlon=-81.20922#map=18/43.46309/-81.20922" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>12 ROSE LANE</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46264&mlon=-81.18620#map=18/43.46264/-81.18620" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>13 ROSE LANE</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46276&mlon=-81.18650#map=18/43.46276/-81.18650" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>13 AREND STREET</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46283&mlon=-81.20864#map=18/43.46283/-81.20864" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>14 AREND STREET</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46320&mlon=-81.20914#map=18/43.46320/-81.20914" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>14 ROSE LANE</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46257&mlon=-81.18626#map=18/43.46257/-81.18626" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>15 ROSE LANE</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46269&mlon=-81.18656#map=18/43.46269/-81.18656" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>15 AREND STREET</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46294&mlon=-81.20856#map=18/43.46294/-81.20856" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>16 AREND STREET</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46332&mlon=-81.20903#map=18/43.46332/-81.20903" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>16 ROSE LANE</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46249&mlon=-81.18633#map=18/43.46249/-81.18633" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>17 AREND STREET</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46306&mlon=-81.20845#map=18/43.46306/-81.20845" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>17 ROSE LANE</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46262&mlon=-81.18662#map=18/43.46262/-81.18662" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>18 AREND STREET</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46343&mlon=-81.20894#map=18/43.46343/-81.20894" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>18 ROSE LANE</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46242&mlon=-81.18638#map=18/43.46242/-81.18638" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>19 AREND STREET</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46317&mlon=-81.20836#map=18/43.46317/-81.20836" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>19 ROSE LANE</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46252&mlon=-81.18670#map=18/43.46252/-81.18670" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>20 ROSE LANE</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46235&mlon=-81.18644#map=18/43.46235/-81.18644" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>20 AREND STREET</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46356&mlon=-81.20883#map=18/43.46356/-81.20883" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>21 ROSE LANE</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46245&mlon=-81.18676#map=18/43.46245/-81.18676" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>21 AREND STREET</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46329&mlon=-81.20825#map=18/43.46329/-81.20825" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>22 AREND STREET</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46366&mlon=-81.20875#map=18/43.46366/-81.20875" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>22 ROSE LANE</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46228&mlon=-81.18650#map=18/43.46228/-81.18650" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>23 ROSE LANE</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46239&mlon=-81.18681#map=18/43.46239/-81.18681" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>23 AREND STREET</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46340&mlon=-81.20817#map=18/43.46340/-81.20817" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>24 AREND STREET</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46378&mlon=-81.20865#map=18/43.46378/-81.20865" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>24 ROSE LANE</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46221&mlon=-81.18656#map=18/43.46221/-81.18656" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>25 AREND STREET</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46352&mlon=-81.20807#map=18/43.46352/-81.20807" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>25 ROSE LANE</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46231&mlon=-81.18688#map=18/43.46231/-81.18688" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>26 ROSE LANE</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46207&mlon=-81.18665#map=18/43.46207/-81.18665" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>26 AREND STREET</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46389&mlon=-81.20856#map=18/43.46389/-81.20856" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>27 AREND STREET</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46363&mlon=-81.20798#map=18/43.46363/-81.20798" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>27 ROSE LANE</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46213&mlon=-81.18706#map=18/43.46213/-81.18706" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>28 NELSON STREET</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46358&mlon=-81.20749#map=18/43.46358/-81.20749" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>28 ROSE LANE</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46199&mlon=-81.18660#map=18/43.46199/-81.18660" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>28 AREND STREET</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46402&mlon=-81.20843#map=18/43.46402/-81.20843" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>29 ROSE LANE</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46205&mlon=-81.18701#map=18/43.46205/-81.18701" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>29 AREND STREET</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46375&mlon=-81.20788#map=18/43.46375/-81.20788" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>30 NELSON STREET</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46369&mlon=-81.20741#map=18/43.46369/-81.20741" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>30 ROSE LANE</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46192&mlon=-81.18655#map=18/43.46192/-81.18655" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>30 AREND STREET</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46413&mlon=-81.20835#map=18/43.46413/-81.20835" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>31 ROSE LANE</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46198&mlon=-81.18697#map=18/43.46198/-81.18697" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>31 AREND STREET</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46386&mlon=-81.20779#map=18/43.46386/-81.20779" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>32 AREND STREET</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46425&mlon=-81.20825#map=18/43.46425/-81.20825" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>32 ROSE LANE</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46184&mlon=-81.18650#map=18/43.46184/-81.18650" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>33 ROSE LANE</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46191&mlon=-81.18692#map=18/43.46191/-81.18692" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>34 AREND STREET</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46436&mlon=-81.20816#map=18/43.46436/-81.20816" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>34 CLAYTON STREET</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46400&mlon=-81.20712#map=18/43.46400/-81.20712" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>35 ROSE LANE</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46181&mlon=-81.18686#map=18/43.46181/-81.18686" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>36 CLAYTON STREET</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46395&mlon=-81.20734#map=18/43.46395/-81.20734" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>37 ROSE LANE</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46175&mlon=-81.18682#map=18/43.46175/-81.18682" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>38 CLAYTON STREET</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46403&mlon=-81.20749#map=18/43.46403/-81.20749" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>39 ROSE LANE</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46167&mlon=-81.18677#map=18/43.46167/-81.18677" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>40 CLAYTON STREET</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46410&mlon=-81.20767#map=18/43.46410/-81.20767" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>41 ROSE LANE</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46159&mlon=-81.18672#map=18/43.46159/-81.18672" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>91 KENTON STREET</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46732&mlon=-81.21109#map=18/43.46732/-81.21109" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>93 KENTON STREET</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46737&mlon=-81.21119#map=18/43.46737/-81.21119" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>101 CLAYTON STREET</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46660&mlon=-81.21202#map=18/43.46660/-81.21202" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>103 CLAYTON STREET</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46665&mlon=-81.21213#map=18/43.46665/-81.21213" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>135A PUGH STREET</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.55899&mlon=-80.91375#map=18/43.55899/-80.91375" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>135B PUGH STREET</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.55899&mlon=-80.91375#map=18/43.55899/-80.91375" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>230 ONTARIO ROAD</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46283&mlon=-81.18625#map=18/43.46283/-81.18625" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>4195 LINE 52</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.49360&mlon=-80.91205#map=18/43.49360/-80.91205" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>5054 LINE 92</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.82862&mlon=-80.77905#map=18/43.82862/-80.77905" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6077 FRANK STREET</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46247&mlon=-81.20972#map=18/43.46247/-81.20972" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6267 LINE 89</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.80665&mlon=-80.93189#map=18/43.80665/-80.93189" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6604 ROAD 154</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.60737&mlon=-81.00835#map=18/43.60737/-81.00835" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6675A PERTH LINE 86</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.76225&mlon=-81.02848#map=18/43.76225/-81.02848" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6675B PERTH LINE 86</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.76225&mlon=-81.02848#map=18/43.76225/-81.02848" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6750 PERTH ROAD 147</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.60991&mlon=-80.97753#map=18/43.60991/-80.97753" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6962 LINE 19</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.40969&mlon=-81.36034#map=18/43.40969/-81.36034" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>7003 RAYMOND DRIVE</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.57258&mlon=-80.83240#map=18/43.57258/-80.83240" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>7568A ROAD 154</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67611&mlon=-80.95483#map=18/43.67611/-80.95483" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>7568B ROAD 154</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67611&mlon=-80.95483#map=18/43.67611/-80.95483" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>8358C FAIRLANE ROAD</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74984&mlon=-80.94027#map=18/43.74984/-80.94027" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>8358D FAIRLANE ROAD</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74982&mlon=-80.94030#map=18/43.74982/-80.94030" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>8849 ROAD 146</td><td></td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.76000&mlon=-80.85150#map=18/43.76000/-80.85150" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Retired Addresses <span class="badge badge-red">16</span></h2>
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-removed',0)">Address</th><th onclick="sortTable('t-removed',1)">Street</th>
+        <th onclick="sortTable('t-removed',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-removed">
+        
+        <tr><td>34 CLAYTON STREET</td><td></td><td></td>
+          <td><span class="history"><span class="a">+ 2026-08-20</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46407&mlon=-81.20739#map=18/43.46407/-81.20739" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>91 KENTON STREET</td><td></td><td></td>
+          <td><span class="history"><span class="a">+ 2026-08-20</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46745&mlon=-81.21106#map=18/43.46745/-81.21106" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>93 KENTON STREET</td><td></td><td></td>
+          <td><span class="history"><span class="a">+ 2026-08-20</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46745&mlon=-81.21106#map=18/43.46745/-81.21106" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>101 CLAYTON STREET</td><td></td><td></td>
+          <td><span class="history"><span class="a">+ 2026-08-20</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46665&mlon=-81.21205#map=18/43.46665/-81.21205" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>103 CLAYTON STREET</td><td></td><td></td>
+          <td><span class="history"><span class="a">+ 2026-08-20</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46665&mlon=-81.21205#map=18/43.46665/-81.21205" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>135 PUGH STREET</td><td></td><td></td>
+          <td><span class="history"><span class="a">+ 2026-08-20</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.55899&mlon=-80.91375#map=18/43.55899/-80.91375" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>230 ONTARIO ROAD</td><td></td><td></td>
+          <td><span class="history"><span class="a">+ 2026-08-20</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46203&mlon=-81.18696#map=18/43.46203/-81.18696" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>693 CONNERS DRIVE UNIT A</td><td></td><td>UNIT A</td>
+          <td><span class="history"><span class="a">+ 2026-08-20</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72695&mlon=-80.96019#map=18/43.72695/-80.96019" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>693 CONNERS DRIVE UNIT B</td><td></td><td>UNIT B</td>
+          <td><span class="history"><span class="a">+ 2026-08-20</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72695&mlon=-80.96019#map=18/43.72695/-80.96019" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>695 CONNERS DRIVE UNIT A</td><td></td><td>UNIT A</td>
+          <td><span class="history"><span class="a">+ 2026-08-20</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72693&mlon=-80.96023#map=18/43.72693/-80.96023" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>695 CONNERS DRIVE UNIT B</td><td></td><td>UNIT B</td>
+          <td><span class="history"><span class="a">+ 2026-08-20</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.72693&mlon=-80.96023#map=18/43.72693/-80.96023" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6077 FRANK STREET</td><td></td><td></td>
+          <td><span class="history"><span class="a">+ 2026-08-20</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46233&mlon=-81.20990#map=18/43.46233/-81.20990" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6604 LINE 66</td><td></td><td></td>
+          <td><span class="history"><span class="a">+ 2026-08-20</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.60737&mlon=-81.00835#map=18/43.60737/-81.00835" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6675 PERTH LINE 86</td><td></td><td></td>
+          <td><span class="history"><span class="a">+ 2026-08-20</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.76225&mlon=-81.02848#map=18/43.76225/-81.02848" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>7003 RAYMOND DRIVE</td><td></td><td></td>
+          <td><span class="history"><span class="a">+ 2026-08-20</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.57220&mlon=-80.83251#map=18/43.57220/-80.83251" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>7568 ROAD 154</td><td></td><td></td>
+          <td><span class="history"><span class="a">+ 2026-08-20</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67611&mlon=-80.95483#map=18/43.67611/-80.95483" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Updated Addresses <span class="badge badge-yellow">18</span>
+      <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (Full_AddNum)</li><li>Unit (Unit)</li><li>Full address (Full_Add)</li><li>Coordinates (latitude, longitude)</li><li>Addtl_Loc</li><li>Inc_Muni</li><li>Property_Number</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>Latitude</li><li>Longitude</li></ul>
+      
+    </span>
+  </span></h2>
+    
+    
+    <table>
+      <thead><tr><th>Address</th><th>What Changed</th><th>Before</th><th></th><th>After</th><th>Map</th></tr></thead>
+      <tbody>
+        
+  <tr><td rowspan="1">137A PUGH STREET</td>
+    <td class="change-field">Property_Number</td>
+    <td class="old-val">311034000212023</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">311034000212098</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.55894&mlon=-80.91363#map=18/43.55894/-80.91363" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">137B PUGH STREET</td>
+    <td class="change-field">Property_Number</td>
+    <td class="old-val">311034000212023</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">311034000212098</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.55894&mlon=-80.91363#map=18/43.55894/-80.91363" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">2234 WILLIAM SHAKESPEARE STREET</td>
+    <td class="change-field">Property_Number</td>
+    <td class="old-val">311001000114810</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">311001000114819</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36911&mlon=-80.84114#map=18/43.36911/-80.84114" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">2235 WILLIAM SHAKESPEARE STREET</td>
+    <td class="change-field">Property_Number</td>
+    <td class="old-val">311001000114803</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">311001000114812</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36866&mlon=-80.84117#map=18/43.36866/-80.84117" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">2237 WILLIAM SHAKESPEARE STREET</td>
+    <td class="change-field">Property_Number</td>
+    <td class="old-val">311001000114804</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">311001000114813</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36865&mlon=-80.84136#map=18/43.36865/-80.84136" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">2238 WILLIAM SHAKESPEARE STREET</td>
+    <td class="change-field">Property_Number</td>
+    <td class="old-val">311001000114809</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">311001000114818</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36912&mlon=-80.84136#map=18/43.36912/-80.84136" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">2239 WILLIAM SHAKESPEARE STREET</td>
+    <td class="change-field">Property_Number</td>
+    <td class="old-val">311001000114804</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">311001000114813</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36866&mlon=-80.84146#map=18/43.36866/-80.84146" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">2241 WILLIAM SHAKESPEARE STREET</td>
+    <td class="change-field">Property_Number</td>
+    <td class="old-val">311001000114805</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">311001000114814</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36868&mlon=-80.84165#map=18/43.36868/-80.84165" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">2242 WILLIAM SHAKESPEARE STREET</td>
+    <td class="change-field">Property_Number</td>
+    <td class="old-val">311001000114808</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">311001000114817</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36912&mlon=-80.84169#map=18/43.36912/-80.84169" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">2243 WILLIAM SHAKESPEARE STREET</td>
+    <td class="change-field">Property_Number</td>
+    <td class="old-val">311001000114805</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">311001000114814</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36869&mlon=-80.84181#map=18/43.36869/-80.84181" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">2244 WILLIAM SHAKESPEARE STREET</td>
+    <td class="change-field">Property_Number</td>
+    <td class="old-val">311001000114807</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">311001000114816</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36903&mlon=-80.84212#map=18/43.36903/-80.84212" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">2245 WILLIAM SHAKESPEARE STREET</td>
+    <td class="change-field">Property_Number</td>
+    <td class="old-val">311001000114806</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">311001000114815</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36874&mlon=-80.84212#map=18/43.36874/-80.84212" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">2246 WILLIAM SHAKESPEARE STREET</td>
+    <td class="change-field">Property_Number</td>
+    <td class="old-val">311001000114807</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">311001000114816</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36896&mlon=-80.84212#map=18/43.36896/-80.84212" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">2247 WILLIAM SHAKESPEARE STREET</td>
+    <td class="change-field">Property_Number</td>
+    <td class="old-val">311001000114806</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">311001000114815</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36881&mlon=-80.84212#map=18/43.36881/-80.84212" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">3276 PERTH ROAD 130</td>
+    <td class="change-field">Property_Number</td>
+    <td class="old-val">312009000210702</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">312009000208800</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.34405&mlon=-81.09570#map=18/43.34405/-81.09570" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">4699 LINE 26</td>
+    <td class="change-field">Property_Number</td>
+    <td class="old-val">312009000208800</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">312009000208802</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.35773&mlon=-81.09782#map=18/43.35773/-81.09782" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">5211 LINE 71</td>
+    <td class="change-field">Property_Number</td>
+    <td class="old-val">314036000512600</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">314036000512602</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.61129&mlon=-80.96830#map=18/43.61129/-80.96830" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">6856 LINE 26</td>
+    <td class="change-field">Property_Number</td>
+    <td class="old-val">313021000601200</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">313021000601202</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45207&mlon=-81.30874#map=18/43.45207/-81.30874" target="_blank" rel="noopener">View ↗</a></td></tr>
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Renumbered Addresses <span class="badge badge-accent">0</span></h2>
+    
+    <p class="empty">No addresses renumbered.</p>
+  </div>
+
+  <div class="section">
+    <h2>Street Renames <span class="badge badge-purple">0</span></h2>
+    <p class="empty">No street renames.</p>
+  </div>
+
+  
+
+  
+
+  
+  <div class="section">
+    <h2>Boundary Changes <span class="badge badge-teal">0</span></h2>
+    <p class="empty">No ward or municipality reassignments.</p>
+  </div>
+  
+
+  <div class="section">
+    <h2>Location Adjustments <span class="badge" style="background: var(--surface2); color: var(--text-dim)">0</span></h2>
+    
+    <p class="empty">No location adjustments.</p>
+  </div>
+
+  <div class="generated-at">Report generated Sep 08, 2026 at 07:04 PM · source licence: None published (confirmed 2026-08-20)</div>
+
+  <script>
+    function sortTable(tbodyId, col) {
+      const tbody = document.getElementById(tbodyId);
+      if (!tbody) return;
+      const rows = Array.from(tbody.rows);
+      const dir = tbody.dataset.sortDir === 'asc' ? 'desc' : 'asc';
+      tbody.dataset.sortDir = dir;
+      rows.sort((a, b) => {
+        const av = a.cells[col]?.textContent.trim() || '';
+        const bv = b.cells[col]?.textContent.trim() || '';
+        const an = parseFloat(av), bn = parseFloat(bv);
+        if (!isNaN(an) && !isNaN(bn)) return dir === 'asc' ? an - bn : bn - an;
+        return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+      });
+      rows.forEach(r => tbody.appendChild(r));
+    }
+  </script>
+</body>
+
+</html>
