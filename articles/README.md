@@ -33,6 +33,12 @@ fortnight was never seen. August 2026 is still open.
 
 ## Writing the next one
 
+Normally nothing: from the 3rd of each month the `kk-ontario-article` scheduled task
+(`monthly-article.ps1`) writes the previous month unattended — both variants, the
+research notes and this table's row — and commits and pushes them. It waits a day
+whenever Toronto has an open flag inside the month. `logs/article-runs.csv` says what
+each day's run did. By hand, for an older month or another city:
+
 ```
 python tools/month_digest.py --city toronto --months              # which months qualify
 python run.py flags                                               # nothing open for the month?
