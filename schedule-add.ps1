@@ -1,6 +1,12 @@
-# Registers ONE scheduled task that runs daily-update.ps1 (parallel update of all
-# datasets, then commit + push docs). New cities in datasets\*.toml are picked up
-# automatically; no re-registration needed.
+# Registers two scheduled tasks:
+#   kk-ontario-update   daily 12:00  daily-update.ps1 (parallel update of all
+#                       datasets, then commit + push docs). New cities in
+#                       datasets\*.toml are picked up automatically.
+#   kk-ontario-article  daily 15:00  monthly-article.ps1 (from the 3rd of each
+#                       month, write the previous month's Toronto newsletter
+#                       piece with headless Claude, commit + push articles\).
+#                       Exits at once on every other day; 15:00 keeps it clear
+#                       of the noon run's git even after two retries.
 
 $projectDir = $PSScriptRoot
 $taskName   = "kk-ontario-update"
@@ -28,3 +34,24 @@ Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Se
 
 Write-Host ("Registered {0}: daily {1:HH:mm} via daily-update.ps1, log: {2}" -f $taskName, $runAt, $logFile)
 Write-Host "Retry: daily-update.ps1 itself reruns up to 3 attempts, 15 min apart, on failure."
+
+# The article writer. Long limit: two headless Claude phases with web research
+# can take an hour or more. No RestartCount: a failed phase is retried by the
+# next day's run, which resumes from whichever article files are missing.
+$articleTask  = "kk-ontario-article"
+$articleAt    = Get-Date "15:00"
+$articleLog   = "$projectDir\logs\article.log"
+
+$articleAction = New-ScheduledTaskAction `
+    -Execute "powershell.exe" `
+    -Argument "-NoProfile -ExecutionPolicy Bypass -File `"$projectDir\monthly-article.ps1`""
+
+$articleTrigger = New-ScheduledTaskTrigger -Daily -At $articleAt
+
+$articleSettings = New-ScheduledTaskSettingsSet `
+    -ExecutionTimeLimit (New-TimeSpan -Hours 4) `
+    -StartWhenAvailable
+
+Register-ScheduledTask -TaskName $articleTask -Action $articleAction -Trigger $articleTrigger -Settings $articleSettings -Force | Out-Null
+
+Write-Host ("Registered {0}: daily {1:HH:mm} via monthly-article.ps1 (acts from the 3rd), log: {2}" -f $articleTask, $articleAt, $articleLog)

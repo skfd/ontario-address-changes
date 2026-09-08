@@ -72,7 +72,22 @@ each — `<slug>-<YYYY-MM>.md`, Markdown that pastes into Substack unchanged. Se
    link the day's report on the live site, so a reader can check any claim. Attribution
    travels with the content to every venue it is cross-posted to.
 
+8b. **Index it.** Add the month's row to the table in `articles/README.md` — net
+   count and the lead of each variant, matching the rows above it.
+
 9. **Commit.** One commit per article batch.
+
+## The scheduled run
+
+Since 2026-09-08 the previous month is written unattended: the `kk-ontario-article`
+task runs `monthly-article.ps1` daily at 15:00, which does nothing before the 3rd,
+asks `tools/article_due.py` whether the month is complete, unflagged and unwritten,
+then runs this skill headlessly in two phases (offline variant; research + researched
+variant + README row) and commits and pushes `articles/`. A month held by an open
+Toronto flag logs `WAITING` and is retried the next day; a phase that dies leaves its
+files and the next day resumes from whatever is missing. `logs/article.log` and
+`logs/article-runs.csv` hold the outcome. Months older than the previous one, and
+other cities, are still written by hand with the loop above.
 
 ## Numbers: net vs gross
 
