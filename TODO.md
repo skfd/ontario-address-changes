@@ -572,6 +572,25 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
   59,159 → 59,121 → 58,809, i.e. −353 net with the big step −312 on 07-24. Pulls
   still succeed daily — the publisher went quiet, we didn't.)
 
+- [ ] **Daily run: the site render repeats on every retry attempt — decide between three
+  fixes (found 2026-09-08).** Simcoe answered 503 on all three attempts that day; the
+  cities themselves cost 13 min on attempt 1 (Ottawa the long pole) and ~1 min on the
+  retries (short-circuit works), but `run.py update --all` re-renders all 890 report pages
+  for 53 datasets after *each* attempt (23 min, then 36 min), so attempt 3 was killed
+  mid-render by the task's 2 h `ExecutionTimeLimit` at 14:00: no END line, no commit, site
+  a day stale. Nineteen of the last thirty runs finish by 12:36; only a persistently-down
+  city produces this. Options, not yet chosen:
+  1. **Render once, after the retry loop** (recommended): pass `--no-report` to each
+     attempt in `daily-update.ps1`, then one `python run.py report --all` before the
+     commit. A three-attempt day drops from 2 h+ to ~75 min; normal days unchanged.
+  2. **Raise the limit to 3 h** in `schedule-add.ps1` as a backstop, since a killed run
+     leaves no END line for progress.ps1 and no commit. Keep it clear of the 15:00
+     `kk-ontario-article` slot (that task waits while `daily-update.ps1` is alive).
+  3. **Make the render incremental** — 30 min to rewrite every historical page daily
+     grows with history; rendering only pages whose content changed would be seconds on
+     most days. Bigger change (pages re-stamp their generated time by design, see the
+     2026-06-11 "commit every day" decision); its own session.
+
 ## 5. Hand to coding agent when convenient
 
 Code fixes found during the audits. Every one of them changes payload hashes → a
