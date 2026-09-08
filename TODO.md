@@ -582,9 +582,17 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
   once, after the retry loop -- each attempt in `daily-update.ps1` now passes
   `--no-report`, then one `python run.py report --all` (logged as a `RENDER` line, so
   progress.ps1 shows "Rendering site") runs before the vault report and the commit. A
-  three-attempt day drops from 2 h+ to ~80 min; normal days are unchanged. The 3 h limit
-  was not raised: worst case (13 min cities + 2 x 15 min retry sleeps + 36 min render)
-  stays inside 2 h, and a longer window would only crowd the 15:00 article task. The
+  three-attempt day drops from 2 h+ to ~80 min; normal days are unchanged. Verified the
+  same evening with a manual `Start-ScheduledTask` run, simcoe still 503: attempts
+  2 + 2 + 9 min, one 34 min render, commit + push, `END exit=1 attempts=3`. The 3 h limit
+  was not raised: with a city that *answers* (even with a 503), the worst case (13 min
+  cities + 2 x 15 min retry sleeps + 36 min render) stays inside 2 h, and a longer window
+  would only crowd the 15:00 article task. Still open, and not covered by this fix: a
+  city that *hangs* instead. The arcgis fetcher retries connection errors and timeouts
+  itself (`RETRIES = 3`, `RETRY_WAIT = 900` in address-vault), so a hanging source costs
+  ~50 min per attempt before the outer loop even retries; two such attempts plus one
+  15 min sleep already pass 2 h with no render at all. Either cap the fetcher's total
+  retry budget per attempt or raise the limit -- decide when it first happens. The
   incremental render (rendering only pages whose content changed) remains a separate
   idea -- 30 min of daily rewriting grows with history -- but nothing forces it now.
 
