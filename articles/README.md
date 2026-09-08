@@ -24,12 +24,13 @@ This is a live comparison. One variant may be dropped after review; dropping it 
 | 2026-05 | +19 | Chloe Cooley St debuts, reserved | By-law 182-2026 names it; the City's own report repeats the wrong enslaver's name from a 2007 plaque |
 | 2026-06 | +15 | An address for an unbuilt station entrance | …under a name Metrolinx has since dropped; and Hamilton publishes the `R`-suffix and half-number rules Toronto doesn't |
 | 2026-07 | +12 | Crosstown West gets its addresses | Those nine addresses are a **contract's parts list**; and the park "renamings" are restorations of decisions up to ten years old |
+| 2026-08 | +7 | Twelve retirements that are still on file: the file swapping which record it keeps for an address | The swapped addresses are buildings the City dated years ago (Yonge/Glebe rezoned **2010**, Hullmark Centre, Alter); a park council renamed on 30 July reached the file in **20 days**; a 2023 permit named 530 Duplex Ave before the file did |
 
-The researched versions lead on something else in four months out of five — which is
+The researched versions lead on something else in five months out of six — which is
 most of what this comparison was set up to find out.
 
 February 2026 is deliberately absent: observation starts 2026-02-12, so its first
-fortnight was never seen. August 2026 is still open.
+fortnight was never seen. September 2026 is still open.
 
 ## Writing the next one
 
