@@ -71,6 +71,29 @@ Set-Content $logFile $startLine
 Write-Host $startLine
 $runStart = Get-Date
 
+# Retry budget. The task's ExecutionTimeLimit (3 h, schedule-add.ps1) is the
+# backstop; this gate keeps the run well inside it so the site is always
+# rendered and published. A city that hangs instead of answering is the case:
+# the arcgis fetcher waits out F5-style blocks itself (3 x 15 min, resuming
+# from the last OID -- worth keeping, the outer loop can't resume), so one
+# attempt can cost ~55 min. Before sleeping for another attempt, ask whether
+# the run could still finish: elapsed + sleep + an attempt as long as the
+# LONGEST one so far + the render (34-36 min at 890 pages in 2026-09, grows
+# with history) + vault report and git. If not, stop retrying and go render:
+# the failed city gets a red day and tomorrow's run, instead of the kill that
+# took the whole site with it (2026-09-08). Longest, not last: a slow first
+# attempt followed by a 2 min retry must not talk the gate into a third that
+# hangs. 130 lets a legitimately slow 31 min first attempt still retry, and
+# the worst sequence the gate can be fooled into (13 + 20 min attempts, then
+# a 60 min hang) still ends ~170 min, inside the backstop.
+$budgetMinutes = 130
+$retrySleepMinutes = 15
+$renderMinutes = 45
+
+function Test-RetryBudget([double]$elapsedMin, [double]$longestAttemptMin) {
+    return ($elapsedMin + $retrySleepMinutes + $longestAttemptMin + $renderMinutes) -le $budgetMinutes
+}
+
 # Retry here, not in Task Scheduler: RestartCount never fires on a nonzero
 # exit code (it only covers launch failures). Reruns are cheap because
 # already-updated cities short-circuit (cached download + already-imported)
@@ -81,10 +104,11 @@ $runStart = Get-Date
 $updateExit = 1
 $ranUpdate  = $false
 $skipReason = 'offline'
+$longestMin = 0
 foreach ($attempt in 1..3) {
     if ($attempt -gt 1) {
         Log "RETRY attempt $attempt $(Get-Date -Format o)"
-        Start-Sleep -Seconds 900
+        Start-Sleep -Seconds (60 * $retrySleepMinutes)
     }
     # No internet is handled like the laptop being off: skip the attempt
     # instead of letting every city fail and be recorded as a run failure.
@@ -101,10 +125,18 @@ foreach ($attempt in 1..3) {
         $skipReason = 'metered'
         continue
     }
+    $attemptStart = Get-Date
     Invoke-Logged "python run.py update --all --jobs 6 --no-report"
     $updateExit = $LASTEXITCODE
     $ranUpdate  = $true
     if ($updateExit -eq 0) { break }
+    # Checked here, at the bottom, so $attempt still counts attempts that ran.
+    $elapsedMin = ((Get-Date) - $runStart).TotalMinutes
+    $longestMin = [math]::Max($longestMin, ((Get-Date) - $attemptStart).TotalMinutes)
+    if ($attempt -lt 3 -and -not (Test-RetryBudget $elapsedMin $longestMin)) {
+        Log ("NO-RETRY $(Get-Date -Format o) elapsed={0:0}m longest={1:0}m budget={2}m" -f $elapsedMin, $longestMin, $budgetMinutes)
+        break
+    }
 }
 
 # A failed run on a machine that is (or went) offline/metered is not "FAILED":

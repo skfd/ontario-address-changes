@@ -24,8 +24,11 @@ $trigger = New-ScheduledTaskTrigger -Daily -At $runAt
 # RestartCount does NOT fire on a nonzero exit code (only on launch failures) --
 # observed 2026-07-16, when an all-cities failure never retried. daily-update.ps1
 # retries failed runs itself; RestartCount stays only to cover launch failures.
+# 3 h is a backstop: daily-update.ps1 budgets its own retries to finish inside
+# ~2 h (a killed run leaves no END line and no commit, 2026-09-08), and the
+# 15:00 article task waits up to 90 min for a live update anyway.
 $settings = New-ScheduledTaskSettingsSet `
-    -ExecutionTimeLimit (New-TimeSpan -Hours 2) `
+    -ExecutionTimeLimit (New-TimeSpan -Hours 3) `
     -StartWhenAvailable `
     -RestartCount 3 `
     -RestartInterval (New-TimeSpan -Minutes 30)

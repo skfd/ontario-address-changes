@@ -587,12 +587,15 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
   2 + 2 + 9 min, one 34 min render, commit + push, `END exit=1 attempts=3`. The 3 h limit
   was not raised: with a city that *answers* (even with a 503), the worst case (13 min
   cities + 2 x 15 min retry sleeps + 36 min render) stays inside 2 h, and a longer window
-  would only crowd the 15:00 article task. Still open, and not covered by this fix: a
-  city that *hangs* instead. The arcgis fetcher retries connection errors and timeouts
-  itself (`RETRIES = 3`, `RETRY_WAIT = 900` in address-vault), so a hanging source costs
-  ~50 min per attempt before the outer loop even retries; two such attempts plus one
-  15 min sleep already pass 2 h with no render at all. Either cap the fetcher's total
-  retry budget per attempt or raise the limit -- decide when it first happens. The
+  would only crowd the 15:00 article task. A city that *hangs* instead was not covered
+  by that alone: the arcgis fetcher retries connection errors and timeouts itself
+  (`RETRIES = 3`, `RETRY_WAIT = 900` in address-vault, resuming from the last OID --
+  kept, the outer loop cannot resume), so a hanging source costs ~55 min per attempt
+  before the outer loop even retries. Closed 2026-09-09: `daily-update.ps1` now skips a
+  retry (`NO-RETRY` line) when elapsed + 15 min sleep + an attempt as long as the longest
+  so far + 45 min render would pass 130 min, so the render always runs; and the task
+  limit was raised to 3 h as a backstop (the 15:00 article task waits up to 90 min for a
+  live update, so a late finish costs it nothing). The
   incremental render (rendering only pages whose content changed) remains a separate
   idea -- 30 min of daily rewriting grows with history -- but nothing forces it now.
 

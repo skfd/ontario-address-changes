@@ -124,7 +124,11 @@ onboarding reference documents the full procedure).
 `daily-update.ps1` pulls every city (`update --all --jobs 6 --no-report`, up to
 three attempts 15 min apart), then renders the site once (`report --all`, about
 30 min for the full history of 53 datasets) before committing and pushing
-`docs\`. After the update, it also regenerates the address-vault status page
+`docs\`. A retry is skipped (`NO-RETRY` log line) when elapsed time plus another
+attempt as long as the longest so far plus the render would pass ~130 min, so a
+city that hangs costs its own red day rather than the whole site; the task's
+3 h `ExecutionTimeLimit` is only a backstop. After the update, it also
+regenerates the address-vault status page
 (`addressvault report` → `<ADDRESSVAULT_DIR>\report.html`) — a local file about
 the vault, not part of the published site. It runs on every outcome, including
 offline/metered ones, since it reads only the catalog and disk; if it fails the
