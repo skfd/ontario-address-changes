@@ -46,7 +46,7 @@ def rows_for(ds, where, params):
     return rows
 
 
-def near(ds, conn, lat0, lon0, last_id, limit=12):
+def near(ds, conn, lat0, lon0, last_id, street=None, limit=12):
     """Nearest active address on each *other* street, closest first.
 
     Answers "where is this, actually" without leaving the store. A new street has
@@ -68,7 +68,9 @@ def near(ds, conn, lat0, lon0, last_id, limit=12):
         out.append((math.hypot((r["longitude"] - lon0) * 111_320 * math.cos(mid),
                                (r["latitude"] - lat0) * 111_320), r))
     out.sort(key=lambda x: x[0])
-    seen, rows = set(), []
+    # The anchor's own street is not a neighbour: without this the first hit
+    # was always the anchor itself at 0 m.
+    seen, rows = {street}, []
     for d, r in out:
         if r["street"] in seen:
             continue
@@ -94,12 +96,17 @@ def main():
 
     ds = registry.load(a.city)
     dates = _dates(ds)
-    last_id = max(dates) if dates else 0
+    # "Active" means alive in the latest NON-skipped snapshot. A skipped pull
+    # (same content as the day before) records a snapshot row but no address
+    # rows, so keying on max(dates) made every address look retired whenever
+    # the newest pulls were duplicates (toronto, 2026-09-08).
+    live = diff.nonskipped(ds)
+    last_id = live[-1]["id"] if live else 0
 
     if a.near:
         conn = db.init_db(ds)
         anchor = conn.execute(
-            "SELECT full, latitude, longitude FROM addresses WHERE full = ? "
+            "SELECT full, street, latitude, longitude FROM addresses WHERE full = ? "
             "AND min_snapshot_id <= ? AND max_snapshot_id >= ? LIMIT 1",
             (a.near, last_id, last_id)).fetchone()
         if not anchor:
@@ -107,7 +114,8 @@ def main():
             raise SystemExit(f"no active address {a.near!r} in {ds.slug}")
         sys.stdout.reconfigure(encoding="utf-8")
         print(f"{anchor['full']}  ({anchor['latitude']}, {anchor['longitude']})\n")
-        for d, full in near(ds, conn, anchor["latitude"], anchor["longitude"], last_id):
+        for d, full in near(ds, conn, anchor["latitude"], anchor["longitude"], last_id,
+                            street=anchor["street"]):
             print(f"  {d:>5} m  {full}")
         conn.close()
         return
