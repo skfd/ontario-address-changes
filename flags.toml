@@ -1126,7 +1126,11 @@ fields = ["ARN"]
 scope = "289 rows changed the same field set [ARN] (100% of the day's 289 modifications)"
 detail = "top: '43160100502268822819' -> '43160100502260122821' (132), '43160100502010120185' -> '43160100502010120273' (85), '43160100502093520970' -> '43160100502090120972' (36)"
 detected = "2026-09-04"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-09-10"
+rule = "datasets/simcoe.toml: ignore_fields += ARN (in place since the 2026-08-26/28 review; backfill --reapply-ignore already applied, dry-run rewrites 0 rows)"
+note = "289 rows, 100% of the day's modifications, changed only ARN (assessment roll number): three roll blocks of 132/85/36 rows re-linked, reversing the 08-26 and 08-28 flips exactly. Same parcel-join flapping already ruled technical on 08-26 and 08-28; no address changed. Covered by the existing rule, nothing new to apply."
 
 [[flag]]
 slug = "brampton"
@@ -1136,7 +1140,11 @@ fields = ["REG_PLAN_NUMBER"]
 scope = "61 rows changed the same field set [REG_PLAN_NUMBER] (100% of the day's 61 modifications)"
 detail = "top: '21T-19015B' -> '43M-2196' (61)"
 detected = "2026-09-09"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-09-10"
+rule = "datasets/brampton.toml: ignore_fields += REG_PLAN_NUMBER (in place since the 2026-09-02 review; backfill --reapply-ignore already applied, dry-run rewrites 0 rows)"
+note = "61 rows, 100% of the day's modifications, changed only REG_PLAN_NUMBER: the same 61 Boundary Creek Path / Brasstown Valley Trail points that got 21T-19015B on 09-02 flipped to the registered plan 43M-2196. Planning metadata on the points, no address changed. Covered by the existing rule, nothing new to apply."
 
 [[flag]]
 slug = "milton"
