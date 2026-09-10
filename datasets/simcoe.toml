@@ -29,7 +29,18 @@ osm_compatible = "yellow-review"
 # Faithful UTM 17N copies of the point geometry, already tracked as coordinates. The one
 # allowed day-one ignore: house precedent is 11-of-11 tracked cities' coordinate-duplicate
 # pairs ignored — they only ever mask real moves or manufacture phantom ones.
-ignore_fields = ["X_COORD", "Y_COORD"]
+ignore_fields = [
+  "X_COORD", "Y_COORD",
+  # Assessment roll number. The county's parcel join flips it back and forth for
+  # whole condo blocks and lot runs: 2026-08-26 (90 rows), 2026-08-28 (395, incl.
+  # the exact reversal of 08-26) and 2026-09-04 (289, the exact reversal of 08-28)
+  # were 100% ARN and nothing else. A tax-roll link, not an address property.
+  "ARN",
+]
+
+# Ignored for change detection but still written to props: the roll number is
+# the only link to the tax roll (renfrew RollNumber precedent).
+keep_fields = ["ARN"]
 
 [identity]
 # ADDRESSID (integer): 0 null, 0 <= 0, 0 duplicated values across all 190,207 rows

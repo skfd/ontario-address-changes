@@ -1040,7 +1040,11 @@ fields = ["ARN"]
 scope = "90 rows changed the same field set [ARN] (86% of the day's 105 modifications)"
 detail = "top: '43160100502090120972' -> '43160100502090220972' (71), '431601005022600' -> '43160100502090123020' (1), '43160100502090120972' -> '43160100502090123020' (1)"
 detected = "2026-08-26"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-09-09"
+rule = "datasets/simcoe.toml: ignore_fields += ARN, keep_fields = [ARN]; backfill_props_hash.py --reapply-ignore --city simcoe run 2026-09-09 (191,005 rows, store backed up first)"
+note = "90 rows changed only ARN (assessment roll number): 289 Broward Way units 73-82+ and a run of 13th Line lots re-linked to a new roll, then re-linked again on 08-28 and reversed on 09-04. The county's parcel join flapping, not an address change; a tax-roll link is not an address property. 2026-09-04 is the same signature and is covered by this rule."
 
 [[flag]]
 slug = "renfrew"
@@ -1048,7 +1052,11 @@ date = "2026-08-28"
 signature = "mass-added"
 scope = "6,269 added in one day (16.1% of 39,050)"
 detected = "2026-08-28"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-09-09"
+rule = "no config lever for feed coverage growth; the county NENA layer is still populating municipality by municipality (Deep River, Head Clara & Maria and Pembroke still absent or near-empty on 08-28) - expect the rest to land the same way and file them technical; publish_reports = false, so nothing public was at stake"
+note = "6,269 adds = two member municipalities landing in the county layer: Laurentian Valley 0 -> 4,159 rows and Killaloe-Hagarty-Richards 14 -> 1,886 (96% of the adds); the remainder spread thinly over 346 streets, 67 already existed. Feed coverage expansion, not construction; the 06-13 mass-add was the same layer backfill."
 
 [[flag]]
 slug = "simcoe"
@@ -1058,7 +1066,11 @@ fields = ["ARN"]
 scope = "395 rows changed the same field set [ARN] (100% of the day's 395 modifications)"
 detail = "top: '43160100502260122821' -> '43160100502268822819' (132), '43160100502010120273' -> '43160100502018620273' (88), '43160100502010120273' -> '43160100502010120185' (85)"
 detected = "2026-08-28"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-09-09"
+rule = "datasets/simcoe.toml: ignore_fields += ARN, keep_fields = [ARN]; backfill_props_hash.py --reapply-ignore --city simcoe run 2026-09-09 (191,005 rows, store backed up first)"
+note = "395 rows, 100% of the day's modifications, changed only ARN (assessment roll number): five roll blocks of 33-132 rows each (condo units at 289 Broward Way, lot runs on 13th Line and two other parcels) re-linked, several undoing 08-26 exactly, and all five reversed again on 09-04. The county's parcel join flapping, not an address change. 2026-09-04 is the same signature and is covered by this rule."
 
 [[flag]]
 slug = "muskoka"
