@@ -14,9 +14,11 @@ location_min_move_m = 25
 # Planning/permit metadata joined onto address points; it churns on its own
 # schedule and oscillates (C_OF_A flipped A-2022-0345<->0346 on 292 rows in each
 # direction twice over July-August 2026). None of it says anything about the
-# address itself (flags 2026-06-20..08-16).
+# address itself (flags 2026-06-20..08-16). REG_PLAN_NUMBER is the registered
+# sibling of DRAFT_PLAN_NUMBER: a subdivision's 61 points got the draft number
+# on 2026-09-02 and the registered one on 09-09 (flags 2026-09-02, 09-09).
 ignore_fields = [
-  "C_OF_A", "CITY_FILE", "DRAFT_PLAN_NUMBER", "CONDO_PLAN_NUMBER",
+  "C_OF_A", "CITY_FILE", "DRAFT_PLAN_NUMBER", "REG_PLAN_NUMBER", "CONDO_PLAN_NUMBER",
   "PERMIT_ISSUEDATE", "PERMIT_NO", "PERMIT_TYPE", "SUB_TYPE", "WORK_TYPE",
   "OCCUPANCY_DATE",
 ]

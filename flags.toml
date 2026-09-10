@@ -1089,7 +1089,11 @@ fields = ["ADDID_TEXT"]
 scope = "53,846 rows changed the same field set [ADDID_TEXT] (100% of the day's 53,846 modifications)"
 detail = "top: None -> '6670' (1), None -> '29372' (1), None -> '12040' (1)"
 detected = "2026-08-30"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-09-10"
+rule = "datasets/guelph.toml: ignore_fields += ADDID_TEXT; backfill_props_hash --reapply-ignore --city guelph (271,262 rows, dry-run clean)"
+note = "ADDID_TEXT appeared on all 53,846 rows (None -> text copy of the ADDID key), 0 addresses added or rewritten. The source published a widened field set for one day (vault: +ADDID_TEXT, +GlobalID, +ROOM, +SEAT, +created/last_edited audit fields); GlobalID and the audit fields are already stripped globally, so ADDID_TEXT is the one that flagged."
 
 [[flag]]
 slug = "brampton"
@@ -1099,7 +1103,11 @@ fields = ["REG_PLAN_NUMBER"]
 scope = "61 rows changed the same field set [REG_PLAN_NUMBER] (98% of the day's 62 modifications)"
 detail = "top: None -> '21T-19015B' (61)"
 detected = "2026-09-02"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-09-10"
+rule = "datasets/brampton.toml: ignore_fields += REG_PLAN_NUMBER; backfill_props_hash --reapply-ignore --city brampton (236,781 rows, dry-run clean)"
+note = "61 rows in one new subdivision (Boundary Creek Path / Brasstown Valley Trail) got REG_PLAN_NUMBER None -> 21T-19015B; the same 61 flipped to the registered 43M-2196 on 09-09. Planning metadata joined onto the points, sibling of the already-ignored DRAFT_PLAN_NUMBER; no address changed. The 09-09 flag is covered by the same rule."
 
 [[flag]]
 slug = "milton"
