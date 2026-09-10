@@ -23,6 +23,7 @@ rewrites an existing entry.
 
 import json
 import os
+import re
 import tomllib
 from collections import Counter
 from datetime import datetime
@@ -225,6 +226,62 @@ def stamp(flags_out, slug, date):
         fl["date"] = date
         fl["detected"] = today
     return flags_out
+
+
+def review(slug, date, verdict, note, rule="", reviewed=None, path=LEDGER_PATH):
+    """File a verdict on every OPEN entry for ``slug``/``date``, editing the
+    ledger in place and touching nothing else in the file.
+
+    The ledger is hand-readable history, so this is a text edit, not a
+    re-serialisation: each ``[[flag]]`` block is located by parsing it alone,
+    and only its ``status = "open"`` line is replaced, by the review fields in
+    the order the header documents. Already-reviewed entries are left as they
+    are (never rewrite a verdict from code; a person reopens by hand), and a
+    day with no open entry raises -- filing against a quiet day is a typo, not
+    an intent. Returns the keys of the entries it closed.
+    """
+    if verdict not in VERDICTS:
+        raise ValueError(f"verdict must be one of {VERDICTS}, not {verdict!r}")
+    note = " ".join(str(note or "").split())
+    if not note:
+        raise ValueError("a verdict needs a note: one line of evidence")
+    if verdict != "business" and not str(rule or "").strip():
+        raise ValueError(f"a {verdict} verdict needs a rule that stops the recurrence")
+    reviewed = reviewed or datetime.now().strftime("%Y-%m-%d")
+
+    with open(path, "r", encoding="utf-8", newline="") as f:
+        text = f.read()
+    # Split keeping the separators, so the file reassembles byte-for-byte.
+    parts = re.split(r"(?m)^(\[\[flag\]\][ \t]*\r?\n)", text)
+    closed = []
+    for i in range(1, len(parts), 2):
+        header, body = parts[i], parts[i + 1]
+        try:
+            entry = tomllib.loads(body)
+        except tomllib.TOMLDecodeError:
+            continue
+        if entry.get("slug") != slug or entry.get("date") != date:
+            continue
+        if entry.get("status", "open") == "reviewed":
+            continue
+        m = re.search(r'(?m)^status[ \t]*=[ \t]*"open"[ \t]*$', body)
+        if not m:
+            continue
+        nl = "\r\n" if "\r\n" in body else "\n"
+        fields = nl.join([
+            'status = "reviewed"',
+            f"verdict = {_toml_str(verdict)}",
+            f"reviewed = {_toml_str(reviewed)}",
+            f"rule = {_toml_str(' '.join(str(rule or '').split()))}",
+            f"note = {_toml_str(note)}",
+        ])
+        parts[i + 1] = body[:m.start()] + fields + body[m.end():]
+        closed.append(flag_key(entry))
+    if not closed:
+        raise LookupError(f"no open flag for {slug} {date}; nothing to file")
+    with open(path, "w", encoding="utf-8", newline="") as f:
+        f.write("".join(parts))
+    return closed
 
 
 # ---- holds ----

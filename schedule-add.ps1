@@ -55,3 +55,28 @@ $articleSettings = New-ScheduledTaskSettingsSet `
 Register-ScheduledTask -TaskName $articleTask -Action $articleAction -Trigger $articleTrigger -Settings $articleSettings -Force | Out-Null
 
 Write-Host ("Registered {0}: daily {1:HH:mm} via monthly-article.ps1 (acts from the 3rd), log: {2}" -f $articleTask, $articleAt, $articleLog)
+
+# The flag review. Hourly through the evening, when the operator is actually
+# answering issues: 18:00, 19:00, 20:00, 21:00, 22:00. Nothing before the noon
+# run has had its retries, nothing in the 23:00-06:00 quiet hours. Short limit:
+# a pass is a few gh calls plus, at most, one headless Claude triage.
+$flagsTask = "kk-ontario-flags"
+$flagsAt   = Get-Date "18:00"
+$flagsLog  = "$projectDir\logs\flags-review.log"
+
+$flagsAction = New-ScheduledTaskAction `
+    -Execute "powershell.exe" `
+    -Argument "-NoProfile -ExecutionPolicy Bypass -File `"$projectDir\review-flags.ps1`""
+
+$flagsTrigger = New-ScheduledTaskTrigger -Daily -At $flagsAt
+$flagsTrigger.Repetition = (New-ScheduledTaskTrigger -Once -At $flagsAt `
+    -RepetitionInterval (New-TimeSpan -Hours 1) `
+    -RepetitionDuration (New-TimeSpan -Hours 4 -Minutes 30)).Repetition
+
+$flagsSettings = New-ScheduledTaskSettingsSet `
+    -ExecutionTimeLimit (New-TimeSpan -Minutes 50) `
+    -StartWhenAvailable
+
+Register-ScheduledTask -TaskName $flagsTask -Action $flagsAction -Trigger $flagsTrigger -Settings $flagsSettings -Force | Out-Null
+
+Write-Host ("Registered {0}: hourly 18:00-22:00 via review-flags.ps1, log: {1}" -f $flagsTask, $flagsLog)

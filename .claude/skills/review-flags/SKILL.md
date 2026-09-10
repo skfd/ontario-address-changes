@@ -80,7 +80,35 @@ the same flag recurring is an unfinished review.
    together, one commit per review session, message like
    `Review flags: brant 2026-06-17 technical (STREET_TYPE restyle)`.
 
+## The GitHub queue
+
+Every open flag-day is also a GitHub issue (label `flag`) on
+skfd/ontario-address-changes, opened by `tools/flag_issues.py open` with the
+brief inside it, so the operator can review from a phone. The hourly task
+`review-flags.ps1` (18:00-22:00) runs `open`, files the operator's comments
+(`apply`), launches this skill headless for what is left (`inbox`), then
+`publish` renders, commits, pushes and closes what is answered.
+
+When you are working the inbox, **file through the tool, not by hand**:
+
+```
+python tools/flag_issues.py inbox                 # what is waiting, and why
+python tools/flag_issues.py file <n> --verdict technical --rule "..." --note "..."
+python tools/flag_issues.py file <n> --verdict bug --rule "..." --note "..." --vault artifact
+python tools/flag_issues.py propose <n> --verdict business --note "evidence; what would settle it"
+```
+
+`file` edits flags.toml in place (step 4), calls `addressvault review` for
+`--vault`, posts what it did on the issue and relabels it. It refuses
+`business` and vault `real` unless `--from-comment <id>` names the owner's
+comment saying so: those two verdicts publish a claim, and they are the
+operator's. When the operator has ruled `technical`/`bug` on the issue, the
+inbox item carries their note and `comment_id`; make the rule real (step 5)
+and file with `--from-comment`. In headless mode skip steps 6-7: the wrapper
+renders, commits and closes.
+
 ## Hard rules
+
 
 - Never delete or rewrite a ledger entry's identity fields; reviewed history
   is the calibration record for the signatures.

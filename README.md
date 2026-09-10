@@ -53,6 +53,11 @@ of many datasets. Adding a city is a config file, not code.
   verdict — `business` publishes it, `technical`/`bug` hold it forever with a
   rule that stops the recurrence. `python run.py flags` lists the open queue;
   `logs/flags.html` is its human view (back-office only, never published).
+  Each open flag-day is also a **GitHub issue** (label `flag`), brief
+  included, so it can be reviewed from a phone: comment `business`, `technical`,
+  `bug` or `hold` and a note, and the hourly evening task files it, re-renders,
+  pushes and replies with the commit (`tools/flag_issues.py`, `review-flags.ps1`).
+  Claude triages the plainly technical ones itself; `business` is the owner's.
 
 ## Identity (the important part)
 
@@ -84,6 +89,7 @@ python run.py update --city ottawa  # fetch -> import -> diff for one dataset
 python run.py update --all          # all datasets (per-city failures isolated)
 python run.py report --all          # (re)render HTML reports
 python run.py flags                 # list change events held pending review
+python tools/flag_issues.py open    # mirror them to GitHub issues (the hourly task does this)
 ```
 
 `download`, `import`, and `diff` are also available as individual steps.
