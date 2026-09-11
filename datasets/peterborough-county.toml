@@ -31,6 +31,10 @@ full   = "FULLADDR"
 # accounted for). 54 of 40,532 ADDRNUM values carry a hyphen; ~31 of those are
 # "<number>-<unit>" (1579-1 .. 1579-18, one building) and the rest are ranges. 0.08% —
 # noted rather than parsed, cf. brantford where the same pattern covers 5.7%.
+# 2026-09-09: the source added a UnitID field (vault fields test, filed schema). Populated on
+# 4 of 40,546 rows (36/38 King Street E units 1-2, Cavan Monaghan; FULLADDR already carried
+# "UNIT n"). Tracked via the props blob; not mapped to `unit` until it is populated more
+# widely -- a city-tune call, not a triage one.
 
 # Change classes (field values verified against the latest snapshot): a
 # modification touching only these fields is reported in its humanized section

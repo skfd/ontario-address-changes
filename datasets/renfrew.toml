@@ -56,6 +56,14 @@ ignore_fields = [
   # (Bldg -> Building/None, Trlr -> Trailer/None on 1,854 rows); styling of the
   # unit the canonical field already tracks.
   "UnitPreTyp",
+  # NENA "complete address number": a composite the canonical fields already cover. It
+  # equalled Add_Number [+ " " + AddNum_Suf] on 45,259 of 45,271 rows on 2026-08-28; on
+  # 2026-09-10 the county began writing the unit label into it too ('259 102' ->
+  # '259 Suite 102', 184 rows in 12 buildings, with the misplaced unit number cleared out
+  # of AddNum_Suf), and 51 more unit rows still await the same restyle. Add_Number and
+  # Unit carry the real components; AddNum_Suf stays tracked (2,417 letter suffixes A/B/C
+  # are real address data).
+  "AddNum_Cmp",
 ]
 
 # Ignored for change detection (above) but still written to props: the roll number is the

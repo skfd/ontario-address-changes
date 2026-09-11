@@ -1170,7 +1170,11 @@ date = "2026-09-10"
 signature = "mass-added"
 scope = "1,653 added in one day (3.7% of 45,271)"
 detected = "2026-09-10"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-09-10"
+rule = "datasets/renfrew.toml: ignore_fields += AddNum_Cmp (composite of Add_Number+AddNum_Suf+unit label the canonical fields already track; equalled them on 45,259/45,271 rows); backfill_props_hash --reapply-ignore --city renfrew run, 53,892 rows, verified 0 left; AddNum_Suf stays tracked; canonical full has no lever (06-13 precedent); coverage growth has no config lever, file the remaining munis (Deep River, Head Clara & Maria, Pembroke) technical the same way"
+note = "mass-added: 1,653 adds = Laurentian Hills landing in the county layer, 0 -> 1,498 rows (91%; 84 of them address text already present under another muni), exactly the municipality-by-municipality population the 08-28 rule predicted; 65 removed, identity is geometry-synthesized so no point moved. The other 155 adds (Arnprior John/Winston St ~70, possibly real construction) ride under this hold; publish_reports = false so nothing public is at stake. mass-modified [AddNum_Cmp, AddNum_Suf, full]: 182 of 184 rows value-preserving - the county now writes the unit label into AddNum_Cmp ('259 102' -> '259 Suite 102', 12 buildings) and clears the misplaced unit number out of AddNum_Suf (2,417 letter suffixes A/B/C untouched); the 2 others are full recomposed from components (Add_Number/Unit unchanged). Feed restyle, no address changed."
 
 [[flag]]
 slug = "renfrew"
@@ -1179,5 +1183,22 @@ signature = "mass-modified"
 fields = ["AddNum_Cmp", "AddNum_Suf", "full"]
 scope = "184 rows changed the same field set [AddNum_Cmp, AddNum_Suf, full] (76% of the day's 242 modifications)"
 detected = "2026-09-10"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-09-10"
+rule = "datasets/renfrew.toml: ignore_fields += AddNum_Cmp (composite of Add_Number+AddNum_Suf+unit label the canonical fields already track; equalled them on 45,259/45,271 rows); backfill_props_hash --reapply-ignore --city renfrew run, 53,892 rows, verified 0 left; AddNum_Suf stays tracked; canonical full has no lever (06-13 precedent); coverage growth has no config lever, file the remaining munis (Deep River, Head Clara & Maria, Pembroke) technical the same way"
+note = "mass-added: 1,653 adds = Laurentian Hills landing in the county layer, 0 -> 1,498 rows (91%; 84 of them address text already present under another muni), exactly the municipality-by-municipality population the 08-28 rule predicted; 65 removed, identity is geometry-synthesized so no point moved. The other 155 adds (Arnprior John/Winston St ~70, possibly real construction) ride under this hold; publish_reports = false so nothing public is at stake. mass-modified [AddNum_Cmp, AddNum_Suf, full]: 182 of 184 rows value-preserving - the county now writes the unit label into AddNum_Cmp ('259 102' -> '259 Suite 102', 12 buildings) and clears the misplaced unit number out of AddNum_Suf (2,417 letter suffixes A/B/C untouched); the 2 others are full recomposed from components (Add_Number/Unit unchanged). Feed restyle, no address changed."
+
+[[flag]]
+slug = "renfrew"
+date = "2026-09-10"
+signature = "mass-modified"
+fields = ["AddNum_Suf", "full"]
+scope = "184 rows changed the same field set [AddNum_Suf, full] (93% of the day's 197 modifications)"
+detected = "2026-09-10"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-09-10"
+rule = "one-time tail of the AddNum_Cmp rule: the county moved unit numbers out of AddNum_Suf (kept tracked, 2,417 real letter suffixes) in the same 09-10 edit; canonical full has no lever (06-13 precedent); 51 unit rows still unrestyled may trickle in below the 50-row floor"
+note = "Same 184-row unit restyle as filed above, re-signatured after ignore_fields += AddNum_Cmp was backfilled into history: what remains is AddNum_Suf losing the misplaced unit number ('102' -> None; 12 buildings) and canonical full recomposed with the unit label ('259 102 Albert Street' -> '259 Suite 102 Albert Street', 182/184 value-preserving). Feed restyle, no address changed."
 
