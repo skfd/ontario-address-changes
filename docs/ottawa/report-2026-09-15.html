@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>City of Ottawa Address Changes — Tuesday, Sep 15, 2026</title>
+  <style>
+    :root {
+      --bg: #fafafa; --surface: #ffffff; --surface2: #f5f5f5; --surface3: #ebebeb;
+      --border: #e0e0e0; --border-strong: #d1d1d1; --text: #242424;
+      --text-secondary: #424242; --text-dim: #616161; --accent: #0078d4;
+      --accent-hover: #106ebe; --accent-bg: #eff6fc; --green: #107c10;
+      --green-bg: #f1faf1; --green-tint: #9fd89f; --red: #c50f1f; --red-bg: #fdf3f4;
+      --red-tint: #eeacb2; --yellow: #eaa300; --yellow-bg: #fefbf4; --yellow-tint: #f9e2ae;
+      --purple: #881798; --purple-bg: #f9f3fb; --teal: #038387; --teal-bg: #f0fafa;
+      --shadow-4: 0 2px 4px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --shadow-8: 0 4px 8px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --card-bg: #ffffff; --card-hover: #f5f5f5; color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1f1f1f; --surface: #292929; --surface2: #333333; --surface3: #3d3d3d;
+        --border: #525252; --border-strong: #666666; --text: #ffffff;
+        --text-secondary: #d6d6d6; --text-dim: #adadad; --accent: #2899f5;
+        --accent-hover: #3aa0f3; --accent-bg: #002848; --green: #54b054;
+        --green-bg: #052505; --green-tint: #107c10; --red: #dc626d; --red-bg: #3b0509;
+        --red-tint: #c50f1f; --yellow: #f2c661; --yellow-bg: #463100; --yellow-tint: #eaa300;
+        --purple: #d29ddb; --purple-bg: #3a1040; --teal: #58c0c4; --teal-bg: #013638;
+        --shadow-4: 0 2px 4px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --shadow-8: 0 4px 8px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --card-bg: #333333; --card-hover: #3d3d3d; color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI Variable','Segoe UI',system-ui,-apple-system,sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.5; padding: 2rem;
+      max-width: 1100px; margin: 0 auto; font-size: 14px; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; color: var(--accent-hover); }
+    .back-link { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 12px;
+      color: var(--text-dim); margin-bottom: 1.5rem; transition: color 0.1s; }
+    .back-link:hover { color: var(--accent); text-decoration: none; }
+    h1 { font-size: 24px; font-weight: 600; margin-bottom: 4px; }
+    .subtitle { color: var(--text-secondary); font-size: 14px; margin-bottom: 12px; }
+    .explainer { color: var(--text-secondary); font-size: 13px; line-height: 1.5;
+      margin-bottom: 24px; padding: 12px 16px; background: var(--surface);
+      border-radius: 8px; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px; margin-bottom: 24px; }
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px;
+      padding: 16px; box-shadow: var(--shadow-4); transition: box-shadow 0.1s; }
+    .card:hover { box-shadow: var(--shadow-8); }
+    .card .label { font-size: 12px; color: var(--text-dim); font-weight: 400; }
+    .card .value { font-size: 28px; font-weight: 600; margin-top: 4px; }
+    .card .value.green { color: var(--green); } .card .value.red { color: var(--red); }
+    .card .value.yellow { color: var(--yellow); } .card .value.accent { color: var(--accent); }
+    .card .value.purple { color: var(--purple); }
+    .card .value.teal { color: var(--teal); }
+    .sparkline { display: block; margin-top: 6px; overflow: visible; opacity: 0.9; }
+    .sparkline-label { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+    .section { margin-bottom: 24px; }
+    .section h2 { font-size: 16px; font-weight: 600; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px; }
+    .badge { font-size: 12px; padding: 2px 8px; border-radius: 999px; font-weight: 600; }
+    .badge-green { background: var(--green-bg); color: var(--green); }
+    .badge-red { background: var(--red-bg); color: var(--red); }
+    .badge-yellow { background: var(--yellow-bg); color: var(--yellow); }
+    .badge-accent { background: var(--accent-bg); color: var(--accent); }
+    .badge-purple { background: var(--purple-bg); color: var(--purple); }
+    .badge-teal { background: var(--teal-bg); color: var(--teal); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface);
+      border-radius: 8px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    thead { background: var(--surface2); }
+    th { text-align: left; padding: 8px 12px; font-weight: 600; color: var(--text-dim);
+      font-size: 12px; cursor: pointer; user-select: none; border-bottom: 1px solid var(--border); }
+    th:hover { color: var(--accent); }
+    td { padding: 8px 12px; border-top: 1px solid var(--border); }
+    tr:hover td { background: var(--surface2); }
+    .old-val { color: var(--red); text-decoration: line-through; }
+    .new-val { color: var(--green); }
+    .arrow-val { color: var(--text-dim); text-align: center; white-space: nowrap; }
+    .map-link { display: inline-flex; align-items: center; margin-left: 0.4em;
+      color: var(--accent); vertical-align: middle; white-space: nowrap; font-size: 12px; }
+    .map-link:hover { color: var(--accent-hover); }
+    .map-link svg { width: 14px; height: 14px; }
+    .change-field { color: var(--yellow); font-weight: 600; }
+    .bar-chart { margin-top: 8px; }
+    .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 12px; }
+    .bar-label { width: 180px; text-align: right; color: var(--text-secondary); flex-shrink: 0;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .bar-track { flex: 1; height: 8px; background: var(--surface2); border-radius: 4px;
+      overflow: hidden; position: relative; }
+    .bar-fill { height: 100%; border-radius: 4px; transition: width 0.15s ease; }
+    .bar-fill.green { background: var(--green); } .bar-fill.red { background: var(--red); }
+    .bar-count { width: 40px; font-size: 12px; color: var(--text-dim); }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+    .empty { color: var(--text-dim); font-style: italic; padding: 16px; }
+    .truncated { color: var(--text-dim); font-size: 12px; margin-top: 8px; }
+    .collapsible-toggle { background: transparent; border: 1px solid var(--border);
+      color: var(--accent); padding: 5px 12px; border-radius: 4px; cursor: pointer;
+      font-size: 12px; font-family: inherit; margin-bottom: 12px; transition: background 0.1s; }
+    .collapsible-toggle:hover { background: var(--surface2); }
+    details.rename-group { background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; margin-bottom: 8px; box-shadow: var(--shadow-4); }
+    details.rename-group summary { padding: 10px 14px; cursor: pointer; font-size: 13px; }
+    details.rename-group[open] summary { border-bottom: 1px solid var(--border); }
+    details.rename-group table { border: none; box-shadow: none; border-radius: 0; }
+    details.rename-group .truncated { padding: 0 14px 10px; margin-top: 0; }
+    .rename-count { color: var(--text-dim); font-size: 12px; margin-left: 6px; }
+    .no-changes-banner { background: var(--green-bg); border: 1px solid var(--green-tint);
+      color: var(--green); padding: 16px; border-radius: 8px; margin-bottom: 24px;
+      text-align: center; font-weight: 600; font-size: 14px; }
+    .baseline-banner { background: var(--accent-bg); border: 1px solid var(--accent);
+      color: var(--accent); padding: 16px; border-radius: 8px; margin-bottom: 24px; font-size: 13px; }
+    .generated-at { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-dim); }
+    .history { font-size: 12.5px; color: var(--text-secondary); white-space: nowrap; }
+    .history .a { color: var(--green); font-weight: 500; }
+    .history .r { color: var(--red); font-weight: 500; }
+    .history .dot { color: var(--text-dim); margin: 0 4px; }
+    .history-none { color: var(--text-dim); font-style: italic; font-size: 12.5px; }
+    .info-wrap { position: relative; display: inline-flex; vertical-align: middle; }
+    .info-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+      height: 18px; padding: 0 8px 0 7px; border-radius: 999px; border: none;
+      color: #fff; background: var(--accent); cursor: help; font-size: 11px; font-weight: 600;
+      font-style: normal; font-family: inherit; line-height: 1; white-space: nowrap; }
+    .info-btn .glyph { font-style: italic; font-weight: 700;
+      font-family: Georgia, 'Times New Roman', serif; }
+    .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn,
+    .info-wrap:focus .info-btn { background: var(--accent-hover); }
+    .info-pop { display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 20;
+      width: 320px; max-width: 80vw; padding: 12px 14px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-8);
+      font-size: 12.5px; font-weight: 400; color: var(--text-secondary); line-height: 1.5; }
+    .info-wrap:hover .info-pop, .info-wrap:focus-within .info-pop,
+    .info-wrap:focus .info-pop { display: block; }
+    .info-pop strong { display: block; color: var(--text); font-size: 12px; margin-bottom: 4px; }
+    .info-pop ul { list-style: none; margin: 0 0 10px; padding: 0; }
+    .info-pop li { padding: 1px 0 1px 14px; position: relative; }
+    .info-pop li::before { content: "·"; position: absolute; left: 4px; color: var(--text-dim); }
+    .info-pop .note { color: var(--text-dim); font-size: 11.5px; margin: 0 0 10px; }
+    .info-pop .muted { color: var(--text-dim); font-style: italic; }
+  </style>
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+
+  <a class="back-link" href="index.html">← Back to City of Ottawa reports</a>
+
+  <h1>City of Ottawa — Address Changes</h1>
+  <p class="subtitle">
+    Changes between  and Tuesday, Sep 15, 2026
+    · 403,328 total addresses
+  </p>
+
+  
+
+  <div class="cards">
+    <div class="card"><div class="label">Total Addresses</div>
+      <div class="value accent">403,328</div></div>
+    <div class="card"><div class="label">New Addresses</div>
+      <div class="value green">+169</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#107c10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,17.1 19.7,16.6 37.3,18.0 55.0,17.2 72.7,17.1 90.3,17.1 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#107c10"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Retired Addresses</div>
+      <div class="value red">−0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#c50f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,10.0 19.7,6.0 37.3,18.0 55.0,18.0 72.7,2.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#c50f1f"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Updated Addresses <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRNUM)</li><li>Street name (FULLNAME)</li><li>Unit (UNITID)</li><li>Full address (FULLADDR)</li><li>Coordinates (latitude, longitude)</li><li>ADDRTYPE</li><li>PI_MUNICIPAL_ADDRESS_ID</li><li>QUALIFIER</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span></div>
+      <div class="value yellow">2</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,10.0 90.3,18.0 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Renumbered</div>
+      <div class="value accent">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#0078d4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#0078d4"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Street Renames</div>
+      <div class="value purple">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#9141ac" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#9141ac"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    <div class="card"><div class="label">Status Changes</div>
+      <div class="value teal">16</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#038387" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,11.0 19.7,15.0 37.3,9.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#038387"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    <div class="card"><div class="label">Location Adjustments</div>
+      <div class="value" style="color: var(--text-dim)">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#808080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,2.0 37.3,18.0 55.0,18.0 72.7,2.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#808080"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+  </div>
+
+  
+  <div class="section">
+    <h2>Change Breakdown</h2>
+    <div class="stats-grid">
+      
+      <div class="card"><div class="label">Top Streets by New Addresses</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">LEVRIER, COURS DU</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">79</span></div>
+        <div class="bar-row"><span class="bar-label">HYACINTH WAY</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:43.0%"></div></div>
+          <span class="bar-count">34</span></div>
+        <div class="bar-row"><span class="bar-label">TADOUSSAC, TSSE DE</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:41.0%"></div></div>
+          <span class="bar-count">32</span></div>
+        <div class="bar-row"><span class="bar-label">CANOT D&#39;ECORCE, RUE DU</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:30.0%"></div></div>
+          <span class="bar-count">24</span></div>
+      </div></div>
+      
+      
+      <div class="card"><div class="label">Most Frequently Updated Fields</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">ADDRTYPE</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">18</span></div>
+        <div class="bar-row"><span class="bar-label">Location</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:11.0%"></div></div>
+          <span class="bar-count">2</span></div>
+      </div></div>
+    </div>
+  </div>
+  
+
+  <div class="section">
+    <h2>New Addresses <span class="badge badge-green">169</span></h2>
+    
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-added',0)">Address</th><th onclick="sortTable('t-added',1)">Street</th>
+        <th onclick="sortTable('t-added',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-added">
+        
+        <tr><td>1150 CANOT D&#39;ECORCE, RUE DU</td><td>CANOT D&#39;ECORCE, RUE DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50421&mlon=-75.46199#map=18/45.50421/-75.46199" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1152 CANOT D&#39;ECORCE, RUE DU</td><td>CANOT D&#39;ECORCE, RUE DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50426&mlon=-75.46202#map=18/45.50426/-75.46202" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1153 CANOT D&#39;ECORCE, RUE DU</td><td>CANOT D&#39;ECORCE, RUE DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50405&mlon=-75.46238#map=18/45.50405/-75.46238" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1154 CANOT D&#39;ECORCE, RUE DU</td><td>CANOT D&#39;ECORCE, RUE DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50430&mlon=-75.46206#map=18/45.50430/-75.46206" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1155 CANOT D&#39;ECORCE, RUE DU</td><td>CANOT D&#39;ECORCE, RUE DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50409&mlon=-75.46242#map=18/45.50409/-75.46242" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1156 CANOT D&#39;ECORCE, RUE DU</td><td>CANOT D&#39;ECORCE, RUE DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50435&mlon=-75.46211#map=18/45.50435/-75.46211" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1157 CANOT D&#39;ECORCE, RUE DU</td><td>CANOT D&#39;ECORCE, RUE DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50414&mlon=-75.46246#map=18/45.50414/-75.46246" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1158 CANOT D&#39;ECORCE, RUE DU</td><td>CANOT D&#39;ECORCE, RUE DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50440&mlon=-75.46214#map=18/45.50440/-75.46214" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1159 CANOT D&#39;ECORCE, RUE DU</td><td>CANOT D&#39;ECORCE, RUE DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50417&mlon=-75.46250#map=18/45.50417/-75.46250" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1160 CANOT D&#39;ECORCE, RUE DU</td><td>CANOT D&#39;ECORCE, RUE DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50447&mlon=-75.46221#map=18/45.50447/-75.46221" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1161 CANOT D&#39;ECORCE, RUE DU</td><td>CANOT D&#39;ECORCE, RUE DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50426&mlon=-75.46258#map=18/45.50426/-75.46258" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1162 CANOT D&#39;ECORCE, RUE DU</td><td>CANOT D&#39;ECORCE, RUE DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50452&mlon=-75.46226#map=18/45.50452/-75.46226" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1163 CANOT D&#39;ECORCE, RUE DU</td><td>CANOT D&#39;ECORCE, RUE DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50430&mlon=-75.46261#map=18/45.50430/-75.46261" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1164 CANOT D&#39;ECORCE, RUE DU</td><td>CANOT D&#39;ECORCE, RUE DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50460&mlon=-75.46230#map=18/45.50460/-75.46230" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1165 CANOT D&#39;ECORCE, RUE DU</td><td>CANOT D&#39;ECORCE, RUE DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50435&mlon=-75.46265#map=18/45.50435/-75.46265" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1166 CANOT D&#39;ECORCE, RUE DU</td><td>CANOT D&#39;ECORCE, RUE DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50465&mlon=-75.46234#map=18/45.50465/-75.46234" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1167 CANOT D&#39;ECORCE, RUE DU</td><td>CANOT D&#39;ECORCE, RUE DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50440&mlon=-75.46268#map=18/45.50440/-75.46268" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1168 CANOT D&#39;ECORCE, RUE DU</td><td>CANOT D&#39;ECORCE, RUE DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50469&mlon=-75.46238#map=18/45.50469/-75.46238" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1169 CANOT D&#39;ECORCE, RUE DU</td><td>CANOT D&#39;ECORCE, RUE DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50447&mlon=-75.46276#map=18/45.50447/-75.46276" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1171 CANOT D&#39;ECORCE, RUE DU</td><td>CANOT D&#39;ECORCE, RUE DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50452&mlon=-75.46280#map=18/45.50452/-75.46280" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1173 CANOT D&#39;ECORCE, RUE DU</td><td>CANOT D&#39;ECORCE, RUE DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50459&mlon=-75.46286#map=18/45.50459/-75.46286" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1175 CANOT D&#39;ECORCE, RUE DU</td><td>CANOT D&#39;ECORCE, RUE DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50464&mlon=-75.46290#map=18/45.50464/-75.46290" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1177 CANOT D&#39;ECORCE, RUE DU</td><td>CANOT D&#39;ECORCE, RUE DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50472&mlon=-75.46295#map=18/45.50472/-75.46295" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1179 CANOT D&#39;ECORCE, RUE DU</td><td>CANOT D&#39;ECORCE, RUE DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50477&mlon=-75.46299#map=18/45.50477/-75.46299" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>200 HYACINTH WAY</td><td>HYACINTH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50553&mlon=-75.46314#map=18/45.50553/-75.46314" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>201 HYACINTH WAY</td><td>HYACINTH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50584&mlon=-75.46340#map=18/45.50584/-75.46340" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>202 HYACINTH WAY</td><td>HYACINTH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50556&mlon=-75.46308#map=18/45.50556/-75.46308" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>203 HYACINTH WAY</td><td>HYACINTH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50587&mlon=-75.46333#map=18/45.50587/-75.46333" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>204 HYACINTH WAY</td><td>HYACINTH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50559&mlon=-75.46301#map=18/45.50559/-75.46301" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>205 HYACINTH WAY</td><td>HYACINTH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50591&mlon=-75.46323#map=18/45.50591/-75.46323" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>206 HYACINTH WAY</td><td>HYACINTH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50561&mlon=-75.46294#map=18/45.50561/-75.46294" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>207 HYACINTH WAY</td><td>HYACINTH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50594&mlon=-75.46315#map=18/45.50594/-75.46315" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>208 HYACINTH WAY</td><td>HYACINTH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50566&mlon=-75.46283#map=18/45.50566/-75.46283" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>209 HYACINTH WAY</td><td>HYACINTH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50598&mlon=-75.46305#map=18/45.50598/-75.46305" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>210 HYACINTH WAY</td><td>HYACINTH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50568&mlon=-75.46276#map=18/45.50568/-75.46276" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>211 HYACINTH WAY</td><td>HYACINTH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50602&mlon=-75.46297#map=18/45.50602/-75.46297" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>212 HYACINTH WAY</td><td>HYACINTH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50571&mlon=-75.46270#map=18/45.50571/-75.46270" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>213 HYACINTH WAY</td><td>HYACINTH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50607&mlon=-75.46288#map=18/45.50607/-75.46288" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>214 HYACINTH WAY</td><td>HYACINTH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50574&mlon=-75.46264#map=18/45.50574/-75.46264" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>215 HYACINTH WAY</td><td>HYACINTH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50610&mlon=-75.46281#map=18/45.50610/-75.46281" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>216 HYACINTH WAY</td><td>HYACINTH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50578&mlon=-75.46252#map=18/45.50578/-75.46252" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>217 HYACINTH WAY</td><td>HYACINTH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50614&mlon=-75.46271#map=18/45.50614/-75.46271" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>218 HYACINTH WAY</td><td>HYACINTH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50581&mlon=-75.46246#map=18/45.50581/-75.46246" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>219 HYACINTH WAY</td><td>HYACINTH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50617&mlon=-75.46264#map=18/45.50617/-75.46264" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>220 HYACINTH WAY</td><td>HYACINTH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50584&mlon=-75.46240#map=18/45.50584/-75.46240" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>221 HYACINTH WAY</td><td>HYACINTH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50621&mlon=-75.46253#map=18/45.50621/-75.46253" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>222 HYACINTH WAY</td><td>HYACINTH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50586&mlon=-75.46233#map=18/45.50586/-75.46233" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>223 HYACINTH WAY</td><td>HYACINTH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50624&mlon=-75.46247#map=18/45.50624/-75.46247" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>224 HYACINTH WAY</td><td>HYACINTH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50590&mlon=-75.46226#map=18/45.50590/-75.46226" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>225 HYACINTH WAY</td><td>HYACINTH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50629&mlon=-75.46236#map=18/45.50629/-75.46236" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>226 HYACINTH WAY</td><td>HYACINTH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50593&mlon=-75.46216#map=18/45.50593/-75.46216" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>227 HYACINTH WAY</td><td>HYACINTH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50632&mlon=-75.46230#map=18/45.50632/-75.46230" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>228 HYACINTH WAY</td><td>HYACINTH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50597&mlon=-75.46208#map=18/45.50597/-75.46208" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>229 HYACINTH WAY</td><td>HYACINTH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50636&mlon=-75.46220#map=18/45.50636/-75.46220" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>230 HYACINTH WAY</td><td>HYACINTH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50599&mlon=-75.46200#map=18/45.50599/-75.46200" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>231 HYACINTH WAY</td><td>HYACINTH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50640&mlon=-75.46212#map=18/45.50640/-75.46212" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>232 HYACINTH WAY</td><td>HYACINTH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50602&mlon=-75.46195#map=18/45.50602/-75.46195" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>234 HYACINTH WAY</td><td>HYACINTH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50605&mlon=-75.46189#map=18/45.50605/-75.46189" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3372 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50404&mlon=-75.46059#map=18/45.50404/-75.46059" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3376 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50412&mlon=-75.46066#map=18/45.50412/-75.46066" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3380 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50420&mlon=-75.46074#map=18/45.50420/-75.46074" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3384 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50429&mlon=-75.46080#map=18/45.50429/-75.46080" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3388 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50440&mlon=-75.46090#map=18/45.50440/-75.46090" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3393 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50442&mlon=-75.46147#map=18/45.50442/-75.46147" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3395 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50448&mlon=-75.46151#map=18/45.50448/-75.46151" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3396 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50458&mlon=-75.46105#map=18/45.50458/-75.46105" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3397 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50455&mlon=-75.46158#map=18/45.50455/-75.46158" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3399 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50461&mlon=-75.46162#map=18/45.50461/-75.46162" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3400 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50469&mlon=-75.46111#map=18/45.50469/-75.46111" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3401 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50470&mlon=-75.46164#map=18/45.50470/-75.46164" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3403 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50477&mlon=-75.46163#map=18/45.50477/-75.46163" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3405 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50487&mlon=-75.46155#map=18/45.50487/-75.46155" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3407 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50490&mlon=-75.46149#map=18/45.50490/-75.46149" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3409 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50494&mlon=-75.46143#map=18/45.50494/-75.46143" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3411 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50500&mlon=-75.46134#map=18/45.50500/-75.46134" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3413 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50503&mlon=-75.46126#map=18/45.50503/-75.46126" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3415 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50505&mlon=-75.46121#map=18/45.50505/-75.46121" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3416 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50477&mlon=-75.46075#map=18/45.50477/-75.46075" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3420 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50491&mlon=-75.46066#map=18/45.50491/-75.46066" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3424 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50507&mlon=-75.46069#map=18/45.50507/-75.46069" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3428 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50520&mlon=-75.46074#map=18/45.50520/-75.46074" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3432 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50531&mlon=-75.46084#map=18/45.50531/-75.46084" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3436 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50540&mlon=-75.46089#map=18/45.50540/-75.46089" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3440 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50549&mlon=-75.46097#map=18/45.50549/-75.46097" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3444 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50560&mlon=-75.46106#map=18/45.50560/-75.46106" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3450 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50578&mlon=-75.46116#map=18/45.50578/-75.46116" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3454 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50585&mlon=-75.46120#map=18/45.50585/-75.46120" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3458 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50594&mlon=-75.46126#map=18/45.50594/-75.46126" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3462 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50603&mlon=-75.46133#map=18/45.50603/-75.46133" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3466 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50612&mlon=-75.46141#map=18/45.50612/-75.46141" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3470 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50623&mlon=-75.46148#map=18/45.50623/-75.46148" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3474 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50633&mlon=-75.46155#map=18/45.50633/-75.46155" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3478 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50641&mlon=-75.46160#map=18/45.50641/-75.46160" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3482 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50650&mlon=-75.46166#map=18/45.50650/-75.46166" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3486 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50660&mlon=-75.46172#map=18/45.50660/-75.46172" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3490 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50670&mlon=-75.46178#map=18/45.50670/-75.46178" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3494 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50679&mlon=-75.46185#map=18/45.50679/-75.46185" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3498 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50690&mlon=-75.46193#map=18/45.50690/-75.46193" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3502 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50699&mlon=-75.46198#map=18/45.50699/-75.46198" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3506 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50711&mlon=-75.46208#map=18/45.50711/-75.46208" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3510 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50718&mlon=-75.46231#map=18/45.50718/-75.46231" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3514 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50718&mlon=-75.46250#map=18/45.50718/-75.46250" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3515 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50674&mlon=-75.46237#map=18/45.50674/-75.46237" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3518 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50711&mlon=-75.46267#map=18/45.50711/-75.46267" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3519 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50669&mlon=-75.46252#map=18/45.50669/-75.46252" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3522 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50703&mlon=-75.46281#map=18/45.50703/-75.46281" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3523 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50663&mlon=-75.46265#map=18/45.50663/-75.46265" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3526 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50695&mlon=-75.46295#map=18/45.50695/-75.46295" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3527 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50656&mlon=-75.46275#map=18/45.50656/-75.46275" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3530 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50686&mlon=-75.46311#map=18/45.50686/-75.46311" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3531 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50650&mlon=-75.46288#map=18/45.50650/-75.46288" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3535 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50646&mlon=-75.46301#map=18/45.50646/-75.46301" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3539 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50640&mlon=-75.46312#map=18/45.50640/-75.46312" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3543 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50634&mlon=-75.46329#map=18/45.50634/-75.46329" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3547 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50629&mlon=-75.46342#map=18/45.50629/-75.46342" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3551 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50623&mlon=-75.46353#map=18/45.50623/-75.46353" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3555 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50617&mlon=-75.46368#map=18/45.50617/-75.46368" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3560 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50607&mlon=-75.46410#map=18/45.50607/-75.46410" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3562 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50603&mlon=-75.46406#map=18/45.50603/-75.46406" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3564 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50595&mlon=-75.46400#map=18/45.50595/-75.46400" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3566 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50589&mlon=-75.46396#map=18/45.50589/-75.46396" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3568 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50582&mlon=-75.46391#map=18/45.50582/-75.46391" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3570 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50577&mlon=-75.46387#map=18/45.50577/-75.46387" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3572 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50571&mlon=-75.46382#map=18/45.50571/-75.46382" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3574 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50565&mlon=-75.46378#map=18/45.50565/-75.46378" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3576 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50560&mlon=-75.46374#map=18/45.50560/-75.46374" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3578 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50555&mlon=-75.46370#map=18/45.50555/-75.46370" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3580 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50547&mlon=-75.46363#map=18/45.50547/-75.46363" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3582 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50542&mlon=-75.46359#map=18/45.50542/-75.46359" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3584 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50538&mlon=-75.46356#map=18/45.50538/-75.46356" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3586 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50531&mlon=-75.46350#map=18/45.50531/-75.46350" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3588 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50526&mlon=-75.46347#map=18/45.50526/-75.46347" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3590 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50521&mlon=-75.46341#map=18/45.50521/-75.46341" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3592 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50514&mlon=-75.46334#map=18/45.50514/-75.46334" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3594 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50509&mlon=-75.46330#map=18/45.50509/-75.46330" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3596 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50505&mlon=-75.46326#map=18/45.50505/-75.46326" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3598 LEVRIER, COURS DU</td><td>LEVRIER, COURS DU</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50501&mlon=-75.46323#map=18/45.50501/-75.46323" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>50 TADOUSSAC, TSSE DE</td><td>TADOUSSAC, TSSE DE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50491&mlon=-75.46259#map=18/45.50491/-75.46259" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>51 TADOUSSAC, TSSE DE</td><td>TADOUSSAC, TSSE DE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50520&mlon=-75.46286#map=18/45.50520/-75.46286" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>52 TADOUSSAC, TSSE DE</td><td>TADOUSSAC, TSSE DE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50494&mlon=-75.46251#map=18/45.50494/-75.46251" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>53 TADOUSSAC, TSSE DE</td><td>TADOUSSAC, TSSE DE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50524&mlon=-75.46278#map=18/45.50524/-75.46278" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>54 TADOUSSAC, TSSE DE</td><td>TADOUSSAC, TSSE DE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50498&mlon=-75.46242#map=18/45.50498/-75.46242" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>55 TADOUSSAC, TSSE DE</td><td>TADOUSSAC, TSSE DE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50527&mlon=-75.46273#map=18/45.50527/-75.46273" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>56 TADOUSSAC, TSSE DE</td><td>TADOUSSAC, TSSE DE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50501&mlon=-75.46234#map=18/45.50501/-75.46234" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>57 TADOUSSAC, TSSE DE</td><td>TADOUSSAC, TSSE DE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50530&mlon=-75.46267#map=18/45.50530/-75.46267" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>58 TADOUSSAC, TSSE DE</td><td>TADOUSSAC, TSSE DE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50505&mlon=-75.46225#map=18/45.50505/-75.46225" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>59 TADOUSSAC, TSSE DE</td><td>TADOUSSAC, TSSE DE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50534&mlon=-75.46256#map=18/45.50534/-75.46256" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>60 TADOUSSAC, TSSE DE</td><td>TADOUSSAC, TSSE DE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50508&mlon=-75.46217#map=18/45.50508/-75.46217" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>61 TADOUSSAC, TSSE DE</td><td>TADOUSSAC, TSSE DE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50537&mlon=-75.46249#map=18/45.50537/-75.46249" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>62 TADOUSSAC, TSSE DE</td><td>TADOUSSAC, TSSE DE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50512&mlon=-75.46207#map=18/45.50512/-75.46207" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>63 TADOUSSAC, TSSE DE</td><td>TADOUSSAC, TSSE DE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50541&mlon=-75.46239#map=18/45.50541/-75.46239" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>64 TADOUSSAC, TSSE DE</td><td>TADOUSSAC, TSSE DE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50515&mlon=-75.46201#map=18/45.50515/-75.46201" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>65 TADOUSSAC, TSSE DE</td><td>TADOUSSAC, TSSE DE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50545&mlon=-75.46232#map=18/45.50545/-75.46232" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>66 TADOUSSAC, TSSE DE</td><td>TADOUSSAC, TSSE DE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50517&mlon=-75.46194#map=18/45.50517/-75.46194" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>67 TADOUSSAC, TSSE DE</td><td>TADOUSSAC, TSSE DE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50549&mlon=-75.46222#map=18/45.50549/-75.46222" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>68 TADOUSSAC, TSSE DE</td><td>TADOUSSAC, TSSE DE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50521&mlon=-75.46188#map=18/45.50521/-75.46188" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>69 TADOUSSAC, TSSE DE</td><td>TADOUSSAC, TSSE DE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50552&mlon=-75.46216#map=18/45.50552/-75.46216" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>70 TADOUSSAC, TSSE DE</td><td>TADOUSSAC, TSSE DE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50523&mlon=-75.46181#map=18/45.50523/-75.46181" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>71 TADOUSSAC, TSSE DE</td><td>TADOUSSAC, TSSE DE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50555&mlon=-75.46208#map=18/45.50555/-75.46208" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>72 TADOUSSAC, TSSE DE</td><td>TADOUSSAC, TSSE DE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50528&mlon=-75.46169#map=18/45.50528/-75.46169" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>73 TADOUSSAC, TSSE DE</td><td>TADOUSSAC, TSSE DE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50559&mlon=-75.46197#map=18/45.50559/-75.46197" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>74 TADOUSSAC, TSSE DE</td><td>TADOUSSAC, TSSE DE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50531&mlon=-75.46163#map=18/45.50531/-75.46163" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>75 TADOUSSAC, TSSE DE</td><td>TADOUSSAC, TSSE DE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50562&mlon=-75.46190#map=18/45.50562/-75.46190" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>76 TADOUSSAC, TSSE DE</td><td>TADOUSSAC, TSSE DE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50533&mlon=-75.46155#map=18/45.50533/-75.46155" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>77 TADOUSSAC, TSSE DE</td><td>TADOUSSAC, TSSE DE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50565&mlon=-75.46183#map=18/45.50565/-75.46183" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>78 TADOUSSAC, TSSE DE</td><td>TADOUSSAC, TSSE DE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50535&mlon=-75.46149#map=18/45.50535/-75.46149" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>79 TADOUSSAC, TSSE DE</td><td>TADOUSSAC, TSSE DE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50569&mlon=-75.46173#map=18/45.50569/-75.46173" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>80 TADOUSSAC, TSSE DE</td><td>TADOUSSAC, TSSE DE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50538&mlon=-75.46143#map=18/45.50538/-75.46143" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>81 TADOUSSAC, TSSE DE</td><td>TADOUSSAC, TSSE DE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.50572&mlon=-75.46166#map=18/45.50572/-75.46166" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Retired Addresses <span class="badge badge-red">0</span></h2>
+    <p class="empty">No addresses retired.</p>
+  </div>
+
+  <div class="section">
+    <h2>Updated Addresses <span class="badge badge-yellow">2</span>
+      <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRNUM)</li><li>Street name (FULLNAME)</li><li>Unit (UNITID)</li><li>Full address (FULLADDR)</li><li>Coordinates (latitude, longitude)</li><li>ADDRTYPE</li><li>PI_MUNICIPAL_ADDRESS_ID</li><li>QUALIFIER</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span></h2>
+    
+    
+    <table>
+      <thead><tr><th>Address</th><th>What Changed</th><th>Before</th><th></th><th>After</th><th>Map</th></tr></thead>
+      <tbody>
+        
+  <tr><td rowspan="2">430 CLARENCE ST E</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">MAIN</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">SUBORD</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.43427&mlon=-75.68032#map=18/45.43427/-75.68032" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">45.43421, -75.68015<a class="map-link" href="https://www.openstreetmap.org/?mlat=45.43421&mlon=-75.68015#map=19/45.43421/-75.68015" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↖ 14.9m</td>
+    <td class="new-val">45.43427, -75.68032<a class="map-link" href="https://www.openstreetmap.org/?mlat=45.43427&mlon=-75.68032#map=19/45.43427/-75.68032" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="2">60 COBOURG ST</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.43425&mlon=-75.68010#map=18/45.43425/-75.68010" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">45.43421, -75.68015<a class="map-link" href="https://www.openstreetmap.org/?mlat=45.43421&mlon=-75.68015#map=19/45.43421/-75.68015" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↗ 5.9m</td>
+    <td class="new-val">45.43425, -75.68010<a class="map-link" href="https://www.openstreetmap.org/?mlat=45.43425&mlon=-75.68010#map=19/45.43425/-75.68010" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Renumbered Addresses <span class="badge badge-accent">0</span></h2>
+    
+    <p class="empty">No addresses renumbered.</p>
+  </div>
+
+  <div class="section">
+    <h2>Street Renames <span class="badge badge-purple">0</span></h2>
+    <p class="empty">No street renames.</p>
+  </div>
+
+  
+
+  
+  <div class="section">
+    <h2>Status Changes <span class="badge badge-teal">16</span></h2>
+    
+  <details class="rename-group">
+    <summary><span class="change-field">ADDRTYPE:</span> <span class="old-val">SUBORD</span> <span class="arrow-val">→</span> <span class="new-val">MAIN</span><span class="rename-count">16 addresses</span></summary>
+    <table>
+      <tbody>
+        
+        <tr><td>2130 BRIAN COBURN BLVD</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.43225&mlon=-75.52256#map=18/45.43225/-75.52256" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2983 NAVAN RD</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.43269&mlon=-75.52119#map=18/45.43269/-75.52119" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3053 NAVAN RD</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.43122&mlon=-75.51923#map=18/45.43122/-75.51923" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>200 PALEO HTS</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.43287&mlon=-75.52152#map=18/45.43287/-75.52152" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>250 PALEO HTS</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.43237&mlon=-75.52173#map=18/45.43237/-75.52173" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>255 PALEO HTS</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.43241&mlon=-75.52106#map=18/45.43241/-75.52106" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>264 PALEO HTS</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.43194&mlon=-75.52136#map=18/45.43194/-75.52136" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>276 PALEO HTS</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.43186&mlon=-75.52085#map=18/45.43186/-75.52085" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>288 PALEO HTS</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.43175&mlon=-75.52039#map=18/45.43175/-75.52039" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>51 ROSALIE RIDGE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.43318&mlon=-75.52104#map=18/45.43318/-75.52104" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>95 ROSALIE RIDGE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.43307&mlon=-75.52044#map=18/45.43307/-75.52044" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>100 ROSALIE RIDGE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.43282&mlon=-75.52078#map=18/45.43282/-75.52078" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>114 ROSALIE RIDGE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.43243&mlon=-75.52058#map=18/45.43243/-75.52058" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>115 ROSALIE RIDGE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.43254&mlon=-75.52013#map=18/45.43254/-75.52013" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>121 ROSALIE RIDGE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.43235&mlon=-75.52003#map=18/45.43235/-75.52003" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>501 STOMPIN&#39; TOM PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.43394&mlon=-75.52000#map=18/45.43394/-75.52000" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+  </details>
+  
+    
+  </div>
+  
+
+  
+
+  <div class="section">
+    <h2>Location Adjustments <span class="badge" style="background: var(--surface2); color: var(--text-dim)">0</span></h2>
+    
+    <p class="empty">No location adjustments.</p>
+  </div>
+
+  <div class="generated-at">Report generated Sep 15, 2026 at 01:03 PM · source licence: Open Government Licence – City of Ottawa 2.0</div>
+
+  <script>
+    function sortTable(tbodyId, col) {
+      const tbody = document.getElementById(tbodyId);
+      if (!tbody) return;
+      const rows = Array.from(tbody.rows);
+      const dir = tbody.dataset.sortDir === 'asc' ? 'desc' : 'asc';
+      tbody.dataset.sortDir = dir;
+      rows.sort((a, b) => {
+        const av = a.cells[col]?.textContent.trim() || '';
+        const bv = b.cells[col]?.textContent.trim() || '';
+        const an = parseFloat(av), bn = parseFloat(bv);
+        if (!isNaN(an) && !isNaN(bn)) return dir === 'asc' ? an - bn : bn - an;
+        return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+      });
+      rows.forEach(r => tbody.appendChild(r));
+    }
+  </script>
+</body>
+
+</html>
