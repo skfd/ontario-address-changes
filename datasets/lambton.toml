@@ -8,19 +8,33 @@ osm_compatible = "green-ogl"
 
 [identity]
 key_field = ""                          # only a sequential OBJECTID exists; synthesize
-synth_fields = ["number", "street"]     # no unit field is published
+synth_fields = ["number", "street"]     # unchanged across the 2026-09-15 schema migration (below)
 
+# 2026-09-15: the county republished the layer on an NG911-style schema (Esri Address
+# Data Management). The old 11 fields (STNUM, STNAME, STTYPE/STTYPE_A, STDIR/STDIR_A,
+# ADDRESS, MUNICIPALITY, CITY, UPDATED) are gone; 26 new ones replaced them. Same
+# 56,988 points, same geometry. Verified against the last old snapshot (16, 56,897 rows):
+# 56,158 identity keys (98.7%) survive the remap unchanged - St_Name is the bare street
+# name exactly as STNAME was, Add_Number is STNUM as an integer. The ~740 that re-mint
+# are directional-prefix streets ("West Parkway" -> St_Name "Parkway" + St_PreDir
+# "West") and lettered numbers ("477A" -> Add_Number 477 + AddNum_Suf "A"); no [fields]
+# entry can concatenate and a synth_props disambiguator would re-key all 56k rows, so
+# those ~1.3% land once as retire+add pairs. The first import on this schema re-hashes
+# every row (props roster change) - expect one mass-modified flag, technical.
 [fields]                                # source property -> canonical name
-number = "STNUM"
-street = "STNAME"                        # STTYPE/STDIR (and abbreviations) tracked via the props blob
-full   = "ADDRESS"
-# unit: source has none, confirmed 2026-08-10 against the live field list (11 fields, all
-# accounted for). 7 of 56,903 STNUM values embed one as "<number>-<unit>" (1140-1 .. 1140-4)
-# — the reverse order from brantford's, and at 0.01% not worth parsing for.
+number = "Add_Number"                   # integer, null on 15 junk rows (blank St_Name, full_add 'ON')
+street = "St_Name"                      # bare name; St_PosTyp / St_PreDir / St_PosDir / St_PreTyp ride in the props blob
+unit   = "Unit"                         # 61 of 56,988 rows ('B-511 Louisa Street'); unittype is all null. Display only - not in synth_fields
+full   = "full_add"                     # '5317 Nauvoo Road Township of Warwick ON' - embeds Inc_Muni, so a
+                                        # municipality reassignment changes {Inc_Muni, full} and will NOT class as boundary
 
-# Change classes (field values verified against the latest snapshot): a
+# Change classes (field values verified against the 2026-09-15 layer): a
 # modification touching only these fields is reported in its humanized section
-# (place renames / status changes / boundary reassignments) instead of the
-# generic Updated Addresses table.
+# (status flips / boundary reassignments) instead of the generic Updated Addresses table.
+# MUNICIPALITY / CITY stay listed so the archive's pre-09-15 boundary events keep their
+# class (classes apply at report time over the whole history).
+# currentstatus is a coded domain: 1 Approved, 2 For Review, 3 Retired, 4 Active,
+# 5 Pending, 6 Tentative. On 2026-09-15: 56,985 Active, 3 Retired.
 [classes]
-boundary = ["MUNICIPALITY", "CITY"]
+boundary = ["MUNICIPALITY", "CITY", "Inc_Muni"]
+status = ["currentstatus"]
