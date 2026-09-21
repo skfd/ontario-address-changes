@@ -36,11 +36,23 @@ ignore_fields = [
   # the exact reversal of 08-26) and 2026-09-04 (289, the exact reversal of 08-28)
   # were 100% ARN and nothing else. A tax-roll link, not an address property.
   "ARN",
+  # Per-lot / per-unit member of the same roll family (equals ARN on 178k of
+  # 190k rows; differs only for condo units and freshly severed lots). 2026-09-21:
+  # one parent roll 434101000301450 split into 51 per-lot ChildARNs on Switchgrass
+  # Avenue / White Cedar Parkway (Springwater), 48 of them with a 0.8-3.9 m re-snap
+  # and nothing else. Same
+  # parcel-join mechanics as the ARN rulings of 08-26/08-28/09-04.
+  "ChildARN",
 ]
 
-# Ignored for change detection but still written to props: the roll number is
+# Ignored for change detection but still written to props: the roll numbers are
 # the only link to the tax roll (renfrew RollNumber precedent).
-keep_fields = ["ARN"]
+keep_fields = ["ARN", "ChildARN"]
+
+# Points get re-snapped to the parcel when the roll link changes: 62 of the 67
+# roll re-links in the store moved the point 0.8-3.9 m (5-dp coordinates, one
+# step ~1 m). Genuine re-placements here travel 5-340 m and still publish.
+location_min_move_m = 5
 
 [identity]
 # ADDRESSID (integer): 0 null, 0 <= 0, 0 duplicated values across all 190,207 rows
