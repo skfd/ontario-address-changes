@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>City of Kitchener Address Changes — Monday, Sep 21, 2026</title>
+  <style>
+    :root {
+      --bg: #fafafa; --surface: #ffffff; --surface2: #f5f5f5; --surface3: #ebebeb;
+      --border: #e0e0e0; --border-strong: #d1d1d1; --text: #242424;
+      --text-secondary: #424242; --text-dim: #616161; --accent: #0078d4;
+      --accent-hover: #106ebe; --accent-bg: #eff6fc; --green: #107c10;
+      --green-bg: #f1faf1; --green-tint: #9fd89f; --red: #c50f1f; --red-bg: #fdf3f4;
+      --red-tint: #eeacb2; --yellow: #eaa300; --yellow-bg: #fefbf4; --yellow-tint: #f9e2ae;
+      --purple: #881798; --purple-bg: #f9f3fb; --teal: #038387; --teal-bg: #f0fafa;
+      --shadow-4: 0 2px 4px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --shadow-8: 0 4px 8px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --card-bg: #ffffff; --card-hover: #f5f5f5; color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1f1f1f; --surface: #292929; --surface2: #333333; --surface3: #3d3d3d;
+        --border: #525252; --border-strong: #666666; --text: #ffffff;
+        --text-secondary: #d6d6d6; --text-dim: #adadad; --accent: #2899f5;
+        --accent-hover: #3aa0f3; --accent-bg: #002848; --green: #54b054;
+        --green-bg: #052505; --green-tint: #107c10; --red: #dc626d; --red-bg: #3b0509;
+        --red-tint: #c50f1f; --yellow: #f2c661; --yellow-bg: #463100; --yellow-tint: #eaa300;
+        --purple: #d29ddb; --purple-bg: #3a1040; --teal: #58c0c4; --teal-bg: #013638;
+        --shadow-4: 0 2px 4px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --shadow-8: 0 4px 8px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --card-bg: #333333; --card-hover: #3d3d3d; color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI Variable','Segoe UI',system-ui,-apple-system,sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.5; padding: 2rem;
+      max-width: 1100px; margin: 0 auto; font-size: 14px; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; color: var(--accent-hover); }
+    .back-link { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 12px;
+      color: var(--text-dim); margin-bottom: 1.5rem; transition: color 0.1s; }
+    .back-link:hover { color: var(--accent); text-decoration: none; }
+    h1 { font-size: 24px; font-weight: 600; margin-bottom: 4px; }
+    .subtitle { color: var(--text-secondary); font-size: 14px; margin-bottom: 12px; }
+    .explainer { color: var(--text-secondary); font-size: 13px; line-height: 1.5;
+      margin-bottom: 24px; padding: 12px 16px; background: var(--surface);
+      border-radius: 8px; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px; margin-bottom: 24px; }
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px;
+      padding: 16px; box-shadow: var(--shadow-4); transition: box-shadow 0.1s; }
+    .card:hover { box-shadow: var(--shadow-8); }
+    .card .label { font-size: 12px; color: var(--text-dim); font-weight: 400; }
+    .card .value { font-size: 28px; font-weight: 600; margin-top: 4px; }
+    .card .value.green { color: var(--green); } .card .value.red { color: var(--red); }
+    .card .value.yellow { color: var(--yellow); } .card .value.accent { color: var(--accent); }
+    .card .value.purple { color: var(--purple); }
+    .card .value.teal { color: var(--teal); }
+    .sparkline { display: block; margin-top: 6px; overflow: visible; opacity: 0.9; }
+    .sparkline-label { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+    .section { margin-bottom: 24px; }
+    .section h2 { font-size: 16px; font-weight: 600; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px; }
+    .badge { font-size: 12px; padding: 2px 8px; border-radius: 999px; font-weight: 600; }
+    .badge-green { background: var(--green-bg); color: var(--green); }
+    .badge-red { background: var(--red-bg); color: var(--red); }
+    .badge-yellow { background: var(--yellow-bg); color: var(--yellow); }
+    .badge-accent { background: var(--accent-bg); color: var(--accent); }
+    .badge-purple { background: var(--purple-bg); color: var(--purple); }
+    .badge-teal { background: var(--teal-bg); color: var(--teal); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface);
+      border-radius: 8px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    thead { background: var(--surface2); }
+    th { text-align: left; padding: 8px 12px; font-weight: 600; color: var(--text-dim);
+      font-size: 12px; cursor: pointer; user-select: none; border-bottom: 1px solid var(--border); }
+    th:hover { color: var(--accent); }
+    td { padding: 8px 12px; border-top: 1px solid var(--border); }
+    tr:hover td { background: var(--surface2); }
+    .old-val { color: var(--red); text-decoration: line-through; }
+    .new-val { color: var(--green); }
+    .arrow-val { color: var(--text-dim); text-align: center; white-space: nowrap; }
+    .map-link { display: inline-flex; align-items: center; margin-left: 0.4em;
+      color: var(--accent); vertical-align: middle; white-space: nowrap; font-size: 12px; }
+    .map-link:hover { color: var(--accent-hover); }
+    .map-link svg { width: 14px; height: 14px; }
+    .change-field { color: var(--yellow); font-weight: 600; }
+    .bar-chart { margin-top: 8px; }
+    .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 12px; }
+    .bar-label { width: 180px; text-align: right; color: var(--text-secondary); flex-shrink: 0;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .bar-track { flex: 1; height: 8px; background: var(--surface2); border-radius: 4px;
+      overflow: hidden; position: relative; }
+    .bar-fill { height: 100%; border-radius: 4px; transition: width 0.15s ease; }
+    .bar-fill.green { background: var(--green); } .bar-fill.red { background: var(--red); }
+    .bar-count { width: 40px; font-size: 12px; color: var(--text-dim); }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+    .empty { color: var(--text-dim); font-style: italic; padding: 16px; }
+    .truncated { color: var(--text-dim); font-size: 12px; margin-top: 8px; }
+    .collapsible-toggle { background: transparent; border: 1px solid var(--border);
+      color: var(--accent); padding: 5px 12px; border-radius: 4px; cursor: pointer;
+      font-size: 12px; font-family: inherit; margin-bottom: 12px; transition: background 0.1s; }
+    .collapsible-toggle:hover { background: var(--surface2); }
+    details.rename-group { background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; margin-bottom: 8px; box-shadow: var(--shadow-4); }
+    details.rename-group summary { padding: 10px 14px; cursor: pointer; font-size: 13px; }
+    details.rename-group[open] summary { border-bottom: 1px solid var(--border); }
+    details.rename-group table { border: none; box-shadow: none; border-radius: 0; }
+    details.rename-group .truncated { padding: 0 14px 10px; margin-top: 0; }
+    .rename-count { color: var(--text-dim); font-size: 12px; margin-left: 6px; }
+    .no-changes-banner { background: var(--green-bg); border: 1px solid var(--green-tint);
+      color: var(--green); padding: 16px; border-radius: 8px; margin-bottom: 24px;
+      text-align: center; font-weight: 600; font-size: 14px; }
+    .baseline-banner { background: var(--accent-bg); border: 1px solid var(--accent);
+      color: var(--accent); padding: 16px; border-radius: 8px; margin-bottom: 24px; font-size: 13px; }
+    .generated-at { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-dim); }
+    .history { font-size: 12.5px; color: var(--text-secondary); white-space: nowrap; }
+    .history .a { color: var(--green); font-weight: 500; }
+    .history .r { color: var(--red); font-weight: 500; }
+    .history .dot { color: var(--text-dim); margin: 0 4px; }
+    .history-none { color: var(--text-dim); font-style: italic; font-size: 12.5px; }
+    .info-wrap { position: relative; display: inline-flex; vertical-align: middle; }
+    .info-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+      height: 18px; padding: 0 8px 0 7px; border-radius: 999px; border: none;
+      color: #fff; background: var(--accent); cursor: help; font-size: 11px; font-weight: 600;
+      font-style: normal; font-family: inherit; line-height: 1; white-space: nowrap; }
+    .info-btn .glyph { font-style: italic; font-weight: 700;
+      font-family: Georgia, 'Times New Roman', serif; }
+    .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn,
+    .info-wrap:focus .info-btn { background: var(--accent-hover); }
+    .info-pop { display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 20;
+      width: 320px; max-width: 80vw; padding: 12px 14px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-8);
+      font-size: 12.5px; font-weight: 400; color: var(--text-secondary); line-height: 1.5; }
+    .info-wrap:hover .info-pop, .info-wrap:focus-within .info-pop,
+    .info-wrap:focus .info-pop { display: block; }
+    .info-pop strong { display: block; color: var(--text); font-size: 12px; margin-bottom: 4px; }
+    .info-pop ul { list-style: none; margin: 0 0 10px; padding: 0; }
+    .info-pop li { padding: 1px 0 1px 14px; position: relative; }
+    .info-pop li::before { content: "·"; position: absolute; left: 4px; color: var(--text-dim); }
+    .info-pop .note { color: var(--text-dim); font-size: 11.5px; margin: 0 0 10px; }
+    .info-pop .muted { color: var(--text-dim); font-style: italic; }
+  </style>
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+
+  <a class="back-link" href="index.html">← Back to City of Kitchener reports</a>
+
+  <h1>City of Kitchener — Address Changes</h1>
+  <p class="subtitle">
+    Changes between  and Monday, Sep 21, 2026
+    · 132,232 total addresses
+  </p>
+
+  
+
+  <div class="cards">
+    <div class="card"><div class="label">Total Addresses</div>
+      <div class="value accent">132,232</div></div>
+    <div class="card"><div class="label">New Addresses</div>
+      <div class="value green">+131</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#107c10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,17.6 19.7,2.0 37.3,17.4 55.0,18.0 72.7,14.1 90.3,18.0 108.0,4.6"/><circle cx="108.0" cy="4.6" r="2" fill="#107c10"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Retired Addresses</div>
+      <div class="value red">−0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#c50f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,2.0 37.3,18.0 55.0,16.0 72.7,14.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#c50f1f"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Updated Addresses <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (CIVIC_NO)</li><li>Street name (STREET)</li><li>Unit (UNIT)</li><li>Full address (ADDRESS)</li><li>Coordinates (latitude, longitude)</li><li>POLL</li><li>PROPERTY_UNIT_ID</li><li>STATUS</li><li>UNIT_TYPE</li><li>WARD</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>LATITUDE</li><li>LONGITUDE</li><li>PARCELID</li><li>ROADSEGMENTID</li><li>ROLL_REFERENCE</li><li>X_COORD</li><li>Y_COORD</li></ul>
+      
+    </span>
+  </span></div>
+      <div class="value yellow">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,14.3 19.7,2.0 37.3,18.0 55.0,18.0 72.7,16.6 90.3,13.1 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Renumbered</div>
+      <div class="value accent">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#0078d4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,2.0 37.3,12.7 55.0,18.0 72.7,7.3 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#0078d4"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Street Renames</div>
+      <div class="value purple">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#9141ac" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#9141ac"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    <div class="card"><div class="label">Status Changes</div>
+      <div class="value teal">7</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#038387" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,17.8 19.7,8.0 37.3,17.9 55.0,18.0 72.7,6.8 90.3,2.0 108.0,17.3"/><circle cx="108.0" cy="17.3" r="2" fill="#038387"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    <div class="card"><div class="label">Boundary Changes</div>
+      <div class="value teal">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#038387" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#038387"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    <div class="card"><div class="label">Location Adjustments</div>
+      <div class="value" style="color: var(--text-dim)">47</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#808080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,17.9 19.7,2.0 37.3,12.4 55.0,18.0 72.7,14.7 90.3,18.0 108.0,14.1"/><circle cx="108.0" cy="14.1" r="2" fill="#808080"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+  </div>
+
+  
+  <div class="section">
+    <h2>Change Breakdown</h2>
+    <div class="stats-grid">
+      
+      <div class="card"><div class="label">Top Streets by New Addresses</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">ESKERWOOD WAY</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">59</span></div>
+        <div class="bar-row"><span class="bar-label">TAVERNERS CRES</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:80.0%"></div></div>
+          <span class="bar-count">47</span></div>
+        <div class="bar-row"><span class="bar-label">MIHAI EMINESCU WAY</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:22.0%"></div></div>
+          <span class="bar-count">13</span></div>
+      </div></div>
+      
+      
+      <div class="card"><div class="label">Most Frequently Updated Fields</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">Location</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">47</span></div>
+        <div class="bar-row"><span class="bar-label">STATUS</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:15.0%"></div></div>
+          <span class="bar-count">7</span></div>
+      </div></div>
+    </div>
+  </div>
+  
+
+  <div class="section">
+    <h2>New Addresses <span class="badge badge-green">131</span></h2>
+    
+    <details class="rename-group">
+      <summary>104 BONIFACE AVE <span class="arrow-val">→</span> <span class="new-val">2 units (1, 2)</span><span class="rename-count">2 new addresses · original address remains</span></summary>
+      <table>
+        <thead><tr><th>Address</th><th>Unit</th><th>History</th><th>Map</th></tr></thead>
+        <tbody>
+          
+          <tr><td>1-104 BONIFACE AVE</td><td>1</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.43070&mlon=-80.46121#map=18/43.43070/-80.46121" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>2-104 BONIFACE AVE</td><td>2</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.43070&mlon=-80.46121#map=18/43.43070/-80.46121" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+    </details>
+    
+    <details class="rename-group">
+      <summary>18 BUSH CLOVER CRES <span class="arrow-val">→</span> <span class="new-val">2 units (1, 2)</span><span class="rename-count">2 new addresses · original address remains</span></summary>
+      <table>
+        <thead><tr><th>Address</th><th>Unit</th><th>History</th><th>Map</th></tr></thead>
+        <tbody>
+          
+          <tr><td>1-18 BUSH CLOVER CRES</td><td>1</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.41117&mlon=-80.50887#map=18/43.41117/-80.50887" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>2-18 BUSH CLOVER CRES</td><td>2</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.41117&mlon=-80.50887#map=18/43.41117/-80.50887" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+    </details>
+    
+    <details class="rename-group">
+      <summary>254 WESTWOOD DR <span class="arrow-val">→</span> <span class="new-val">2 units (1, 2)</span><span class="rename-count">2 new addresses · original address remains</span></summary>
+      <table>
+        <thead><tr><th>Address</th><th>Unit</th><th>History</th><th>Map</th></tr></thead>
+        <tbody>
+          
+          <tr><td>1-254 WESTWOOD DR</td><td>1</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.44316&mlon=-80.53377#map=18/43.44316/-80.53377" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>2-254 WESTWOOD DR</td><td>2</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.44316&mlon=-80.53377#map=18/43.44316/-80.53377" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+    </details>
+    
+    <details class="rename-group">
+      <summary>4 MARKWOOD DR <span class="arrow-val">→</span> <span class="new-val">2 units (1, 2)</span><span class="rename-count">2 new addresses · original address remains</span></summary>
+      <table>
+        <thead><tr><th>Address</th><th>Unit</th><th>History</th><th>Map</th></tr></thead>
+        <tbody>
+          
+          <tr><td>1-4 MARKWOOD DR</td><td>1</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.44149&mlon=-80.52621#map=18/43.44149/-80.52621" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>2-4 MARKWOOD DR</td><td>2</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.44149&mlon=-80.52621#map=18/43.44149/-80.52621" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+    </details>
+    
+    <details class="rename-group">
+      <summary>67 BLUCHER ST <span class="arrow-val">→</span> <span class="new-val">2 units (1, 2)</span><span class="rename-count">2 new addresses · original address remains</span></summary>
+      <table>
+        <thead><tr><th>Address</th><th>Unit</th><th>History</th><th>Map</th></tr></thead>
+        <tbody>
+          
+          <tr><td>1-67 BLUCHER ST</td><td>1</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46088&mlon=-80.49734#map=18/43.46088/-80.49734" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>2-67 BLUCHER ST</td><td>2</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46073&mlon=-80.49717#map=18/43.46073/-80.49717" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+    </details>
+    
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-added',0)">Address</th><th onclick="sortTable('t-added',1)">Street</th>
+        <th onclick="sortTable('t-added',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-added">
+        
+        <tr><td>200 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39334&mlon=-80.50929#map=18/43.39334/-80.50929" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>201 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39305&mlon=-80.50920#map=18/43.39305/-80.50920" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>205 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39296&mlon=-80.50957#map=18/43.39296/-80.50957" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>209 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39294&mlon=-80.50970#map=18/43.39294/-80.50970" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>213 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39294&mlon=-80.50980#map=18/43.39294/-80.50980" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>217 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39294&mlon=-80.50992#map=18/43.39294/-80.50992" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>221 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39296&mlon=-80.51001#map=18/43.39296/-80.51001" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>225 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39299&mlon=-80.51012#map=18/43.39299/-80.51012" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>229 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39310&mlon=-80.51026#map=18/43.39310/-80.51026" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>232 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39329&mlon=-80.50980#map=18/43.39329/-80.50980" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>233 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39318&mlon=-80.51033#map=18/43.39318/-80.51033" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>236 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39338&mlon=-80.50984#map=18/43.39338/-80.50984" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>237 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39325&mlon=-80.51036#map=18/43.39325/-80.51036" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>240 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39346&mlon=-80.50987#map=18/43.39346/-80.50987" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>241 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39334&mlon=-80.51039#map=18/43.39334/-80.51039" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>244 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39355&mlon=-80.50990#map=18/43.39355/-80.50990" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>245 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39344&mlon=-80.51041#map=18/43.39344/-80.51041" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>248 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39364&mlon=-80.50992#map=18/43.39364/-80.50992" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>249 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39351&mlon=-80.51044#map=18/43.39351/-80.51044" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>252 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39373&mlon=-80.50995#map=18/43.39373/-80.50995" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>253 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39357&mlon=-80.51046#map=18/43.39357/-80.51046" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>256 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39382&mlon=-80.50998#map=18/43.39382/-80.50998" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>257 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39364&mlon=-80.51049#map=18/43.39364/-80.51049" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>260 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39392&mlon=-80.51001#map=18/43.39392/-80.51001" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>261 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39372&mlon=-80.51051#map=18/43.39372/-80.51051" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>264 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39404&mlon=-80.51004#map=18/43.39404/-80.51004" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>265 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39378&mlon=-80.51052#map=18/43.39378/-80.51052" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>267 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39384&mlon=-80.51053#map=18/43.39384/-80.51053" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>268 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39413&mlon=-80.51007#map=18/43.39413/-80.51007" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>269 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39391&mlon=-80.51055#map=18/43.39391/-80.51055" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>271 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39398&mlon=-80.51056#map=18/43.39398/-80.51056" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>272 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39422&mlon=-80.51009#map=18/43.39422/-80.51009" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>273 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39404&mlon=-80.51058#map=18/43.39404/-80.51058" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>275 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39410&mlon=-80.51060#map=18/43.39410/-80.51060" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>276 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39431&mlon=-80.51011#map=18/43.39431/-80.51011" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>277 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39416&mlon=-80.51061#map=18/43.39416/-80.51061" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>279 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39422&mlon=-80.51063#map=18/43.39422/-80.51063" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>280 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39440&mlon=-80.51013#map=18/43.39440/-80.51013" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>281 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39428&mlon=-80.51064#map=18/43.39428/-80.51064" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>283 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39434&mlon=-80.51066#map=18/43.39434/-80.51066" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>284 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39448&mlon=-80.51016#map=18/43.39448/-80.51016" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>285 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39440&mlon=-80.51068#map=18/43.39440/-80.51068" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>287 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39447&mlon=-80.51070#map=18/43.39447/-80.51070" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>288 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39456&mlon=-80.51019#map=18/43.39456/-80.51019" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>289 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39457&mlon=-80.51073#map=18/43.39457/-80.51073" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>291 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39463&mlon=-80.51074#map=18/43.39463/-80.51074" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>293 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39468&mlon=-80.51075#map=18/43.39468/-80.51075" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>295 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39473&mlon=-80.51076#map=18/43.39473/-80.51076" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>297 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39478&mlon=-80.51078#map=18/43.39478/-80.51078" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>299 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39484&mlon=-80.51079#map=18/43.39484/-80.51079" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>301 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39490&mlon=-80.51081#map=18/43.39490/-80.51081" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>303 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39496&mlon=-80.51081#map=18/43.39496/-80.51081" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>305 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39502&mlon=-80.51083#map=18/43.39502/-80.51083" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>307 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39509&mlon=-80.51085#map=18/43.39509/-80.51085" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>309 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39514&mlon=-80.51087#map=18/43.39514/-80.51087" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>311 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39519&mlon=-80.51089#map=18/43.39519/-80.51089" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>313 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39524&mlon=-80.51090#map=18/43.39524/-80.51090" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>315 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39529&mlon=-80.51092#map=18/43.39529/-80.51092" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>317 ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39534&mlon=-80.51093#map=18/43.39534/-80.51093" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>185 GATEWAY PARK DR</td><td>GATEWAY PARK DR</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.40540&mlon=-80.38747#map=18/43.40540/-80.38747" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>7 MIHAI EMINESCU WAY</td><td>MIHAI EMINESCU WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39479&mlon=-80.50929#map=18/43.39479/-80.50929" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>18 MIHAI EMINESCU WAY</td><td>MIHAI EMINESCU WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39505&mlon=-80.50958#map=18/43.39505/-80.50958" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>19 MIHAI EMINESCU WAY</td><td>MIHAI EMINESCU WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39470&mlon=-80.50972#map=18/43.39470/-80.50972" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>20 MIHAI EMINESCU WAY</td><td>MIHAI EMINESCU WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39504&mlon=-80.50966#map=18/43.39504/-80.50966" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>22 MIHAI EMINESCU WAY</td><td>MIHAI EMINESCU WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39502&mlon=-80.50974#map=18/43.39502/-80.50974" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>24 MIHAI EMINESCU WAY</td><td>MIHAI EMINESCU WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39501&mlon=-80.50982#map=18/43.39501/-80.50982" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>26 MIHAI EMINESCU WAY</td><td>MIHAI EMINESCU WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39500&mlon=-80.50990#map=18/43.39500/-80.50990" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>28 MIHAI EMINESCU WAY</td><td>MIHAI EMINESCU WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39499&mlon=-80.50997#map=18/43.39499/-80.50997" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>29 MIHAI EMINESCU WAY</td><td>MIHAI EMINESCU WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39462&mlon=-80.51020#map=18/43.39462/-80.51020" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>30 MIHAI EMINESCU WAY</td><td>MIHAI EMINESCU WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39497&mlon=-80.51006#map=18/43.39497/-80.51006" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>32 MIHAI EMINESCU WAY</td><td>MIHAI EMINESCU WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39496&mlon=-80.51015#map=18/43.39496/-80.51015" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>34 MIHAI EMINESCU WAY</td><td>MIHAI EMINESCU WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39495&mlon=-80.51025#map=18/43.39495/-80.51025" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>36 MIHAI EMINESCU WAY</td><td>MIHAI EMINESCU WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39493&mlon=-80.51034#map=18/43.39493/-80.51034" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>5 TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39272&mlon=-80.50912#map=18/43.39272/-80.50912" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>8 TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39288&mlon=-80.50871#map=18/43.39288/-80.50871" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>9 TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39280&mlon=-80.50914#map=18/43.39280/-80.50914" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>12 TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39296&mlon=-80.50873#map=18/43.39296/-80.50873" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>13 TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39290&mlon=-80.50917#map=18/43.39290/-80.50917" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>16 TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39305&mlon=-80.50876#map=18/43.39305/-80.50876" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>17 TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39298&mlon=-80.50919#map=18/43.39298/-80.50919" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>20 TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39313&mlon=-80.50879#map=18/43.39313/-80.50879" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>24 TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39322&mlon=-80.50881#map=18/43.39322/-80.50881" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>28 TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39331&mlon=-80.50884#map=18/43.39331/-80.50884" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>29 TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39340&mlon=-80.50931#map=18/43.39340/-80.50931" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>32 TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39340&mlon=-80.50886#map=18/43.39340/-80.50886" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>33 TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39346&mlon=-80.50933#map=18/43.39346/-80.50933" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>36 TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39347&mlon=-80.50888#map=18/43.39347/-80.50888" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>37 TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39353&mlon=-80.50935#map=18/43.39353/-80.50935" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>40 TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39356&mlon=-80.50891#map=18/43.39356/-80.50891" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>41 TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39361&mlon=-80.50937#map=18/43.39361/-80.50937" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>44 TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39365&mlon=-80.50894#map=18/43.39365/-80.50894" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>45 TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39369&mlon=-80.50940#map=18/43.39369/-80.50940" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>48 TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39373&mlon=-80.50896#map=18/43.39373/-80.50896" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>49 TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39376&mlon=-80.50942#map=18/43.39376/-80.50942" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>52 TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39380&mlon=-80.50899#map=18/43.39380/-80.50899" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>53 TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39384&mlon=-80.50944#map=18/43.39384/-80.50944" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>55 TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39392&mlon=-80.50947#map=18/43.39392/-80.50947" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>56 TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39396&mlon=-80.50904#map=18/43.39396/-80.50904" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>57 TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39399&mlon=-80.50949#map=18/43.39399/-80.50949" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>58 TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39402&mlon=-80.50905#map=18/43.39402/-80.50905" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>59 TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39405&mlon=-80.50951#map=18/43.39405/-80.50951" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>60 TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39407&mlon=-80.50907#map=18/43.39407/-80.50907" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>61 TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39411&mlon=-80.50953#map=18/43.39411/-80.50953" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>62 TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39414&mlon=-80.50909#map=18/43.39414/-80.50909" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>63 TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39419&mlon=-80.50956#map=18/43.39419/-80.50956" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>64 TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39420&mlon=-80.50911#map=18/43.39420/-80.50911" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>65 TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39426&mlon=-80.50958#map=18/43.39426/-80.50958" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>66 TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39427&mlon=-80.50913#map=18/43.39427/-80.50913" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>67 TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39433&mlon=-80.50960#map=18/43.39433/-80.50960" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>68 TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39433&mlon=-80.50915#map=18/43.39433/-80.50915" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>69 TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39439&mlon=-80.50963#map=18/43.39439/-80.50963" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>70 TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39441&mlon=-80.50918#map=18/43.39441/-80.50918" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>71 TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39446&mlon=-80.50965#map=18/43.39446/-80.50965" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>72 TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39448&mlon=-80.50920#map=18/43.39448/-80.50920" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>73 TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39454&mlon=-80.50967#map=18/43.39454/-80.50967" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>74 TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39454&mlon=-80.50922#map=18/43.39454/-80.50922" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>75 TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39463&mlon=-80.50970#map=18/43.39463/-80.50970" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>76 TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39460&mlon=-80.50924#map=18/43.39460/-80.50924" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>78 TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39466&mlon=-80.50926#map=18/43.39466/-80.50926" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>80 TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39473&mlon=-80.50927#map=18/43.39473/-80.50927" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 TU LANE ST</td><td>TU LANE ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.40557&mlon=-80.38881#map=18/43.40557/-80.38881" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Retired Addresses <span class="badge badge-red">0</span></h2>
+    <p class="empty">No addresses retired.</p>
+  </div>
+
+  <div class="section">
+    <h2>Updated Addresses <span class="badge badge-yellow">0</span>
+      <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (CIVIC_NO)</li><li>Street name (STREET)</li><li>Unit (UNIT)</li><li>Full address (ADDRESS)</li><li>Coordinates (latitude, longitude)</li><li>POLL</li><li>PROPERTY_UNIT_ID</li><li>STATUS</li><li>UNIT_TYPE</li><li>WARD</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>LATITUDE</li><li>LONGITUDE</li><li>PARCELID</li><li>ROADSEGMENTID</li><li>ROLL_REFERENCE</li><li>X_COORD</li><li>Y_COORD</li></ul>
+      
+    </span>
+  </span></h2>
+    
+    <p class="empty">No addresses updated.</p>
+  </div>
+
+  <div class="section">
+    <h2>Renumbered Addresses <span class="badge badge-accent">0</span></h2>
+    
+    <p class="empty">No addresses renumbered.</p>
+  </div>
+
+  <div class="section">
+    <h2>Street Renames <span class="badge badge-purple">0</span></h2>
+    <p class="empty">No street renames.</p>
+  </div>
+
+  
+
+  
+  <div class="section">
+    <h2>Status Changes <span class="badge badge-teal">7</span></h2>
+    
+  <details class="rename-group">
+    <summary><span class="change-field">STATUS:</span> <span class="old-val">PENDING</span> <span class="arrow-val">→</span> <span class="new-val">ACTIVE</span><span class="rename-count">7 addresses</span></summary>
+    <table>
+      <tbody>
+        
+        <tr><td>3-102 CALMCREST DR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.41573&mlon=-80.49115#map=18/43.41573/-80.49115" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1108-3241 KING ST E</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.42577&mlon=-80.42435#map=18/43.42577/-80.42435" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2309-3241 KING ST E</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.42577&mlon=-80.42435#map=18/43.42577/-80.42435" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2407-3241 KING ST E</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.42577&mlon=-80.42435#map=18/43.42577/-80.42435" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6 MIHAI EMINESCU WAY</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39511&mlon=-80.50917#map=18/43.39511/-80.50917" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 MIHAI EMINESCU WAY</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39510&mlon=-80.50928#map=18/43.39510/-80.50928" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>14 MIHAI EMINESCU WAY</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39508&mlon=-80.50940#map=18/43.39508/-80.50940" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+  </details>
+  
+    
+  </div>
+  
+
+  
+  <div class="section">
+    <h2>Boundary Changes <span class="badge badge-teal">0</span></h2>
+    <p class="empty">No ward or municipality reassignments.</p>
+  </div>
+  
+
+  <div class="section">
+    <h2>Location Adjustments <span class="badge" style="background: var(--surface2); color: var(--text-dim)">47</span></h2>
+    
+    
+    
+    <table>
+      <thead><tr><th>Address</th><th>Before</th><th></th><th>After</th></tr></thead>
+      <tbody>
+        
+        <tr><td>63 BLUCHER ST</td>
+          
+          <td class="old-val">43.46080, -80.49755<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46080&mlon=-80.49755#map=19/43.46080/-80.49755" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 5.6m</td>
+          <td class="new-val">43.46075, -80.49756<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46075&mlon=-80.49756#map=19/43.46075/-80.49756" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>1-63 BLUCHER ST</td>
+          
+          <td class="old-val">43.46075, -80.49755<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46075&mlon=-80.49755#map=19/43.46075/-80.49755" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">← 0.8m</td>
+          <td class="new-val">43.46075, -80.49756<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46075&mlon=-80.49756#map=19/43.46075/-80.49756" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>3-63 BLUCHER ST</td>
+          
+          <td class="old-val">43.46075, -80.49755<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46075&mlon=-80.49755#map=19/43.46075/-80.49755" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">← 0.8m</td>
+          <td class="new-val">43.46075, -80.49756<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46075&mlon=-80.49756#map=19/43.46075/-80.49756" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>71 BLUCHER ST</td>
+          
+          <td class="old-val">43.46057, -80.49654<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46057&mlon=-80.49654#map=19/43.46057/-80.49654" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 3.3m</td>
+          <td class="new-val">43.46055, -80.49657<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46055&mlon=-80.49657#map=19/43.46055/-80.49657" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>A-71 BLUCHER ST</td>
+          
+          <td class="old-val">43.46057, -80.49654<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46057&mlon=-80.49654#map=19/43.46057/-80.49654" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 22.5m</td>
+          <td class="new-val">43.46073, -80.49671<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46073&mlon=-80.49671#map=19/43.46073/-80.49671" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>B-71 BLUCHER ST</td>
+          
+          <td class="old-val">43.46057, -80.49654<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46057&mlon=-80.49654#map=19/43.46057/-80.49654" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 17.9m</td>
+          <td class="new-val">43.46070, -80.49667<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46070&mlon=-80.49667#map=19/43.46070/-80.49667" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>C-71 BLUCHER ST</td>
+          
+          <td class="old-val">43.46057, -80.49654<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46057&mlon=-80.49654#map=19/43.46057/-80.49654" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 12.4m</td>
+          <td class="new-val">43.46066, -80.49663<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46066&mlon=-80.49663#map=19/43.46066/-80.49663" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>D-71 BLUCHER ST</td>
+          
+          <td class="old-val">43.46057, -80.49654<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46057&mlon=-80.49654#map=19/43.46057/-80.49654" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 6.4m</td>
+          <td class="new-val">43.46062, -80.49658<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46062&mlon=-80.49658#map=19/43.46062/-80.49658" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>F-71 BLUCHER ST</td>
+          
+          <td class="old-val">43.46057, -80.49654<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46057&mlon=-80.49654#map=19/43.46057/-80.49654" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 5.2m</td>
+          <td class="new-val">43.46054, -80.49649<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46054&mlon=-80.49649#map=19/43.46054/-80.49649" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>G-71 BLUCHER ST</td>
+          
+          <td class="old-val">43.46057, -80.49654<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46057&mlon=-80.49654#map=19/43.46057/-80.49654" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 11.2m</td>
+          <td class="new-val">43.46050, -80.49644<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46050&mlon=-80.49644#map=19/43.46050/-80.49644" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>H-71 BLUCHER ST</td>
+          
+          <td class="old-val">43.46057, -80.49654<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46057&mlon=-80.49654#map=19/43.46057/-80.49654" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 16.7m</td>
+          <td class="new-val">43.46046, -80.49640<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46046&mlon=-80.49640#map=19/43.46046/-80.49640" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>I-71 BLUCHER ST</td>
+          
+          <td class="old-val">43.46057, -80.49654<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46057&mlon=-80.49654#map=19/43.46057/-80.49654" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 23.5m</td>
+          <td class="new-val">43.46041, -80.49635<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46041&mlon=-80.49635#map=19/43.46041/-80.49635" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>J-71 BLUCHER ST</td>
+          
+          <td class="old-val">43.46057, -80.49654<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46057&mlon=-80.49654#map=19/43.46057/-80.49654" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 29.0m</td>
+          <td class="new-val">43.46037, -80.49631<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46037&mlon=-80.49631#map=19/43.46037/-80.49631" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>267 DUMFRIES AVE</td>
+          
+          <td class="old-val">43.45479, -80.47076<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45479&mlon=-80.47076#map=19/43.45479/-80.47076" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 4.6m</td>
+          <td class="new-val">43.45482, -80.47080<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45482&mlon=-80.47080#map=19/43.45482/-80.47080" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>1-267 DUMFRIES AVE</td>
+          
+          <td class="old-val">43.45479, -80.47076<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45479&mlon=-80.47076#map=19/43.45479/-80.47076" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 4.6m</td>
+          <td class="new-val">43.45482, -80.47080<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45482&mlon=-80.47080#map=19/43.45482/-80.47080" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>2-267 DUMFRIES AVE</td>
+          
+          <td class="old-val">43.45479, -80.47076<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45479&mlon=-80.47076#map=19/43.45479/-80.47076" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 4.6m</td>
+          <td class="new-val">43.45482, -80.47080<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45482&mlon=-80.47080#map=19/43.45482/-80.47080" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>ESKERWOOD WAY</td>
+          
+          <td class="old-val">43.39395, -80.50995<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39395&mlon=-80.50995#map=19/43.39395/-80.50995" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">→ 6.6m</td>
+          <td class="new-val">43.39396, -80.50987<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39396&mlon=-80.50987#map=19/43.39396/-80.50987" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>ESKERWOOD WAY</td>
+          
+          <td class="old-val">43.39492, -80.51088<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39492&mlon=-80.51088#map=19/43.39492/-80.51088" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 17.7m</td>
+          <td class="new-val">43.39502, -80.51105<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39502&mlon=-80.51105#map=19/43.39502/-80.51105" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>ESKERWOOD WAY</td>
+          
+          <td class="old-val">43.39380, -80.51061<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39380&mlon=-80.51061#map=19/43.39380/-80.51061" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 13.1m</td>
+          <td class="new-val">43.39374, -80.51075<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39374&mlon=-80.51075#map=19/43.39374/-80.51075" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>ESKERWOOD WAY</td>
+          
+          <td class="old-val">43.39292, -80.50985<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39292&mlon=-80.50985#map=19/43.39292/-80.50985" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 7.8m</td>
+          <td class="new-val">43.39285, -80.50986<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39285&mlon=-80.50986#map=19/43.39285/-80.50986" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>6 EXECUTIVE PL</td>
+          
+          <td class="old-val">43.38007, -80.41002<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.38007&mlon=-80.41002#map=19/43.38007/-80.41002" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↑ 35.9m</td>
+          <td class="new-val">43.38039, -80.41007<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.38039&mlon=-80.41007#map=19/43.38039/-80.41007" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>135 GATEWAY PARK DR</td>
+          
+          <td class="old-val">43.40541, -80.38750<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.40541&mlon=-80.38750#map=19/43.40541/-80.38750" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 111.9m</td>
+          <td class="new-val">43.40587, -80.38873<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.40587&mlon=-80.38873#map=19/43.40587/-80.38873" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>MIHAI EMINESCU WAY</td>
+          
+          <td class="old-val">43.39512, -80.50930<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39512&mlon=-80.50930#map=19/43.39512/-80.50930" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 10.3m</td>
+          <td class="new-val">43.39503, -80.50927<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39503&mlon=-80.50927#map=19/43.39503/-80.50927" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>MIHAI EMINESCU WAY</td>
+          
+          <td class="old-val">43.39499, -80.51003<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39499&mlon=-80.51003#map=19/43.39499/-80.51003" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 9.9m</td>
+          <td class="new-val">43.39493, -80.50994<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39493&mlon=-80.50994#map=19/43.39493/-80.50994" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>27 QUARRY PARK DR</td>
+          
+          <td class="old-val">43.46760, -80.43449<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46760&mlon=-80.43449#map=19/43.46760/-80.43449" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 2.4m</td>
+          <td class="new-val">43.46758, -80.43448<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46758&mlon=-80.43448#map=19/43.46758/-80.43448" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>TAVERNERS CRES</td>
+          
+          <td class="old-val">43.39436, -80.50906<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39436&mlon=-80.50906#map=19/43.39436/-80.50906" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">→ 3.4m</td>
+          <td class="new-val">43.39437, -80.50902<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39437&mlon=-80.50902#map=19/43.39437/-80.50902" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>TAVERNERS CRES</td>
+          
+          <td class="old-val">43.39339, -80.50873<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39339&mlon=-80.50873#map=19/43.39339/-80.50873" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">→ 3.4m</td>
+          <td class="new-val">43.39340, -80.50869<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39340&mlon=-80.50869#map=19/43.39340/-80.50869" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>TAVERNERS CRES</td>
+          
+          <td class="old-val">43.39401, -80.50955<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39401&mlon=-80.50955#map=19/43.39401/-80.50955" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">← 9.5m</td>
+          <td class="new-val">43.39398, -80.50966<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39398&mlon=-80.50966#map=19/43.39398/-80.50966" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>TAVERNERS CRES</td>
+          
+          <td class="old-val">43.39284, -80.50916<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39284&mlon=-80.50916#map=19/43.39284/-80.50916" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">← 10.0m</td>
+          <td class="new-val">43.39286, -80.50928<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39286&mlon=-80.50928#map=19/43.39286/-80.50928" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>1-809 VICTORIA ST N</td>
+          
+          <td class="old-val">43.46198, -80.46885<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46198&mlon=-80.46885#map=19/43.46198/-80.46885" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">→ 31.1m</td>
+          <td class="new-val">43.46208, -80.46849<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46208&mlon=-80.46849#map=19/43.46208/-80.46849" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>10-809 VICTORIA ST N</td>
+          
+          <td class="old-val">43.46198, -80.46885<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46198&mlon=-80.46885#map=19/43.46198/-80.46885" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">→ 31.1m</td>
+          <td class="new-val">43.46208, -80.46849<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46208&mlon=-80.46849#map=19/43.46208/-80.46849" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>11-809 VICTORIA ST N</td>
+          
+          <td class="old-val">43.46198, -80.46885<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46198&mlon=-80.46885#map=19/43.46198/-80.46885" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">→ 31.1m</td>
+          <td class="new-val">43.46208, -80.46849<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46208&mlon=-80.46849#map=19/43.46208/-80.46849" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>2-809 VICTORIA ST N</td>
+          
+          <td class="old-val">43.46198, -80.46885<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46198&mlon=-80.46885#map=19/43.46198/-80.46885" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">→ 31.1m</td>
+          <td class="new-val">43.46208, -80.46849<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46208&mlon=-80.46849#map=19/43.46208/-80.46849" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>3A-809 VICTORIA ST N</td>
+          
+          <td class="old-val">43.46198, -80.46885<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46198&mlon=-80.46885#map=19/43.46198/-80.46885" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">→ 31.1m</td>
+          <td class="new-val">43.46208, -80.46849<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46208&mlon=-80.46849#map=19/43.46208/-80.46849" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>3B-809 VICTORIA ST N</td>
+          
+          <td class="old-val">43.46198, -80.46885<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46198&mlon=-80.46885#map=19/43.46198/-80.46885" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">→ 31.1m</td>
+          <td class="new-val">43.46208, -80.46849<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46208&mlon=-80.46849#map=19/43.46208/-80.46849" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>4A-809 VICTORIA ST N</td>
+          
+          <td class="old-val">43.46198, -80.46885<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46198&mlon=-80.46885#map=19/43.46198/-80.46885" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">→ 31.1m</td>
+          <td class="new-val">43.46208, -80.46849<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46208&mlon=-80.46849#map=19/43.46208/-80.46849" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>4B-809 VICTORIA ST N</td>
+          
+          <td class="old-val">43.46198, -80.46885<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46198&mlon=-80.46885#map=19/43.46198/-80.46885" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">→ 31.1m</td>
+          <td class="new-val">43.46208, -80.46849<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46208&mlon=-80.46849#map=19/43.46208/-80.46849" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>5A-809 VICTORIA ST N</td>
+          
+          <td class="old-val">43.46198, -80.46885<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46198&mlon=-80.46885#map=19/43.46198/-80.46885" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">→ 31.1m</td>
+          <td class="new-val">43.46208, -80.46849<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46208&mlon=-80.46849#map=19/43.46208/-80.46849" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>5B-809 VICTORIA ST N</td>
+          
+          <td class="old-val">43.46198, -80.46885<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46198&mlon=-80.46885#map=19/43.46198/-80.46885" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">→ 31.1m</td>
+          <td class="new-val">43.46208, -80.46849<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46208&mlon=-80.46849#map=19/43.46208/-80.46849" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>6A-809 VICTORIA ST N</td>
+          
+          <td class="old-val">43.46198, -80.46885<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46198&mlon=-80.46885#map=19/43.46198/-80.46885" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">→ 31.1m</td>
+          <td class="new-val">43.46208, -80.46849<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46208&mlon=-80.46849#map=19/43.46208/-80.46849" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>6B-809 VICTORIA ST N</td>
+          
+          <td class="old-val">43.46198, -80.46885<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46198&mlon=-80.46885#map=19/43.46198/-80.46885" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">→ 31.1m</td>
+          <td class="new-val">43.46208, -80.46849<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46208&mlon=-80.46849#map=19/43.46208/-80.46849" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>7-809 VICTORIA ST N</td>
+          
+          <td class="old-val">43.46198, -80.46885<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46198&mlon=-80.46885#map=19/43.46198/-80.46885" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">→ 31.1m</td>
+          <td class="new-val">43.46208, -80.46849<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46208&mlon=-80.46849#map=19/43.46208/-80.46849" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>8-809 VICTORIA ST N</td>
+          
+          <td class="old-val">43.46198, -80.46885<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46198&mlon=-80.46885#map=19/43.46198/-80.46885" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">→ 31.1m</td>
+          <td class="new-val">43.46208, -80.46849<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46208&mlon=-80.46849#map=19/43.46208/-80.46849" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>9-809 VICTORIA ST N</td>
+          
+          <td class="old-val">43.46198, -80.46885<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46198&mlon=-80.46885#map=19/43.46198/-80.46885" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">→ 31.1m</td>
+          <td class="new-val">43.46208, -80.46849<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46208&mlon=-80.46849#map=19/43.46208/-80.46849" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>175 WESTWOOD DR</td>
+          
+          <td class="old-val">43.44421, -80.53204<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.44421&mlon=-80.53204#map=19/43.44421/-80.53204" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 40.6m</td>
+          <td class="new-val">43.44385, -80.53196<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.44385&mlon=-80.53196#map=19/43.44385/-80.53196" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>15 WILD CHICORY ST</td>
+          
+          <td class="old-val">43.36640, -80.44408<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36640&mlon=-80.44408#map=19/43.36640/-80.44408" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 2.4m</td>
+          <td class="new-val">43.36638, -80.44407<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36638&mlon=-80.44407#map=19/43.36638/-80.44407" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>139 WINTER WREN CRES</td>
+          
+          <td class="old-val">43.36463, -80.44566<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36463&mlon=-80.44566#map=19/43.36463/-80.44566" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">← 0.8m</td>
+          <td class="new-val">43.36463, -80.44567<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36463&mlon=-80.44567#map=19/43.36463/-80.44567" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+      </tbody>
+    </table>
+    
+    
+    
+  </div>
+
+  <div class="generated-at">Report generated Sep 21, 2026 at 01:03 PM · source licence: Open Government Licence - The Corporation of the City of Kitchener</div>
+
+  <script>
+    function sortTable(tbodyId, col) {
+      const tbody = document.getElementById(tbodyId);
+      if (!tbody) return;
+      const rows = Array.from(tbody.rows);
+      const dir = tbody.dataset.sortDir === 'asc' ? 'desc' : 'asc';
+      tbody.dataset.sortDir = dir;
+      rows.sort((a, b) => {
+        const av = a.cells[col]?.textContent.trim() || '';
+        const bv = b.cells[col]?.textContent.trim() || '';
+        const an = parseFloat(av), bn = parseFloat(bv);
+        if (!isNaN(an) && !isNaN(bn)) return dir === 'asc' ? an - bn : bn - an;
+        return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+      });
+      rows.forEach(r => tbody.appendChild(r));
+    }
+  </script>
+</body>
+
+</html>
