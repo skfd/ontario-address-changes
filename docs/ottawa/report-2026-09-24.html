@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>City of Ottawa Address Changes — Thursday, Sep 24, 2026</title>
+  <style>
+    :root {
+      --bg: #fafafa; --surface: #ffffff; --surface2: #f5f5f5; --surface3: #ebebeb;
+      --border: #e0e0e0; --border-strong: #d1d1d1; --text: #242424;
+      --text-secondary: #424242; --text-dim: #616161; --accent: #0078d4;
+      --accent-hover: #106ebe; --accent-bg: #eff6fc; --green: #107c10;
+      --green-bg: #f1faf1; --green-tint: #9fd89f; --red: #c50f1f; --red-bg: #fdf3f4;
+      --red-tint: #eeacb2; --yellow: #eaa300; --yellow-bg: #fefbf4; --yellow-tint: #f9e2ae;
+      --purple: #881798; --purple-bg: #f9f3fb; --teal: #038387; --teal-bg: #f0fafa;
+      --shadow-4: 0 2px 4px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --shadow-8: 0 4px 8px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --card-bg: #ffffff; --card-hover: #f5f5f5; color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1f1f1f; --surface: #292929; --surface2: #333333; --surface3: #3d3d3d;
+        --border: #525252; --border-strong: #666666; --text: #ffffff;
+        --text-secondary: #d6d6d6; --text-dim: #adadad; --accent: #2899f5;
+        --accent-hover: #3aa0f3; --accent-bg: #002848; --green: #54b054;
+        --green-bg: #052505; --green-tint: #107c10; --red: #dc626d; --red-bg: #3b0509;
+        --red-tint: #c50f1f; --yellow: #f2c661; --yellow-bg: #463100; --yellow-tint: #eaa300;
+        --purple: #d29ddb; --purple-bg: #3a1040; --teal: #58c0c4; --teal-bg: #013638;
+        --shadow-4: 0 2px 4px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --shadow-8: 0 4px 8px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --card-bg: #333333; --card-hover: #3d3d3d; color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI Variable','Segoe UI',system-ui,-apple-system,sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.5; padding: 2rem;
+      max-width: 1100px; margin: 0 auto; font-size: 14px; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; color: var(--accent-hover); }
+    .back-link { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 12px;
+      color: var(--text-dim); margin-bottom: 1.5rem; transition: color 0.1s; }
+    .back-link:hover { color: var(--accent); text-decoration: none; }
+    h1 { font-size: 24px; font-weight: 600; margin-bottom: 4px; }
+    .subtitle { color: var(--text-secondary); font-size: 14px; margin-bottom: 12px; }
+    .explainer { color: var(--text-secondary); font-size: 13px; line-height: 1.5;
+      margin-bottom: 24px; padding: 12px 16px; background: var(--surface);
+      border-radius: 8px; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px; margin-bottom: 24px; }
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px;
+      padding: 16px; box-shadow: var(--shadow-4); transition: box-shadow 0.1s; }
+    .card:hover { box-shadow: var(--shadow-8); }
+    .card .label { font-size: 12px; color: var(--text-dim); font-weight: 400; }
+    .card .value { font-size: 28px; font-weight: 600; margin-top: 4px; }
+    .card .value.green { color: var(--green); } .card .value.red { color: var(--red); }
+    .card .value.yellow { color: var(--yellow); } .card .value.accent { color: var(--accent); }
+    .card .value.purple { color: var(--purple); }
+    .card .value.teal { color: var(--teal); }
+    .sparkline { display: block; margin-top: 6px; overflow: visible; opacity: 0.9; }
+    .sparkline-label { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+    .section { margin-bottom: 24px; }
+    .section h2 { font-size: 16px; font-weight: 600; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px; }
+    .badge { font-size: 12px; padding: 2px 8px; border-radius: 999px; font-weight: 600; }
+    .badge-green { background: var(--green-bg); color: var(--green); }
+    .badge-red { background: var(--red-bg); color: var(--red); }
+    .badge-yellow { background: var(--yellow-bg); color: var(--yellow); }
+    .badge-accent { background: var(--accent-bg); color: var(--accent); }
+    .badge-purple { background: var(--purple-bg); color: var(--purple); }
+    .badge-teal { background: var(--teal-bg); color: var(--teal); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface);
+      border-radius: 8px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    thead { background: var(--surface2); }
+    th { text-align: left; padding: 8px 12px; font-weight: 600; color: var(--text-dim);
+      font-size: 12px; cursor: pointer; user-select: none; border-bottom: 1px solid var(--border); }
+    th:hover { color: var(--accent); }
+    td { padding: 8px 12px; border-top: 1px solid var(--border); }
+    tr:hover td { background: var(--surface2); }
+    .old-val { color: var(--red); text-decoration: line-through; }
+    .new-val { color: var(--green); }
+    .arrow-val { color: var(--text-dim); text-align: center; white-space: nowrap; }
+    .map-link { display: inline-flex; align-items: center; margin-left: 0.4em;
+      color: var(--accent); vertical-align: middle; white-space: nowrap; font-size: 12px; }
+    .map-link:hover { color: var(--accent-hover); }
+    .map-link svg { width: 14px; height: 14px; }
+    .change-field { color: var(--yellow); font-weight: 600; }
+    .bar-chart { margin-top: 8px; }
+    .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 12px; }
+    .bar-label { width: 180px; text-align: right; color: var(--text-secondary); flex-shrink: 0;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .bar-track { flex: 1; height: 8px; background: var(--surface2); border-radius: 4px;
+      overflow: hidden; position: relative; }
+    .bar-fill { height: 100%; border-radius: 4px; transition: width 0.15s ease; }
+    .bar-fill.green { background: var(--green); } .bar-fill.red { background: var(--red); }
+    .bar-count { width: 40px; font-size: 12px; color: var(--text-dim); }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+    .empty { color: var(--text-dim); font-style: italic; padding: 16px; }
+    .truncated { color: var(--text-dim); font-size: 12px; margin-top: 8px; }
+    .collapsible-toggle { background: transparent; border: 1px solid var(--border);
+      color: var(--accent); padding: 5px 12px; border-radius: 4px; cursor: pointer;
+      font-size: 12px; font-family: inherit; margin-bottom: 12px; transition: background 0.1s; }
+    .collapsible-toggle:hover { background: var(--surface2); }
+    details.rename-group { background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; margin-bottom: 8px; box-shadow: var(--shadow-4); }
+    details.rename-group summary { padding: 10px 14px; cursor: pointer; font-size: 13px; }
+    details.rename-group[open] summary { border-bottom: 1px solid var(--border); }
+    details.rename-group table { border: none; box-shadow: none; border-radius: 0; }
+    details.rename-group .truncated { padding: 0 14px 10px; margin-top: 0; }
+    .rename-count { color: var(--text-dim); font-size: 12px; margin-left: 6px; }
+    .no-changes-banner { background: var(--green-bg); border: 1px solid var(--green-tint);
+      color: var(--green); padding: 16px; border-radius: 8px; margin-bottom: 24px;
+      text-align: center; font-weight: 600; font-size: 14px; }
+    .baseline-banner { background: var(--accent-bg); border: 1px solid var(--accent);
+      color: var(--accent); padding: 16px; border-radius: 8px; margin-bottom: 24px; font-size: 13px; }
+    .generated-at { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-dim); }
+    .history { font-size: 12.5px; color: var(--text-secondary); white-space: nowrap; }
+    .history .a { color: var(--green); font-weight: 500; }
+    .history .r { color: var(--red); font-weight: 500; }
+    .history .dot { color: var(--text-dim); margin: 0 4px; }
+    .history-none { color: var(--text-dim); font-style: italic; font-size: 12.5px; }
+    .info-wrap { position: relative; display: inline-flex; vertical-align: middle; }
+    .info-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+      height: 18px; padding: 0 8px 0 7px; border-radius: 999px; border: none;
+      color: #fff; background: var(--accent); cursor: help; font-size: 11px; font-weight: 600;
+      font-style: normal; font-family: inherit; line-height: 1; white-space: nowrap; }
+    .info-btn .glyph { font-style: italic; font-weight: 700;
+      font-family: Georgia, 'Times New Roman', serif; }
+    .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn,
+    .info-wrap:focus .info-btn { background: var(--accent-hover); }
+    .info-pop { display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 20;
+      width: 320px; max-width: 80vw; padding: 12px 14px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-8);
+      font-size: 12.5px; font-weight: 400; color: var(--text-secondary); line-height: 1.5; }
+    .info-wrap:hover .info-pop, .info-wrap:focus-within .info-pop,
+    .info-wrap:focus .info-pop { display: block; }
+    .info-pop strong { display: block; color: var(--text); font-size: 12px; margin-bottom: 4px; }
+    .info-pop ul { list-style: none; margin: 0 0 10px; padding: 0; }
+    .info-pop li { padding: 1px 0 1px 14px; position: relative; }
+    .info-pop li::before { content: "·"; position: absolute; left: 4px; color: var(--text-dim); }
+    .info-pop .note { color: var(--text-dim); font-size: 11.5px; margin: 0 0 10px; }
+    .info-pop .muted { color: var(--text-dim); font-style: italic; }
+  </style>
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+
+  <a class="back-link" href="index.html">← Back to City of Ottawa reports</a>
+
+  <h1>City of Ottawa — Address Changes</h1>
+  <p class="subtitle">
+    Changes between  and Thursday, Sep 24, 2026
+    · 404,180 total addresses
+  </p>
+
+  
+
+  <div class="cards">
+    <div class="card"><div class="label">Total Addresses</div>
+      <div class="value accent">404,180</div></div>
+    <div class="card"><div class="label">New Addresses</div>
+      <div class="value green">+5</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#107c10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,17.8 19.7,14.7 37.3,17.8 55.0,2.0 72.7,17.7 90.3,18.0 108.0,17.9"/><circle cx="108.0" cy="17.9" r="2" fill="#107c10"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Retired Addresses</div>
+      <div class="value red">−0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#c50f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,2.0 55.0,18.0 72.7,18.0 90.3,10.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#c50f1f"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Updated Addresses <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRNUM)</li><li>Street name (FULLNAME)</li><li>Unit (UNITID)</li><li>Full address (FULLADDR)</li><li>Coordinates (latitude, longitude)</li><li>ADDRTYPE</li><li>PI_MUNICIPAL_ADDRESS_ID</li><li>QUALIFIER</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span></div>
+      <div class="value yellow">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,13.4 37.3,15.7 55.0,2.0 72.7,15.7 90.3,13.4 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Renumbered</div>
+      <div class="value accent">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#0078d4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#0078d4"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Street Renames</div>
+      <div class="value purple">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#9141ac" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#9141ac"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    <div class="card"><div class="label">Status Changes</div>
+      <div class="value teal">142</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#038387" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,16.2 37.3,16.6 55.0,16.4 72.7,18.0 90.3,15.0 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#038387"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    <div class="card"><div class="label">Location Adjustments</div>
+      <div class="value" style="color: var(--text-dim)">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#808080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,2.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#808080"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+  </div>
+
+  
+  <div class="section">
+    <h2>Change Breakdown</h2>
+    <div class="stats-grid">
+      
+      <div class="card"><div class="label">Top Streets by New Addresses</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">CARILLON ST</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">3</span></div>
+      </div></div>
+      
+      
+      <div class="card"><div class="label">Most Frequently Updated Fields</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">ADDRTYPE</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">142</span></div>
+      </div></div>
+    </div>
+  </div>
+  
+
+  <div class="section">
+    <h2>New Addresses <span class="badge badge-green">5</span></h2>
+    
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-added',0)">Address</th><th onclick="sortTable('t-added',1)">Street</th>
+        <th onclick="sortTable('t-added',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-added">
+        
+        <tr><td>207 B CARILLON ST</td><td>CARILLON ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.43750&mlon=-75.66428#map=18/45.43750/-75.66428" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>207 C CARILLON ST</td><td>CARILLON ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.43752&mlon=-75.66428#map=18/45.43752/-75.66428" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>207 A CARILLON ST</td><td>CARILLON ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.43748&mlon=-75.66428#map=18/45.43748/-75.66428" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>4200 B LOGGERS WAY</td><td>LOGGERS WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.40857&mlon=-76.20948#map=18/45.40857/-76.20948" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3827 B NAVAN RD</td><td>NAVAN RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.42444&mlon=-75.48281#map=18/45.42444/-75.48281" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Retired Addresses <span class="badge badge-red">0</span></h2>
+    <p class="empty">No addresses retired.</p>
+  </div>
+
+  <div class="section">
+    <h2>Updated Addresses <span class="badge badge-yellow">0</span>
+      <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRNUM)</li><li>Street name (FULLNAME)</li><li>Unit (UNITID)</li><li>Full address (FULLADDR)</li><li>Coordinates (latitude, longitude)</li><li>ADDRTYPE</li><li>PI_MUNICIPAL_ADDRESS_ID</li><li>QUALIFIER</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span></h2>
+    
+    <p class="empty">No addresses updated.</p>
+  </div>
+
+  <div class="section">
+    <h2>Renumbered Addresses <span class="badge badge-accent">0</span></h2>
+    
+    <p class="empty">No addresses renumbered.</p>
+  </div>
+
+  <div class="section">
+    <h2>Street Renames <span class="badge badge-purple">0</span></h2>
+    <p class="empty">No street renames.</p>
+  </div>
+
+  
+
+  
+  <div class="section">
+    <h2>Status Changes <span class="badge badge-teal">142</span></h2>
+    
+  <details class="rename-group">
+    <summary><span class="change-field">ADDRTYPE:</span> <span class="old-val">SUBORD</span> <span class="arrow-val">→</span> <span class="new-val">MAIN</span><span class="rename-count">142 addresses</span></summary>
+    <table>
+      <tbody>
+        
+        <tr><td>300 BELLISSIMO WAY</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44621&mlon=-75.46200#map=18/45.44621/-75.46200" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>308 BELLISSIMO WAY</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44596&mlon=-75.46187#map=18/45.44596/-75.46187" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>600 CITYSCAPE ST</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44590&mlon=-75.46310#map=18/45.44590/-75.46310" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>609 CITYSCAPE ST</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44576&mlon=-75.46253#map=18/45.44576/-75.46253" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>612 CITYSCAPE ST</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44556&mlon=-75.46292#map=18/45.44556/-75.46292" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>617 CITYSCAPE ST</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44552&mlon=-75.46240#map=18/45.44552/-75.46240" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>624 CITYSCAPE ST</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44522&mlon=-75.46273#map=18/45.44522/-75.46273" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>625 CITYSCAPE ST</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44528&mlon=-75.46226#map=18/45.44528/-75.46226" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>636 CITYSCAPE ST</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44489&mlon=-75.46254#map=18/45.44489/-75.46254" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>901 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44570&mlon=-75.46492#map=18/45.44570/-75.46492" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>903 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44581&mlon=-75.46497#map=18/45.44581/-75.46497" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>905 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44592&mlon=-75.46504#map=18/45.44592/-75.46504" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>907 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44603&mlon=-75.46510#map=18/45.44603/-75.46510" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>909 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44614&mlon=-75.46516#map=18/45.44614/-75.46516" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>911 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44626&mlon=-75.46512#map=18/45.44626/-75.46512" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>913 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44635&mlon=-75.46499#map=18/45.44635/-75.46499" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>914 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44614&mlon=-75.46474#map=18/45.44614/-75.46474" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>915 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44640&mlon=-75.46483#map=18/45.44640/-75.46483" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>916 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44619&mlon=-75.46460#map=18/45.44619/-75.46460" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>917 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44644&mlon=-75.46467#map=18/45.44644/-75.46467" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>918 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44624&mlon=-75.46445#map=18/45.44624/-75.46445" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>919 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44649&mlon=-75.46452#map=18/45.44649/-75.46452" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>920 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44628&mlon=-75.46432#map=18/45.44628/-75.46432" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>921 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44653&mlon=-75.46438#map=18/45.44653/-75.46438" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>922 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44632&mlon=-75.46416#map=18/45.44632/-75.46416" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>923 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44657&mlon=-75.46425#map=18/45.44657/-75.46425" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>924 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44638&mlon=-75.46399#map=18/45.44638/-75.46399" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>925 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44661&mlon=-75.46413#map=18/45.44661/-75.46413" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>926 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44643&mlon=-75.46383#map=18/45.44643/-75.46383" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>927 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44666&mlon=-75.46401#map=18/45.44666/-75.46401" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>928 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44648&mlon=-75.46368#map=18/45.44648/-75.46368" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>929 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44669&mlon=-75.46388#map=18/45.44669/-75.46388" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>931 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44674&mlon=-75.46374#map=18/45.44674/-75.46374" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>933 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44679&mlon=-75.46359#map=18/45.44679/-75.46359" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>935 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44684&mlon=-75.46344#map=18/45.44684/-75.46344" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>936 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44665&mlon=-75.46306#map=18/45.44665/-75.46306" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>937 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44689&mlon=-75.46328#map=18/45.44689/-75.46328" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>938 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44670&mlon=-75.46292#map=18/45.44670/-75.46292" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>939 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44693&mlon=-75.46314#map=18/45.44693/-75.46314" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>940 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44674&mlon=-75.46279#map=18/45.44674/-75.46279" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>941 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44697&mlon=-75.46299#map=18/45.44697/-75.46299" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>942 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44678&mlon=-75.46265#map=18/45.44678/-75.46265" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>943 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44702&mlon=-75.46286#map=18/45.44702/-75.46286" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>944 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44683&mlon=-75.46252#map=18/45.44683/-75.46252" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>945 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44706&mlon=-75.46271#map=18/45.44706/-75.46271" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>946 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44687&mlon=-75.46239#map=18/45.44687/-75.46239" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>948 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44691&mlon=-75.46226#map=18/45.44691/-75.46226" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>949 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44715&mlon=-75.46235#map=18/45.44715/-75.46235" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>950 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44695&mlon=-75.46214#map=18/45.44695/-75.46214" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>951 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44719&mlon=-75.46220#map=18/45.44719/-75.46220" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>952 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44698&mlon=-75.46202#map=18/45.44698/-75.46202" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>953 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44723&mlon=-75.46208#map=18/45.44723/-75.46208" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>954 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44703&mlon=-75.46187#map=18/45.44703/-75.46187" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>955 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44727&mlon=-75.46194#map=18/45.44727/-75.46194" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>957 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44730&mlon=-75.46176#map=18/45.44730/-75.46176" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>959 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44725&mlon=-75.46159#map=18/45.44725/-75.46159" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>961 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44715&mlon=-75.46151#map=18/45.44715/-75.46151" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>963 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44706&mlon=-75.46145#map=18/45.44706/-75.46145" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>965 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44697&mlon=-75.46141#map=18/45.44697/-75.46141" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>967 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44689&mlon=-75.46136#map=18/45.44689/-75.46136" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>969 GOSLING POND CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44680&mlon=-75.46130#map=18/45.44680/-75.46130" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>800 GREAT POND AVE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44668&mlon=-75.46164#map=18/45.44668/-75.46164" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>808 GREAT POND AVE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44657&mlon=-75.46198#map=18/45.44657/-75.46198" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>820 GREAT POND AVE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44643&mlon=-75.46244#map=18/45.44643/-75.46244" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>836 GREAT POND AVE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44619&mlon=-75.46314#map=18/45.44619/-75.46314" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>840 GREAT POND AVE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44609&mlon=-75.46347#map=18/45.44609/-75.46347" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>842 GREAT POND AVE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44605&mlon=-75.46360#map=18/45.44605/-75.46360" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>844 GREAT POND AVE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44601&mlon=-75.46373#map=18/45.44601/-75.46373" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>846 GREAT POND AVE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44598&mlon=-75.46386#map=18/45.44598/-75.46386" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>848 GREAT POND AVE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44594&mlon=-75.46399#map=18/45.44594/-75.46399" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>850 GREAT POND AVE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44590&mlon=-75.46412#map=18/45.44590/-75.46412" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>852 GREAT POND AVE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44586&mlon=-75.46424#map=18/45.44586/-75.46424" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>854 GREAT POND AVE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44582&mlon=-75.46438#map=18/45.44582/-75.46438" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>856 GREAT POND AVE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44578&mlon=-75.46452#map=18/45.44578/-75.46452" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>200 JAMEELA ROW</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44638&mlon=-75.46146#map=18/45.44638/-75.46146" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>201 JAMEELA ROW</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44653&mlon=-75.46105#map=18/45.44653/-75.46105" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>208 JAMEELA ROW</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44612&mlon=-75.46132#map=18/45.44612/-75.46132" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>213 JAMEELA ROW</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44620&mlon=-75.46086#map=18/45.44620/-75.46086" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>216 JAMEELA ROW</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44590&mlon=-75.46119#map=18/45.44590/-75.46119" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>224 JAMEELA ROW</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44566&mlon=-75.46105#map=18/45.44566/-75.46105" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>225 JAMEELA ROW</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44586&mlon=-75.46067#map=18/45.44586/-75.46067" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>101 LITTLE MOOSE LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44541&mlon=-75.45993#map=18/45.44541/-75.45993" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>113 LITTLE MOOSE LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44526&mlon=-75.46039#map=18/45.44526/-75.46039" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>125 LITTLE MOOSE LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44511&mlon=-75.46087#map=18/45.44511/-75.46087" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>135 LITTLE MOOSE LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44500&mlon=-75.46127#map=18/45.44500/-75.46127" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2460 PORTOBELLO BLVD</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44766&mlon=-75.46131#map=18/45.44766/-75.46131" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2472 PORTOBELLO BLVD</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44732&mlon=-75.46112#map=18/45.44732/-75.46112" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2480 PORTOBELLO BLVD</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44708&mlon=-75.46098#map=18/45.44708/-75.46098" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2490 PORTOBELLO BLVD</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44663&mlon=-75.46072#map=18/45.44663/-75.46072" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2502 PORTOBELLO BLVD</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44629&mlon=-75.46052#map=18/45.44629/-75.46052" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>700 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44537&mlon=-75.46476#map=18/45.44537/-75.46476" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>701 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44549&mlon=-75.46438#map=18/45.44549/-75.46438" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>702 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44526&mlon=-75.46469#map=18/45.44526/-75.46469" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>703 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44540&mlon=-75.46433#map=18/45.44540/-75.46433" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>704 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44515&mlon=-75.46462#map=18/45.44515/-75.46462" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>705 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44532&mlon=-75.46428#map=18/45.44532/-75.46428" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>706 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44504&mlon=-75.46456#map=18/45.44504/-75.46456" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>707 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44525&mlon=-75.46423#map=18/45.44525/-75.46423" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>708 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44494&mlon=-75.46448#map=18/45.44494/-75.46448" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>709 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44514&mlon=-75.46418#map=18/45.44514/-75.46418" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>710 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44484&mlon=-75.46443#map=18/45.44484/-75.46443" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>711 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44503&mlon=-75.46410#map=18/45.44503/-75.46410" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>712 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44474&mlon=-75.46438#map=18/45.44474/-75.46438" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>713 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44492&mlon=-75.46405#map=18/45.44492/-75.46405" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>714 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44464&mlon=-75.46432#map=18/45.44464/-75.46432" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>715 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44481&mlon=-75.46398#map=18/45.44481/-75.46398" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>716 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44455&mlon=-75.46426#map=18/45.44455/-75.46426" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>717 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44471&mlon=-75.46392#map=18/45.44471/-75.46392" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>718 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44444&mlon=-75.46418#map=18/45.44444/-75.46418" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>719 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44459&mlon=-75.46386#map=18/45.44459/-75.46386" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>720 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44434&mlon=-75.46412#map=18/45.44434/-75.46412" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>722 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44428&mlon=-75.46395#map=18/45.44428/-75.46395" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>724 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44428&mlon=-75.46375#map=18/45.44428/-75.46375" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>726 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44433&mlon=-75.46357#map=18/45.44433/-75.46357" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>728 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44438&mlon=-75.46343#map=18/45.44438/-75.46343" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>730 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44443&mlon=-75.46329#map=18/45.44443/-75.46329" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>732 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44448&mlon=-75.46317#map=18/45.44448/-75.46317" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>734 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44455&mlon=-75.46303#map=18/45.44455/-75.46303" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>736 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44466&mlon=-75.46294#map=18/45.44466/-75.46294" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>738 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44479&mlon=-75.46297#map=18/45.44479/-75.46297" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>740 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44492&mlon=-75.46304#map=18/45.44492/-75.46304" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>741 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44472&mlon=-75.46334#map=18/45.44472/-75.46334" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>742 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44501&mlon=-75.46310#map=18/45.44501/-75.46310" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>743 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44485&mlon=-75.46340#map=18/45.44485/-75.46340" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>744 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44512&mlon=-75.46315#map=18/45.44512/-75.46315" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>745 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44497&mlon=-75.46348#map=18/45.44497/-75.46348" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>746 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44521&mlon=-75.46321#map=18/45.44521/-75.46321" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>747 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44508&mlon=-75.46354#map=18/45.44508/-75.46354" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>748 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44529&mlon=-75.46326#map=18/45.44529/-75.46326" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>749 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44519&mlon=-75.46359#map=18/45.44519/-75.46359" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>750 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44538&mlon=-75.46331#map=18/45.44538/-75.46331" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>751 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44531&mlon=-75.46366#map=18/45.44531/-75.46366" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>752 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44546&mlon=-75.46336#map=18/45.44546/-75.46336" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>753 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44540&mlon=-75.46371#map=18/45.44540/-75.46371" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>754 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44557&mlon=-75.46343#map=18/45.44557/-75.46343" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>755 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44549&mlon=-75.46377#map=18/45.44549/-75.46377" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>756 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44567&mlon=-75.46349#map=18/45.44567/-75.46349" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>757 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44557&mlon=-75.46383#map=18/45.44557/-75.46383" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>758 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44575&mlon=-75.46352#map=18/45.44575/-75.46352" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>759 PROSPER CIR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44566&mlon=-75.46387#map=18/45.44566/-75.46387" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>500 SWAN SHORE WALK</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44604&mlon=-75.46254#map=18/45.44604/-75.46254" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>509 SWAN SHORE WALK</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44593&mlon=-75.46201#map=18/45.44593/-75.46201" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+  </details>
+  
+    
+  </div>
+  
+
+  
+
+  <div class="section">
+    <h2>Location Adjustments <span class="badge" style="background: var(--surface2); color: var(--text-dim)">0</span></h2>
+    
+    <p class="empty">No location adjustments.</p>
+  </div>
+
+  <div class="generated-at">Report generated Sep 24, 2026 at 01:06 PM · source licence: Open Government Licence – City of Ottawa 2.0</div>
+
+  <script>
+    function sortTable(tbodyId, col) {
+      const tbody = document.getElementById(tbodyId);
+      if (!tbody) return;
+      const rows = Array.from(tbody.rows);
+      const dir = tbody.dataset.sortDir === 'asc' ? 'desc' : 'asc';
+      tbody.dataset.sortDir = dir;
+      rows.sort((a, b) => {
+        const av = a.cells[col]?.textContent.trim() || '';
+        const bv = b.cells[col]?.textContent.trim() || '';
+        const an = parseFloat(av), bn = parseFloat(bv);
+        if (!isNaN(an) && !isNaN(bn)) return dir === 'asc' ? an - bn : bn - an;
+        return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+      });
+      rows.forEach(r => tbody.appendChild(r));
+    }
+  </script>
+</body>
+
+</html>

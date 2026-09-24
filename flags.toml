@@ -1295,3 +1295,13 @@ reviewed = "2026-09-21"
 rule = "datasets/simcoe.toml: ignore_fields += ChildARN, keep_fields = [ARN, ChildARN], location_min_move_m = 5; backfill_props_hash.py --reapply-ignore --city simcoe run 2026-09-21 (191,102 rows; store backed up to simcoe.db.bak-2026-09-21 first; dry-run now rewrites 0 rows)"
 note = "50 rows changed only ChildARN plus a 0.8-3.9 m point re-snap: 47 lots on Switchgrass Avenue / White Cedar Parkway (Innisfil) moved off one parent roll 434101000301450 onto per-lot child rolls 4341010003030xx, plus 210 Concession 8 East and 107 Penetanguishene Road. Number, street and full address unchanged on every row. ChildARN is the per-lot member of the roll family already ruled technical for ARN on 08-26/08-28/09-04 (equals ARN on 178k of 190k rows); the sub-4 m moves are the point re-snapping to the new parcel, as on every earlier ChildARN re-link in the store. With the rule applied the day reduces to one modification: 107 Penetanguishene Road's 337 m move, which clears the floor and publishes as a location adjustment. Vault has no anomaly row for the day."
 
+[[flag]]
+slug = "renfrew"
+date = "2026-09-24"
+signature = "mass-modified"
+fields = ["St_PreTyp"]
+scope = "236 rows changed the same field set [St_PreTyp] (93% of the day's 253 modifications)"
+detail = "top: 'Highway' -> None (236)"
+detected = "2026-09-24"
+status = "open"
+
