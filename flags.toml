@@ -1303,5 +1303,9 @@ fields = ["St_PreTyp"]
 scope = "236 rows changed the same field set [St_PreTyp] (93% of the day's 253 modifications)"
 detail = "top: 'Highway' -> None (236)"
 detected = "2026-09-24"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-09-24"
+rule = "datasets/renfrew.toml: ignore_fields += St_PreTyp (NENA pre-type that only ever held 'Highway' on 249 rows store-wide, every one a duplicate of St_PosTyp on Highway 17; a real pre-type change recomposes Full_Address, which canonical full tracks); DB backed up to renfrew.db.bak-2026-09-24, backfill_props_hash --reapply-ignore --city renfrew run, 249 rows rewritten, verified 0 left and the 09-11->09-24 diff drops 253 -> 17 modifications"
+note = "St_PreTyp 'Highway' -> None on 236 Laurentian Hills rows on Highway 17 (plus 3 riding a STATUS flip; 3 Petawawa rows still carry it). St_Name stayed '17', St_PosTyp stayed 'Highway', full and Full_Address identical before and after on every row. The county dropped a redundant token, no address changed. No vault anomaly that day."
 

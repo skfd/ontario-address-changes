@@ -64,6 +64,13 @@ ignore_fields = [
   # Unit carry the real components; AddNum_Suf stays tracked (2,417 letter suffixes A/B/C
   # are real address data).
   "AddNum_Cmp",
+  # NENA street pre-type. In this layer it has only ever held "Highway", on 249 rows
+  # across the whole store, and every one of them was Highway 17 where St_PosTyp already
+  # said "Highway" - a duplicate token, never a real pre-type. Laurentian Hills cleared it
+  # on 236 rows on 2026-09-24 (St_Name '17', St_PosTyp 'Highway', full and Full_Address
+  # unchanged on every row); 3 Petawawa rows still carry it. A genuine pre-type change
+  # (e.g. Highway -> County Road) recomposes Full_Address, which canonical `full` tracks.
+  "St_PreTyp",
 ]
 
 # Ignored for change detection (above) but still written to props: the roll number is the
