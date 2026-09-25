@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>City of Ottawa Address Changes — Friday, Sep 25, 2026</title>
+  <style>
+    :root {
+      --bg: #fafafa; --surface: #ffffff; --surface2: #f5f5f5; --surface3: #ebebeb;
+      --border: #e0e0e0; --border-strong: #d1d1d1; --text: #242424;
+      --text-secondary: #424242; --text-dim: #616161; --accent: #0078d4;
+      --accent-hover: #106ebe; --accent-bg: #eff6fc; --green: #107c10;
+      --green-bg: #f1faf1; --green-tint: #9fd89f; --red: #c50f1f; --red-bg: #fdf3f4;
+      --red-tint: #eeacb2; --yellow: #eaa300; --yellow-bg: #fefbf4; --yellow-tint: #f9e2ae;
+      --purple: #881798; --purple-bg: #f9f3fb; --teal: #038387; --teal-bg: #f0fafa;
+      --shadow-4: 0 2px 4px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --shadow-8: 0 4px 8px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --card-bg: #ffffff; --card-hover: #f5f5f5; color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1f1f1f; --surface: #292929; --surface2: #333333; --surface3: #3d3d3d;
+        --border: #525252; --border-strong: #666666; --text: #ffffff;
+        --text-secondary: #d6d6d6; --text-dim: #adadad; --accent: #2899f5;
+        --accent-hover: #3aa0f3; --accent-bg: #002848; --green: #54b054;
+        --green-bg: #052505; --green-tint: #107c10; --red: #dc626d; --red-bg: #3b0509;
+        --red-tint: #c50f1f; --yellow: #f2c661; --yellow-bg: #463100; --yellow-tint: #eaa300;
+        --purple: #d29ddb; --purple-bg: #3a1040; --teal: #58c0c4; --teal-bg: #013638;
+        --shadow-4: 0 2px 4px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --shadow-8: 0 4px 8px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --card-bg: #333333; --card-hover: #3d3d3d; color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI Variable','Segoe UI',system-ui,-apple-system,sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.5; padding: 2rem;
+      max-width: 1100px; margin: 0 auto; font-size: 14px; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; color: var(--accent-hover); }
+    .back-link { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 12px;
+      color: var(--text-dim); margin-bottom: 1.5rem; transition: color 0.1s; }
+    .back-link:hover { color: var(--accent); text-decoration: none; }
+    h1 { font-size: 24px; font-weight: 600; margin-bottom: 4px; }
+    .subtitle { color: var(--text-secondary); font-size: 14px; margin-bottom: 12px; }
+    .explainer { color: var(--text-secondary); font-size: 13px; line-height: 1.5;
+      margin-bottom: 24px; padding: 12px 16px; background: var(--surface);
+      border-radius: 8px; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px; margin-bottom: 24px; }
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px;
+      padding: 16px; box-shadow: var(--shadow-4); transition: box-shadow 0.1s; }
+    .card:hover { box-shadow: var(--shadow-8); }
+    .card .label { font-size: 12px; color: var(--text-dim); font-weight: 400; }
+    .card .value { font-size: 28px; font-weight: 600; margin-top: 4px; }
+    .card .value.green { color: var(--green); } .card .value.red { color: var(--red); }
+    .card .value.yellow { color: var(--yellow); } .card .value.accent { color: var(--accent); }
+    .card .value.purple { color: var(--purple); }
+    .card .value.teal { color: var(--teal); }
+    .sparkline { display: block; margin-top: 6px; overflow: visible; opacity: 0.9; }
+    .sparkline-label { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+    .section { margin-bottom: 24px; }
+    .section h2 { font-size: 16px; font-weight: 600; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px; }
+    .badge { font-size: 12px; padding: 2px 8px; border-radius: 999px; font-weight: 600; }
+    .badge-green { background: var(--green-bg); color: var(--green); }
+    .badge-red { background: var(--red-bg); color: var(--red); }
+    .badge-yellow { background: var(--yellow-bg); color: var(--yellow); }
+    .badge-accent { background: var(--accent-bg); color: var(--accent); }
+    .badge-purple { background: var(--purple-bg); color: var(--purple); }
+    .badge-teal { background: var(--teal-bg); color: var(--teal); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface);
+      border-radius: 8px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    thead { background: var(--surface2); }
+    th { text-align: left; padding: 8px 12px; font-weight: 600; color: var(--text-dim);
+      font-size: 12px; cursor: pointer; user-select: none; border-bottom: 1px solid var(--border); }
+    th:hover { color: var(--accent); }
+    td { padding: 8px 12px; border-top: 1px solid var(--border); }
+    tr:hover td { background: var(--surface2); }
+    .old-val { color: var(--red); text-decoration: line-through; }
+    .new-val { color: var(--green); }
+    .arrow-val { color: var(--text-dim); text-align: center; white-space: nowrap; }
+    .map-link { display: inline-flex; align-items: center; margin-left: 0.4em;
+      color: var(--accent); vertical-align: middle; white-space: nowrap; font-size: 12px; }
+    .map-link:hover { color: var(--accent-hover); }
+    .map-link svg { width: 14px; height: 14px; }
+    .change-field { color: var(--yellow); font-weight: 600; }
+    .bar-chart { margin-top: 8px; }
+    .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 12px; }
+    .bar-label { width: 180px; text-align: right; color: var(--text-secondary); flex-shrink: 0;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .bar-track { flex: 1; height: 8px; background: var(--surface2); border-radius: 4px;
+      overflow: hidden; position: relative; }
+    .bar-fill { height: 100%; border-radius: 4px; transition: width 0.15s ease; }
+    .bar-fill.green { background: var(--green); } .bar-fill.red { background: var(--red); }
+    .bar-count { width: 40px; font-size: 12px; color: var(--text-dim); }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+    .empty { color: var(--text-dim); font-style: italic; padding: 16px; }
+    .truncated { color: var(--text-dim); font-size: 12px; margin-top: 8px; }
+    .collapsible-toggle { background: transparent; border: 1px solid var(--border);
+      color: var(--accent); padding: 5px 12px; border-radius: 4px; cursor: pointer;
+      font-size: 12px; font-family: inherit; margin-bottom: 12px; transition: background 0.1s; }
+    .collapsible-toggle:hover { background: var(--surface2); }
+    details.rename-group { background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; margin-bottom: 8px; box-shadow: var(--shadow-4); }
+    details.rename-group summary { padding: 10px 14px; cursor: pointer; font-size: 13px; }
+    details.rename-group[open] summary { border-bottom: 1px solid var(--border); }
+    details.rename-group table { border: none; box-shadow: none; border-radius: 0; }
+    details.rename-group .truncated { padding: 0 14px 10px; margin-top: 0; }
+    .rename-count { color: var(--text-dim); font-size: 12px; margin-left: 6px; }
+    .no-changes-banner { background: var(--green-bg); border: 1px solid var(--green-tint);
+      color: var(--green); padding: 16px; border-radius: 8px; margin-bottom: 24px;
+      text-align: center; font-weight: 600; font-size: 14px; }
+    .baseline-banner { background: var(--accent-bg); border: 1px solid var(--accent);
+      color: var(--accent); padding: 16px; border-radius: 8px; margin-bottom: 24px; font-size: 13px; }
+    .generated-at { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-dim); }
+    .history { font-size: 12.5px; color: var(--text-secondary); white-space: nowrap; }
+    .history .a { color: var(--green); font-weight: 500; }
+    .history .r { color: var(--red); font-weight: 500; }
+    .history .dot { color: var(--text-dim); margin: 0 4px; }
+    .history-none { color: var(--text-dim); font-style: italic; font-size: 12.5px; }
+    .info-wrap { position: relative; display: inline-flex; vertical-align: middle; }
+    .info-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+      height: 18px; padding: 0 8px 0 7px; border-radius: 999px; border: none;
+      color: #fff; background: var(--accent); cursor: help; font-size: 11px; font-weight: 600;
+      font-style: normal; font-family: inherit; line-height: 1; white-space: nowrap; }
+    .info-btn .glyph { font-style: italic; font-weight: 700;
+      font-family: Georgia, 'Times New Roman', serif; }
+    .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn,
+    .info-wrap:focus .info-btn { background: var(--accent-hover); }
+    .info-pop { display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 20;
+      width: 320px; max-width: 80vw; padding: 12px 14px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-8);
+      font-size: 12.5px; font-weight: 400; color: var(--text-secondary); line-height: 1.5; }
+    .info-wrap:hover .info-pop, .info-wrap:focus-within .info-pop,
+    .info-wrap:focus .info-pop { display: block; }
+    .info-pop strong { display: block; color: var(--text); font-size: 12px; margin-bottom: 4px; }
+    .info-pop ul { list-style: none; margin: 0 0 10px; padding: 0; }
+    .info-pop li { padding: 1px 0 1px 14px; position: relative; }
+    .info-pop li::before { content: "·"; position: absolute; left: 4px; color: var(--text-dim); }
+    .info-pop .note { color: var(--text-dim); font-size: 11.5px; margin: 0 0 10px; }
+    .info-pop .muted { color: var(--text-dim); font-style: italic; }
+  </style>
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+
+  <a class="back-link" href="index.html">← Back to City of Ottawa reports</a>
+
+  <h1>City of Ottawa — Address Changes</h1>
+  <p class="subtitle">
+    Changes between  and Friday, Sep 25, 2026
+    · 404,184 total addresses
+  </p>
+
+  
+
+  <div class="cards">
+    <div class="card"><div class="label">Total Addresses</div>
+      <div class="value accent">404,184</div></div>
+    <div class="card"><div class="label">New Addresses</div>
+      <div class="value green">+6</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#107c10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,14.7 19.7,17.8 37.3,2.0 55.0,17.7 72.7,18.0 90.3,17.9 108.0,17.9"/><circle cx="108.0" cy="17.9" r="2" fill="#107c10"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Retired Addresses</div>
+      <div class="value red">−2</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#c50f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,2.0 37.3,18.0 55.0,18.0 72.7,10.0 90.3,18.0 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#c50f1f"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Updated Addresses <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRNUM)</li><li>Street name (FULLNAME)</li><li>Unit (UNITID)</li><li>Full address (FULLADDR)</li><li>Coordinates (latitude, longitude)</li><li>ADDRTYPE</li><li>PI_MUNICIPAL_ADDRESS_ID</li><li>QUALIFIER</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span></div>
+      <div class="value yellow">1</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,13.4 19.7,15.7 37.3,2.0 55.0,15.7 72.7,13.4 90.3,18.0 108.0,15.7"/><circle cx="108.0" cy="15.7" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Renumbered</div>
+      <div class="value accent">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#0078d4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#0078d4"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Street Renames</div>
+      <div class="value purple">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#9141ac" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#9141ac"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    <div class="card"><div class="label">Status Changes</div>
+      <div class="value teal">78</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#038387" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,16.2 19.7,16.6 37.3,16.4 55.0,18.0 72.7,15.0 90.3,2.0 108.0,9.2"/><circle cx="108.0" cy="9.2" r="2" fill="#038387"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    <div class="card"><div class="label">Location Adjustments</div>
+      <div class="value" style="color: var(--text-dim)">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#808080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,2.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#808080"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+  </div>
+
+  
+  <div class="section">
+    <h2>Change Breakdown</h2>
+    <div class="stats-grid">
+      
+      
+      
+      <div class="card"><div class="label">Most Frequently Updated Fields</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">ADDRTYPE</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">79</span></div>
+        <div class="bar-row"><span class="bar-label">Location</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:1.0%"></div></div>
+          <span class="bar-count">1</span></div>
+      </div></div>
+    </div>
+  </div>
+  
+
+  <div class="section">
+    <h2>New Addresses <span class="badge badge-green">6</span></h2>
+    
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-added',0)">Address</th><th onclick="sortTable('t-added',1)">Street</th>
+        <th onclick="sortTable('t-added',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-added">
+        
+        <tr><td>3260 B ALBION RD S</td><td>ALBION RD S</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.36216&mlon=-75.64801#map=18/45.36216/-75.64801" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1281 B GREGORY CRT</td><td>GREGORY CRT</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44497&mlon=-75.59311#map=18/45.44497/-75.59311" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>812 B HAMLET RD</td><td>HAMLET RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39942&mlon=-75.63280#map=18/45.39942/-75.63280" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>475 B NEWMAN AVE</td><td>NEWMAN AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.42791&mlon=-75.64676#map=18/45.42791/-75.64676" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>53 ST. CLAIRE AVE</td><td>ST. CLAIRE AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.35656&mlon=-75.74355#map=18/45.35656/-75.74355" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>495 2 WENTWORTH AVE</td><td>WENTWORTH AVE</td><td>2</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.36797&mlon=-75.77856#map=18/45.36797/-75.77856" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Retired Addresses <span class="badge badge-red">2</span></h2>
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-removed',0)">Address</th><th onclick="sortTable('t-removed',1)">Street</th>
+        <th onclick="sortTable('t-removed',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-removed">
+        
+        <tr><td>4037 LARRY ROBINSON RD</td><td>LARRY ROBINSON RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.20611&mlon=-75.37188#map=18/45.20611/-75.37188" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>277 PONDEROSA ST</td><td>PONDEROSA ST</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.28475&mlon=-75.89383#map=18/45.28475/-75.89383" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Updated Addresses <span class="badge badge-yellow">1</span>
+      <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRNUM)</li><li>Street name (FULLNAME)</li><li>Unit (UNITID)</li><li>Full address (FULLADDR)</li><li>Coordinates (latitude, longitude)</li><li>ADDRTYPE</li><li>PI_MUNICIPAL_ADDRESS_ID</li><li>QUALIFIER</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span></h2>
+    
+    
+    <table>
+      <thead><tr><th>Address</th><th>What Changed</th><th>Before</th><th></th><th>After</th><th>Map</th></tr></thead>
+      <tbody>
+        
+  <tr><td rowspan="2">4050 GREGOIRE RD</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.20618&mlon=-75.37124#map=18/45.20618/-75.37124" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">45.20573, -75.37160<a class="map-link" href="https://www.openstreetmap.org/?mlat=45.20573&mlon=-75.37160#map=19/45.20573/-75.37160" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↗ 57.5m</td>
+    <td class="new-val">45.20618, -75.37124<a class="map-link" href="https://www.openstreetmap.org/?mlat=45.20618&mlon=-75.37124#map=19/45.20618/-75.37124" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Renumbered Addresses <span class="badge badge-accent">0</span></h2>
+    
+    <p class="empty">No addresses renumbered.</p>
+  </div>
+
+  <div class="section">
+    <h2>Street Renames <span class="badge badge-purple">0</span></h2>
+    <p class="empty">No street renames.</p>
+  </div>
+
+  
+
+  
+  <div class="section">
+    <h2>Status Changes <span class="badge badge-teal">78</span></h2>
+    
+  <details class="rename-group">
+    <summary><span class="change-field">ADDRTYPE:</span> <span class="old-val">SUBORD</span> <span class="arrow-val">→</span> <span class="new-val">MAIN</span><span class="rename-count">76 addresses</span></summary>
+    <table>
+      <tbody>
+        
+        <tr><td>342 AUTUMN MEADOW WAY</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.13156&mlon=-75.70417#map=18/45.13156/-75.70417" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>345 AUTUMN MEADOW WAY</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.13094&mlon=-75.70400#map=18/45.13094/-75.70400" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>346 AUTUMN MEADOW WAY</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.13132&mlon=-75.70444#map=18/45.13132/-75.70444" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>349 AUTUMN MEADOW WAY</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.13075&mlon=-75.70424#map=18/45.13075/-75.70424" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>350 AUTUMN MEADOW WAY</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.13111&mlon=-75.70474#map=18/45.13111/-75.70474" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>353 AUTUMN MEADOW WAY</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.13058&mlon=-75.70459#map=18/45.13058/-75.70459" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>354 AUTUMN MEADOW WAY</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.13089&mlon=-75.70518#map=18/45.13089/-75.70518" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>357 AUTUMN MEADOW WAY</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.13040&mlon=-75.70488#map=18/45.13040/-75.70488" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>358 AUTUMN MEADOW WAY</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.13072&mlon=-75.70553#map=18/45.13072/-75.70553" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>361 AUTUMN MEADOW WAY</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.13023&mlon=-75.70516#map=18/45.13023/-75.70516" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>362 AUTUMN MEADOW WAY</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.13056&mlon=-75.70584#map=18/45.13056/-75.70584" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>365 AUTUMN MEADOW WAY</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.13008&mlon=-75.70550#map=18/45.13008/-75.70550" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>366 AUTUMN MEADOW WAY</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.13043&mlon=-75.70622#map=18/45.13043/-75.70622" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>369 AUTUMN MEADOW WAY</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.12988&mlon=-75.70577#map=18/45.12988/-75.70577" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>370 AUTUMN MEADOW WAY</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.13015&mlon=-75.70642#map=18/45.13015/-75.70642" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>373 AUTUMN MEADOW WAY</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.12986&mlon=-75.70616#map=18/45.12986/-75.70616" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>316 BELLISSIMO WAY</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44573&mlon=-75.46174#map=18/45.44573/-75.46174" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>324 BELLISSIMO WAY</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44549&mlon=-75.46161#map=18/45.44549/-75.46161" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>700 CAMARGUE PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32703&mlon=-75.60037#map=18/45.32703/-75.60037" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>702 CAMARGUE PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32697&mlon=-75.60037#map=18/45.32697/-75.60037" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>704 CAMARGUE PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32691&mlon=-75.60037#map=18/45.32691/-75.60037" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>706 CAMARGUE PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32684&mlon=-75.60034#map=18/45.32684/-75.60034" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>708 CAMARGUE PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32678&mlon=-75.60029#map=18/45.32678/-75.60029" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>709 CAMARGUE PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32685&mlon=-75.60006#map=18/45.32685/-75.60006" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>710 CAMARGUE PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32673&mlon=-75.60025#map=18/45.32673/-75.60025" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>711 CAMARGUE PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32679&mlon=-75.60000#map=18/45.32679/-75.60000" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>712 CAMARGUE PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32668&mlon=-75.60020#map=18/45.32668/-75.60020" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>713 CAMARGUE PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32675&mlon=-75.59995#map=18/45.32675/-75.59995" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>714 CAMARGUE PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32662&mlon=-75.60015#map=18/45.32662/-75.60015" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>715 CAMARGUE PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32669&mlon=-75.59990#map=18/45.32669/-75.59990" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>716 CAMARGUE PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32656&mlon=-75.60011#map=18/45.32656/-75.60011" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>717 CAMARGUE PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32663&mlon=-75.59985#map=18/45.32663/-75.59985" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>718 CAMARGUE PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32652&mlon=-75.60007#map=18/45.32652/-75.60007" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>719 CAMARGUE PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32656&mlon=-75.59980#map=18/45.32656/-75.59980" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>720 CAMARGUE PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32646&mlon=-75.60002#map=18/45.32646/-75.60002" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>721 CAMARGUE PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32652&mlon=-75.59977#map=18/45.32652/-75.59977" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>722 CAMARGUE PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32639&mlon=-75.59997#map=18/45.32639/-75.59997" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>723 CAMARGUE PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32648&mlon=-75.59972#map=18/45.32648/-75.59972" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>724 CAMARGUE PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32633&mlon=-75.59992#map=18/45.32633/-75.59992" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>725 CAMARGUE PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32641&mlon=-75.59967#map=18/45.32641/-75.59967" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>726 CAMARGUE PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32628&mlon=-75.59987#map=18/45.32628/-75.59987" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>745 CAMARGUE PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32678&mlon=-75.59875#map=18/45.32678/-75.59875" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>747 CAMARGUE PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32683&mlon=-75.59879#map=18/45.32683/-75.59879" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>749 CAMARGUE PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32688&mlon=-75.59883#map=18/45.32688/-75.59883" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>751 CAMARGUE PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32694&mlon=-75.59888#map=18/45.32694/-75.59888" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>145 LITTLE MOOSE LANE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44487&mlon=-75.46167#map=18/45.44487/-75.46167" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>500 PANTANAL PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32658&mlon=-75.59927#map=18/45.32658/-75.59927" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>501 PANTANAL PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32647&mlon=-75.59952#map=18/45.32647/-75.59952" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>502 PANTANAL PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32663&mlon=-75.59932#map=18/45.32663/-75.59932" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>503 PANTANAL PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32653&mlon=-75.59957#map=18/45.32653/-75.59957" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>504 PANTANAL PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32669&mlon=-75.59936#map=18/45.32669/-75.59936" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>505 PANTANAL PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32658&mlon=-75.59961#map=18/45.32658/-75.59961" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>506 PANTANAL PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32673&mlon=-75.59940#map=18/45.32673/-75.59940" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>507 PANTANAL PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32662&mlon=-75.59965#map=18/45.32662/-75.59965" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>508 PANTANAL PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32678&mlon=-75.59944#map=18/45.32678/-75.59944" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>509 PANTANAL PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32669&mlon=-75.59970#map=18/45.32669/-75.59970" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>511 PANTANAL PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32676&mlon=-75.59975#map=18/45.32676/-75.59975" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>513 PANTANAL PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32681&mlon=-75.59980#map=18/45.32681/-75.59980" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>515 PANTANAL PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32686&mlon=-75.59984#map=18/45.32686/-75.59984" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>517 PANTANAL PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32692&mlon=-75.59989#map=18/45.32692/-75.59989" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>522 PANTANAL PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32684&mlon=-75.59929#map=18/45.32684/-75.59929" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>524 PANTANAL PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32679&mlon=-75.59925#map=18/45.32679/-75.59925" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>525 PANTANAL PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32687&mlon=-75.59904#map=18/45.32687/-75.59904" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>526 PANTANAL PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32674&mlon=-75.59921#map=18/45.32674/-75.59921" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>527 PANTANAL PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32681&mlon=-75.59900#map=18/45.32681/-75.59900" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>528 PANTANAL PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32669&mlon=-75.59916#map=18/45.32669/-75.59916" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>529 PANTANAL PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32677&mlon=-75.59896#map=18/45.32677/-75.59896" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>530 PANTANAL PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32664&mlon=-75.59912#map=18/45.32664/-75.59912" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>531 PANTANAL PRIV</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.32671&mlon=-75.59890#map=18/45.32671/-75.59890" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2514 PORTOBELLO BLVD</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44596&mlon=-75.46032#map=18/45.44596/-75.46032" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>22 SINTALUTA WALK</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.18871&mlon=-75.85321#map=18/45.18871/-75.85321" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>24 SINTALUTA WALK</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.18866&mlon=-75.85316#map=18/45.18866/-75.85316" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>26 SINTALUTA WALK</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.18861&mlon=-75.85311#map=18/45.18861/-75.85311" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>28 SINTALUTA WALK</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.18857&mlon=-75.85305#map=18/45.18857/-75.85305" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>525 SWAN SHORE WALK</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44545&mlon=-75.46173#map=18/45.44545/-75.46173" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>51 TERCET TERR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25618&mlon=-75.90427#map=18/45.25618/-75.90427" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+  </details>
+  
+  <details class="rename-group">
+    <summary><span class="change-field">ADDRTYPE:</span> <span class="old-val">MAIN</span> <span class="arrow-val">→</span> <span class="new-val">SUBORD</span><span class="rename-count">2 addresses</span></summary>
+    <table>
+      <tbody>
+        
+        <tr><td>1135 CARLING AVE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.38922&mlon=-75.72753#map=18/45.38922/-75.72753" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>509 SWAN SHORE WALK</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44593&mlon=-75.46201#map=18/45.44593/-75.46201" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+  </details>
+  
+    
+  </div>
+  
+
+  
+
+  <div class="section">
+    <h2>Location Adjustments <span class="badge" style="background: var(--surface2); color: var(--text-dim)">0</span></h2>
+    
+    <p class="empty">No location adjustments.</p>
+  </div>
+
+  <div class="generated-at">Report generated Sep 25, 2026 at 12:57 PM · source licence: Open Government Licence – City of Ottawa 2.0</div>
+
+  <script>
+    function sortTable(tbodyId, col) {
+      const tbody = document.getElementById(tbodyId);
+      if (!tbody) return;
+      const rows = Array.from(tbody.rows);
+      const dir = tbody.dataset.sortDir === 'asc' ? 'desc' : 'asc';
+      tbody.dataset.sortDir = dir;
+      rows.sort((a, b) => {
+        const av = a.cells[col]?.textContent.trim() || '';
+        const bv = b.cells[col]?.textContent.trim() || '';
+        const an = parseFloat(av), bn = parseFloat(bv);
+        if (!isNaN(an) && !isNaN(bn)) return dir === 'asc' ? an - bn : bn - an;
+        return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+      });
+      rows.forEach(r => tbody.appendChild(r));
+    }
+  </script>
+</body>
+
+</html>

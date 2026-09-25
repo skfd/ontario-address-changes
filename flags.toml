@@ -1309,3 +1309,31 @@ reviewed = "2026-09-24"
 rule = "datasets/renfrew.toml: ignore_fields += St_PreTyp (NENA pre-type that only ever held 'Highway' on 249 rows store-wide, every one a duplicate of St_PosTyp on Highway 17; a real pre-type change recomposes Full_Address, which canonical full tracks); DB backed up to renfrew.db.bak-2026-09-24, backfill_props_hash --reapply-ignore --city renfrew run, 249 rows rewritten, verified 0 left and the 09-11->09-24 diff drops 253 -> 17 modifications"
 note = "St_PreTyp 'Highway' -> None on 236 Laurentian Hills rows on Highway 17 (plus 3 riding a STATUS flip; 3 Petawawa rows still carry it). St_Name stayed '17', St_PosTyp stayed 'Highway', full and Full_Address identical before and after on every row. The county dropped a redundant token, no address changed. No vault anomaly that day."
 
+[[flag]]
+slug = "greater-sudbury"
+date = "2026-09-25"
+signature = "mass-modified"
+fields = ["location"]
+scope = "57 rows changed the same field set [location] (95% of the day's 60 modifications)"
+detected = "2026-09-25"
+status = "open"
+
+[[flag]]
+slug = "kingston"
+date = "2026-09-25"
+signature = "mass-modified"
+fields = ["POSTAL_CODE"]
+scope = "121 rows changed the same field set [POSTAL_CODE] (50% of the day's 242 modifications)"
+detail = "top: 'K7M 0E5' -> 'K7M 0C1' (121)"
+detected = "2026-09-25"
+status = "open"
+
+[[flag]]
+slug = "kingston"
+date = "2026-09-25"
+signature = "mass-modified"
+fields = ["POSTAL_CODE", "full", "unit"]
+scope = "120 rows changed the same field set [POSTAL_CODE, full, unit] (50% of the day's 242 modifications)"
+detected = "2026-09-25"
+status = "open"
+
