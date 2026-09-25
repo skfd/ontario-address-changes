@@ -21,6 +21,17 @@ ignore_fields = [
 ]
 keep_fields = ["ASSIGNEDADDRESSID"]
 
+# Sub-parcel cartographic nudges. Measured across all location-only moves since
+# 2026-06 (excluding three points that bounce 9-137 m daily, see below): 201 of
+# 225 travel under 10 m, 8 sit in the 10-25 m band, 16 are 25 m+. The 2026-09-25
+# sweep (57 rows, McNeill/Bloor/White/Patterson cluster) was median 3.4 m, p90
+# 6.7 m, 54 of 57 under 10 m. 10 rather than the 25 used elsewhere so the 12-25 m
+# re-placements this city does a few of each week keep publishing.
+# Not a fix for ADDRESSID 107023 / 107038 / 58596, which oscillate between a
+# handful of positions 9-137 m apart on most pulls (184 of 409 historical moves)
+# and leak onto the site as daily Location Adjustments; that wants city-tune.
+location_min_move_m = 10
+
 [identity]
 key_field = "ADDRESSID"                        # stable address id, 100% populated, order-independent (OBJECTID is sequential)
 synth_fields = ["number", "street", "unit"]    # fallback only

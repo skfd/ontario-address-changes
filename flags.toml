@@ -1316,7 +1316,11 @@ signature = "mass-modified"
 fields = ["location"]
 scope = "57 rows changed the same field set [location] (95% of the day's 60 modifications)"
 detected = "2026-09-25"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-09-25"
+rule = "datasets/greater-sudbury.toml: location_min_move_m = 10 (report-time floor, no backfill needed)"
+note = "57 location-only rows, median 3.4 m, p90 6.7 m, 54 of 57 under 10 m, clustered on McNeill Blvd / Bloor St / White Ave / Patterson St; no field rode along and the vault saw an ordinary pull. Sub-parcel cartographic nudges, the kingston/brampton/guelph class. Floor set at 10 m from the city's own history (201 of 225 non-oscillating moves since June are under 10 m) so its 12-25 m re-placements keep publishing; with the floor the day is 3 location rows plus 3 ordinary edits, no mass event."
 
 [[flag]]
 slug = "kingston"
