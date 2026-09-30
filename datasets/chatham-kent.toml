@@ -12,6 +12,11 @@ format = "geojson"
 license_name = "None published (confirmed 2026-08-20)"
 osm_compatible = "unknown-review"
 
+# POINT_X/POINT_Y (projected UTM copies of the point geometry) appeared on 2026-09-30,
+# None -> value on 56,145 rows. The geometry is already tracked as location; the
+# columns only duplicate it (flag 2026-09-30).
+ignore_fields = ["POINT_X", "POINT_Y"]
+
 [identity]
 # ADDRESS_ID has a 0/null "no-id" sentinel on ~1,588 rows (would collapse them), so synthesize.
 # No unit field published in this layer (cf. brantford/lambton).
