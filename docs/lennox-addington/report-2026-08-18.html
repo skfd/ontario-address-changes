@@ -183,7 +183,7 @@
     <span class="info-btn"><span class="glyph">i</span> Fields</span>
     <span class="info-pop">
       <strong>Compared for changes</strong>
-      <ul><li>Street number (ADD_LABEL)</li><li>Full address (ADDRESS)</li><li>Coordinates (latitude, longitude)</li><li>BELL_MUNIC</li><li>Number</li></ul>
+      <ul><li>Street number (ADD_LABEL)</li><li>Street name (derived from ADDRESS)</li><li>Full address (ADDRESS)</li><li>Coordinates (latitude, longitude)</li><li>BELL_MUNIC</li><li>Number</li></ul>
       <strong>Ignored (changes here are not counted)</strong>
       <p class="muted">None — every source field is compared.</p>
     </span>
@@ -213,20 +213,21 @@
   <div class="section">
     <h2>New Addresses <span class="badge badge-green">2</span></h2>
     
-    
-    <table>
-      <thead><tr><th onclick="sortTable('t-added',0)">Address</th><th onclick="sortTable('t-added',1)">Street</th>
-        <th onclick="sortTable('t-added',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
-      <tbody id="t-added">
-        
-        <tr><td>57A Redford Drive</td><td></td><td></td>
-          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.07776&mlon=-77.28425#map=18/45.07776/-77.28425" target="_blank" rel="noopener">View ↗</a></td></tr>
-        
-        <tr><td>57B Redford Drive</td><td></td><td></td>
-          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.07786&mlon=-77.28488#map=18/45.07786/-77.28488" target="_blank" rel="noopener">View ↗</a></td></tr>
-        
-      </tbody>
-    </table>
+    <details class="rename-group">
+      <summary><span class="old-val">57 Redford Drive</span> <span class="arrow-val">→</span> <span class="new-val">57A, 57B</span><span class="rename-count">2 new addresses · original address retired</span></summary>
+      <table>
+        <thead><tr><th>Address</th><th>Unit</th><th>History</th><th>Map</th></tr></thead>
+        <tbody>
+          
+          <tr><td>57A Redford Drive</td><td></td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.07776&mlon=-77.28425#map=18/45.07776/-77.28425" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>57B Redford Drive</td><td></td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.07786&mlon=-77.28488#map=18/45.07786/-77.28488" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+    </details>
     
     
   </div>
@@ -239,7 +240,7 @@
         <th onclick="sortTable('t-removed',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
       <tbody id="t-removed">
         
-        <tr><td>57 Redford Drive</td><td></td><td></td>
+        <tr><td>57 Redford Drive</td><td>Redford Drive</td><td></td>
           <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.07776&mlon=-77.28425#map=18/45.07776/-77.28425" target="_blank" rel="noopener">View ↗</a></td></tr>
         
       </tbody>
@@ -254,7 +255,7 @@
     <span class="info-btn"><span class="glyph">i</span> Fields</span>
     <span class="info-pop">
       <strong>Compared for changes</strong>
-      <ul><li>Street number (ADD_LABEL)</li><li>Full address (ADDRESS)</li><li>Coordinates (latitude, longitude)</li><li>BELL_MUNIC</li><li>Number</li></ul>
+      <ul><li>Street number (ADD_LABEL)</li><li>Street name (derived from ADDRESS)</li><li>Full address (ADDRESS)</li><li>Coordinates (latitude, longitude)</li><li>BELL_MUNIC</li><li>Number</li></ul>
       <strong>Ignored (changes here are not counted)</strong>
       <p class="muted">None — every source field is compared.</p>
     </span>
@@ -291,7 +292,7 @@
     <p class="empty">No location adjustments.</p>
   </div>
 
-  <div class="generated-at">Report generated Oct 02, 2026 at 12:59 PM · source licence: Open Government Licence - County of Lennox and Addington v2.0</div>
+  <div class="generated-at">Report generated Oct 03, 2026 at 01:47 AM · source licence: Open Government Licence - County of Lennox and Addington v2.0</div>
 
   <script>
     function sortTable(tbodyId, col) {
