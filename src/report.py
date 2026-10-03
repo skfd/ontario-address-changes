@@ -346,7 +346,7 @@ def _prepare(ds, d, new_id, is_baseline=False):
             "place_name": [], "status": [], "boundary": []}
     for m in d["modified"]:
         cats[_category(m, ds.classes, bool(ds.fields.get("number")),
-                       bool(ds.fields.get("street")))].append(m)
+                       ds.has_street)].append(m)
 
     counts = {"added": len(d["added"]), "removed": len(d["removed"]),
               "modified": len(cats["significant"]),
@@ -424,6 +424,8 @@ def _compared_fields(ds, prop_keys):
     """
     out = [f"{_CANON_LABEL[k]} ({src})"
            for k in ("number", "street", "unit", "full") if (src := ds.fields.get(k))]
+    if ds.street_from_full:
+        out.insert(1, f"{_CANON_LABEL['street']} (derived from {ds.fields['full']})")
     out.append("Coordinates (latitude, longitude)")
     seen = {src.lower() for src in ds.fields.values() if src}
     seen |= {f.lower() for f in ds.ignore_fields}
@@ -592,7 +594,7 @@ def generate_all(datasets):
         meta = []
         for idx, (snap, d, is_base) in enumerate(diffs):
             cat = Counter(_category(m, ds.classes, bool(ds.fields.get("number")),
-                                    bool(ds.fields.get("street")))
+                                    ds.has_street)
                           for m in d["modified"])
             series["added"].append(len(d["added"]))
             series["removed"].append(len(d["removed"]))

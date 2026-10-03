@@ -81,7 +81,7 @@ def _categorize(ds, mods):
         m["addr"] = report._addr(m)
         report._combine_location(m)
         cats[report._category(m, ds.classes, bool(ds.fields.get("number")),
-                              bool(ds.fields.get("street")))].append(m)
+                              ds.has_street)].append(m)
     return cats
 
 
