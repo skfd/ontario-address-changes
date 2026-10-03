@@ -159,7 +159,7 @@
         <div class="city-link city-blocked">
           <div class="city-main">
             <div class="city-name">{{ c.provider }}</div>
-            <div class="city-sub">{{ c.license_name }} · last snapshot {{ c.last_date }}</div>
+            <div class="city-sub">{{ c.license_name }} · {% if c.last_checked %}checked {{ c.last_checked }}{% else %}last snapshot {{ c.last_date }}{% endif %}</div>
             <div class="city-sub">Tracked, but the publisher's licence does not permit republishing
               reports — none are available here.</div>
           </div>
@@ -172,7 +172,7 @@
         <a class="city-link" href="{{ c.slug }}/index.html">
           <div class="city-main">
             <div class="city-name">{{ c.provider }}</div>
-            <div class="city-sub">{{ c.license_name }} · last snapshot {{ c.last_date }} · {{ c.report_count }} report{{ 's' if c.report_count != 1 else '' }}</div>
+            <div class="city-sub">{{ c.license_name }} · {% if c.last_checked %}checked {{ c.last_checked }}{% else %}last snapshot {{ c.last_date }}{% endif %} · {{ c.report_count }} report{{ 's' if c.report_count != 1 else '' }}</div>
             {% if c.highlight %}<div class="city-sub city-highlight">latest: {{ c.highlight }}</div>{% endif %}
           </div>
           <div class="city-right">

@@ -101,6 +101,7 @@ def _update_serial(datasets, args):
             # already-imported snapshot skips json.load entirely.
             if db.already_imported(ds, filepath):
                 print(f"  already imported: {os.path.basename(filepath)}")
+                db.record_check(ds, filepath, *fetch.latest_check(ds))
             else:
                 db.import_snapshot(ds, filepath, fetch.load_features(filepath))
             diff.report_latest(ds)

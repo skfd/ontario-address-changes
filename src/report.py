@@ -432,8 +432,21 @@ def _compared_fields(ds, prop_keys):
     return out
 
 
+def _changed(counts):
+    return (counts["modified"] + counts["modified_location"]
+            + counts["renumbered"] + counts["renamed"]
+            + counts["place_name"] + counts["status"] + counts["boundary"])
+
+
 def _render_report(ds, snap, d, is_baseline, spark, source_url, compared, ignored):
+    """Write the day's report page and return its counts, or None when the day
+    has nothing to show. An empty day is a snapshot whose only movement was in
+    fields since ignored or held -- reprocessing emptied it -- and a page
+    saying so is noise; the index marks only the newest check as "No changes"."""
     p = _prepare(ds, d, snap["id"], is_baseline)
+    if not is_baseline and not (p["counts"]["added"] or p["counts"]["removed"]
+                                or _changed(p["counts"])):
+        return None
     counts = p["counts"]
     date = diff.snap_date(snap)
     ctx = {
@@ -533,6 +546,7 @@ def generate_all(datasets):
             card = {
                 "slug": ds.slug, "provider": ds.provider, "license_name": ds.license_name,
                 "row_count": snaps[-1]["row_count"], "last_date": diff.snap_date(snaps[-1]),
+                "last_checked": _last_checked(ds),
                 "added": 0, "removed": 0, "modified": 0, "highlight": "",
                 "has_changes": False, "report_count": 0,
                 "compared_fields": [], "ignored_fields": [],
@@ -590,36 +604,41 @@ def generate_all(datasets):
         for idx, (snap, d, is_base) in enumerate(diffs):
             counts = _render_report(ds, snap, d, is_base, _spark_series(series, idx), source_url,
                                     compared, ignored)
+            if counts is None:
+                continue
             date = diff.snap_date(snap)
-            changed = (counts["modified"] + counts["modified_location"]
-                       + counts["renumbered"] + counts["renamed"]
-                       + counts["place_name"] + counts["status"] + counts["boundary"])
             meta.append({
                 "date": date, "friendly_date": _friendly_date(date),
                 "filename": f"report-{date}.html", "is_baseline": is_base,
                 "added": counts["added"], "removed": counts["removed"],
-                "modified": counts["modified"], "changed": changed,
+                "modified": counts["modified"], "changed": _changed(counts),
                 "phrases": _cat_phrases(counts),
                 "new_streets": new_by_snap.get(snap["id"], []),
             })
+
+        # A page from a day that is now empty, or that no longer has a snapshot,
+        # would stay reachable by URL; nothing links to it, so it goes.
+        written = {m["filename"] for m in meta}
+        for path in glob.glob(os.path.join(DOCS_DIR, ds.slug, "report-*.html")):
+            if os.path.basename(path) not in written:
+                os.remove(path)
 
         meta.reverse()                       # newest first
         if meta:
             meta[0]["is_latest"] = not meta[0]["is_baseline"]
 
-        # The most recent run may have found no changes (a skipped snapshot newer
-        # than the latest real report). Surface that check date as an inactive
-        # "No changes" row, matching the sibling Toronto tracker's index.
-        all_snaps = db.get_snapshots(ds)
-        if all_snaps:
-            last_date = diff.snap_date(all_snaps[-1])
-            if last_date > meta[0]["date"]:
-                meta.insert(0, {
-                    "date": last_date, "friendly_date": _friendly_date(last_date),
-                    "filename": None, "is_baseline": False,
-                    "added": 0, "removed": 0, "modified": 0, "changed": 0,
-                    "phrases": [], "new_streets": [],
-                })
+        # The first row is always the newest check. When it found nothing --
+        # an unchanged pull, or a snapshot whose report came out empty -- it is
+        # an inactive "No changes" row, so a reader can tell a quiet source
+        # from an updater that stopped.
+        last_checked = _last_checked(ds)
+        if last_checked > meta[0]["date"]:
+            meta.insert(0, {
+                "date": last_checked, "friendly_date": _friendly_date(last_checked),
+                "filename": None, "is_baseline": False,
+                "added": 0, "removed": 0, "modified": 0, "changed": 0,
+                "phrases": [], "new_streets": [],
+            })
 
         # flatten new-street debuts across reports, newest first, cap at 15
         recent_new_streets = [
@@ -643,6 +662,7 @@ def generate_all(datasets):
         card = {
             "slug": ds.slug, "provider": ds.provider, "license_name": ds.license_name,
             "row_count": snaps[-1]["row_count"], "last_date": diff.snap_date(snaps[-1]),
+            "last_checked": _last_checked(ds),
             "added": latest["added"], "removed": latest["removed"], "modified": latest["changed"],
             "highlight": "" if latest["is_baseline"] else " · ".join(latest["phrases"][:2]),
             "has_changes": not latest["is_baseline"],
@@ -739,6 +759,11 @@ def _map_features(cities):
              for c in cities if c.get("hull")]
     feats.sort(key=lambda t: -t[0])     # largest first => smaller drawn on top & clickable
     return {"type": "FeatureCollection", "features": [f for _, f in feats]}
+
+
+def _last_checked(ds):
+    """Date of the newest pull recorded for this dataset, changed or not."""
+    return max(diff.snap_date(s) for s in db.get_snapshots(ds))
 
 
 def _load_skipped():

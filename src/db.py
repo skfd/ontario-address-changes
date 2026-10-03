@@ -209,6 +209,38 @@ def already_imported(ds, filepath):
     return bool(hit)
 
 
+def record_check(ds, filepath, check_date, checked_at):
+    """Record a pull whose file is byte-identical to an imported one as a skip.
+
+    The vault keeps no second copy of an unchanged day: its ``latest`` points
+    back at the file it last changed in, so the filename check above sees an
+    old name and the day used to leave no trace. Readers then could not tell
+    "checked, nothing moved" from "never checked" -- Guelph's reports stopped at
+    2026-09-17 while the vault pulled it daily. The row is named for the day of
+    the check and copies the canonical row's count and hash, as a content-hash
+    skip would. Idempotent on that name.
+    """
+    conn = init_db(ds)
+    filename = f"{ds.slug}-{check_date}.geojson"
+    try:
+        if conn.execute("SELECT 1 FROM snapshots WHERE filename = ?", (filename,)).fetchone():
+            return
+        canon = conn.execute(
+            "SELECT row_count, content_hash FROM snapshots WHERE filename = ? "
+            "ORDER BY id LIMIT 1", (os.path.basename(filepath),)).fetchone()
+        if not canon:
+            return
+        print(f"  no changes since {os.path.basename(filepath)} — recording check {check_date}")
+        conn.execute(
+            "INSERT INTO snapshots (downloaded, row_count, filename, content_hash, skipped) "
+            "VALUES (?, ?, ?, ?, 1)",
+            (checked_at, canon["row_count"], filename, canon["content_hash"]))
+        _resolve_blocks(conn)
+        conn.commit()
+    finally:
+        conn.close()
+
+
 def import_snapshot(ds, filepath, features, headers=None):
     """Import normalized features as a new snapshot using SCD-2 delta logic."""
     conn = init_db(ds)

@@ -45,6 +45,18 @@ def fetch_path(ds, force=False):
         return v.path(ds.slug, "latest")
 
 
+def latest_check(ds):
+    """(date, local fetch time) of the vault's newest pull for this dataset.
+
+    Differs from the date in ``fetch_path``'s filename on an unchanged day,
+    which resolves to the file the content last changed in."""
+    from datetime import datetime
+    snap = _vault(ds).snapshot(ds.slug, "latest")
+    fetched = (datetime.fromisoformat(snap.fetched_at).astimezone().replace(tzinfo=None)
+               if snap.fetched_at else datetime.now())
+    return snap.date, fetched.isoformat()
+
+
 def load_features(path):
     with open(path, encoding="utf-8") as f:
         return json.load(f).get("features", [])
