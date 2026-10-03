@@ -2,7 +2,8 @@
 
 lennox-addington publishes only a full ADDRESS and a number (ADD_LABEL), so its
 street was NULL on every row and street-level features (new-street debuts,
-renames) could never fire. The shapes below are real rows from its store.
+renames) could never fire; perth-county likewise publishes only Full_Add, with
+the unit trailing it. The shapes below are real rows from their stores.
 """
 
 import os
@@ -39,6 +40,29 @@ from src.registry import Dataset, _parse
 ])
 def test_derives_street(full, number, street):
     assert street_from_full(full, number) == street
+
+
+@pytest.mark.parametrize("full, number, unit, street", [
+    # perth-county: 3. the unit as published trails the address
+    ("11 MADDISON STREET EAST UNIT 3E", "11", "UNIT 3E", "MADDISON STREET EAST"),
+    ("195 ST. DAVID STREET SUITE 101", "195", "SUITE 101", "ST. DAVID STREET"),
+    ("9A MAPLE STREET UNIT 1", "9A", "UNIT 1", "MAPLE STREET"),
+    ("596 ALBERT AVENUE NORTH UNIT 1, BUILDING A", "596", "UNIT 1",
+     "ALBERT AVENUE NORTH"),                                  # trailer after the unit
+    ("11 Maddison Street East Unit 3e", "11", "UNIT 3E", "Maddison Street East"),
+    ("11 MADDISON STREET EAST", "11", "UNIT 3E", "MADDISON STREET EAST"),  # not found
+    ("12 UNIT 3E", "12", "UNIT 3E", None),                    # nothing left before it
+    # perth-county shapes with no unit
+    ("1874 PERTH ROAD 120A", "1874", None, "PERTH ROAD 120A"),  # street's own digits kept
+    ("5083B LINE 2", "5083B", None, "LINE 2"),
+    ("6379-6389 APPLE BLOSSOM WAY", "6379-6389", None, "APPLE BLOSSOM WAY"),
+    ("984035 PERTH-OXFORD ROAD", "984035", None, "PERTH-OXFORD ROAD"),
+    ("59 N.D. WALT LANE", "59", None, "N.D. WALT LANE"),
+    ("290 O'LOANE AVENUE", "290", None, "O'LOANE AVENUE"),
+    ("61636 FISCHER ROAD", "6136", None, "FISCHER ROAD"),     # number typo in source
+])
+def test_derives_street_with_unit(full, number, unit, street):
+    assert street_from_full(full, number, unit) == street
 
 
 @pytest.mark.parametrize("full, number", [

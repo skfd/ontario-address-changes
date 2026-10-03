@@ -25,6 +25,16 @@ osm_compatible = "unknown-review"
 # snapshots), but with synthesized identity here a populated echo could only add noise.
 ignore_fields = ["Longitude", "Latitude"]
 
+# The source has no street column, so street is derived from Full_Add minus the
+# house number and the trailing unit (normalize.street_from_full: "11 MADDISON
+# STREET EAST UNIT 3E" -> "MADDISON STREET EAST", the unit cut where the Unit
+# column's value starts, so "..., BUILDING A" trailers go with it). 18,726 of
+# 18,735 stored rows get one; the 9 with no Full_Add stay None. Turned on
+# 2026-10-03 with the whole stored history rewritten first
+# (tools/derive_street_from_full.py), so it landed with no phantom mass event.
+# Street is not in the identity basis (synthesized from full + lon/lat).
+street_from_full = true
+
 [identity]
 # No stable source id in the 9-field schema (verified against the live field list
 # 2026-08-20): OBJECTID is sequential/volatile, no GlobalID, and Property_Number is a
@@ -42,8 +52,8 @@ synth_fields = ["full"]                        # Full_Add already carries number
 # number and keeps house suffixes (720 rows like 5083B); 9 of 18,605 blank.
 number = "Full_AddNum"
 # street: source has none — the public view exposes only 9 fields, with no St_Name-style
-# parsed NENA column; Full_Add is the only street carrier (the waterloo precedent:
-# accept full-address-only display rather than invent a parser).
+# parsed NENA column; Full_Add is the only street carrier, so street is derived from it
+# (street_from_full above).
 unit   = "Unit"                                 # 1,075 of 18,605 (~5.8%) populated, e.g. "UNIT 3E"
 full   = "Full_Add"                             # e.g. "5651 PERTH LINE 86 UNIT 2"
 

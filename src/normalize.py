@@ -177,7 +177,7 @@ def canonical(ds, feature):
         rec.setdefault(name, None)
     if ds.street_from_full:
         # the registry guarantees no mapped street to overwrite
-        rec["street"] = street_from_full(rec["full"], rec["number"])
+        rec["street"] = street_from_full(rec["full"], rec["number"], rec["unit"])
 
     rec["longitude"] = lon
     rec["latitude"] = lat
@@ -209,9 +209,9 @@ def _is_number_token(tok):
     return any(ch.isdigit() for ch in tok) and not _ORDINAL_RE.match(tok)
 
 
-def street_from_full(full, number=None):
+def street_from_full(full, number=None, unit=None):
     """Street name derived from a full-address string, for sources that publish
-    no street column (Dataset.street_from_full). A pure function of the two
+    no street column (Dataset.street_from_full). A pure function of the three
     canonical columns, so the importer and tools/derive_street_from_full.py can
     never disagree about a row.
 
@@ -221,7 +221,16 @@ def street_from_full(full, number=None):
     2. Otherwise (or after that) drop leading civic-number material: digit-led
        tokens other than ordinals ("2-30", "38G", "2-2- 30") and designator
        pairs ("Site 14", "Unit 4-140").
-    3. What remains is the street. Nothing remains ("70"), or nothing was
+    3. The unit as published trails the address ("11 Maddison Street East
+       Unit 3E", "596 Albert Avenue North Unit 1, Building A" -- perth-county):
+       cut the street where it starts, dropping anything after it. Anchored on
+       the unit column only, never on trailing digits, which are often the
+       street's own ("Perth Road 120A", "Line 2"); a unit not found in the
+       address leaves the tail alone. The first match wins, which is safe
+       while units carry a designator word ("Unit 1"); a source whose unit
+       column is a bare "1" would cut "100 Road 1 Unit 1" at the street's
+       own 1 -- sample unit values before turning this on for one.
+    4. What remains is the street. Nothing remains ("70"), or nothing was
        dropped at all ("Windermere Boulevard" -- no number to anchor on), gives
        None: an unparseable row stays streetless rather than guessed.
 
@@ -253,6 +262,13 @@ def street_from_full(full, number=None):
         break
     if i == 0 or i >= len(toks):
         return None
+    if unit:
+        # compared without trailing commas: "Unit 1, Building A"
+        utoks = [t.rstrip(",").upper() for t in unit.split()]
+        bare = [t.rstrip(",").upper() for t in toks]
+        for j in range(i, len(toks) - len(utoks) + 1):
+            if bare[j:j + len(utoks)] == utoks:
+                return " ".join(toks[i:j]).rstrip(",") or None
     return " ".join(toks[i:])
 
 

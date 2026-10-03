@@ -29,6 +29,12 @@ Run so far:
               Only street + payload_hash moved, no row re-keyed; snapshot 38's
               content_hash rewritten and re-verified against the 2026-09-25 raw
               pull (0 diffs). Backup: lennox-addington.pre-street-from-full-2026-10-03.db.
+  2026-10-03  perth-county: 18,726 of 18,735 rows got a street (the trailing unit cut
+              off via the new unit argument); 9 with no Full_Add stay None. No row
+              re-keyed; snapshot 2's content_hash rewritten and re-verified against
+              the 2026-09-08 raw pull (0 diffs). Debuts: AREND STREET and ROSE LANE
+              (28 each) at snapshot 2. Backup:
+              perth-county.pre-street-from-full-2026-10-03.db.
 
 Not part of the daily run. Safe to re-run: it is idempotent.
 """
@@ -78,7 +84,7 @@ def migrate(ds, dry_run=False):
             "SELECT identity_key, min_snapshot_id, number, street, unit, full, "
             "longitude, latitude, props, payload_hash FROM addresses"):
         total += 1
-        new_street = normalize.street_from_full(r["full"], r["number"])
+        new_street = normalize.street_from_full(r["full"], r["number"], r["unit"])
         with_street += new_street is not None
         rec = {c: r[c] for c in _HASH_COLS}
         rec["street"] = new_street
