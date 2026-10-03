@@ -640,18 +640,21 @@ def generate_all(datasets):
                 "phrases": [], "new_streets": [],
             })
 
-        # flatten new-street debuts across reports, newest first, cap at 15
-        recent_new_streets = [
+        # every new-street debut ever observed, newest first. Uncapped: there are
+        # few enough that the whole list is the interesting part.
+        new_streets = [
             {"street": s["street"], "count": s["count"],
              "filename": m["filename"], "friendly_date": m["friendly_date"]}
             for m in meta for s in m["new_streets"]
-        ][:15]
+        ]
+        baseline = next((m for m in meta if m["is_baseline"]), None)
 
         with open(os.path.join(DOCS_DIR, ds.slug, "index.html"), "w", encoding="utf-8") as f:
             f.write(_env.get_template("city_index.html").render(
                 provider=ds.provider, license_name=ds.license_name,
                 source_url=source_url, reports=meta,
-                recent_new_streets=recent_new_streets,
+                new_streets=new_streets,
+                tracking_since=baseline["friendly_date"] if baseline else None,
                 compared_fields=compared, ignored_fields=ignored))
 
         latest = meta[0]
@@ -667,6 +670,7 @@ def generate_all(datasets):
             "highlight": "" if latest["is_baseline"] else " · ".join(latest["phrases"][:2]),
             "has_changes": not latest["is_baseline"],
             "report_count": sum(1 for m in meta if m["filename"]),
+            "new_street_count": len(new_streets),
             "compared_fields": compared, "ignored_fields": ignored,
             "no_changes": no_changes, "hull": _hull_geometry(ds),
         }

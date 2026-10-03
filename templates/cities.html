@@ -172,7 +172,7 @@
         <a class="city-link" href="{{ c.slug }}/index.html">
           <div class="city-main">
             <div class="city-name">{{ c.provider }}</div>
-            <div class="city-sub">{{ c.license_name }} · {% if c.last_checked %}checked {{ c.last_checked }}{% else %}last snapshot {{ c.last_date }}{% endif %} · {{ c.report_count }} report{{ 's' if c.report_count != 1 else '' }}</div>
+            <div class="city-sub">{{ c.license_name }} · {% if c.last_checked %}checked {{ c.last_checked }}{% else %}last snapshot {{ c.last_date }}{% endif %} · {{ c.report_count }} report{{ 's' if c.report_count != 1 else '' }}{% if c.new_street_count is defined %} · {% if c.new_street_count %}{{ c.new_street_count }} new street{{ 's' if c.new_street_count != 1 else '' }}{% else %}no new streets{% endif %}{% endif %}</div>
             {% if c.highlight %}<div class="city-sub city-highlight">latest: {{ c.highlight }}</div>{% endif %}
           </div>
           <div class="city-right">
