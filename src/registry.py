@@ -24,6 +24,7 @@ class Dataset:
     source_crs: str = ""  # e.g. "EPSG:2952"; reproject to WGS84 when coords are out of lon/lat range
     publish_reports: bool = True  # false: licence forbids republication — keep tracking, publish no report pages
     location_min_move_m: float = 0.0  # drop location-only modifications moving less than this (metres); 0 = off
+    street_from_full: bool = False  # no street column: derive street from full minus the number (normalize.street_from_full)
     key_field: str = ""
     synth_fields: list = field(default_factory=lambda: ["full"])
     synth_props: list = field(default_factory=list)  # source props added to the synth basis
@@ -32,6 +33,11 @@ class Dataset:
     ignore_fields: list = field(default_factory=list)  # source props excluded from change detection
     keep_fields: list = field(default_factory=list)  # ignored fields still stored in props for consumers
     classes: dict = field(default_factory=dict)  # change class -> source props (see _VALID_CLASSES)
+
+    @property
+    def has_street(self):
+        """True when canonical street is populated, mapped or derived."""
+        return bool(self.fields.get("street")) or self.street_from_full
 
     @property
     def data_dir(self):
@@ -71,6 +77,20 @@ def _parse(path):
     if not isinstance(floor, (int, float)) or floor < 0:
         raise ValueError(f"{path}: location_min_move_m must be a non-negative number")
 
+    # A top-level option, not a [fields] entry: [fields] is a str->str map that
+    # report.py and the vault's Source both iterate as source column names.
+    street_from_full = raw.get("street_from_full", False)
+    if not isinstance(street_from_full, bool):
+        raise ValueError(f"{path}: street_from_full must be true or false")
+    if street_from_full:
+        fmap = raw.get("fields", {})
+        if fmap.get("street"):
+            raise ValueError(f"{path}: street_from_full = true with a mapped "
+                             "[fields] street - pick one")
+        if not fmap.get("full"):
+            raise ValueError(f"{path}: street_from_full = true needs a mapped "
+                             "[fields] full")
+
     identity = raw.get("identity", {})
     # Geometry is the default disambiguator for a synthesized key. Dropping it
     # without adding another one would collapse every same-address row onto one
@@ -89,6 +109,7 @@ def _parse(path):
         source_crs=raw.get("source_crs", ""),
         publish_reports=raw.get("publish_reports", True),
         location_min_move_m=float(floor),
+        street_from_full=street_from_full,
         key_field=identity.get("key_field", ""),
         synth_fields=identity.get("synth_fields", ["full"]),
         synth_props=identity.get("synth_props", []),

@@ -21,9 +21,17 @@ osm_compatible = "yellow-ogl"
 ignore_fields = ["ADD_LABEL"]
 keep_fields = ["ADD_LABEL"]
 
+# The source has no street column, so street is derived from the full ADDRESS
+# minus the house number (normalize.street_from_full) - 26,168 of 26,182 stored
+# rows get one; the rest are bare numbers or carry no number to anchor on
+# ("Windermere Boulevard") and stay None. Turned on 2026-10-03 with the whole
+# stored history rewritten first (tools/derive_street_from_full.py), so it
+# landed with no phantom mass event. Street is not in the identity basis.
+street_from_full = true
+
 [identity]
-# No parsed street field (only Number + full ADDRESS) and no stable id; synthesize from the full
-# address string + lon/lat (cf. waterloo).
+# No source street column (street is derived from ADDRESS, see street_from_full above) and no
+# stable id; synthesize from the full address string + lon/lat (cf. waterloo).
 key_field = ""                                 # synthesize
 synth_fields = ["full"]
 

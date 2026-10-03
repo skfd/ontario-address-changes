@@ -175,6 +175,9 @@ def canonical(ds, feature):
            if name in _CANONICAL}
     for name in _CANONICAL:
         rec.setdefault(name, None)
+    if ds.street_from_full:
+        # the registry guarantees no mapped street to overwrite
+        rec["street"] = street_from_full(rec["full"], rec["number"])
 
     rec["longitude"] = lon
     rec["latitude"] = lat
@@ -191,6 +194,66 @@ def canonical(ds, feature):
     rec["identity_key"] = _identity(ds, rec, props, lon, lat)
     rec["payload_hash"] = _payload_hash(rec, hash_props)
     return rec
+
+
+# Words that introduce a site/unit designator ahead of the civic number in a
+# full-address string: "Site 14 Camp Gesher", "Unit 4-140 Industrial Boulevard",
+# "C01 Unit A 310 Bridge Street West" (all lennox-addington). Each takes exactly
+# one following token as its designator.
+_DESIGNATOR_WORDS = frozenset({"site", "unit", "apt", "suite"})
+# "5th Concession Road North": digit-led but the street's own first word.
+_ORDINAL_RE = re.compile(r"^\d+(?:st|nd|rd|th)$", re.IGNORECASE)
+
+
+def _is_number_token(tok):
+    return any(ch.isdigit() for ch in tok) and not _ORDINAL_RE.match(tok)
+
+
+def street_from_full(full, number=None):
+    """Street name derived from a full-address string, for sources that publish
+    no street column (Dataset.street_from_full). A pure function of the two
+    canonical columns, so the importer and tools/derive_street_from_full.py can
+    never disagree about a row.
+
+    1. The number as published leads the full address ("137A Main St" with
+       number "137A", "C01 Unit A 310 Bridge St" with that whole run as the
+       number): drop it.
+    2. Otherwise (or after that) drop leading civic-number material: digit-led
+       tokens other than ordinals ("2-30", "38G", "2-2- 30") and designator
+       pairs ("Site 14", "Unit 4-140").
+    3. What remains is the street. Nothing remains ("70"), or nothing was
+       dropped at all ("Windermere Boulevard" -- no number to anchor on), gives
+       None: an unparseable row stays streetless rather than guessed.
+
+    Whitespace runs collapse to one space; case is kept as published.
+    """
+    if not full:
+        return None
+    toks = full.split()
+    i = 0
+    if number:
+        ntoks = number.split()
+        # a number that is the whole address ("12 Sunnyside Court" in both
+        # columns) anchors nothing; fall through to step 2
+        if (len(ntoks) < len(toks)
+                and [t.upper() for t in toks[:len(ntoks)]] == [t.upper() for t in ntoks]):
+            i = len(ntoks)
+    while i < len(toks):
+        if _is_number_token(toks[i]):
+            i += 1
+            continue
+        # a designator pair needs a street left after it, and must look like
+        # one: leading the address, or next to a number ("C01 Unit A 310")
+        # -- so "12 Unit Street East" keeps its street
+        if (toks[i].lower() in _DESIGNATOR_WORDS and i + 2 < len(toks)
+                and (i == 0 or _is_number_token(toks[i + 1])
+                     or _is_number_token(toks[i + 2]))):
+            i += 2
+            continue
+        break
+    if i == 0 or i >= len(toks):
+        return None
+    return " ".join(toks[i:])
 
 
 def _identity(ds, rec, props, lon, lat):
