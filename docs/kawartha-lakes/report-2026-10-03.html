@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>City of Kawartha Lakes Address Changes — Saturday, Oct 03, 2026</title>
+  <style>
+    :root {
+      --bg: #fafafa; --surface: #ffffff; --surface2: #f5f5f5; --surface3: #ebebeb;
+      --border: #e0e0e0; --border-strong: #d1d1d1; --text: #242424;
+      --text-secondary: #424242; --text-dim: #616161; --accent: #0078d4;
+      --accent-hover: #106ebe; --accent-bg: #eff6fc; --green: #107c10;
+      --green-bg: #f1faf1; --green-tint: #9fd89f; --red: #c50f1f; --red-bg: #fdf3f4;
+      --red-tint: #eeacb2; --yellow: #eaa300; --yellow-bg: #fefbf4; --yellow-tint: #f9e2ae;
+      --purple: #881798; --purple-bg: #f9f3fb; --teal: #038387; --teal-bg: #f0fafa;
+      --shadow-4: 0 2px 4px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --shadow-8: 0 4px 8px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --card-bg: #ffffff; --card-hover: #f5f5f5; color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1f1f1f; --surface: #292929; --surface2: #333333; --surface3: #3d3d3d;
+        --border: #525252; --border-strong: #666666; --text: #ffffff;
+        --text-secondary: #d6d6d6; --text-dim: #adadad; --accent: #2899f5;
+        --accent-hover: #3aa0f3; --accent-bg: #002848; --green: #54b054;
+        --green-bg: #052505; --green-tint: #107c10; --red: #dc626d; --red-bg: #3b0509;
+        --red-tint: #c50f1f; --yellow: #f2c661; --yellow-bg: #463100; --yellow-tint: #eaa300;
+        --purple: #d29ddb; --purple-bg: #3a1040; --teal: #58c0c4; --teal-bg: #013638;
+        --shadow-4: 0 2px 4px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --shadow-8: 0 4px 8px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --card-bg: #333333; --card-hover: #3d3d3d; color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI Variable','Segoe UI',system-ui,-apple-system,sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.5; padding: 2rem;
+      max-width: 1100px; margin: 0 auto; font-size: 14px; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; color: var(--accent-hover); }
+    .back-link { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 12px;
+      color: var(--text-dim); margin-bottom: 1.5rem; transition: color 0.1s; }
+    .back-link:hover { color: var(--accent); text-decoration: none; }
+    h1 { font-size: 24px; font-weight: 600; margin-bottom: 4px; }
+    .subtitle { color: var(--text-secondary); font-size: 14px; margin-bottom: 12px; }
+    .explainer { color: var(--text-secondary); font-size: 13px; line-height: 1.5;
+      margin-bottom: 24px; padding: 12px 16px; background: var(--surface);
+      border-radius: 8px; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px; margin-bottom: 24px; }
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px;
+      padding: 16px; box-shadow: var(--shadow-4); transition: box-shadow 0.1s; }
+    .card:hover { box-shadow: var(--shadow-8); }
+    .card .label { font-size: 12px; color: var(--text-dim); font-weight: 400; }
+    .card .value { font-size: 28px; font-weight: 600; margin-top: 4px; }
+    .card .value.green { color: var(--green); } .card .value.red { color: var(--red); }
+    .card .value.yellow { color: var(--yellow); } .card .value.accent { color: var(--accent); }
+    .card .value.purple { color: var(--purple); }
+    .card .value.teal { color: var(--teal); }
+    .sparkline { display: block; margin-top: 6px; overflow: visible; opacity: 0.9; }
+    .sparkline-label { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+    .section { margin-bottom: 24px; }
+    .section h2 { font-size: 16px; font-weight: 600; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px; }
+    .badge { font-size: 12px; padding: 2px 8px; border-radius: 999px; font-weight: 600; }
+    .badge-green { background: var(--green-bg); color: var(--green); }
+    .badge-red { background: var(--red-bg); color: var(--red); }
+    .badge-yellow { background: var(--yellow-bg); color: var(--yellow); }
+    .badge-accent { background: var(--accent-bg); color: var(--accent); }
+    .badge-purple { background: var(--purple-bg); color: var(--purple); }
+    .badge-teal { background: var(--teal-bg); color: var(--teal); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface);
+      border-radius: 8px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    thead { background: var(--surface2); }
+    th { text-align: left; padding: 8px 12px; font-weight: 600; color: var(--text-dim);
+      font-size: 12px; cursor: pointer; user-select: none; border-bottom: 1px solid var(--border); }
+    th:hover { color: var(--accent); }
+    td { padding: 8px 12px; border-top: 1px solid var(--border); }
+    tr:hover td { background: var(--surface2); }
+    .old-val { color: var(--red); text-decoration: line-through; }
+    .new-val { color: var(--green); }
+    .arrow-val { color: var(--text-dim); text-align: center; white-space: nowrap; }
+    .map-link { display: inline-flex; align-items: center; margin-left: 0.4em;
+      color: var(--accent); vertical-align: middle; white-space: nowrap; font-size: 12px; }
+    .map-link:hover { color: var(--accent-hover); }
+    .map-link svg { width: 14px; height: 14px; }
+    .change-field { color: var(--yellow); font-weight: 600; }
+    .bar-chart { margin-top: 8px; }
+    .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 12px; }
+    .bar-label { width: 180px; text-align: right; color: var(--text-secondary); flex-shrink: 0;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .bar-track { flex: 1; height: 8px; background: var(--surface2); border-radius: 4px;
+      overflow: hidden; position: relative; }
+    .bar-fill { height: 100%; border-radius: 4px; transition: width 0.15s ease; }
+    .bar-fill.green { background: var(--green); } .bar-fill.red { background: var(--red); }
+    .bar-count { width: 40px; font-size: 12px; color: var(--text-dim); }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+    .empty { color: var(--text-dim); font-style: italic; padding: 16px; }
+    .truncated { color: var(--text-dim); font-size: 12px; margin-top: 8px; }
+    .collapsible-toggle { background: transparent; border: 1px solid var(--border);
+      color: var(--accent); padding: 5px 12px; border-radius: 4px; cursor: pointer;
+      font-size: 12px; font-family: inherit; margin-bottom: 12px; transition: background 0.1s; }
+    .collapsible-toggle:hover { background: var(--surface2); }
+    details.rename-group { background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; margin-bottom: 8px; box-shadow: var(--shadow-4); }
+    details.rename-group summary { padding: 10px 14px; cursor: pointer; font-size: 13px; }
+    details.rename-group[open] summary { border-bottom: 1px solid var(--border); }
+    details.rename-group table { border: none; box-shadow: none; border-radius: 0; }
+    details.rename-group .truncated { padding: 0 14px 10px; margin-top: 0; }
+    .rename-count { color: var(--text-dim); font-size: 12px; margin-left: 6px; }
+    .no-changes-banner { background: var(--green-bg); border: 1px solid var(--green-tint);
+      color: var(--green); padding: 16px; border-radius: 8px; margin-bottom: 24px;
+      text-align: center; font-weight: 600; font-size: 14px; }
+    .baseline-banner { background: var(--accent-bg); border: 1px solid var(--accent);
+      color: var(--accent); padding: 16px; border-radius: 8px; margin-bottom: 24px; font-size: 13px; }
+    .generated-at { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-dim); }
+    .history { font-size: 12.5px; color: var(--text-secondary); white-space: nowrap; }
+    .history .a { color: var(--green); font-weight: 500; }
+    .history .r { color: var(--red); font-weight: 500; }
+    .history .dot { color: var(--text-dim); margin: 0 4px; }
+    .history-none { color: var(--text-dim); font-style: italic; font-size: 12.5px; }
+    .info-wrap { position: relative; display: inline-flex; vertical-align: middle; }
+    .info-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+      height: 18px; padding: 0 8px 0 7px; border-radius: 999px; border: none;
+      color: #fff; background: var(--accent); cursor: help; font-size: 11px; font-weight: 600;
+      font-style: normal; font-family: inherit; line-height: 1; white-space: nowrap; }
+    .info-btn .glyph { font-style: italic; font-weight: 700;
+      font-family: Georgia, 'Times New Roman', serif; }
+    .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn,
+    .info-wrap:focus .info-btn { background: var(--accent-hover); }
+    .info-pop { display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 20;
+      width: 320px; max-width: 80vw; padding: 12px 14px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-8);
+      font-size: 12.5px; font-weight: 400; color: var(--text-secondary); line-height: 1.5; }
+    .info-wrap:hover .info-pop, .info-wrap:focus-within .info-pop,
+    .info-wrap:focus .info-pop { display: block; }
+    .info-pop strong { display: block; color: var(--text); font-size: 12px; margin-bottom: 4px; }
+    .info-pop ul { list-style: none; margin: 0 0 10px; padding: 0; }
+    .info-pop li { padding: 1px 0 1px 14px; position: relative; }
+    .info-pop li::before { content: "·"; position: absolute; left: 4px; color: var(--text-dim); }
+    .info-pop .note { color: var(--text-dim); font-size: 11.5px; margin: 0 0 10px; }
+    .info-pop .muted { color: var(--text-dim); font-style: italic; }
+  </style>
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+
+  <a class="back-link" href="index.html">← Back to City of Kawartha Lakes reports</a>
+
+  <h1>City of Kawartha Lakes — Address Changes</h1>
+  <p class="subtitle">
+    Changes between  and Saturday, Oct 03, 2026
+    · 44,246 total addresses
+  </p>
+
+  
+
+  <div class="cards">
+    <div class="card"><div class="label">Total Addresses</div>
+      <div class="value accent">44,246</div></div>
+    <div class="card"><div class="label">New Addresses</div>
+      <div class="value green">+48</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#107c10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,2.0 28.5,18.0 55.0,18.0 81.5,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#107c10"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Retired Addresses</div>
+      <div class="value red">−7</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#c50f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 28.5,18.0 55.0,15.7 81.5,13.4 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#c50f1f"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Updated Addresses <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (StreetNumber)</li><li>Street name (StreetNameFull)</li><li>Unit (UnitNumber)</li><li>Full address (FullAddress)</li><li>Coordinates (latitude, longitude)</li><li>ARUApproved</li><li>AddressID</li><li>HwyCountyNum</li><li>MultiUnitLot</li><li>PlaceName</li><li>SingleLowerTier</li><li>StreetNameAlt</li><li>StreetNumberPrefix</li><li>StreetNumberSuffix</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>StreetAddress</li><li>StreetDirectionAbrv</li><li>StreetDirectionSuffix</li><li>StreetNameBody</li><li>StreetNumSuffixConcat</li><li>StreetSegmentID</li><li>StreetTypeSuffix</li><li>StreetTypeSuffixAbrv</li><li>Xlong</li><li>Ylat</li></ul>
+      
+    </span>
+  </span></div>
+      <div class="value yellow">17</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 28.5,11.4 55.0,16.1 81.5,6.7 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Renumbered</div>
+      <div class="value accent">1</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#0078d4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 28.5,18.0 55.0,2.0 81.5,18.0 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#0078d4"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Street Renames</div>
+      <div class="value purple">19</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#9141ac" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 28.5,18.0 55.0,18.0 81.5,18.0 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#9141ac"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    
+    <div class="card"><div class="label">Boundary Changes</div>
+      <div class="value teal">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#038387" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 28.5,18.0 55.0,18.0 81.5,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#038387"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    <div class="card"><div class="label">Location Adjustments</div>
+      <div class="value" style="color: var(--text-dim)">28</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#808080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 28.5,18.0 55.0,16.9 81.5,18.0 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#808080"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+  </div>
+
+  
+  <div class="section">
+    <h2>Change Breakdown</h2>
+    <div class="stats-grid">
+      
+      <div class="card"><div class="label">Top Streets by New Addresses</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">Sanderson Drive</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">7</span></div>
+        <div class="bar-row"><span class="bar-label">Highway 35</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:43.0%"></div></div>
+          <span class="bar-count">3</span></div>
+      </div></div>
+      
+      
+      <div class="card"><div class="label">Most Frequently Updated Fields</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">Location</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">37</span></div>
+        <div class="bar-row"><span class="bar-label">Full Address</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:68.0%"></div></div>
+          <span class="bar-count">25</span></div>
+        <div class="bar-row"><span class="bar-label">Street</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:62.0%"></div></div>
+          <span class="bar-count">23</span></div>
+        <div class="bar-row"><span class="bar-label">ARUApproved</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:38.0%"></div></div>
+          <span class="bar-count">14</span></div>
+        <div class="bar-row"><span class="bar-label">MultiUnitLot</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:38.0%"></div></div>
+          <span class="bar-count">14</span></div>
+        <div class="bar-row"><span class="bar-label">Address Number</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:16.0%"></div></div>
+          <span class="bar-count">6</span></div>
+        <div class="bar-row"><span class="bar-label">PlaceName</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:11.0%"></div></div>
+          <span class="bar-count">4</span></div>
+        <div class="bar-row"><span class="bar-label">StreetNumberSuffix</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:5.0%"></div></div>
+          <span class="bar-count">2</span></div>
+        <div class="bar-row"><span class="bar-label">HwyCountyNum</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:3.0%"></div></div>
+          <span class="bar-count">1</span></div>
+        <div class="bar-row"><span class="bar-label">StreetNameAlt</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:3.0%"></div></div>
+          <span class="bar-count">1</span></div>
+      </div></div>
+    </div>
+  </div>
+  
+
+  <div class="section">
+    <h2>New Addresses <span class="badge badge-green">48</span></h2>
+    
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-added',0)">Address</th><th onclick="sortTable('t-added',1)">Street</th>
+        <th onclick="sortTable('t-added',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-added">
+        
+        <tr><td>78 Antiquary Road, Eldon Twp, Kawartha Lakes</td><td>Antiquary Road</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.55126&mlon=-79.05004#map=18/44.55126/-79.05004" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1 Beech Street, Woodville, Kawartha Lakes</td><td>Beech Street</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.39715&mlon=-78.98649#map=18/44.39715/-78.98649" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1052 Boundary Road, Emily Twp, Kawartha Lakes</td><td>Boundary Road</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.41634&mlon=-78.48526#map=18/44.41634/-78.48526" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>8C Carew Boulevard, Lindsay, Kawartha Lakes</td><td>Carew Boulevard</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.37531&mlon=-78.75998#map=18/44.37531/-78.75998" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>112 Centennial Park Road, Eldon Twp, Kawartha Lakes</td><td>Centennial Park Road</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.49061&mlon=-79.01577#map=18/44.49061/-79.01577" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>88B Childs Road, Dalton Twp, Kawartha Lakes</td><td>Childs Road</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.69728&mlon=-79.14868#map=18/44.69728/-79.14868" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>48 Cresswell Road, Cresswell, Kawartha Lakes</td><td>Cresswell Road</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.28568&mlon=-78.97319#map=18/44.28568/-78.97319" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>62B Debois Street, Lindsay, Kawartha Lakes</td><td>Debois Street</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.36115&mlon=-78.76312#map=18/44.36115/-78.76312" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>34 Dunbar Drive, Verulam Twp, Kawartha Lakes</td><td>Dunbar Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.52349&mlon=-78.65725#map=18/44.52349/-78.65725" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>694 Esker Road, Emily Twp, Kawartha Lakes</td><td>Esker Road</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.36308&mlon=-78.61945#map=18/44.36308/-78.61945" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1504 Farms Road, Eldon Twp, Kawartha Lakes</td><td>Farms Road</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.52222&mlon=-79.06848#map=18/44.52222/-79.06848" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>191B Front Street West, Bobcaygeon, Kawartha Lakes</td><td>Front Street West</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.53738&mlon=-78.55466#map=18/44.53738/-78.55466" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>195B Front Street West, Bobcaygeon, Kawartha Lakes</td><td>Front Street West</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.53730&mlon=-78.55502#map=18/44.53730/-78.55502" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>54D Goodman Road, Fenelon Twp, Kawartha Lakes</td><td>Goodman Road</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.57021&mlon=-78.79968#map=18/44.57021/-78.79968" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1831 Heights Road, Verulam Twp, Kawartha Lakes</td><td>Heights Road</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.44231&mlon=-78.67170#map=18/44.44231/-78.67170" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>420 Hickory Beach Road, Verulam Twp, Kawartha Lakes</td><td>Hickory Beach Road</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.50439&mlon=-78.68327#map=18/44.50439/-78.68327" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>428 Hickory Beach Road, Verulam Twp, Kawartha Lakes</td><td>Hickory Beach Road</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.50394&mlon=-78.68305#map=18/44.50394/-78.68305" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>4413D Highway 35, Fenelon Twp, Kawartha Lakes</td><td>Highway 35</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.46877&mlon=-78.76395#map=18/44.46877/-78.76395" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6525 Highway 35, Somerville Twp, Kawartha Lakes</td><td>Highway 35</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.64864&mlon=-78.79691#map=18/44.64864/-78.79691" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6921 Highway 35, Bexley Twp, Kawartha Lakes</td><td>Highway 35</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.68043&mlon=-78.80692#map=18/44.68043/-78.80692" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>698 Highway 7A, Manvers Twp, Kawartha Lakes</td><td>Highway 7A</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.16038&mlon=-78.65657#map=18/44.16038/-78.65657" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>28 Horseshoe Crescent, Bexley Twp, Kawartha Lakes</td><td>Horseshoe Crescent</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.64536&mlon=-78.83764#map=18/44.64536/-78.83764" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3945 Kawartha Lakes Road 121, Somerville Twp, Kawartha Lakes</td><td>Kawartha Lakes Road 121</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.77198&mlon=-78.64575#map=18/44.77198/-78.64575" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1987 Kawartha Lakes Road 8, Bobcaygeon, Kawartha Lakes</td><td>Kawartha Lakes Road 8</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.54219&mlon=-78.55997#map=18/44.54219/-78.55997" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1159D Killarney Bay Road, Fenelon Twp, Kawartha Lakes</td><td>Killarney Bay Road</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.50540&mlon=-78.84418#map=18/44.50540/-78.84418" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1305D Kirkfield Road, Eldon Twp, Kawartha Lakes</td><td>Kirkfield Road</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.52825&mlon=-78.96467#map=18/44.52825/-78.96467" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>28 Lees Road, Fenelon Twp, Kawartha Lakes</td><td>Lees Road</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.50448&mlon=-78.81375#map=18/44.50448/-78.81375" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>123 Lightning Point Road, Somerville Twp, Kawartha Lakes</td><td>Lightning Point Road</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.63298&mlon=-78.80668#map=18/44.63298/-78.80668" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>22 Maple Avenue, Bexley Twp, Kawartha Lakes</td><td>Maple Avenue</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.55989&mlon=-78.86209#map=18/44.55989/-78.86209" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>32 Maple Avenue, Bexley Twp, Kawartha Lakes</td><td>Maple Avenue</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.56040&mlon=-78.86191#map=18/44.56040/-78.86191" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>74B Melbourne Street West, Lindsay, Kawartha Lakes</td><td>Melbourne Street West</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35029&mlon=-78.74120#map=18/44.35029/-78.74120" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>40B Parkside Drive, Lindsay, Kawartha Lakes</td><td>Parkside Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35408&mlon=-78.71839#map=18/44.35408/-78.71839" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>160B Pleasant Point Road, Mariposa Twp, Kawartha Lakes</td><td>Pleasant Point Road</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.21939&mlon=-78.89248#map=18/44.21939/-78.89248" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>191 Pontypool Road, Manvers Twp, Kawartha Lakes</td><td>Pontypool Road</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.10608&mlon=-78.61363#map=18/44.10608/-78.61363" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1090 Ramsey Road, Mariposa Twp, Kawartha Lakes</td><td>Ramsey Road</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.25349&mlon=-78.82398#map=18/44.25349/-78.82398" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>53B Riverview Drive, Emily Twp, Kawartha Lakes</td><td>Riverview Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.33049&mlon=-78.52252#map=18/44.33049/-78.52252" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>58 Sanderson Drive, Lindsay, Kawartha Lakes</td><td>Sanderson Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.36251&mlon=-78.76445#map=18/44.36251/-78.76445" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>60 Sanderson Drive, Lindsay, Kawartha Lakes</td><td>Sanderson Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.36253&mlon=-78.76437#map=18/44.36253/-78.76437" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>64 Sanderson Drive, Lindsay, Kawartha Lakes</td><td>Sanderson Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.36256&mlon=-78.76422#map=18/44.36256/-78.76422" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>66 Sanderson Drive, Lindsay, Kawartha Lakes</td><td>Sanderson Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.36258&mlon=-78.76414#map=18/44.36258/-78.76414" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>68 Sanderson Drive, Lindsay, Kawartha Lakes</td><td>Sanderson Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.36260&mlon=-78.76406#map=18/44.36260/-78.76406" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>112 Sanderson Drive, Lindsay, Kawartha Lakes</td><td>Sanderson Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.36208&mlon=-78.76497#map=18/44.36208/-78.76497" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>116 Sanderson Drive, Lindsay, Kawartha Lakes</td><td>Sanderson Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.36205&mlon=-78.76516#map=18/44.36205/-78.76516" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1108B Sandy Hook Road, Manvers Twp, Kawartha Lakes</td><td>Sandy Hook Road</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.10746&mlon=-78.57863#map=18/44.10746/-78.57863" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>99 Schell Line, Somerville Twp, Kawartha Lakes</td><td>Schell Line</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.63258&mlon=-78.60699#map=18/44.63258/-78.60699" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>684 Sturgeon Point Road, Fenelon Twp, Kawartha Lakes</td><td>Sturgeon Point Road</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.48352&mlon=-78.70114#map=18/44.48352/-78.70114" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>136 Trent Canal Road, Fenelon Twp, Kawartha Lakes</td><td>Trent Canal Road</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.57159&mlon=-78.78132#map=18/44.57159/-78.78132" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3 Willowdale Court, Ops Twp, Kawartha Lakes</td><td>Willowdale Court</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.32577&mlon=-78.72072#map=18/44.32577/-78.72072" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Retired Addresses <span class="badge badge-red">7</span></h2>
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-removed',0)">Address</th><th onclick="sortTable('t-removed',1)">Street</th>
+        <th onclick="sortTable('t-removed',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-removed">
+        
+        <tr><td>121D Albert Street North, Lindsay, Kawartha Lakes</td><td>Albert Street North</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-08-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.36228&mlon=-78.74906#map=18/44.36228/-78.74906" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>313 Fox Road, Emily Twp, Kawartha Lakes</td><td>Fox Road</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.32458&mlon=-78.55958#map=18/44.32458/-78.55958" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>4413D Highway 35, Fenelon Twp, Kawartha Lakes</td><td>Highway 35</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-07-24</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.46877&mlon=-78.76395#map=18/44.46877/-78.76395" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>245 Kawartha Lakes Road 46, Mariposa Twp, Kawartha Lakes</td><td>Kawartha Lakes Road 46</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-08-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35737&mlon=-78.97297#map=18/44.35737/-78.97297" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>28 Lees Road, Fenelon Twp, Kawartha Lakes</td><td>Lees Road</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-07-24</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.50448&mlon=-78.81375#map=18/44.50448/-78.81375" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>165 Peniel Road, Mariposa Twp, Kawartha Lakes</td><td>Peniel Road</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-08-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35065&mlon=-78.98743#map=18/44.35065/-78.98743" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1676 Peniel Road, Fenelon Twp, Kawartha Lakes</td><td>Peniel Road</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-08-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.38590&mlon=-78.81063#map=18/44.38590/-78.81063" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Updated Addresses <span class="badge badge-yellow">17</span>
+      <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (StreetNumber)</li><li>Street name (StreetNameFull)</li><li>Unit (UnitNumber)</li><li>Full address (FullAddress)</li><li>Coordinates (latitude, longitude)</li><li>ARUApproved</li><li>AddressID</li><li>HwyCountyNum</li><li>MultiUnitLot</li><li>PlaceName</li><li>SingleLowerTier</li><li>StreetNameAlt</li><li>StreetNumberPrefix</li><li>StreetNumberSuffix</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>StreetAddress</li><li>StreetDirectionAbrv</li><li>StreetDirectionSuffix</li><li>StreetNameBody</li><li>StreetNumSuffixConcat</li><li>StreetSegmentID</li><li>StreetTypeSuffix</li><li>StreetTypeSuffixAbrv</li><li>Xlong</li><li>Ylat</li></ul>
+      
+    </span>
+  </span></h2>
+    
+    
+    <table>
+      <thead><tr><th>Address</th><th>What Changed</th><th>Before</th><th></th><th>After</th><th>Map</th></tr></thead>
+      <tbody>
+        
+  <tr><td rowspan="6">121D Albert Street North, Lindsay, Kawartha Lakes</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">160</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">121</td>
+    <td rowspan="6"><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.36228&mlon=-78.74906#map=18/44.36228/-78.74906" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Street</td>
+    <td class="old-val">Pleasant Point Road</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Albert Street North</td>
+    </tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">160B Pleasant Point Road, Mariposa Twp, Kawartha Lakes</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">121D Albert Street North, Lindsay, Kawartha Lakes</td>
+    </tr>
+  <tr>
+    <td class="change-field">PlaceName</td>
+    <td class="old-val">Mariposa Twp</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Lindsay</td>
+    </tr>
+  <tr>
+    <td class="change-field">StreetNumberSuffix</td>
+    <td class="old-val">B</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">D</td>
+    </tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">44.21939, -78.89248<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.21939&mlon=-78.89248#map=19/44.21939/-78.89248" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↗ 19586.2m</td>
+    <td class="new-val">44.36228, -78.74906<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.36228&mlon=-78.74906#map=19/44.36228/-78.74906" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="2">22 Bayview Lane, Bexley Twp, Kawartha Lakes</td>
+    <td class="change-field">ARUApproved</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Yes</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.64639&mlon=-78.83662#map=18/44.64639/-78.83662" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">MultiUnitLot</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Yes</td>
+    </tr>
+  <tr><td rowspan="2">88 Childs Road, Dalton Twp, Kawartha Lakes</td>
+    <td class="change-field">ARUApproved</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Yes</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.69831&mlon=-79.14929#map=18/44.69831/-79.14929" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">MultiUnitLot</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Yes</td>
+    </tr>
+  <tr><td rowspan="3">32 Dunbar Drive, Verulam Twp, Kawartha Lakes</td>
+    <td class="change-field">ARUApproved</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Yes</td>
+    <td rowspan="3"><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.52301&mlon=-78.65703#map=18/44.52301/-78.65703" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">MultiUnitLot</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Yes</td>
+    </tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">44.52328, -78.65705<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.52328&mlon=-78.65705#map=19/44.52328/-78.65705" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↓ 30.1m</td>
+    <td class="new-val">44.52301, -78.65703<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.52301&mlon=-78.65703#map=19/44.52301/-78.65703" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="3">191 Front Street West, Bobcaygeon, Kawartha Lakes</td>
+    <td class="change-field">ARUApproved</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Yes</td>
+    <td rowspan="3"><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.53726&mlon=-78.55461#map=18/44.53726/-78.55461" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">MultiUnitLot</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Yes</td>
+    </tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">44.53733, -78.55463<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.53733&mlon=-78.55463#map=19/44.53733/-78.55463" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↓ 8.0m</td>
+    <td class="new-val">44.53726, -78.55461<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.53726&mlon=-78.55461#map=19/44.53726/-78.55461" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="3">195 Front Street West, Bobcaygeon, Kawartha Lakes</td>
+    <td class="change-field">ARUApproved</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Yes</td>
+    <td rowspan="3"><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.53717&mlon=-78.55497#map=18/44.53717/-78.55497" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">MultiUnitLot</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Yes</td>
+    </tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">44.53724, -78.55499<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.53724&mlon=-78.55499#map=19/44.53724/-78.55499" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↓ 8.0m</td>
+    <td class="new-val">44.53717, -78.55497<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.53717&mlon=-78.55497#map=19/44.53717/-78.55497" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="2">54 Goodman Road, Fenelon Twp, Kawartha Lakes</td>
+    <td class="change-field">ARUApproved</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Yes</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.57026&mlon=-78.79946#map=18/44.57026/-78.79946" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">MultiUnitLot</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Yes</td>
+    </tr>
+  <tr><td rowspan="2">1636 Kawartha Lakes Road 36, Fenelon Twp, Kawartha Lakes</td>
+    <td class="change-field">ARUApproved</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Yes</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.44319&mlon=-78.67320#map=18/44.44319/-78.67320" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">MultiUnitLot</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Yes</td>
+    </tr>
+  <tr><td rowspan="9">245 Kawartha Lakes Road 46, Mariposa Twp, Kawartha Lakes</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">191</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">245</td>
+    <td rowspan="9"><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35737&mlon=-78.97297#map=18/44.35737/-78.97297" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Street</td>
+    <td class="old-val">Pontypool Road</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Kawartha Lakes Road 46</td>
+    </tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">191 Pontypool Road, Manvers Twp, Kawartha Lakes</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">245 Kawartha Lakes Road 46, Mariposa Twp, Kawartha Lakes</td>
+    </tr>
+  <tr>
+    <td class="change-field">ARUApproved</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Yes</td>
+    </tr>
+  <tr>
+    <td class="change-field">HwyCountyNum</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">46</td>
+    </tr>
+  <tr>
+    <td class="change-field">MultiUnitLot</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Yes</td>
+    </tr>
+  <tr>
+    <td class="change-field">PlaceName</td>
+    <td class="old-val">Manvers Twp</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Mariposa Twp</td>
+    </tr>
+  <tr>
+    <td class="change-field">StreetNameAlt</td>
+    <td class="old-val">Kawartha Lakes 12</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">County Road 46</td>
+    </tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">44.10608, -78.61363<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.10608&mlon=-78.61363#map=19/44.10608/-78.61363" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↖ 40050.5m</td>
+    <td class="new-val">44.35737, -78.97297<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35737&mlon=-78.97297#map=19/44.35737/-78.97297" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="2">1185 Killarney Bay Road, Fenelon Twp, Kawartha Lakes</td>
+    <td class="change-field">ARUApproved</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Yes</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.50372&mlon=-78.84340#map=18/44.50372/-78.84340" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">MultiUnitLot</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Yes</td>
+    </tr>
+  <tr><td rowspan="2">1305 Kirkfield Road, Eldon Twp, Kawartha Lakes</td>
+    <td class="change-field">ARUApproved</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Yes</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.52829&mlon=-78.96449#map=18/44.52829/-78.96449" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">MultiUnitLot</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Yes</td>
+    </tr>
+  <tr><td rowspan="2">74 Melbourne Street West, Lindsay, Kawartha Lakes</td>
+    <td class="change-field">ARUApproved</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Yes</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35019&mlon=-78.74114#map=18/44.35019/-78.74114" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">MultiUnitLot</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Yes</td>
+    </tr>
+  <tr><td rowspan="3">40 Parkside Drive, Lindsay, Kawartha Lakes</td>
+    <td class="change-field">ARUApproved</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Yes</td>
+    <td rowspan="3"><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35402&mlon=-78.71836#map=18/44.35402/-78.71836" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">MultiUnitLot</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Yes</td>
+    </tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">44.35406, -78.71837<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35406&mlon=-78.71837#map=19/44.35406/-78.71837" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↓ 4.5m</td>
+    <td class="new-val">44.35402, -78.71836<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35402&mlon=-78.71836#map=19/44.35402/-78.71836" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="8">165 Peniel Road, Mariposa Twp, Kawartha Lakes</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">1108</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">165</td>
+    <td rowspan="8"><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35065&mlon=-78.98743#map=18/44.35065/-78.98743" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Street</td>
+    <td class="old-val">Sandy Hook Road</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Peniel Road</td>
+    </tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">1108B Sandy Hook Road, Manvers Twp, Kawartha Lakes</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">165 Peniel Road, Mariposa Twp, Kawartha Lakes</td>
+    </tr>
+  <tr>
+    <td class="change-field">ARUApproved</td>
+    <td class="old-val">Yes</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">MultiUnitLot</td>
+    <td class="old-val">Yes</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">PlaceName</td>
+    <td class="old-val">Manvers Twp</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Mariposa Twp</td>
+    </tr>
+  <tr>
+    <td class="change-field">StreetNumberSuffix</td>
+    <td class="old-val">B</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">44.10746, -78.57863<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.10746&mlon=-78.57863#map=19/44.10746/-78.57863" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↖ 42381.9m</td>
+    <td class="new-val">44.35065, -78.98743<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35065&mlon=-78.98743#map=19/44.35065/-78.98743" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="5">1676 Peniel Road, Fenelon Twp, Kawartha Lakes</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">22</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1676</td>
+    <td rowspan="5"><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.38590&mlon=-78.81063#map=18/44.38590/-78.81063" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Street</td>
+    <td class="old-val">Maple Avenue</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Peniel Road</td>
+    </tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">22 Maple Avenue, Bexley Twp, Kawartha Lakes</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1676 Peniel Road, Fenelon Twp, Kawartha Lakes</td>
+    </tr>
+  <tr>
+    <td class="change-field">PlaceName</td>
+    <td class="old-val">Bexley Twp</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Fenelon Twp</td>
+    </tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">44.55989, -78.86209<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.55989&mlon=-78.86209#map=19/44.55989/-78.86209" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↓ 19795.2m</td>
+    <td class="new-val">44.38590, -78.81063<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.38590&mlon=-78.81063#map=19/44.38590/-78.81063" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="2">53 Riverview Drive, Emily Twp, Kawartha Lakes</td>
+    <td class="change-field">ARUApproved</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Yes</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.33044&mlon=-78.52220#map=18/44.33044/-78.52220" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">MultiUnitLot</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Yes</td>
+    </tr>
+  <tr><td rowspan="3">62 Sanderson Drive, Lindsay, Kawartha Lakes</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">58</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">62</td>
+    <td rowspan="3"><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.36255&mlon=-78.76429#map=18/44.36255/-78.76429" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">58 Sanderson Drive, Lindsay, Kawartha Lakes</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">62 Sanderson Drive, Lindsay, Kawartha Lakes</td>
+    </tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">44.36256, -78.76426<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.36256&mlon=-78.76426#map=19/44.36256/-78.76426" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↙ 2.6m</td>
+    <td class="new-val">44.36255, -78.76429<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.36255&mlon=-78.76429#map=19/44.36255/-78.76429" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Renumbered Addresses <span class="badge badge-accent">1</span></h2>
+    
+    
+    <table>
+      <thead><tr><th>Address</th><th>What Changed</th><th>Before</th><th></th><th>After</th><th>Map</th></tr></thead>
+      <tbody>
+        
+  <tr><td rowspan="2">4 Byrne Court, Bexley Twp, Kawartha Lakes</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">20</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">4</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.63379&mlon=-78.85054#map=18/44.63379/-78.85054" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">20 Byrne Court, Bexley Twp, Kawartha Lakes</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">4 Byrne Court, Bexley Twp, Kawartha Lakes</td>
+    </tr>
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Street Renames <span class="badge badge-purple">19</span></h2>
+    
+    
+    <details class="rename-group">
+      <summary><span class="old-val">William Street</span> <span class="arrow-val">→</span> <span class="new-val">William Street North</span><span class="rename-count">13 addresses</span></summary>
+      <table>
+        <tbody>
+          
+          <tr><td>437 William Street North, Lindsay, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.37667&mlon=-78.74967#map=18/44.37667/-78.74967" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>440 William Street North, Lindsay, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.37712&mlon=-78.74930#map=18/44.37712/-78.74930" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>442 William Street North, Lindsay, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.37726&mlon=-78.74942#map=18/44.37726/-78.74942" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>444 William Street North, Lindsay, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.37738&mlon=-78.74956#map=18/44.37738/-78.74956" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>445 William Street North, Lindsay, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.37713&mlon=-78.75029#map=18/44.37713/-78.75029" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>446 William Street North, Lindsay, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.37752&mlon=-78.74970#map=18/44.37752/-78.74970" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>447 William Street North, Lindsay, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.37722&mlon=-78.75051#map=18/44.37722/-78.75051" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>448 William Street North, Lindsay, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.37764&mlon=-78.74985#map=18/44.37764/-78.74985" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>449 William Street North, Lindsay, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.37734&mlon=-78.75068#map=18/44.37734/-78.75068" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>450 William Street North, Lindsay, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.37777&mlon=-78.75003#map=18/44.37777/-78.75003" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>454 William Street North, Lindsay, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.37789&mlon=-78.75027#map=18/44.37789/-78.75027" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>456 William Street North, Lindsay, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.37805&mlon=-78.75039#map=18/44.37805/-78.75039" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>460 William Street North, Lindsay, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.37821&mlon=-78.75054#map=18/44.37821/-78.75054" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+      
+    </details>
+    
+    <details class="rename-group">
+      <summary><span class="old-val">Church Street</span> <span class="arrow-val">→</span> <span class="new-val">Church Street East</span><span class="rename-count">3 addresses</span></summary>
+      <table>
+        <tbody>
+          
+          <tr><td>49 Church Street East, Omemee, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.30137&mlon=-78.55381#map=18/44.30137/-78.55381" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>51 Church Street East, Omemee, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.30142&mlon=-78.55360#map=18/44.30142/-78.55360" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>53 Church Street East, Omemee, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.30147&mlon=-78.55338#map=18/44.30147/-78.55338" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+      
+    </details>
+    
+    <details class="rename-group">
+      <summary><span class="old-val">George Street North</span> <span class="arrow-val">→</span> <span class="new-val">George Street South</span><span class="rename-count">3 addresses</span></summary>
+      <table>
+        <tbody>
+          
+          <tr><td>14 George Street South, Omemee, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.29778&mlon=-78.55715#map=18/44.29778/-78.55715" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>15 George Street South, Omemee, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.29787&mlon=-78.55809#map=18/44.29787/-78.55809" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>17 George Street South, Omemee, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.29770&mlon=-78.55800#map=18/44.29770/-78.55800" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+      
+    </details>
+    
+    
+  </div>
+
+  
+
+  
+
+  
+  <div class="section">
+    <h2>Boundary Changes <span class="badge badge-teal">0</span></h2>
+    <p class="empty">No ward or municipality reassignments.</p>
+  </div>
+  
+
+  <div class="section">
+    <h2>Location Adjustments <span class="badge" style="background: var(--surface2); color: var(--text-dim)">28</span></h2>
+    
+    
+    
+    <table>
+      <thead><tr><th>Address</th><th>Before</th><th></th><th>After</th></tr></thead>
+      <tbody>
+        
+        <tr><td>1 Brenda Court, Lindsay, Kawartha Lakes</td>
+          
+          <td class="old-val">44.35598, -78.72215<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35598&mlon=-78.72215#map=19/44.35598/-78.72215" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↗ 9.8m</td>
+          <td class="new-val">44.35602, -78.72204<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35602&mlon=-78.72204#map=19/44.35602/-78.72204" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>2 Brenda Court, Lindsay, Kawartha Lakes</td>
+          
+          <td class="old-val">44.35643, -78.72237<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35643&mlon=-78.72237#map=19/44.35643/-78.72237" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↗ 11.7m</td>
+          <td class="new-val">44.35650, -78.72226<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35650&mlon=-78.72226#map=19/44.35650/-78.72226" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>3 Brenda Court, Lindsay, Kawartha Lakes</td>
+          
+          <td class="old-val">44.35601, -78.72196<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35601&mlon=-78.72196#map=19/44.35601/-78.72196" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↗ 10.4m</td>
+          <td class="new-val">44.35606, -78.72185<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35606&mlon=-78.72185#map=19/44.35606/-78.72185" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>4 Brenda Court, Lindsay, Kawartha Lakes</td>
+          
+          <td class="old-val">44.35649, -78.72217<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35649&mlon=-78.72217#map=19/44.35649/-78.72217" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↗ 11.1m</td>
+          <td class="new-val">44.35656, -78.72207<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35656&mlon=-78.72207#map=19/44.35656/-78.72207" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>79 Charlore Park Drive, Emily Twp, Kawartha Lakes</td>
+          
+          <td class="old-val">44.35726, -78.52533<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35726&mlon=-78.52533#map=19/44.35726/-78.52533" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">→ 27.0m</td>
+          <td class="new-val">44.35718, -78.52501<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35718&mlon=-78.52501#map=19/44.35718/-78.52501" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>83 Charlore Park Drive, Emily Twp, Kawartha Lakes</td>
+          
+          <td class="old-val">44.35723, -78.52476<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35723&mlon=-78.52476#map=19/44.35723/-78.52476" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 6.7m</td>
+          <td class="new-val">44.35717, -78.52475<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35717&mlon=-78.52475#map=19/44.35717/-78.52475" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>85 Charlore Park Drive, Emily Twp, Kawartha Lakes</td>
+          
+          <td class="old-val">44.35722, -78.52452<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35722&mlon=-78.52452#map=19/44.35722/-78.52452" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 7.8m</td>
+          <td class="new-val">44.35715, -78.52453<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35715&mlon=-78.52453#map=19/44.35715/-78.52453" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>89 Charlore Park Drive, Emily Twp, Kawartha Lakes</td>
+          
+          <td class="old-val">44.35721, -78.52428<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35721&mlon=-78.52428#map=19/44.35721/-78.52428" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 7.8m</td>
+          <td class="new-val">44.35714, -78.52428<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35714&mlon=-78.52428#map=19/44.35714/-78.52428" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>91 Charlore Park Drive, Emily Twp, Kawartha Lakes</td>
+          
+          <td class="old-val">44.35718, -78.52387<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35718&mlon=-78.52387#map=19/44.35718/-78.52387" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 14.6m</td>
+          <td class="new-val">44.35707, -78.52377<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35707&mlon=-78.52377#map=19/44.35707/-78.52377" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>177 Charlore Park Drive, Emily Twp, Kawartha Lakes</td>
+          
+          <td class="old-val">44.35718, -78.52335<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35718&mlon=-78.52335#map=19/44.35718/-78.52335" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↑ 10.1m</td>
+          <td class="new-val">44.35727, -78.52334<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35727&mlon=-78.52334#map=19/44.35727/-78.52334" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>181 East Street South, Bobcaygeon, Kawartha Lakes</td>
+          
+          <td class="old-val">44.53437, -78.53745<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.53437&mlon=-78.53745#map=19/44.53437/-78.53745" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">→ 16.0m</td>
+          <td class="new-val">44.53439, -78.53725<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.53439&mlon=-78.53725#map=19/44.53439/-78.53725" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>372 Hayes Line, Emily Twp, Kawartha Lakes</td>
+          
+          <td class="old-val">44.26729, -78.55636<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.26729&mlon=-78.55636#map=19/44.26729/-78.55636" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 687.5m</td>
+          <td class="new-val">44.26200, -78.55191<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.26200&mlon=-78.55191#map=19/44.26200/-78.55191" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>836 Hayes Line, Emily Twp, Kawartha Lakes</td>
+          
+          <td class="old-val">44.27409, -78.51312<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.27409&mlon=-78.51312#map=19/44.27409/-78.51312" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 195.4m</td>
+          <td class="new-val">44.27246, -78.51221<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.27246&mlon=-78.51221#map=19/44.27246/-78.51221" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>4607 Highway 7, Emily Twp, Kawartha Lakes</td>
+          
+          <td class="old-val">44.31839, -78.48222<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.31839&mlon=-78.48222#map=19/44.31839/-78.48222" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">← 13.9m</td>
+          <td class="new-val">44.31836, -78.48239<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.31836&mlon=-78.48239#map=19/44.31836/-78.48239" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>694 Highway 7A, Manvers Twp, Kawartha Lakes</td>
+          
+          <td class="old-val">44.15989, -78.65749<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.15989&mlon=-78.65749#map=19/44.15989/-78.65749" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">← 101.6m</td>
+          <td class="new-val">44.15983, -78.65876<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.15983&mlon=-78.65876#map=19/44.15983/-78.65876" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>1386 Killarney Bay Road, Fenelon Twp, Kawartha Lakes</td>
+          
+          <td class="old-val">44.52196, -78.84927<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.52196&mlon=-78.84927#map=19/44.52196/-78.84927" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 37.6m</td>
+          <td class="new-val">44.52164, -78.84912<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.52164&mlon=-78.84912#map=19/44.52164/-78.84912" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>35 Logie Street, Lindsay, Kawartha Lakes</td>
+          
+          <td class="old-val">44.35477, -78.72256<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35477&mlon=-78.72256#map=19/44.35477/-78.72256" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↑ 10.0m</td>
+          <td class="new-val">44.35486, -78.72256<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35486&mlon=-78.72256#map=19/44.35486/-78.72256" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>37 Logie Street, Lindsay, Kawartha Lakes</td>
+          
+          <td class="old-val">44.35466, -78.72258<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35466&mlon=-78.72258#map=19/44.35466/-78.72258" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↑ 10.3m</td>
+          <td class="new-val">44.35475, -78.72255<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35475&mlon=-78.72255#map=19/44.35475/-78.72255" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>41 Logie Street, Lindsay, Kawartha Lakes</td>
+          
+          <td class="old-val">44.35422, -78.72268<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35422&mlon=-78.72268#map=19/44.35422/-78.72268" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 9.0m</td>
+          <td class="new-val">44.35414, -78.72270<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35414&mlon=-78.72270#map=19/44.35414/-78.72270" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>43 Logie Street, Lindsay, Kawartha Lakes</td>
+          
+          <td class="old-val">44.35408, -78.72273<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35408&mlon=-78.72273#map=19/44.35408/-78.72273" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 8.0m</td>
+          <td class="new-val">44.35401, -78.72275<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35401&mlon=-78.72275#map=19/44.35401/-78.72275" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>124 Meadowview Road, Emily Twp, Kawartha Lakes</td>
+          
+          <td class="old-val">44.26396, -78.55219<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.26396&mlon=-78.55219#map=19/44.26396/-78.55219" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 895.6m</td>
+          <td class="new-val">44.27037, -78.55898<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.27037&mlon=-78.55898#map=19/44.27037/-78.55898" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>67 Navigators Trail, Bobcaygeon, Kawartha Lakes</td>
+          
+          <td class="old-val">44.54016, -78.53058<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.54016&mlon=-78.53058#map=19/44.54016/-78.53058" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 18.1m</td>
+          <td class="new-val">44.54006, -78.53040<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.54006&mlon=-78.53040#map=19/44.54006/-78.53040" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>801 Peace Road, Emily Twp, Kawartha Lakes</td>
+          
+          <td class="old-val">44.34794, -78.55681<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.34794&mlon=-78.55681#map=19/44.34794/-78.55681" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 369.4m</td>
+          <td class="new-val">44.34482, -78.55523<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.34482&mlon=-78.55523#map=19/44.34482/-78.55523" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>6 - 1 Peel Street, Lindsay, Kawartha Lakes</td>
+          
+          <td class="old-val">44.35669, -78.73714<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35669&mlon=-78.73714#map=19/44.35669/-78.73714" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↑ 4.7m</td>
+          <td class="new-val">44.35673, -78.73716<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35673&mlon=-78.73716#map=19/44.35673/-78.73716" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>6 - 2 Peel Street, Lindsay, Kawartha Lakes</td>
+          
+          <td class="old-val">44.35669, -78.73714<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35669&mlon=-78.73714#map=19/44.35669/-78.73714" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 5.8m</td>
+          <td class="new-val">44.35664, -78.73712<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35664&mlon=-78.73712#map=19/44.35664/-78.73712" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>110 Sanderson Drive, Lindsay, Kawartha Lakes</td>
+          
+          <td class="old-val">44.36210, -78.76493<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.36210&mlon=-78.76493#map=19/44.36210/-78.76493" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">→ 3.4m</td>
+          <td class="new-val">44.36211, -78.76489<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.36211&mlon=-78.76489#map=19/44.36211/-78.76489" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>114 Sanderson Drive, Lindsay, Kawartha Lakes</td>
+          
+          <td class="old-val">44.36206, -78.76512<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.36206&mlon=-78.76512#map=19/44.36206/-78.76512" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">→ 4.1m</td>
+          <td class="new-val">44.36207, -78.76507<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.36207&mlon=-78.76507#map=19/44.36207/-78.76507" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>884 St Luke&#39;s Road, Emily Twp, Kawartha Lakes</td>
+          
+          <td class="old-val">44.38138, -78.52646<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.38138&mlon=-78.52646#map=19/44.38138/-78.52646" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 406.0m</td>
+          <td class="new-val">44.38456, -78.52896<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.38456&mlon=-78.52896#map=19/44.38456/-78.52896" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+      </tbody>
+    </table>
+    
+    
+    
+  </div>
+
+  <div class="generated-at">Report generated Oct 03, 2026 at 12:55 PM · source licence: None published (disclaimer only, confirmed 2026-08-20)</div>
+
+  <script>
+    function sortTable(tbodyId, col) {
+      const tbody = document.getElementById(tbodyId);
+      if (!tbody) return;
+      const rows = Array.from(tbody.rows);
+      const dir = tbody.dataset.sortDir === 'asc' ? 'desc' : 'asc';
+      tbody.dataset.sortDir = dir;
+      rows.sort((a, b) => {
+        const av = a.cells[col]?.textContent.trim() || '';
+        const bv = b.cells[col]?.textContent.trim() || '';
+        const an = parseFloat(av), bn = parseFloat(bv);
+        if (!isNaN(an) && !isNaN(bn)) return dir === 'asc' ? an - bn : bn - an;
+        return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+      });
+      rows.forEach(r => tbody.appendChild(r));
+    }
+  </script>
+</body>
+
+</html>
