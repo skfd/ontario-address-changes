@@ -1372,5 +1372,9 @@ fields = ["full"]
 scope = "395 rows changed the same field set [full] (100% of the day's 395 modifications)"
 detail = "top: '589B 12TH LINE  ROAD' -> '589B 12TH LINE ROAD' (1), '262 13TH LINE  ROAD' -> '262 13TH LINE ROAD' (1), '4  15TH LINE ROAD' -> '4 15TH LINE ROAD' (1); 100% value-preserving restyle"
 detected = "2026-10-07"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-10-07"
+rule = "none needed: one-time upstream whitespace cleanup of Location; 0 double-spaced full values remain in the active 22,397 rows, so it cannot recur; canonical full has no ignore lever (renfrew 06-13 precedent)"
+note = "Location (canonical full) lost a doubled space on all 395 modified rows ('108 ABBEY LANE' -> '108 ABBEY LANE'), 100% value-preserving; number, street and props unchanged on every row; vault clean. Feed restyle, no address changed."
 
