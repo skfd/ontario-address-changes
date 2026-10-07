@@ -1364,3 +1364,13 @@ reviewed = "2026-09-30"
 rule = "datasets/chatham-kent.toml: ignore_fields += POINT_X, POINT_Y; backfill_props_hash --reapply-ignore --city chatham-kent (56,147 rows, DB backed up)"
 note = "Two new columns POINT_X/POINT_Y (projected copies of the point geometry) appeared 2026-09-30: None -> value on 56,145 of 56,147 modified rows, ~54.5k distinct values, no other field touched, 0 adds/removals. Vault says the same (+POINT_X, +POINT_Y, 0% rewritten). Feed schema change, no address changed."
 
+[[flag]]
+slug = "frontenac"
+date = "2026-10-07"
+signature = "mass-modified"
+fields = ["full"]
+scope = "395 rows changed the same field set [full] (100% of the day's 395 modifications)"
+detail = "top: '589B 12TH LINE  ROAD' -> '589B 12TH LINE ROAD' (1), '262 13TH LINE  ROAD' -> '262 13TH LINE ROAD' (1), '4  15TH LINE ROAD' -> '4 15TH LINE ROAD' (1); 100% value-preserving restyle"
+detected = "2026-10-07"
+status = "open"
+
