@@ -448,7 +448,8 @@ def build_body(slug, date, entries, vault_row, ds):
     parts.append("Links: " + " · ".join(links))
     parts.append("")
     parts.append(_vault_section(vault_row))
-    parts.append(_how_to_answer(bool(vault_row), vault_only))
+    # Ask for a vault line only while the vault's question is still open.
+    parts.append(_how_to_answer(bool(vault_row) and not vault_row.get("verdict"), vault_only))
     if entries:
         parts.append("<details><summary>Review brief (rows, transitions, this city's "
                      "past flags)</summary>\n\n```\n" + _brief_text(slug, date) + "\n```\n</details>")
@@ -577,7 +578,9 @@ def _inbox(limit=0):
         vault_only = "vault-only" in iss["labels"] and key not in ledger_days
         item = {"number": iss["number"], "url": iss["url"], "slug": iss["slug"], "date": iss["date"],
                 "vault_only": vault_only, "vault_flagged": vault_only or "vault" in iss["labels"],
-                "ledger_open": key in ledger_days}
+                "ledger_open": key in ledger_days,
+                # A widened vault-only issue (#18) has its vault answer already.
+                "vault_answered": any(l.startswith("vault:") for l in iss["labels"])}
         cmts = comments(iss["number"])
         c = pending_operator_comment(cmts)
         if c:
@@ -607,7 +610,8 @@ def cmd_inbox(args):
             what = it.get("error") or f"{it.get('verdict') or ''} {('vault:' + it['vault']) if it.get('vault') else ''}".strip()
             print(f"  #{it['number']} {it['slug']} {it['date']}  operator says: {what} -- {it.get('note', '')[:80]}")
         else:
-            print(f"  #{it['number']} {it['slug']} {it['date']}  needs triage")
+            done = "  (vault already answered)" if it.get("vault_answered") else ""
+            print(f"  #{it['number']} {it['slug']} {it['date']}  needs triage{done}")
 
 
 def _file(number, slug, date, verdict, vault, note, rule, vault_note, from_comment, actor):

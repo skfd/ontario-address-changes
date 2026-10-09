@@ -439,6 +439,7 @@ def test_issue_18_a_closed_vault_only_issue_takes_on_the_site_events(monkeypatch
     assert "mass-added" in edit[0][edit[0].index("--title") + 1]
     body = edit[1]
     assert "Flagged by the vault alone" not in body
+    assert "answered `schema`" in body and "Add a second line `vault:" not in body
     assert "824 added in one day" in body and "`business`" in body
     (n, add, remove), = g.relabels
     assert n == 18 and remove == ["vault-only"]
@@ -481,6 +482,7 @@ def test_a_stale_vault_only_label_does_not_refuse_a_ledger_verdict(monkeypatch):
     (item,) = fi._inbox()
     assert item["kind"] == "operator" and "error" not in item
     assert item["verdict"] == "technical" and item["vault_only"] is False
+    assert item["vault_answered"] is True  # headless Claude must not re-file the vault
     # A truly vault-only day still refuses the ledger word.
     _open_world(monkeypatch, {}, {LAMBTON: VAULT_ROW}, [_issue18()])
     (item,) = fi._inbox()
