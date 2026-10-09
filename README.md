@@ -55,7 +55,8 @@ of many datasets. Adding a city is a config file, not code.
   `logs/flags.html` is its human view (back-office only, never published).
   Each open flag-day is also a **GitHub issue** (label `flag`), brief
   included, so it can be reviewed from a phone: comment `business`, `technical`,
-  `bug` or `hold` and a note, and the hourly evening task files it, re-renders,
+  `bug` or `hold` and a note (or the word alone, to agree with a reading Claude
+  posted there: its reasoning becomes the note), and the hourly evening task files it, re-renders,
   pushes and replies with the commit (`tools/flag_issues.py`, `review-flags.ps1`).
   Claude triages the plainly technical ones itself; `business` is the owner's.
   Only comments by the login that owns the repo (`skfd`) are read; the bot's own

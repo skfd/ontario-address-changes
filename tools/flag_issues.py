@@ -207,8 +207,11 @@ def parse_verdict(body, vault_only=False):
     if not m:
         return None
     word = m.group(1).lower()
-    out = {"verdict": None, "vault": None, "rule": "", "note": ""}
-    note = [m.group(2).strip()] if m.group(2).strip() else []
+    out = {"verdict": None, "vault": None, "rule": "", "note": "", "bare": False}
+    rest = m.group(2).strip()
+    # "business." or "business!" is still the word alone.
+    note = [rest] if re.search(r"[^\W_]", rest) else []
+    out["bare"] = not note and len(lines) == 1
     if word in VAULT_VERDICTS:
         out["vault"] = word
     elif word == "hold":
@@ -248,6 +251,51 @@ def is_owner(c):
     what tells those apart)."""
     login = ((c.get("author") or {}).get("login") or "").lower()
     return login == OWNER_LOGIN.lower() and not is_bot(c)
+
+
+_READING = re.compile(r"Claude's reading: \*\*(\w+)\*\*")
+
+
+def latest_reading(cmts, before=None):
+    """The bot's most recent ``propose`` on the issue (posted before ``before``,
+    an ISO timestamp, when given): ``(word, reasoning)``, or None. The reasoning
+    is the proposal minus the marker, the reading line and the "Reply ..."
+    footer -- the part that can stand as the record if the owner agrees."""
+    for c in sorted(cmts, key=lambda c: c["createdAt"], reverse=True):
+        if not is_bot(c) or (before and c["createdAt"] >= before):
+            continue
+        body = c.get("body") or ""
+        m = _READING.search(body)
+        if not m:
+            continue
+        after = body[m.end():].split("\n", 1)[1] if "\n" in body[m.end():] else ""
+        paras = [" ".join(p.split()) for p in re.split(r"\n\s*\n", after)]
+        paras = [p for p in paras if p and not p.startswith("Reply ")]
+        return m.group(1).lower(), " ".join(paras).strip()
+    return None
+
+
+def adopt_reading(v, cmts, src):
+    """A bare verdict word agrees with Claude's reading: file it with that
+    reading's reasoning as the note. A bare word that has no reading to agree
+    with, or disagrees with it, carries no note and is refused, saying which."""
+    if not v or v.get("error") or v.get("verdict") == "hold" or not v.get("bare"):
+        return v
+    word = v.get("verdict") or v.get("vault")
+    reading = latest_reading(cmts, before=src.get("createdAt"))
+    if reading is None or not reading[1]:
+        return {**v, "error": (
+            f"`{word}` on its own files nothing here: there is no Claude's reading on this "
+            "issue for it to agree with, so there is no note to record. Comment again with "
+            f"`{word}` and one line saying what this was.")}
+    if reading[0] != word:
+        return {**v, "error": (
+            f"`{word}` on its own files nothing here: Claude's reading was **{reading[0]}**, "
+            f"so its reasoning cannot stand as the note for `{word}`. Comment again with "
+            f"`{word}` and one line saying why (or a bare `{reading[0]}` to agree with the "
+            "reading).")}
+    note = f"Owner agreed with Claude's reading: {reading[1]}"
+    return {**v, "note": note, "vault_note": note, "adopted_reading": True}
 
 
 def pending_operator_comment(cmts):
@@ -301,6 +349,12 @@ def _vault_section(row):
     return "\n".join(lines) + "\n\n"
 
 
+_AGREE = ("Once Claude has posted its reading here, the word alone is enough to agree "
+          "with it: a bare word that matches the reading files it with Claude's reasoning "
+          "as the note. A bare word that differs from the reading, or with no reading "
+          "yet, is refused -- give your own note.\n\n")
+
+
 def _how_to_answer(vault_flagged, vault_only):
     if vault_only:
         return (
@@ -311,6 +365,7 @@ def _how_to_answer(vault_flagged, vault_only):
             "- `schema` -- the source changed what it publishes, not the addresses\n"
             "- `real` -- the addresses really moved (owner only)\n"
             "- `hold` -- keep it open; say what is missing\n\n"
+            + _AGREE +
             "Only the repository owner's comments are read. The hourly task files the "
             "verdict in the vault and closes this issue.\n")
     text = (
@@ -321,7 +376,8 @@ def _how_to_answer(vault_flagged, vault_only):
         "- `technical` -- the feed changed, the city did not; Claude makes the config "
         "rule that stops the recurrence (a `rule: ...` line tells it what you have in mind)\n"
         "- `bug` -- the data is not true of the world; held, and the vault is told\n"
-        "- `hold` -- keep it open; say what is missing\n\n")
+        "- `hold` -- keep it open; say what is missing\n\n"
+        + _AGREE)
     if vault_flagged:
         text += ("Add a second line `vault: real|schema|artifact` to answer the vault's "
                  "question on the same comment; until both are answered the issue "
@@ -447,9 +503,10 @@ def _inbox(limit=0):
         item = {"number": iss["number"], "url": iss["url"], "slug": iss["slug"], "date": iss["date"],
                 "vault_only": vault_only, "vault_flagged": vault_only or "vault" in iss["labels"],
                 "ledger_open": key in ledger_days}
-        c = pending_operator_comment(comments(iss["number"]))
+        cmts = comments(iss["number"])
+        c = pending_operator_comment(cmts)
         if c:
-            v = parse_verdict(c["body"], vault_only=vault_only)
+            v = adopt_reading(parse_verdict(c["body"], vault_only=vault_only), cmts, c)
             item.update(kind="operator", comment_id=c["id"], comment_url=c.get("url"), **v)
         elif "needs-triage" in iss["labels"]:
             item["kind"] = "triage"
@@ -581,7 +638,8 @@ def cmd_propose(args):
     ensure_labels()
     body = (f"Claude's reading: **{args.verdict}**, but this verdict is yours to give.\n\n"
             f"{args.note}\n\n"
-            "Reply with the verdict word and your note to file it, or `hold` with what is missing.")
+            f"Reply `{args.verdict}` alone to agree (the reasoning above becomes the note), "
+            "another verdict word with your note, or `hold` with what is missing.")
     comment(args.number, body)
     relabel(args.number, add=["needs-operator"], remove=["needs-triage"])
     print(f"  proposed {args.verdict} on #{args.number}")
@@ -611,7 +669,8 @@ def cmd_apply(args):
             continue
         if not it.get("note"):
             comment(n, "A verdict needs a note: one line saying what this was. Comment again "
-                       "with the verdict word and the reasoning.")
+                       "with the verdict word and the reasoning (the word alone is enough "
+                       "only to agree with Claude's reading on the issue).")
             continue
         done, problems = _file(n, it["slug"], it["date"], verdict, vault, it["note"],
                                it.get("rule", ""), it.get("vault_note"), it["comment_id"], "the operator")

@@ -104,7 +104,10 @@ python tools/flag_issues.py propose <n> --verdict business --note "evidence; wha
 comment saying so: those two verdicts publish a claim, and they are the
 operator's. When the operator has ruled `technical`/`bug` on the issue, the
 inbox item carries their note and `comment_id`; make the rule real (step 5)
-and file with `--from-comment`. In headless mode skip steps 6-7: the wrapper
+and file with `--from-comment`. Write every `propose` note so it can stand as
+the record: an owner who answers with the bare verdict word agrees with your
+reading, and its reasoning is filed as the note ("Owner agreed with Claude's
+reading: ..."). In headless mode skip steps 6-7: the wrapper
 renders, commits and closes.
 
 ## Hard rules

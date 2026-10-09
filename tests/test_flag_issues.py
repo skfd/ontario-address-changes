@@ -36,7 +36,7 @@ def test_vault_and_rule_lines_are_picked_out():
     v = fi.parse_verdict("business: county annexed the township\n"
                          "vault: real -- 6,222 addresses arrived\n"
                          "rule: none needed")
-    assert v == {"verdict": "business", "vault": "real", "rule": "none needed",
+    assert v == {"verdict": "business", "vault": "real", "rule": "none needed", "bare": False,
                  "note": "county annexed the township", "vault_note": "6,222 addresses arrived"}
 
 
@@ -61,6 +61,105 @@ def test_vault_only_day_refuses_a_ledger_word():
 def test_hold_is_a_verdict_that_files_nothing():
     v = fi.parse_verdict("hold -- need to see the county's news page first")
     assert v["verdict"] == "hold" and v["note"].startswith("need to see")
+
+
+# ---- a bare word agrees with Claude's reading ----
+
+# Issue #5 as it happened: Claude proposed business, the owner answered with the
+# word alone (leading space and all), and the bot refused it for want of a note.
+ISSUE5_READING = (
+    "<!-- flag-bot -->\nClaude's reading: **business**, but this verdict is yours to give.\n\n"
+    "55 rows, location only, rural points moved 5-60 m (Arrow Ridge, Balfour Woods Rd, Brandy "
+    "Crest Rd, Beiers Rd clusters), all above the 2 m floor; vault saw nothing at the wire. Same "
+    "signature as the 07-31 and 08-08 flags, both ruled business as re-survey maintenance "
+    "batches. What would settle it: confirm this is that same re-survey stream, then it "
+    "publishes collapsed as Location Adjustments.\n\n"
+    "Reply with the verdict word and your note to file it, or `hold` with what is missing.")
+
+
+def _issue5():
+    return [_c(ISSUE5_READING, "2026-09-10T22:04:29Z", cid="IC_reading"),
+            _c(" business", "2026-09-14T15:05:40Z", cid="IC_owner")]
+
+
+def test_bare_word_is_marked_bare():
+    assert fi.parse_verdict(" business")["bare"] is True
+    assert fi.parse_verdict("business.")["bare"] is True
+    assert fi.parse_verdict("Verdict: business")["bare"] is True
+    assert fi.parse_verdict("business: new subdivision")["bare"] is False
+    assert fi.parse_verdict("business\nvault: real")["bare"] is False
+
+
+def test_issue_5_bare_business_adopts_the_reading():
+    cmts = _issue5()
+    src = fi.pending_operator_comment(cmts)
+    assert src["id"] == "IC_owner"
+    v = fi.adopt_reading(fi.parse_verdict(src["body"]), cmts, src)
+    assert "error" not in v and v["verdict"] == "business" and v["adopted_reading"]
+    assert v["note"].startswith("Owner agreed with Claude's reading: 55 rows, location only")
+    assert v["note"].endswith("publishes collapsed as Location Adjustments.")
+    assert "Reply with" not in v["note"] and "flag-bot" not in v["note"]
+    assert "Claude's reading: **" not in v["note"]
+
+
+def test_issue_5_through_the_inbox_and_the_owner_gate(monkeypatch):
+    cmts = _issue5()
+    monkeypatch.setattr(fi, "list_issues", lambda state="all": [{
+        "number": 5, "url": "u", "slug": "muskoka", "date": "2026-08-29",
+        "labels": {"flag", "needs-operator", "city:muskoka"}, "state": "OPEN"}])
+    monkeypatch.setattr(fi, "comments", lambda n: cmts)
+    monkeypatch.setattr(fi, "open_ledger_days", lambda: {("muskoka", "2026-08-29"): [{}]})
+    (item,) = fi._inbox()
+    assert item["kind"] == "operator" and item["verdict"] == "business"
+    assert item["comment_id"] == "IC_owner" and "error" not in item
+    assert item["note"].startswith("Owner agreed with Claude's reading:")
+    # The owner-only gate accepts the bare word as the owner saying business.
+    filed = []
+    monkeypatch.setattr(fi.flags, "review", lambda *a, **k: filed.append(a) or [("k",)])
+    done, problems = fi._file(5, "muskoka", "2026-08-29", "business", None, item["note"], "",
+                              item["vault_note"], "IC_owner", "the operator")
+    assert done and not problems and filed[0][3] == item["note"]
+
+
+def test_bare_word_that_disagrees_with_the_reading_is_refused():
+    cmts = _issue5()[:1] + [_c("technical", "2026-09-14T15:05:40Z", cid="o")]
+    src = fi.pending_operator_comment(cmts)
+    v = fi.adopt_reading(fi.parse_verdict(src["body"]), cmts, src)
+    assert "error" in v and "**business**" in v["error"] and "`technical`" in v["error"]
+
+
+def test_bare_word_with_no_reading_is_refused():
+    cmts = [_c("business", "2026-09-14T15:05:40Z", cid="o")]
+    v = fi.adopt_reading(fi.parse_verdict("business"), cmts, cmts[0])
+    assert "error" in v and "no Claude's reading" in v["error"]
+
+
+def test_the_newest_reading_before_the_answer_is_the_one_agreed_with():
+    old = _c(fi.BOT_MARK + "\nClaude's reading: **technical**, but...\n\nold\n\nReply x",
+             "2026-09-01T00:00:00Z", cid="r1")
+    new = _c(fi.BOT_MARK + "\nClaude's reading: **schema**, but...\n\nnew reasoning\n\nReply x",
+             "2026-09-02T00:00:00Z", cid="r2")
+    ans = _c("schema", "2026-09-03T00:00:00Z", cid="o")
+    v = fi.adopt_reading(fi.parse_verdict("schema", vault_only=True), [old, new, ans], ans)
+    assert v["vault"] == "schema" and v["vault_note"] == "Owner agreed with Claude's reading: new reasoning"
+
+
+def test_a_word_with_a_note_and_hold_are_left_alone():
+    cmts = _issue5()
+    v = fi.parse_verdict("technical: my own reasons")
+    assert fi.adopt_reading(v, cmts, cmts[1]) == v
+    h = fi.parse_verdict("hold")
+    assert fi.adopt_reading(h, [], {"createdAt": "x"}) == h
+
+
+def test_the_new_proposal_footer_is_stripped_too(monkeypatch):
+    posted = []
+    monkeypatch.setattr(fi, "comment", lambda n, b: posted.append(fi.BOT_MARK + "\n" + b))
+    monkeypatch.setattr(fi, "relabel", lambda *a, **k: None)
+    monkeypatch.setattr(fi, "ensure_labels", lambda *a, **k: None)
+    fi.cmd_propose(type("A", (), {"number": 9, "verdict": "bug", "note": "replayed batch"})())
+    word, why = fi.latest_reading([_c(posted[0], "2026-09-01T00:00:00Z")])
+    assert (word, why) == ("bug", "replayed batch")
 
 
 # ---- whose comment counts ----
