@@ -34,6 +34,7 @@ import argparse
 import json
 import os
 import re
+import sqlite3
 import subprocess
 import sys
 from datetime import date as date_t, datetime
@@ -41,7 +42,7 @@ from datetime import date as date_t, datetime
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, ROOT)
 
-from src import flags, registry  # noqa: E402
+from src import diff, flags, registry  # noqa: E402
 
 REPO = "skfd/ontario-address-changes"
 OWNER_LOGIN = REPO.split("/")[0]
@@ -172,6 +173,26 @@ def vault_changes(days=400):
         print(f"  (vault unreachable: {e})", file=sys.stderr)
         return None
     return {(c["slug"], c["date"]): c for c in data.get("changes", [])}
+
+
+def site_measured(ds, date):
+    """Whether the site's store has a snapshot (imported, or an unchanged-content
+    skip) dated ``date`` or later -- i.e. whether the site has diffed that day
+    and recorded whatever events it holds. A pull refused by the guards leaves
+    no snapshot row, so a vault-only day is not settled until this is true: the
+    import that follows a fix can still flag the day (lambton 2026-09-15, #18).
+    Read-only; a store that does not exist has measured nothing."""
+    path = ds.db_path
+    if not os.path.exists(path):
+        return False
+    uri = "file:" + os.path.abspath(path).replace("\\", "/") + "?mode=ro"
+    conn = sqlite3.connect(uri, uri=True)
+    try:
+        conn.row_factory = sqlite3.Row
+        rows = conn.execute("SELECT filename, downloaded FROM snapshots").fetchall()
+    finally:
+        conn.close()
+    return any(diff.snap_date(dict(r)) >= date for r in rows)
 
 
 def vault_review(slug, date, verdict, note):
@@ -406,7 +427,9 @@ def build_body(slug, date, entries, vault_row, ds):
             parts.append("")
     else:
         parts.append("Flagged by the vault alone: the pull moved, but the site recorded "
-                     "no mass event that day.")
+                     "no mass event that day. If the site has not imported the day yet "
+                     "(a pull its guards refused, say), the import can still record events; "
+                     "this issue stays open until it has, and then covers them too.")
         parts.append("")
     if licence_blocked:
         parts.append("**Licence-blocked city:** it publishes no report pages, so a verdict "
@@ -453,7 +476,8 @@ def _dataset(slug):
 def cmd_open(args):
     ledger_days = open_ledger_days()
     vault = vault_changes()
-    if vault is None:
+    vault_ok = vault is not None
+    if not vault_ok:
         print("open: vault unreachable; opening ledger days without their vault section")
         vault = {}
     vault_open = {k: v for k, v in vault.items() if v.get("verdict") is None}
@@ -463,12 +487,21 @@ def cmd_open(args):
     ensure_labels({f"city:{s}" for s, _ in wanted} | {f"sig:{e['signature']}"
                                                        for es in wanted.values() for e in es})
     issues = {(i["slug"], i["date"]): i for i in list_issues()}
-    created = reopened = 0
+    created = reopened = converted = 0
     for (slug, date), entries in wanted.items():
         ds = _dataset(slug)
         vrow = vault.get((slug, date))
         if (slug, date) in issues:
             iss = issues[(slug, date)]
+            if entries and "vault-only" in iss["labels"]:
+                # One issue per day: the site has since recorded events for a
+                # day opened as vault-only, so this issue now covers them.
+                if not vault_ok:
+                    print(f"  #{iss['number']} {slug} {date}: site events to add; "
+                          "vault unreachable, next pass")
+                elif _convert_vault_only(iss, slug, date, entries, vrow, ds):
+                    converted += 1
+                continue
             if iss["state"].upper() == "CLOSED" and not pending_operator_comment(comments(iss["number"])):
                 gh("issue", "reopen", str(iss["number"]), "--repo", REPO, write=True)
                 comment(iss["number"], "Reopened: this day is still open in the ledger. "
@@ -476,21 +509,62 @@ def cmd_open(args):
                         "answer with a verdict comment (or `hold` with a note).")
                 reopened += 1
             continue
-        labels = ["flag", "needs-triage", f"city:{slug}"]
-        labels += [f"sig:{e['signature']}" for e in {e["signature"]: e for e in entries}.values()]
-        if not entries:
-            labels.append("vault-only")
-        elif vrow:
-            labels.append("vault")
-        if ds is not None and not ds.publish_reports:
-            labels.append("licence-blocked")
+        labels = _issue_labels(slug, entries, vrow, ds)
         body = build_body(slug, date, entries, vrow, ds)
         url = gh("issue", "create", "--repo", REPO, "--title", title_for(slug, date, entries, vrow),
                  "--body-file", "-", *sum((["--label", l] for l in labels), []), input=body,
                  write=True).strip()
         print(f"  opened {url}  {slug} {date}")
         created += 1
-    print(f"open: {created} created, {reopened} reopened, {len(wanted)} day(s) open in all")
+    print(f"open: {created} created, {reopened} reopened, {converted} widened to site events, "
+          f"{len(wanted)} day(s) open in all")
+
+
+def _issue_labels(slug, entries, vrow, ds):
+    labels = ["flag", "needs-triage", f"city:{slug}"]
+    labels += [f"sig:{e['signature']}" for e in {e["signature"]: e for e in entries}.values()]
+    if not entries:
+        labels.append("vault-only")
+    elif vrow:
+        labels.append("vault")
+    if ds is not None and not ds.publish_reports:
+        labels.append("licence-blocked")
+    return labels
+
+
+def _convert_vault_only(iss, slug, date, entries, vrow, ds):
+    """A day opened as vault-only on which the site has since recorded held
+    events (#18: the import that followed a schema fix). Rewrite the issue to
+    cover them -- body, title, labels -- reopen it if it was closed, and say
+    why. The vault's answer, if filed, stands; the site events need their own.
+    Waits while the owner has an unfiled answer on it, so this comment does
+    not bury that answer as "before the bot last spoke"."""
+    n = iss["number"]
+    if pending_operator_comment(comments(n)):
+        print(f"  #{n} {slug} {date}: site events to add; owner's answer pending, next pass")
+        return False
+    gh("issue", "edit", str(n), "--repo", REPO, "--title", title_for(slug, date, entries, vrow),
+       "--body-file", "-", input=build_body(slug, date, entries, vrow, ds), write=True)
+    # It was vault-flagged even when the vault cannot find the row today.
+    add = [l for l in _issue_labels(slug, entries, vrow, ds) + ["vault"]
+           if l not in iss["labels"]]
+    add = list(dict.fromkeys(add))
+    relabel(n, add=add, remove=["vault-only"])
+    was_closed = iss["state"].upper() == "CLOSED"
+    if was_closed:
+        gh("issue", "reopen", str(n), "--repo", REPO, write=True)
+    events = "; ".join(f"{e['signature']} ({e['scope']})" for e in entries[:6])
+    more = f"; +{len(entries) - 6} more" if len(entries) > 6 else ""
+    comment(n, (("Reopened. " if was_closed else "")
+                + f"The site has since recorded {len(entries)} held "
+                f"event{'' if len(entries) == 1 else 's'} for this day, so this issue now "
+                f"covers them too: {events}{more}.\n\n"
+                "Nothing published for them yet. Any vault answer already filed here stands; "
+                "the site events need their own verdict (`business`, `technical`, `bug` or "
+                "`hold`, see How to answer above), and the issue closes once both are filed."))
+    print(f"  widened #{n} {slug} {date} to {len(entries)} site event(s)"
+          + (" and reopened" if was_closed else ""))
+    return True
 
 
 def _inbox(limit=0):
@@ -499,7 +573,8 @@ def _inbox(limit=0):
     items = []
     for iss in list_issues(state="open"):
         key = (iss["slug"], iss["date"])
-        vault_only = "vault-only" in iss["labels"]
+        # The label can be stale: the site may have flagged the day since.
+        vault_only = "vault-only" in iss["labels"] and key not in ledger_days
         item = {"number": iss["number"], "url": iss["url"], "slug": iss["slug"], "date": iss["date"],
                 "vault_only": vault_only, "vault_flagged": vault_only or "vault" in iss["labels"],
                 "ledger_open": key in ledger_days}
@@ -614,7 +689,8 @@ def cmd_file(args):
     iss = next((i for i in list_issues() if i["number"] == args.number), None)
     if iss is None:
         sys.exit(f"#{args.number} is not a flag issue")
-    vault_only = "vault-only" in iss["labels"]
+    vault_only = ("vault-only" in iss["labels"]
+                  and (iss["slug"], iss["date"]) not in open_ledger_days())
     if vault_only and args.verdict:
         sys.exit("a vault-only day takes --vault real|schema|artifact, not --verdict")
     if not (args.verdict or args.vault):
@@ -705,6 +781,7 @@ def cmd_publish(args):
     if vault is None:
         print("publish: vault unreachable; closing nothing this pass")
         return
+    reviewed = _reviewed_days()
     ready = []
     for iss in list_issues(state="open"):
         key = (iss["slug"], iss["date"])
@@ -713,6 +790,14 @@ def cmd_publish(args):
         vrow = vault.get(key)
         if vrow is not None and vrow.get("verdict") is None:
             continue  # the vault's question is still open
+        # A day with ledger entries was measured by the site (they come from its
+        # diff). One without -- vault-only -- may not have been: answered on the
+        # vault's side, but if the site has not imported the day, the import can
+        # still flag it (#18). Not answered yet.
+        ds = _dataset(iss["slug"]) if key not in reviewed else None
+        if ds is not None and not site_measured(ds, iss["date"]):
+            _note_awaiting_site(iss)
+            continue
         ready.append(iss)
     if not ready:
         print("publish: nothing answered since last pass")
@@ -726,6 +811,13 @@ def cmd_publish(args):
         if proc.returncode:
             failed.add(slug)
             print(f"  RENDER FAILED {slug}: {(proc.stderr or proc.stdout).strip()[-500:]}")
+    # A render re-runs flag detection over the city's whole history and can
+    # record new ledger entries; nothing whose day is open now is answered.
+    still_open = open_ledger_days()
+    for iss in [i for i in ready if (i["slug"], i["date"]) in still_open]:
+        print(f"  #{iss['number']} {iss['slug']} {iss['date']}: the render recorded new "
+              "events for this day; left open")
+    ready = [i for i in ready if (i["slug"], i["date"]) not in still_open]
     commit_url = None
     try:
         _git("add", "flags.toml", "datasets", "docs")
@@ -750,6 +842,21 @@ def cmd_publish(args):
         gh("issue", "close", str(iss["number"]), "--repo", REPO, "--reason", "completed",
            write=True)
         print(f"  closed #{iss['number']} {iss['slug']} {iss['date']}")
+
+
+AWAITING_SITE = "<!-- awaiting-site -->"
+
+
+def _note_awaiting_site(iss):
+    """Say once, not hourly, why an answered issue is not closing."""
+    print(f"  #{iss['number']} {iss['slug']} {iss['date']}: answered, but the site has not "
+          "imported this day yet; left open")
+    if any(AWAITING_SITE in (c.get("body") or "") for c in comments(iss["number"])):
+        return
+    comment(iss["number"], AWAITING_SITE + "\nThe vault's question is answered, but the site "
+            "has not imported this day yet (its pull was refused or has not run), so it cannot "
+            "say whether the day holds events of its own. This issue stays open until it has; "
+            "if the import flags the day, the events are added here for a verdict.")
 
 
 def _reviewed_days():

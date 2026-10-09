@@ -59,6 +59,9 @@ of many datasets. Adding a city is a config file, not code.
   posted there: its reasoning becomes the note), and the hourly evening task files it, re-renders,
   pushes and replies with the commit (`tools/flag_issues.py`, `review-flags.ps1`).
   Claude triages the plainly technical ones itself; `business` is the owner's.
+  One issue per day: a day flagged by the vault alone stays open until the site
+  has imported it, and if that import flags the day too, the same issue takes
+  on the site events (body, labels, reopened) rather than being called answered.
   Only comments by the login that owns the repo (`skfd`) are read; the bot's own
   are recognised by a `<!-- flag-bot -->` marker and skipped.
 

@@ -364,3 +364,202 @@ def test_every_write_command_asks_for_the_bot_token():
             assert not is_write
     # relabel's edit is built as a list, so it is not seen here; it is tested above.
     assert found >= 5
+
+
+# ---- one issue per day, and "Answered" only when it is (#18) ----
+#
+# lambton 2026-09-15: the site's guards refused the pull, so only the vault
+# flagged the day and the issue opened vault-only. Claude filed vault schema and
+# remapped the config; publish closed it "Answered". The next day's import
+# flagged the day on the site (mass-added, mass-removed, mass-modified x4) and
+# open reopened the issue -- still labelled vault-only, so the owner could not
+# answer the site events at all.
+
+LAMBTON = ("lambton", "2026-09-15")
+LAMBTON_ENTRIES = [
+    {"slug": "lambton", "date": "2026-09-15", "signature": "mass-added",
+     "scope": "824 added in one day (1.4% of 56,897)", "detected": "2026-09-16"},
+    {"slug": "lambton", "date": "2026-09-15", "signature": "mass-removed",
+     "scope": "739 removed in one day (1.3% of 56,897)", "detected": "2026-09-16"},
+    {"slug": "lambton", "date": "2026-09-15", "signature": "mass-modified", "fields": ["full"],
+     "scope": "47,607 rows changed the same field set", "detected": "2026-09-16"},
+]
+VAULT_ROW = {"slug": "lambton", "date": "2026-09-15", "verdict": "schema", "why": "fields",
+             "addresses": None, "test": "fields"}
+ISSUE18_BOT = [
+    _c(fi.BOT_MARK + "\nFiled by Claude (headless triage):\n- vault: `schema`",
+       "2026-09-15T22:07:39Z", cid="filed"),
+    _c(fi.BOT_MARK + "\nAnswered. Published in https://github.com/x/commit/e078",
+       "2026-09-15T22:08:15Z", cid="answered"),
+]
+
+
+def _issue18(state="OPEN", labels=("flag", "vault-only", "vault:schema", "city:lambton")):
+    return {"number": 18, "url": "u18", "slug": "lambton", "date": "2026-09-15",
+            "state": state, "labels": set(labels), "title": "lambton 2026-09-15 — vault: fields"}
+
+
+class _GH:
+    """Records gh calls, comments and relabels instead of making them."""
+
+    def __init__(self, monkeypatch, cmts=()):
+        self.calls, self.comments, self.relabels = [], [], []
+        self.cmts = list(cmts)
+        monkeypatch.setattr(fi, "gh", self.gh)
+        monkeypatch.setattr(fi, "comment", lambda n, b: self.comments.append((n, b)))
+        monkeypatch.setattr(fi, "relabel", lambda n, add=(), remove=(): self.relabels.append(
+            (n, list(add), list(remove))))
+        monkeypatch.setattr(fi, "comments", lambda n: self.cmts)
+        monkeypatch.setattr(fi, "ensure_labels", lambda *a, **k: None)
+        monkeypatch.setattr(fi, "_brief_text", lambda slug, date: "(brief)")
+        monkeypatch.setattr(fi, "_dataset", lambda slug: None)
+
+    def gh(self, *args, input=None, check=True, write=False):
+        self.calls.append((args, write, input))
+        return "https://github.com/x/issues/99\n"
+
+
+def _open_world(monkeypatch, ledger, vault, issues):
+    monkeypatch.setattr(fi, "open_ledger_days", lambda: dict(ledger))
+    monkeypatch.setattr(fi, "vault_changes", lambda days=400: vault)
+    monkeypatch.setattr(fi, "list_issues", lambda state="all": [
+        i for i in issues if state == "all" or i["state"].lower() == state])
+
+
+def test_issue_18_a_closed_vault_only_issue_takes_on_the_site_events(monkeypatch):
+    g = _GH(monkeypatch, ISSUE18_BOT)
+    _open_world(monkeypatch, {LAMBTON: LAMBTON_ENTRIES}, {LAMBTON: VAULT_ROW},
+                [_issue18(state="CLOSED")])
+    fi.cmd_open(None)
+    kinds = [a[:2] for a, _, _ in g.calls]
+    assert ("issue", "create") not in kinds          # one issue per day, not a second one
+    assert ("issue", "edit") in kinds and ("issue", "reopen") in kinds
+    assert all(w for a, w, _ in g.calls if a[:2] in {("issue", "edit"), ("issue", "reopen")})
+    edit = next((a, i) for a, _, i in g.calls if a[:2] == ("issue", "edit"))
+    assert "mass-added" in edit[0][edit[0].index("--title") + 1]
+    body = edit[1]
+    assert "Flagged by the vault alone" not in body
+    assert "824 added in one day" in body and "`business`" in body
+    (n, add, remove), = g.relabels
+    assert n == 18 and remove == ["vault-only"]
+    assert {"needs-triage", "vault", "sig:mass-added", "sig:mass-removed",
+            "sig:mass-modified"} <= set(add)
+    (n, said), = g.comments
+    assert "now covers them" in said and "3 held events" in said
+    assert "Answered" not in said and "still open in the ledger" not in said
+
+
+def test_an_open_vault_only_issue_is_widened_without_a_reopen(monkeypatch):
+    g = _GH(monkeypatch, ISSUE18_BOT)
+    _open_world(monkeypatch, {LAMBTON: LAMBTON_ENTRIES}, {LAMBTON: VAULT_ROW}, [_issue18()])
+    fi.cmd_open(None)
+    kinds = [a[:2] for a, _, _ in g.calls]
+    assert ("issue", "edit") in kinds and ("issue", "reopen") not in kinds
+    assert g.comments and not g.comments[0][1].startswith("Reopened")
+
+
+def test_widening_waits_for_the_owners_pending_answer(monkeypatch):
+    g = _GH(monkeypatch, ISSUE18_BOT + [_c("technical: remap, see the vault note",
+                                             "2026-09-16T23:00:00Z", cid="owner")])
+    _open_world(monkeypatch, {LAMBTON: LAMBTON_ENTRIES}, {LAMBTON: VAULT_ROW},
+                [_issue18(state="CLOSED")])
+    fi.cmd_open(None)
+    assert not g.calls and not g.comments  # nothing buries the owner's answer
+
+
+def test_widening_waits_when_the_vault_cannot_be_asked(monkeypatch):
+    g = _GH(monkeypatch, ISSUE18_BOT)
+    _open_world(monkeypatch, {LAMBTON: LAMBTON_ENTRIES}, None, [_issue18()])
+    fi.cmd_open(None)
+    assert not g.calls and not g.comments
+
+
+def test_a_stale_vault_only_label_does_not_refuse_a_ledger_verdict(monkeypatch):
+    _GH(monkeypatch, ISSUE18_BOT + [_c("technical: same remap as the vault's schema answer",
+                                         "2026-09-16T23:00:00Z", cid="owner")])
+    _open_world(monkeypatch, {LAMBTON: LAMBTON_ENTRIES}, {LAMBTON: VAULT_ROW}, [_issue18()])
+    (item,) = fi._inbox()
+    assert item["kind"] == "operator" and "error" not in item
+    assert item["verdict"] == "technical" and item["vault_only"] is False
+    # A truly vault-only day still refuses the ledger word.
+    _open_world(monkeypatch, {}, {LAMBTON: VAULT_ROW}, [_issue18()])
+    (item,) = fi._inbox()
+    assert "error" in item
+
+
+def _publish_world(monkeypatch, measured, ledger_seq, reviewed=()):
+    seq = list(ledger_seq)
+    monkeypatch.setattr(fi, "open_ledger_days", lambda: dict(seq.pop(0) if len(seq) > 1 else seq[0]))
+    monkeypatch.setattr(fi, "_reviewed_days", lambda: set(reviewed))
+    monkeypatch.setattr(fi, "_dataset", lambda slug: object())
+    monkeypatch.setattr(fi, "site_measured", lambda ds, date: measured)
+    gits = []
+    monkeypatch.setattr(fi, "_git", lambda *a: gits.append(a) or "sha")
+
+    class P:
+        returncode = 0
+        stdout = stderr = ""
+    monkeypatch.setattr(fi.subprocess, "run", lambda *a, **k: P())
+    return gits
+
+
+def test_issue_18_publish_does_not_answer_a_day_the_site_has_not_imported(monkeypatch):
+    # 2026-09-15 22:08: vault answered schema, ledger empty for the day, the
+    # site's last snapshot 09-14 (guards refused the pull).
+    g = _GH(monkeypatch, ISSUE18_BOT[:1])
+    _open_world(monkeypatch, {}, {LAMBTON: VAULT_ROW}, [_issue18()])
+    _publish_world(monkeypatch, measured=False, ledger_seq=[{}])
+    fi.cmd_publish(None)
+    assert not any(a[:2] == ("issue", "close") for a, _, _ in g.calls)
+    assert not any("Answered" in b for _, b in g.comments)
+    (n, said), = g.comments
+    assert fi.AWAITING_SITE in said and "stays open" in said
+    # Said once, not every hour.
+    g.cmts.append(_c(fi.BOT_MARK + "\n" + said, "2026-09-15T23:00:00Z", cid="aw"))
+    fi.cmd_publish(None)
+    assert len(g.comments) == 1
+
+
+def test_publish_answers_a_vault_only_day_once_the_site_has_measured_it(monkeypatch):
+    g = _GH(monkeypatch, ISSUE18_BOT[:1])
+    _open_world(monkeypatch, {}, {LAMBTON: VAULT_ROW}, [_issue18()])
+    _publish_world(monkeypatch, measured=True, ledger_seq=[{}])
+    fi.cmd_publish(None)
+    assert any(a[:2] == ("issue", "close") and w for a, w, _ in g.calls)
+    assert g.comments[-1][1].startswith("Answered.")
+
+
+def test_publish_leaves_open_a_day_its_own_render_just_flagged(monkeypatch):
+    g = _GH(monkeypatch, [])
+    iss = _issue18(labels=("flag", "city:lambton", "verdict:technical"))
+    _open_world(monkeypatch, {}, {}, [iss])
+    gits = _publish_world(monkeypatch, measured=True,
+                          ledger_seq=[{}, {LAMBTON: LAMBTON_ENTRIES}], reviewed={LAMBTON})
+    fi.cmd_publish(None)
+    assert not any(a[:2] == ("issue", "close") for a, _, _ in g.calls)
+    assert not any("Answered" in b for _, b in g.comments)
+
+
+def test_site_measured_reads_the_store_without_writing_it():
+    import sqlite3
+
+    class DS:
+        pass
+    with tempfile.TemporaryDirectory() as tmp:
+        ds = DS()
+        ds.db_path = os.path.join(tmp, "lambton.db")
+        assert fi.site_measured(ds, "2026-09-15") is False  # no store: nothing measured
+        assert not os.path.exists(ds.db_path)                # and none created
+        conn = sqlite3.connect(ds.db_path)
+        conn.execute("CREATE TABLE snapshots (id INTEGER PRIMARY KEY, downloaded TEXT, "
+                     "filename TEXT, skipped INTEGER)")
+        conn.execute("INSERT INTO snapshots (downloaded, filename, skipped) VALUES "
+                     "('2026-09-14T12:00:00', 'lambton-2026-09-14.geojson', 0)")
+        conn.commit()
+        assert fi.site_measured(ds, "2026-09-15") is False   # the guards refused 09-15
+        # The import a day later carries the 09-15 file's date.
+        conn.execute("INSERT INTO snapshots (downloaded, filename, skipped) VALUES "
+                     "('2026-09-16T12:03:53', 'lambton-2026-09-15.geojson', 0)")
+        conn.commit()
+        conn.close()
+        assert fi.site_measured(ds, "2026-09-15") is True
