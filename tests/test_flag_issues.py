@@ -65,8 +65,10 @@ def test_hold_is_a_verdict_that_files_nothing():
 
 # ---- whose comment counts ----
 
-def _c(body, when, assoc="OWNER", cid="c"):
-    return {"id": cid, "body": body, "createdAt": when, "authorAssociation": assoc}
+def _c(body, when, assoc="OWNER", cid="c", login=None):
+    login = login if login is not None else ("skfd" if assoc == "OWNER" else "someone")
+    return {"id": cid, "body": body, "createdAt": when, "authorAssociation": assoc,
+            "author": {"login": login}}
 
 
 def test_only_the_owners_verdict_after_the_bots_last_word_is_pending():
@@ -76,6 +78,26 @@ def test_only_the_owners_verdict_after_the_bots_last_word_is_pending():
     assert fi.pending_operator_comment([bot, stale, stranger]) is None
     fresh = _c("technical: ARN recode", "2026-09-09T21:30:00Z", cid="new")
     assert fi.pending_operator_comment([bot, stale, stranger, fresh])["id"] == "new"
+
+
+def test_the_owner_is_named_by_login_not_by_association():
+    # A collaborator (the bot account, say) is not the owner, whatever it writes.
+    collab = _c("business: publish", "2026-09-09T21:00:00Z", assoc="COLLABORATOR",
+                login="flag-bot-account", cid="bot")
+    assert fi.pending_operator_comment([collab]) is None
+    # An association that claims OWNER under another login does not pass either.
+    odd = _c("business: publish", "2026-09-09T21:00:00Z", login="not-skfd", cid="odd")
+    assert fi.pending_operator_comment([odd]) is None
+    # Case of the login does not matter.
+    ok = _c("business: publish", "2026-09-09T21:00:00Z", login="SKFD", cid="ok")
+    assert fi.pending_operator_comment([ok])["id"] == "ok"
+
+
+def test_bot_comments_are_ignored_whoever_posted_them():
+    # Historical bot comments carry the owner's login; the marker decides.
+    old_bot = _c(fi.BOT_MARK + "\nbusiness: looks real", "2026-09-09T21:00:00Z", cid="b")
+    assert fi.pending_operator_comment([old_bot]) is None
+    assert not fi.is_owner(old_bot)
 
 
 def test_a_remark_from_the_owner_is_not_pending():
@@ -176,3 +198,70 @@ def test_business_needs_no_rule():
         flags.review("renfrew", "2026-08-28", "business", "new subdivision", path=p)
         e = next(e for e in flags.load_ledger(p) if e["slug"] == "renfrew")
         assert e["verdict"] == "business" and e["rule"] == ""
+
+
+# ---- whose token writes ----
+
+class _Proc:
+    returncode = 0
+    stdout = "[]"
+    stderr = ""
+
+
+def _capture_env(monkeypatch):
+    seen = []
+
+    def fake_run(cmd, **kw):
+        seen.append((cmd, kw.get("env")))
+        return _Proc()
+    monkeypatch.setattr(fi.subprocess, "run", fake_run)
+    return seen
+
+
+def test_writes_go_out_under_the_bot_token_and_reads_do_not(monkeypatch):
+    monkeypatch.setenv(fi.BOT_TOKEN_ENV, "bot-secret")
+    monkeypatch.setenv("GH_TOKEN", "owner-ambient")
+    seen = _capture_env(monkeypatch)
+    fi.comment(7, "hello")
+    fi.relabel(7, add=["needs-operator"])
+    fi.gh("issue", "close", "7", write=True)
+    fi.gh("issue", "view", "7")  # a read
+    writes, read = seen[:3], seen[3]
+    for cmd, env in writes:
+        assert env is not None and env["GH_TOKEN"] == "bot-secret", cmd
+    assert read[1] is None  # inherits: gh's own login
+    assert os.environ["GH_TOKEN"] == "owner-ambient"  # never set process-wide
+
+
+def test_without_a_bot_token_writes_behave_as_before(monkeypatch):
+    monkeypatch.delenv(fi.BOT_TOKEN_ENV, raising=False)
+    seen = _capture_env(monkeypatch)
+    fi.comment(7, "hello")
+    assert seen[0][1] is None
+    monkeypatch.setenv(fi.BOT_TOKEN_ENV, "   ")  # blank counts as unset
+    fi.comment(7, "hello")
+    assert seen[1][1] is None
+
+
+def test_every_write_command_asks_for_the_bot_token():
+    """Each gh call that changes GitHub passes write=True: a call added later
+    without it would quietly post as the owner again."""
+    import ast
+    src = open(os.path.join(ROOT, "tools", "flag_issues.py"), encoding="utf-8").read()
+    writes = {("issue", "create"), ("issue", "comment"), ("issue", "edit"), ("issue", "close"),
+              ("issue", "reopen"), ("label", "create")}
+    reads = {("issue", "list"), ("issue", "view"), ("label", "list")}
+    found = 0
+    for node in ast.walk(ast.parse(src)):
+        if not (isinstance(node, ast.Call) and getattr(node.func, "id", None) in ("gh", "gh_json")):
+            continue
+        consts = tuple(a.value for a in node.args[:2] if isinstance(a, ast.Constant))
+        is_write = any(k.arg == "write" and getattr(k.value, "value", None) is True
+                       for k in node.keywords)
+        if consts in writes:
+            found += 1
+            assert is_write, f"gh{consts} at line {node.lineno} lacks write=True"
+        elif consts in reads:
+            assert not is_write
+    # relabel's edit is built as a list, so it is not seen here; it is tested above.
+    assert found >= 5

@@ -19,9 +19,15 @@ Two things are never done from a comment by anyone but the repository owner:
 a ``business`` verdict (it publishes to the site) and a vault ``real`` (it says
 the world changed). Both repos are public, so every other comment is ignored,
 and headless Claude is refused those two verdicts outright -- ``file`` demands
-the owner's comment id for them. The bot posts as the owner too (gh runs under
-the operator's login), so its own comments are told apart by a marker, not by
-author.
+the owner's comment id for them. The owner is the login that owns REPO, named
+explicitly, never "whoever gh is signed in as".
+
+Every write (issues, comments, labels, close/reopen) goes out under the bot
+account's token in FLAG_BOT_GH_TOKEN when it is set, so GitHub notifies the
+owner of what the bot says; reads, and anything else, use gh's own login. With
+the variable unset the bot posts as the owner, as it always did. Either way its
+comments are told apart by a marker, not by author: the older ones were posted
+under the owner's login.
 """
 
 import argparse
@@ -38,6 +44,9 @@ sys.path.insert(0, ROOT)
 from src import flags, registry  # noqa: E402
 
 REPO = "skfd/ontario-address-changes"
+OWNER_LOGIN = REPO.split("/")[0]
+# The bot account's token, for writes only. Unset: writes use gh's own login.
+BOT_TOKEN_ENV = "FLAG_BOT_GH_TOKEN"
 SITE = "https://skfd.github.io/ontario-address-changes"
 BRIEF = os.path.join(ROOT, ".claude", "skills", "review-flags", "brief.py")
 
@@ -70,9 +79,19 @@ BRIEF_MAX = 30_000  # issue bodies cap at 65,536 chars
 
 # ---- gh ----
 
-def gh(*args, input=None, check=True):
+def _gh_env(write):
+    """The environment for one gh call. A write carries the bot's token as
+    GH_TOKEN for that subprocess only -- never set process-wide, or the git
+    push in publish could go out under the bot through gh's credential helper."""
+    token = os.environ.get(BOT_TOKEN_ENV, "").strip() if write else ""
+    if not token:
+        return None  # inherit: gh's own login, today's behaviour
+    return {**os.environ, "GH_TOKEN": token}
+
+
+def gh(*args, input=None, check=True, write=False):
     proc = subprocess.run(["gh", *args], capture_output=True, text=True,
-                          encoding="utf-8", input=input, cwd=ROOT)
+                          encoding="utf-8", input=input, cwd=ROOT, env=_gh_env(write))
     if check and proc.returncode:
         raise RuntimeError(f"gh {' '.join(args[:3])} failed: {proc.stderr.strip()}")
     return proc.stdout
@@ -93,7 +112,7 @@ def ensure_labels(extra=()):
     for name, (color, desc) in want.items():
         if name not in have:
             gh("label", "create", name, "--repo", REPO, "--color", color,
-               "--description", desc, "--force")
+               "--description", desc, "--force", write=True)
 
 
 def list_issues(state="all"):
@@ -115,7 +134,8 @@ def comments(number):
 
 
 def comment(number, body):
-    gh("issue", "comment", str(number), "--repo", REPO, "--body", BOT_MARK + "\n" + body)
+    gh("issue", "comment", str(number), "--repo", REPO, "--body", BOT_MARK + "\n" + body,
+       write=True)
 
 
 def relabel(number, add=(), remove=()):
@@ -125,7 +145,7 @@ def relabel(number, add=(), remove=()):
     for l in remove:
         args += ["--remove-label", l]
     if add or remove:
-        gh(*args)
+        gh(*args, write=True)
 
 
 # ---- what is open, on both sides ----
@@ -221,6 +241,15 @@ def is_bot(c):
     return BOT_MARK in (c.get("body") or "")
 
 
+def is_owner(c):
+    """The repository owner, by login. Not authorAssociation alone, and not the
+    account gh is signed in as: with a bot token the writer is someone else, and
+    without one the bot's own comments carry the owner's login (the marker is
+    what tells those apart)."""
+    login = ((c.get("author") or {}).get("login") or "").lower()
+    return login == OWNER_LOGIN.lower() and not is_bot(c)
+
+
 def pending_operator_comment(cmts):
     """The owner's newest verdict comment since the bot last spoke, or None.
     Non-owner comments never count: the repo is public."""
@@ -228,7 +257,7 @@ def pending_operator_comment(cmts):
     for c in sorted(cmts, key=lambda c: c["createdAt"], reverse=True):
         if is_bot(c) or c["createdAt"] <= last_bot:
             continue
-        if c.get("authorAssociation") != "OWNER":
+        if not is_owner(c):
             continue
         if parse_verdict(c.get("body")) is not None:
             return c
@@ -385,7 +414,7 @@ def cmd_open(args):
         if (slug, date) in issues:
             iss = issues[(slug, date)]
             if iss["state"].upper() == "CLOSED" and not pending_operator_comment(comments(iss["number"])):
-                gh("issue", "reopen", str(iss["number"]), "--repo", REPO)
+                gh("issue", "reopen", str(iss["number"]), "--repo", REPO, write=True)
                 comment(iss["number"], "Reopened: this day is still open in the ledger. "
                         "An issue closes when a verdict is filed, not when it is closed here; "
                         "answer with a verdict comment (or `hold` with a note).")
@@ -401,7 +430,8 @@ def cmd_open(args):
             labels.append("licence-blocked")
         body = build_body(slug, date, entries, vrow, ds)
         url = gh("issue", "create", "--repo", REPO, "--title", title_for(slug, date, entries, vrow),
-                 "--body-file", "-", *sum((["--label", l] for l in labels), []), input=body).strip()
+                 "--body-file", "-", *sum((["--label", l] for l in labels), []), input=body,
+                 write=True).strip()
         print(f"  opened {url}  {slug} {date}")
         created += 1
     print(f"open: {created} created, {reopened} reopened, {len(wanted)} day(s) open in all")
@@ -459,7 +489,7 @@ def _file(number, slug, date, verdict, vault, note, rule, vault_note, from_comme
     else:
         cmts = comments(number)
         src = next((c for c in cmts if c["id"] == from_comment), None)
-        if src is None or src.get("authorAssociation") != "OWNER" or is_bot(src):
+        if src is None or not is_owner(src):
             raise PermissionError("--from-comment must be a comment by the repository owner on this issue")
         said = parse_verdict(src["body"]) or {}
         for want, key in ((verdict, "verdict"), (vault, "vault")):
@@ -658,7 +688,8 @@ def cmd_publish(args):
         body = "Answered. " + (f"Published in {commit_url}." if commit_url
                                else "Nothing on the site changed.")
         comment(iss["number"], body)
-        gh("issue", "close", str(iss["number"]), "--repo", REPO, "--reason", "completed")
+        gh("issue", "close", str(iss["number"]), "--repo", REPO, "--reason", "completed",
+           write=True)
         print(f"  closed #{iss['number']} {iss['slug']} {iss['date']}")
 
 

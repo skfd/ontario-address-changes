@@ -58,6 +58,27 @@ of many datasets. Adding a city is a config file, not code.
   `bug` or `hold` and a note, and the hourly evening task files it, re-renders,
   pushes and replies with the commit (`tools/flag_issues.py`, `review-flags.ps1`).
   Claude triages the plainly technical ones itself; `business` is the owner's.
+  Only comments by the login that owns the repo (`skfd`) are read; the bot's own
+  are recognised by a `<!-- flag-bot -->` marker and skipped.
+
+  **Bot account** (optional; without it the bot posts as the owner and GitHub
+  never notifies them). With `FLAG_BOT_GH_TOKEN` set, every write — opening
+  issues, comments, labels, close/reopen — goes out under that token, passed to
+  `gh` as `GH_TOKEN` for those calls only; reads and `git push` stay on your own
+  login. One-time setup:
+  1. Create a separate GitHub account for the bot (owner does this).
+  2. Repo **Settings → Collaborators** → invite it with **Write** (Triage can
+     comment, label and close, but cannot create the `city:`/`sig:` labels new
+     issues need). Accept the invite as the bot.
+  3. As the bot, create a **classic** token with the `public_repo` scope (the
+     repo is public; a fine-grained token may not reach a repo owned by another
+     personal account). Give it an expiry you will remember: an expired token
+     makes the hourly pass fail (`FAILED open` in `logs\flags-review.log`).
+  4. Store it as a user environment variable on the machine that runs the
+     tasks; `review-flags.ps1` and the headless Claude it starts inherit it:
+     `[Environment]::SetEnvironmentVariable('FLAG_BOT_GH_TOKEN', '<token>', 'User')`.
+     The next scheduled pass picks it up (sign out and in if it does not);
+     each pass logs `GH-WRITES bot` or `GH-WRITES owner`.
 
 ## Identity (the important part)
 

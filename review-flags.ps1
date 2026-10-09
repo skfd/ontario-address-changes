@@ -105,6 +105,11 @@ foreach ($lock in @(Get-ChildItem $gitDir -Filter '*.lock' -Recurse -Force -File
     }
 }
 
+# Writes to GitHub go out under the bot account when its token is set (a
+# user env var; see README, Flags), so the owner gets notified. Python reads
+# it and hands it to gh per write; this line only records which it was.
+Log "GH-WRITES $(if ("$env:FLAG_BOT_GH_TOKEN".Trim()) { 'bot' } else { 'owner' })"
+
 Log "OPEN $(Get-Date -Format o)"
 Invoke-Logged "python tools\flag_issues.py open"
 if ($LASTEXITCODE -ne 0) { Log "FAILED open exit=$LASTEXITCODE"; Finish 'open' 'failed' 1 }
