@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>City of Ottawa Address Changes — Friday, Oct 09, 2026</title>
+  <style>
+    :root {
+      --bg: #fafafa; --surface: #ffffff; --surface2: #f5f5f5; --surface3: #ebebeb;
+      --border: #e0e0e0; --border-strong: #d1d1d1; --text: #242424;
+      --text-secondary: #424242; --text-dim: #616161; --accent: #0078d4;
+      --accent-hover: #106ebe; --accent-bg: #eff6fc; --green: #107c10;
+      --green-bg: #f1faf1; --green-tint: #9fd89f; --red: #c50f1f; --red-bg: #fdf3f4;
+      --red-tint: #eeacb2; --yellow: #eaa300; --yellow-bg: #fefbf4; --yellow-tint: #f9e2ae;
+      --purple: #881798; --purple-bg: #f9f3fb; --teal: #038387; --teal-bg: #f0fafa;
+      --shadow-4: 0 2px 4px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --shadow-8: 0 4px 8px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --card-bg: #ffffff; --card-hover: #f5f5f5; color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1f1f1f; --surface: #292929; --surface2: #333333; --surface3: #3d3d3d;
+        --border: #525252; --border-strong: #666666; --text: #ffffff;
+        --text-secondary: #d6d6d6; --text-dim: #adadad; --accent: #2899f5;
+        --accent-hover: #3aa0f3; --accent-bg: #002848; --green: #54b054;
+        --green-bg: #052505; --green-tint: #107c10; --red: #dc626d; --red-bg: #3b0509;
+        --red-tint: #c50f1f; --yellow: #f2c661; --yellow-bg: #463100; --yellow-tint: #eaa300;
+        --purple: #d29ddb; --purple-bg: #3a1040; --teal: #58c0c4; --teal-bg: #013638;
+        --shadow-4: 0 2px 4px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --shadow-8: 0 4px 8px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --card-bg: #333333; --card-hover: #3d3d3d; color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI Variable','Segoe UI',system-ui,-apple-system,sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.5; padding: 2rem;
+      max-width: 1100px; margin: 0 auto; font-size: 14px; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; color: var(--accent-hover); }
+    .back-link { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 12px;
+      color: var(--text-dim); margin-bottom: 1.5rem; transition: color 0.1s; }
+    .back-link:hover { color: var(--accent); text-decoration: none; }
+    h1 { font-size: 24px; font-weight: 600; margin-bottom: 4px; }
+    .subtitle { color: var(--text-secondary); font-size: 14px; margin-bottom: 12px; }
+    .explainer { color: var(--text-secondary); font-size: 13px; line-height: 1.5;
+      margin-bottom: 24px; padding: 12px 16px; background: var(--surface);
+      border-radius: 8px; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px; margin-bottom: 24px; }
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px;
+      padding: 16px; box-shadow: var(--shadow-4); transition: box-shadow 0.1s; }
+    .card:hover { box-shadow: var(--shadow-8); }
+    .card .label { font-size: 12px; color: var(--text-dim); font-weight: 400; }
+    .card .value { font-size: 28px; font-weight: 600; margin-top: 4px; }
+    .card .value.green { color: var(--green); } .card .value.red { color: var(--red); }
+    .card .value.yellow { color: var(--yellow); } .card .value.accent { color: var(--accent); }
+    .card .value.purple { color: var(--purple); }
+    .card .value.teal { color: var(--teal); }
+    .sparkline { display: block; margin-top: 6px; overflow: visible; opacity: 0.9; }
+    .sparkline-label { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+    .section { margin-bottom: 24px; }
+    .section h2 { font-size: 16px; font-weight: 600; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px; }
+    .badge { font-size: 12px; padding: 2px 8px; border-radius: 999px; font-weight: 600; }
+    .badge-green { background: var(--green-bg); color: var(--green); }
+    .badge-red { background: var(--red-bg); color: var(--red); }
+    .badge-yellow { background: var(--yellow-bg); color: var(--yellow); }
+    .badge-accent { background: var(--accent-bg); color: var(--accent); }
+    .badge-purple { background: var(--purple-bg); color: var(--purple); }
+    .badge-teal { background: var(--teal-bg); color: var(--teal); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface);
+      border-radius: 8px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    thead { background: var(--surface2); }
+    th { text-align: left; padding: 8px 12px; font-weight: 600; color: var(--text-dim);
+      font-size: 12px; cursor: pointer; user-select: none; border-bottom: 1px solid var(--border); }
+    th:hover { color: var(--accent); }
+    td { padding: 8px 12px; border-top: 1px solid var(--border); }
+    tr:hover td { background: var(--surface2); }
+    .old-val { color: var(--red); text-decoration: line-through; }
+    .new-val { color: var(--green); }
+    .arrow-val { color: var(--text-dim); text-align: center; white-space: nowrap; }
+    .map-link { display: inline-flex; align-items: center; margin-left: 0.4em;
+      color: var(--accent); vertical-align: middle; white-space: nowrap; font-size: 12px; }
+    .map-link:hover { color: var(--accent-hover); }
+    .map-link svg { width: 14px; height: 14px; }
+    .change-field { color: var(--yellow); font-weight: 600; }
+    .bar-chart { margin-top: 8px; }
+    .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 12px; }
+    .bar-label { width: 180px; text-align: right; color: var(--text-secondary); flex-shrink: 0;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .bar-track { flex: 1; height: 8px; background: var(--surface2); border-radius: 4px;
+      overflow: hidden; position: relative; }
+    .bar-fill { height: 100%; border-radius: 4px; transition: width 0.15s ease; }
+    .bar-fill.green { background: var(--green); } .bar-fill.red { background: var(--red); }
+    .bar-count { width: 40px; font-size: 12px; color: var(--text-dim); }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+    .empty { color: var(--text-dim); font-style: italic; padding: 16px; }
+    .truncated { color: var(--text-dim); font-size: 12px; margin-top: 8px; }
+    .collapsible-toggle { background: transparent; border: 1px solid var(--border);
+      color: var(--accent); padding: 5px 12px; border-radius: 4px; cursor: pointer;
+      font-size: 12px; font-family: inherit; margin-bottom: 12px; transition: background 0.1s; }
+    .collapsible-toggle:hover { background: var(--surface2); }
+    details.rename-group { background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; margin-bottom: 8px; box-shadow: var(--shadow-4); }
+    details.rename-group summary { padding: 10px 14px; cursor: pointer; font-size: 13px; }
+    details.rename-group[open] summary { border-bottom: 1px solid var(--border); }
+    details.rename-group table { border: none; box-shadow: none; border-radius: 0; }
+    details.rename-group .truncated { padding: 0 14px 10px; margin-top: 0; }
+    .rename-count { color: var(--text-dim); font-size: 12px; margin-left: 6px; }
+    .no-changes-banner { background: var(--green-bg); border: 1px solid var(--green-tint);
+      color: var(--green); padding: 16px; border-radius: 8px; margin-bottom: 24px;
+      text-align: center; font-weight: 600; font-size: 14px; }
+    .baseline-banner { background: var(--accent-bg); border: 1px solid var(--accent);
+      color: var(--accent); padding: 16px; border-radius: 8px; margin-bottom: 24px; font-size: 13px; }
+    .generated-at { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-dim); }
+    .history { font-size: 12.5px; color: var(--text-secondary); white-space: nowrap; }
+    .history .a { color: var(--green); font-weight: 500; }
+    .history .r { color: var(--red); font-weight: 500; }
+    .history .dot { color: var(--text-dim); margin: 0 4px; }
+    .history-none { color: var(--text-dim); font-style: italic; font-size: 12.5px; }
+    .info-wrap { position: relative; display: inline-flex; vertical-align: middle; }
+    .info-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+      height: 18px; padding: 0 8px 0 7px; border-radius: 999px; border: none;
+      color: #fff; background: var(--accent); cursor: help; font-size: 11px; font-weight: 600;
+      font-style: normal; font-family: inherit; line-height: 1; white-space: nowrap; }
+    .info-btn .glyph { font-style: italic; font-weight: 700;
+      font-family: Georgia, 'Times New Roman', serif; }
+    .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn,
+    .info-wrap:focus .info-btn { background: var(--accent-hover); }
+    .info-pop { display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 20;
+      width: 320px; max-width: 80vw; padding: 12px 14px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-8);
+      font-size: 12.5px; font-weight: 400; color: var(--text-secondary); line-height: 1.5; }
+    .info-wrap:hover .info-pop, .info-wrap:focus-within .info-pop,
+    .info-wrap:focus .info-pop { display: block; }
+    .info-pop strong { display: block; color: var(--text); font-size: 12px; margin-bottom: 4px; }
+    .info-pop ul { list-style: none; margin: 0 0 10px; padding: 0; }
+    .info-pop li { padding: 1px 0 1px 14px; position: relative; }
+    .info-pop li::before { content: "·"; position: absolute; left: 4px; color: var(--text-dim); }
+    .info-pop .note { color: var(--text-dim); font-size: 11.5px; margin: 0 0 10px; }
+    .info-pop .muted { color: var(--text-dim); font-style: italic; }
+  </style>
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+
+  <a class="back-link" href="index.html">← Back to City of Ottawa reports</a>
+
+  <h1>City of Ottawa — Address Changes</h1>
+  <p class="subtitle">
+    Changes between  and Friday, Oct 09, 2026
+    · 404,474 total addresses
+  </p>
+
+  
+
+  <div class="cards">
+    <div class="card"><div class="label">Total Addresses</div>
+      <div class="value accent">404,474</div></div>
+    <div class="card"><div class="label">New Addresses</div>
+      <div class="value green">+59</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#107c10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,17.5 37.3,17.4 55.0,11.0 72.7,17.8 90.3,2.0 108.0,12.1"/><circle cx="108.0" cy="12.1" r="2" fill="#107c10"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Retired Addresses</div>
+      <div class="value red">−0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#c50f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,10.0 19.7,18.0 37.3,2.0 55.0,10.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#c50f1f"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Updated Addresses <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRNUM)</li><li>Street name (FULLNAME)</li><li>Unit (UNITID)</li><li>Full address (FULLADDR)</li><li>Coordinates (latitude, longitude)</li><li>ADDRTYPE</li><li>PI_MUNICIPAL_ADDRESS_ID</li><li>QUALIFIER</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span></div>
+      <div class="value yellow">1</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,2.0 19.7,18.0 37.3,10.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,10.0"/><circle cx="108.0" cy="10.0" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Renumbered</div>
+      <div class="value accent">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#0078d4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#0078d4"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Street Renames</div>
+      <div class="value purple">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#9141ac" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,2.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#9141ac"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    <div class="card"><div class="label">Status Changes</div>
+      <div class="value teal">18</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#038387" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,16.3 19.7,9.3 37.3,13.2 55.0,16.8 72.7,17.0 90.3,2.0 108.0,16.9"/><circle cx="108.0" cy="16.9" r="2" fill="#038387"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    <div class="card"><div class="label">Location Adjustments</div>
+      <div class="value" style="color: var(--text-dim)">1</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#808080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#808080"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+  </div>
+
+  
+  <div class="section">
+    <h2>Change Breakdown</h2>
+    <div class="stats-grid">
+      
+      <div class="card"><div class="label">Top Streets by New Addresses</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">WEST BEACH WAY</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">39</span></div>
+        <div class="bar-row"><span class="bar-label">GRASMERE CRES</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:15.0%"></div></div>
+          <span class="bar-count">6</span></div>
+        <div class="bar-row"><span class="bar-label">TWEEDSMUIR AVE</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:13.0%"></div></div>
+          <span class="bar-count">5</span></div>
+      </div></div>
+      
+      
+      <div class="card"><div class="label">Most Frequently Updated Fields</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">ADDRTYPE</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">19</span></div>
+        <div class="bar-row"><span class="bar-label">Location</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:11.0%"></div></div>
+          <span class="bar-count">2</span></div>
+      </div></div>
+    </div>
+  </div>
+  
+
+  <div class="section">
+    <h2>New Addresses <span class="badge badge-green">59</span></h2>
+    
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-added',0)">Address</th><th onclick="sortTable('t-added',1)">Street</th>
+        <th onclick="sortTable('t-added',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-added">
+        
+        <tr><td>6645 BANK ST</td><td>BANK ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.24502&mlon=-75.52398#map=18/45.24502/-75.52398" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1564 BASELINE RD</td><td>BASELINE RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.35899&mlon=-75.74483#map=18/45.35899/-75.74483" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>109 B CHENOA WAY</td><td>CHENOA WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.24306&mlon=-75.72220#map=18/45.24306/-75.72220" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>263 B DEERCROFT AVE</td><td>DEERCROFT AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.27364&mlon=-75.74229#map=18/45.27364/-75.74229" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1804 B DUMAS ST</td><td>DUMAS ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.45627&mlon=-75.51562#map=18/45.45627/-75.51562" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>980 C DYNES RD</td><td>DYNES RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.36831&mlon=-75.70827#map=18/45.36831/-75.70827" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1679 A GRASMERE CRES</td><td>GRASMERE CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.37625&mlon=-75.66195#map=18/45.37625/-75.66195" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1679 B GRASMERE CRES</td><td>GRASMERE CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.37625&mlon=-75.66190#map=18/45.37625/-75.66190" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1679 C GRASMERE CRES</td><td>GRASMERE CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.37625&mlon=-75.66185#map=18/45.37625/-75.66185" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1679 D GRASMERE CRES</td><td>GRASMERE CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.37626&mlon=-75.66179#map=18/45.37626/-75.66179" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1679 E GRASMERE CRES</td><td>GRASMERE CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.37626&mlon=-75.66173#map=18/45.37626/-75.66173" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1679 F GRASMERE CRES</td><td>GRASMERE CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.37627&mlon=-75.66167#map=18/45.37627/-75.66167" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>275 OLD COACH RD</td><td>OLD COACH RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.34847&mlon=-76.07895#map=18/45.34847/-76.07895" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>572 B PINAWA CIR</td><td>PINAWA CIR</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.23975&mlon=-75.72703#map=18/45.23975/-75.72703" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>518 B REFLECTION ST</td><td>REFLECTION ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.44314&mlon=-75.51750#map=18/45.44314/-75.51750" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>643 A TWEEDSMUIR AVE</td><td>TWEEDSMUIR AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.38547&mlon=-75.74501#map=18/45.38547/-75.74501" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>643 B TWEEDSMUIR AVE</td><td>TWEEDSMUIR AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.38544&mlon=-75.74499#map=18/45.38544/-75.74499" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>643 C TWEEDSMUIR AVE</td><td>TWEEDSMUIR AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.38540&mlon=-75.74497#map=18/45.38540/-75.74497" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>643 D TWEEDSMUIR AVE</td><td>TWEEDSMUIR AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.38537&mlon=-75.74495#map=18/45.38537/-75.74495" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>643 E TWEEDSMUIR AVE</td><td>TWEEDSMUIR AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.38535&mlon=-75.74494#map=18/45.38535/-75.74494" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1300 WEST BEACH WAY</td><td>WEST BEACH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25990&mlon=-75.58125#map=18/45.25990/-75.58125" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1306 WEST BEACH WAY</td><td>WEST BEACH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25969&mlon=-75.58084#map=18/45.25969/-75.58084" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1312 WEST BEACH WAY</td><td>WEST BEACH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25946&mlon=-75.58044#map=18/45.25946/-75.58044" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1318 WEST BEACH WAY</td><td>WEST BEACH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25937&mlon=-75.57989#map=18/45.25937/-75.57989" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1324 WEST BEACH WAY</td><td>WEST BEACH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25951&mlon=-75.57936#map=18/45.25951/-75.57936" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1335 WEST BEACH WAY</td><td>WEST BEACH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.26044&mlon=-75.57896#map=18/45.26044/-75.57896" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1336 WEST BEACH WAY</td><td>WEST BEACH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.26009&mlon=-75.57840#map=18/45.26009/-75.57840" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1341 WEST BEACH WAY</td><td>WEST BEACH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.26072&mlon=-75.57832#map=18/45.26072/-75.57832" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1342 WEST BEACH WAY</td><td>WEST BEACH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.26032&mlon=-75.57785#map=18/45.26032/-75.57785" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1348 WEST BEACH WAY</td><td>WEST BEACH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.26051&mlon=-75.57746#map=18/45.26051/-75.57746" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1349 WEST BEACH WAY</td><td>WEST BEACH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.26091&mlon=-75.57785#map=18/45.26091/-75.57785" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1354 WEST BEACH WAY</td><td>WEST BEACH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.26067&mlon=-75.57702#map=18/45.26067/-75.57702" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1355 WEST BEACH WAY</td><td>WEST BEACH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.26108&mlon=-75.57743#map=18/45.26108/-75.57743" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1360 WEST BEACH WAY</td><td>WEST BEACH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.26084&mlon=-75.57666#map=18/45.26084/-75.57666" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1361 WEST BEACH WAY</td><td>WEST BEACH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.26128&mlon=-75.57696#map=18/45.26128/-75.57696" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1366 WEST BEACH WAY</td><td>WEST BEACH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.26098&mlon=-75.57629#map=18/45.26098/-75.57629" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1367 WEST BEACH WAY</td><td>WEST BEACH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.26150&mlon=-75.57653#map=18/45.26150/-75.57653" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1372 WEST BEACH WAY</td><td>WEST BEACH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.26117&mlon=-75.57587#map=18/45.26117/-75.57587" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1373 WEST BEACH WAY</td><td>WEST BEACH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.26166&mlon=-75.57609#map=18/45.26166/-75.57609" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1378 WEST BEACH WAY</td><td>WEST BEACH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.26133&mlon=-75.57550#map=18/45.26133/-75.57550" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1379 WEST BEACH WAY</td><td>WEST BEACH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.26185&mlon=-75.57562#map=18/45.26185/-75.57562" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1384 WEST BEACH WAY</td><td>WEST BEACH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.26148&mlon=-75.57508#map=18/45.26148/-75.57508" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1390 WEST BEACH WAY</td><td>WEST BEACH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.26167&mlon=-75.57470#map=18/45.26167/-75.57470" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1391 WEST BEACH WAY</td><td>WEST BEACH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.26207&mlon=-75.57513#map=18/45.26207/-75.57513" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1396 WEST BEACH WAY</td><td>WEST BEACH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.26185&mlon=-75.57431#map=18/45.26185/-75.57431" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1397 WEST BEACH WAY</td><td>WEST BEACH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.26226&mlon=-75.57469#map=18/45.26226/-75.57469" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1402 WEST BEACH WAY</td><td>WEST BEACH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.26203&mlon=-75.57392#map=18/45.26203/-75.57392" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1403 WEST BEACH WAY</td><td>WEST BEACH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.26246&mlon=-75.57431#map=18/45.26246/-75.57431" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1408 WEST BEACH WAY</td><td>WEST BEACH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.26218&mlon=-75.57354#map=18/45.26218/-75.57354" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1409 WEST BEACH WAY</td><td>WEST BEACH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.26266&mlon=-75.57375#map=18/45.26266/-75.57375" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1414 WEST BEACH WAY</td><td>WEST BEACH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.26235&mlon=-75.57315#map=18/45.26235/-75.57315" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1415 WEST BEACH WAY</td><td>WEST BEACH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.26287&mlon=-75.57338#map=18/45.26287/-75.57338" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1420 WEST BEACH WAY</td><td>WEST BEACH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.26260&mlon=-75.57278#map=18/45.26260/-75.57278" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1421 WEST BEACH WAY</td><td>WEST BEACH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.26313&mlon=-75.57298#map=18/45.26313/-75.57298" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1426 WEST BEACH WAY</td><td>WEST BEACH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.26273&mlon=-75.57244#map=18/45.26273/-75.57244" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1427 WEST BEACH WAY</td><td>WEST BEACH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.26342&mlon=-75.57246#map=18/45.26342/-75.57246" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1432 WEST BEACH WAY</td><td>WEST BEACH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.26298&mlon=-75.57208#map=18/45.26298/-75.57208" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1433 WEST BEACH WAY</td><td>WEST BEACH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.26367&mlon=-75.57191#map=18/45.26367/-75.57191" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1438 WEST BEACH WAY</td><td>WEST BEACH WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.26326&mlon=-75.57169#map=18/45.26326/-75.57169" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Retired Addresses <span class="badge badge-red">0</span></h2>
+    <p class="empty">No addresses retired.</p>
+  </div>
+
+  <div class="section">
+    <h2>Updated Addresses <span class="badge badge-yellow">1</span>
+      <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRNUM)</li><li>Street name (FULLNAME)</li><li>Unit (UNITID)</li><li>Full address (FULLADDR)</li><li>Coordinates (latitude, longitude)</li><li>ADDRTYPE</li><li>PI_MUNICIPAL_ADDRESS_ID</li><li>QUALIFIER</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span></h2>
+    
+    
+    <table>
+      <thead><tr><th>Address</th><th>What Changed</th><th>Before</th><th></th><th>After</th><th>Map</th></tr></thead>
+      <tbody>
+        
+  <tr><td rowspan="2">1804 DUMAS ST</td>
+    <td class="change-field">ADDRTYPE</td>
+    <td class="old-val">SUBORD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">MAIN</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.45630&mlon=-75.51554#map=18/45.45630/-75.51554" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">45.45636, -75.51557<a class="map-link" href="https://www.openstreetmap.org/?mlat=45.45636&mlon=-75.51557#map=19/45.45636/-75.51557" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↓ 7.1m</td>
+    <td class="new-val">45.45630, -75.51554<a class="map-link" href="https://www.openstreetmap.org/?mlat=45.45630&mlon=-75.51554#map=19/45.45630/-75.51554" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Renumbered Addresses <span class="badge badge-accent">0</span></h2>
+    
+    <p class="empty">No addresses renumbered.</p>
+  </div>
+
+  <div class="section">
+    <h2>Street Renames <span class="badge badge-purple">0</span></h2>
+    <p class="empty">No street renames.</p>
+  </div>
+
+  
+
+  
+  <div class="section">
+    <h2>Status Changes <span class="badge badge-teal">18</span></h2>
+    
+  <details class="rename-group">
+    <summary><span class="change-field">ADDRTYPE:</span> <span class="old-val">SUBORD</span> <span class="arrow-val">→</span> <span class="new-val">MAIN</span><span class="rename-count">15 addresses</span></summary>
+    <table>
+      <tbody>
+        
+        <tr><td>331 A BLOOMFIELD AVE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39642&mlon=-75.75643#map=18/45.39642/-75.75643" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1802 DUMAS ST</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.45636&mlon=-75.51557#map=18/45.45636/-75.51557" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>835 EILEEN VOLLICK CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.36303&mlon=-75.93355#map=18/45.36303/-75.93355" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>837 EILEEN VOLLICK CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.36299&mlon=-75.93350#map=18/45.36299/-75.93350" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>839 EILEEN VOLLICK CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.36295&mlon=-75.93345#map=18/45.36295/-75.93345" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>841 EILEEN VOLLICK CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.36291&mlon=-75.93340#map=18/45.36291/-75.93340" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>843 EILEEN VOLLICK CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.36287&mlon=-75.93334#map=18/45.36287/-75.93334" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>845 EILEEN VOLLICK CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.36282&mlon=-75.93328#map=18/45.36282/-75.93328" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>829 FAIRLINE ROW</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.27653&mlon=-75.89715#map=18/45.27653/-75.89715" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>831 FAIRLINE ROW</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.27649&mlon=-75.89710#map=18/45.27649/-75.89710" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>833 FAIRLINE ROW</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.27643&mlon=-75.89705#map=18/45.27643/-75.89705" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>835 FAIRLINE ROW</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.27639&mlon=-75.89700#map=18/45.27639/-75.89700" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>837 FAIRLINE ROW</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.27635&mlon=-75.89695#map=18/45.27635/-75.89695" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>4635 LIMEBANK RD</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.27782&mlon=-75.66510#map=18/45.27782/-75.66510" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>158 SUNNYSIDE AVE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39635&mlon=-75.67793#map=18/45.39635/-75.67793" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+  </details>
+  
+  <details class="rename-group">
+    <summary><span class="change-field">ADDRTYPE:</span> <span class="old-val">MAIN</span> <span class="arrow-val">→</span> <span class="new-val">SUBORD</span><span class="rename-count">3 addresses</span></summary>
+    <table>
+      <tbody>
+        
+        <tr><td>265 CHURCHILL AVE N</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.39647&mlon=-75.75651#map=18/45.39647/-75.75651" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>884 MOONRISE TERR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25332&mlon=-75.75202#map=18/45.25332/-75.75202" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>636 PERSEUS AVE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.25291&mlon=-75.75289#map=18/45.25291/-75.75289" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+  </details>
+  
+    
+  </div>
+  
+
+  
+
+  <div class="section">
+    <h2>Location Adjustments <span class="badge" style="background: var(--surface2); color: var(--text-dim)">1</span></h2>
+    
+    
+    
+    <table>
+      <thead><tr><th>Address</th><th>Before</th><th></th><th>After</th></tr></thead>
+      <tbody>
+        
+        <tr><td>1240 OLD PRESCOTT RD</td>
+          
+          <td class="old-val">45.26112, -75.57654<a class="map-link" href="https://www.openstreetmap.org/?mlat=45.26112&mlon=-75.57654#map=19/45.26112/-75.57654" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 284.0m</td>
+          <td class="new-val">45.26002, -75.57981<a class="map-link" href="https://www.openstreetmap.org/?mlat=45.26002&mlon=-75.57981#map=19/45.26002/-75.57981" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+      </tbody>
+    </table>
+    
+    
+    
+  </div>
+
+  <div class="generated-at">Report generated Oct 09, 2026 at 01:19 PM · source licence: Open Government Licence – City of Ottawa 2.0</div>
+
+  <script>
+    function sortTable(tbodyId, col) {
+      const tbody = document.getElementById(tbodyId);
+      if (!tbody) return;
+      const rows = Array.from(tbody.rows);
+      const dir = tbody.dataset.sortDir === 'asc' ? 'desc' : 'asc';
+      tbody.dataset.sortDir = dir;
+      rows.sort((a, b) => {
+        const av = a.cells[col]?.textContent.trim() || '';
+        const bv = b.cells[col]?.textContent.trim() || '';
+        const an = parseFloat(av), bn = parseFloat(bv);
+        if (!isNaN(an) && !isNaN(bn)) return dir === 'asc' ? an - bn : bn - an;
+        return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+      });
+      rows.forEach(r => tbody.appendChild(r));
+    }
+  </script>
+</body>
+
+</html>

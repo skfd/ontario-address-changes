@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Town of Oakville Address Changes — Friday, Oct 09, 2026</title>
+  <style>
+    :root {
+      --bg: #fafafa; --surface: #ffffff; --surface2: #f5f5f5; --surface3: #ebebeb;
+      --border: #e0e0e0; --border-strong: #d1d1d1; --text: #242424;
+      --text-secondary: #424242; --text-dim: #616161; --accent: #0078d4;
+      --accent-hover: #106ebe; --accent-bg: #eff6fc; --green: #107c10;
+      --green-bg: #f1faf1; --green-tint: #9fd89f; --red: #c50f1f; --red-bg: #fdf3f4;
+      --red-tint: #eeacb2; --yellow: #eaa300; --yellow-bg: #fefbf4; --yellow-tint: #f9e2ae;
+      --purple: #881798; --purple-bg: #f9f3fb; --teal: #038387; --teal-bg: #f0fafa;
+      --shadow-4: 0 2px 4px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --shadow-8: 0 4px 8px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --card-bg: #ffffff; --card-hover: #f5f5f5; color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1f1f1f; --surface: #292929; --surface2: #333333; --surface3: #3d3d3d;
+        --border: #525252; --border-strong: #666666; --text: #ffffff;
+        --text-secondary: #d6d6d6; --text-dim: #adadad; --accent: #2899f5;
+        --accent-hover: #3aa0f3; --accent-bg: #002848; --green: #54b054;
+        --green-bg: #052505; --green-tint: #107c10; --red: #dc626d; --red-bg: #3b0509;
+        --red-tint: #c50f1f; --yellow: #f2c661; --yellow-bg: #463100; --yellow-tint: #eaa300;
+        --purple: #d29ddb; --purple-bg: #3a1040; --teal: #58c0c4; --teal-bg: #013638;
+        --shadow-4: 0 2px 4px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --shadow-8: 0 4px 8px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --card-bg: #333333; --card-hover: #3d3d3d; color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI Variable','Segoe UI',system-ui,-apple-system,sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.5; padding: 2rem;
+      max-width: 1100px; margin: 0 auto; font-size: 14px; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; color: var(--accent-hover); }
+    .back-link { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 12px;
+      color: var(--text-dim); margin-bottom: 1.5rem; transition: color 0.1s; }
+    .back-link:hover { color: var(--accent); text-decoration: none; }
+    h1 { font-size: 24px; font-weight: 600; margin-bottom: 4px; }
+    .subtitle { color: var(--text-secondary); font-size: 14px; margin-bottom: 12px; }
+    .explainer { color: var(--text-secondary); font-size: 13px; line-height: 1.5;
+      margin-bottom: 24px; padding: 12px 16px; background: var(--surface);
+      border-radius: 8px; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px; margin-bottom: 24px; }
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px;
+      padding: 16px; box-shadow: var(--shadow-4); transition: box-shadow 0.1s; }
+    .card:hover { box-shadow: var(--shadow-8); }
+    .card .label { font-size: 12px; color: var(--text-dim); font-weight: 400; }
+    .card .value { font-size: 28px; font-weight: 600; margin-top: 4px; }
+    .card .value.green { color: var(--green); } .card .value.red { color: var(--red); }
+    .card .value.yellow { color: var(--yellow); } .card .value.accent { color: var(--accent); }
+    .card .value.purple { color: var(--purple); }
+    .card .value.teal { color: var(--teal); }
+    .sparkline { display: block; margin-top: 6px; overflow: visible; opacity: 0.9; }
+    .sparkline-label { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+    .section { margin-bottom: 24px; }
+    .section h2 { font-size: 16px; font-weight: 600; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px; }
+    .badge { font-size: 12px; padding: 2px 8px; border-radius: 999px; font-weight: 600; }
+    .badge-green { background: var(--green-bg); color: var(--green); }
+    .badge-red { background: var(--red-bg); color: var(--red); }
+    .badge-yellow { background: var(--yellow-bg); color: var(--yellow); }
+    .badge-accent { background: var(--accent-bg); color: var(--accent); }
+    .badge-purple { background: var(--purple-bg); color: var(--purple); }
+    .badge-teal { background: var(--teal-bg); color: var(--teal); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface);
+      border-radius: 8px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    thead { background: var(--surface2); }
+    th { text-align: left; padding: 8px 12px; font-weight: 600; color: var(--text-dim);
+      font-size: 12px; cursor: pointer; user-select: none; border-bottom: 1px solid var(--border); }
+    th:hover { color: var(--accent); }
+    td { padding: 8px 12px; border-top: 1px solid var(--border); }
+    tr:hover td { background: var(--surface2); }
+    .old-val { color: var(--red); text-decoration: line-through; }
+    .new-val { color: var(--green); }
+    .arrow-val { color: var(--text-dim); text-align: center; white-space: nowrap; }
+    .map-link { display: inline-flex; align-items: center; margin-left: 0.4em;
+      color: var(--accent); vertical-align: middle; white-space: nowrap; font-size: 12px; }
+    .map-link:hover { color: var(--accent-hover); }
+    .map-link svg { width: 14px; height: 14px; }
+    .change-field { color: var(--yellow); font-weight: 600; }
+    .bar-chart { margin-top: 8px; }
+    .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 12px; }
+    .bar-label { width: 180px; text-align: right; color: var(--text-secondary); flex-shrink: 0;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .bar-track { flex: 1; height: 8px; background: var(--surface2); border-radius: 4px;
+      overflow: hidden; position: relative; }
+    .bar-fill { height: 100%; border-radius: 4px; transition: width 0.15s ease; }
+    .bar-fill.green { background: var(--green); } .bar-fill.red { background: var(--red); }
+    .bar-count { width: 40px; font-size: 12px; color: var(--text-dim); }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+    .empty { color: var(--text-dim); font-style: italic; padding: 16px; }
+    .truncated { color: var(--text-dim); font-size: 12px; margin-top: 8px; }
+    .collapsible-toggle { background: transparent; border: 1px solid var(--border);
+      color: var(--accent); padding: 5px 12px; border-radius: 4px; cursor: pointer;
+      font-size: 12px; font-family: inherit; margin-bottom: 12px; transition: background 0.1s; }
+    .collapsible-toggle:hover { background: var(--surface2); }
+    details.rename-group { background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; margin-bottom: 8px; box-shadow: var(--shadow-4); }
+    details.rename-group summary { padding: 10px 14px; cursor: pointer; font-size: 13px; }
+    details.rename-group[open] summary { border-bottom: 1px solid var(--border); }
+    details.rename-group table { border: none; box-shadow: none; border-radius: 0; }
+    details.rename-group .truncated { padding: 0 14px 10px; margin-top: 0; }
+    .rename-count { color: var(--text-dim); font-size: 12px; margin-left: 6px; }
+    .no-changes-banner { background: var(--green-bg); border: 1px solid var(--green-tint);
+      color: var(--green); padding: 16px; border-radius: 8px; margin-bottom: 24px;
+      text-align: center; font-weight: 600; font-size: 14px; }
+    .baseline-banner { background: var(--accent-bg); border: 1px solid var(--accent);
+      color: var(--accent); padding: 16px; border-radius: 8px; margin-bottom: 24px; font-size: 13px; }
+    .generated-at { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-dim); }
+    .history { font-size: 12.5px; color: var(--text-secondary); white-space: nowrap; }
+    .history .a { color: var(--green); font-weight: 500; }
+    .history .r { color: var(--red); font-weight: 500; }
+    .history .dot { color: var(--text-dim); margin: 0 4px; }
+    .history-none { color: var(--text-dim); font-style: italic; font-size: 12.5px; }
+    .info-wrap { position: relative; display: inline-flex; vertical-align: middle; }
+    .info-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+      height: 18px; padding: 0 8px 0 7px; border-radius: 999px; border: none;
+      color: #fff; background: var(--accent); cursor: help; font-size: 11px; font-weight: 600;
+      font-style: normal; font-family: inherit; line-height: 1; white-space: nowrap; }
+    .info-btn .glyph { font-style: italic; font-weight: 700;
+      font-family: Georgia, 'Times New Roman', serif; }
+    .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn,
+    .info-wrap:focus .info-btn { background: var(--accent-hover); }
+    .info-pop { display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 20;
+      width: 320px; max-width: 80vw; padding: 12px 14px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-8);
+      font-size: 12.5px; font-weight: 400; color: var(--text-secondary); line-height: 1.5; }
+    .info-wrap:hover .info-pop, .info-wrap:focus-within .info-pop,
+    .info-wrap:focus .info-pop { display: block; }
+    .info-pop strong { display: block; color: var(--text); font-size: 12px; margin-bottom: 4px; }
+    .info-pop ul { list-style: none; margin: 0 0 10px; padding: 0; }
+    .info-pop li { padding: 1px 0 1px 14px; position: relative; }
+    .info-pop li::before { content: "·"; position: absolute; left: 4px; color: var(--text-dim); }
+    .info-pop .note { color: var(--text-dim); font-size: 11.5px; margin: 0 0 10px; }
+    .info-pop .muted { color: var(--text-dim); font-style: italic; }
+  </style>
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+
+  <a class="back-link" href="index.html">← Back to Town of Oakville reports</a>
+
+  <h1>Town of Oakville — Address Changes</h1>
+  <p class="subtitle">
+    Changes between  and Friday, Oct 09, 2026
+    · 71,159 total addresses
+  </p>
+
+  
+
+  <div class="cards">
+    <div class="card"><div class="label">Total Addresses</div>
+      <div class="value accent">71,159</div></div>
+    <div class="card"><div class="label">New Addresses</div>
+      <div class="value green">+51</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#107c10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,7.0 19.7,3.6 37.3,10.2 55.0,15.8 72.7,17.4 90.3,17.7 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#107c10"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Retired Addresses</div>
+      <div class="value red">−44</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#c50f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,15.5 72.7,15.5 90.3,18.0 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#c50f1f"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Updated Addresses <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (STREET_NUM)</li><li>Street name (SNAME)</li><li>Unit (UNIT)</li><li>Full address (ADDRESS)</li><li>Coordinates (latitude, longitude)</li><li>LABEL</li><li>STREET_DIR</li><li>STREET_NAME</li><li>STREET_TYPE</li><li>SUFFIX</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span></div>
+      <div class="value yellow">1</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Renumbered</div>
+      <div class="value accent">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#0078d4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#0078d4"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Street Renames</div>
+      <div class="value purple">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#9141ac" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#9141ac"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    
+    <div class="card"><div class="label">Location Adjustments</div>
+      <div class="value" style="color: var(--text-dim)">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#808080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#808080"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+  </div>
+
+  
+  <div class="section">
+    <h2>Change Breakdown</h2>
+    <div class="stats-grid">
+      
+      <div class="card"><div class="label">Top Streets by New Addresses</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">JOHN MCKAY BLVD</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">23</span></div>
+        <div class="bar-row"><span class="bar-label">DARTMOUTH CRES</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:48.0%"></div></div>
+          <span class="bar-count">11</span></div>
+        <div class="bar-row"><span class="bar-label">MAVERICK WAY</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:13.0%"></div></div>
+          <span class="bar-count">3</span></div>
+        <div class="bar-row"><span class="bar-label">WHEAT BOOM DR</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:13.0%"></div></div>
+          <span class="bar-count">3</span></div>
+      </div></div>
+      
+      <div class="card"><div class="label">Top Streets by Retired Addresses</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">JOHN MCKAY BLVD</span>
+          <div class="bar-track"><div class="bar-fill red" style="width:100.0%"></div></div>
+          <span class="bar-count">23</span></div>
+        <div class="bar-row"><span class="bar-label">DARTMOUTH CRES</span>
+          <div class="bar-track"><div class="bar-fill red" style="width:48.0%"></div></div>
+          <span class="bar-count">11</span></div>
+        <div class="bar-row"><span class="bar-label">WHEAT BOOM DR</span>
+          <div class="bar-track"><div class="bar-fill red" style="width:13.0%"></div></div>
+          <span class="bar-count">3</span></div>
+      </div></div>
+      
+      <div class="card"><div class="label">Most Frequently Updated Fields</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">Full Address</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">1</span></div>
+      </div></div>
+    </div>
+  </div>
+  
+
+  <div class="section">
+    <h2>New Addresses <span class="badge badge-green">51</span></h2>
+    
+    <details class="rename-group">
+      <summary>3070 JOHN MCKAY BLVD <span class="arrow-val">→</span> <span class="new-val">8 units (2, 3, 4, 8, 9, 10, 16, 17)</span><span class="rename-count">8 new addresses · original address remains</span></summary>
+      <table>
+        <thead><tr><th>Address</th><th>Unit</th><th>History</th><th>Map</th></tr></thead>
+        <tbody>
+          
+          <tr><td>3070 JOHN MCKAY BLVD Unit 2</td><td>2</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.50099&mlon=-79.71333#map=18/43.50099/-79.71333" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>3070 JOHN MCKAY BLVD Unit 3</td><td>3</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.50096&mlon=-79.71337#map=18/43.50096/-79.71337" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>3070 JOHN MCKAY BLVD Unit 4</td><td>4</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.50092&mlon=-79.71342#map=18/43.50092/-79.71342" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>3070 JOHN MCKAY BLVD Unit 8</td><td>8</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.50075&mlon=-79.71367#map=18/43.50075/-79.71367" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>3070 JOHN MCKAY BLVD Unit 9</td><td>9</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.50071&mlon=-79.71373#map=18/43.50071/-79.71373" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>3070 JOHN MCKAY BLVD Unit 10</td><td>10</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.50067&mlon=-79.71378#map=18/43.50067/-79.71378" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>3070 JOHN MCKAY BLVD Unit 16</td><td>16</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.50042&mlon=-79.71413#map=18/43.50042/-79.71413" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>3070 JOHN MCKAY BLVD Unit 17</td><td>17</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.50038&mlon=-79.71418#map=18/43.50038/-79.71418" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+    </details>
+    
+    <details class="rename-group">
+      <summary>1220 DARTMOUTH CRES <span class="arrow-val">→</span> <span class="new-val">4 units (12, 13, 15, 16)</span><span class="rename-count">4 new addresses · original address remains</span></summary>
+      <table>
+        <thead><tr><th>Address</th><th>Unit</th><th>History</th><th>Map</th></tr></thead>
+        <tbody>
+          
+          <tr><td>1220 DARTMOUTH CRES Unit 12</td><td>12</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.49980&mlon=-79.71482#map=18/43.49980/-79.71482" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>1220 DARTMOUTH CRES Unit 13</td><td>13</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.49986&mlon=-79.71479#map=18/43.49986/-79.71479" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>1220 DARTMOUTH CRES Unit 15</td><td>15</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.49995&mlon=-79.71472#map=18/43.49995/-79.71472" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>1220 DARTMOUTH CRES Unit 16</td><td>16</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.50001&mlon=-79.71467#map=18/43.50001/-79.71467" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+    </details>
+    
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-added',0)">Address</th><th onclick="sortTable('t-added',1)">Street</th>
+        <th onclick="sortTable('t-added',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-added">
+        
+        <tr><td>236 CARDINAL DR</td><td>CARDINAL DR</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46718&mlon=-79.65338#map=18/43.46718/-79.65338" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1162 DARTMOUTH CRES</td><td>DARTMOUTH CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.49824&mlon=-79.71239#map=18/43.49824/-79.71239" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1164 DARTMOUTH CRES</td><td>DARTMOUTH CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.49826&mlon=-79.71244#map=18/43.49826/-79.71244" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1166 DARTMOUTH CRES</td><td>DARTMOUTH CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.49829&mlon=-79.71250#map=18/43.49829/-79.71250" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1168 DARTMOUTH CRES</td><td>DARTMOUTH CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.49832&mlon=-79.71256#map=18/43.49832/-79.71256" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1170 DARTMOUTH CRES</td><td>DARTMOUTH CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.49835&mlon=-79.71262#map=18/43.49835/-79.71262" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1172 DARTMOUTH CRES</td><td>DARTMOUTH CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.49837&mlon=-79.71268#map=18/43.49837/-79.71268" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1174 DARTMOUTH CRES</td><td>DARTMOUTH CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.49840&mlon=-79.71274#map=18/43.49840/-79.71274" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3325 DOVE DR</td><td>DOVE DR</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.50749&mlon=-79.71487#map=18/43.50749/-79.71487" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3014 JOHN MCKAY BLVD</td><td>JOHN MCKAY BLVD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.49872&mlon=-79.71089#map=18/43.49872/-79.71089" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3016 JOHN MCKAY BLVD</td><td>JOHN MCKAY BLVD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.49873&mlon=-79.71096#map=18/43.49873/-79.71096" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3018 JOHN MCKAY BLVD</td><td>JOHN MCKAY BLVD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.49875&mlon=-79.71104#map=18/43.49875/-79.71104" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3020 JOHN MCKAY BLVD</td><td>JOHN MCKAY BLVD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.49877&mlon=-79.71111#map=18/43.49877/-79.71111" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3022 JOHN MCKAY BLVD</td><td>JOHN MCKAY BLVD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.49878&mlon=-79.71118#map=18/43.49878/-79.71118" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3029 JOHN MCKAY BLVD</td><td>JOHN MCKAY BLVD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.50023&mlon=-79.71227#map=18/43.50023/-79.71227" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3038 JOHN MCKAY BLVD</td><td>JOHN MCKAY BLVD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.49909&mlon=-79.71182#map=18/43.49909/-79.71182" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3040 JOHN MCKAY BLVD</td><td>JOHN MCKAY BLVD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.49913&mlon=-79.71187#map=18/43.49913/-79.71187" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3045 JOHN MCKAY BLVD</td><td>JOHN MCKAY BLVD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.50060&mlon=-79.71251#map=18/43.50060/-79.71251" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3067 JOHN MCKAY BLVD</td><td>JOHN MCKAY BLVD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.50112&mlon=-79.71286#map=18/43.50112/-79.71286" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3069 JOHN MCKAY BLVD</td><td>JOHN MCKAY BLVD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.50117&mlon=-79.71290#map=18/43.50117/-79.71290" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3073 JOHN MCKAY BLVD</td><td>JOHN MCKAY BLVD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.50123&mlon=-79.71296#map=18/43.50123/-79.71296" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3075 JOHN MCKAY BLVD</td><td>JOHN MCKAY BLVD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.50129&mlon=-79.71301#map=18/43.50129/-79.71301" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3077 JOHN MCKAY BLVD</td><td>JOHN MCKAY BLVD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.50133&mlon=-79.71305#map=18/43.50133/-79.71305" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3079 JOHN MCKAY BLVD</td><td>JOHN MCKAY BLVD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.50137&mlon=-79.71309#map=18/43.50137/-79.71309" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1179 MAVERICK WAY</td><td>MAVERICK WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.50425&mlon=-79.71701#map=18/43.50425/-79.71701" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1187 MAVERICK WAY</td><td>MAVERICK WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.50463&mlon=-79.71660#map=18/43.50463/-79.71660" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1195 MAVERICK WAY</td><td>MAVERICK WAY</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.50480&mlon=-79.71641#map=18/43.50480/-79.71641" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3201 MEADOWRIDGE DR</td><td>MEADOWRIDGE DR</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.50629&mlon=-79.71293#map=18/43.50629/-79.71293" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3203 MEADOWRIDGE DR</td><td>MEADOWRIDGE DR</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.50632&mlon=-79.71301#map=18/43.50632/-79.71301" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1195 MILLAND DR</td><td>MILLAND DR</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.49829&mlon=-79.71107#map=18/43.49829/-79.71107" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1197 MILLAND DR</td><td>MILLAND DR</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.49834&mlon=-79.71102#map=18/43.49834/-79.71102" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3079 ROBERT LAMB BLVD</td><td>ROBERT LAMB BLVD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.49751&mlon=-79.71435#map=18/43.49751/-79.71435" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3081 ROBERT LAMB BLVD</td><td>ROBERT LAMB BLVD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.49753&mlon=-79.71442#map=18/43.49753/-79.71442" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1082 WHEAT BOOM DR</td><td>WHEAT BOOM DR</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.49791&mlon=-79.71486#map=18/43.49791/-79.71486" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1084 WHEAT BOOM DR</td><td>WHEAT BOOM DR</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.49796&mlon=-79.71488#map=18/43.49796/-79.71488" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1154 WHEAT BOOM DR</td><td>WHEAT BOOM DR</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.50014&mlon=-79.71499#map=18/43.50014/-79.71499" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3430 WILLIAM CUTMORE BLVD</td><td>WILLIAM CUTMORE BLVD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.50565&mlon=-79.71842#map=18/43.50565/-79.71842" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3347 WOLVERINE PATH</td><td>WOLVERINE PATH</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.50523&mlon=-79.71656#map=18/43.50523/-79.71656" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3358 WRYBILL PATH</td><td>WRYBILL PATH</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.50641&mlon=-79.71602#map=18/43.50641/-79.71602" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Retired Addresses <span class="badge badge-red">44</span></h2>
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-removed',0)">Address</th><th onclick="sortTable('t-removed',1)">Street</th>
+        <th onclick="sortTable('t-removed',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-removed">
+        
+        <tr><td>234 CARDINAL DR</td><td>CARDINAL DR</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46718&mlon=-79.65338#map=18/43.46718/-79.65338" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1162 DARTMOUTH CRES</td><td>DARTMOUTH CRES</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.49823&mlon=-79.71236#map=18/43.49823/-79.71236" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1164 DARTMOUTH CRES</td><td>DARTMOUTH CRES</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.49826&mlon=-79.71242#map=18/43.49826/-79.71242" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1166 DARTMOUTH CRES</td><td>DARTMOUTH CRES</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.49828&mlon=-79.71248#map=18/43.49828/-79.71248" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1168 DARTMOUTH CRES</td><td>DARTMOUTH CRES</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.49832&mlon=-79.71255#map=18/43.49832/-79.71255" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1170 DARTMOUTH CRES</td><td>DARTMOUTH CRES</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.49836&mlon=-79.71263#map=18/43.49836/-79.71263" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1172 DARTMOUTH CRES</td><td>DARTMOUTH CRES</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.49839&mlon=-79.71270#map=18/43.49839/-79.71270" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1174 DARTMOUTH CRES</td><td>DARTMOUTH CRES</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.49842&mlon=-79.71277#map=18/43.49842/-79.71277" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1220 DARTMOUTH CRES UNIT 12</td><td>DARTMOUTH CRES</td><td>12</td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.49978&mlon=-79.71483#map=18/43.49978/-79.71483" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1220 DARTMOUTH CRES UNIT 13</td><td>DARTMOUTH CRES</td><td>13</td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.49984&mlon=-79.71479#map=18/43.49984/-79.71479" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1220 DARTMOUTH CRES UNIT 15</td><td>DARTMOUTH CRES</td><td>15</td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.49998&mlon=-79.71469#map=18/43.49998/-79.71469" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1220 DARTMOUTH CRES UNIT 16</td><td>DARTMOUTH CRES</td><td>16</td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.50003&mlon=-79.71464#map=18/43.50003/-79.71464" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3014 JOHN MCKAY BLVD</td><td>JOHN MCKAY BLVD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.49871&mlon=-79.71089#map=18/43.49871/-79.71089" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3016 JOHN MCKAY BLVD</td><td>JOHN MCKAY BLVD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.49874&mlon=-79.71099#map=18/43.49874/-79.71099" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3018 JOHN MCKAY BLVD</td><td>JOHN MCKAY BLVD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.49875&mlon=-79.71108#map=18/43.49875/-79.71108" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3020 JOHN MCKAY BLVD</td><td>JOHN MCKAY BLVD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.49877&mlon=-79.71114#map=18/43.49877/-79.71114" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3022 JOHN MCKAY BLVD</td><td>JOHN MCKAY BLVD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.49880&mlon=-79.71121#map=18/43.49880/-79.71121" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3029 JOHN MCKAY BLVD</td><td>JOHN MCKAY BLVD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.50022&mlon=-79.71226#map=18/43.50022/-79.71226" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3038 JOHN MCKAY BLVD</td><td>JOHN MCKAY BLVD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.49911&mlon=-79.71184#map=18/43.49911/-79.71184" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3040 JOHN MCKAY BLVD</td><td>JOHN MCKAY BLVD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.49916&mlon=-79.71190#map=18/43.49916/-79.71190" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3045 JOHN MCKAY BLVD</td><td>JOHN MCKAY BLVD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.50062&mlon=-79.71252#map=18/43.50062/-79.71252" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3067 JOHN MCKAY BLVD</td><td>JOHN MCKAY BLVD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.50114&mlon=-79.71288#map=18/43.50114/-79.71288" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3069 JOHN MCKAY BLVD</td><td>JOHN MCKAY BLVD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.50118&mlon=-79.71291#map=18/43.50118/-79.71291" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3070 JOHN MCKAY BLVD UNIT 10</td><td>JOHN MCKAY BLVD</td><td>10</td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.50069&mlon=-79.71376#map=18/43.50069/-79.71376" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3070 JOHN MCKAY BLVD UNIT 16</td><td>JOHN MCKAY BLVD</td><td>16</td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.50041&mlon=-79.71414#map=18/43.50041/-79.71414" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3070 JOHN MCKAY BLVD UNIT 17</td><td>JOHN MCKAY BLVD</td><td>17</td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.50037&mlon=-79.71420#map=18/43.50037/-79.71420" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3070 JOHN MCKAY BLVD UNIT 2</td><td>JOHN MCKAY BLVD</td><td>2</td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.50102&mlon=-79.71329#map=18/43.50102/-79.71329" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3070 JOHN MCKAY BLVD UNIT 3</td><td>JOHN MCKAY BLVD</td><td>3</td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.50099&mlon=-79.71334#map=18/43.50099/-79.71334" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3070 JOHN MCKAY BLVD UNIT 4</td><td>JOHN MCKAY BLVD</td><td>4</td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.50094&mlon=-79.71340#map=18/43.50094/-79.71340" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3070 JOHN MCKAY BLVD UNIT 8</td><td>JOHN MCKAY BLVD</td><td>8</td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.50076&mlon=-79.71365#map=18/43.50076/-79.71365" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3070 JOHN MCKAY BLVD UNIT 9</td><td>JOHN MCKAY BLVD</td><td>9</td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.50073&mlon=-79.71370#map=18/43.50073/-79.71370" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3073 JOHN MCKAY BLVD</td><td>JOHN MCKAY BLVD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.50124&mlon=-79.71296#map=18/43.50124/-79.71296" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3075 JOHN MCKAY BLVD</td><td>JOHN MCKAY BLVD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.50130&mlon=-79.71302#map=18/43.50130/-79.71302" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3077 JOHN MCKAY BLVD</td><td>JOHN MCKAY BLVD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.50136&mlon=-79.71307#map=18/43.50136/-79.71307" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3079 JOHN MCKAY BLVD</td><td>JOHN MCKAY BLVD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.50142&mlon=-79.71313#map=18/43.50142/-79.71313" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3201 MEADOWRIDGE DR</td><td>MEADOWRIDGE DR</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.50630&mlon=-79.71297#map=18/43.50630/-79.71297" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3203 MEADOWRIDGE DR</td><td>MEADOWRIDGE DR</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.50633&mlon=-79.71304#map=18/43.50633/-79.71304" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1195 MILLAND DR</td><td>MILLAND DR</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.49831&mlon=-79.71105#map=18/43.49831/-79.71105" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1197 MILLAND DR</td><td>MILLAND DR</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.49837&mlon=-79.71098#map=18/43.49837/-79.71098" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3079 ROBERT LAMB BLVD</td><td>ROBERT LAMB BLVD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.49751&mlon=-79.71433#map=18/43.49751/-79.71433" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3081 ROBERT LAMB BLVD</td><td>ROBERT LAMB BLVD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.49753&mlon=-79.71439#map=18/43.49753/-79.71439" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1082WHEAT BOOM DR</td><td>WHEAT BOOM DR</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.49792&mlon=-79.71487#map=18/43.49792/-79.71487" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1084 WHEAT BOOM DR</td><td>WHEAT BOOM DR</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.49799&mlon=-79.71489#map=18/43.49799/-79.71489" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1154 WHEAT BOOM DR</td><td>WHEAT BOOM DR</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.50016&mlon=-79.71498#map=18/43.50016/-79.71498" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Updated Addresses <span class="badge badge-yellow">1</span>
+      <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (STREET_NUM)</li><li>Street name (SNAME)</li><li>Unit (UNIT)</li><li>Full address (ADDRESS)</li><li>Coordinates (latitude, longitude)</li><li>LABEL</li><li>STREET_DIR</li><li>STREET_NAME</li><li>STREET_TYPE</li><li>SUFFIX</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span></h2>
+    
+    
+    <table>
+      <thead><tr><th>Address</th><th>What Changed</th><th>Before</th><th></th><th>After</th><th>Map</th></tr></thead>
+      <tbody>
+        
+  <tr><td rowspan="1">1220 DARTMOUTH CRES Unit 14</td>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">1220 DARTMOUTH CRES UNIT 14</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1220 DARTMOUTH CRES Unit 14</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.49991&mlon=-79.71475#map=18/43.49991/-79.71475" target="_blank" rel="noopener">View ↗</a></td></tr>
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Renumbered Addresses <span class="badge badge-accent">0</span></h2>
+    
+    <p class="empty">No addresses renumbered.</p>
+  </div>
+
+  <div class="section">
+    <h2>Street Renames <span class="badge badge-purple">0</span></h2>
+    <p class="empty">No street renames.</p>
+  </div>
+
+  
+
+  
+
+  
+
+  <div class="section">
+    <h2>Location Adjustments <span class="badge" style="background: var(--surface2); color: var(--text-dim)">0</span></h2>
+    
+    <p class="empty">No location adjustments.</p>
+  </div>
+
+  <div class="generated-at">Report generated Oct 09, 2026 at 01:12 PM · source licence: Open Government Licence — Town of Oakville</div>
+
+  <script>
+    function sortTable(tbodyId, col) {
+      const tbody = document.getElementById(tbodyId);
+      if (!tbody) return;
+      const rows = Array.from(tbody.rows);
+      const dir = tbody.dataset.sortDir === 'asc' ? 'desc' : 'asc';
+      tbody.dataset.sortDir = dir;
+      rows.sort((a, b) => {
+        const av = a.cells[col]?.textContent.trim() || '';
+        const bv = b.cells[col]?.textContent.trim() || '';
+        const an = parseFloat(av), bn = parseFloat(bv);
+        if (!isNaN(an) && !isNaN(bn)) return dir === 'asc' ? an - bn : bn - an;
+        return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+      });
+      rows.forEach(r => tbody.appendChild(r));
+    }
+  </script>
+</body>
+
+</html>
