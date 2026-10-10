@@ -33,7 +33,7 @@ the second for every non-green city: cleared for all OGL-family cities and for
 burlington/london (pass-through condition); blocked for sdg / renfrew /
 peterborough-county (gated); unclear-by-silence for the unknowns.
 
-## Green — 17 (licence on the OSMF-approved list or equivalent)
+## Green — 18 (licence on the OSMF-approved list or equivalent)
 
 | dataset | tier | licence |
 |---|---|---|
@@ -48,6 +48,7 @@ peterborough-county (gated); unclear-by-silence for the unknowns.
 | kingston | green-lwg | Open Data Licence - City of Kingston |
 | lambton | green-ogl | Open Government Licence - County of Lambton |
 | niagara-falls | green-lwg | Open Government Licence - Niagara Region |
+| oakville | green-lwg | Open Government Licence – Town of Oakville (**LWG-listed compatible 2026-09-14**, verified 2026-10-09 on the [OSMF variants page](https://osmfoundation.org/wiki/OGL_Canada_and_local_variants), which links the town's [licence PDF](https://www.oakville.ca/getmedia/3cb7902a-2220-433e-8aed-24f326b745b9/town-hall-oakville-open-data-licence.pdf); OSM wiki Contributors entry exists; Canada#Open_Data table still says "Not accepted" — stale. ALSO brownfield-active (TronnaLegacy MapRoulette 55881) — do not touch regardless) |
 | ottawa | green-lwg | Open Government Licence – City of Ottawa 2.0 |
 | quinte-west | green-lwg | City of Quinte West Open Data Licence |
 | thunder-bay | green-lwg | City of Thunder Bay Open Data Licence |
@@ -55,9 +56,10 @@ peterborough-county (gated); unclear-by-silence for the unknowns.
 | waterloo | green-lwg | Open Government Licence – City of Waterloo |
 | york | green-lwg | York Region Open Data Licence |
 
-## Yellow — OGL-family variants for the LWG variant-review email (11)
+## Yellow — OGL-family variants for the LWG variant-review email (10)
 
-The six from 2026-08-16 plus **five found 2026-08-20** (frontenac,
+Five of the six from 2026-08-16 (oakville went green 2026-10-09: LWG-listed
+2026-09-14) plus **five found 2026-08-20** (frontenac,
 leeds-grenville, lennox-addington, milton, windsor). Waiting on: adding the
 new five to the drafted email, human read, send, reply. The
 **2026-08-16 user decision** stands: scaffolding ahead of the LWG reply is
@@ -74,7 +76,6 @@ fine; any OSM import stays gated on the reply (queue state: engine
 | leeds-grenville | yellow-ogl | OGL – United Counties of Leeds and Grenville v1.0 | **found 2026-08-20** (was "attribution line only"): full OGL-Canada-style text at geohub-uclg hub terms page; DCAT binds the address dataset to it — add to email |
 | lennox-addington | yellow-ogl | OGL – County of Lennox and Addington v2.0 | **found 2026-08-20** (was unknown): item licenseInfo links the hub terms page; commercial OK, attribution line specified — add to email; the "ask gisservices@ to confirm in writing" step is now unnecessary |
 | milton | yellow-ogl | OGL – Milton | **found 2026-08-20** (was unknown): Discover Milton hub "Disclaimer and Terms of Use"; caveat — the OGL covers the open-data page whose Address Points item points at `Datasets/Address_Pts`, while we track `WebMaps/MGIS/MapServer/63` (same host/publisher); consider re-pointing — add to email |
-| oakville | yellow-ogl | OGL — Town of Oakville | clone of OGL-Canada 2.0; ALSO brownfield-active (TronnaLegacy MapRoulette 55881) — do not touch regardless |
 | sarnia | yellow-ogl | OGL – City of Sarnia (item licenseInfo of the renamed service) | re-tiered in the toml 2026-08-20 with the URL fix (service renamed `Addresses_Open_Data` → `Addresses_Open_Data_AGOL`, item `2ed254db85d6442a8b040213c0c6b097`); self-declared OGL-Canada 2.0 clone; already in the email |
 | windsor | yellow-ogl | OGL – The Corporation of the City of Windsor v1.0 | **upgraded from red 2026-08-20**: the "Terms of Use" PDF at opendata.citywindsor.ca is a full OGL; the city's portal binds its Address datasets to it. Caveat: we track mappmycity.ca rather than the portal copy — consider re-pointing. Add to email |
 
@@ -146,9 +147,9 @@ sault-ste-marie (SooMaps click-through: non-commercial only, expressly
 covering consumed mapservices — borderline for a free tracker; operator may
 overrule).
 
-## Counts (2026-08-20, post-onboarding-wave)
+## Counts (2026-08-20, post-onboarding-wave; oakville to green 2026-10-09)
 
-green 17 · OGL-family in/joining the LWG email 13 · yellow-review 6
+green 18 · OGL-family in/joining the LWG email 12 · yellow-review 6
 (peel-region, bruce, norfolk, halton-hills, simcoe, prince-edward-county) ·
 CC-BY waiver 1 · restrictive 6 (4 gated off the site: sdg, renfrew,
 peterborough-county, cobourg) · unknown 9 — of **53 tracked datasets**.
