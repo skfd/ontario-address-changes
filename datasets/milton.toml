@@ -25,6 +25,9 @@ ignore_fields = [
   # Property roll RSN - assessment join key, rekeys upstream (one solo rewrite
   # 2026-07-18; burlington PROPERTYRSN precedent). Kept in props as the tax link.
   "PROP_RSN",
+  "GEOSTNAME",                                   # street-name stem; only ever changes with STREET_NAME (196/196)
+  "STREET_TYPE",                                 # street-type part; only ever changes with STREET_NAME (11/11)
+  "HISTORY",                                     # rename audit stamp (old address); rode along the 2026-09-03 Tremaine rename
 ]
 keep_fields = ["PROP_RSN"]
 

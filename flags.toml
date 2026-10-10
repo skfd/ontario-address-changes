@@ -1079,7 +1079,11 @@ signature = "mass-modified"
 fields = ["location"]
 scope = "55 rows changed the same field set [location] (100% of the day's 55 modifications)"
 detected = "2026-08-29"
-status = "open"
+status = "reviewed"
+verdict = "business"
+reviewed = "2026-10-09"
+rule = ""
+note = "Owner, after map + OSM-building check: rural points re-placed 2-162 m (median 28) with no net move toward buildings (5 closer, 12 farther); same maintenance stream as 07-31/08-08, publish collapsed as Location Adjustments. No rule: no floor separates this drift from real fixes (Redwood 181-361 m)."
 
 [[flag]]
 slug = "guelph"
@@ -1116,7 +1120,11 @@ signature = "mass-modified"
 fields = ["GEOSTNAME", "HISTORY", "full", "street"]
 scope = "119 rows changed the same field set [GEOSTNAME, HISTORY, full, street] (92% of the day's 130 modifications)"
 detected = "2026-09-03"
-status = "open"
+status = "reviewed"
+verdict = "business"
+reviewed = "2026-10-09"
+rule = ""
+note = "Owner: Tremaine Road -> Gaetan Road (119) and Carton Lane (11) per the town's 2026 renaming notice (old Tremaine cut off by Halton's new Tremaine Rd). 64 of the Gaetan rows were walked back to Tremaine on 09-09 (over-applied rename, town's fix); ruled together with 09-09 so the site ends correct."
 
 [[flag]]
 slug = "simcoe"
@@ -1153,7 +1161,11 @@ signature = "mass-modified"
 fields = ["GEOSTNAME", "full", "street"]
 scope = "66 rows changed the same field set [GEOSTNAME, full, street] (100% of the day's 66 modifications)"
 detected = "2026-09-09"
-status = "open"
+status = "reviewed"
+verdict = "business"
+reviewed = "2026-10-09"
+rule = ""
+note = "Owner: 64-66 of the 09-03 Gaetan Road rows (4029-7580) back to Tremaine Road, HISTORY untouched - the town narrowing an over-applied rename to the by-law segment. Published with 09-03 so the site's end state is right (Gaetan only where the by-law put it)."
 
 [[flag]]
 slug = "york"
@@ -1162,7 +1174,11 @@ signature = "mass-modified"
 fields = ["location"]
 scope = "104 rows changed the same field set [location] (100% of the day's 104 modifications)"
 detected = "2026-09-09"
-status = "open"
+status = "reviewed"
+verdict = "business"
+reviewed = "2026-10-09"
+rule = ""
+note = "Owner, after map check: 4 buildings, not a sweep - 7030/7070 Woodbine swapped onto their correct buildings (101 unit rows ride 7030), 350 First Commerce Dr 114 m, 7685 Yonge 35 m. Points moved to the right buildings: useful Location Adjustments."
 
 [[flag]]
 slug = "renfrew"
@@ -1270,7 +1286,11 @@ signature = "mass-modified"
 fields = ["location"]
 scope = "73 rows changed the same field set [location] (100% of the day's 73 modifications)"
 detected = "2026-09-16"
-status = "open"
+status = "reviewed"
+verdict = "business"
+reviewed = "2026-10-09"
+rule = ""
+note = "Owner, after map + OSM-building check: 73 points re-placed 4-361 m; 1032 Redwood Rd units 1/3/5 now sit on their own cottages, ~20 points moved closer to buildings, rest drift. Real re-survey batch, publish collapsed as Location Adjustments."
 
 [[flag]]
 slug = "kingston"
@@ -1377,4 +1397,30 @@ verdict = "technical"
 reviewed = "2026-10-07"
 rule = "none needed: one-time upstream whitespace cleanup of Location; 0 double-spaced full values remain in the active 22,397 rows, so it cannot recur; canonical full has no ignore lever (renfrew 06-13 precedent)"
 note = "Location (canonical full) lost a doubled space on all 395 modified rows ('108 ABBEY LANE' -> '108 ABBEY LANE'), 100% value-preserving; number, street and props unchanged on every row; vault clean. Feed restyle, no address changed."
+
+[[flag]]
+slug = "milton"
+date = "2026-09-03"
+signature = "mass-modified"
+fields = ["full", "street"]
+scope = "130 rows changed the same field set [full, street] (100% of the day's 130 modifications)"
+detected = "2026-10-09"
+status = "reviewed"
+verdict = "business"
+reviewed = "2026-10-09"
+rule = ""
+note = "Same event as the reviewed 2026-09-03 entry (business, owner 2026-10-09); re-signatured to [full, street] after GEOSTNAME/STREET_TYPE/HISTORY went into milton ignore_fields so the Tremaine rename classes as Street Renames."
+
+[[flag]]
+slug = "milton"
+date = "2026-09-09"
+signature = "mass-modified"
+fields = ["full", "street"]
+scope = "66 rows changed the same field set [full, street] (100% of the day's 66 modifications)"
+detected = "2026-10-09"
+status = "reviewed"
+verdict = "business"
+reviewed = "2026-10-09"
+rule = ""
+note = "Same event as the reviewed 2026-09-09 entry (business, owner 2026-10-09); re-signatured to [full, street] after GEOSTNAME/STREET_TYPE/HISTORY went into milton ignore_fields so the Tremaine rename classes as Street Renames."
 
