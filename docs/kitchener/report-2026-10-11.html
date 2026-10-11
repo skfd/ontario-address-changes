@@ -1,0 +1,1905 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>City of Kitchener Address Changes — Sunday, Oct 11, 2026</title>
+  <style>
+    :root {
+      --bg: #fafafa; --surface: #ffffff; --surface2: #f5f5f5; --surface3: #ebebeb;
+      --border: #e0e0e0; --border-strong: #d1d1d1; --text: #242424;
+      --text-secondary: #424242; --text-dim: #616161; --accent: #0078d4;
+      --accent-hover: #106ebe; --accent-bg: #eff6fc; --green: #107c10;
+      --green-bg: #f1faf1; --green-tint: #9fd89f; --red: #c50f1f; --red-bg: #fdf3f4;
+      --red-tint: #eeacb2; --yellow: #eaa300; --yellow-bg: #fefbf4; --yellow-tint: #f9e2ae;
+      --purple: #881798; --purple-bg: #f9f3fb; --teal: #038387; --teal-bg: #f0fafa;
+      --shadow-4: 0 2px 4px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --shadow-8: 0 4px 8px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --card-bg: #ffffff; --card-hover: #f5f5f5; color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1f1f1f; --surface: #292929; --surface2: #333333; --surface3: #3d3d3d;
+        --border: #525252; --border-strong: #666666; --text: #ffffff;
+        --text-secondary: #d6d6d6; --text-dim: #adadad; --accent: #2899f5;
+        --accent-hover: #3aa0f3; --accent-bg: #002848; --green: #54b054;
+        --green-bg: #052505; --green-tint: #107c10; --red: #dc626d; --red-bg: #3b0509;
+        --red-tint: #c50f1f; --yellow: #f2c661; --yellow-bg: #463100; --yellow-tint: #eaa300;
+        --purple: #d29ddb; --purple-bg: #3a1040; --teal: #58c0c4; --teal-bg: #013638;
+        --shadow-4: 0 2px 4px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --shadow-8: 0 4px 8px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --card-bg: #333333; --card-hover: #3d3d3d; color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI Variable','Segoe UI',system-ui,-apple-system,sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.5; padding: 2rem;
+      max-width: 1100px; margin: 0 auto; font-size: 14px; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; color: var(--accent-hover); }
+    .back-link { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 12px;
+      color: var(--text-dim); margin-bottom: 1.5rem; transition: color 0.1s; }
+    .back-link:hover { color: var(--accent); text-decoration: none; }
+    h1 { font-size: 24px; font-weight: 600; margin-bottom: 4px; }
+    .subtitle { color: var(--text-secondary); font-size: 14px; margin-bottom: 12px; }
+    .explainer { color: var(--text-secondary); font-size: 13px; line-height: 1.5;
+      margin-bottom: 24px; padding: 12px 16px; background: var(--surface);
+      border-radius: 8px; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px; margin-bottom: 24px; }
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px;
+      padding: 16px; box-shadow: var(--shadow-4); transition: box-shadow 0.1s; }
+    .card:hover { box-shadow: var(--shadow-8); }
+    .card .label { font-size: 12px; color: var(--text-dim); font-weight: 400; }
+    .card .value { font-size: 28px; font-weight: 600; margin-top: 4px; }
+    .card .value.green { color: var(--green); } .card .value.red { color: var(--red); }
+    .card .value.yellow { color: var(--yellow); } .card .value.accent { color: var(--accent); }
+    .card .value.purple { color: var(--purple); }
+    .card .value.teal { color: var(--teal); }
+    .sparkline { display: block; margin-top: 6px; overflow: visible; opacity: 0.9; }
+    .sparkline-label { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+    .section { margin-bottom: 24px; }
+    .section h2 { font-size: 16px; font-weight: 600; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px; }
+    .badge { font-size: 12px; padding: 2px 8px; border-radius: 999px; font-weight: 600; }
+    .badge-green { background: var(--green-bg); color: var(--green); }
+    .badge-red { background: var(--red-bg); color: var(--red); }
+    .badge-yellow { background: var(--yellow-bg); color: var(--yellow); }
+    .badge-accent { background: var(--accent-bg); color: var(--accent); }
+    .badge-purple { background: var(--purple-bg); color: var(--purple); }
+    .badge-teal { background: var(--teal-bg); color: var(--teal); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface);
+      border-radius: 8px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    thead { background: var(--surface2); }
+    th { text-align: left; padding: 8px 12px; font-weight: 600; color: var(--text-dim);
+      font-size: 12px; cursor: pointer; user-select: none; border-bottom: 1px solid var(--border); }
+    th:hover { color: var(--accent); }
+    td { padding: 8px 12px; border-top: 1px solid var(--border); }
+    tr:hover td { background: var(--surface2); }
+    .old-val { color: var(--red); text-decoration: line-through; }
+    .new-val { color: var(--green); }
+    .arrow-val { color: var(--text-dim); text-align: center; white-space: nowrap; }
+    .map-link { display: inline-flex; align-items: center; margin-left: 0.4em;
+      color: var(--accent); vertical-align: middle; white-space: nowrap; font-size: 12px; }
+    .map-link:hover { color: var(--accent-hover); }
+    .map-link svg { width: 14px; height: 14px; }
+    .change-field { color: var(--yellow); font-weight: 600; }
+    .bar-chart { margin-top: 8px; }
+    .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 12px; }
+    .bar-label { width: 180px; text-align: right; color: var(--text-secondary); flex-shrink: 0;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .bar-track { flex: 1; height: 8px; background: var(--surface2); border-radius: 4px;
+      overflow: hidden; position: relative; }
+    .bar-fill { height: 100%; border-radius: 4px; transition: width 0.15s ease; }
+    .bar-fill.green { background: var(--green); } .bar-fill.red { background: var(--red); }
+    .bar-count { width: 40px; font-size: 12px; color: var(--text-dim); }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+    .empty { color: var(--text-dim); font-style: italic; padding: 16px; }
+    .truncated { color: var(--text-dim); font-size: 12px; margin-top: 8px; }
+    .collapsible-toggle { background: transparent; border: 1px solid var(--border);
+      color: var(--accent); padding: 5px 12px; border-radius: 4px; cursor: pointer;
+      font-size: 12px; font-family: inherit; margin-bottom: 12px; transition: background 0.1s; }
+    .collapsible-toggle:hover { background: var(--surface2); }
+    details.rename-group { background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; margin-bottom: 8px; box-shadow: var(--shadow-4); }
+    details.rename-group summary { padding: 10px 14px; cursor: pointer; font-size: 13px; }
+    details.rename-group[open] summary { border-bottom: 1px solid var(--border); }
+    details.rename-group table { border: none; box-shadow: none; border-radius: 0; }
+    details.rename-group .truncated { padding: 0 14px 10px; margin-top: 0; }
+    .rename-count { color: var(--text-dim); font-size: 12px; margin-left: 6px; }
+    .no-changes-banner { background: var(--green-bg); border: 1px solid var(--green-tint);
+      color: var(--green); padding: 16px; border-radius: 8px; margin-bottom: 24px;
+      text-align: center; font-weight: 600; font-size: 14px; }
+    .baseline-banner { background: var(--accent-bg); border: 1px solid var(--accent);
+      color: var(--accent); padding: 16px; border-radius: 8px; margin-bottom: 24px; font-size: 13px; }
+    .generated-at { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-dim); }
+    .history { font-size: 12.5px; color: var(--text-secondary); white-space: nowrap; }
+    .history .a { color: var(--green); font-weight: 500; }
+    .history .r { color: var(--red); font-weight: 500; }
+    .history .dot { color: var(--text-dim); margin: 0 4px; }
+    .history-none { color: var(--text-dim); font-style: italic; font-size: 12.5px; }
+    .info-wrap { position: relative; display: inline-flex; vertical-align: middle; }
+    .info-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+      height: 18px; padding: 0 8px 0 7px; border-radius: 999px; border: none;
+      color: #fff; background: var(--accent); cursor: help; font-size: 11px; font-weight: 600;
+      font-style: normal; font-family: inherit; line-height: 1; white-space: nowrap; }
+    .info-btn .glyph { font-style: italic; font-weight: 700;
+      font-family: Georgia, 'Times New Roman', serif; }
+    .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn,
+    .info-wrap:focus .info-btn { background: var(--accent-hover); }
+    .info-pop { display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 20;
+      width: 320px; max-width: 80vw; padding: 12px 14px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-8);
+      font-size: 12.5px; font-weight: 400; color: var(--text-secondary); line-height: 1.5; }
+    .info-wrap:hover .info-pop, .info-wrap:focus-within .info-pop,
+    .info-wrap:focus .info-pop { display: block; }
+    .info-pop strong { display: block; color: var(--text); font-size: 12px; margin-bottom: 4px; }
+    .info-pop ul { list-style: none; margin: 0 0 10px; padding: 0; }
+    .info-pop li { padding: 1px 0 1px 14px; position: relative; }
+    .info-pop li::before { content: "·"; position: absolute; left: 4px; color: var(--text-dim); }
+    .info-pop .note { color: var(--text-dim); font-size: 11.5px; margin: 0 0 10px; }
+    .info-pop .muted { color: var(--text-dim); font-style: italic; }
+  </style>
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+
+  <a class="back-link" href="index.html">← Back to City of Kitchener reports</a>
+
+  <h1>City of Kitchener — Address Changes</h1>
+  <p class="subtitle">
+    Changes between  and Sunday, Oct 11, 2026
+    · 132,329 total addresses
+  </p>
+
+  
+
+  <div class="cards">
+    <div class="card"><div class="label">Total Addresses</div>
+      <div class="value accent">132,329</div></div>
+    <div class="card"><div class="label">New Addresses</div>
+      <div class="value green">+102</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#107c10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,13.4 37.3,18.0 55.0,2.0 72.7,15.3 90.3,18.0 108.0,5.5"/><circle cx="108.0" cy="5.5" r="2" fill="#107c10"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Retired Addresses</div>
+      <div class="value red">−27</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#c50f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,17.4 19.7,16.8 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#c50f1f"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Updated Addresses <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (CIVIC_NO)</li><li>Street name (STREET)</li><li>Unit (UNIT)</li><li>Full address (ADDRESS)</li><li>Coordinates (latitude, longitude)</li><li>POLL</li><li>PROPERTY_UNIT_ID</li><li>STATUS</li><li>UNIT_TYPE</li><li>WARD</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>LATITUDE</li><li>LONGITUDE</li><li>PARCELID</li><li>ROADSEGMENTID</li><li>ROLL_REFERENCE</li><li>X_COORD</li><li>Y_COORD</li></ul>
+      
+    </span>
+  </span></div>
+      <div class="value yellow">35</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,15.7 37.3,10.2 55.0,18.0 72.7,18.0 90.3,18.0 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Renumbered</div>
+      <div class="value accent">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#0078d4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,2.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#0078d4"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Street Renames</div>
+      <div class="value purple">12</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#9141ac" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#9141ac"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    <div class="card"><div class="label">Status Changes</div>
+      <div class="value teal">20</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#038387" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,6.8 37.3,2.0 55.0,17.3 72.7,17.9 90.3,18.0 108.0,16.1"/><circle cx="108.0" cy="16.1" r="2" fill="#038387"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    <div class="card"><div class="label">Boundary Changes</div>
+      <div class="value teal">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#038387" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#038387"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    <div class="card"><div class="label">Location Adjustments</div>
+      <div class="value" style="color: var(--text-dim)">29</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#808080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,4.4 37.3,18.0 55.0,2.0 72.7,17.7 90.3,17.7 108.0,8.1"/><circle cx="108.0" cy="8.1" r="2" fill="#808080"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+  </div>
+
+  
+  <div class="section">
+    <h2>Change Breakdown</h2>
+    <div class="stats-grid">
+      
+      <div class="card"><div class="label">Top Streets by New Addresses</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">BLAIR VALLEY ST</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">67</span></div>
+        <div class="bar-row"><span class="bar-label">TRUSSLER RD</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:24.0%"></div></div>
+          <span class="bar-count">16</span></div>
+        <div class="bar-row"><span class="bar-label">WELLINGTON ST S</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:13.0%"></div></div>
+          <span class="bar-count">9</span></div>
+        <div class="bar-row"><span class="bar-label">FREDERICK ST</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:6.0%"></div></div>
+          <span class="bar-count">4</span></div>
+      </div></div>
+      
+      <div class="card"><div class="label">Top Streets by Retired Addresses</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">WELLINGTON ST S</span>
+          <div class="bar-track"><div class="bar-fill red" style="width:100.0%"></div></div>
+          <span class="bar-count">13</span></div>
+        <div class="bar-row"><span class="bar-label">ESKERWOOD WAY</span>
+          <div class="bar-track"><div class="bar-fill red" style="width:31.0%"></div></div>
+          <span class="bar-count">4</span></div>
+        <div class="bar-row"><span class="bar-label">TAVERNERS CRES</span>
+          <div class="bar-track"><div class="bar-fill red" style="width:23.0%"></div></div>
+          <span class="bar-count">3</span></div>
+      </div></div>
+      
+      <div class="card"><div class="label">Most Frequently Updated Fields</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">Full Address</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">47</span></div>
+        <div class="bar-row"><span class="bar-label">Address Number</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:72.0%"></div></div>
+          <span class="bar-count">34</span></div>
+        <div class="bar-row"><span class="bar-label">UNIT_TYPE</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:72.0%"></div></div>
+          <span class="bar-count">34</span></div>
+        <div class="bar-row"><span class="bar-label">Location</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:64.0%"></div></div>
+          <span class="bar-count">30</span></div>
+        <div class="bar-row"><span class="bar-label">Street</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:47.0%"></div></div>
+          <span class="bar-count">22</span></div>
+        <div class="bar-row"><span class="bar-label">STATUS</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:43.0%"></div></div>
+          <span class="bar-count">20</span></div>
+      </div></div>
+    </div>
+  </div>
+  
+
+  <div class="section">
+    <h2>New Addresses <span class="badge badge-green">102</span></h2>
+    
+    <details class="rename-group">
+      <summary>60 TRUSSLER RD <span class="arrow-val">→</span> <span class="new-val">16 units (1–16)</span><span class="rename-count">16 new addresses · original address remains</span></summary>
+      <table>
+        <thead><tr><th>Address</th><th>Unit</th><th>History</th><th>Map</th></tr></thead>
+        <tbody>
+          
+          <tr><td>1-60 TRUSSLER RD</td><td>1</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.41922&mlon=-80.55882#map=18/43.41922/-80.55882" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>2-60 TRUSSLER RD</td><td>2</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.41922&mlon=-80.55882#map=18/43.41922/-80.55882" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>3-60 TRUSSLER RD</td><td>3</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.41922&mlon=-80.55882#map=18/43.41922/-80.55882" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>4-60 TRUSSLER RD</td><td>4</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.41922&mlon=-80.55882#map=18/43.41922/-80.55882" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>5-60 TRUSSLER RD</td><td>5</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.41922&mlon=-80.55882#map=18/43.41922/-80.55882" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>6-60 TRUSSLER RD</td><td>6</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.41922&mlon=-80.55882#map=18/43.41922/-80.55882" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>7-60 TRUSSLER RD</td><td>7</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.41922&mlon=-80.55882#map=18/43.41922/-80.55882" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>8-60 TRUSSLER RD</td><td>8</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.41922&mlon=-80.55882#map=18/43.41922/-80.55882" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>9-60 TRUSSLER RD</td><td>9</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.41922&mlon=-80.55882#map=18/43.41922/-80.55882" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>10-60 TRUSSLER RD</td><td>10</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.41922&mlon=-80.55882#map=18/43.41922/-80.55882" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>11-60 TRUSSLER RD</td><td>11</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.41922&mlon=-80.55882#map=18/43.41922/-80.55882" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>12-60 TRUSSLER RD</td><td>12</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.41922&mlon=-80.55882#map=18/43.41922/-80.55882" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>13-60 TRUSSLER RD</td><td>13</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.41922&mlon=-80.55882#map=18/43.41922/-80.55882" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>14-60 TRUSSLER RD</td><td>14</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.41922&mlon=-80.55882#map=18/43.41922/-80.55882" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>15-60 TRUSSLER RD</td><td>15</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.41922&mlon=-80.55882#map=18/43.41922/-80.55882" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>16-60 TRUSSLER RD</td><td>16</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.41922&mlon=-80.55882#map=18/43.41922/-80.55882" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+    </details>
+    
+    <details class="rename-group">
+      <summary>25 WELLINGTON ST S <span class="arrow-val">→</span> <span class="new-val">9 units (LKR, PKG, SRV, SRV, SRV, SRV, SRV, SRV, …)</span><span class="rename-count">9 new addresses · original address remains</span></summary>
+      <table>
+        <thead><tr><th>Address</th><th>Unit</th><th>History</th><th>Map</th></tr></thead>
+        <tbody>
+          
+          <tr><td>LKR-25 WELLINGTON ST S</td><td>LKR</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45296&mlon=-80.50273#map=18/43.45296/-80.50273" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>PKG-25 WELLINGTON ST S</td><td>PKG</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45296&mlon=-80.50273#map=18/43.45296/-80.50273" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>SRV-25 WELLINGTON ST S</td><td>SRV</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45296&mlon=-80.50273#map=18/43.45296/-80.50273" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>SRV-25 WELLINGTON ST S</td><td>SRV</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45296&mlon=-80.50273#map=18/43.45296/-80.50273" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>SRV-25 WELLINGTON ST S</td><td>SRV</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45296&mlon=-80.50273#map=18/43.45296/-80.50273" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>SRV-25 WELLINGTON ST S</td><td>SRV</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45296&mlon=-80.50273#map=18/43.45296/-80.50273" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>SRV-25 WELLINGTON ST S</td><td>SRV</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45296&mlon=-80.50273#map=18/43.45296/-80.50273" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>SRV-25 WELLINGTON ST S</td><td>SRV</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45296&mlon=-80.50273#map=18/43.45296/-80.50273" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>SRV-25 WELLINGTON ST S</td><td>SRV</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45297&mlon=-80.50273#map=18/43.45297/-80.50273" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+    </details>
+    
+    <details class="rename-group">
+      <summary>631 FREDERICK ST <span class="arrow-val">→</span> <span class="new-val">4 units (1–4)</span><span class="rename-count">4 new addresses · original address remains</span></summary>
+      <table>
+        <thead><tr><th>Address</th><th>Unit</th><th>History</th><th>Map</th></tr></thead>
+        <tbody>
+          
+          <tr><td>1-631 FREDERICK ST</td><td>1</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46032&mlon=-80.46602#map=18/43.46032/-80.46602" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>2-631 FREDERICK ST</td><td>2</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46074&mlon=-80.46155#map=18/43.46074/-80.46155" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>3-631 FREDERICK ST</td><td>3</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46032&mlon=-80.46602#map=18/43.46032/-80.46602" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>4-631 FREDERICK ST</td><td>4</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46032&mlon=-80.46602#map=18/43.46032/-80.46602" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+    </details>
+    
+    <details class="rename-group">
+      <summary>69 NATHALIE ST <span class="arrow-val">→</span> <span class="new-val">2 units (A, B)</span><span class="rename-count">2 new addresses · original address remains</span></summary>
+      <table>
+        <thead><tr><th>Address</th><th>Unit</th><th>History</th><th>Map</th></tr></thead>
+        <tbody>
+          
+          <tr><td>A-69 NATHALIE ST</td><td>A</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.40444&mlon=-80.53836#map=18/43.40444/-80.53836" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>B-69 NATHALIE ST</td><td>B</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.40444&mlon=-80.53836#map=18/43.40444/-80.53836" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+    </details>
+    
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-added',0)">Address</th><th onclick="sortTable('t-added',1)">Street</th>
+        <th onclick="sortTable('t-added',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-added">
+        
+        <tr><td>10 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36653&mlon=-80.44778#map=18/43.36653/-80.44778" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>12 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36646&mlon=-80.44776#map=18/43.36646/-80.44776" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>14 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36641&mlon=-80.44775#map=18/43.36641/-80.44775" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>16 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36636&mlon=-80.44774#map=18/43.36636/-80.44774" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>18 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36631&mlon=-80.44772#map=18/43.36631/-80.44772" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>20 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36625&mlon=-80.44770#map=18/43.36625/-80.44770" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>22 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36617&mlon=-80.44769#map=18/43.36617/-80.44769" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>24 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36611&mlon=-80.44767#map=18/43.36611/-80.44767" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>26 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36606&mlon=-80.44765#map=18/43.36606/-80.44765" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>28 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36602&mlon=-80.44764#map=18/43.36602/-80.44764" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>30 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36596&mlon=-80.44763#map=18/43.36596/-80.44763" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>31 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36597&mlon=-80.44705#map=18/43.36597/-80.44705" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>32 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36589&mlon=-80.44761#map=18/43.36589/-80.44761" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>33 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36591&mlon=-80.44704#map=18/43.36591/-80.44704" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>34 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36583&mlon=-80.44759#map=18/43.36583/-80.44759" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>35 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36587&mlon=-80.44702#map=18/43.36587/-80.44702" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>36 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36578&mlon=-80.44757#map=18/43.36578/-80.44757" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>37 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36582&mlon=-80.44700#map=18/43.36582/-80.44700" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>38 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36572&mlon=-80.44755#map=18/43.36572/-80.44755" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>39 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36577&mlon=-80.44699#map=18/43.36577/-80.44699" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>40 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36564&mlon=-80.44753#map=18/43.36564/-80.44753" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>41 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36572&mlon=-80.44697#map=18/43.36572/-80.44697" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>42 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36557&mlon=-80.44751#map=18/43.36557/-80.44751" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>43 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36563&mlon=-80.44695#map=18/43.36563/-80.44695" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>44 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36552&mlon=-80.44750#map=18/43.36552/-80.44750" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>45 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36558&mlon=-80.44693#map=18/43.36558/-80.44693" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>46 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36547&mlon=-80.44748#map=18/43.36547/-80.44748" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>47 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36553&mlon=-80.44692#map=18/43.36553/-80.44692" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>48 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36542&mlon=-80.44747#map=18/43.36542/-80.44747" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>49 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36547&mlon=-80.44690#map=18/43.36547/-80.44690" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>50 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36535&mlon=-80.44745#map=18/43.36535/-80.44745" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>51 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36538&mlon=-80.44688#map=18/43.36538/-80.44688" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>53 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36532&mlon=-80.44686#map=18/43.36532/-80.44686" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>55 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36527&mlon=-80.44684#map=18/43.36527/-80.44684" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>57 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36523&mlon=-80.44682#map=18/43.36523/-80.44682" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>59 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36518&mlon=-80.44680#map=18/43.36518/-80.44680" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>61 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36511&mlon=-80.44678#map=18/43.36511/-80.44678" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>825 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36745&mlon=-80.44397#map=18/43.36745/-80.44397" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>827 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36743&mlon=-80.44408#map=18/43.36743/-80.44408" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>829 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36742&mlon=-80.44414#map=18/43.36742/-80.44414" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>831 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36740&mlon=-80.44421#map=18/43.36740/-80.44421" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>833 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36738&mlon=-80.44427#map=18/43.36738/-80.44427" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>835 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36738&mlon=-80.44437#map=18/43.36738/-80.44437" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>837 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36735&mlon=-80.44447#map=18/43.36735/-80.44447" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>839 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36733&mlon=-80.44456#map=18/43.36733/-80.44456" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>841 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36732&mlon=-80.44462#map=18/43.36732/-80.44462" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>843 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36731&mlon=-80.44469#map=18/43.36731/-80.44469" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>845 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36730&mlon=-80.44475#map=18/43.36730/-80.44475" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>847 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36729&mlon=-80.44483#map=18/43.36729/-80.44483" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>849 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36726&mlon=-80.44495#map=18/43.36726/-80.44495" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>851 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36724&mlon=-80.44502#map=18/43.36724/-80.44502" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>853 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36723&mlon=-80.44509#map=18/43.36723/-80.44509" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>855 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36722&mlon=-80.44516#map=18/43.36722/-80.44516" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>857 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36721&mlon=-80.44522#map=18/43.36721/-80.44522" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>859 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36720&mlon=-80.44530#map=18/43.36720/-80.44530" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>861 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36718&mlon=-80.44540#map=18/43.36718/-80.44540" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>863 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36716&mlon=-80.44549#map=18/43.36716/-80.44549" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>865 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36715&mlon=-80.44555#map=18/43.36715/-80.44555" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>867 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36714&mlon=-80.44562#map=18/43.36714/-80.44562" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>869 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36713&mlon=-80.44569#map=18/43.36713/-80.44569" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>871 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36710&mlon=-80.44577#map=18/43.36710/-80.44577" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>873 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36709&mlon=-80.44588#map=18/43.36709/-80.44588" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>875 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36707&mlon=-80.44597#map=18/43.36707/-80.44597" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>877 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36706&mlon=-80.44603#map=18/43.36706/-80.44603" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>879 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36705&mlon=-80.44610#map=18/43.36705/-80.44610" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>881 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36703&mlon=-80.44616#map=18/43.36703/-80.44616" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>883 BLAIR VALLEY ST</td><td>BLAIR VALLEY ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36701&mlon=-80.44627#map=18/43.36701/-80.44627" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>PKG-175 COMMONWEALTH ST</td><td>COMMONWEALTH ST</td><td>PKG</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.40530&mlon=-80.50395#map=18/43.40530/-80.50395" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>397 KING ST E</td><td>KING ST E</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.44672&mlon=-80.48271#map=18/43.44672/-80.48271" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>102-305 KING ST W</td><td>KING ST W</td><td>102</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45153&mlon=-80.49502#map=18/43.45153/-80.49502" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2-116 QUEEN ST N</td><td>QUEEN ST N</td><td>2</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45500&mlon=-80.48547#map=18/43.45500/-80.48547" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Retired Addresses <span class="badge badge-red">27</span></h2>
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-removed',0)">Address</th><th onclick="sortTable('t-removed',1)">Street</th>
+        <th onclick="sortTable('t-removed',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-removed">
+        
+        <tr><td>ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39396&mlon=-80.50987#map=18/43.39396/-80.50987" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39502&mlon=-80.51105#map=18/43.39502/-80.51105" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39374&mlon=-80.51075#map=18/43.39374/-80.51075" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>ESKERWOOD WAY</td><td>ESKERWOOD WAY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39285&mlon=-80.50986#map=18/43.39285/-80.50986" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>GOLD DUST CRES</td><td>GOLD DUST CRES</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39712&mlon=-80.52698#map=18/43.39712/-80.52698" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>MIHAI EMINESCU WAY</td><td>MIHAI EMINESCU WAY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39503&mlon=-80.50927#map=18/43.39503/-80.50927" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>MIHAI EMINESCU WAY</td><td>MIHAI EMINESCU WAY</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39493&mlon=-80.50994#map=18/43.39493/-80.50994" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>NEWCASTLE DR</td><td>NEWCASTLE DR</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.38278&mlon=-80.46918#map=18/43.38278/-80.46918" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>75 OTTERBEIN RD</td><td>OTTERBEIN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46955&mlon=-80.43801#map=18/43.46955/-80.43801" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>111 OTTERBEIN RD</td><td>OTTERBEIN RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-08-03</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46941&mlon=-80.43745#map=18/43.46941/-80.43745" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39340&mlon=-80.50869#map=18/43.39340/-80.50869" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39398&mlon=-80.50966#map=18/43.39398/-80.50966" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>TAVERNERS CRES</td><td>TAVERNERS CRES</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39286&mlon=-80.50928#map=18/43.39286/-80.50928" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1301-25 WELLINGTON ST S</td><td>WELLINGTON ST S</td><td>1301</td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45296&mlon=-80.50273#map=18/43.45296/-80.50273" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1302-25 WELLINGTON ST S</td><td>WELLINGTON ST S</td><td>1302</td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45296&mlon=-80.50273#map=18/43.45296/-80.50273" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1303-25 WELLINGTON ST S</td><td>WELLINGTON ST S</td><td>1303</td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45296&mlon=-80.50273#map=18/43.45296/-80.50273" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1304-25 WELLINGTON ST S</td><td>WELLINGTON ST S</td><td>1304</td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45296&mlon=-80.50273#map=18/43.45296/-80.50273" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1305-25 WELLINGTON ST S</td><td>WELLINGTON ST S</td><td>1305</td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45296&mlon=-80.50273#map=18/43.45296/-80.50273" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1306-25 WELLINGTON ST S</td><td>WELLINGTON ST S</td><td>1306</td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45296&mlon=-80.50273#map=18/43.45296/-80.50273" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1307-25 WELLINGTON ST S</td><td>WELLINGTON ST S</td><td>1307</td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45296&mlon=-80.50273#map=18/43.45296/-80.50273" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1308-25 WELLINGTON ST S</td><td>WELLINGTON ST S</td><td>1308</td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45296&mlon=-80.50273#map=18/43.45296/-80.50273" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1309-25 WELLINGTON ST S</td><td>WELLINGTON ST S</td><td>1309</td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45296&mlon=-80.50273#map=18/43.45296/-80.50273" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1310-25 WELLINGTON ST S</td><td>WELLINGTON ST S</td><td>1310</td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45296&mlon=-80.50273#map=18/43.45296/-80.50273" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1311-25 WELLINGTON ST S</td><td>WELLINGTON ST S</td><td>1311</td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45296&mlon=-80.50273#map=18/43.45296/-80.50273" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1312-25 WELLINGTON ST S</td><td>WELLINGTON ST S</td><td>1312</td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45296&mlon=-80.50273#map=18/43.45296/-80.50273" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1314-25 WELLINGTON ST S</td><td>WELLINGTON ST S</td><td>1314</td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45296&mlon=-80.50273#map=18/43.45296/-80.50273" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>42 WINDOM RD</td><td>WINDOM RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.43087&mlon=-80.42867#map=18/43.43087/-80.42867" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Updated Addresses <span class="badge badge-yellow">35</span>
+      <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (CIVIC_NO)</li><li>Street name (STREET)</li><li>Unit (UNIT)</li><li>Full address (ADDRESS)</li><li>Coordinates (latitude, longitude)</li><li>POLL</li><li>PROPERTY_UNIT_ID</li><li>STATUS</li><li>UNIT_TYPE</li><li>WARD</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>LATITUDE</li><li>LONGITUDE</li><li>PARCELID</li><li>ROADSEGMENTID</li><li>ROLL_REFERENCE</li><li>X_COORD</li><li>Y_COORD</li></ul>
+      
+    </span>
+  </span></h2>
+    
+    
+    <table>
+      <thead><tr><th>Address</th><th>What Changed</th><th>Before</th><th></th><th>After</th><th>Map</th></tr></thead>
+      <tbody>
+        
+  <tr><td rowspan="4">100 BANDON DR</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">100</td>
+    <td rowspan="4"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39639&mlon=-80.52930#map=18/43.39639/-80.52930" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Street</td>
+    <td class="old-val">GOLD DUST CRES</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">BANDON DR</td>
+    </tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">GOLD DUST CRES</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">100 BANDON DR</td>
+    </tr>
+  <tr>
+    <td class="change-field">UNIT_TYPE</td>
+    <td class="old-val">UNKNOWN</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">BASE</td>
+    </tr>
+  <tr><td rowspan="4">105 BANDON DR</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">105</td>
+    <td rowspan="4"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39756&mlon=-80.52850#map=18/43.39756/-80.52850" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Street</td>
+    <td class="old-val">GOLD DUST CRES</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">BANDON DR</td>
+    </tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">GOLD DUST CRES</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">105 BANDON DR</td>
+    </tr>
+  <tr>
+    <td class="change-field">UNIT_TYPE</td>
+    <td class="old-val">UNKNOWN</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">BASE</td>
+    </tr>
+  <tr><td rowspan="4">110 BANDON DR</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">110</td>
+    <td rowspan="4"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39737&mlon=-80.52494#map=18/43.39737/-80.52494" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Street</td>
+    <td class="old-val">RATTLESNAKE ST</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">BANDON DR</td>
+    </tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">RATTLESNAKE ST</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">110 BANDON DR</td>
+    </tr>
+  <tr>
+    <td class="change-field">UNIT_TYPE</td>
+    <td class="old-val">UNKNOWN</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">BASE</td>
+    </tr>
+  <tr><td rowspan="4">115 BANDON DR</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">115</td>
+    <td rowspan="4"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39790&mlon=-80.52639#map=18/43.39790/-80.52639" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Street</td>
+    <td class="old-val">BURGUNDY CRES</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">BANDON DR</td>
+    </tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">BURGUNDY CRES</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">115 BANDON DR</td>
+    </tr>
+  <tr>
+    <td class="change-field">UNIT_TYPE</td>
+    <td class="old-val">UNKNOWN</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">BASE</td>
+    </tr>
+  <tr><td rowspan="3">BLAIR VALLEY ST</td>
+    <td class="change-field">Street</td>
+    <td class="old-val">BLAIR CREEK DR</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">BLAIR VALLEY ST</td>
+    <td rowspan="3"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36715&mlon=-80.44506#map=18/43.36715/-80.44506" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">BLAIR CREEK DR</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">BLAIR VALLEY ST</td>
+    </tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">43.36722, -80.44509<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36722&mlon=-80.44509#map=19/43.36722/-80.44509" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↓ 8.2m</td>
+    <td class="new-val">43.36715, -80.44506<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36715&mlon=-80.44506#map=19/43.36715/-80.44506" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="3">70 BLAIR VALLEY ST</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">70</td>
+    <td rowspan="3"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36460&mlon=-80.44797#map=18/43.36460/-80.44797" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">BLAIR VALLEY ST</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">70 BLAIR VALLEY ST</td>
+    </tr>
+  <tr>
+    <td class="change-field">UNIT_TYPE</td>
+    <td class="old-val">UNKNOWN</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">BASE</td>
+    </tr>
+  <tr><td rowspan="4">75 BLAIR VALLEY ST</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">75</td>
+    <td rowspan="4"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36465&mlon=-80.44632#map=18/43.36465/-80.44632" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Street</td>
+    <td class="old-val">JACOB DETWEILLER DR</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">BLAIR VALLEY ST</td>
+    </tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">JACOB DETWEILLER DR</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">75 BLAIR VALLEY ST</td>
+    </tr>
+  <tr>
+    <td class="change-field">UNIT_TYPE</td>
+    <td class="old-val">UNKNOWN</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">BASE</td>
+    </tr>
+  <tr><td rowspan="3">35 ESSEX RD</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">35</td>
+    <td rowspan="3"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39894&mlon=-80.51375#map=18/43.39894/-80.51375" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">ESSEX RD</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">35 ESSEX RD</td>
+    </tr>
+  <tr>
+    <td class="change-field">UNIT_TYPE</td>
+    <td class="old-val">UNKNOWN</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">BASE</td>
+    </tr>
+  <tr><td rowspan="4">250 GOLD DUST CRES</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">250</td>
+    <td rowspan="4"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39394&mlon=-80.52374#map=18/43.39394/-80.52374" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Street</td>
+    <td class="old-val">ROSEBUSH ST</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">GOLD DUST CRES</td>
+    </tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">ROSEBUSH ST</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">250 GOLD DUST CRES</td>
+    </tr>
+  <tr>
+    <td class="change-field">UNIT_TYPE</td>
+    <td class="old-val">UNKNOWN</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">BASE</td>
+    </tr>
+  <tr><td rowspan="3">186 NEWCASTLE DR</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">186</td>
+    <td rowspan="3"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.38371&mlon=-80.47012#map=18/43.38371/-80.47012" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">NEWCASTLE DR</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">186 NEWCASTLE DR</td>
+    </tr>
+  <tr>
+    <td class="change-field">UNIT_TYPE</td>
+    <td class="old-val">UNKNOWN</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">BASE</td>
+    </tr>
+  <tr><td rowspan="3">187 NEWCASTLE DR</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">187</td>
+    <td rowspan="3"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.38380&mlon=-80.46950#map=18/43.38380/-80.46950" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">NEWCASTLE DR</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">187 NEWCASTLE DR</td>
+    </tr>
+  <tr>
+    <td class="change-field">UNIT_TYPE</td>
+    <td class="old-val">UNKNOWN</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">BASE</td>
+    </tr>
+  <tr><td rowspan="3">189 NEWCASTLE DR</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">189</td>
+    <td rowspan="3"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.38370&mlon=-80.46948#map=18/43.38370/-80.46948" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">NEWCASTLE DR</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">189 NEWCASTLE DR</td>
+    </tr>
+  <tr>
+    <td class="change-field">UNIT_TYPE</td>
+    <td class="old-val">UNKNOWN</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">BASE</td>
+    </tr>
+  <tr><td rowspan="3">190 NEWCASTLE DR</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">190</td>
+    <td rowspan="3"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.38360&mlon=-80.47009#map=18/43.38360/-80.47009" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">NEWCASTLE DR</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">190 NEWCASTLE DR</td>
+    </tr>
+  <tr>
+    <td class="change-field">UNIT_TYPE</td>
+    <td class="old-val">UNKNOWN</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">BASE</td>
+    </tr>
+  <tr><td rowspan="3">194 NEWCASTLE DR</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">194</td>
+    <td rowspan="3"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.38351&mlon=-80.47005#map=18/43.38351/-80.47005" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">NEWCASTLE DR</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">194 NEWCASTLE DR</td>
+    </tr>
+  <tr>
+    <td class="change-field">UNIT_TYPE</td>
+    <td class="old-val">UNKNOWN</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">BASE</td>
+    </tr>
+  <tr><td rowspan="3">195 NEWCASTLE DR</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">195</td>
+    <td rowspan="3"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.38361&mlon=-80.46943#map=18/43.38361/-80.46943" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">NEWCASTLE DR</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">195 NEWCASTLE DR</td>
+    </tr>
+  <tr>
+    <td class="change-field">UNIT_TYPE</td>
+    <td class="old-val">UNKNOWN</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">BASE</td>
+    </tr>
+  <tr><td rowspan="3">197 NEWCASTLE DR</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">197</td>
+    <td rowspan="3"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.38351&mlon=-80.46940#map=18/43.38351/-80.46940" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">NEWCASTLE DR</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">197 NEWCASTLE DR</td>
+    </tr>
+  <tr>
+    <td class="change-field">UNIT_TYPE</td>
+    <td class="old-val">UNKNOWN</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">BASE</td>
+    </tr>
+  <tr><td rowspan="3">198 NEWCASTLE DR</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">198</td>
+    <td rowspan="3"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.38341&mlon=-80.47003#map=18/43.38341/-80.47003" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">NEWCASTLE DR</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">198 NEWCASTLE DR</td>
+    </tr>
+  <tr>
+    <td class="change-field">UNIT_TYPE</td>
+    <td class="old-val">UNKNOWN</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">BASE</td>
+    </tr>
+  <tr><td rowspan="3">199 NEWCASTLE DR</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">199</td>
+    <td rowspan="3"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.38341&mlon=-80.46937#map=18/43.38341/-80.46937" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">NEWCASTLE DR</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">199 NEWCASTLE DR</td>
+    </tr>
+  <tr>
+    <td class="change-field">UNIT_TYPE</td>
+    <td class="old-val">UNKNOWN</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">BASE</td>
+    </tr>
+  <tr><td rowspan="3">201 NEWCASTLE DR</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">201</td>
+    <td rowspan="3"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.38330&mlon=-80.46934#map=18/43.38330/-80.46934" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">NEWCASTLE DR</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">201 NEWCASTLE DR</td>
+    </tr>
+  <tr>
+    <td class="change-field">UNIT_TYPE</td>
+    <td class="old-val">UNKNOWN</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">BASE</td>
+    </tr>
+  <tr><td rowspan="3">202 NEWCASTLE DR</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">202</td>
+    <td rowspan="3"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.38330&mlon=-80.47000#map=18/43.38330/-80.47000" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">NEWCASTLE DR</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">202 NEWCASTLE DR</td>
+    </tr>
+  <tr>
+    <td class="change-field">UNIT_TYPE</td>
+    <td class="old-val">UNKNOWN</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">BASE</td>
+    </tr>
+  <tr><td rowspan="3">203 NEWCASTLE DR</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">203</td>
+    <td rowspan="3"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.38320&mlon=-80.46928#map=18/43.38320/-80.46928" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">NEWCASTLE DR</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">203 NEWCASTLE DR</td>
+    </tr>
+  <tr>
+    <td class="change-field">UNIT_TYPE</td>
+    <td class="old-val">UNKNOWN</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">BASE</td>
+    </tr>
+  <tr><td rowspan="3">205 NEWCASTLE DR</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">205</td>
+    <td rowspan="3"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.38308&mlon=-80.46927#map=18/43.38308/-80.46927" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">NEWCASTLE DR</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">205 NEWCASTLE DR</td>
+    </tr>
+  <tr>
+    <td class="change-field">UNIT_TYPE</td>
+    <td class="old-val">UNKNOWN</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">BASE</td>
+    </tr>
+  <tr><td rowspan="3">206 NEWCASTLE DR</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">206</td>
+    <td rowspan="3"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.38320&mlon=-80.46997#map=18/43.38320/-80.46997" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">NEWCASTLE DR</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">206 NEWCASTLE DR</td>
+    </tr>
+  <tr>
+    <td class="change-field">UNIT_TYPE</td>
+    <td class="old-val">UNKNOWN</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">BASE</td>
+    </tr>
+  <tr><td rowspan="3">207 NEWCASTLE DR</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">207</td>
+    <td rowspan="3"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.38298&mlon=-80.46924#map=18/43.38298/-80.46924" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">NEWCASTLE DR</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">207 NEWCASTLE DR</td>
+    </tr>
+  <tr>
+    <td class="change-field">UNIT_TYPE</td>
+    <td class="old-val">UNKNOWN</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">BASE</td>
+    </tr>
+  <tr><td rowspan="3">209 NEWCASTLE DR</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">209</td>
+    <td rowspan="3"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.38289&mlon=-80.46922#map=18/43.38289/-80.46922" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">NEWCASTLE DR</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">209 NEWCASTLE DR</td>
+    </tr>
+  <tr>
+    <td class="change-field">UNIT_TYPE</td>
+    <td class="old-val">UNKNOWN</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">BASE</td>
+    </tr>
+  <tr><td rowspan="3">210 NEWCASTLE DR</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">210</td>
+    <td rowspan="3"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.38309&mlon=-80.46994#map=18/43.38309/-80.46994" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">NEWCASTLE DR</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">210 NEWCASTLE DR</td>
+    </tr>
+  <tr>
+    <td class="change-field">UNIT_TYPE</td>
+    <td class="old-val">UNKNOWN</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">BASE</td>
+    </tr>
+  <tr><td rowspan="3">211 NEWCASTLE DR</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">211</td>
+    <td rowspan="3"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.38247&mlon=-80.46983#map=18/43.38247/-80.46983" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">NEWCASTLE DR</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">211 NEWCASTLE DR</td>
+    </tr>
+  <tr>
+    <td class="change-field">UNIT_TYPE</td>
+    <td class="old-val">UNKNOWN</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">BASE</td>
+    </tr>
+  <tr><td rowspan="3">213 NEWCASTLE DR</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">213</td>
+    <td rowspan="3"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.38258&mlon=-80.46985#map=18/43.38258/-80.46985" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">NEWCASTLE DR</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">213 NEWCASTLE DR</td>
+    </tr>
+  <tr>
+    <td class="change-field">UNIT_TYPE</td>
+    <td class="old-val">UNKNOWN</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">BASE</td>
+    </tr>
+  <tr><td rowspan="3">214 NEWCASTLE DR</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">214</td>
+    <td rowspan="3"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.38299&mlon=-80.46991#map=18/43.38299/-80.46991" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">NEWCASTLE DR</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">214 NEWCASTLE DR</td>
+    </tr>
+  <tr>
+    <td class="change-field">UNIT_TYPE</td>
+    <td class="old-val">UNKNOWN</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">BASE</td>
+    </tr>
+  <tr><td rowspan="3">215 NEWCASTLE DR</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">215</td>
+    <td rowspan="3"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.38268&mlon=-80.46987#map=18/43.38268/-80.46987" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">NEWCASTLE DR</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">215 NEWCASTLE DR</td>
+    </tr>
+  <tr>
+    <td class="change-field">UNIT_TYPE</td>
+    <td class="old-val">UNKNOWN</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">BASE</td>
+    </tr>
+  <tr><td rowspan="3">218 NEWCASTLE DR</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">218</td>
+    <td rowspan="3"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.38289&mlon=-80.46991#map=18/43.38289/-80.46991" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">NEWCASTLE DR</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">218 NEWCASTLE DR</td>
+    </tr>
+  <tr>
+    <td class="change-field">UNIT_TYPE</td>
+    <td class="old-val">UNKNOWN</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">BASE</td>
+    </tr>
+  <tr><td rowspan="3">222 NEWCASTLE DR</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">222</td>
+    <td rowspan="3"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.38278&mlon=-80.46988#map=18/43.38278/-80.46988" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">NEWCASTLE DR</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">222 NEWCASTLE DR</td>
+    </tr>
+  <tr>
+    <td class="change-field">UNIT_TYPE</td>
+    <td class="old-val">UNKNOWN</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">BASE</td>
+    </tr>
+  <tr><td rowspan="4">101 RATTLESNAKE ST</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">101</td>
+    <td rowspan="4"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39458&mlon=-80.52458#map=18/43.39458/-80.52458" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Street</td>
+    <td class="old-val">ROSEBUSH ST</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">RATTLESNAKE ST</td>
+    </tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">ROSEBUSH ST</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">101 RATTLESNAKE ST</td>
+    </tr>
+  <tr>
+    <td class="change-field">UNIT_TYPE</td>
+    <td class="old-val">UNKNOWN</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">BASE</td>
+    </tr>
+  <tr><td rowspan="4">505 ROSENBERG WAY</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">505</td>
+    <td rowspan="4"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39690&mlon=-80.52525#map=18/43.39690/-80.52525" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Street</td>
+    <td class="old-val">RATTLESNAKE ST</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">ROSENBERG WAY</td>
+    </tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">RATTLESNAKE ST</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">505 ROSENBERG WAY</td>
+    </tr>
+  <tr>
+    <td class="change-field">UNIT_TYPE</td>
+    <td class="old-val">UNKNOWN</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">BASE</td>
+    </tr>
+  <tr><td rowspan="4">535 ROSENBERG WAY</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">535</td>
+    <td rowspan="4"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39667&mlon=-80.52518#map=18/43.39667/-80.52518" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Street</td>
+    <td class="old-val">MERION ST</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">ROSENBERG WAY</td>
+    </tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">MERION ST</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">535 ROSENBERG WAY</td>
+    </tr>
+  <tr>
+    <td class="change-field">UNIT_TYPE</td>
+    <td class="old-val">UNKNOWN</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">BASE</td>
+    </tr>
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Renumbered Addresses <span class="badge badge-accent">0</span></h2>
+    
+    <p class="empty">No addresses renumbered.</p>
+  </div>
+
+  <div class="section">
+    <h2>Street Renames <span class="badge badge-purple">12</span></h2>
+    
+    
+    <details class="rename-group">
+      <summary><span class="old-val">SOLITUDE ST</span> <span class="arrow-val">→</span> <span class="new-val">PINSENT CRES</span><span class="rename-count">3 addresses</span></summary>
+      <table>
+        <tbody>
+          
+          <tr><td>PINSENT CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39635&mlon=-80.53141#map=18/43.39635/-80.53141" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>PINSENT CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39578&mlon=-80.53186#map=18/43.39578/-80.53186" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>PINSENT CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39538&mlon=-80.53173#map=18/43.39538/-80.53173" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+      
+    </details>
+    
+    <details class="rename-group">
+      <summary><span class="old-val">GEORGE ISRAEL ST</span> <span class="arrow-val">→</span> <span class="new-val">PINSENT CRES</span><span class="rename-count">2 addresses</span></summary>
+      <table>
+        <tbody>
+          
+          <tr><td>PINSENT CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39552&mlon=-80.53001#map=18/43.39552/-80.53001" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>PINSENT CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39656&mlon=-80.52970#map=18/43.39656/-80.52970" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+      
+    </details>
+    
+    <details class="rename-group">
+      <summary><span class="old-val">BURGUNDY CRES</span> <span class="arrow-val">→</span> <span class="new-val">PINSENT CRES</span><span class="rename-count">1 address</span></summary>
+      <table>
+        <tbody>
+          
+          <tr><td>PINSENT CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39720&mlon=-80.52644#map=18/43.39720/-80.52644" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+      
+    </details>
+    
+    <details class="rename-group">
+      <summary><span class="old-val">GOLD DUST CRES</span> <span class="arrow-val">→</span> <span class="new-val">ROSEBUSH ST</span><span class="rename-count">1 address</span></summary>
+      <table>
+        <tbody>
+          
+          <tr><td>ROSEBUSH ST</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39618&mlon=-80.52795#map=18/43.39618/-80.52795" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+      
+    </details>
+    
+    <details class="rename-group">
+      <summary><span class="old-val">GOLD DUST CRES</span> <span class="arrow-val">→</span> <span class="new-val">ROSENBERG WAY</span><span class="rename-count">1 address</span></summary>
+      <table>
+        <tbody>
+          
+          <tr><td>ROSENBERG WAY</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39704&mlon=-80.52824#map=18/43.39704/-80.52824" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+      
+    </details>
+    
+    <details class="rename-group">
+      <summary><span class="old-val">SAWBUCK ST</span> <span class="arrow-val">→</span> <span class="new-val">ROSEBUSH ST</span><span class="rename-count">1 address</span></summary>
+      <table>
+        <tbody>
+          
+          <tr><td>ROSEBUSH ST</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39640&mlon=-80.52801#map=18/43.39640/-80.52801" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+      
+    </details>
+    
+    <details class="rename-group">
+      <summary><span class="old-val">SAWBUCK ST</span> <span class="arrow-val">→</span> <span class="new-val">SIDEWINDER ST</span><span class="rename-count">1 address</span></summary>
+      <table>
+        <tbody>
+          
+          <tr><td>SIDEWINDER ST</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39681&mlon=-80.52815#map=18/43.39681/-80.52815" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+      
+    </details>
+    
+    <details class="rename-group">
+      <summary><span class="old-val">SAWGRASS ST</span> <span class="arrow-val">→</span> <span class="new-val">MUIRFIELD CRES</span><span class="rename-count">1 address</span></summary>
+      <table>
+        <tbody>
+          
+          <tr><td>MUIRFIELD CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39730&mlon=-80.52589#map=18/43.39730/-80.52589" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+      
+    </details>
+    
+    <details class="rename-group">
+      <summary><span class="old-val">SHEEPHORN ST</span> <span class="arrow-val">→</span> <span class="new-val">PINSENT CRES</span><span class="rename-count">1 address</span></summary>
+      <table>
+        <tbody>
+          
+          <tr><td>PINSENT CRES</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39547&mlon=-80.53033#map=18/43.39547/-80.53033" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+      
+    </details>
+    
+    
+  </div>
+
+  
+
+  
+  <div class="section">
+    <h2>Status Changes <span class="badge badge-teal">20</span></h2>
+    
+  <details class="rename-group">
+    <summary><span class="change-field">STATUS:</span> <span class="old-val">PENDING</span> <span class="arrow-val">→</span> <span class="new-val">ACTIVE</span><span class="rename-count">20 addresses</span></summary>
+    <table>
+      <tbody>
+        
+        <tr><td>155 FIFTH AVE</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.43036&mlon=-80.45339#map=18/43.43036/-80.45339" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1-210 HERITAGE DR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46484&mlon=-80.44342#map=18/43.46484/-80.44342" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10-210 HERITAGE DR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46500&mlon=-80.44356#map=18/43.46500/-80.44356" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>11-210 HERITAGE DR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46503&mlon=-80.44357#map=18/43.46503/-80.44357" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>12-210 HERITAGE DR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46503&mlon=-80.44358#map=18/43.46503/-80.44358" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>13-210 HERITAGE DR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46509&mlon=-80.44363#map=18/43.46509/-80.44363" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>14-210 HERITAGE DR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46508&mlon=-80.44364#map=18/43.46508/-80.44364" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>15-210 HERITAGE DR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46511&mlon=-80.44364#map=18/43.46511/-80.44364" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>16-210 HERITAGE DR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46510&mlon=-80.44365#map=18/43.46510/-80.44365" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2-210 HERITAGE DR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46485&mlon=-80.44340#map=18/43.46485/-80.44340" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3-210 HERITAGE DR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46487&mlon=-80.44343#map=18/43.46487/-80.44343" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>4-210 HERITAGE DR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46487&mlon=-80.44344#map=18/43.46487/-80.44344" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>5-210 HERITAGE DR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46494&mlon=-80.44349#map=18/43.46494/-80.44349" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6-210 HERITAGE DR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46493&mlon=-80.44350#map=18/43.46493/-80.44350" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>7-210 HERITAGE DR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46495&mlon=-80.44351#map=18/43.46495/-80.44351" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>8-210 HERITAGE DR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46494&mlon=-80.44352#map=18/43.46494/-80.44352" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>9-210 HERITAGE DR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46501&mlon=-80.44355#map=18/43.46501/-80.44355" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>A-210 HERITAGE DR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46501&mlon=-80.44348#map=18/43.46501/-80.44348" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>B-210 HERITAGE DR</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46517&mlon=-80.44334#map=18/43.46517/-80.44334" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>11 OTTERBEIN RD</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46952&mlon=-80.43843#map=18/43.46952/-80.43843" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+  </details>
+  
+    
+  </div>
+  
+
+  
+  <div class="section">
+    <h2>Boundary Changes <span class="badge badge-teal">0</span></h2>
+    <p class="empty">No ward or municipality reassignments.</p>
+  </div>
+  
+
+  <div class="section">
+    <h2>Location Adjustments <span class="badge" style="background: var(--surface2); color: var(--text-dim)">29</span></h2>
+    
+    
+    
+    <table>
+      <thead><tr><th>Address</th><th>Before</th><th></th><th>After</th></tr></thead>
+      <tbody>
+        
+        <tr><td>852 AMAND DR</td>
+          
+          <td class="old-val">43.39360, -80.50775<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39360&mlon=-80.50775#map=19/43.39360/-80.50775" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 1.4m</td>
+          <td class="new-val">43.39361, -80.50776<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39361&mlon=-80.50776#map=19/43.39361/-80.50776" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>609 ANTON CRES</td>
+          
+          <td class="old-val">43.39749, -80.49649<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39749&mlon=-80.49649#map=19/43.39749/-80.49649" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↑ 2.4m</td>
+          <td class="new-val">43.39751, -80.49648<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39751&mlon=-80.49648#map=19/43.39751/-80.49648" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>621 ANTON CRES</td>
+          
+          <td class="old-val">43.39745, -80.49682<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39745&mlon=-80.49682#map=19/43.39745/-80.49682" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">→ 0.8m</td>
+          <td class="new-val">43.39745, -80.49681<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39745&mlon=-80.49681#map=19/43.39745/-80.49681" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>BLAIR VALLEY ST</td>
+          
+          <td class="old-val">43.36602, -80.44764<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36602&mlon=-80.44764#map=19/43.36602/-80.44764" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">← 6.1m</td>
+          <td class="new-val">43.36600, -80.44771<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36600&mlon=-80.44771#map=19/43.36600/-80.44771" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>BLAIR VALLEY ST</td>
+          
+          <td class="old-val">43.36558, -80.44689<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36558&mlon=-80.44689#map=19/43.36558/-80.44689" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">→ 8.4m</td>
+          <td class="new-val">43.36560, -80.44679<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36560&mlon=-80.44679#map=19/43.36560/-80.44679" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>20 BRAUN ST</td>
+          
+          <td class="old-val">43.45663, -80.50444<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45663&mlon=-80.50444#map=19/43.45663/-80.50444" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">← 3.4m</td>
+          <td class="new-val">43.45662, -80.50448<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45662&mlon=-80.50448#map=19/43.45662/-80.50448" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>38 CLAREMONT AVE</td>
+          
+          <td class="old-val">43.45327, -80.51891<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45327&mlon=-80.51891#map=19/43.45327/-80.51891" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↑ 3.4m</td>
+          <td class="new-val">43.45330, -80.51892<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.45330&mlon=-80.51892#map=19/43.45330/-80.51892" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>YRD-175 COMMONWEALTH ST</td>
+          
+          <td class="old-val">43.40516, -80.50414<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.40516&mlon=-80.50414#map=19/43.40516/-80.50414" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↗ 21.9m</td>
+          <td class="new-val">43.40530, -80.50395<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.40530&mlon=-80.50395#map=19/43.40530/-80.50395" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>3 EVENSTONE AVE</td>
+          
+          <td class="old-val">43.38188, -80.45296<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.38188&mlon=-80.45296#map=19/43.38188/-80.45296" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">← 7.3m</td>
+          <td class="new-val">43.38188, -80.45305<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.38188&mlon=-80.45305#map=19/43.38188/-80.45305" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>1-3 EVENSTONE AVE</td>
+          
+          <td class="old-val">43.38188, -80.45296<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.38188&mlon=-80.45296#map=19/43.38188/-80.45296" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">← 7.3m</td>
+          <td class="new-val">43.38188, -80.45305<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.38188&mlon=-80.45305#map=19/43.38188/-80.45305" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>132 FAIRWAY RD N</td>
+          
+          <td class="old-val">43.43161, -80.43094<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.43161&mlon=-80.43094#map=19/43.43161/-80.43094" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 2.8m</td>
+          <td class="new-val">43.43163, -80.43096<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.43163&mlon=-80.43096#map=19/43.43163/-80.43096" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>BSMT-132 FAIRWAY RD N</td>
+          
+          <td class="old-val">43.43161, -80.43094<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.43161&mlon=-80.43094#map=19/43.43161/-80.43094" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 2.8m</td>
+          <td class="new-val">43.43163, -80.43096<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.43163&mlon=-80.43096#map=19/43.43163/-80.43096" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>485 HURON RD</td>
+          
+          <td class="old-val">43.39114, -80.46947<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39114&mlon=-80.46947#map=19/43.39114/-80.46947" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 40.2m</td>
+          <td class="new-val">43.39082, -80.46924<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39082&mlon=-80.46924#map=19/43.39082/-80.46924" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>495 HURON RD</td>
+          
+          <td class="old-val">43.39080, -80.47025<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39080&mlon=-80.47025#map=19/43.39080/-80.47025" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 21.7m</td>
+          <td class="new-val">43.39070, -80.47048<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39070&mlon=-80.47048#map=19/43.39070/-80.47048" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>18 IVY LANE CRT</td>
+          
+          <td class="old-val">43.42745, -80.54986<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.42745&mlon=-80.54986#map=19/43.42745/-80.54986" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">← 1.6m</td>
+          <td class="new-val">43.42745, -80.54988<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.42745&mlon=-80.54988#map=19/43.42745/-80.54988" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>34 JACOB DETWEILLER DR</td>
+          
+          <td class="old-val">43.36604, -80.44196<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36604&mlon=-80.44196#map=19/43.36604/-80.44196" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↗ 2.0m</td>
+          <td class="new-val">43.36605, -80.44194<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36605&mlon=-80.44194#map=19/43.36605/-80.44194" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>120 JACOB DETWEILLER DR</td>
+          
+          <td class="old-val">43.36503, -80.44520<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36503&mlon=-80.44520#map=19/43.36503/-80.44520" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 2.2m</td>
+          <td class="new-val">43.36501, -80.44520<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.36501&mlon=-80.44520#map=19/43.36501/-80.44520" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>145 PATHFINDER CRES</td>
+          
+          <td class="old-val">43.39191, -80.44521<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39191&mlon=-80.44521#map=19/43.39191/-80.44521" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 2.7m</td>
+          <td class="new-val">43.39190, -80.44524<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.39190&mlon=-80.44524#map=19/43.39190/-80.44524" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>39 PEACHWOOD CRT</td>
+          
+          <td class="old-val">43.46100, -80.45548<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46100&mlon=-80.45548#map=19/43.46100/-80.45548" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↑ 2.2m</td>
+          <td class="new-val">43.46102, -80.45548<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.46102&mlon=-80.45548#map=19/43.46102/-80.45548" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>71 RUSKVIEW RD</td>
+          
+          <td class="old-val">43.42227, -80.51147<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.42227&mlon=-80.51147#map=19/43.42227/-80.51147" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">→ 1.6m</td>
+          <td class="new-val">43.42227, -80.51145<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.42227&mlon=-80.51145#map=19/43.42227/-80.51145" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>70 TIMBERLANE CRES</td>
+          
+          <td class="old-val">43.41978, -80.54460<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.41978&mlon=-80.54460#map=19/43.41978/-80.54460" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 2.2m</td>
+          <td class="new-val">43.41976, -80.54460<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.41976&mlon=-80.54460#map=19/43.41976/-80.54460" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>72 TIMBERLANE CRES</td>
+          
+          <td class="old-val">43.41975, -80.54468<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.41975&mlon=-80.54468#map=19/43.41975/-80.54468" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 2.2m</td>
+          <td class="new-val">43.41973, -80.54468<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.41973&mlon=-80.54468#map=19/43.41973/-80.54468" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>60 TRUSSLER RD</td>
+          
+          <td class="old-val">43.41943, -80.55813<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.41943&mlon=-80.55813#map=19/43.41943/-80.55813" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 60.5m</td>
+          <td class="new-val">43.41922, -80.55882<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.41922&mlon=-80.55882#map=19/43.41922/-80.55882" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>33 WATERCRESS CRT</td>
+          
+          <td class="old-val">43.41154, -80.51753<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.41154&mlon=-80.51753#map=19/43.41154/-80.51753" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↑ 3.4m</td>
+          <td class="new-val">43.41157, -80.51752<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.41157&mlon=-80.51752#map=19/43.41157/-80.51752" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>35 WATERCRESS CRT</td>
+          
+          <td class="old-val">43.41152, -80.51759<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.41152&mlon=-80.51759#map=19/43.41152/-80.51759" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↑ 2.2m</td>
+          <td class="new-val">43.41154, -80.51759<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.41154&mlon=-80.51759#map=19/43.41154/-80.51759" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>22 WINDING WAY</td>
+          
+          <td class="old-val">43.41944, -80.53615<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.41944&mlon=-80.53615#map=19/43.41944/-80.53615" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 1.4m</td>
+          <td class="new-val">43.41943, -80.53616<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.41943&mlon=-80.53616#map=19/43.41943/-80.53616" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>32 WINDOM RD</td>
+          
+          <td class="old-val">43.43107, -80.42848<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.43107&mlon=-80.42848#map=19/43.43107/-80.42848" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">← 25.1m</td>
+          <td class="new-val">43.43106, -80.42879<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.43106&mlon=-80.42879#map=19/43.43106/-80.42879" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>A-32 WINDOM RD</td>
+          
+          <td class="old-val">43.43107, -80.42848<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.43107&mlon=-80.42848#map=19/43.43107/-80.42848" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 2.7m</td>
+          <td class="new-val">43.43106, -80.42845<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.43106&mlon=-80.42845#map=19/43.43106/-80.42845" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>B-32 WINDOM RD</td>
+          
+          <td class="old-val">43.43107, -80.42848<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.43107&mlon=-80.42848#map=19/43.43107/-80.42848" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 28.1m</td>
+          <td class="new-val">43.43085, -80.42865<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.43085&mlon=-80.42865#map=19/43.43085/-80.42865" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+      </tbody>
+    </table>
+    
+    
+    
+  </div>
+
+  <div class="generated-at">Report generated Oct 11, 2026 at 02:11 PM · source licence: Open Government Licence - The Corporation of the City of Kitchener</div>
+
+  <script>
+    function sortTable(tbodyId, col) {
+      const tbody = document.getElementById(tbodyId);
+      if (!tbody) return;
+      const rows = Array.from(tbody.rows);
+      const dir = tbody.dataset.sortDir === 'asc' ? 'desc' : 'asc';
+      tbody.dataset.sortDir = dir;
+      rows.sort((a, b) => {
+        const av = a.cells[col]?.textContent.trim() || '';
+        const bv = b.cells[col]?.textContent.trim() || '';
+        const an = parseFloat(av), bn = parseFloat(bv);
+        if (!isNaN(an) && !isNaN(bn)) return dir === 'asc' ? an - bn : bn - an;
+        return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+      });
+      rows.forEach(r => tbody.appendChild(r));
+    }
+  </script>
+</body>
+
+</html>
