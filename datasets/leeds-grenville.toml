@@ -1,6 +1,13 @@
 slug = "leeds-grenville"
 provider = "United Counties of Leeds and Grenville"
-data_url = "https://services3.arcgis.com/KQcdsE7S72bcD7R8/ArcGIS/rest/services/CivicAddress/FeatureServer/0"
+# Re-pointed 2026-10-12 to the licensed layer. The old CivicAddress/FeatureServer (item
+# 5b8385254ee94401ba03df02369e8aef) has an EMPTY licenseInfo; the counties' open-data item
+# 3587c7019a7142e7aee6fd970b79b4fc "LG_CivicAddress_OpenData" (owner UCLG_Admin) serves the
+# service below and its licenseInfo links the terms page. Evidence: ontario-osm-data-sources
+# licences/leeds-grenville/verdict.md. Same org, same schema, same 54,251 rows: probed through
+# normalize against the store on 2026-10-11, 54,251/54,251 keys and payload hashes identical,
+# so the swap changes nothing in history.
+data_url = "https://services3.arcgis.com/KQcdsE7S72bcD7R8/arcgis/rest/services/LG_CivicAddress_OpenData/FeatureServer/0"
 access = "arcgis"
 format = "geojson"
 # Licence found 2026-08-20: OGL-Canada-style, v1.0; the counties' DCAT entry for

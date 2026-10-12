@@ -2,7 +2,19 @@ slug = "windsor"
 provider = "City of Windsor"
 # The catalogued layer (.../MapServer/1, AllUniqueAddresses) is empty; the populated layer is 0
 # (AllUniqueAddresses_Parcels, 133k rows). Parcel polygons -> normalize uses ring centroids (cf. renfrew).
-data_url = "https://mappmycity.ca/arcgis/rest/services/MappMyCity/AllUniqueAddresses_Parcels/MapServer/0"
+# Re-pointed 2026-10-12 to the LICENSED layer. MappMyCity/AllUniqueAddresses_Parcels has an empty
+# copyrightText and no catalogue item points at it. The city's new hub (org HhXPJoZ6FLKHdvrH) has two
+# items bound to the Terms PDF: "Address Point" b6e438e857c74685af9ba793c5f19ead -> PropertyParcels/0
+# (points) and "Address Polygon" 6793ba072d1b4103bf2a7b296ab8961c -> PropertyParcels/1 (below).
+# Evidence: ontario-osm-data-sources licences/windsor/verdict.md. The verdict offers either; the
+# POLYGON layer is the one that keeps history, measured through normalize against the store on
+# 2026-10-11: /1 carries over 118,841 of 118,841 synth keys (same parcels -> same ring centroids;
+# 2 added), while /0's points re-key 117,125 of them. The service is new - its copyrightText is
+# still a template ("[Insert Owner Department, e.g., Traffic Operations]"); the hub items are what
+# bind it to the licence. Switch-day differences that are real, not config (they land as one event):
+# propertyrsn differs on ~12,100 rows; Frontage/Depth/AmandaArea read "0.00" on ~6,600-8,500 rows
+# where the old layer had values; Ward is absent on ~3,600 rows that had one (boundary class).
+data_url = "https://mappmycity.ca/arcgis/rest/services/OpenDataServices/PropertyParcels/MapServer/1"
 access = "arcgis"
 format = "geojson"
 # Licence re-read 2026-08-20: NOT custom terms after all - the PDF at
@@ -36,6 +48,12 @@ ignore_fields = [
   # OBJECTID - not identity, and not address data. Deliberately not keep_fields: they
   # index a join we do not have the other side of, so nothing downstream can use them.
   "JOIN_FID", "Join_Count", "TARGET_FID",
+  # Assessment roll number, twice over (RollNumber, roll_number). The licensed
+  # PropertyParcels layer does not publish either (re-point 2026-10-12), so they would
+  # leave every stored row at once. Ignored and removed from the whole history with
+  # tools/backfill_props_hash.py --reapply-ignore the same day, so the switch re-hashes
+  # nothing on their account; the values remain in the vault's pre-switch snapshots.
+  "RollNumber", "roll_number",
 ]
 
 [identity]

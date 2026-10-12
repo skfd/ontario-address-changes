@@ -2,7 +2,18 @@ slug = "barrie"
 provider = "City of Barrie"
 # Catalogued self-hosted gisservices.barrie.ca refused connections; resolved via ArcGIS Online search
 # to the official org (owner BarrieGIS, services3.arcgis.com/C964zBpHgJUpj4d0), COB_ADDRESS_POINT.
-data_url = "https://services3.arcgis.com/C964zBpHgJUpj4d0/arcgis/rest/services/COB_ADDRESS_POINT/FeatureServer/0"
+# Re-pointed 2026-10-12 to the LICENSED layer. COB_ADDRESS_POINT (item 38b9faf0262e4ff9acf3e1d6720df7f8)
+# has an empty licenseInfo and is in no opendata.barrie.ca group, so the portal's "you are agreeing
+# to the terms of the Open Data License" notice does not reach it. The catalogue's "Address Points"
+# item 4902c7fd1aff42fb892a9d4e51428b95 (owner BarrieGIS) serves the self-hosted AddressVW below.
+# Evidence: ontario-osm-data-sources licences/barrie/verdict.md.
+# Same address database, same ADDRESSID key: probed through normalize against the store on
+# 2026-10-11, 60,879 of 63,383 active keys carry over. The switch day is a real one-time event,
+# not a config artefact: 2,504 keys retire (2,473 Pending + 31 Temporary - AddressVW publishes
+# 680 Pending where COB_ADDRESS_POINT has 3,153; Current is 60,181 in both), 7 are added, and
+# ~390 rows flip Pending -> Current with ~396 PARCELIDs reassigned to newer parcel numbers.
+# What the swap costs: most Pending (not-yet-built) addresses drop out of view.
+data_url = "https://gispublic.barrie.ca/arcgis/rest/services/Open_Data/AddressVW/MapServer/0"
 access = "arcgis"
 format = "geojson"
 license_name = "Open Government Licence - Barrie"
@@ -13,7 +24,13 @@ osm_compatible = "green-self"
 # Clerks' workflow annotations prefixed onto the record ('CURRENT 0014538; Added
 # Condo Suite units...'); they ride along with real STATUS flips (2026-07-06)
 # and would otherwise keep pulling class-exempt status sweeps into the flag queue.
-ignore_fields = ["COMMENT"]
+ignore_fields = [
+  "COMMENT",  # not published by AddressVW (2026-10-12); kept in case it comes back
+  # AddressVW-only coordinate echoes (2026-10-12): the point again as text, in lon/lat and
+  # UTM - the dufferin LONGITUDEX/EASTINGX shape. Never stored, so ignoring them before the
+  # first AddressVW import re-hashes nothing; tracked, they would re-hash every row today.
+  "Easting", "Northing", "Longitude", "Latitude",
+]
 
 [identity]
 key_field = "ADDRESSID"                        # stable address id, 100% populated, order-independent (OBJECTID_1 is sequential)
