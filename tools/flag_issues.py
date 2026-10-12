@@ -207,9 +207,10 @@ def vault_review(slug, date, verdict, note):
 # ---- the operator's comment ----
 
 _VERDICT_WORDS = "|".join(LEDGER_VERDICTS + VAULT_VERDICTS + ("hold",))
-_SEP = r"\s*(?:[:=]|-+|–|—)?\s*"  # "business: x", "business -- x", "business x"
-_FIRST = re.compile(r"^\s*(?:verdict\s*[:=]\s*)?(" + _VERDICT_WORDS + r")\b" + _SEP + r"(.*)$",
-                    re.IGNORECASE)
+_SEP = r"\s*(?:[:=,;]|-+|–|—)?\s*"  # "business: x", "business -- x", "business, x", "business x"
+_MD = r"[*_`~]*"  # "**technical**, x" from a phone keyboard is still the word (#17, 2026-09-14)
+_FIRST = re.compile(r"^\s*(?:>\s*)?" + _MD + r"(?:verdict\s*[:=]\s*)?" + _MD + r"(" + _VERDICT_WORDS
+                    + r")(?![A-Za-z0-9])" + _MD + _SEP + r"(.*)$", re.IGNORECASE)
 _VAULT = re.compile(r"^\s*vault\s*[:=]\s*(real|schema|artifact)\b" + _SEP + r"(.*)$",
                     re.IGNORECASE)
 _RULE = re.compile(r"^\s*rule\s*[:=]\s*(.+)$", re.IGNORECASE)
@@ -329,6 +330,17 @@ def pending_operator_comment(cmts):
         if not is_owner(c):
             continue
         if parse_verdict(c.get("body")) is not None:
+            return c
+    return None
+
+
+def unread_operator_comment(cmts):
+    """The owner's newest comment since the bot last spoke that is not a verdict,
+    or None. It gets one reply saying so: silence let #17's answer sit unread
+    for four weeks."""
+    last_bot = max((c["createdAt"] for c in cmts if is_bot(c)), default="")
+    for c in sorted(cmts, key=lambda c: c["createdAt"], reverse=True):
+        if not is_bot(c) and c["createdAt"] > last_bot and is_owner(c):
             return c
     return None
 
@@ -586,6 +598,8 @@ def _inbox(limit=0):
         if c:
             v = adopt_reading(parse_verdict(c["body"], vault_only=vault_only), cmts, c)
             item.update(kind="operator", comment_id=c["id"], comment_url=c.get("url"), **v)
+        elif unread_operator_comment(cmts):
+            item["kind"] = "unread"
         elif "needs-triage" in iss["labels"]:
             item["kind"] = "triage"
         else:
@@ -609,6 +623,8 @@ def cmd_inbox(args):
         if it["kind"] == "operator":
             what = it.get("error") or f"{it.get('verdict') or ''} {('vault:' + it['vault']) if it.get('vault') else ''}".strip()
             print(f"  #{it['number']} {it['slug']} {it['date']}  operator says: {what} -- {it.get('note', '')[:80]}")
+        elif it["kind"] == "unread":
+            print(f"  #{it['number']} {it['slug']} {it['date']}  owner commented, not a verdict (apply replies)")
         else:
             done = "  (vault already answered)" if it.get("vault_answered") else ""
             print(f"  #{it['number']} {it['slug']} {it['date']}  needs triage{done}")
@@ -732,9 +748,16 @@ def cmd_apply(args):
     ensure_labels()
     left = []
     for it in _inbox():
+        n = it["number"]
+        if it["kind"] == "unread":
+            comment(n, "I could not read a verdict in your last comment, so nothing was filed. "
+                       "Start its first line with one of: business, technical, bug, hold "
+                       "(bold is fine), then the note. If it was a question, it waits for "
+                       "an interactive session.")
+            print(f"  unread #{n}: owner comment is not a verdict; replied")
+            continue
         if it["kind"] != "operator":
             continue
-        n = it["number"]
         if it.get("error"):
             comment(n, it["error"])
             continue

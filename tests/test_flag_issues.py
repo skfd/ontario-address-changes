@@ -32,6 +32,17 @@ def test_verdict_prefix_and_case_are_tolerated():
     assert fi.parse_verdict("BUG\nreplayed batch")["verdict"] == "bug"
 
 
+def test_markdown_around_the_word_is_still_the_word():
+    # #17, 2026-09-14: a bold verdict from a phone sat unread for four weeks.
+    v = fi.parse_verdict("**technical**, it's not a change just adding info to nodes that were half filled")
+    assert v["verdict"] == "technical"
+    assert v["note"] == "it's not a change just adding info to nodes that were half filled"
+    assert fi.parse_verdict("`business`")["bare"]
+    assert fi.parse_verdict("_hold_ waiting on the by-law map")["verdict"] == "hold"
+    assert fi.parse_verdict("> bug: replayed batch")["verdict"] == "bug"
+    assert fi.parse_verdict("businesslike remark") is None
+
+
 def test_vault_and_rule_lines_are_picked_out():
     v = fi.parse_verdict("business: county annexed the township\n"
                          "vault: real -- 6,222 addresses arrived\n"
@@ -177,6 +188,16 @@ def test_only_the_owners_verdict_after_the_bots_last_word_is_pending():
     assert fi.pending_operator_comment([bot, stale, stranger]) is None
     fresh = _c("technical: ARN recode", "2026-09-09T21:30:00Z", cid="new")
     assert fi.pending_operator_comment([bot, stale, stranger, fresh])["id"] == "new"
+
+
+def test_an_owner_comment_that_is_not_a_verdict_is_noticed_once():
+    bot = _c(fi.BOT_MARK + "\nClaude's reading: **technical**", "2026-09-13T22:00:00Z", cid="b")
+    question = _c("why does this keep happening?", "2026-09-14T15:00:00Z", cid="q")
+    stranger = _c("nice tracker", "2026-09-14T16:00:00Z", assoc="NONE", cid="x")
+    assert fi.pending_operator_comment([bot, question]) is None
+    assert fi.unread_operator_comment([bot, question, stranger])["id"] == "q"
+    replied = _c(fi.BOT_MARK + "\nI could not read a verdict", "2026-09-14T22:00:00Z", cid="r")
+    assert fi.unread_operator_comment([bot, question, replied]) is None
 
 
 def test_the_owner_is_named_by_login_not_by_association():
