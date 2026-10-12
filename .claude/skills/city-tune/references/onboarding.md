@@ -24,7 +24,8 @@ does this and it is the only record of why a URL is what it is.
 ## 2. Licence and OSM compatibility
 
 `license_name` verbatim from the source, plus `osm_compatible`, using the existing
-vocabulary: `green-lwg`, `green-ogl`, `yellow-ogl`, `yellow-review`, `orange-ccby-waiver`,
+vocabulary: `green-lwg`, `green-self` (self-listed on wiki Contributors under the OSMF
+self-service procedure, not yet on the OSMF list), `green-ogl`, `yellow-ogl`, `yellow-review`, `orange-ccby-waiver`,
 `red-review`, `unknown-review`. A proprietary or all-rights-reserved licence is a
 `skipped.toml` entry, not a dataset (City of Peterborough).
 
