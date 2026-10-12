@@ -11,9 +11,10 @@ provider = "City of Windsor"
 # 2026-10-11: /1 carries over 118,841 of 118,841 synth keys (same parcels -> same ring centroids;
 # 2 added), while /0's points re-key 117,125 of them. The service is new - its copyrightText is
 # still a template ("[Insert Owner Department, e.g., Traffic Operations]"); the hub items are what
-# bind it to the licence. Switch-day differences that are real, not config (they land as one event):
-# propertyrsn differs on ~12,100 rows; Frontage/Depth/AmandaArea read "0.00" on ~6,600-8,500 rows
-# where the old layer had values; Ward is absent on ~3,600 rows that had one (boundary class).
+# bind it to the licence. First import 2026-10-12 (snapshot 28): +2 added, 0 removed, 0 modified.
+# The 14,490 duplicate-key rows (multi-address parcels) differ between the two layers in which
+# duplicate comes first; the store keeps the first, and that one matches. Duplicates that come later
+# do differ (propertyrsn, zeroed Frontage/Depth/AmandaArea, blank Ward), but they were never stored.
 data_url = "https://mappmycity.ca/arcgis/rest/services/OpenDataServices/PropertyParcels/MapServer/1"
 access = "arcgis"
 format = "geojson"

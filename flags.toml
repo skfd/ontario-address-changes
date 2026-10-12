@@ -1424,3 +1424,24 @@ reviewed = "2026-10-09"
 rule = ""
 note = "Same event as the reviewed 2026-09-09 entry (business, owner 2026-10-09); re-signatured to [full, street] after GEOSTNAME/STREET_TYPE/HISTORY went into milton ignore_fields so the Tremaine rename classes as Street Renames."
 
+[[flag]]
+slug = "barrie"
+date = "2026-10-12"
+signature = "mass-removed"
+scope = "2,504 removed in one day (4.0% of 63,383)"
+detected = "2026-10-12"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-10-12"
+rule = "one-time: the 2026-10-12 source swap from COB_ADDRESS_POINT to the licensed Open_Data/AddressVW (datasets/barrie.toml); measured before the switch, recurs only if the source changes again"
+note = "All 2,504 are Pending (2,473) or Temporary (31) rows that AddressVW does not publish (680 Pending there vs 3,153 in the old layer; Current 60,181 in both) - the feed changed, the city removed nothing."
+
+[[flag]]
+slug = "barrie"
+date = "2026-10-12"
+signature = "mass-modified"
+fields = ["PARCELID", "STATUS"]
+scope = "389 rows changed the same field set [PARCELID, STATUS] (98% of the day's 398 modifications)"
+detected = "2026-10-12"
+status = "open"
+
