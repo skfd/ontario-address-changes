@@ -1225,7 +1225,11 @@ signature = "mass-modified"
 fields = ["ELECTORAL_DISTRICT_NAME", "GARBAGE_DAY", "NEIGHBOURHOOD", "RECYCLING_DAY"]
 scope = "109 rows changed the same field set [ELECTORAL_DISTRICT_NAME, GARBAGE_DAY, NEIGHBOURHOOD, RECYCLING_DAY] (100% of the day's 109 modifications)"
 detected = "2026-09-13"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-10-12"
+rule = "datasets/kingston.toml: ignore_fields += GARBAGE_DAY, RECYCLING_DAY, NEIGHBOURHOOD, ELECTORAL_DISTRICT_NAME; [classes] boundary drops ELECTORAL_DISTRICT_NAME; store backfilled --reapply-ignore"
+note = "Owner: not a change, just adding info to nodes that were half filled. City-service and ward overlays filled in batches after new streets are created; kept in address-vault's raw pulls, no longer tracked here (owner 2026-10-12). Postal code stays tracked."
 
 [[flag]]
 slug = "lambton"
@@ -1233,7 +1237,11 @@ date = "2026-09-15"
 signature = "mass-added"
 scope = "824 added in one day (1.4% of 56,897)"
 detected = "2026-09-16"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-10-12"
+rule = "datasets/lambton.toml remapped to the NG911 schema (commit e0785864, 2026-09-15); vault schema already filed"
+note = "Owner: technical. The county republished the layer on an NG911 schema; the six events that day are the schema switch (same points, renamed fields), not address changes."
 
 [[flag]]
 slug = "lambton"
@@ -1241,7 +1249,11 @@ date = "2026-09-15"
 signature = "mass-removed"
 scope = "739 removed in one day (1.3% of 56,897)"
 detected = "2026-09-16"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-10-12"
+rule = "datasets/lambton.toml remapped to the NG911 schema (commit e0785864, 2026-09-15); vault schema already filed"
+note = "Owner: technical. The county republished the layer on an NG911 schema; the six events that day are the schema switch (same points, renamed fields), not address changes."
 
 [[flag]]
 slug = "lambton"
@@ -1250,7 +1262,11 @@ signature = "mass-modified"
 fields = ["ADDRESS", "Add_Number", "CITY", "Country", "County", "Inc_Muni", "MUNICIPALITY", "STDIR", "STDIR_A", "STNAME", "STNUM", "STTYPE", "STTYPE_A", "St_Name", "St_PosDir", "St_PosTyp", "activedate", "approveddate", "currentstatus", "full", "pointtype", "province"]
 scope = "707 rows changed the same field set [ADDRESS, Add_Number, CITY, Country, County, Inc_Muni, MUNICIPALITY, STDIR, STDIR_A, STNAME, STNUM, STTYPE, STTYPE_A, St_Name, St_PosDir, St_PosTyp, activedate, approveddate, currentstatus, full, pointtype, province] (1% of the day's 56,158 modifications)"
 detected = "2026-09-16"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-10-12"
+rule = "datasets/lambton.toml remapped to the NG911 schema (commit e0785864, 2026-09-15); vault schema already filed"
+note = "Owner: technical. The county republished the layer on an NG911 schema; the six events that day are the schema switch (same points, renamed fields), not address changes."
 
 [[flag]]
 slug = "lambton"
@@ -1259,7 +1275,11 @@ signature = "mass-modified"
 fields = ["ADDRESS", "Add_Number", "CITY", "Country", "County", "Inc_Muni", "MUNICIPALITY", "STNAME", "STNUM", "STTYPE", "STTYPE_A", "St_Name", "St_PosTyp", "activedate", "approveddate", "currentstatus", "full", "pointtype", "province"]
 scope = "5,063 rows changed the same field set [ADDRESS, Add_Number, CITY, Country, County, Inc_Muni, MUNICIPALITY, STNAME, STNUM, STTYPE, STTYPE_A, St_Name, St_PosTyp, activedate, approveddate, currentstatus, full, pointtype, province] (9% of the day's 56,158 modifications)"
 detected = "2026-09-16"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-10-12"
+rule = "datasets/lambton.toml remapped to the NG911 schema (commit e0785864, 2026-09-15); vault schema already filed"
+note = "Owner: technical. The county republished the layer on an NG911 schema; the six events that day are the schema switch (same points, renamed fields), not address changes."
 
 [[flag]]
 slug = "lambton"
@@ -1268,7 +1288,11 @@ signature = "mass-modified"
 fields = ["ADDRESS", "Add_Number", "Country", "County", "Inc_Muni", "MUNICIPALITY", "STDIR", "STDIR_A", "STNAME", "STNUM", "STTYPE", "STTYPE_A", "St_Name", "St_PosDir", "St_PosTyp", "activedate", "approveddate", "currentstatus", "full", "pointtype", "province"]
 scope = "2,608 rows changed the same field set [ADDRESS, Add_Number, Country, County, Inc_Muni, MUNICIPALITY, STDIR, STDIR_A, STNAME, STNUM, STTYPE, STTYPE_A, St_Name, St_PosDir, St_PosTyp, activedate, approveddate, currentstatus, full, pointtype, province] (5% of the day's 56,158 modifications)"
 detected = "2026-09-16"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-10-12"
+rule = "datasets/lambton.toml remapped to the NG911 schema (commit e0785864, 2026-09-15); vault schema already filed"
+note = "Owner: technical. The county republished the layer on an NG911 schema; the six events that day are the schema switch (same points, renamed fields), not address changes."
 
 [[flag]]
 slug = "lambton"
@@ -1277,7 +1301,11 @@ signature = "mass-modified"
 fields = ["ADDRESS", "Add_Number", "Country", "County", "Inc_Muni", "MUNICIPALITY", "STNAME", "STNUM", "STTYPE", "STTYPE_A", "St_Name", "St_PosTyp", "activedate", "approveddate", "currentstatus", "full", "pointtype", "province"]
 scope = "47,607 rows changed the same field set [ADDRESS, Add_Number, Country, County, Inc_Muni, MUNICIPALITY, STNAME, STNUM, STTYPE, STTYPE_A, St_Name, St_PosTyp, activedate, approveddate, currentstatus, full, pointtype, province] (85% of the day's 56,158 modifications)"
 detected = "2026-09-16"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-10-12"
+rule = "datasets/lambton.toml remapped to the NG911 schema (commit e0785864, 2026-09-15); vault schema already filed"
+note = "Owner: technical. The county republished the layer on an NG911 schema; the six events that day are the schema switch (same points, renamed fields), not address changes."
 
 [[flag]]
 slug = "muskoka"
@@ -1300,7 +1328,11 @@ fields = ["POSTAL_CODE"]
 scope = "60 rows changed the same field set [POSTAL_CODE] (91% of the day's 66 modifications)"
 detail = "top: None -> 'K7M 1T3' (12), None -> 'K7M 1T4' (8), None -> 'K7M 1T5' (8)"
 detected = "2026-09-17"
-status = "open"
+status = "reviewed"
+verdict = "business"
+reviewed = "2026-10-12"
+rule = ""
+note = "Owner 2026-10-12: postal codes matter. Canada Post assigned codes K7M 1S8-1T8 to 59 of the 62 AKI RD addresses created 2026-09-04/05 (plus 778 Progress Ave); a new street getting its codes is news."
 
 [[flag]]
 slug = "simcoe"
@@ -1369,7 +1401,11 @@ fields = ["HERITAGE"]
 scope = "64 rows changed the same field set [HERITAGE] (83% of the day's 77 modifications)"
 detail = "top: 'LISTED' -> None (64)"
 detected = "2026-09-27"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-10-12"
+rule = "none by design: HERITAGE stays tracked (owner 2026-10-12, a real delisting is reader-relevant); first HERITAGE change in 98 snapshots, a one-off cleanup of a tag the new lots inherited from 8331 Heritage Rd"
+note = "Owner: technical, this day only. 60 lots created 2026-08-08 inherited the farm parcel's LISTED tag and the city cleared it from them and the parent; no address changed."
 
 [[flag]]
 slug = "chatham-kent"

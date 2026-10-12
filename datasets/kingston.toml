@@ -24,6 +24,11 @@ ignore_fields = [
   # they change only alongside a street rename and drag echo rows into the report
   # (2026-08-19: ROYAL ST->KINGSTON HEIGHTS DR carried both).
   "STREET_BODY_NAME", "STREET_TYPE_SUFFIX",
+  # City-service and political overlays joined onto the points, not addresses:
+  # filled in batches weeks after a street is created (flag 2026-09-13, #17)
+  # and reassigned in sweeps. Owner 2026-10-12: kept in address-vault's raw
+  # pulls, not tracked here. Postal code stays tracked.
+  "GARBAGE_DAY", "RECYCLING_DAY", "NEIGHBOURHOOD", "ELECTORAL_DISTRICT_NAME",
 ]
 
 [identity]
@@ -41,4 +46,4 @@ full   = "FULL_ADDRESS"
 # (place renames / status changes / boundary reassignments) instead of the
 # generic Updated Addresses table.
 [classes]
-boundary = ["ELECTORAL_DISTRICT_NAME", "MUNICIPALITY"]
+boundary = ["MUNICIPALITY"]
