@@ -418,8 +418,9 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
   the original six — date not recorded, no reply yet; these five and the rest
   are being evaluated for the OSMF self-service route, see LICENSING.md Yellow);
   optionally add the burlington/london terms-URL
-  pass-through to their report pages; optionally re-point milton and windsor at
-  the URLs their open licences literally cover.
+  pass-through to their report pages; ~~optionally re-point milton and windsor at
+  the URLs their open licences literally cover~~ (2026-10-12: windsor re-pointed,
+  with barrie and leeds-grenville; milton deferred, reasons in milton.toml).
 
 ## 4. Periodic / ops chores
 
