@@ -34,7 +34,7 @@ the second for every non-green city: cleared for all OGL-family cities and for
 burlington/london (pass-through condition); blocked for sdg / renfrew /
 peterborough-county (gated); unclear-by-silence for the unknowns.
 
-## Green — 18 (licence on the OSMF-approved list or equivalent)
+## Green — 17 (licence on the OSMF-approved list or equivalent)
 
 | dataset | tier | licence |
 |---|---|---|
@@ -42,7 +42,6 @@ peterborough-county (gated); unclear-by-silence for the unknowns.
 | brant | green-cc0 | CC0 (item licenseInfo, re-tiered 2026-08-16; ODbL-compatible outright, no LWG needed; optional courtesy confirm with county) |
 | cambridge | green-lwg | Open Government Licence - City of Cambridge |
 | cornwall | green-lwg | Open Government Licence - City of Cornwall |
-| durham | green-lwg | Open Government Licence – City of Oshawa |
 | greater-sudbury | green-lwg | Open Data Licence - City of Greater Sudbury |
 | guelph | green-lwg | Open Government Licence - City of Guelph |
 | hamilton | green-lwg | Open Data Licence – Hamilton |
@@ -87,11 +86,12 @@ gated until the licence clears (queue state: engine
 | sarnia | yellow-ogl | OGL – City of Sarnia (item licenseInfo of the renamed service) | re-tiered in the toml 2026-08-20 with the URL fix (service renamed `Addresses_Open_Data` → `Addresses_Open_Data_AGOL`, item `2ed254db85d6442a8b040213c0c6b097`); self-declared OGL-Canada 2.0 clone; already in the email |
 | windsor | yellow-ogl | OGL – The Corporation of the City of Windsor v1.0 | **upgraded from red 2026-08-20**: the "Terms of Use" PDF at opendata.citywindsor.ca is a full OGL; the city's portal binds its Address datasets to it. Caveat: we track mappmycity.ca rather than the portal copy — consider re-pointing. Add to email |
 
-## Near-green desk work (1)
+## Near-green desk work (2)
 
 | dataset | tier | licence | comment |
 |---|---|---|---|
 | peel-region | yellow-review | Open Data Licence for the Regional Municipality of Peel v1.0 | full text confirmed 2026-08-20 at data.peelregion.ca/pages/license (hub page item `a03e28df41e5423abea4beb34d975961`): OGL-like grant incl. commercial, attribution *optional*. Based on the UK OGL. Diff it against UK OGL and add to the email |
+| durham | yellow-review | Region of Durham Open Data Licence v1.0 | **moved out of green 2026-10-11.** The toml named the City of Oshawa OGL, but the Region's own item for the tracked service (`8dcfee4f…`, owner GIS_DurhamRegion) cites the Region of Durham licence. Not OGL-Canada-based (optional attribution, credit removable on request, "not harmful to others", no venue clause) — needs the LWG. Diff: ontario-osm-data-sources `licences/durham/verdict.md` |
 
 ## Orange — CC BY waiver needed (1)
 
@@ -155,9 +155,9 @@ sault-ste-marie (SooMaps click-through: non-commercial only, expressly
 covering consumed mapservices — borderline for a free tracker; operator may
 overrule).
 
-## Counts (2026-08-20, post-onboarding-wave; oakville to green 2026-10-09)
+## Counts (2026-08-20, post-onboarding-wave; oakville to green 2026-10-09; durham out of green 2026-10-11)
 
-green 18 · OGL-family in/joining the LWG email 12 · yellow-review 6
-(peel-region, bruce, norfolk, halton-hills, simcoe, prince-edward-county) ·
+green 17 · OGL-family in/joining the LWG email 12 · yellow-review 7
+(peel-region, durham, bruce, norfolk, halton-hills, simcoe, prince-edward-county) ·
 CC-BY waiver 1 · restrictive 6 (4 gated off the site: sdg, renfrew,
 peterborough-county, cobourg) · unknown 9 — of **53 tracked datasets**.

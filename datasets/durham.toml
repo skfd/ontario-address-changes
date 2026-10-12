@@ -4,10 +4,12 @@ data_url = "https://maps.durham.ca/arcgis/rest/services/Open_Data/Durham_OpenDat
 access = "arcgis"
 format = "geojson"
 # Catalogued under "Oshawa" but the layer is region-wide (Ajax, Whitby, Pickering...).
-# Licence below is the City of Oshawa OGL the catalogue verified; the region-wide
-# licence is unconfirmed — fine for change-tracking, recheck before any redistribution.
-license_name = "Open Government Licence – City of Oshawa"
-osm_compatible = "green-lwg"
+# The Region's own item for this service (8dcfee4f…, owner GIS_DurhamRegion) cites the
+# Region of Durham Open Data Licence v1.0, not the Oshawa OGL (checked 2026-10-11). It is
+# not OGL-Canada-based (optional attribution, "not harmful to others"), so it needs the LWG:
+# ontario-osm-data-sources/licences/durham/verdict.md.
+license_name = "Region of Durham Open Data Licence v1.0"
+osm_compatible = "yellow-review"
 
 # Canada Post postal codes backfilled in area batches (957 null->code rows on
 # 2026-08-18 alone, L1M/L1E/L1X blocks); enrichment rollout by the region, not
