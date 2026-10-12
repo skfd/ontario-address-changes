@@ -1382,7 +1382,11 @@ fields = ["POSTAL_CODE"]
 scope = "121 rows changed the same field set [POSTAL_CODE] (50% of the day's 242 modifications)"
 detail = "top: 'K7M 0E5' -> 'K7M 0C1' (121)"
 detected = "2026-09-25"
-status = "open"
+status = "reviewed"
+verdict = "business"
+reviewed = "2026-10-12"
+rule = ""
+note = "Owner delegated the call 2026-10-12 ('your call please'); Claude: business. One site, two neighbouring buildings: 1610 Bath Rd and its 120 units K7M 0E5 -> 0C1, 1620 Bath Rd's 120 unit stubs got their unit numbers and took 0E5; same single-site shape as kingston 06-12/06-26 (business). Owner 2026-10-12: postal codes matter."
 
 [[flag]]
 slug = "kingston"
@@ -1391,7 +1395,11 @@ signature = "mass-modified"
 fields = ["POSTAL_CODE", "full", "unit"]
 scope = "120 rows changed the same field set [POSTAL_CODE, full, unit] (50% of the day's 242 modifications)"
 detected = "2026-09-25"
-status = "open"
+status = "reviewed"
+verdict = "business"
+reviewed = "2026-10-12"
+rule = ""
+note = "Owner delegated the call 2026-10-12 ('your call please'); Claude: business. One site, two neighbouring buildings: 1610 Bath Rd and its 120 units K7M 0E5 -> 0C1, 1620 Bath Rd's 120 unit stubs got their unit numbers and took 0E5; same single-site shape as kingston 06-12/06-26 (business). Owner 2026-10-12: postal codes matter."
 
 [[flag]]
 slug = "brampton"
@@ -1479,5 +1487,9 @@ signature = "mass-modified"
 fields = ["PARCELID", "STATUS"]
 scope = "389 rows changed the same field set [PARCELID, STATUS] (98% of the day's 398 modifications)"
 detected = "2026-10-12"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-10-12"
+rule = "one-time: the 2026-10-12 source swap from COB_ADDRESS_POINT to the licensed Open_Data/AddressVW (datasets/barrie.toml); measured on 2026-10-11 before the switch, recurs only if the source changes again"
+note = "Same swap as the reviewed mass-removed entry: 387 rows Pending->Current and 2 Current->Temporary, with PARCELIDs moved from parent parcels (e.g. 1046589, 1050069) to newer lot parcels. AddressVW already carried these values when probed against the store the day before the switch, so this is the two layers differing, not anything Barrie did on 2026-10-12. Vault schema for the same reason (-2,497 = the Pending/Temporary rows AddressVW omits)."
 
