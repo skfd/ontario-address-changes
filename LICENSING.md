@@ -13,7 +13,8 @@ item `licenseInfo`, DCAT feeds, hub terms pages, publisher websites; evidence
 URLs quoted in each TOML). Previous full review 2026-08-16; its method note
 stands (licence page where published, else ArcGIS service JSON →
 `serviceItemId` → portal item `licenseInfo`). Detail lives in the engine's
-`future-work/multi-city/license-contacts-todo.md` and the draft LWG email:
+`future-work/multi-city/license-contacts-todo.md` and the LWG email (sent,
+date not recorded; no reply as of 2026-10-11), drafted at
 <https://gist.github.com/skfd/043eded6a26b279b7cf75aa3927b14da>.
 
 **Publishing gate (new 2026-08-20):** datasets whose published terms forbid
@@ -48,7 +49,7 @@ peterborough-county (gated); unclear-by-silence for the unknowns.
 | kingston | green-lwg | Open Data Licence - City of Kingston |
 | lambton | green-ogl | Open Government Licence - County of Lambton |
 | niagara-falls | green-lwg | Open Government Licence - Niagara Region |
-| oakville | green-lwg | Open Government Licence – Town of Oakville (**LWG-listed compatible 2026-09-14**, verified 2026-10-09 on the [OSMF variants page](https://osmfoundation.org/wiki/OGL_Canada_and_local_variants), which links the town's [licence PDF](https://www.oakville.ca/getmedia/3cb7902a-2220-433e-8aed-24f326b745b9/town-hall-oakville-open-data-licence.pdf); OSM wiki Contributors entry exists; Canada#Open_Data table still says "Not accepted" — stale. ALSO brownfield-active (TronnaLegacy MapRoulette 55881) — do not touch regardless) |
+| oakville | green-lwg | Open Government Licence – Town of Oakville (**LWG-listed compatible 2026-09-14**, verified 2026-10-09 on the [OSMF variants page](https://osmfoundation.org/wiki/OGL_Canada_and_local_variants), which links the town's [licence PDF](https://www.oakville.ca/getmedia/3cb7902a-2220-433e-8aed-24f326b745b9/town-hall-oakville-open-data-licence.pdf); OSM wiki Contributors entry exists, added by TronnaLegacy 2026-08-31 via the OSMF self-service procedure — which message prompted the LWG listing is not known; Canada#Open_Data table still says "Not accepted" — stale. ALSO brownfield-active (TronnaLegacy MapRoulette 55881) — do not touch regardless) |
 | ottawa | green-lwg | Open Government Licence – City of Ottawa 2.0 |
 | quinte-west | green-lwg | City of Quinte West Open Data Licence |
 | thunder-bay | green-lwg | City of Thunder Bay Open Data Licence |
@@ -60,10 +61,17 @@ peterborough-county (gated); unclear-by-silence for the unknowns.
 
 Five of the six from 2026-08-16 (oakville went green 2026-10-09: LWG-listed
 2026-09-14) plus **five found 2026-08-20** (frontenac,
-leeds-grenville, lennox-addington, milton, windsor). Waiting on: adding the
-new five to the drafted email, human read, send, reply. The
-**2026-08-16 user decision** stands: scaffolding ahead of the LWG reply is
-fine; any OSM import stays gated on the reply (queue state: engine
+leeds-grenville, lennox-addington, milton, windsor). The email covering the
+six from 2026-08-16 was sent (date not recorded; no reply as of 2026-10-11).
+Next, for these and every "add to email" row in this file: the OSMF
+self-service route — diff against the Ottawa Open Data Licence 2.0; if the
+only differences are locality name, legal venue, PII or "records"
+definitions, add a Contributors entry and email
+legal-questions@osmfoundation.org; follow up with legal-questions@ for any
+that are not a pure variant (diffs in progress in
+`ontario-osm-data-sources/licences/`). The **2026-08-16 user decision**
+stands: scaffolding ahead of licence clearance is fine; any OSM import stays
+gated until the licence clears (queue state: engine
 `future-work/multi-city/onboarding-queue.md`).
 
 | dataset | tier | licence | comment |

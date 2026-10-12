@@ -412,10 +412,12 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
 - [ ] NEW follow-ups out of the review: ~~decide the sdg / renfrew /
   peterborough-county publishing question~~ (decided + implemented 2026-08-20 —
   gated, see above); optionally send permission asks to those three counties so the
-  gates can lift; add the five newly-found OGL variants (frontenac, leeds-grenville,
+  gates can lift; ~~add the five newly-found OGL variants (frontenac, leeds-grenville,
   lennox-addington, milton, windsor) to the drafted LWG variant-review email
-  (gist in LICENSING.md) and send it — that email is the one OGL follow-up
-  actually waiting on a human; optionally add the burlington/london terms-URL
+  (gist in LICENSING.md) and send it~~ (2026-10-11: the email went out covering
+  the original six — date not recorded, no reply yet; these five and the rest
+  are being evaluated for the OSMF self-service route, see LICENSING.md Yellow);
+  optionally add the burlington/london terms-URL
   pass-through to their report pages; optionally re-point milton and windsor at
   the URLs their open licences literally cover.
 
