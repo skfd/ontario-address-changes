@@ -12,6 +12,17 @@ provider = "County of Dufferin"
 # Re-pointing means a new identity mapping and a fresh snapshot history, so
 # it is a tracker decision, not a city-config workaround. The dufferin
 # checkout is PARKED until this is resolved (engine onboarding-queue.md).
+# 2026-10-12, re-evaluated with the licence diff (ontario-osm-data-sources
+# licences/dufferin/verdict.md): NOT re-pointed. The licence argument runs the
+# other way here - THIS layer's item (0a7cdf8b0e74434c82eced47538bf4f1) links
+# the licence PDF directly, while Address_Points (item 2fca5d07a8bb432b8addb7d2131e9996)
+# has an empty licenseInfo and is covered only by the open-data page's portal-wide
+# notice. So what is left is the data-quality re-point, still a user decision, and
+# the address layer has faults of its own (pulled 2026-10-11, 28,305 rows): 2,624
+# (9.3%) have no CIVIC_NO; FULLADDY != CIVIC_NO + STREETNAME on ~3,800, some
+# holding editor notes ("2026 APRIL 10 ADDED FROM ORANGEVILLE"); UNIT is set on
+# 83 rows, many of them legal descriptions or street names; no stable id, so a
+# synthesized key (5 collisions on number+street+unit+geometry).
 data_url = "https://services5.arcgis.com/C0BEdgagVaXzcw0W/arcgis/rest/services/Dufferin_County_Entrances/FeatureServer/0"
 access = "arcgis"
 format = "geojson"

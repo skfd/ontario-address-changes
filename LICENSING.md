@@ -38,11 +38,11 @@ peterborough-county (gated); unclear-by-silence for the unknowns.
 
 | dataset | tier | licence |
 |---|---|---|
-| barrie | green-self | Open Government Licence - Barrie (**self-listed on Contributors 2026-10-12**; + MFIPPA exemption (as Oakville, Niagara Region, Toronto); NB the tracked layer is not the licensed one — re-point to `Open_Data/AddressVW`) |
+| barrie | green-self | Open Government Licence - Barrie (**self-listed on Contributors 2026-10-12**; + MFIPPA exemption (as Oakville, Niagara Region, Toronto); **re-pointed 2026-10-12** to the licensed `Open_Data/AddressVW` (item `4902c7fd…`); the old COB_ADDRESS_POINT had no licence statement. Same ADDRESSID key; AddressVW carries far fewer Pending addresses (680 vs 3,153)) |
 | brant | green-cc0 | CC0 (item licenseInfo, re-tiered 2026-08-16; ODbL-compatible outright, no LWG needed; optional courtesy confirm with county) |
 | cambridge | green-lwg | Open Government Licence - City of Cambridge |
 | cornwall | green-lwg | Open Government Licence - City of Cornwall |
-| dufferin | green-self | Open Government Licence – The County of Dufferin (**self-listed on Contributors 2026-10-12**; four OSMF categories only) |
+| dufferin | green-self | Open Government Licence – The County of Dufferin (**self-listed on Contributors 2026-10-12**; four OSMF categories only). The tracked Entrances layer is the **item-licensed** one; the better `Address_Points` layer is covered only by the portal-wide notice, so the 2026-10-12 licence pass did not re-point it — the data-quality re-point stays a user decision (see toml)) |
 | greater-sudbury | green-self | Open Data Licence - City of Greater Sudbury (**self-listed on Contributors 2026-10-12**; Quinte West's approved text (open-ended exemption, PHI, by-laws, "Use")) |
 | guelph | green-lwg | Open Government Licence - City of Guelph |
 | haldimand | green-self | Open Government Licence – Haldimand County (**self-listed on Contributors 2026-10-12**; Toronto's approved text word for word) |
@@ -56,7 +56,7 @@ peterborough-county (gated); unclear-by-silence for the unknowns.
 | thunder-bay | green-lwg | City of Thunder Bay Open Data Licence |
 | toronto | green-lwg | Open Government Licence – Toronto |
 | waterloo | green-lwg | Open Government Licence – City of Waterloo |
-| windsor | green-self | Open Government Licence – The Corporation of the City of Windsor (**self-listed on Contributors 2026-10-12**; + MFIPPA exemption, "official marks" (Niagara Region); NB re-point to `OpenDataServices/PropertyParcels`) |
+| windsor | green-self | Open Government Licence – The Corporation of the City of Windsor (**self-listed on Contributors 2026-10-12**; + MFIPPA exemption, "official marks" (Niagara Region); **re-pointed 2026-10-12** to the licensed Address Polygon layer `OpenDataServices/PropertyParcels/MapServer/1` (item `6793ba07…`) — the polygons keep all synthesized keys, the Address Point layer `/0` would have re-keyed 117k) |
 | york | green-lwg | York Region Open Data Licence |
 
 ## Yellow — OGL-family variants for the LWG variant-review email (8)
@@ -78,12 +78,12 @@ gated until the licence clears (queue state: engine
 
 | dataset | tier | licence | comment |
 |---|---|---|---|
-| brantford | yellow-ogl | OGL – Brantford v1.0 | clone; adds PHIPA to exemptions; venue drops Federal Court |
+| brantford | yellow-ogl | OGL – Brantford v1.0 | clone; adds PHIPA to exemptions; venue drops Federal Court. The tracked `OP_Site_Addresses2` is the item-licensed layer ("See Licence"); the parked better layer `SiteAddress_pub` has no licenseInfo, so 2026-10-12 did not re-point it. The 2026-10-11 diff found added terms, so it is not self-service compatible (`licences/brantford/verdict.md`) |
 | frontenac | yellow-ogl | OGL – County of Frontenac v1.0 | **found 2026-08-20** (was unknown): PDF linked from the Frontenac GIS hub, based on OGL-Ontario 1.0; oddity: clause 5 says don't "rely on it for navigation, decision making or advising" — add to email |
 | kitchener | yellow-ogl | OGL – City of Kitchener v1.0 | attribution *voluntary*; city gave explicit OSM permission (wiki: Waterloo_region/Kitchener_authorization) — effectively cleared |
-| leeds-grenville | yellow-ogl | OGL – United Counties of Leeds and Grenville v1.0 | **found 2026-08-20** (was "attribution line only"): full OGL-Canada-style text at geohub-uclg hub terms page; DCAT binds the address dataset to it — add to email |
+| leeds-grenville | yellow-ogl | OGL – United Counties of Leeds and Grenville v1.0 | **found 2026-08-20** (was "attribution line only"): full OGL-Canada-style text at geohub-uclg hub terms page; DCAT binds the address dataset to it — add to email. **Re-pointed 2026-10-12** to the licensed `LG_CivicAddress_OpenData` (item `3587c701…`); the old CivicAddress item had an empty licenseInfo. Identical data, so no history change |
 | lennox-addington | yellow-ogl | OGL – County of Lennox and Addington v2.0 | **found 2026-08-20** (was unknown): item licenseInfo links the hub terms page; commercial OK, attribution line specified — add to email; the "ask gisservices@ to confirm in writing" step is now unnecessary |
-| milton | yellow-ogl | OGL – Milton | **found 2026-08-20** (was unknown): Discover Milton hub "Disclaimer and Terms of Use"; caveat — the OGL covers the open-data page whose Address Points item points at `Datasets/Address_Pts`, while we track `WebMaps/MGIS/MapServer/63` (same host/publisher); consider re-pointing — add to email |
+| milton | yellow-ogl | OGL – Milton | **found 2026-08-20** (was unknown): Discover Milton hub "Disclaimer and Terms of Use"; caveat — the OGL covers the open-data page whose Address Points item points at `Datasets/Address_Pts`, while we track `WebMaps/MGIS/MapServer/63` (same host/publisher); consider re-pointing — add to email. **Re-point deferred 2026-10-12**: `Address_Pts` failed every query on 2026-10-11 (HTTP 500), has no STREET_NAME/FULL_ADDRESS (street would need composing from parts normalize cannot join) and no STATUS/WARD. Reasons in the toml |
 | lambton | yellow-ogl | OGL 2.0 – County of Lambton | **moved out of green 2026-10-12**: diff vs Ottawa 2.0 found an added "sole and exclusive rights" sentence and a dropped Versioning clause (as Sarnia) — in the 2026-10-12 LWG follow-up email |
 | sarnia | yellow-ogl | OGL – City of Sarnia (item licenseInfo of the renamed service) | re-tiered in the toml 2026-08-20 with the URL fix (service renamed `Addresses_Open_Data` → `Addresses_Open_Data_AGOL`, item `2ed254db85d6442a8b040213c0c6b097`); self-declared OGL-Canada 2.0 clone; already in the email |
 
