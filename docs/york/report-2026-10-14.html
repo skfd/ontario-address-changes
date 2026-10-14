@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Regional Municipality of York Address Changes — Wednesday, Oct 14, 2026</title>
+  <style>
+    :root {
+      --bg: #fafafa; --surface: #ffffff; --surface2: #f5f5f5; --surface3: #ebebeb;
+      --border: #e0e0e0; --border-strong: #d1d1d1; --text: #242424;
+      --text-secondary: #424242; --text-dim: #616161; --accent: #0078d4;
+      --accent-hover: #106ebe; --accent-bg: #eff6fc; --green: #107c10;
+      --green-bg: #f1faf1; --green-tint: #9fd89f; --red: #c50f1f; --red-bg: #fdf3f4;
+      --red-tint: #eeacb2; --yellow: #eaa300; --yellow-bg: #fefbf4; --yellow-tint: #f9e2ae;
+      --purple: #881798; --purple-bg: #f9f3fb; --teal: #038387; --teal-bg: #f0fafa;
+      --shadow-4: 0 2px 4px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --shadow-8: 0 4px 8px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --card-bg: #ffffff; --card-hover: #f5f5f5; color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1f1f1f; --surface: #292929; --surface2: #333333; --surface3: #3d3d3d;
+        --border: #525252; --border-strong: #666666; --text: #ffffff;
+        --text-secondary: #d6d6d6; --text-dim: #adadad; --accent: #2899f5;
+        --accent-hover: #3aa0f3; --accent-bg: #002848; --green: #54b054;
+        --green-bg: #052505; --green-tint: #107c10; --red: #dc626d; --red-bg: #3b0509;
+        --red-tint: #c50f1f; --yellow: #f2c661; --yellow-bg: #463100; --yellow-tint: #eaa300;
+        --purple: #d29ddb; --purple-bg: #3a1040; --teal: #58c0c4; --teal-bg: #013638;
+        --shadow-4: 0 2px 4px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --shadow-8: 0 4px 8px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --card-bg: #333333; --card-hover: #3d3d3d; color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI Variable','Segoe UI',system-ui,-apple-system,sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.5; padding: 2rem;
+      max-width: 1100px; margin: 0 auto; font-size: 14px; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; color: var(--accent-hover); }
+    .back-link { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 12px;
+      color: var(--text-dim); margin-bottom: 1.5rem; transition: color 0.1s; }
+    .back-link:hover { color: var(--accent); text-decoration: none; }
+    h1 { font-size: 24px; font-weight: 600; margin-bottom: 4px; }
+    .subtitle { color: var(--text-secondary); font-size: 14px; margin-bottom: 12px; }
+    .explainer { color: var(--text-secondary); font-size: 13px; line-height: 1.5;
+      margin-bottom: 24px; padding: 12px 16px; background: var(--surface);
+      border-radius: 8px; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px; margin-bottom: 24px; }
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px;
+      padding: 16px; box-shadow: var(--shadow-4); transition: box-shadow 0.1s; }
+    .card:hover { box-shadow: var(--shadow-8); }
+    .card .label { font-size: 12px; color: var(--text-dim); font-weight: 400; }
+    .card .value { font-size: 28px; font-weight: 600; margin-top: 4px; }
+    .card .value.green { color: var(--green); } .card .value.red { color: var(--red); }
+    .card .value.yellow { color: var(--yellow); } .card .value.accent { color: var(--accent); }
+    .card .value.purple { color: var(--purple); }
+    .card .value.teal { color: var(--teal); }
+    .sparkline { display: block; margin-top: 6px; overflow: visible; opacity: 0.9; }
+    .sparkline-label { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+    .section { margin-bottom: 24px; }
+    .section h2 { font-size: 16px; font-weight: 600; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px; }
+    .badge { font-size: 12px; padding: 2px 8px; border-radius: 999px; font-weight: 600; }
+    .badge-green { background: var(--green-bg); color: var(--green); }
+    .badge-red { background: var(--red-bg); color: var(--red); }
+    .badge-yellow { background: var(--yellow-bg); color: var(--yellow); }
+    .badge-accent { background: var(--accent-bg); color: var(--accent); }
+    .badge-purple { background: var(--purple-bg); color: var(--purple); }
+    .badge-teal { background: var(--teal-bg); color: var(--teal); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface);
+      border-radius: 8px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    thead { background: var(--surface2); }
+    th { text-align: left; padding: 8px 12px; font-weight: 600; color: var(--text-dim);
+      font-size: 12px; cursor: pointer; user-select: none; border-bottom: 1px solid var(--border); }
+    th:hover { color: var(--accent); }
+    td { padding: 8px 12px; border-top: 1px solid var(--border); }
+    tr:hover td { background: var(--surface2); }
+    .old-val { color: var(--red); text-decoration: line-through; }
+    .new-val { color: var(--green); }
+    .arrow-val { color: var(--text-dim); text-align: center; white-space: nowrap; }
+    .map-link { display: inline-flex; align-items: center; margin-left: 0.4em;
+      color: var(--accent); vertical-align: middle; white-space: nowrap; font-size: 12px; }
+    .map-link:hover { color: var(--accent-hover); }
+    .map-link svg { width: 14px; height: 14px; }
+    .change-field { color: var(--yellow); font-weight: 600; }
+    .bar-chart { margin-top: 8px; }
+    .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 12px; }
+    .bar-label { width: 180px; text-align: right; color: var(--text-secondary); flex-shrink: 0;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .bar-track { flex: 1; height: 8px; background: var(--surface2); border-radius: 4px;
+      overflow: hidden; position: relative; }
+    .bar-fill { height: 100%; border-radius: 4px; transition: width 0.15s ease; }
+    .bar-fill.green { background: var(--green); } .bar-fill.red { background: var(--red); }
+    .bar-count { width: 40px; font-size: 12px; color: var(--text-dim); }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+    .empty { color: var(--text-dim); font-style: italic; padding: 16px; }
+    .truncated { color: var(--text-dim); font-size: 12px; margin-top: 8px; }
+    .collapsible-toggle { background: transparent; border: 1px solid var(--border);
+      color: var(--accent); padding: 5px 12px; border-radius: 4px; cursor: pointer;
+      font-size: 12px; font-family: inherit; margin-bottom: 12px; transition: background 0.1s; }
+    .collapsible-toggle:hover { background: var(--surface2); }
+    details.rename-group { background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; margin-bottom: 8px; box-shadow: var(--shadow-4); }
+    details.rename-group summary { padding: 10px 14px; cursor: pointer; font-size: 13px; }
+    details.rename-group[open] summary { border-bottom: 1px solid var(--border); }
+    details.rename-group table { border: none; box-shadow: none; border-radius: 0; }
+    details.rename-group .truncated { padding: 0 14px 10px; margin-top: 0; }
+    .rename-count { color: var(--text-dim); font-size: 12px; margin-left: 6px; }
+    .no-changes-banner { background: var(--green-bg); border: 1px solid var(--green-tint);
+      color: var(--green); padding: 16px; border-radius: 8px; margin-bottom: 24px;
+      text-align: center; font-weight: 600; font-size: 14px; }
+    .baseline-banner { background: var(--accent-bg); border: 1px solid var(--accent);
+      color: var(--accent); padding: 16px; border-radius: 8px; margin-bottom: 24px; font-size: 13px; }
+    .generated-at { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-dim); }
+    .history { font-size: 12.5px; color: var(--text-secondary); white-space: nowrap; }
+    .history .a { color: var(--green); font-weight: 500; }
+    .history .r { color: var(--red); font-weight: 500; }
+    .history .dot { color: var(--text-dim); margin: 0 4px; }
+    .history-none { color: var(--text-dim); font-style: italic; font-size: 12.5px; }
+    .info-wrap { position: relative; display: inline-flex; vertical-align: middle; }
+    .info-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+      height: 18px; padding: 0 8px 0 7px; border-radius: 999px; border: none;
+      color: #fff; background: var(--accent); cursor: help; font-size: 11px; font-weight: 600;
+      font-style: normal; font-family: inherit; line-height: 1; white-space: nowrap; }
+    .info-btn .glyph { font-style: italic; font-weight: 700;
+      font-family: Georgia, 'Times New Roman', serif; }
+    .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn,
+    .info-wrap:focus .info-btn { background: var(--accent-hover); }
+    .info-pop { display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 20;
+      width: 320px; max-width: 80vw; padding: 12px 14px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-8);
+      font-size: 12.5px; font-weight: 400; color: var(--text-secondary); line-height: 1.5; }
+    .info-wrap:hover .info-pop, .info-wrap:focus-within .info-pop,
+    .info-wrap:focus .info-pop { display: block; }
+    .info-pop strong { display: block; color: var(--text); font-size: 12px; margin-bottom: 4px; }
+    .info-pop ul { list-style: none; margin: 0 0 10px; padding: 0; }
+    .info-pop li { padding: 1px 0 1px 14px; position: relative; }
+    .info-pop li::before { content: "·"; position: absolute; left: 4px; color: var(--text-dim); }
+    .info-pop .note { color: var(--text-dim); font-size: 11.5px; margin: 0 0 10px; }
+    .info-pop .muted { color: var(--text-dim); font-style: italic; }
+  </style>
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+
+  <a class="back-link" href="index.html">← Back to Regional Municipality of York reports</a>
+
+  <h1>Regional Municipality of York — Address Changes</h1>
+  <p class="subtitle">
+    Changes between  and Wednesday, Oct 14, 2026
+    · 431,860 total addresses
+  </p>
+
+  
+
+  <div class="cards">
+    <div class="card"><div class="label">Total Addresses</div>
+      <div class="value accent">431,860</div></div>
+    <div class="card"><div class="label">New Addresses</div>
+      <div class="value green">+71</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#107c10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,17.8 19.7,16.9 37.3,17.8 55.0,17.3 72.7,16.9 90.3,17.8 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#107c10"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Retired Addresses</div>
+      <div class="value red">−45</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#c50f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,16.6 37.3,18.0 55.0,18.0 72.7,17.3 90.3,17.3 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#c50f1f"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Updated Addresses <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (FULL_STREET_NAME)</li><li>Unit (SUITE_NUMBER)</li><li>Full address (FULL_CIVIC_ADDR)</li><li>Coordinates (latitude, longitude)</li><li>ADDRS_PNT_TYPE</li><li>ADD_NUM_SUFFIX</li><li>COUNTRY</li><li>LIFESTATUS</li><li>MAIL_ADDRESS_NUMBER</li><li>MAIL_ADDRESS_NUMBER_SUFFIX</li><li>MAIL_COMMUNITY_NAME</li><li>MAIL_FULL_ADDRESS_TEXT</li><li>MAIL_POSTAL_CODE</li><li>MAIL_PROVINCE</li><li>MAIL_STATUS</li><li>MAIL_STREET_NAME</li><li>MAIL_STREET_TYPE</li><li>MAIL_SUITE_NUMBER</li><li>MAIL_UNIT_DESIGNATOR</li><li>MUNICIPALITY</li><li>PNT_GIS_ID</li><li>PREFIX_DIRECTION</li><li>PREFIX_TYPE</li><li>STREET_NAME</li><li>STREET_NAME_ID</li><li>STREET_TYPE</li><li>SUFFIX_DIRECTION</li><li>UNIT_DESIGNATOR</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>PARID</li><li>PRO_DATE</li></ul>
+      
+    </span>
+  </span></div>
+      <div class="value yellow">2</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,10.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,10.0 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Renumbered</div>
+      <div class="value accent">16</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#0078d4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,16.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#0078d4"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Street Renames</div>
+      <div class="value purple">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#9141ac" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#9141ac"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    <div class="card"><div class="label">Status Changes</div>
+      <div class="value teal">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#038387" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#038387"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    <div class="card"><div class="label">Boundary Changes</div>
+      <div class="value teal">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#038387" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#038387"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    <div class="card"><div class="label">Location Adjustments</div>
+      <div class="value" style="color: var(--text-dim)">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#808080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,2.0 37.3,18.0 55.0,7.3 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#808080"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+  </div>
+
+  
+  <div class="section">
+    <h2>Change Breakdown</h2>
+    <div class="stats-grid">
+      
+      <div class="card"><div class="label">Top Streets by New Addresses</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">Anna Russell Way</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">36</span></div>
+        <div class="bar-row"><span class="bar-label">John Canning Way</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:97.0%"></div></div>
+          <span class="bar-count">35</span></div>
+      </div></div>
+      
+      <div class="card"><div class="label">Top Streets by Retired Addresses</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">Anna Russell Way</span>
+          <div class="bar-track"><div class="bar-fill red" style="width:100.0%"></div></div>
+          <span class="bar-count">45</span></div>
+      </div></div>
+      
+      <div class="card"><div class="label">Most Frequently Updated Fields</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">Full Address</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">18</span></div>
+        <div class="bar-row"><span class="bar-label">Address Number</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:89.0%"></div></div>
+          <span class="bar-count">16</span></div>
+        <div class="bar-row"><span class="bar-label">STREET_NAME</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:11.0%"></div></div>
+          <span class="bar-count">2</span></div>
+        <div class="bar-row"><span class="bar-label">STREET_NAME_ID</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:11.0%"></div></div>
+          <span class="bar-count">2</span></div>
+        <div class="bar-row"><span class="bar-label">Street</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:11.0%"></div></div>
+          <span class="bar-count">2</span></div>
+      </div></div>
+    </div>
+  </div>
+  
+
+  <div class="section">
+    <h2>New Addresses <span class="badge badge-green">71</span></h2>
+    
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-added',0)">Address</th><th onclick="sortTable('t-added',1)">Street</th>
+        <th onclick="sortTable('t-added',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-added">
+        
+        <tr><td>95 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86304&mlon=-79.31427#map=18/43.86304/-79.31427" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>97 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86309&mlon=-79.31428#map=18/43.86309/-79.31428" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>99 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86315&mlon=-79.31430#map=18/43.86315/-79.31430" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>101 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86320&mlon=-79.31431#map=18/43.86320/-79.31431" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>103 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86325&mlon=-79.31432#map=18/43.86325/-79.31432" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>105 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86335&mlon=-79.31434#map=18/43.86335/-79.31434" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>107 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86340&mlon=-79.31436#map=18/43.86340/-79.31436" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>109 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86346&mlon=-79.31437#map=18/43.86346/-79.31437" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>111 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86351&mlon=-79.31438#map=18/43.86351/-79.31438" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>113 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86356&mlon=-79.31440#map=18/43.86356/-79.31440" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>115 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86364&mlon=-79.31443#map=18/43.86364/-79.31443" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>117 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86370&mlon=-79.31443#map=18/43.86370/-79.31443" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>119 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86375&mlon=-79.31445#map=18/43.86375/-79.31445" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>130 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86414&mlon=-79.31438#map=18/43.86414/-79.31438" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>132 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86413&mlon=-79.31446#map=18/43.86413/-79.31446" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>134 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86411&mlon=-79.31453#map=18/43.86411/-79.31453" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>136 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86410&mlon=-79.31461#map=18/43.86410/-79.31461" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>137 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86381&mlon=-79.31447#map=18/43.86381/-79.31447" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>138 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86408&mlon=-79.31468#map=18/43.86408/-79.31468" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>139 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86379&mlon=-79.31461#map=18/43.86379/-79.31461" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>140 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86406&mlon=-79.31474#map=18/43.86406/-79.31474" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>142 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86404&mlon=-79.31482#map=18/43.86404/-79.31482" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>144 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86401&mlon=-79.31492#map=18/43.86401/-79.31492" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>146 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86399&mlon=-79.31499#map=18/43.86399/-79.31499" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>147 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86366&mlon=-79.31499#map=18/43.86366/-79.31499" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>148 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86397&mlon=-79.31506#map=18/43.86397/-79.31506" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>150 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86395&mlon=-79.31513#map=18/43.86395/-79.31513" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>152 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86394&mlon=-79.31520#map=18/43.86394/-79.31520" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>154 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86392&mlon=-79.31528#map=18/43.86392/-79.31528" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>157 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86361&mlon=-79.31535#map=18/43.86361/-79.31535" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>158 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86385&mlon=-79.31559#map=18/43.86385/-79.31559" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>160 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86384&mlon=-79.31565#map=18/43.86384/-79.31565" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>162 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86383&mlon=-79.31573#map=18/43.86383/-79.31573" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>164 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86381&mlon=-79.31580#map=18/43.86381/-79.31580" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>166 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86379&mlon=-79.31587#map=18/43.86379/-79.31587" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>168 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86377&mlon=-79.31595#map=18/43.86377/-79.31595" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3 John Canning Way</td><td>John Canning Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86279&mlon=-79.31436#map=18/43.86279/-79.31436" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>4 John Canning Way</td><td>John Canning Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86265&mlon=-79.31472#map=18/43.86265/-79.31472" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>5 John Canning Way</td><td>John Canning Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86283&mlon=-79.31437#map=18/43.86283/-79.31437" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6 John Canning Way</td><td>John Canning Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86270&mlon=-79.31474#map=18/43.86270/-79.31474" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>7 John Canning Way</td><td>John Canning Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86289&mlon=-79.31439#map=18/43.86289/-79.31439" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>8 John Canning Way</td><td>John Canning Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86275&mlon=-79.31475#map=18/43.86275/-79.31475" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>9 John Canning Way</td><td>John Canning Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86294&mlon=-79.31440#map=18/43.86294/-79.31440" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 John Canning Way</td><td>John Canning Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86281&mlon=-79.31477#map=18/43.86281/-79.31477" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>11 John Canning Way</td><td>John Canning Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86302&mlon=-79.31442#map=18/43.86302/-79.31442" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>12 John Canning Way</td><td>John Canning Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86286&mlon=-79.31478#map=18/43.86286/-79.31478" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>13 John Canning Way</td><td>John Canning Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86307&mlon=-79.31444#map=18/43.86307/-79.31444" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>14 John Canning Way</td><td>John Canning Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86291&mlon=-79.31480#map=18/43.86291/-79.31480" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>15 John Canning Way</td><td>John Canning Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86313&mlon=-79.31445#map=18/43.86313/-79.31445" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>16 John Canning Way</td><td>John Canning Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86297&mlon=-79.31480#map=18/43.86297/-79.31480" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>17 John Canning Way</td><td>John Canning Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86318&mlon=-79.31446#map=18/43.86318/-79.31446" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>18 John Canning Way</td><td>John Canning Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86305&mlon=-79.31482#map=18/43.86305/-79.31482" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>19 John Canning Way</td><td>John Canning Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86324&mlon=-79.31448#map=18/43.86324/-79.31448" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>20 John Canning Way</td><td>John Canning Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86310&mlon=-79.31483#map=18/43.86310/-79.31483" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>21 John Canning Way</td><td>John Canning Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86333&mlon=-79.31450#map=18/43.86333/-79.31450" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>22 John Canning Way</td><td>John Canning Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86316&mlon=-79.31484#map=18/43.86316/-79.31484" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>23 John Canning Way</td><td>John Canning Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86339&mlon=-79.31451#map=18/43.86339/-79.31451" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>24 John Canning Way</td><td>John Canning Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86321&mlon=-79.31486#map=18/43.86321/-79.31486" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>25 John Canning Way</td><td>John Canning Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86344&mlon=-79.31453#map=18/43.86344/-79.31453" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>26 John Canning Way</td><td>John Canning Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86326&mlon=-79.31488#map=18/43.86326/-79.31488" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>27 John Canning Way</td><td>John Canning Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86349&mlon=-79.31454#map=18/43.86349/-79.31454" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>28 John Canning Way</td><td>John Canning Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86331&mlon=-79.31488#map=18/43.86331/-79.31488" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>29 John Canning Way</td><td>John Canning Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86354&mlon=-79.31456#map=18/43.86354/-79.31456" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>30 John Canning Way</td><td>John Canning Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86340&mlon=-79.31492#map=18/43.86340/-79.31492" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>31 John Canning Way</td><td>John Canning Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86363&mlon=-79.31457#map=18/43.86363/-79.31457" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>32 John Canning Way</td><td>John Canning Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86345&mlon=-79.31493#map=18/43.86345/-79.31493" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>33 John Canning Way</td><td>John Canning Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86368&mlon=-79.31458#map=18/43.86368/-79.31458" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>34 John Canning Way</td><td>John Canning Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86350&mlon=-79.31494#map=18/43.86350/-79.31494" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>35 John Canning Way</td><td>John Canning Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86373&mlon=-79.31460#map=18/43.86373/-79.31460" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>36 John Canning Way</td><td>John Canning Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86356&mlon=-79.31495#map=18/43.86356/-79.31495" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>38 John Canning Way</td><td>John Canning Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86361&mlon=-79.31496#map=18/43.86361/-79.31496" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Retired Addresses <span class="badge badge-red">45</span></h2>
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-removed',0)">Address</th><th onclick="sortTable('t-removed',1)">Street</th>
+        <th onclick="sortTable('t-removed',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-removed">
+        
+        <tr><td>1 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86312&mlon=-79.31442#map=18/43.86312/-79.31442" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>39 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86353&mlon=-79.31566#map=18/43.86353/-79.31566" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>41 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86358&mlon=-79.31567#map=18/43.86358/-79.31567" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>43 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86370&mlon=-79.31570#map=18/43.86370/-79.31570" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>45 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86378&mlon=-79.31573#map=18/43.86378/-79.31573" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>46 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86377&mlon=-79.31547#map=18/43.86377/-79.31547" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>47 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86385&mlon=-79.31550#map=18/43.86385/-79.31550" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>48 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86386&mlon=-79.31538#map=18/43.86386/-79.31538" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>49 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86379&mlon=-79.31535#map=18/43.86379/-79.31535" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>50 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86388&mlon=-79.31527#map=18/43.86388/-79.31527" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>52 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86391&mlon=-79.31517#map=18/43.86391/-79.31517" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>53 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86383&mlon=-79.31515#map=18/43.86383/-79.31515" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>54 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86392&mlon=-79.31505#map=18/43.86392/-79.31505" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>55 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86385&mlon=-79.31501#map=18/43.86385/-79.31501" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>56 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86394&mlon=-79.31497#map=18/43.86394/-79.31497" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>57 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86388&mlon=-79.31494#map=18/43.86388/-79.31494" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>58 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86397&mlon=-79.31486#map=18/43.86397/-79.31486" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>59 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86391&mlon=-79.31482#map=18/43.86391/-79.31482" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>60 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86399&mlon=-79.31477#map=18/43.86399/-79.31477" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>62 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86403&mlon=-79.31464#map=18/43.86403/-79.31464" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>63 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86396&mlon=-79.31460#map=18/43.86396/-79.31460" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>64 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86406&mlon=-79.31454#map=18/43.86406/-79.31454" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>65 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86400&mlon=-79.31451#map=18/43.86400/-79.31451" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>66 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86383&mlon=-79.31446#map=18/43.86383/-79.31446" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>67 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86381&mlon=-79.31456#map=18/43.86381/-79.31456" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>68 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86376&mlon=-79.31443#map=18/43.86376/-79.31443" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>69 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86372&mlon=-79.31454#map=18/43.86372/-79.31454" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>70 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86363&mlon=-79.31440#map=18/43.86363/-79.31440" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>71 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86361&mlon=-79.31452#map=18/43.86361/-79.31452" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>72 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86357&mlon=-79.31438#map=18/43.86357/-79.31438" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>73 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86354&mlon=-79.31449#map=18/43.86354/-79.31449" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>74 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86348&mlon=-79.31437#map=18/43.86348/-79.31437" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>76 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86341&mlon=-79.31434#map=18/43.86341/-79.31434" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>78 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86327&mlon=-79.31486#map=18/43.86327/-79.31486" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>79 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86320&mlon=-79.31483#map=18/43.86320/-79.31483" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>80 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86324&mlon=-79.31497#map=18/43.86324/-79.31497" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>81 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86318&mlon=-79.31495#map=18/43.86318/-79.31495" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>82 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86319&mlon=-79.31511#map=18/43.86319/-79.31511" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>83 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86313&mlon=-79.31508#map=18/43.86313/-79.31508" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>84 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86317&mlon=-79.31521#map=18/43.86317/-79.31521" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>85 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86311&mlon=-79.31519#map=18/43.86311/-79.31519" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>86 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86343&mlon=-79.31522#map=18/43.86343/-79.31522" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>88 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86352&mlon=-79.31514#map=18/43.86352/-79.31514" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>90 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86349&mlon=-79.31499#map=18/43.86349/-79.31499" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>92 Anna Russell Way</td><td>Anna Russell Way</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-10</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.86358&mlon=-79.31491#map=18/43.86358/-79.31491" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Updated Addresses <span class="badge badge-yellow">2</span>
+      <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (FULL_STREET_NAME)</li><li>Unit (SUITE_NUMBER)</li><li>Full address (FULL_CIVIC_ADDR)</li><li>Coordinates (latitude, longitude)</li><li>ADDRS_PNT_TYPE</li><li>ADD_NUM_SUFFIX</li><li>COUNTRY</li><li>LIFESTATUS</li><li>MAIL_ADDRESS_NUMBER</li><li>MAIL_ADDRESS_NUMBER_SUFFIX</li><li>MAIL_COMMUNITY_NAME</li><li>MAIL_FULL_ADDRESS_TEXT</li><li>MAIL_POSTAL_CODE</li><li>MAIL_PROVINCE</li><li>MAIL_STATUS</li><li>MAIL_STREET_NAME</li><li>MAIL_STREET_TYPE</li><li>MAIL_SUITE_NUMBER</li><li>MAIL_UNIT_DESIGNATOR</li><li>MUNICIPALITY</li><li>PNT_GIS_ID</li><li>PREFIX_DIRECTION</li><li>PREFIX_TYPE</li><li>STREET_NAME</li><li>STREET_NAME_ID</li><li>STREET_TYPE</li><li>SUFFIX_DIRECTION</li><li>UNIT_DESIGNATOR</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>PARID</li><li>PRO_DATE</li></ul>
+      
+    </span>
+  </span></h2>
+    
+    
+    <table>
+      <thead><tr><th>Address</th><th>What Changed</th><th>Before</th><th></th><th>After</th><th>Map</th></tr></thead>
+      <tbody>
+        
+  <tr><td rowspan="4">2 Harper Way</td>
+    <td class="change-field">Street</td>
+    <td class="old-val">Harris Way</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Harper Way</td>
+    <td rowspan="4"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.81606&mlon=-79.40002#map=18/43.81606/-79.40002" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">2 Harris Way</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">2 Harper Way</td>
+    </tr>
+  <tr>
+    <td class="change-field">STREET_NAME</td>
+    <td class="old-val">Harris</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Harper</td>
+    </tr>
+  <tr>
+    <td class="change-field">STREET_NAME_ID</td>
+    <td class="old-val">3877</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">3870</td>
+    </tr>
+  <tr><td rowspan="4">2 Harris Way</td>
+    <td class="change-field">Street</td>
+    <td class="old-val">Harper Way</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Harris Way</td>
+    <td rowspan="4"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.81629&mlon=-79.40006#map=18/43.81629/-79.40006" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">2 Harper Way</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">2 Harris Way</td>
+    </tr>
+  <tr>
+    <td class="change-field">STREET_NAME</td>
+    <td class="old-val">Harper</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Harris</td>
+    </tr>
+  <tr>
+    <td class="change-field">STREET_NAME_ID</td>
+    <td class="old-val">3870</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">3877</td>
+    </tr>
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Renumbered Addresses <span class="badge badge-accent">16</span></h2>
+    
+    
+    <table>
+      <thead><tr><th>Address</th><th>What Changed</th><th>Before</th><th></th><th>After</th><th>Map</th></tr></thead>
+      <tbody>
+        
+  <tr><td rowspan="2">1 Bethune Way</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">55</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.84392&mlon=-79.30392#map=18/43.84392/-79.30392" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">55 Bethune Way</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">1 Bethune Way</td>
+    </tr>
+  <tr><td rowspan="2">3 Bethune Way</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">53</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">3</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.84397&mlon=-79.30394#map=18/43.84397/-79.30394" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">53 Bethune Way</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">3 Bethune Way</td>
+    </tr>
+  <tr><td rowspan="2">5 Bethune Way</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">51</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">5</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.84401&mlon=-79.30395#map=18/43.84401/-79.30395" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">51 Bethune Way</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">5 Bethune Way</td>
+    </tr>
+  <tr><td rowspan="2">7 Bethune Way</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">49</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">7</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.84405&mlon=-79.30396#map=18/43.84405/-79.30396" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">49 Bethune Way</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">7 Bethune Way</td>
+    </tr>
+  <tr><td rowspan="2">9 Bethune Way</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">47</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">9</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.84409&mlon=-79.30397#map=18/43.84409/-79.30397" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">47 Bethune Way</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">9 Bethune Way</td>
+    </tr>
+  <tr><td rowspan="2">11 Bethune Way</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">45</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">11</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.84414&mlon=-79.30398#map=18/43.84414/-79.30398" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">45 Bethune Way</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">11 Bethune Way</td>
+    </tr>
+  <tr><td rowspan="2">13 Bethune Way</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">43</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">13</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.84418&mlon=-79.30399#map=18/43.84418/-79.30399" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">43 Bethune Way</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">13 Bethune Way</td>
+    </tr>
+  <tr><td rowspan="2">15 Bethune Way</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">41</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">15</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.84423&mlon=-79.30401#map=18/43.84423/-79.30401" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">41 Bethune Way</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">15 Bethune Way</td>
+    </tr>
+  <tr><td rowspan="2">41 Bethune Way</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">15</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">41</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.84435&mlon=-79.30345#map=18/43.84435/-79.30345" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">15 Bethune Way</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">41 Bethune Way</td>
+    </tr>
+  <tr><td rowspan="2">43 Bethune Way</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">13</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">43</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.84432&mlon=-79.30345#map=18/43.84432/-79.30345" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">13 Bethune Way</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">43 Bethune Way</td>
+    </tr>
+  <tr><td rowspan="2">45 Bethune Way</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">11</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">45</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.84427&mlon=-79.30344#map=18/43.84427/-79.30344" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">11 Bethune Way</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">45 Bethune Way</td>
+    </tr>
+  <tr><td rowspan="2">47 Bethune Way</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">9</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">47</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.84423&mlon=-79.30343#map=18/43.84423/-79.30343" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">9 Bethune Way</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">47 Bethune Way</td>
+    </tr>
+  <tr><td rowspan="2">49 Bethune Way</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">7</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">49</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.84419&mlon=-79.30341#map=18/43.84419/-79.30341" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">7 Bethune Way</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">49 Bethune Way</td>
+    </tr>
+  <tr><td rowspan="2">51 Bethune Way</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">5</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">51</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.84415&mlon=-79.30340#map=18/43.84415/-79.30340" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">5 Bethune Way</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">51 Bethune Way</td>
+    </tr>
+  <tr><td rowspan="2">53 Bethune Way</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">3</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">53</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.84410&mlon=-79.30338#map=18/43.84410/-79.30338" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">3 Bethune Way</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">53 Bethune Way</td>
+    </tr>
+  <tr><td rowspan="2">55 Bethune Way</td>
+    <td class="change-field">Address Number</td>
+    <td class="old-val">1</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">55</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.84405&mlon=-79.30337#map=18/43.84405/-79.30337" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">1 Bethune Way</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">55 Bethune Way</td>
+    </tr>
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Street Renames <span class="badge badge-purple">0</span></h2>
+    <p class="empty">No street renames.</p>
+  </div>
+
+  
+
+  
+  <div class="section">
+    <h2>Status Changes <span class="badge badge-teal">0</span></h2>
+    <p class="empty">No status changes.</p>
+  </div>
+  
+
+  
+  <div class="section">
+    <h2>Boundary Changes <span class="badge badge-teal">0</span></h2>
+    <p class="empty">No ward or municipality reassignments.</p>
+  </div>
+  
+
+  <div class="section">
+    <h2>Location Adjustments <span class="badge" style="background: var(--surface2); color: var(--text-dim)">0</span></h2>
+    
+    <p class="empty">No location adjustments.</p>
+  </div>
+
+  <div class="generated-at">Report generated Oct 14, 2026 at 01:15 PM · source licence: York Region Open Data Licence</div>
+
+  <script>
+    function sortTable(tbodyId, col) {
+      const tbody = document.getElementById(tbodyId);
+      if (!tbody) return;
+      const rows = Array.from(tbody.rows);
+      const dir = tbody.dataset.sortDir === 'asc' ? 'desc' : 'asc';
+      tbody.dataset.sortDir = dir;
+      rows.sort((a, b) => {
+        const av = a.cells[col]?.textContent.trim() || '';
+        const bv = b.cells[col]?.textContent.trim() || '';
+        const an = parseFloat(av), bn = parseFloat(bv);
+        if (!isNaN(an) && !isNaN(bn)) return dir === 'asc' ? an - bn : bn - an;
+        return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+      });
+      rows.forEach(r => tbody.appendChild(r));
+    }
+  </script>
+</body>
+
+</html>
