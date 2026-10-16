@@ -546,9 +546,10 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
     - simcoe — 8 days (09-02 → 10-07), 5 hard, 22 failed pulls, all `503 Service
       Unavailable` from `maps.simcoe.ca`. Still the pattern the 09-08 render fix was
       built around; no alternative layer (the NG911 one is smaller, §2).
-    - guelph — 7 days (07-24 → 10-15), 1 hard (09-10). Mid-pagination `500` on the
-      `OBJECTID > 4000/6000` page from `gismaps.guelph.ca`; the 10-15 noon run failed
-      all three attempts and the vault's 16:00 pull then succeeded.
+    - guelph — 2 days (09-10, 10-15), 6 failed pulls, 1 hard (09-10). Kept here rather
+      than with the one-offs because of the shape: mid-pagination `500` on the
+      `OBJECTID > 4000/6000` page from `gismaps.guelph.ca`, and on 10-15 all three noon
+      attempts failed the same way before the vault's 16:00 pull succeeded.
     - milton — 3 of 5 days 10-08 → 10-12 (2 hard), `Wait time of the request to the
       service 'WebMaps/MGIS.MapServer' has expired` — ArcGIS Server instance-pool
       exhaustion on `api.milton.ca`. New in October; watch whether it sticks, since the
@@ -557,14 +558,15 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
       time with the count probe also refused, each time recovered on the next attempt.
   - **One-offs (16 cities, 1–2 days each):** `IncompleteRead` cluster 07-20/22
     (barrie, cornwall, hamilton, peterborough-county, sdg — same two days, so our link,
-    not theirs), oakville/toronto/brampton 07-19..27 timeouts, durham 08-06, thunder-bay
-    08-24, ottawa 09-02, brantford 09-25, amherstburg 09-21, sarnia 08-20 (the URL fix).
-    Noise; no action.
+    not theirs), oakville/toronto/brampton 07-19..27 timeouts, niagara-falls 07-28,
+    durham 08-06, peel-region 08-18, thunder-bay 08-24, ottawa 09-02, brantford 09-25,
+    amherstburg 09-21, sarnia 08-20 (the URL fix). Noise; no action.
   - **Not erroring, but frozen** (the blind spot the deleted `--stale` had, measured
     from the vault's content hashes rather than the tracker's store): waterloo,
     dufferin, elgin, peel-region identical on every pull since 06-27/28 (105 pulls);
-    cambridge since 08-07 (66 pulls); amherstburg, cobourg, halton-hills, middlesex,
-    norfolk and sarnia have never changed since their 08-20 import day (56 pulls).
+    cambridge since 08-07 (66 pulls); amherstburg, cobourg, halton-hills, middlesex and
+    norfolk have never changed since their 08-20 import day, and sarnia not since its
+    08-20 URL fix (56 pulls each).
     Elgin and middlesex are explained in §2 (stale layers, live replacements found);
     peel-region at 504k addresses and cambridge at 54k unchanged for 15 and 10 weeks
     deserve the same look — a periodic export, not a live layer, is the likely answer.
