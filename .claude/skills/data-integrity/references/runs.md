@@ -17,10 +17,19 @@ needs a human, which means knowing which failures are expected.
   run of them is news.
 - **ottawa fetch errors** — the city sits behind an F5 that rate-limits by connection.
   Intermittent, self-clearing.
+- **`outage`** (since 2026-10-16) — every city that failed has failed
+  `run.py KNOWN_OUTAGE_DAYS` (3) pull days running. Not retried, exits 0. Those cities
+  are not forgotten: each has a `source-down` GitHub issue from `tools/source_alerts.py`
+  (hourly, from `review-flags.ps1`) and a `down:` line in the daily commit message.
+  `python tools/source_alerts.py status` lists them with their streaks.
+- **Flake lines in `update.log`** — `retrying in 30s (flake 1/4)` and the like. The
+  vault's fetcher gives HTTP 5xx, ArcGIS error bodies, broken reads and an empty first
+  page four short tries before failing the city. A pull that healed this way succeeded.
 
 ## Are failures
 
-- A **numeric nonzero** exit in `runs.csv`.
+- A **numeric nonzero** exit in `runs.csv`. Since 2026-10-16 this means a *fresh*
+  failure: a city failing on its first or second day. Long outages show as `outage`.
 - `publish-failed` — the site build or push broke. The update itself may have been fine;
   the public site is what is stale.
 - A city appearing in `update.log` as `ERROR (<slug>)` on consecutive runs. One run is

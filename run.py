@@ -153,9 +153,49 @@ def _update_parallel(datasets, args):
     return done, failed
 
 
+# A city whose pulls have failed this many pull days running (today included)
+# is a known outage: still pulled every run, in case it is back, but it no
+# longer fails the run. Three, so a source that is down over a weekend still
+# reads as news on the Monday, and one that has been down since a day before
+# yesterday does not redden every run until somebody re-points it
+# (west-parry-sound, 2026-09-24..10-15: 21 of 22 runs exited 1, so nothing
+# else that broke in those weeks could have turned the run red).
+KNOWN_OUTAGE_DAYS = 3
+# The exit code for "only known outages failed": the run did what it could and
+# nothing new broke. daily-update.ps1 does not retry it and records 'outage'.
+EXIT_OUTAGE_ONLY = 3
+
+
+def _split_known_outages(failed):
+    """(fresh, known) -- known as ``[(ds, days)]``. A city that failed outside
+    the vault (an import refusal, a crash) has no streak and stays fresh, and
+    so does everything if the vault cannot be read: unknown is not 'known'."""
+    from src import fetch
+    try:
+        streaks = fetch.failure_streaks()
+    except Exception as e:
+        print(f"  (could not read failure streaks: {e})")
+        return failed, []
+    fresh, known = [], []
+    for ds in failed:
+        days = streaks.get(ds.slug, {}).get("days", 0)
+        if days >= KNOWN_OUTAGE_DAYS:
+            known.append((ds, days))
+        else:
+            fresh.append(ds)
+    return fresh, known
+
+
 def cmd_update(args):
     """Fetch -> import -> diff -> report, with per-city failure isolation."""
     datasets = _resolve(args)
+    paused = [ds for ds in datasets if not ds.enabled]
+    if paused:
+        # Not pulled at all. The pages stay as the last good pull left them,
+        # which is all a failing city's pages ever show either; `report --all`
+        # still renders them.
+        print(f"paused (enabled = false): {', '.join(ds.slug for ds in paused)}")
+        datasets = [ds for ds in datasets if ds.enabled]
     if args.jobs > 1 and len(datasets) > 1:
         done, failed = _update_parallel(datasets, args)
     else:
@@ -167,8 +207,16 @@ def cmd_update(args):
     if done and not args.no_report:
         from src import report
         report.generate_all(done)
-    if failed:
-        sys.exit(f"update failed for: {', '.join(ds.slug for ds in failed)}")
+    if not failed:
+        return
+    fresh, known = _split_known_outages(failed)
+    if known:
+        print("known outage (failing "
+              f"{KNOWN_OUTAGE_DAYS}+ pull days, not failing the run): "
+              + ", ".join(f"{ds.slug} ({days} days)" for ds, days in known))
+    if fresh:
+        sys.exit(f"update failed for: {', '.join(ds.slug for ds in fresh)}")
+    sys.exit(EXIT_OUTAGE_ONLY)
 
 
 def main():

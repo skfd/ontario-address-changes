@@ -129,7 +129,11 @@ foreach ($attempt in 1..3) {
     Invoke-Logged "python run.py update --all --jobs 6 --no-report"
     $updateExit = $LASTEXITCODE
     $ranUpdate  = $true
-    if ($updateExit -eq 0) { break }
+    # 3 = the only cities that failed are known outages (failing 3+ pull days
+    # running, run.py KNOWN_OUTAGE_DAYS). Retrying cannot help them and is what
+    # turned every run since 2026-09-24 into a three-attempt, exit-1 day; they
+    # are reported by tools/source_alerts.py instead.
+    if ($updateExit -eq 0 -or $updateExit -eq 3) { break }
     # Checked here, at the bottom, so $attempt still counts attempts that ran.
     $elapsedMin = ((Get-Date) - $runStart).TotalMinutes
     $longestMin = [math]::Max($longestMin, ((Get-Date) - $attemptStart).TotalMinutes)
@@ -146,6 +150,7 @@ if ($updateExit -ne 0) {
     if (-not $ranUpdate)        { $outcome = $skipReason }
     elseif (-not (Test-Online)) { $outcome = 'offline' }
     elseif (Test-Metered)       { $outcome = 'metered' }
+    elseif ($updateExit -eq 3)  { $outcome = 'outage' }
 }
 
 # Render the site once, after the retry loop. Skipped when no attempt ran
@@ -194,7 +199,7 @@ foreach ($lock in @(Get-ChildItem $gitDir -Filter '*.lock' -Recurse -Force -File
 # the day's events; a modified or deleted page is a re-render (a flag verdict,
 # a class or ignore-field change) and worth a look in the log.
 # BEGIN Get-DailyMessage
-function Get-DailyMessage([string[]]$nameStatus) {
+function Get-DailyMessage([string[]]$nameStatus, [string[]]$down = @()) {
     $date = Get-Date -Format yyyy-MM-dd
     $new = [System.Collections.Generic.List[string]]::new()
     $rerendered = [System.Collections.Generic.List[string]]::new()
@@ -215,6 +220,10 @@ function Get-DailyMessage([string[]]$nameStatus) {
     $lines = @("daily update ${date}: $($parts -join ', ')")
     if ($new.Count)        { $lines += ''; $lines += "new: $($new -join ', ')" }
     if ($rerendered.Count) { if ($lines.Count -eq 1) { $lines += '' }; $lines += "re-rendered: $($rerendered -join ', ')" }
+    # Known outages, so `git log` shows a source that has been down for weeks
+    # even on a day the run itself counted as fine.
+    $down = @($down | Where-Object { $_ })
+    if ($down.Count) { if ($lines.Count -eq 1) { $lines += '' }; $lines += "down: $($down -join ', ')" }
     return $lines
 }
 # END Get-DailyMessage
@@ -229,7 +238,8 @@ if ($publishExit -eq 0) {
         # The message goes through a file: Invoke-Logged runs under cmd, where a
         # multi-line quoted argument has no reliable form. logs\ is gitignored.
         $msgFile = "$logDir\commit-msg.txt"
-        Set-Content $msgFile (Get-DailyMessage @(git diff --cached --name-status --no-renames))
+        $downLines = @(python tools\source_alerts.py down 2>$null)
+        Set-Content $msgFile (Get-DailyMessage @(git diff --cached --name-status --no-renames) $downLines)
         Invoke-Logged "git commit -F `"$msgFile`""
         $publishExit = $LASTEXITCODE
         # Nothing new to push if the commit never landed, and pushing anyway
@@ -246,7 +256,7 @@ if ($publishExit -eq 0) {
 # (observed 2026-08-05). Report it -- but never over-write a real update
 # failure or an offline/metered skip: those are the bigger news, and the first
 # already exits nonzero.
-if (($renderExit -ne 0 -or $publishExit -ne 0) -and $outcome -eq 0) { $outcome = 'publish-failed' }
+if (($renderExit -ne 0 -or $publishExit -ne 0) -and ($outcome -eq 0 -or $outcome -eq 'outage')) { $outcome = 'publish-failed' }
 
 # Final log line marks the run as over for progress.ps1.
 Log "END $(Get-Date -Format o) exit=$outcome attempts=$attempt"
@@ -265,6 +275,9 @@ else                    { $row | Export-Csv $runsCsv -NoTypeInformation }
 # Offline/metered exits 0: nothing is wrong with the pipeline, there was just
 # no (usable) network.
 if ($outcome -in 'offline', 'metered') { exit 0 }
+# Only known outages failed: nothing new broke, so Task Scheduler sees success.
+# runs.csv keeps 'outage' and tools/source_alerts.py carries the alert.
+if ($outcome -eq 'outage') { exit 0 }
 # The cities updated but the site did not: $updateExit is 0 here, so this needs
 # its own nonzero exit to reach Task Scheduler as a failure.
 if ($outcome -eq 'publish-failed') { exit 1 }

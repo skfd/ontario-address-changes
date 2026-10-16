@@ -126,6 +126,8 @@ function Show-Progress {
               # Cities updated fine but the commit/push did not land, so the
               # published site is stale even though no city failed.
               elseif ($raw -match '(?m)^END .*exit=publish-failed') { 'Cities OK, site NOT published' }
+              # Only cities already down for days failed (source_alerts.py has them).
+              elseif ($raw -match '(?m)^END .*exit=outage') { 'Run OK except known outages' }
               elseif ($failed.Count)   { 'Run finished with failures' }
               else                     { 'Run OK' }
     Write-Host ("{0}: {1} ok, {2} failed, {3} pending (of {4})" -f `

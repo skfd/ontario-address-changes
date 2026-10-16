@@ -57,6 +57,13 @@ def latest_check(ds):
     return snap.date, fetched.isoformat()
 
 
+def failure_streaks():
+    """``slug -> {"days", "since", "last_good", "detail"}`` from the vault: every
+    city whose latest pull day failed, and for how many pull days in a row."""
+    from addressvault import Vault
+    return Vault(link_wait=False).cat.failure_streaks()
+
+
 def load_features(path):
     with open(path, encoding="utf-8") as f:
         return json.load(f).get("features", [])

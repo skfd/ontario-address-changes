@@ -23,6 +23,7 @@ class Dataset:
     osm_compatible: str = ""
     source_crs: str = ""  # e.g. "EPSG:2952"; reproject to WGS84 when coords are out of lon/lat range
     publish_reports: bool = True  # false: licence forbids republication — keep tracking, publish no report pages
+    enabled: bool = True  # false: source paused (e.g. a dead endpoint awaiting a re-point) — `update` skips the pull, pages keep the last snapshot
     location_min_move_m: float = 0.0  # drop location-only modifications moving less than this (metres); 0 = off
     street_from_full: bool = False  # no street column: derive street from full minus the number (normalize.street_from_full)
     key_field: str = ""
@@ -108,6 +109,7 @@ def _parse(path):
         osm_compatible=raw.get("osm_compatible", ""),
         source_crs=raw.get("source_crs", ""),
         publish_reports=raw.get("publish_reports", True),
+        enabled=raw.get("enabled", True),
         location_min_move_m=float(floor),
         street_from_full=street_from_full,
         key_field=identity.get("key_field", ""),
