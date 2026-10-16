@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>County of Simcoe Address Changes — Thursday, Oct 15, 2026</title>
+  <style>
+    :root {
+      --bg: #fafafa; --surface: #ffffff; --surface2: #f5f5f5; --surface3: #ebebeb;
+      --border: #e0e0e0; --border-strong: #d1d1d1; --text: #242424;
+      --text-secondary: #424242; --text-dim: #616161; --accent: #0078d4;
+      --accent-hover: #106ebe; --accent-bg: #eff6fc; --green: #107c10;
+      --green-bg: #f1faf1; --green-tint: #9fd89f; --red: #c50f1f; --red-bg: #fdf3f4;
+      --red-tint: #eeacb2; --yellow: #eaa300; --yellow-bg: #fefbf4; --yellow-tint: #f9e2ae;
+      --purple: #881798; --purple-bg: #f9f3fb; --teal: #038387; --teal-bg: #f0fafa;
+      --shadow-4: 0 2px 4px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --shadow-8: 0 4px 8px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --card-bg: #ffffff; --card-hover: #f5f5f5; color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1f1f1f; --surface: #292929; --surface2: #333333; --surface3: #3d3d3d;
+        --border: #525252; --border-strong: #666666; --text: #ffffff;
+        --text-secondary: #d6d6d6; --text-dim: #adadad; --accent: #2899f5;
+        --accent-hover: #3aa0f3; --accent-bg: #002848; --green: #54b054;
+        --green-bg: #052505; --green-tint: #107c10; --red: #dc626d; --red-bg: #3b0509;
+        --red-tint: #c50f1f; --yellow: #f2c661; --yellow-bg: #463100; --yellow-tint: #eaa300;
+        --purple: #d29ddb; --purple-bg: #3a1040; --teal: #58c0c4; --teal-bg: #013638;
+        --shadow-4: 0 2px 4px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --shadow-8: 0 4px 8px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --card-bg: #333333; --card-hover: #3d3d3d; color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI Variable','Segoe UI',system-ui,-apple-system,sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.5; padding: 2rem;
+      max-width: 1100px; margin: 0 auto; font-size: 14px; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; color: var(--accent-hover); }
+    .back-link { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 12px;
+      color: var(--text-dim); margin-bottom: 1.5rem; transition: color 0.1s; }
+    .back-link:hover { color: var(--accent); text-decoration: none; }
+    h1 { font-size: 24px; font-weight: 600; margin-bottom: 4px; }
+    .subtitle { color: var(--text-secondary); font-size: 14px; margin-bottom: 12px; }
+    .explainer { color: var(--text-secondary); font-size: 13px; line-height: 1.5;
+      margin-bottom: 24px; padding: 12px 16px; background: var(--surface);
+      border-radius: 8px; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px; margin-bottom: 24px; }
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px;
+      padding: 16px; box-shadow: var(--shadow-4); transition: box-shadow 0.1s; }
+    .card:hover { box-shadow: var(--shadow-8); }
+    .card .label { font-size: 12px; color: var(--text-dim); font-weight: 400; }
+    .card .value { font-size: 28px; font-weight: 600; margin-top: 4px; }
+    .card .value.green { color: var(--green); } .card .value.red { color: var(--red); }
+    .card .value.yellow { color: var(--yellow); } .card .value.accent { color: var(--accent); }
+    .card .value.purple { color: var(--purple); }
+    .card .value.teal { color: var(--teal); }
+    .sparkline { display: block; margin-top: 6px; overflow: visible; opacity: 0.9; }
+    .sparkline-label { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+    .section { margin-bottom: 24px; }
+    .section h2 { font-size: 16px; font-weight: 600; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px; }
+    .badge { font-size: 12px; padding: 2px 8px; border-radius: 999px; font-weight: 600; }
+    .badge-green { background: var(--green-bg); color: var(--green); }
+    .badge-red { background: var(--red-bg); color: var(--red); }
+    .badge-yellow { background: var(--yellow-bg); color: var(--yellow); }
+    .badge-accent { background: var(--accent-bg); color: var(--accent); }
+    .badge-purple { background: var(--purple-bg); color: var(--purple); }
+    .badge-teal { background: var(--teal-bg); color: var(--teal); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface);
+      border-radius: 8px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    thead { background: var(--surface2); }
+    th { text-align: left; padding: 8px 12px; font-weight: 600; color: var(--text-dim);
+      font-size: 12px; cursor: pointer; user-select: none; border-bottom: 1px solid var(--border); }
+    th:hover { color: var(--accent); }
+    td { padding: 8px 12px; border-top: 1px solid var(--border); }
+    tr:hover td { background: var(--surface2); }
+    .old-val { color: var(--red); text-decoration: line-through; }
+    .new-val { color: var(--green); }
+    .arrow-val { color: var(--text-dim); text-align: center; white-space: nowrap; }
+    .map-link { display: inline-flex; align-items: center; margin-left: 0.4em;
+      color: var(--accent); vertical-align: middle; white-space: nowrap; font-size: 12px; }
+    .map-link:hover { color: var(--accent-hover); }
+    .map-link svg { width: 14px; height: 14px; }
+    .change-field { color: var(--yellow); font-weight: 600; }
+    .bar-chart { margin-top: 8px; }
+    .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 12px; }
+    .bar-label { width: 180px; text-align: right; color: var(--text-secondary); flex-shrink: 0;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .bar-track { flex: 1; height: 8px; background: var(--surface2); border-radius: 4px;
+      overflow: hidden; position: relative; }
+    .bar-fill { height: 100%; border-radius: 4px; transition: width 0.15s ease; }
+    .bar-fill.green { background: var(--green); } .bar-fill.red { background: var(--red); }
+    .bar-count { width: 40px; font-size: 12px; color: var(--text-dim); }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+    .empty { color: var(--text-dim); font-style: italic; padding: 16px; }
+    .truncated { color: var(--text-dim); font-size: 12px; margin-top: 8px; }
+    .collapsible-toggle { background: transparent; border: 1px solid var(--border);
+      color: var(--accent); padding: 5px 12px; border-radius: 4px; cursor: pointer;
+      font-size: 12px; font-family: inherit; margin-bottom: 12px; transition: background 0.1s; }
+    .collapsible-toggle:hover { background: var(--surface2); }
+    details.rename-group { background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; margin-bottom: 8px; box-shadow: var(--shadow-4); }
+    details.rename-group summary { padding: 10px 14px; cursor: pointer; font-size: 13px; }
+    details.rename-group[open] summary { border-bottom: 1px solid var(--border); }
+    details.rename-group table { border: none; box-shadow: none; border-radius: 0; }
+    details.rename-group .truncated { padding: 0 14px 10px; margin-top: 0; }
+    .rename-count { color: var(--text-dim); font-size: 12px; margin-left: 6px; }
+    .no-changes-banner { background: var(--green-bg); border: 1px solid var(--green-tint);
+      color: var(--green); padding: 16px; border-radius: 8px; margin-bottom: 24px;
+      text-align: center; font-weight: 600; font-size: 14px; }
+    .baseline-banner { background: var(--accent-bg); border: 1px solid var(--accent);
+      color: var(--accent); padding: 16px; border-radius: 8px; margin-bottom: 24px; font-size: 13px; }
+    .generated-at { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-dim); }
+    .history { font-size: 12.5px; color: var(--text-secondary); white-space: nowrap; }
+    .history .a { color: var(--green); font-weight: 500; }
+    .history .r { color: var(--red); font-weight: 500; }
+    .history .dot { color: var(--text-dim); margin: 0 4px; }
+    .history-none { color: var(--text-dim); font-style: italic; font-size: 12.5px; }
+    .info-wrap { position: relative; display: inline-flex; vertical-align: middle; }
+    .info-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+      height: 18px; padding: 0 8px 0 7px; border-radius: 999px; border: none;
+      color: #fff; background: var(--accent); cursor: help; font-size: 11px; font-weight: 600;
+      font-style: normal; font-family: inherit; line-height: 1; white-space: nowrap; }
+    .info-btn .glyph { font-style: italic; font-weight: 700;
+      font-family: Georgia, 'Times New Roman', serif; }
+    .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn,
+    .info-wrap:focus .info-btn { background: var(--accent-hover); }
+    .info-pop { display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 20;
+      width: 320px; max-width: 80vw; padding: 12px 14px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-8);
+      font-size: 12.5px; font-weight: 400; color: var(--text-secondary); line-height: 1.5; }
+    .info-wrap:hover .info-pop, .info-wrap:focus-within .info-pop,
+    .info-wrap:focus .info-pop { display: block; }
+    .info-pop strong { display: block; color: var(--text); font-size: 12px; margin-bottom: 4px; }
+    .info-pop ul { list-style: none; margin: 0 0 10px; padding: 0; }
+    .info-pop li { padding: 1px 0 1px 14px; position: relative; }
+    .info-pop li::before { content: "·"; position: absolute; left: 4px; color: var(--text-dim); }
+    .info-pop .note { color: var(--text-dim); font-size: 11.5px; margin: 0 0 10px; }
+    .info-pop .muted { color: var(--text-dim); font-style: italic; }
+  </style>
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+
+  <a class="back-link" href="index.html">← Back to County of Simcoe reports</a>
+
+  <h1>County of Simcoe — Address Changes</h1>
+  <p class="subtitle">
+    Changes between  and Thursday, Oct 15, 2026
+    · 190,432 total addresses
+  </p>
+
+  
+
+  <div class="cards">
+    <div class="card"><div class="label">Total Addresses</div>
+      <div class="value accent">190,432</div></div>
+    <div class="card"><div class="label">New Addresses</div>
+      <div class="value green">+0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#107c10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,16.2 19.7,18.0 37.3,12.7 55.0,2.0 72.7,18.0 90.3,14.4 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#107c10"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Retired Addresses</div>
+      <div class="value red">−0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#c50f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#c50f1f"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Updated Addresses <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (STNUM)</li><li>Street name (FULLNAME)</li><li>Unit (Unit)</li><li>Full address (FULL_ADDRESS)</li><li>Coordinates (latitude, longitude)</li><li>ADDRESSID</li><li>DIR</li><li>DIRPREF</li><li>MUNI</li><li>PREFIX</li><li>STNAME</li><li>SUFFIX</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>ARN</li><li>ChildARN</li><li>X_COORD</li><li>Y_COORD</li></ul>
+      
+    </span>
+  </span></div>
+      <div class="value yellow">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,2.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Renumbered</div>
+      <div class="value accent">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#0078d4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#0078d4"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Street Renames</div>
+      <div class="value purple">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#9141ac" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#9141ac"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    
+    <div class="card"><div class="label">Boundary Changes</div>
+      <div class="value teal">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#038387" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#038387"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    <div class="card"><div class="label">Location Adjustments</div>
+      <div class="value" style="color: var(--text-dim)">71</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#808080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,11.5 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#808080"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+  </div>
+
+  
+  <div class="section">
+    <h2>Change Breakdown</h2>
+    <div class="stats-grid">
+      
+      
+      
+      <div class="card"><div class="label">Most Frequently Updated Fields</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">Location</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">71</span></div>
+      </div></div>
+    </div>
+  </div>
+  
+
+  <div class="section">
+    <h2>New Addresses <span class="badge badge-green">0</span></h2>
+    
+    <p class="empty">No new addresses.</p>
+  </div>
+
+  <div class="section">
+    <h2>Retired Addresses <span class="badge badge-red">0</span></h2>
+    <p class="empty">No addresses retired.</p>
+  </div>
+
+  <div class="section">
+    <h2>Updated Addresses <span class="badge badge-yellow">0</span>
+      <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (STNUM)</li><li>Street name (FULLNAME)</li><li>Unit (Unit)</li><li>Full address (FULL_ADDRESS)</li><li>Coordinates (latitude, longitude)</li><li>ADDRESSID</li><li>DIR</li><li>DIRPREF</li><li>MUNI</li><li>PREFIX</li><li>STNAME</li><li>SUFFIX</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>ARN</li><li>ChildARN</li><li>X_COORD</li><li>Y_COORD</li></ul>
+      
+    </span>
+  </span></h2>
+    
+    <p class="empty">No addresses updated.</p>
+  </div>
+
+  <div class="section">
+    <h2>Renumbered Addresses <span class="badge badge-accent">0</span></h2>
+    
+    <p class="empty">No addresses renumbered.</p>
+  </div>
+
+  <div class="section">
+    <h2>Street Renames <span class="badge badge-purple">0</span></h2>
+    <p class="empty">No street renames.</p>
+  </div>
+
+  
+
+  
+
+  
+  <div class="section">
+    <h2>Boundary Changes <span class="badge badge-teal">0</span></h2>
+    <p class="empty">No ward or municipality reassignments.</p>
+  </div>
+  
+
+  <div class="section">
+    <h2>Location Adjustments <span class="badge" style="background: var(--surface2); color: var(--text-dim)">71</span></h2>
+    
+    <p class="explainer">71 addresses had only their map position adjusted — median shift 10.5&nbsp;m, largest 279.1&nbsp;m. The street addresses themselves did not change.</p>
+    
+    
+    <details class="rename-group">
+      <summary>Per-address detail<span class="rename-count">71 addresses</span></summary>
+    <table>
+      <thead><tr><th>Address</th><th>Before</th><th></th><th>After</th></tr></thead>
+      <tbody>
+        
+        <tr><td>2185 COUNTY ROAD 92</td>
+          
+          <td class="old-val">44.55540, -79.92936<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.55540&mlon=-79.92936#map=19/44.55540/-79.92936" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 18.1m</td>
+          <td class="new-val">44.55524, -79.92932<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.55524&mlon=-79.92932#map=19/44.55524/-79.92932" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>10 KITCHENER STREET</td>
+          
+          <td class="old-val">44.59258, -79.40853<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59258&mlon=-79.40853#map=19/44.59258/-79.40853" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 50.4m</td>
+          <td class="new-val">44.59224, -79.40811<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59224&mlon=-79.40811#map=19/44.59224/-79.40811" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>12 KITCHENER STREET</td>
+          
+          <td class="old-val">44.59324, -79.40925<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59324&mlon=-79.40925#map=19/44.59324/-79.40925" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">→ 5.5m</td>
+          <td class="new-val">44.59324, -79.40918<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59324&mlon=-79.40918#map=19/44.59324/-79.40918" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>18 KITCHENER STREET</td>
+          
+          <td class="old-val">44.59223, -79.40883<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59223&mlon=-79.40883#map=19/44.59223/-79.40883" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 33.6m</td>
+          <td class="new-val">44.59205, -79.40849<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59205&mlon=-79.40849#map=19/44.59205/-79.40849" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>24 KITCHENER STREET</td>
+          
+          <td class="old-val">44.59212, -79.40936<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59212&mlon=-79.40936#map=19/44.59212/-79.40936" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 38.5m</td>
+          <td class="new-val">44.59186, -79.40904<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59186&mlon=-79.40904#map=19/44.59186/-79.40904" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>26 KITCHENER STREET</td>
+          
+          <td class="old-val">44.59260, -79.41065<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59260&mlon=-79.41065#map=19/44.59260/-79.41065" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 138.8m</td>
+          <td class="new-val">44.59166, -79.40950<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59166&mlon=-79.40950#map=19/44.59166/-79.40950" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>30 KITCHENER STREET</td>
+          
+          <td class="old-val">44.59185, -79.41000<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59185&mlon=-79.41000#map=19/44.59185/-79.41000" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 40.0m</td>
+          <td class="new-val">44.59152, -79.40980<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59152&mlon=-79.40980#map=19/44.59152/-79.40980" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>32 KITCHENER STREET</td>
+          
+          <td class="old-val">44.59171, -79.41033<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59171&mlon=-79.41033#map=19/44.59171/-79.41033" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 43.5m</td>
+          <td class="new-val">44.59137, -79.41006<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59137&mlon=-79.41006#map=19/44.59137/-79.41006" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>40 KITCHENER STREET</td>
+          
+          <td class="old-val">44.59125, -79.41299<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59125&mlon=-79.41299#map=19/44.59125/-79.41299" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 85.5m</td>
+          <td class="new-val">44.59054, -79.41258<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59054&mlon=-79.41258#map=19/44.59054/-79.41258" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>100 KITCHENER STREET</td>
+          
+          <td class="old-val">44.58839, -79.41730<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.58839&mlon=-79.41730#map=19/44.58839/-79.41730" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">→ 279.1m</td>
+          <td class="new-val">44.58837, -79.41378<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.58837&mlon=-79.41378#map=19/44.58837/-79.41378" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>17 KORLEA CRESCENT</td>
+          
+          <td class="old-val">44.59376, -79.40511<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59376&mlon=-79.40511#map=19/44.59376/-79.40511" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 6.0m</td>
+          <td class="new-val">44.59372, -79.40506<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59372&mlon=-79.40506#map=19/44.59372/-79.40506" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>19 KORLEA CRESCENT</td>
+          
+          <td class="old-val">44.59385, -79.40497<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59385&mlon=-79.40497#map=19/44.59385/-79.40497" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 10.9m</td>
+          <td class="new-val">44.59377, -79.40489<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59377&mlon=-79.40489#map=19/44.59377/-79.40489" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>21 KORLEA CRESCENT</td>
+          
+          <td class="old-val">44.59391, -79.40479<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59391&mlon=-79.40479#map=19/44.59391/-79.40479" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 10.5m</td>
+          <td class="new-val">44.59383, -79.40472<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59383&mlon=-79.40472#map=19/44.59383/-79.40472" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>23 KORLEA CRESCENT</td>
+          
+          <td class="old-val">44.59396, -79.40460<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59396&mlon=-79.40460#map=19/44.59396/-79.40460" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 6.4m</td>
+          <td class="new-val">44.59391, -79.40456<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59391&mlon=-79.40456#map=19/44.59391/-79.40456" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>25 KORLEA CRESCENT UNIT A</td>
+          
+          <td class="old-val">44.59400, -79.40440<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59400&mlon=-79.40440#map=19/44.59400/-79.40440" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 7.8m</td>
+          <td class="new-val">44.59393, -79.40441<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59393&mlon=-79.40441#map=19/44.59393/-79.40441" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>27 KORLEA CRESCENT</td>
+          
+          <td class="old-val">44.59404, -79.40420<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59404&mlon=-79.40420#map=19/44.59404/-79.40420" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 5.0m</td>
+          <td class="new-val">44.59400, -79.40417<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59400&mlon=-79.40417#map=19/44.59400/-79.40417" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>31 KORLEA CRESCENT</td>
+          
+          <td class="old-val">44.59413, -79.40381<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59413&mlon=-79.40381#map=19/44.59413/-79.40381" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 6.9m</td>
+          <td class="new-val">44.59407, -79.40383<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59407&mlon=-79.40383#map=19/44.59407/-79.40383" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>33 KORLEA CRESCENT</td>
+          
+          <td class="old-val">44.59418, -79.40353<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59418&mlon=-79.40353#map=19/44.59418/-79.40353" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 11.4m</td>
+          <td class="new-val">44.59408, -79.40356<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59408&mlon=-79.40356#map=19/44.59408/-79.40356" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>37 KORLEA CRESCENT</td>
+          
+          <td class="old-val">44.59390, -79.40327<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59390&mlon=-79.40327#map=19/44.59390/-79.40327" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 5.2m</td>
+          <td class="new-val">44.59387, -79.40332<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59387&mlon=-79.40332#map=19/44.59387/-79.40332" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>4 KRIS COURT</td>
+          
+          <td class="old-val">44.59389, -79.40537<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59389&mlon=-79.40537#map=19/44.59389/-79.40537" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 5.8m</td>
+          <td class="new-val">44.59384, -79.40539<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59384&mlon=-79.40539#map=19/44.59384/-79.40539" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>5 KRIS COURT</td>
+          
+          <td class="old-val">44.59363, -79.40599<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59363&mlon=-79.40599#map=19/44.59363/-79.40599" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">→ 6.4m</td>
+          <td class="new-val">44.59362, -79.40591<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59362&mlon=-79.40591#map=19/44.59362/-79.40591" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>7 KRIS COURT</td>
+          
+          <td class="old-val">44.59381, -79.40601<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59381&mlon=-79.40601#map=19/44.59381/-79.40601" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">→ 13.7m</td>
+          <td class="new-val">44.59379, -79.40584<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59379&mlon=-79.40584#map=19/44.59379/-79.40584" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>9 OLIVE CRESCENT</td>
+          
+          <td class="old-val">44.58935, -79.40320<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.58935&mlon=-79.40320#map=19/44.58935/-79.40320" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↑ 19.2m</td>
+          <td class="new-val">44.58951, -79.40329<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.58951&mlon=-79.40329#map=19/44.58951/-79.40329" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>16 OLIVE CRESCENT</td>
+          
+          <td class="old-val">44.59015, -79.40349<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59015&mlon=-79.40349#map=19/44.59015/-79.40349" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 11.0m</td>
+          <td class="new-val">44.59009, -79.40338<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59009&mlon=-79.40338#map=19/44.59009/-79.40338" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>19 OLIVE CRESCENT</td>
+          
+          <td class="old-val">44.58948, -79.40292<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.58948&mlon=-79.40292#map=19/44.58948/-79.40292" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">→ 7.2m</td>
+          <td class="new-val">44.58947, -79.40283<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.58947&mlon=-79.40283#map=19/44.58947/-79.40283" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>22 OLIVE CRESCENT</td>
+          
+          <td class="old-val">44.59028, -79.40324<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59028&mlon=-79.40324#map=19/44.59028/-79.40324" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 17.9m</td>
+          <td class="new-val">44.59013, -79.40316<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59013&mlon=-79.40316#map=19/44.59013/-79.40316" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>28 OLIVE CRESCENT</td>
+          
+          <td class="old-val">44.59041, -79.40298<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59041&mlon=-79.40298#map=19/44.59041/-79.40298" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 14.1m</td>
+          <td class="new-val">44.59031, -79.40287<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59031&mlon=-79.40287#map=19/44.59031/-79.40287" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>38 OLIVE CRESCENT</td>
+          
+          <td class="old-val">44.59056, -79.40270<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59056&mlon=-79.40270#map=19/44.59056/-79.40270" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 14.5m</td>
+          <td class="new-val">44.59044, -79.40263<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59044&mlon=-79.40263#map=19/44.59044/-79.40263" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>39 OLIVE CRESCENT</td>
+          
+          <td class="old-val">44.58996, -79.40212<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.58996&mlon=-79.40212#map=19/44.58996/-79.40212" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 13.7m</td>
+          <td class="new-val">44.58986, -79.40202<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.58986&mlon=-79.40202#map=19/44.58986/-79.40202" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>42 OLIVE CRESCENT</td>
+          
+          <td class="old-val">44.59068, -79.40247<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59068&mlon=-79.40247#map=19/44.59068/-79.40247" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 7.7m</td>
+          <td class="new-val">44.59064, -79.40239<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59064&mlon=-79.40239#map=19/44.59064/-79.40239" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>48 OLIVE CRESCENT</td>
+          
+          <td class="old-val">44.59076, -79.40231<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59076&mlon=-79.40231#map=19/44.59076/-79.40231" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 7.3m</td>
+          <td class="new-val">44.59071, -79.40225<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59071&mlon=-79.40225#map=19/44.59071/-79.40225" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>54 OLIVE CRESCENT</td>
+          
+          <td class="old-val">44.59093, -79.40199<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59093&mlon=-79.40199#map=19/44.59093/-79.40199" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 6.5m</td>
+          <td class="new-val">44.59089, -79.40193<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59089&mlon=-79.40193#map=19/44.59089/-79.40193" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>57 OLIVE CRESCENT</td>
+          
+          <td class="old-val">44.59054, -79.40121<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59054&mlon=-79.40121#map=19/44.59054/-79.40121" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 11.0m</td>
+          <td class="new-val">44.59048, -79.40110<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59048&mlon=-79.40110#map=19/44.59048/-79.40110" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>61 OLIVE CRESCENT</td>
+          
+          <td class="old-val">44.59065, -79.40108<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59065&mlon=-79.40108#map=19/44.59065/-79.40108" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↖ 16.5m</td>
+          <td class="new-val">44.59078, -79.40118<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59078&mlon=-79.40118#map=19/44.59078/-79.40118" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>62 OLIVE CRESCENT</td>
+          
+          <td class="old-val">44.59140, -79.40163<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59140&mlon=-79.40163#map=19/44.59140/-79.40163" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 18.2m</td>
+          <td class="new-val">44.59125, -79.40154<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59125&mlon=-79.40154#map=19/44.59125/-79.40154" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>63 OLIVE CRESCENT</td>
+          
+          <td class="old-val">44.59076, -79.40098<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59076&mlon=-79.40098#map=19/44.59076/-79.40098" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 11.8m</td>
+          <td class="new-val">44.59066, -79.40093<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59066&mlon=-79.40093#map=19/44.59066/-79.40093" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>71 OLIVE CRESCENT</td>
+          
+          <td class="old-val">44.59107, -79.40073<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59107&mlon=-79.40073#map=19/44.59107/-79.40073" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↑ 7.1m</td>
+          <td class="new-val">44.59113, -79.40076<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59113&mlon=-79.40076#map=19/44.59113/-79.40076" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>72 OLIVE CRESCENT</td>
+          
+          <td class="old-val">44.59162, -79.40135<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59162&mlon=-79.40135#map=19/44.59162/-79.40135" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 14.6m</td>
+          <td class="new-val">44.59151, -79.40125<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59151&mlon=-79.40125#map=19/44.59151/-79.40125" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>74 OLIVE CRESCENT</td>
+          
+          <td class="old-val">44.59172, -79.40121<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59172&mlon=-79.40121#map=19/44.59172/-79.40121" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 10.1m</td>
+          <td class="new-val">44.59164, -79.40115<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59164&mlon=-79.40115#map=19/44.59164/-79.40115" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>77 OLIVE CRESCENT</td>
+          
+          <td class="old-val">44.59119, -79.40060<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59119&mlon=-79.40060#map=19/44.59119/-79.40060" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↗ 6.1m</td>
+          <td class="new-val">44.59124, -79.40057<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59124&mlon=-79.40057#map=19/44.59124/-79.40057" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>79 OLIVE CRESCENT</td>
+          
+          <td class="old-val">44.59137, -79.40049<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59137&mlon=-79.40049#map=19/44.59137/-79.40049" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">→ 7.5m</td>
+          <td class="new-val">44.59135, -79.40040<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59135&mlon=-79.40040#map=19/44.59135/-79.40040" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>2 SHANNON STREET</td>
+          
+          <td class="old-val">44.59240, -79.40616<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59240&mlon=-79.40616#map=19/44.59240/-79.40616" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">→ 9.0m</td>
+          <td class="new-val">44.59242, -79.40605<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59242&mlon=-79.40605#map=19/44.59242/-79.40605" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>4 SHANNON STREET</td>
+          
+          <td class="old-val">44.59251, -79.40588<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59251&mlon=-79.40588#map=19/44.59251/-79.40588" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 9.8m</td>
+          <td class="new-val">44.59245, -79.40597<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59245&mlon=-79.40597#map=19/44.59245/-79.40597" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>6 SHANNON STREET</td>
+          
+          <td class="old-val">44.59268, -79.40572<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59268&mlon=-79.40572#map=19/44.59268/-79.40572" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 7.9m</td>
+          <td class="new-val">44.59263, -79.40565<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59263&mlon=-79.40565#map=19/44.59263/-79.40565" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>8 SHANNON STREET</td>
+          
+          <td class="old-val">44.59275, -79.40556<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59275&mlon=-79.40556#map=19/44.59275/-79.40556" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 10.5m</td>
+          <td class="new-val">44.59267, -79.40549<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59267&mlon=-79.40549#map=19/44.59267/-79.40549" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>10 SHANNON STREET</td>
+          
+          <td class="old-val">44.59278, -79.40536<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59278&mlon=-79.40536#map=19/44.59278/-79.40536" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 6.1m</td>
+          <td class="new-val">44.59273, -79.40533<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59273&mlon=-79.40533#map=19/44.59273/-79.40533" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>14 SHANNON STREET</td>
+          
+          <td class="old-val">44.59302, -79.40480<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59302&mlon=-79.40480#map=19/44.59302/-79.40480" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 5.2m</td>
+          <td class="new-val">44.59299, -79.40475<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59299&mlon=-79.40475#map=19/44.59299/-79.40475" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>16 SHANNON STREET</td>
+          
+          <td class="old-val">44.59309, -79.40462<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59309&mlon=-79.40462#map=19/44.59309/-79.40462" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 6.0m</td>
+          <td class="new-val">44.59305, -79.40457<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59305&mlon=-79.40457#map=19/44.59305/-79.40457" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>18 SHANNON STREET</td>
+          
+          <td class="old-val">44.59316, -79.40445<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59316&mlon=-79.40445#map=19/44.59316/-79.40445" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 5.0m</td>
+          <td class="new-val">44.59312, -79.40442<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59312&mlon=-79.40442#map=19/44.59312/-79.40442" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>20 SHANNON STREET UNIT A</td>
+          
+          <td class="old-val">44.59323, -79.40429<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59323&mlon=-79.40429#map=19/44.59323/-79.40429" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 6.9m</td>
+          <td class="new-val">44.59317, -79.40427<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59317&mlon=-79.40427#map=19/44.59317/-79.40427" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>20 SHANNON STREET UNIT B</td>
+          
+          <td class="old-val">44.59331, -79.40435<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59331&mlon=-79.40435#map=19/44.59331/-79.40435" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 16.9m</td>
+          <td class="new-val">44.59319, -79.40422<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59319&mlon=-79.40422#map=19/44.59319/-79.40422" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>22 SHANNON STREET</td>
+          
+          <td class="old-val">44.59330, -79.40412<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59330&mlon=-79.40412#map=19/44.59330/-79.40412" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 6.4m</td>
+          <td class="new-val">44.59325, -79.40408<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59325&mlon=-79.40408#map=19/44.59325/-79.40408" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>24 SHANNON STREET</td>
+          
+          <td class="old-val">44.59337, -79.40396<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59337&mlon=-79.40396#map=19/44.59337/-79.40396" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 6.0m</td>
+          <td class="new-val">44.59333, -79.40391<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59333&mlon=-79.40391#map=19/44.59333/-79.40391" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>28 SHANNON STREET</td>
+          
+          <td class="old-val">44.59351, -79.40361<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59351&mlon=-79.40361#map=19/44.59351/-79.40361" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 5.6m</td>
+          <td class="new-val">44.59346, -79.40360<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59346&mlon=-79.40360#map=19/44.59346/-79.40360" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>32 SHANNON STREET</td>
+          
+          <td class="old-val">44.59368, -79.40321<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59368&mlon=-79.40321#map=19/44.59368/-79.40321" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 6.0m</td>
+          <td class="new-val">44.59364, -79.40316<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59364&mlon=-79.40316#map=19/44.59364/-79.40316" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>34 SHANNON STREET</td>
+          
+          <td class="old-val">44.59375, -79.40303<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59375&mlon=-79.40303#map=19/44.59375/-79.40303" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↘ 6.1m</td>
+          <td class="new-val">44.59370, -79.40300<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59370&mlon=-79.40300#map=19/44.59370/-79.40300" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>498 WEST STREET SOUTH</td>
+          
+          <td class="old-val">44.59368, -79.40682<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59368&mlon=-79.40682#map=19/44.59368/-79.40682" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 21.5m</td>
+          <td class="new-val">44.59359, -79.40706<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59359&mlon=-79.40706#map=19/44.59359/-79.40706" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>500 WEST STREET SOUTH</td>
+          
+          <td class="old-val">44.59356, -79.40670<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59356&mlon=-79.40670#map=19/44.59356/-79.40670" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 24.0m</td>
+          <td class="new-val">44.59345, -79.40696<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59345&mlon=-79.40696#map=19/44.59345/-79.40696" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>506 WEST STREET SOUTH</td>
+          
+          <td class="old-val">44.59341, -79.40658<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59341&mlon=-79.40658#map=19/44.59341/-79.40658" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 23.9m</td>
+          <td class="new-val">44.59329, -79.40683<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59329&mlon=-79.40683#map=19/44.59329/-79.40683" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>510 WEST STREET SOUTH</td>
+          
+          <td class="old-val">44.59317, -79.40638<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59317&mlon=-79.40638#map=19/44.59317/-79.40638" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 15.5m</td>
+          <td class="new-val">44.59309, -79.40654<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59309&mlon=-79.40654#map=19/44.59309/-79.40654" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>512 WEST STREET SOUTH</td>
+          
+          <td class="old-val">44.59310, -79.40632<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59310&mlon=-79.40632#map=19/44.59310/-79.40632" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 16.2m</td>
+          <td class="new-val">44.59302, -79.40649<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59302&mlon=-79.40649#map=19/44.59302/-79.40649" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>514 WEST STREET SOUTH</td>
+          
+          <td class="old-val">44.59301, -79.40625<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59301&mlon=-79.40625#map=19/44.59301/-79.40625" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 22.7m</td>
+          <td class="new-val">44.59291, -79.40650<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59291&mlon=-79.40650#map=19/44.59291/-79.40650" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>516 WEST STREET SOUTH</td>
+          
+          <td class="old-val">44.59281, -79.40608<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59281&mlon=-79.40608#map=19/44.59281/-79.40608" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 23.3m</td>
+          <td class="new-val">44.59270, -79.40633<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59270&mlon=-79.40633#map=19/44.59270/-79.40633" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>518 WEST STREET SOUTH</td>
+          
+          <td class="old-val">44.59262, -79.40614<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59262&mlon=-79.40614#map=19/44.59262/-79.40614" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">← 9.3m</td>
+          <td class="new-val">44.59259, -79.40625<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59259&mlon=-79.40625#map=19/44.59259/-79.40625" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>592 WEST STREET SOUTH</td>
+          
+          <td class="old-val">44.59054, -79.40448<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59054&mlon=-79.40448#map=19/44.59054/-79.40448" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 7.2m</td>
+          <td class="new-val">44.59051, -79.40456<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59051&mlon=-79.40456#map=19/44.59051/-79.40456" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>594 WEST STREET SOUTH</td>
+          
+          <td class="old-val">44.59048, -79.40443<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59048&mlon=-79.40443#map=19/44.59048/-79.40443" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">← 8.0m</td>
+          <td class="new-val">44.59047, -79.40453<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59047&mlon=-79.40453#map=19/44.59047/-79.40453" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>595 WEST STREET SOUTH</td>
+          
+          <td class="old-val">44.59326, -79.40804<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59326&mlon=-79.40804#map=19/44.59326/-79.40804" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">→ 11.2m</td>
+          <td class="new-val">44.59327, -79.40790<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59327&mlon=-79.40790#map=19/44.59327/-79.40790" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>600 WEST STREET SOUTH</td>
+          
+          <td class="old-val">44.59027, -79.40426<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59027&mlon=-79.40426#map=19/44.59027/-79.40426" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 14.3m</td>
+          <td class="new-val">44.59021, -79.40442<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59021&mlon=-79.40442#map=19/44.59021/-79.40442" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>604 WEST STREET SOUTH</td>
+          
+          <td class="old-val">44.59017, -79.40408<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59017&mlon=-79.40408#map=19/44.59017/-79.40408" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↙ 7.1m</td>
+          <td class="new-val">44.59013, -79.40415<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59013&mlon=-79.40415#map=19/44.59013/-79.40415" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>606 WEST STREET SOUTH</td>
+          
+          <td class="old-val">44.59000, -79.40395<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59000&mlon=-79.40395#map=19/44.59000/-79.40395" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">← 10.4m</td>
+          <td class="new-val">44.58999, -79.40408<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.58999&mlon=-79.40408#map=19/44.58999/-79.40408" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+        <tr><td>609 WEST STREET SOUTH</td>
+          
+          <td class="old-val">44.59264, -79.40732<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59264&mlon=-79.40732#map=19/44.59264/-79.40732" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          <td class="arrow-val">↓ 14.8m</td>
+          <td class="new-val">44.59251, -79.40728<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.59251&mlon=-79.40728#map=19/44.59251/-79.40728" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+          
+        </tr>
+        
+      </tbody>
+    </table>
+    
+    </details>
+    
+  </div>
+
+  <div class="generated-at">Data pulled Oct 15, 2026 at 12:08 PM · source licence: Open Government Licence - Simcoe County</div>
+
+  <script>
+    function sortTable(tbodyId, col) {
+      const tbody = document.getElementById(tbodyId);
+      if (!tbody) return;
+      const rows = Array.from(tbody.rows);
+      const dir = tbody.dataset.sortDir === 'asc' ? 'desc' : 'asc';
+      tbody.dataset.sortDir = dir;
+      rows.sort((a, b) => {
+        const av = a.cells[col]?.textContent.trim() || '';
+        const bv = b.cells[col]?.textContent.trim() || '';
+        const an = parseFloat(av), bn = parseFloat(bv);
+        if (!isNaN(an) && !isNaN(bn)) return dir === 'asc' ? an - bn : bn - an;
+        return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+      });
+      rows.forEach(r => tbody.appendChild(r));
+    }
+  </script>
+</body>
+
+</html>
