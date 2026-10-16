@@ -111,14 +111,16 @@
 
     <div class="section-header">Reports · {{ license_name }} {{ ui.field_info(compared_fields, ignored_fields) }}</div>
     <div class="reports">
-      {% for report in reports %}
-      {% set changed = report.changed|default(report.modified) %}
-      {% if report.added == 0 and report.removed == 0 and changed == 0 and not report.is_baseline %}
-      <div class="report-link" style="opacity:.55">
-        <div class="date-row"><span class="date">{{ report.friendly_date }}</span></div>
+      {# The newest check, shown only when it is newer than the newest report:
+         filled from ../status.json below, so the date of a quiet day's pull
+         never rewrites this page. #}
+      <div class="report-link" id="check-row" style="opacity:.55;display:none"
+           data-slug="{{ slug }}" data-newest="{{ newest_date }}">
+        <div class="date-row"><span class="date"></span></div>
         <div class="summary"><span class="indicator neutral"></span>No changes</div>
       </div>
-      {% else %}
+      {% for report in reports %}
+      {% set changed = report.changed|default(report.modified) %}
       <a class="report-link" href="{{ report.filename }}">
         <div class="date-row"><span class="date">{{ report.friendly_date }}</span>
           {% if report.is_latest %}<span class="badge-latest">New</span>{% endif %}
@@ -132,12 +134,20 @@
           {{ "{:,}".format(report.added) }} new · {{ "{:,}".format(report.removed) }} removed{% if report.modified %} · {{ "{:,}".format(report.modified) }} updated{% endif %}{% for p in report.phrases|default([]) %} · {{ p }}{% endfor %}
         </div>
       </a>
-      {% endif %}
       {% endfor %}
     </div>
 
     <footer>Source licence: {{ license_name }} · <a href="https://github.com/skfd/ontario-address-changes">Source on GitHub</a></footer>
   </main>
+<script>
+  fetch('../status.json', {cache: 'no-cache'}).then(function (r) { return r.json(); }).then(function (s) {
+    var row = document.getElementById('check-row'), st = s[row.dataset.slug];
+    if (st && st.checked > row.dataset.newest) {
+      row.querySelector('.date').textContent = st.friendly;
+      row.style.display = '';
+    }
+  }).catch(function () {});
+</script>
 </body>
 
 </html>

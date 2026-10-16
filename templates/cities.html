@@ -159,7 +159,7 @@
         <div class="city-link city-blocked">
           <div class="city-main">
             <div class="city-name">{{ c.provider }}</div>
-            <div class="city-sub">{{ c.license_name }} · {% if c.last_checked %}checked {{ c.last_checked }}{% else %}last snapshot {{ c.last_date }}{% endif %}</div>
+            <div class="city-sub">{{ c.license_name }} · last snapshot {{ c.last_date }}<span data-checked-slug="{{ c.slug }}" data-last="{{ c.last_date }}"></span></div>
             <div class="city-sub">Tracked, but the publisher's licence does not permit republishing
               reports — none are available here.</div>
           </div>
@@ -172,7 +172,7 @@
         <a class="city-link" href="{{ c.slug }}/index.html">
           <div class="city-main">
             <div class="city-name">{{ c.provider }}</div>
-            <div class="city-sub">{{ c.license_name }} · {% if c.last_checked %}checked {{ c.last_checked }}{% else %}last snapshot {{ c.last_date }}{% endif %} · {{ c.report_count }} report{{ 's' if c.report_count != 1 else '' }}{% if c.new_street_count is defined %} · {% if c.new_street_count %}{{ c.new_street_count }} new street{{ 's' if c.new_street_count != 1 else '' }}{% else %}no new streets{% endif %}{% endif %}</div>
+            <div class="city-sub">{{ c.license_name }} · last snapshot {{ c.last_date }}<span data-checked-slug="{{ c.slug }}" data-last="{{ c.last_date }}"></span> · {{ c.report_count }} report{{ 's' if c.report_count != 1 else '' }}{% if c.new_street_count is defined %} · {% if c.new_street_count %}{{ c.new_street_count }} new street{{ 's' if c.new_street_count != 1 else '' }}{% else %}no new streets{% endif %}{% endif %}</div>
             {% if c.highlight %}<div class="city-sub city-highlight">latest: {{ c.highlight }}</div>{% endif %}
           </div>
           <div class="city-right">
@@ -259,6 +259,16 @@
       }
     })();
   </script>
+<script>
+  // "checked <date>" comes from status.json, the one file that moves on a quiet
+  // day, so this page stays byte-identical until a city's data changes.
+  fetch('status.json', {cache: 'no-cache'}).then(function (r) { return r.json(); }).then(function (s) {
+    document.querySelectorAll('[data-checked-slug]').forEach(function (el) {
+      var st = s[el.dataset.checkedSlug];
+      if (st && st.checked > el.dataset.last) el.textContent = ' \u00b7 checked ' + st.checked;
+    });
+  }).catch(function () {});
+</script>
 </body>
 
 </html>

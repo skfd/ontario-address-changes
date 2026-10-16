@@ -80,12 +80,18 @@ def test_the_index_leads_with_the_check_and_drops_empty_days():
         with open(os.path.join(city, "index.html"), encoding="utf-8") as f:
             index = f.read()
         dates = re.findall(r'class="date">([^<]+)<', index)
-        assert dates[0].endswith("Jan 09, 2026"), dates
-        assert len(dates) == 3, dates                   # check, 01-02, baseline
+        assert len(dates) == 2, dates                   # 01-02, baseline
+        # The check itself is not in the page: a hidden row names the newest
+        # report, and status.json decides client-side whether the check is newer.
         assert index.count("No changes") == 1
+        assert 'data-newest="2026-01-02"' in index
+        assert f'data-slug="{SLUG}"' in index
 
+        with open(os.path.join(docs, "status.json"), encoding="utf-8") as f:
+            assert json.load(f)[SLUG] == {"checked": "2026-01-09",
+                                          "friendly": "Friday, Jan 09, 2026"}
         with open(os.path.join(city, "_card.json"), encoding="utf-8") as f:
-            assert json.load(f)["last_checked"] == "2026-01-09"
+            assert "last_checked" not in json.load(f)
     finally:
         flags.record, report.generate_flags_page, report.DOCS_DIR = real
         shutil.rmtree(docs)

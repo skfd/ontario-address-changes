@@ -28,6 +28,7 @@ TEMPLATES_DIR = os.path.join(ROOT_DIR, "templates")
 DOCS_DIR = os.path.join(ROOT_DIR, "docs")
 LOGS_DIR = os.path.join(ROOT_DIR, "logs")
 SKIPPED_PATH = os.path.join(ROOT_DIR, "skipped.toml")
+STATUS_FILE = "status.json"
 
 MAX_RENDER = 1000          # cap rows rendered per table (true counts still shown)
 MASS_MIN_ROWS = 50         # a same-shaped sweep must cover this many rows...
@@ -531,6 +532,7 @@ def generate_all(datasets):
     os.makedirs(DOCS_DIR, exist_ok=True)
     open(os.path.join(DOCS_DIR, ".nojekyll"), "w").close()
     cities = []
+    checked = {}   # slug -> newest check, for status.json
     ledger = flags.load_ledger()
 
     for ds in datasets:
@@ -562,7 +564,6 @@ def generate_all(datasets):
             card = {
                 "slug": ds.slug, "provider": ds.provider, "license_name": ds.license_name,
                 "row_count": snaps[-1]["row_count"], "last_date": diff.snap_date(snaps[-1]),
-                "last_checked": _last_checked(ds),
                 "added": 0, "removed": 0, "modified": 0, "highlight": "",
                 "has_changes": False, "report_count": 0,
                 "compared_fields": [], "ignored_fields": [],
@@ -570,6 +571,7 @@ def generate_all(datasets):
                 "license_blocked": True,
             }
             cities.append(card)
+            checked[ds.slug] = _checked_entry(ds)
             with open(os.path.join(city_dir, "_card.json"), "w", encoding="utf-8") as f:
                 json.dump(card, f)
             continue
@@ -643,18 +645,12 @@ def generate_all(datasets):
         if meta:
             meta[0]["is_latest"] = not meta[0]["is_baseline"]
 
-        # The first row is always the newest check. When it found nothing --
-        # an unchanged pull, or a snapshot whose report came out empty -- it is
-        # an inactive "No changes" row, so a reader can tell a quiet source
-        # from an updater that stopped.
-        last_checked = _last_checked(ds)
-        if last_checked > meta[0]["date"]:
-            meta.insert(0, {
-                "date": last_checked, "friendly_date": _friendly_date(last_checked),
-                "filename": None, "is_baseline": False,
-                "added": 0, "removed": 0, "modified": 0, "changed": 0,
-                "phrases": [], "new_streets": [],
-            })
+        # The newest check is not in the page. The city index carries a hidden
+        # "No changes" row that status.json fills in client-side when the last
+        # pull is newer than the newest report, so a reader can still tell a
+        # quiet source from an updater that stopped -- without the date of the
+        # check rewriting every city index on every daily run (see STATUS_FILE).
+        checked[ds.slug] = _checked_entry(ds)
 
         # every new-street debut ever observed, newest first. Uncapped: there are
         # few enough that the whole list is the interesting part.
@@ -669,6 +665,7 @@ def generate_all(datasets):
             f.write(_env.get_template("city_index.html").render(
                 provider=ds.provider, license_name=ds.license_name,
                 source_url=source_url, reports=meta,
+                slug=ds.slug, newest_date=meta[0]["date"],
                 new_streets=new_streets,
                 tracking_since=baseline["friendly_date"] if baseline else None,
                 compared_fields=compared, ignored_fields=ignored))
@@ -681,7 +678,6 @@ def generate_all(datasets):
         card = {
             "slug": ds.slug, "provider": ds.provider, "license_name": ds.license_name,
             "row_count": snaps[-1]["row_count"], "last_date": diff.snap_date(snaps[-1]),
-            "last_checked": _last_checked(ds),
             "added": latest["added"], "removed": latest["removed"], "modified": latest["changed"],
             "highlight": "" if latest["is_baseline"] else " · ".join(latest["phrases"][:2]),
             "has_changes": not latest["is_baseline"],
@@ -703,6 +699,8 @@ def generate_all(datasets):
         if os.path.basename(os.path.dirname(path)) not in rendered:
             with open(path, encoding="utf-8") as f:
                 cities.append(json.load(f))
+
+    _write_status(checked)
 
     cities.sort(key=lambda c: c["provider"])
     total_addresses = sum(c["row_count"] for c in cities)
@@ -784,6 +782,29 @@ def _map_features(cities):
 def _last_checked(ds):
     """Date of the newest pull recorded for this dataset, changed or not."""
     return max(diff.snap_date(s) for s in db.get_snapshots(ds))
+
+
+def _checked_entry(ds):
+    d = _last_checked(ds)
+    return {"checked": d, "friendly": _friendly_date(d)}
+
+
+def _write_status(checked):
+    """docs/status.json: slug -> {checked, friendly}, the date of each city's
+    newest pull. It is the one published file that moves on a day nothing
+    changed, which is the point: the landing and the city indexes read it
+    client-side, so their HTML stays byte-identical until the data moves and
+    the daily commit is one file on a quiet day. Merged over the existing file
+    so a single-city render keeps the other cities' entries; sorted so the
+    output is deterministic."""
+    path = os.path.join(DOCS_DIR, STATUS_FILE)
+    status = {}
+    if os.path.exists(path):
+        with open(path, encoding="utf-8") as f:
+            status = json.load(f)
+    status.update(checked)
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(status, f, sort_keys=True, indent=1)
 
 
 def _load_skipped():
