@@ -188,6 +188,37 @@ foreach ($lock in @(Get-ChildItem $gitDir -Filter '*.lock' -Recurse -Force -File
     }
 }
 
+# The commit message says what the day published, so `git log --oneline` reads
+# without --stat. Only report pages count: cards and city indexes move every
+# day the update ran (their "checked" date), which is not news. New pages are
+# the day's events; a modified or deleted page is a re-render (a flag verdict,
+# a class or ignore-field change) and worth a look in the log.
+# BEGIN Get-DailyMessage
+function Get-DailyMessage([string[]]$nameStatus) {
+    $date = Get-Date -Format yyyy-MM-dd
+    $new = [System.Collections.Generic.List[string]]::new()
+    $rerendered = [System.Collections.Generic.List[string]]::new()
+    $removed = 0
+    foreach ($line in $nameStatus) {
+        if ($line -match '^([AMD])\s+docs/([^/]+)/report-') {
+            $kind, $city = $Matches[1], $Matches[2]
+            if ($kind -eq 'A') { if (-not $new.Contains($city)) { $new.Add($city) } }
+            elseif ($kind -eq 'M') { if (-not $rerendered.Contains($city)) { $rerendered.Add($city) } }
+            else { $removed++ }
+        }
+    }
+    $parts = @()
+    if ($new.Count)        { $parts += "$($new.Count) new report$(if ($new.Count -ne 1) { 's' })" }
+    if ($rerendered.Count) { $parts += "$($rerendered.Count) re-rendered" }
+    if ($removed)          { $parts += "$removed removed" }
+    if (-not $parts)       { $parts += 'no new reports' }
+    $lines = @("daily update ${date}: $($parts -join ', ')")
+    if ($new.Count)        { $lines += ''; $lines += "new: $($new -join ', ')" }
+    if ($rerendered.Count) { if ($lines.Count -eq 1) { $lines += '' }; $lines += "re-rendered: $($rerendered -join ', ')" }
+    return $lines
+}
+# END Get-DailyMessage
+
 # flags.toml rides along: report generation appends newly flagged events to it,
 # and the append is only durable history once committed.
 Invoke-Logged "git add docs flags.toml"
@@ -195,7 +226,11 @@ $publishExit = $LASTEXITCODE
 if ($publishExit -eq 0) {
     git diff --cached --quiet
     if ($LASTEXITCODE -ne 0) {
-        Invoke-Logged "git commit -m `"daily update $(Get-Date -Format yyyy-MM-dd)`""
+        # The message goes through a file: Invoke-Logged runs under cmd, where a
+        # multi-line quoted argument has no reliable form. logs\ is gitignored.
+        $msgFile = "$logDir\commit-msg.txt"
+        Set-Content $msgFile (Get-DailyMessage @(git diff --cached --name-status --no-renames))
+        Invoke-Logged "git commit -F `"$msgFile`""
         $publishExit = $LASTEXITCODE
         # Nothing new to push if the commit never landed, and pushing anyway
         # reports "Everything up-to-date" -- a success that hides the failure.
