@@ -227,6 +227,52 @@ Static sources (toronto, waterloo) cannot be probed this way — no layer metada
 
 ## 2. Find data sources for uncovered cities
 
+**From the ontario-osm-data-sources portal sweep, 2026-10-16.** That repo graded every
+address layer on every Ontario portal (`catalogue/layers/*.csv`, theme `addresses`); these
+are the ones that change something here. Counts and dates probed live 2026-10-16.
+
+- [ ] **west-parry-sound is failing daily (urgent).** The tracked
+      `wpsgnPublic/wpsgn_opendata/FeatureServer/0` answers 500 "Service ... not started"
+      (both attempts, 2026-10-15). The same server's
+      `https://www.wpsgn.ca/s22/rest/services/NG911/NG911/FeatureServer/9112` ("Civic Address
+      Point NENA") answers with 21,734 rows against our 21,705. A re-point, but onto a
+      53-field NENA schema: new field map and identity, and pre-rule the schema-switch day
+      the way lambton's was (flags.toml, 2026-09-15). Same network, same OGL question (§3).
+- [ ] **middlesex follows a 2023 snapshot.** `MiddlesexCountyAddressPoints` (item name
+      `mc_address`) was last edited 2023-10-18 and holds 31,571. The county's live layer is
+      `https://utility.arcgis.com/usrsvcs/servers/f4dd79bdd35a456c87c0c20668138c05/rest/services/MiddlesexCounty/Base_Layers/MapServer/1`,
+      34,308 rows. No licence on either, so the gate is unchanged. A `utility.arcgis.com`
+      proxy URL: check it is stable before trusting it.
+- [ ] **elgin's tracked layer has not moved since 2026-06-12** (30 identical pulls,
+      21,785 rows, `Public/MapServer/1` "E911", no lastEditDate). The county now publishes
+      `https://services6.arcgis.com/TCQ78XR5HqDZ1SDc/arcgis/rest/services/Elgin_Civic_Numbers_2026/FeatureServer/0`
+      (item `4ec0a122eed343948c0bb705733a2861`, owner `elgingis`), 24,177 rows, edited
+      2026-10-05. Its item licenseInfo is empty, but the county's Hub
+      (`elgin-county-open-data-Elgin-County.hub.arcgis.com`) names "Open Government Licence -
+      County of Elgin" portal-wide, which the 2026-08-20 check ("none published") predates.
+      A re-point and a §3 licence recheck, the dufferin shape (portal-wide notice only).
+- [ ] **Essex County is not "No address layer" any more.** Tecumseh publishes
+      `https://gisweb.tecumseh.ca/arcgis/rest/services/OpenDataMaps/OpenDataMAP_InfraZonePropBound_Layers/MapServer/33`,
+      9,860 points (number, street, suffix), catalogued under "Open Government Licence - The
+      Corporation of the County of Essex". A new dataset; fix the skipped.toml entry either way.
+- [ ] **Grey County has an address fabric again**, on `gis.grey.ca/server`:
+      `Public/Service_ParcelLabels/MapServer/3` (51,458 county-wide addresses on parcel
+      polygons, centroiding needed) and `.../MapServer/2` (10,509 Blue Mountains points). No
+      licence published, and it answered 403 from here on 2026-10-16. Update skipped.toml
+      from "No address layer" to the licence gate.
+- [ ] **Member layers under open licences, in regions we track:** Ajax (38,381, Ajax Open
+      Data Licence v1.0), Whitby (49,090, Whitby OGL) and Pickering (42,743, Pickering Open
+      Data License) inside durham, which is yellow-review on the Region's own licence;
+      Newmarket (34,923) inside york; Welland (22,461, OGL Welland) and Niagara Falls city
+      (35,700) inside niagara-falls; Orillia (11,274) and New Tecumseth (14,836) inside simcoe.
+      Only durham's matter now: if its licence fails the LWG, these three cover most of it.
+
+Checked and not new: dufferin's Entrances vs Address_Points (your decision, in its toml);
+simcoe's NG911 layer (188,698, smaller than the tracked 190,432); waterloo's MapServer
+endpoint (263,200, an alternative to the Hub shapefile export if that ever breaks); North
+Bay, Oxford, Haliburton, Sault Ste. Marie and the City of Peterborough (the catalogue also
+finds no usable licence).
+
 **OUTCOME 2026-08-20 — the onboarding wave ran the same day the probes below landed.**
 Eleven datasets imported with verified baselines: **simcoe** (190,207 — covers
 Innisfil 20,540 + Collingwood 15,323 + 16 more member munis; no Barrie overlap,
