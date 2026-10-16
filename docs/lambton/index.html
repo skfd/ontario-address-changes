@@ -110,6 +110,11 @@
   </span></div>
     <div class="reports">
       
+      <div class="report-link" id="check-row" style="opacity:.55;display:none"
+           data-slug="lambton" data-newest="2026-10-15">
+        <div class="date-row"><span class="date"></span></div>
+        <div class="summary"><span class="indicator neutral"></span>No changes</div>
+      </div>
       
       
       <a class="report-link" href="report-2026-10-15.html">
@@ -126,8 +131,6 @@
       </a>
       
       
-      
-      
       <a class="report-link" href="report-2026-10-09.html">
         <div class="date-row"><span class="date">Friday, Oct 09, 2026</span>
           
@@ -140,8 +143,6 @@
           2 new · 0 removed
         </div>
       </a>
-      
-      
       
       
       <a class="report-link" href="report-2026-10-02.html">
@@ -158,8 +159,6 @@
       </a>
       
       
-      
-      
       <a class="report-link" href="report-2026-10-01.html">
         <div class="date-row"><span class="date">Thursday, Oct 01, 2026</span>
           
@@ -172,8 +171,6 @@
           23 new · 0 removed
         </div>
       </a>
-      
-      
       
       
       <a class="report-link" href="report-2026-09-30.html">
@@ -190,8 +187,6 @@
       </a>
       
       
-      
-      
       <a class="report-link" href="report-2026-09-15.html">
         <div class="date-row"><span class="date">Tuesday, Sep 15, 2026</span>
           
@@ -203,8 +198,6 @@
           0 new · 0 removed · 173 updated
         </div>
       </a>
-      
-      
       
       
       <a class="report-link" href="report-2026-06-10.html">
@@ -220,11 +213,19 @@
         </div>
       </a>
       
-      
     </div>
 
     <footer>Source licence: Open Government Licence - County of Lambton · <a href="https://github.com/skfd/ontario-address-changes">Source on GitHub</a></footer>
   </main>
+<script>
+  fetch('../status.json', {cache: 'no-cache'}).then(function (r) { return r.json(); }).then(function (s) {
+    var row = document.getElementById('check-row'), st = s[row.dataset.slug];
+    if (st && st.checked > row.dataset.newest) {
+      row.querySelector('.date').textContent = st.friendly;
+      row.style.display = '';
+    }
+  }).catch(function () {});
+</script>
 </body>
 
 </html>

@@ -125,14 +125,11 @@
   </span></div>
     <div class="reports">
       
-      
-      
-      <div class="report-link" style="opacity:.55">
-        <div class="date-row"><span class="date">Thursday, Oct 15, 2026</span></div>
+      <div class="report-link" id="check-row" style="opacity:.55;display:none"
+           data-slug="huron" data-newest="2026-10-10">
+        <div class="date-row"><span class="date"></span></div>
         <div class="summary"><span class="indicator neutral"></span>No changes</div>
       </div>
-      
-      
       
       
       <a class="report-link" href="report-2026-10-10.html">
@@ -149,8 +146,6 @@
       </a>
       
       
-      
-      
       <a class="report-link" href="report-2026-10-03.html">
         <div class="date-row"><span class="date">Saturday, Oct 03, 2026</span>
           
@@ -163,8 +158,6 @@
           3 new · 0 removed · 1 address split
         </div>
       </a>
-      
-      
       
       
       <a class="report-link" href="report-2026-09-26.html">
@@ -181,8 +174,6 @@
       </a>
       
       
-      
-      
       <a class="report-link" href="report-2026-09-19.html">
         <div class="date-row"><span class="date">Saturday, Sep 19, 2026</span>
           
@@ -195,8 +186,6 @@
           3 new · 0 removed
         </div>
       </a>
-      
-      
       
       
       <a class="report-link" href="report-2026-09-12.html">
@@ -213,8 +202,6 @@
       </a>
       
       
-      
-      
       <a class="report-link" href="report-2026-09-05.html">
         <div class="date-row"><span class="date">Saturday, Sep 05, 2026</span>
           
@@ -227,8 +214,6 @@
           42 new · 5 removed · 4 address splits
         </div>
       </a>
-      
-      
       
       
       <a class="report-link" href="report-2026-08-22.html">
@@ -245,8 +230,6 @@
       </a>
       
       
-      
-      
       <a class="report-link" href="report-2026-08-08.html">
         <div class="date-row"><span class="date">Saturday, Aug 08, 2026</span>
           
@@ -259,8 +242,6 @@
           43 new · 32 removed · 4 address splits
         </div>
       </a>
-      
-      
       
       
       <a class="report-link" href="report-2026-08-01.html">
@@ -277,8 +258,6 @@
       </a>
       
       
-      
-      
       <a class="report-link" href="report-2026-07-29.html">
         <div class="date-row"><span class="date">Wednesday, Jul 29, 2026</span>
           
@@ -292,8 +271,6 @@
       </a>
       
       
-      
-      
       <a class="report-link" href="report-2026-07-25.html">
         <div class="date-row"><span class="date">Saturday, Jul 25, 2026</span>
           
@@ -305,8 +282,6 @@
           4 new · 1 removed · 33,701 boundary changes
         </div>
       </a>
-      
-      
       
       
       <a class="report-link" href="report-2026-07-18.html">
@@ -323,8 +298,6 @@
       </a>
       
       
-      
-      
       <a class="report-link" href="report-2026-07-11.html">
         <div class="date-row"><span class="date">Saturday, Jul 11, 2026</span>
           
@@ -337,8 +310,6 @@
           7 new · 2 removed · 1 address split
         </div>
       </a>
-      
-      
       
       
       <a class="report-link" href="report-2026-07-04.html">
@@ -355,8 +326,6 @@
       </a>
       
       
-      
-      
       <a class="report-link" href="report-2026-06-27.html">
         <div class="date-row"><span class="date">Saturday, Jun 27, 2026</span>
           
@@ -369,8 +338,6 @@
           3 new · 1 removed
         </div>
       </a>
-      
-      
       
       
       <a class="report-link" href="report-2026-06-20.html">
@@ -387,8 +354,6 @@
       </a>
       
       
-      
-      
       <a class="report-link" href="report-2026-06-13.html">
         <div class="date-row"><span class="date">Saturday, Jun 13, 2026</span>
           
@@ -401,8 +366,6 @@
           6 new · 2 removed · 1 address split
         </div>
       </a>
-      
-      
       
       
       <a class="report-link" href="report-2026-06-11.html">
@@ -418,11 +381,19 @@
         </div>
       </a>
       
-      
     </div>
 
     <footer>Source licence: Open Government Licence - The County of Huron · <a href="https://github.com/skfd/ontario-address-changes">Source on GitHub</a></footer>
   </main>
+<script>
+  fetch('../status.json', {cache: 'no-cache'}).then(function (r) { return r.json(); }).then(function (s) {
+    var row = document.getElementById('check-row'), st = s[row.dataset.slug];
+    if (st && st.checked > row.dataset.newest) {
+      row.querySelector('.date').textContent = st.friendly;
+      row.style.display = '';
+    }
+  }).catch(function () {});
+</script>
 </body>
 
 </html>

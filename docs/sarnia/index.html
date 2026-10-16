@@ -110,14 +110,11 @@
   </span></div>
     <div class="reports">
       
-      
-      
-      <div class="report-link" style="opacity:.55">
-        <div class="date-row"><span class="date">Thursday, Oct 15, 2026</span></div>
+      <div class="report-link" id="check-row" style="opacity:.55;display:none"
+           data-slug="sarnia" data-newest="2026-08-20">
+        <div class="date-row"><span class="date"></span></div>
         <div class="summary"><span class="indicator neutral"></span>No changes</div>
       </div>
-      
-      
       
       
       <a class="report-link" href="report-2026-08-20.html">
@@ -134,8 +131,6 @@
       </a>
       
       
-      
-      
       <a class="report-link" href="report-2026-06-11.html">
         <div class="date-row"><span class="date">Thursday, Jun 11, 2026</span>
           
@@ -149,11 +144,19 @@
         </div>
       </a>
       
-      
     </div>
 
     <footer>Source licence: City of Sarnia Open Data Terms of Use (OGL-Canada 2.0 based) · <a href="https://github.com/skfd/ontario-address-changes">Source on GitHub</a></footer>
   </main>
+<script>
+  fetch('../status.json', {cache: 'no-cache'}).then(function (r) { return r.json(); }).then(function (s) {
+    var row = document.getElementById('check-row'), st = s[row.dataset.slug];
+    if (st && st.checked > row.dataset.newest) {
+      row.querySelector('.date').textContent = st.friendly;
+      row.style.display = '';
+    }
+  }).catch(function () {});
+</script>
 </body>
 
 </html>

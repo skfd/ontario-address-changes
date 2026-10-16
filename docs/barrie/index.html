@@ -119,14 +119,11 @@
   </span></div>
     <div class="reports">
       
-      
-      
-      <div class="report-link" style="opacity:.55">
-        <div class="date-row"><span class="date">Thursday, Oct 15, 2026</span></div>
+      <div class="report-link" id="check-row" style="opacity:.55;display:none"
+           data-slug="barrie" data-newest="2026-10-12">
+        <div class="date-row"><span class="date"></span></div>
         <div class="summary"><span class="indicator neutral"></span>No changes</div>
       </div>
-      
-      
       
       
       <a class="report-link" href="report-2026-10-12.html">
@@ -142,8 +139,6 @@
       </a>
       
       
-      
-      
       <a class="report-link" href="report-2026-10-05.html">
         <div class="date-row"><span class="date">Monday, Oct 05, 2026</span>
           
@@ -157,8 +152,6 @@
       </a>
       
       
-      
-      
       <a class="report-link" href="report-2026-09-28.html">
         <div class="date-row"><span class="date">Monday, Sep 28, 2026</span>
           
@@ -170,8 +163,6 @@
           0 new · 0 removed · 6 status changes · 6 moved
         </div>
       </a>
-      
-      
       
       
       <a class="report-link" href="report-2026-09-21.html">
@@ -188,8 +179,6 @@
       </a>
       
       
-      
-      
       <a class="report-link" href="report-2026-09-14.html">
         <div class="date-row"><span class="date">Monday, Sep 14, 2026</span>
           
@@ -201,8 +190,6 @@
           0 new · 0 removed · 7 moved
         </div>
       </a>
-      
-      
       
       
       <a class="report-link" href="report-2026-09-07.html">
@@ -219,8 +206,6 @@
       </a>
       
       
-      
-      
       <a class="report-link" href="report-2026-09-02.html">
         <div class="date-row"><span class="date">Wednesday, Sep 02, 2026</span>
           
@@ -232,8 +217,6 @@
           1 new · 0 removed · 175 status changes · 1 moved
         </div>
       </a>
-      
-      
       
       
       <a class="report-link" href="report-2026-08-31.html">
@@ -249,8 +232,6 @@
       </a>
       
       
-      
-      
       <a class="report-link" href="report-2026-08-24.html">
         <div class="date-row"><span class="date">Monday, Aug 24, 2026</span>
           
@@ -262,8 +243,6 @@
           6 new · 10 removed · 20 updated · 1 address split · 8 status changes
         </div>
       </a>
-      
-      
       
       
       <a class="report-link" href="report-2026-08-17.html">
@@ -280,8 +259,6 @@
       </a>
       
       
-      
-      
       <a class="report-link" href="report-2026-08-10.html">
         <div class="date-row"><span class="date">Monday, Aug 10, 2026</span>
           
@@ -293,8 +270,6 @@
           0 new · 0 removed · 1 updated
         </div>
       </a>
-      
-      
       
       
       <a class="report-link" href="report-2026-08-03.html">
@@ -311,8 +286,6 @@
       </a>
       
       
-      
-      
       <a class="report-link" href="report-2026-07-28.html">
         <div class="date-row"><span class="date">Tuesday, Jul 28, 2026</span>
           
@@ -324,8 +297,6 @@
           0 new · 0 removed · 20 updated · 23 status changes
         </div>
       </a>
-      
-      
       
       
       <a class="report-link" href="report-2026-07-20.html">
@@ -342,8 +313,6 @@
       </a>
       
       
-      
-      
       <a class="report-link" href="report-2026-07-13.html">
         <div class="date-row"><span class="date">Monday, Jul 13, 2026</span>
           
@@ -356,8 +325,6 @@
           8 new · 1 removed
         </div>
       </a>
-      
-      
       
       
       <a class="report-link" href="report-2026-07-06.html">
@@ -373,8 +340,6 @@
       </a>
       
       
-      
-      
       <a class="report-link" href="report-2026-06-29.html">
         <div class="date-row"><span class="date">Monday, Jun 29, 2026</span>
           
@@ -386,8 +351,6 @@
           3 new · 0 removed · 6 updated · 13 moved
         </div>
       </a>
-      
-      
       
       
       <a class="report-link" href="report-2026-06-22.html">
@@ -404,8 +367,6 @@
       </a>
       
       
-      
-      
       <a class="report-link" href="report-2026-06-11.html">
         <div class="date-row"><span class="date">Thursday, Jun 11, 2026</span>
           
@@ -419,11 +380,19 @@
         </div>
       </a>
       
-      
     </div>
 
     <footer>Source licence: Open Government Licence - Barrie · <a href="https://github.com/skfd/ontario-address-changes">Source on GitHub</a></footer>
   </main>
+<script>
+  fetch('../status.json', {cache: 'no-cache'}).then(function (r) { return r.json(); }).then(function (s) {
+    var row = document.getElementById('check-row'), st = s[row.dataset.slug];
+    if (st && st.checked > row.dataset.newest) {
+      row.querySelector('.date').textContent = st.friendly;
+      row.style.display = '';
+    }
+  }).catch(function () {});
+</script>
 </body>
 
 </html>

@@ -130,14 +130,11 @@
   </span></div>
     <div class="reports">
       
-      
-      
-      <div class="report-link" style="opacity:.55">
-        <div class="date-row"><span class="date">Thursday, Oct 15, 2026</span></div>
+      <div class="report-link" id="check-row" style="opacity:.55;display:none"
+           data-slug="leeds-grenville" data-newest="2026-10-06">
+        <div class="date-row"><span class="date"></span></div>
         <div class="summary"><span class="indicator neutral"></span>No changes</div>
       </div>
-      
-      
       
       
       <a class="report-link" href="report-2026-10-06.html">
@@ -154,8 +151,6 @@
       </a>
       
       
-      
-      
       <a class="report-link" href="report-2026-09-01.html">
         <div class="date-row"><span class="date">Tuesday, Sep 01, 2026</span>
           
@@ -167,8 +162,6 @@
           44 new · 9 removed · 73 updated · 1 address split · 17 moved
         </div>
       </a>
-      
-      
       
       
       <a class="report-link" href="report-2026-08-04.html">
@@ -185,8 +178,6 @@
       </a>
       
       
-      
-      
       <a class="report-link" href="report-2026-07-07.html">
         <div class="date-row"><span class="date">Tuesday, Jul 07, 2026</span>
           
@@ -198,8 +189,6 @@
           79 new · 0 removed · 39 updated · 206 moved
         </div>
       </a>
-      
-      
       
       
       <a class="report-link" href="report-2026-06-11.html">
@@ -215,11 +204,19 @@
         </div>
       </a>
       
-      
     </div>
 
     <footer>Source licence: Open Government Licence - United Counties of Leeds and Grenville v1.0 · <a href="https://github.com/skfd/ontario-address-changes">Source on GitHub</a></footer>
   </main>
+<script>
+  fetch('../status.json', {cache: 'no-cache'}).then(function (r) { return r.json(); }).then(function (s) {
+    var row = document.getElementById('check-row'), st = s[row.dataset.slug];
+    if (st && st.checked > row.dataset.newest) {
+      row.querySelector('.date').textContent = st.friendly;
+      row.style.display = '';
+    }
+  }).catch(function () {});
+</script>
 </body>
 
 </html>
