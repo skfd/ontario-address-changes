@@ -231,6 +231,26 @@ Static sources (toronto, waterloo) cannot be probed this way — no layer metada
 
 ## 2. Find data sources for uncovered cities
 
+**Places queue, consolidated 2026-10-16** (detail for each in the items below; this is
+the order to work them):
+
+| # | place | what | why now |
+|---|---|---|---|
+| 1 | west-parry-sound | re-point to NG911/9112 (21,734) or email wpsgn | down 22 days, reddens every run |
+| 2 | elgin | re-point to Elgin_Civic_Numbers_2026 (24,177) + licence recheck | tracked layer frozen since 06-12 |
+| 3 | middlesex | re-point to the county's live Base_Layers/MapServer/1 (34,308) | tracked item is a 2023 snapshot |
+| 4 | Tecumseh (Essex) | new dataset, 9,860 pts, OGL Essex; fix skipped.toml | first Essex points under an open licence |
+| 5 | Grey County | licence ask; 51k parcel labels + 10.5k Blue Mountains pts; 403 from here | skipped.toml says "no layer", now wrong |
+| 6 | peel-region, waterloo, dufferin, cambridge, chatham-kent | data-integrity look: content frozen 15/16/16/10/12 weeks | live layer or periodic export? |
+| 7 | stratford, prince-edward-county, haldimand | city-tune audit pass (2+ changed snapshots, TOML untouched since 08-20) | owed since onboarding |
+| 8 | milton | licensed-layer re-point, deferred 2026-10-12 | now also the flakiest October source |
+| 9 | Ajax, Whitby, Pickering / Newmarket / Welland, Niagara Falls city / Orillia, New Tecumseth | member layers under open licences | only if durham/york/niagara/simcoe fail the LWG |
+| 10 | Oxford, North Bay, Haliburton, Sault Ste. Marie, City of Peterborough | licence asks (layers verified live) | stuck at the gate, not at the search |
+| — | Belleville, Northumberland, Lanark, Timmins, Owen Sound, Kenora | still no machine-readable layer | quarterly re-probe only |
+
+The other six August onboards (amherstburg, cobourg, halton-hills, middlesex, norfolk,
+west-parry-sound) cannot be tuned yet — none has published a second distinct snapshot.
+
 **From the ontario-osm-data-sources portal sweep, 2026-10-16.** That repo graded every
 address layer on every Ontario portal (`catalogue/layers/*.csv`, theme `addresses`); these
 are the ones that change something here. Counts and dates probed live 2026-10-16.
@@ -570,6 +590,42 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
     Elgin and middlesex are explained in §2 (stale layers, live replacements found);
     peel-region at 504k addresses and cambridge at 54k unchanged for 15 and 10 weeks
     deserve the same look — a periodic export, not a live layer, is the likely answer.
+- [ ] **Flaky sources — the technical plan (written 2026-10-16, hand to a coding
+  agent).** Today there is no mechanism that detects or announces a source failing
+  consistently: `runs.csv` has one exit code for the whole run, `update.log` keeps one
+  run, the vault report shows red cells but no streak, and nothing posts anywhere.
+  Three layers, independent, in order of payoff:
+  1. **Heal server-side transients inside the pull** (address-vault `fetch/arcgis.py`).
+     The fetcher's 3 × 15-min retry covers only `ConnectionError`/`Timeout` (built for
+     ottawa's F5 block). Every error in the chronic bucket above is something else and
+     fails the city on the spot: HTTP 5xx from `raise_for_status` (simcoe 503, guelph
+     mid-page 500, hamilton/brantford 502), the ArcGIS error body under HTTP 200
+     (kingston "Error invoking service", milton "Wait time ... expired", WPS "not
+     started"), and `first page returned no features` (cambridge). Add a second, short
+     tier for those: ~4 tries at 30/60/120/240 s on a fresh Session, resuming from
+     `last_oid` exactly as the long tier does, and apply it to the count probe too (a
+     transient 500 there currently just drops verification for the day). Keep the long
+     tier for connection blocks. Expected effect, from the 90-day data: cambridge's 7,
+     guelph's 6 and milton's 7 failed pulls all recovered within the outer loop's 15 min,
+     so most would heal in attempt 1; simcoe's 503s outlast 45 min on 5 of 8 days, so
+     it is helped less; WPS not at all (which is correct — a stopped service should fail).
+  2. **Make the run streak-aware** (`run.py update` + `daily-update.ps1`). Record each
+     city's failure signature per day (the vault `jobs` table already has it). A city
+     whose last 3 daily pulls failed with the same signature is a *known outage*: pull it
+     once, print `failed (down N days)`, and leave it out of the retry decision, so the
+     outer loop retries only on a *fresh* failure and the exit code goes back to meaning
+     "something new broke". Honour `enabled = false` in the TOML as the manual version
+     (skip the pull, keep rendering from the last snapshot, landing row says "paused").
+     Streak days still count toward the vault report, not toward exit 1.
+  3. **Announce it** — reuse `tools/flag_issues.py`'s bot: at streak day 3 open one
+     GitHub issue per city (`source-down` label; signature, last good date, the TOML's
+     alternative-URL notes, link to the vault report) and auto-close it with a comment on
+     the first clean pull. The hourly `kk-ontario-flags` task already carries the token
+     and the owner gets GitHub's notification. Also a `down: west-parry-sound (22d)` line
+     in the daily commit message and a "failed N days running" column in the vault
+     report, so the streak is visible without the issue. Frozen-but-succeeding layers
+     (the bucket above) get the same treatment at a different threshold — e.g. 60 days
+     identical — as a `stale` label, since that bucket is where elgin and middlesex hid.
 - [x] ~~**kingston: source down since 2026-08-08**~~ — **recovered on its own 2026-08-10.**
   Seven pull attempts across 08-08 and 08-09, every one `arcgis error 500: Error invoking
   service`; today's noon run pulled it normally (`expect=77,294`, no ERROR line, and
