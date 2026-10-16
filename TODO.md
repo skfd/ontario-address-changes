@@ -647,6 +647,12 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
      west-parry-sound down, and dufferin, elgin, peel-region, waterloo stale.
   Not covered: the static fetcher (toronto, waterloo downloads) still has only its own
   retry — toronto's two July failures were of that kind, nothing since.
+  Known wobbles, left as is: a pull *refused* by the vault's guards counts toward the
+  down streak, so three refused days read as "source down" (the issue quotes the
+  "truncated pull" error, so it is not misleading, and a refusal already shows as
+  "needs a look" in the vault report). A paused source keeps its down issue open, and
+  90 days after its last change also gets a stale issue. In parallel mode the "known
+  outage" line prints twice, once from the worker and once from the parent.
 - [x] ~~**kingston: source down since 2026-08-08**~~ — **recovered on its own 2026-08-10.**
   Seven pull attempts across 08-08 and 08-09, every one `arcgis error 500: Error invoking
   service`; today's noon run pulled it normally (`expect=77,294`, no ERROR line, and
@@ -695,6 +701,9 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
   current design escalates a one-day failure (exit 1) exactly as loudly as a three-week
   one. Whatever is decided, a per-city "failed N days running" line in the daily commit
   message or the vault report would have been enough here.
+  **Decided and built 2026-10-16:** N = 3 pull days. From the third, the city stops
+  failing the run and a `source-down` GitHub issue carries the alert instead (§4,
+  flaky-sources item).
 - [ ] **A Windows Update restart skips the day silently — diagnosed 2026-08-12, left
   unfixed by choice.** Found while checking why 08-12 had no run at all: no `runs.csv`
   row, zero lines in `update.log`, no vault snapshots pulled, and the task itself

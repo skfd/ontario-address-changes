@@ -248,6 +248,9 @@ function Show-History {
             $r = $runs[$day]
             $note = if ($r.exit -eq 'offline') { 'offline (like laptop off)' }
                     elseif ($r.exit -eq 'metered') { 'skipped (metered connection)' }
+                    elseif ($r.exit -eq 'outage') { "run ok except known outages ({0} attempt(s))" -f $r.attempts }
+                    elseif ($r.exit -eq 'publish-failed') { 'cities ok, site NOT published' }
+                    elseif ($r.exit -notmatch '^-?\d+$') { "run ended '{0}'" -f $r.exit }
                     elseif ([int]$r.exit -eq 0) { "run ok ({0} attempt(s))" -f $r.attempts }
                     else { "run FAILED after {0} attempt(s)" -f $r.attempts }
         } elseif ($okN -eq 0) {
