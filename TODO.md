@@ -1,7 +1,8 @@
 # Operator TODO — ontario-address-changes
 
-Last updated: 2026-08-21. Tasks for the human operator. Field-coverage numbers come
-from an audit of all 42 tracked cities (latest snapshot in each city DB).
+Last updated: 2026-10-16. Tasks for the human operator. Field-coverage numbers come
+from an audit of all 42 tracked cities (latest snapshot in each city DB; the 11
+datasets onboarded 2026-08-20 are not in the appendix yet).
 
 ## 1. Complete field selection for tracked cities
 
@@ -222,6 +223,9 @@ event). These are all additions.
 - [ ] **renfrew** — 71 fields live against far fewer stored, but renfrew is frozen at
   06-29, so most of that is drift accumulated while we were not looking rather than a
   real roster change. Re-run `--drift` once it unfreezes before acting on it.
+  **Unfrozen** (noted 2026-10-16): the county layer moved 08-28 (+6,222, two member
+  municipalities loaded), 09-10 (+1,588, Laurentian Hills) and last on 09-24, so the
+  precondition is met; `.claude/skills/data-integrity/health.py --drift` is ready to run.
 
 Static sources (toronto, waterloo) cannot be probed this way — no layer metadata to ask.
 
@@ -238,6 +242,19 @@ are the ones that change something here. Counts and dates probed live 2026-10-16
       Point NENA") answers with 21,734 rows against our 21,705. A re-point, but onto a
       53-field NENA schema: new field map and identity, and pre-rule the schema-switch day
       the way lambton's was (flags.toml, 2026-09-15). Same network, same OGL question (§3).
+      **Cost, measured 2026-10-16:** down every day since 09-24 except 10-01 (22 days, 63
+      failed pulls, same message each time; the 10-01 pull succeeded and was byte-identical
+      to 08-20, so the service was briefly *started* that day, not fixed). Because it fails
+      on every attempt, every daily run since 09-24 has gone the full three attempts and
+      exited 1 — 21 of 22 days — which saturates the exit code (nothing new can turn it
+      red) and adds ~35 min/day (median run 47 min on a clean day vs 85 on a three-attempt
+      day, Sept–Oct). Two routes, decide one: the NG911 re-point above, or first an email
+      to info@wpsgn.ca (the TOML already names them for the licence-scope question) — a
+      "not started" service is an operator-side switch and the 10-01 blip shows it can be
+      flipped. The tracker has no pause switch: the vault honours `enabled = false` in a
+      TOML for its own `pull-due`, but `run.py update` seeds the Source without it and
+      pulls regardless, so stopping the daily cost needs either that one-line change
+      (skip the pull, keep rendering from the last snapshot) or the re-point itself.
 - [ ] **middlesex follows a 2023 snapshot.** `MiddlesexCountyAddressPoints` (item name
       `mc_address`) was last edited 2023-10-18 and holds 31,571. The county's live layer is
       `https://utility.arcgis.com/usrsvcs/servers/f4dd79bdd35a456c87c0c20668138c05/rest/services/MiddlesexCounty/Base_Layers/MapServer/1`,
@@ -301,13 +318,13 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
         `opendata-bellevillegis.hub.arcgis.com`, ~60 public services) but no address
         layer in it. Hastings County's `CivicAddresses` does NOT cover Belleville
         (separated city; its MUNICIPALI codes are all rural townships).
-  - [ ] Simcoe County — **recovered**, different layer on the same server:
+  - [x] Simcoe County (onboarded 2026-08-20) — **recovered**, different layer on the same server:
         `https://maps.simcoe.ca/arcgis/rest/services/Public/Operational_Layers_Dynamic/MapServer/1`
         ("Address Numbers"), 190,207 rows, paginated, full parsed schema (STNUM/STNAME/
         Unit/MUNI/FULL_ADDRESS + ADDRESSID). The old Search_Layers_Dynamic went
         token-secured. Licence not stated on the service. Big: would cover many member
         municipalities — check overlap policy before onboarding.
-  - [ ] Oxford County — **recovered at the same server**:
+  - [x] Oxford County (refused at the licence gate 2026-08-20) — **recovered at the same server**:
         `https://public.oxfordcounty.ca/arcgis/rest/services/OpenData/OXFORD_OpenData/MapServer/0`
         ("OXFORD_CivicAddress"), 56,658 rows, maxRecordCount 100k (single-pull), rich
         schema incl. UNIT and END_DATE/END_REASON (source-side retirement tracking —
@@ -316,24 +333,24 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
   - [ ] Northumberland County — server back (`/arcgis` moved to `/server`) but the full
         service sweep shows roads/parks/wards only — **no address layer.** (Cobourg
         below now partially covers the county.)
-  - [ ] Haldimand County — **migrated to a new server**:
+  - [x] Haldimand County (onboarded 2026-08-20) — **migrated to a new server**:
         `https://gis.haldimandcounty.ca/server/rest/services/Topo/AddressPoints/FeatureServer/0`
         (NG911AddressPoints), 26,602 rows, NG911-style parsed fields + unit + Status.
         Old maps.haldimandcounty.on.ca still redirects everything to a maintenance page.
         Licence not stated.
-  - [ ] Middlesex County — **migrated to ArcGIS Online**, one layer covers all six
+  - [x] Middlesex County (onboarded 2026-08-20; layer is a 2023 snapshot, see the 2026-10-16 sweep above) — **migrated to ArcGIS Online**, one layer covers all six
         member municipalities (MUNCODE confirms LB/NEWB/NMID/SWM/SC/THC, plus Adelaide
         Metcalfe and some blank codes to watch):
         `https://services.arcgis.com/vhh9rYcMiBEBPGYb/arcgis/rest/services/MiddlesexCountyAddressPoints/FeatureServer/0`
         item `928ed74edad64e4aa65170fb49c46476`, 31,571 rows, parsed fields + UNIT.
         Licence: county "as is" disclaimer terms on an open public item. (A slimmer
         sibling `mc_address` without UNIT/MUNCODE also exists — prefer the full one.)
-  - [ ] Cobourg — **migrated to ArcGIS Online**:
+  - [x] Cobourg (onboarded 2026-08-20, gated off the site) — **migrated to ArcGIS Online**:
         `https://services5.arcgis.com/bD7yhukP2irPxz1v/arcgis/rest/services/Address_Points/FeatureServer/0`
         item `8e0339a5814b4c84b097c983c7626572`, 7,837 rows, parsed schema and a real
         source id (`ADD_ID` — good for identity). Terms of use at
         `public-hub-townofcobourg.hub.arcgis.com/pages/terms-of-use` — read before adding.
-  - [ ] West Parry Sound — **recovered**, instance moved to `/s22`:
+  - [x] West Parry Sound (onboarded 2026-08-20; down since 09-24, see the sweep above) — **recovered**, instance moved to `/s22`:
         `https://www.wpsgn.ca/s22/rest/services/wpsgnPublic/wpsgn_opendata/FeatureServer/0`
         ("Civic Address", official wpsgnet org), 21,705 rows, incl. unit, a `Retired`
         flag and Verified/rollnumber fields. Licence not stated.
@@ -343,33 +360,33 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
   on the way: LIO's Address Point data class is NOT on the open GeoHub (only ORN
   road ranges); it sits behind OGDE licensing, so no provincial layer can cover
   these municipalities.
-  - [ ] Perth County — **found**: `https://services3.arcgis.com/FkQ7EeWcZFoXIXH7/arcgis/rest/services/NG911_Addresses_and_Roads_Public_View/FeatureServer/0`
+  - [x] Perth County (onboarded 2026-08-20) — **found**: `https://services3.arcgis.com/FkQ7EeWcZFoXIXH7/arcgis/rest/services/NG911_Addresses_and_Roads_Public_View/FeatureServer/0`
         (county org, NG911 public view), 18,605 rows, parsed fields + Unit + Inc_Muni
         (North Perth / West Perth / Perth East / Perth South — Stratford and
         St. Marys, separated cities, are NOT included). Licence unstated.
-  - [ ] Halton Hills — **found**: `https://services3.arcgis.com/Nn3SWZrtm4WZaUtd/arcgis/rest/services/Civic_Address_(od)/FeatureServer/152`
+  - [x] Halton Hills (onboarded 2026-08-20) — **found**: `https://services3.arcgis.com/Nn3SWZrtm4WZaUtd/arcgis/rest/services/Civic_Address_(od)/FeatureServer/152`
         ("Master Town Civic Address Dataset", note layer id 152), 21,900 rows, rich
         parsed schema + a real source id (`ADDR_ID`).
-  - [ ] Prince Edward County — **found, hiding inside "Property Info"**: layer 0 of
+  - [x] Prince Edward County (onboarded 2026-08-20) — **found, hiding inside "Property Info"**: layer 0 of
         `https://services1.arcgis.com/4HnHVMMKSNypEIkS/arcgis/rest/services/HostedFeatures___Property_Info/FeatureServer/0`
         is "Site Structure Address Points - Unfiltered" (NENA schema), 27,580 rows;
         probably needs a `STATUS_pec = 'Current'` filter. Licence unstated.
-  - [ ] Innisfil + Collingwood — **found via the recovered Simcoe County layer**
+  - [x] Innisfil + Collingwood (covered by simcoe since 2026-08-20) — **found via the recovered Simcoe County layer**
         (§ above): MUNI groupBy verified INNISFIL 20,540 and COLLINGWOOD 15,323 of
         the 190,207 county-wide rows (16 more municipalities in there too — Bradford
         West Gwillimbury, Wasaga Beach, Orillia, Midland...).
-  - [ ] North Bay — **found, with a staleness caveat**:
+  - [x] North Bay (refused at the licence gate 2026-08-20) — **found, with a staleness caveat**:
         `https://services5.arcgis.com/ItUGraUlQOjvSGOV/arcgis/rest/services/CivicAddress_Point/FeatureServer/0`
         (city org), 21,964 rows — but editingInfo says data last edited April 2023,
         so it may be a static upload; verify it moves before onboarding.
-  - [ ] Stratford — **found** on the city's ArcGIS Enterprise:
+  - [x] Stratford (onboarded 2026-08-20) — **found** on the city's ArcGIS Enterprise:
         `https://maps.stratford.ca/gisserver/rest/services/Addressing/Civic_Address/FeatureServer/0`,
         14,873 rows, parsed fields + unit.
-  - [ ] Amherstburg — **found (new since last check)**, moved out of the special-cases
+  - [x] Amherstburg (onboarded 2026-08-20) — **found (new since last check)**, moved out of the special-cases
         list: `https://mapamherstburg.ca/arcgis/rest/services/Address_Points/FeatureServer/0`,
         10,925 rows, real address points (ARN, Add1 number, FullStName). Licence
         unstated. This is also the only Essex County municipality with points.
-  - [ ] Haliburton County — **promising lead, polygon not points**:
+  - [x] Haliburton County (refused at the licence gate 2026-08-20) — **promising lead, polygon not points**:
         `https://gis.haliburtoncounty.ca/arcgis/rest/services/Public/SearchLayers_2/MapServer/4`
         ("Address", polygon, 33,980 rows, ARN/ADDNUM/STREET/TOWNSHIP). Usable only if
         centroids are acceptable (cf. windsor's parcel centroids — precedent exists).
@@ -390,13 +407,13 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
   - [ ] Kenora — still nothing: city org live (13 public services), no address or
         parcel-address layer.
 - [ ] Special cases — need a decision, not a search:
-  - [ ] **Norfolk County** — resolved itself 2026-08-20: the county published an OPEN
+  - [x] **Norfolk County** (onboarded 2026-08-20) — resolved itself 2026-08-20: the county published an OPEN
         sibling of the secured layer.
         `https://services1.arcgis.com/mSGV2hCLXHNsfQqK/arcgis/rest/services/Civic_Addresses/FeatureServer/0`
         item `05c74eeabb454f54b9f50ca1b0dd5326`, 35,121 rows, parsed fields + unit +
         roll number, and an explicit "Open Data Licence Agreement" (OGL-style). The
         old `CivicAddresses` is still token-secured. Ready to onboard.
-  - [ ] **Sault Ste. Marie** — a stable undated layer now exists, removing the reason
+  - [x] **Sault Ste. Marie** (refused at the licence gate 2026-08-20, borderline) — a stable undated layer now exists, removing the reason
         it was skipped: `https://services1.arcgis.com/nlLTq2Zj0Jwv1qft/arcgis/rest/services/SooMaps_Addresses_View/FeatureServer/0`
         (item "SooMaps_Addresses View", owner City of SSM), 33,356 rows, clean civic
         schema incl. unit + postal code, created 2026-03, data edited 2026-08-13 — a
@@ -479,6 +496,10 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
   all three). **Still kept, gate not met:** `-2026-08-20-preignore` (1.15 GB, 17
   cities) and `-2026-08-20-remap` (lennox), because today's tuning/remap landed
   *after* today's noon run — droppable once the 2026-08-21 run imports cleanly.
+  **Gate met long ago, not yet dropped (checked 2026-10-16):** all three remaining
+  directories are still on disk — `-2026-08-20-preignore` 1.15 GB, `-2026-08-20-remap`
+  0.01 GB, `-2026-08-21-nullliterals` 2.87 GB (§5's null-literal migration backup) —
+  4.0 GB in total, with ~55 clean daily imports on top of each. Operator cleanup.
   Original note follows for the restore procedure. — 2.9 GB outside the repo, kept while the
   prop-hashing migration settles (§5). Both passes verified idempotent and every
   affected city's latest diff verified byte-identical the same day, so these are
@@ -506,6 +527,47 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
   failed, or no attempt); `health.py --blocks --runs` is the project-side second.
   Currently outstanding: 2026-07-31 exited 1 after three attempts.
   (Kingston, below, cleared itself on 2026-08-10.)
+  **2026-10-16 picture:** the outstanding item is no longer one day but a streak — exit 1
+  on 21 of the last 22 runs, all three-attempt days, every one of them west-parry-sound
+  (§2, urgent). The one clean day, 10-01, is the one day WPS answered. `runs.csv` has
+  therefore said nothing useful since 09-24; read the vault's `report.html` or
+  `addressvault report --json` per city instead. Commit + push still ran every day
+  (exit 1 does not block publishing), so the site itself was never stale.
+- [ ] **Source reliability review 2026-10-16** — every failed pull in the vault's
+  `jobs` table since 2026-07-19 (90 days), bucketed. Only the first bucket needs a hand.
+  - **Permanently down (1):** west-parry-sound — above.
+  - **Chronic but self-healing (5)** — the retry loop recovers most days; nothing to
+    change, but these are the sources that will next cost a three-attempt day:
+    - kingston — 11 attempt-failed days (08-08 → 10-12), 4 ended the day without a
+      snapshot (last 09-21). `Gateway Time-out` / `Error invoking service` from the
+      `utility.arcgis.com` proxy to the city's on-prem server, roughly weekly, never
+      more than two days running. The §4 note below ("ask the city if it persists past a
+      week") has not been triggered.
+    - simcoe — 8 days (09-02 → 10-07), 5 hard, 22 failed pulls, all `503 Service
+      Unavailable` from `maps.simcoe.ca`. Still the pattern the 09-08 render fix was
+      built around; no alternative layer (the NG911 one is smaller, §2).
+    - guelph — 7 days (07-24 → 10-15), 1 hard (09-10). Mid-pagination `500` on the
+      `OBJECTID > 4000/6000` page from `gismaps.guelph.ca`; the 10-15 noon run failed
+      all three attempts and the vault's 16:00 pull then succeeded.
+    - milton — 3 of 5 days 10-08 → 10-12 (2 hard), `Wait time of the request to the
+      service 'WebMaps/MGIS.MapServer' has expired` — ArcGIS Server instance-pool
+      exhaustion on `api.milton.ca`. New in October; watch whether it sticks, since the
+      licensed-layer re-point for milton was deferred 2026-10-12 (milton.toml).
+    - cambridge — 3 days (09-27, 09-28, 10-15), `first page returned no features`, each
+      time with the count probe also refused, each time recovered on the next attempt.
+  - **One-offs (16 cities, 1–2 days each):** `IncompleteRead` cluster 07-20/22
+    (barrie, cornwall, hamilton, peterborough-county, sdg — same two days, so our link,
+    not theirs), oakville/toronto/brampton 07-19..27 timeouts, durham 08-06, thunder-bay
+    08-24, ottawa 09-02, brantford 09-25, amherstburg 09-21, sarnia 08-20 (the URL fix).
+    Noise; no action.
+  - **Not erroring, but frozen** (the blind spot the deleted `--stale` had, measured
+    from the vault's content hashes rather than the tracker's store): waterloo,
+    dufferin, elgin, peel-region identical on every pull since 06-27/28 (105 pulls);
+    cambridge since 08-07 (66 pulls); amherstburg, cobourg, halton-hills, middlesex,
+    norfolk and sarnia have never changed since their 08-20 import day (56 pulls).
+    Elgin and middlesex are explained in §2 (stale layers, live replacements found);
+    peel-region at 504k addresses and cambridge at 54k unchanged for 15 and 10 weeks
+    deserve the same look — a periodic export, not a live layer, is the likely answer.
 - [x] ~~**kingston: source down since 2026-08-08**~~ — **recovered on its own 2026-08-10.**
   Seven pull attempts across 08-08 and 08-09, every one `arcgis error 500: Error invoking
   service`; today's noon run pulled it normally (`expect=77,294`, no ERROR line, and
@@ -547,6 +609,13 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
   escalate beyond the vault report (a nonzero exit, a notification). Nothing escalates
   today — kingston's two-day outage produced only a red run. Decide it with a week of
   evidence, not now.
+  **The evidence arrived (2026-10-16):** west-parry-sound failed 22 days in a row and the
+  only signal was a red run every day — which, because it was red every day, stopped
+  being a signal. It was noticed by the 10-15 data-sources sweep, not by any surface here.
+  So the answer to question 2 is "no" again, and the N-days question has a shape: the
+  current design escalates a one-day failure (exit 1) exactly as loudly as a three-week
+  one. Whatever is decided, a per-city "failed N days running" line in the daily commit
+  message or the vault report would have been enough here.
 - [ ] **A Windows Update restart skips the day silently — diagnosed 2026-08-12, left
   unfixed by choice.** Found while checking why 08-12 had no run at all: no `runs.csv`
   row, zero lines in `update.log`, no vault snapshots pulled, and the task itself
@@ -619,7 +688,9 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
   2026-07-24 — a data-integrity look, not a config one. (Checked 2026-08-20: now
   27 days without a new content hash; the July trajectory was 59,162 → 59,158 →
   59,159 → 59,121 → 58,809, i.e. −353 net with the big step −312 on 07-24. Pulls
-  still succeed daily — the publisher went quiet, we didn't.)
+  still succeed daily — the publisher went quiet, we didn't.) 2026-10-16: the layer
+  republished once since, on 09-30, but only to add `POINT_X`/`POINT_Y` columns — the
+  address content is still the 07-24 state (58,809 rows), now 12 weeks old.
 
 - [x] **Daily run: the site render repeated on every retry attempt (found 2026-09-08,
   fixed 2026-09-08).** Simcoe answered 503 on all three attempts that day; the cities
@@ -722,6 +793,9 @@ one-time "modified" spike, so batch them:
   kingston, leeds-grenville, lennox-addington) — 41 rows total, and all but the 18
   `<Null>` ones are values we deliberately keep. Worth doing when the appendix's
   windsor number coverage (100% -> 99.4%) is next being corrected, not before.
+  Re-measured 2026-10-16, after the 10-12 re-point to the licensed `PropertyParcels`
+  layer: still exactly 696 active rows with `number` = `full` = "None", so the new
+  layer carries the same ETL leak and the item stands unchanged.
 
 - [x] Add `objectid_1`/`globalid_1` variants to `_VOLATILE_KEYS` (normalize.py) —
   present in 7 cities' stored props; mass-modify risk if a provider reassigns them.
