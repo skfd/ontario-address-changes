@@ -152,8 +152,10 @@ if ($updateExit -ne 0) {
 # (offline/metered all day): docs\ stays untouched and the commit gate below
 # keeps the day commit-free, as before. A partially failed day still renders:
 # `report --all` re-renders the failed cities too (from their last good
-# snapshot, so every page still shows its snapshot's date; only the
-# "generated" stamp moves, which happens daily anyway). A render failure
+# snapshot, so every page still shows its snapshot's date). Rendering is
+# deterministic -- the footer stamp is the snapshot's download time, not the
+# clock -- so an unchanged page is byte-identical and the commit below
+# touches only pages whose content moved. A render failure
 # leaves the cities updated but the site stale, i.e. publish-failed.
 $renderExit = 0
 if ($ranUpdate) {

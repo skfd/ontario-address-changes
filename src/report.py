@@ -45,6 +45,20 @@ HULL_SIMPLIFY = 0.0008     # ~80m, trims the embedded coordinate count
 _env = Environment(loader=FileSystemLoader(TEMPLATES_DIR), autoescape=True)
 
 
+def _pulled_stamp(snap):
+    """When the snapshot's file was downloaded, for the page footer.
+
+    Derived from the snapshot row, never from the clock: the stamp must be the
+    same every time the page is rendered, so a daily re-render of every report
+    (report --all) rewrites a file only when its content changed and git
+    history records real changes rather than 1,100 moving timestamps a day.
+    """
+    try:
+        return datetime.fromisoformat(snap["downloaded"]).strftime("%b %d, %Y at %I:%M %p")
+    except (ValueError, TypeError):
+        return snap["downloaded"] or "unknown date"
+
+
 def _friendly_date(d):
     try:
         return datetime.strptime(d[:10], "%Y-%m-%d").strftime("%A, %b %d, %Y")
@@ -454,7 +468,7 @@ def _render_report(ds, snap, d, is_baseline, spark, source_url, compared, ignore
     ctx = {
         "compared_fields": compared, "ignored_fields": ignored,
         "provider": ds.provider, "license_name": ds.license_name,
-        "generated": datetime.now().strftime("%b %d, %Y at %I:%M %p"),
+        "pulled": _pulled_stamp(snap),
         "new_snapshot": snap, "new_date_friendly": _friendly_date(date),
         "old_date_friendly": "", "is_baseline": is_baseline,
         "added": p["added"], "removed": p["removed"], "modified": p["modified"],
