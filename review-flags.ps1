@@ -114,6 +114,13 @@ Log "OPEN $(Get-Date -Format o)"
 Invoke-Logged "python tools\flag_issues.py open"
 if ($LASTEXITCODE -ne 0) { Log "FAILED open exit=$LASTEXITCODE"; Finish 'open' 'failed' 1 }
 
+# Sources down for days, or frozen for months, as their own issues -- opened
+# once, closed when the source recovers. Hourly so a recovery closes the same
+# afternoon. Not fatal: a failed alert pass must not hold up the flag queue.
+Log "ALERTS $(Get-Date -Format o)"
+Invoke-Logged "python tools\source_alerts.py sync"
+if ($LASTEXITCODE -ne 0) { Log "FAILED alerts exit=$LASTEXITCODE (continuing)" }
+
 Log "APPLY $(Get-Date -Format o)"
 Invoke-Logged "python tools\flag_issues.py apply"
 if ($LASTEXITCODE -ne 0) { Log "FAILED apply exit=$LASTEXITCODE"; Finish 'apply' 'failed' 1 }

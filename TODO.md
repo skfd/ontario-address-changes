@@ -271,10 +271,9 @@ are the ones that change something here. Counts and dates probed live 2026-10-16
       day, Sept–Oct). Two routes, decide one: the NG911 re-point above, or first an email
       to info@wpsgn.ca (the TOML already names them for the licence-scope question) — a
       "not started" service is an operator-side switch and the 10-01 blip shows it can be
-      flipped. The tracker has no pause switch: the vault honours `enabled = false` in a
-      TOML for its own `pull-due`, but `run.py update` seeds the Source without it and
-      pulls regardless, so stopping the daily cost needs either that one-line change
-      (skip the pull, keep rendering from the last snapshot) or the re-point itself.
+      flipped. (2026-10-16: the daily cost is gone without either — WPS now fails in
+      half a second with no retries and no longer fails the run, see the flaky-sources
+      item in §4. `enabled = false` in its TOML now pauses it outright if wanted.)
 - [ ] **middlesex follows a 2023 snapshot.** `MiddlesexCountyAddressPoints` (item name
       `mc_address`) was last edited 2023-10-18 and holds 31,571. The county's live layer is
       `https://utility.arcgis.com/usrsvcs/servers/f4dd79bdd35a456c87c0c20668138c05/rest/services/MiddlesexCounty/Base_Layers/MapServer/1`,
@@ -590,8 +589,8 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
     Elgin and middlesex are explained in §2 (stale layers, live replacements found);
     peel-region at 504k addresses and cambridge at 54k unchanged for 15 and 10 weeks
     deserve the same look — a periodic export, not a live layer, is the likely answer.
-- [ ] **Flaky sources — the technical plan (written 2026-10-16, hand to a coding
-  agent).** Today there is no mechanism that detects or announces a source failing
+- [x] **Flaky sources — the technical plan (written 2026-10-16; all three layers
+  DONE the same day, see the end of this item).** Today there is no mechanism that detects or announces a source failing
   consistently: `runs.csv` has one exit code for the whole run, `update.log` keeps one
   run, the vault report shows red cells but no streak, and nothing posts anywhere.
   Three layers, independent, in order of payoff:
@@ -626,6 +625,28 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
      report, so the streak is visible without the issue. Frozen-but-succeeding layers
      (the bucket above) get the same treatment at a different threshold — e.g. 60 days
      identical — as a `stale` label, since that bucket is where elgin and middlesex hid.
+
+  **Done 2026-10-16**, as planned with these specifics:
+  1. address-vault `fetch/arcgis.py`: `FLAKE_WAITS = (30, 60, 120, 240)`, one budget per
+     fetch shared by metadata, count and pages, resuming past the last OID, fresh Session
+     per try. Covers HTTP 500/502/503/504, ArcGIS error bodies with those codes,
+     `ChunkedEncodingError` (the IncompleteRead cluster), `JSONDecodeError` (HTML served
+     as JSON) and the empty first page. A body saying "not started" / "does not exist"
+     fails at once (verified live: WPS fails in 0.5 s). A count probe still flaking after
+     the budget falls back to an unverified pull, as before. 9 tests.
+  2. Vault `Catalog.failure_streaks()` (consecutive pull days with no successful pull;
+     days with no pull skipped), shown as a "down" column on the vault status page and
+     as `streaks` in `report --json`. `run.py update` treats a failed city with a streak
+     of `KNOWN_OUTAGE_DAYS = 3`+ as a known outage: still pulled, not counted; exit 3 when
+     only known outages failed. `daily-update.ps1` does not retry exit 3, records
+     `outage` in `runs.csv`, exits 0, and adds `down: <city> (N days, last good D)` to
+     the daily commit message. `enabled = false` in a dataset TOML skips the pull.
+  3. `tools/source_alerts.py`: `source-down` (streak ≥ 3) and `source-stale` (≥ 90 days
+     identical) issues, one per city, closed with a comment on recovery, never touched
+     00:00–07:00; run hourly by `review-flags.ps1`. First live pass will open five:
+     west-parry-sound down, and dufferin, elgin, peel-region, waterloo stale.
+  Not covered: the static fetcher (toronto, waterloo downloads) still has only its own
+  retry — toronto's two July failures were of that kind, nothing since.
 - [x] ~~**kingston: source down since 2026-08-08**~~ — **recovered on its own 2026-08-10.**
   Seven pull attempts across 08-08 and 08-09, every one `arcgis error 500: Error invoking
   service`; today's noon run pulled it normally (`expect=77,294`, no ERROR line, and

@@ -84,6 +84,16 @@ of many datasets. Adding a city is a config file, not code.
      The next scheduled pass picks it up (sign out and in if it does not);
      each pass logs `GH-WRITES bot` or `GH-WRITES owner`.
 
+  **Source alerts** use the same channel (`tools/source_alerts.py sync`, run by
+  the same hourly pass). A city whose pulls have failed three pull days running
+  gets one `source-down` issue; a city whose pulls have been byte-identical for
+  90 days gets one `source-stale` issue. Each closes itself, with a comment, when
+  the source recovers. Nothing is opened or closed between midnight and 07:00.
+  From the third day a down city also stops failing the daily run (it exits 0,
+  `runs.csv` says `outage`), so a nonzero exit means something new broke. To stop
+  pulling a dead source until it is re-pointed, set `enabled = false` in its TOML;
+  its pages keep showing the last good pull.
+
 ## Identity (the important part)
 
 Diffing needs a key that is *stable across republishes*. Each dataset config
