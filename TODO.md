@@ -302,11 +302,13 @@ are the ones that change something here. Counts and dates probed live 2026-10-16
       MapServer omits `objectIdField` (fixed in address-vault `db63039`, the OID now comes
       from the field type). Liveness is still unproven - no editingInfo; the 90-day
       source-stale alert will say. Follow-ups:
-  - [ ] **Layer 0 of the same service, "Address (Units)", holds 2,298 unit points** (only
+  - [x] **Layer 0 of the same service, "Address (Units)", holds 2,298 unit points** (only
         `STREET_UNI` + `FULLADDRES`, 465 buildings); the tracked layer 1 has 424 unit rows,
         419 of them also in layer 0. The old export had 568 unit rows (420 here, 531 there),
-        so the re-point dropped ~148 units. Tracking layer 0 needs a second dataset
-        (`middlesex-units`?) or multi-layer support. Your call whether units matter here.
+        so the re-point dropped ~148 units. **Decided 2026-10-16: the tracker does not care**
+        (no second dataset). An import does: noted in address-importer-friend
+        `future-work/multi-city/onboarding-queue.md` (parked section) so a middlesex import
+        takes its units from layer 0.
   - [ ] **location_min_move_m** once a second distinct snapshot exists: the re-placement
         shape (median 0 m, p90 8.4 m) looks like toronto's jitter.
 - [x] **elgin's tracked layer has not moved since 2026-06-12** (30 identical pulls,
@@ -329,6 +331,19 @@ are the ones that change something here. Counts and dates probed live 2026-10-16
       so normalize now drops exact "N/A" as null (`2c9de922a`). The layer was created in one
       upload on 2026-10-05 and is named for the year: it may be an annual export, and the
       90-day stale alert will tell. Issue #39 (source-stale) closes on the next hourly pass.
+  - [ ] **Elgin's OGL: take it to the wiki** (licence verdict agreed 2026-10-16). The OSMF
+        self-service route, as for the six self-listed 2026-10-12: diff the hub's "Open
+        Government Licence - County of Elgin" against the Ottawa Open Data Licence 2.0 into
+        `ontario-osm-data-sources/licences/elgin/verdict.md`; if the only differences are
+        locality, venue, PII or records definitions, add an OSM wiki Contributors entry,
+        email legal-questions@osmfoundation.org, and move the toml to `green-self`
+        (LICENSING.md and the import queue's parked list follow). If not a pure variant, it
+        goes in the LWG follow-up instead. Cite the hub site item (`5fa753ff…`) as the
+        licence source - the layer's own item carries no licenseInfo.
+  - [ ] **Watch for an `Elgin_Civic_Numbers_2027`.** The service is named for the year; if
+        the county publishes next year's as a new service and freezes this one, the 90-day
+        source-stale issue is the signal, and the fix is another re-point (this time with
+        history, so a flagged switch day as for lambton 2026-09-15, not a fresh baseline).
 - [ ] **Essex County is not "No address layer" any more.** Tecumseh publishes
       `https://gisweb.tecumseh.ca/arcgis/rest/services/OpenDataMaps/OpenDataMAP_InfraZonePropBound_Layers/MapServer/33`,
       9,860 points (number, street, suffix), catalogued under "Open Government Licence - The
