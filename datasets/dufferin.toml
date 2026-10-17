@@ -23,7 +23,15 @@ provider = "County of Dufferin"
 # holding editor notes ("2026 APRIL 10 ADDED FROM ORANGEVILLE"); UNIT is set on
 # 83 rows, many of them legal descriptions or street names; no stable id, so a
 # synthesized key (5 collisions on number+street+unit+geometry).
-data_url = "https://services5.arcgis.com/C0BEdgagVaXzcw0W/arcgis/rest/services/Dufferin_County_Entrances/FeatureServer/0"
+# RE-POINTED 2026-10-16 (owner's call) from Dufferin_County_Entrances (27,075 driveway
+# entrance points, last edited 2017-08-02: one distinct snapshot in four months) to the
+# county's live address layer below (28,305 points, lastEditDate 2026-10-08). The old store
+# held only its baseline, so it is rebuilt rather than diffed (backup at
+# ontario-db-backup-2026-10-16-dufferin); the vault keeps every Entrances pull. The licence
+# argument above stands: this item's licenseInfo is empty and it is covered by the open-data
+# page's portal-wide notice. Known faults: 2,627 rows have no civic number (street-only points
+# such as "RIVER ROAD"), FULLADDY disagrees with CIVIC_NO + STREETNAME on ~3,800 rows.
+data_url = "https://services5.arcgis.com/C0BEdgagVaXzcw0W/arcgis/rest/services/Address_Points_DufferinCounty_Open_Data/FeatureServer/0"
 access = "arcgis"
 format = "geojson"
 license_name = "Open Government Licence - County of Dufferin"
@@ -31,19 +39,16 @@ license_name = "Open Government Licence - County of Dufferin"
 # ontario-osm-data-sources/licences/dufferin/verdict.md); LWG told by email. Not yet on the OSMF list.
 osm_compatible = "green-self"
 
-# Two faithful coordinate echoes, both measured 2026-08-10 (audit.py --coords):
-# LONGITUDEX/LATITUDEY deviate from the geometry by exactly 0.00 m at every percentile —
-# stored at the same 5 dp the comparison rounds to — and EASTINGX/NORTHINGY are the same
-# points in UTM 17N, max 6.83 m and tightly clustered. Neither can move except on jitter
-# below the compare resolution, so this is tidiness rather than urgency; ignored while
-# the city was being looked at anyway.
-ignore_fields = ["LONGITUDEX", "LATITUDEY", "EASTINGX", "NORTHINGY"]
-
 [identity]
-key_field = "ID"                               # stable id, 100% populated and order-independent (FID/OBJECTID are sequential)
-synth_fields = ["number", "street"]            # fallback; no unit field in this layer
+# No key column besides OBJECTID: synthesize (5 collisions on number+street+unit+geometry).
+key_field = ""
+synth_fields = ["number", "street", "unit"]
 
-[fields]                                        # source property -> canonical name
-number = "STREETNUM"
+[fields]                                        # canonical name -> source property
+number = "CIVIC_NO"
 street = "STREETNAME"
+unit   = "UNIT"
 full   = "FULLADDY"
+
+[classes]
+boundary = ["TOWN"]
