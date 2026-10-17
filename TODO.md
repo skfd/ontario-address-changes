@@ -889,6 +889,35 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
 Code fixes found during the audits. Every one of them changes payload hashes → a
 one-time "modified" spike, so batch them:
 
+- [ ] **Cache the per-snapshot diffs (found 2026-10-16).** The daily render is ~33 min
+  of CPU for 53 datasets, and almost none of it is HTML: `report.generate_all` calls
+  `_chronological_diffs`, which recomputes `diff.compute_baseline` and every consecutive
+  `diff.compute_diff` pair for every city, every day, before a single page is written.
+  That cost grows with history and is the only CPU-bound part of the run. Fix: persist
+  each pair's diff once, keyed by `(old_id, new_id)` plus a hash of the dataset config
+  that shapes it (`field_map`, `ignore_fields`/`keep_fields`, `classes`,
+  `location_min_move_m`, identity settings) — in the city DB or a sidecar — and have
+  `_chronological_diffs` read cached pairs and compute only the new one. A config edit
+  changes the hash and recomputes the whole history on the next render, which is the
+  behaviour `backfill --reapply-ignore` already relies on, so no stale pages. Expected:
+  a quiet day's render drops from ~33 min to a few; the daily run from ~80 min to ~40.
+  No hash change, no spike — render-side only. Measure before/after with the `RENDER`
+  → `END` log lines.
+- [ ] **Render cities in parallel (found 2026-10-16).** `generate_all` is one serial
+  `for ds in datasets` loop on a 12-core machine. After the diff cache lands, run the
+  per-city part (diffs, flag detection, report pages, `_card.json`) in a process pool —
+  a worker per dataset, same `--jobs` as `update` — and keep the landing page,
+  `status.json` and flags page as the serial tail once the cards are in. Watch the two
+  shared writers: `flags.record` appends to `flags.toml` (collect each worker's detected
+  entries and record them once in the parent, as `_detect_flags` already returns them),
+  and the ledger reload. Expected ~6–8x on whatever the render still costs.
+- [ ] **Stream the GeoJSON import (found 2026-10-16).** `fetch.load_features` does one
+  `json.load` of the whole file — up to ~590 MB for york/peel/toronto — and
+  `db.import_snapshot` then iterates `features` once. Switch to `ijson.items(f,
+  "features.item")` (the vault already depends on ijson) and pass the iterator through;
+  `import_snapshot` only needs a count at the end, not `len(features)` up front. Halves
+  peak memory per worker, so `--jobs` can go above 6 without the big three colliding,
+  and removes the multi-second parse stall on changed days. No hash change.
 - [ ] **"None" / "<Null>" in the canonical fields (found 2026-10-16).** `_NULL_LITERALS`
   drops them from props only; `_clean` (the canonical number/street/unit/full) honours
   just "N/A". Stored canonical values today: windsor number + full "None" on 696 rows,
