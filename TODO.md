@@ -250,20 +250,26 @@ the order to work them):
 | — | Belleville, Northumberland, Lanark, Timmins, Owen Sound, Kenora | still no machine-readable layer | quarterly re-probe only |
 
 **2026-10-16 sweep onboarding, follow-ups** (24 datasets added, dufferin re-pointed to its address layer, LICENSING.md has the table):
-- [ ] Licence reads: ajax (registry names "Town of Ajax Open Data Licence v1.0"; the service
-      says only copyright), tecumseh (Essex hub OGL vs the item's "(c) Town of Tecumseh"),
-      waterloo-region (licence link 404s; hub page needs a browser). All three publish now.
+- [x] Licence reads (2026-10-16, evidence in each TOML + LICENSING.md): waterloo-region is
+      **green-lwg** (Region OGL v2.0, LWG 2025-02-10; page moved, old link 404); ajax is
+      yellow-review (OGL clone, credit optional, bound only by the hub's site-wide text);
+      tecumseh stays yellow-review (County of Essex OGL, but the County licenses the Town's
+      points). All three keep publishing.
+- [ ] Confirmation asks, publishing already: ajax (does the site-wide OGL cover Civic
+      Addresses item e48315e9?), tecumseh (may the County of Essex OGL license the Town's points?).
 - [ ] Gated for no licence text, worth an ask: caledon, dryden, oshawa ("reference use only"
       claim unverified), vaughan, vaughan-ng911, grey x3, gorham-ware, oliver-paipoonge.
 - [ ] Measure the daily run after the first full day: ~1.5M more rows (waterloo-region 263k,
       mississauga 220k, vaughan 140k + 94k, oshawa 64k). Six-way parallel, but check it
       still clears the evening window.
-- [ ] lennox-addington: the township views (GN_Civics, Loyalist, AH, Stone Mills) expose
-      STREET_NAM 100% and UNIT_IDENT the county view hides - a field-map upgrade for the
-      county store (it derives street from full and maps no unit), not new datasets.
-- [ ] Landing "addresses tracked" now double-counts overlaps (mississauga in peel-region,
-      vaughan/newmarket in york, ajax/pickering/whitby/oshawa in durham, ...). Decide whether
-      the headline should count distinct coverage.
+- [x] ~~lennox-addington field-map upgrade~~ **declined 2026-10-16**: the tracked Public View
+      carries a view filter, `(SUBUNITTYPE <> 'Public Redact' AND ADD_LABEL <> 'Unknown Address')
+      OR (...)`; every view that exposes STREET_NAM/UNIT_IDENT (the four township views and
+      "Civic Addresses (Public View)", 27,383 vs 26,613 rows) has no such filter, so it would
+      import the county's redacted points (~37) plus 733 'Unknown Address' rows.
+      street_from_full stays.
+- [x] Landing "addresses tracked" double-counted overlaps: decided 2026-10-16 to keep the
+      plain sum and relabel it "address records" (tooltip explains the overlap).
 - [ ] city-tune audit for each new city after two changed snapshots (classes, ignore_fields).
 
 The other six August onboards (amherstburg, cobourg, halton-hills, middlesex, norfolk,

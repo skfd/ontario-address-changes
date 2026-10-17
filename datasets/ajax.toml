@@ -9,9 +9,16 @@ format = "geojson"
 # Native layer SR; the geojson export arrives in WGS84, so this guards a future export-CRS switch.
 source_crs = "EPSG:26917"
 license_name = "Town of Ajax - Open Data Licence v.1.0"
-osm_compatible = "unknown-review"
-# Licence as named by the registry (Ajax open-data portal); the service itself states only
-# "Town of Ajax" copyright. Confirm the licence text in the next licence pass.
+osm_compatible = "yellow-review"
+# Read 2026-10-16: a 3-page OGL-Ontario clone (worldwide, royalty-free; copy, publish, adapt,
+# commercial use; credit *optional*: "Contains public sector Information made available under
+# The Corporation of the Town of Ajax's Open Data Licence"), PDF item 22e2d8e2...:
+# https://townofajax.maps.arcgis.com/sharing/rest/content/items/22e2d8e248724d7cb0310dc2db675abd/data
+# It reaches this layer only site-wide: the hub home page (maps-townofajax.opendata.arcgis.com)
+# says "By using the Town of Ajax Open Data site you agree to the following licence"; the layer's
+# item (e48315e9...) has licenseInfo null and the DCAT row has license "". The site item's own
+# licenseInfo field says "CC-BY-SA" (a stale default, not the visible text). Promote to yellow-ogl
+# once the town confirms the licence covers this item, the prince-edward-county shape.
 
 ignore_fields = [
   # Repeat the geometry.

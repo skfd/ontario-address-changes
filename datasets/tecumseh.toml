@@ -10,8 +10,15 @@ format = "geojson"
 source_crs = "EPSG:26917"
 license_name = "Open Government Licence - The Corporation of the County of Essex"
 osm_compatible = "yellow-review"
-# Licence as listed on the Essex County hub (registry); the item itself says only
-# "(c) Copyright Town of Tecumseh". Confirm in the next licence pass.
+# Read 2026-10-16: the only grant in the chain is the County of Essex OGL v1.0, hub-wide
+# (https://gisweb.countyofessex.ca/OpenData/County%20of%20Essex%20-%20Open%20Government%20Licence.pdf);
+# the county hub's home page names Tecumseh among the municipalities it covers ("You may use and
+# republish the data as you wish"). The item (a0c6e857..., in the county's AGOL org, authored by
+# a town account) and both DCAT feeds carry only "(c) Copyright Town of Tecumseh" + a disclaimer -
+# the same template the county's own OGL datasets use, so no grant and no restriction. Gap: OGL
+# section 12 names the County as Information Provider and 6(c) exempts third-party rights it may not
+# license; a one-line confirmation from Tecumseh GIS closes it. Attribution: "Contains information
+# licensed under the Open Government Licence - County of Essex" (+ "(c) Town of Tecumseh").
 
 ignore_fields = [
   # Repeat the geometry.

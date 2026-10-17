@@ -165,14 +165,14 @@ dataset with `publish_reports = false`, and a member city's own layer is tracked
 tracked region (cities usually publish fresher data than the roll-up). The four refusals of
 2026-08-20 (oxford, north-bay, haliburton, sault-ste-marie) and City of Peterborough are now
 tracked, gated. Licence names marked "registry" in the TOMLs were read off a portal by the
-sweep, not at the service: ajax, tecumseh, waterloo-region want a confirming read in the next
-licence pass. Left out as provable views/copies of tracked layers: four L&A township views,
+sweep, not at the service: ajax, tecumseh, waterloo-region were read at the source the same night
+(below; evidence in each TOML). Left out as provable views/copies of tracked layers: four L&A township views,
 SDG North Dundas, Douro-Dummer, Simcoe's NG911 export and New Tecumseth/Orillia copies,
 Strathroy-Caradoc 2024. Brockville is token-secured (skipped.toml).
 
 | dataset | tier | licence |
 |---|---|---|
-| ajax | unknown-review | Town of Ajax - Open Data Licence v.1.0 |
+| ajax | yellow-review (was unknown, read 2026-10-16) | Town of Ajax - Open Data Licence v.1.0: OGL-Ontario clone, credit optional; binds the layer only via the hub's site-wide "by using this site" text (item licenseInfo null, DCAT blank) - confirm coverage, then yellow-ogl |
 | blue-mountains | unknown-review · **publish_reports = false** | (none published) |
 | caledon | unknown-review · **publish_reports = false** | (none published) |
 | dryden | unknown-review · **publish_reports = false** | (none published) |
@@ -190,16 +190,16 @@ Strathroy-Caradoc 2024. Brockville is token-secured (skipped.toml).
 | peterborough | red-review · **publish_reports = false** | City of Peterborough Open Data Terms of Use |
 | pickering | unknown-review | City of Pickering Open Data License |
 | sault-ste-marie | red-review · **publish_reports = false** | (none published) |
-| tecumseh | yellow-review | Open Government Licence - The Corporation of the County of Essex |
+| tecumseh | yellow-review (read 2026-10-16) | OGL - County of Essex v1.0, hub-wide; the county hub names Tecumseh, the item says only "(c) Town of Tecumseh". The County is the licensor, so ask Tecumseh GIS to confirm the County may license its points |
 | vaughan | unknown-review · **publish_reports = false** | (none published) |
 | vaughan-ng911 | unknown-review · **publish_reports = false** | (none published) |
-| waterloo-region | unknown-review | Region of Waterloo Open Data Licence |
+| waterloo-region | **green-lwg** (read 2026-10-16) | OGL - Region of Waterloo v2.0, LWG-approved 2025-02-10; licence page moved in the 2026-05 CMS move (old URL 404) |
 | welland | yellow-ogl | Open Government Licence - City of Welland |
 | whitby | yellow-ogl | The Corporation of the Town of Whitby Open Government License |
 
 ## Counts (2026-10-16, after the registry-sweep onboarding; tallied from the TOMLs)
 
-green 20 (13 `green-lwg`, 6 `green-self`, 1 `green-cc0`) · OGL-family awaiting the LWG 13 ·
-yellow-review 9 · CC-BY waiver 1 · restrictive 12 · unknown 22 — of **77 tracked datasets**.
+green 21 (14 `green-lwg`, 6 `green-self`, 1 `green-cc0`) · OGL-family awaiting the LWG 13 ·
+yellow-review 10 · CC-BY waiver 1 · restrictive 12 · unknown 20 — of **77 tracked datasets**.
 19 are gated off the site (`publish_reports = false`): sdg, renfrew, peterborough-county,
 cobourg, plus the 15 from the 2026-10-16 sweep listed above.
