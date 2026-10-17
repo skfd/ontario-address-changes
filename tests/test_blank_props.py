@@ -67,6 +67,29 @@ def test_literal_null_strings_dropped():
     assert leaked["payload_hash"] == absent["payload_hash"]
 
 
+
+def test_na_is_null_in_canonical_fields_and_props():
+    """elgin's 2026 layer writes "N/A" into StrUNIT on 94% of rows. As a unit it
+    would sit in every synthesized key and on every report row, and the day the
+    county emits real blanks the whole city would re-key."""
+    ds = Dataset(slug="_test_blank", provider="Test", data_url="x", access="static",
+                 format="geojson", key_field="", synth_fields=["number", "street", "unit"],
+                 fields={"number": "NUM", "street": "ST", "unit": "U", "full": "FULL"})
+    leaked = normalize.canonical(ds, _feat(U="N/A"))
+    absent = normalize.canonical(ds, _feat())
+
+    assert leaked["unit"] is None
+    assert "U" not in json.loads(leaked["props"])
+    assert leaked["identity_key"] == absent["identity_key"]
+    assert leaked["payload_hash"] == absent["payload_hash"]
+
+
+def test_none_literal_still_reaches_canonical_fields():
+    """windsor stores "None" as number/full on 696 rows; dropping it in _clean
+    would re-key them, so only props treat it as null for now."""
+    assert normalize._clean("None") == "None"
+    assert normalize._clean("<Null>") == "<Null>"
+
 def test_real_words_that_only_look_null_are_kept():
     """Only the exact-case serializer spellings go.
 

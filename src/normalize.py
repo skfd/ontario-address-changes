@@ -68,7 +68,15 @@ EDIT_METADATA_FIELDS = frozenset({
 # kitchener UNIT_TYPE), "NA"/"na", "?", "-", "NONE". Those are things a person or a
 # domain author typed meaning something; only the exact-case serializer spellings
 # are machine artefacts, so the match is exact-case and not a fuzzy null-ish list.
-_NULL_LITERALS = frozenset({"None", "<Null>"})
+# "N/A" joined 2026-10-16: elgin's 2026 civic layer fills StrUNIT with it on 22,756
+# of 24,177 rows, and no store held the exact spelling anywhere when it was added.
+_NULL_LITERALS = frozenset({"None", "<Null>", "N/A"})
+
+# The literals _clean drops from the canonical fields too. Only "N/A": "None" and
+# "<Null>" already sit in stored canonical values (windsor number/full 696,
+# norfolk unit 12, durham 5, leeds-grenville 2, measured 2026-10-16), so honouring
+# them here re-keys those stores - a migration of its own, not a filter tweak.
+_CANONICAL_NULL_LITERALS = frozenset({"N/A"})
 
 _CANONICAL = ("number", "street", "unit", "full")
 
@@ -77,6 +85,8 @@ def _clean(val):
     if val is None:
         return None
     s = str(val).strip()
+    if s in _CANONICAL_NULL_LITERALS:
+        return None
     return s or None
 
 
