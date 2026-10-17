@@ -221,12 +221,17 @@ event). These are all additions.
   Nearly-empty siblings noticed alongside, all subsumed by mapped fields and left alone:
   greater-sudbury `STREETSUFFIX` (12 rows), `ADDRESSNUMBERPREFIX` (17),
   `ADDRESSNUMBERSUFFIX` (372).
-- [ ] **renfrew** — 71 fields live against far fewer stored, but renfrew is frozen at
+- [x] **renfrew** — 71 fields live against far fewer stored, but renfrew is frozen at
   06-29, so most of that is drift accumulated while we were not looking rather than a
   real roster change. Re-run `--drift` once it unfreezes before acting on it.
   **Unfrozen** (noted 2026-10-16): the county layer moved 08-28 (+6,222, two member
   municipalities loaded), 09-10 (+1,588, Laurentian Hills) and last on 09-24, so the
   precondition is met; `.claude/skills/data-integrity/health.py --drift` is ready to run.
+  **Run 2026-10-16: nothing to do.** All 33 "new" fields are empty NENA schema slots - 0 of
+  46,965 rows filled each (A5, AddCode, AddNum_Pre, Post_Code, Post_Comm, LSt_*, St_PreMod,
+  Floor, Room, Seat, ...). Every *filled* live field missing from props is already in
+  `ignore_fields` or volatile ESRI/edit metadata. None ignored pre-emptively, by the rule
+  above: Post_Code and the street parts would carry address content if filled.
 
 Static sources (toronto, waterloo) cannot be probed this way — no layer metadata to ask.
 
