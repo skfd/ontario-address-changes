@@ -1,24 +1,31 @@
 slug = "west-parry-sound"
 provider = "West Parry Sound Geography Network"
-# District-wide layer covering the WPSGN member municipalities/townships/First Nations/
-# local roads boards (13 Municipality values incl. Seguin, Archipelago, Parry Sound,
-# McDougall, Whitestone, Carling, McKellar, Wasauksing) — the muskoka shape; each member
-# maintains its own rows via a designated editor. Resolved 2026-08-20: the old
-# wpsgn.ca/arcgis instance returns an HTML error page; the server moved to /s22. The
-# service folder is literally named "wpsgn_opendata". Official: AGOL item
-# c9053cbee22e47ceac167971a9963ed7 (owner wpsgnet, the official WPS Geography Network
-# org) points at exactly this URL. 21,705 rows re-verified live 2026-08-20.
-data_url = "https://www.wpsgn.ca/s22/rest/services/wpsgnPublic/wpsgn_opendata/FeatureServer/0"
+# District-wide NG911 address layer covering the WPSGN members (9 municipality domain
+# values: Seguin, The Archipelago, Parry Sound, McDougall, McKellar, Carling,
+# Whitestone, Unorganized, First Nation; the First Nations and local roads boards
+# carried separately in firstnation / localroadsboard) - the muskoka shape.
+#
+# Re-pointed 2026-10-16 from wpsgnPublic/wpsgn_opendata/FeatureServer/0, the layer
+# tracked since 2026-08-20. That one answered 500 "Service ... not started" every day
+# from 09-24 (the one exception, 10-01, was byte-identical to 08-20), and it had been a
+# frozen export all along: never a second distinct snapshot in 56 vault pulls, while
+# this layer carries revision_date edits from 2023 through 2026-10. Measured against
+# the 08-20 store before switching: 98.1% of identity keys (21,280 of 21,703) survive
+# the field map below; the ~420 that don't are a 2023-26 edit backlog (104 Fire Route ->
+# named-road renames, 30 renumbers, ~97 points gone, ~130 new) plus ~120 unit re-spellings
+# ("Unit 1" -> unitnumber "1", "A & B" -> add_range "A-B"). Neither is a dated change, so
+# the store was re-baselined from this layer instead of diffing across the switch (the
+# 08-20 store is backed up at C:\Users\kk\ontario-db-backup-2026-10-16-wps\).
+# 21,734 rows live 2026-10-16.
+data_url = "https://www.wpsgn.ca/s22/rest/services/NG911/NG911/FeatureServer/9112"
 access = "arcgis"
 format = "geojson"
-# Native layer SR is EPSG:3395 (World Mercator — unusual); the geojson export arrives
-# already in WGS84 (verified on sample rows 2026-08-20), so this is a guard for a future
-# export-CRS switch (pass-through while in lon/lat range).
-source_crs = "EPSG:3395"
-# Licence found 2026-08-20: nothing on the service (copyrightText empty) or the AGOL item
-# (licenseInfo null) or the data-wpsgn.opendata.arcgis.com hub, but the network's re3data
+# Native layer SR is EPSG:26917 (UTM 17N); the fetcher asks for outSR=4326, so this is
+# the guard for a future export-CRS switch (pass-through while in lon/lat range).
+source_crs = "EPSG:26917"
+# Licence: nothing on this service either (copyrightText empty). The network's re3data
 # entry (r3d100013016) links the licence PDF, live at
-# https://wpsgn.ca/OpenGovernmentLicense%E2%80%93TownshipofTheArchipelago.pdf — v2, based
+# https://wpsgn.ca/OpenGovernmentLicense%E2%80%93TownshipofTheArchipelago.pdf - v2, based
 # on OGL-Canada 2.0 (copy/modify/publish/distribute incl. commercial, attribution
 # required). Oddity: the licence is issued in the name of one member (Township of The
 # Archipelago) while the layer covers all members; re3data lists it as the licence for
@@ -26,43 +33,36 @@ source_crs = "EPSG:3395"
 license_name = "Open Government License - Township of The Archipelago (v2, based on OGL-Canada 2.0)"
 osm_compatible = "yellow-ogl"
 
-# CreationDate/ModificationDate are the esri editor-tracking timestamps of this service
-# (its twin pair created_user/created_date/last_edited_user/last_edited_date is already
-# stripped globally by EDIT_METADATA_FIELDS, which misses these two spellings). Same
-# class of field, no address content — ignored from day one so edit timestamps never
-# reach payload_hash.
-ignore_fields = ["CreationDate", "ModificationDate"]
+# creation_date / revision_date are NENA's record-maintenance timestamps (epoch ms;
+# 74% / 32% populated) - the editor-tracking class EDIT_METADATA_FIELDS strips
+# globally under other spellings. No address content; ignored from day one, as the
+# old layer's CreationDate/ModificationDate were. The rest (LinkObjId, rotation,
+# pointtype, provider_type, ...) stay tracked until history shows churn.
+ignore_fields = ["creation_date", "revision_date"]
 
 [identity]
-# No stable source id. Rollnumber is an assessment parcel roll, 1:many with addresses
-# (up to 47 rows per roll on 490301001375000, checked 2026-08-20) and dirty besides
-# (free-text values "na", "henvey", "condo", "boat ramp", "LOT 109"; 1 blank row) — the
-# windsor trap. GlobalID is 100% populated and unique within the snapshot but has no
-# cross-snapshot stability evidence yet and may regenerate on republish (brant
-# precedent). OBJECTID sequential.
+# No usable source id. add_pt_key and civicid are empty on every row. parcelid is the
+# assessment roll (the old Rollnumber: 1:many, up to 47 rows on 490301001375000, 105
+# "none"). globalid is 100% populated and unique but has no cross-snapshot evidence on
+# this service yet and may regenerate on republish (brant precedent) - revisit once
+# there are 2+ snapshots of this layer. OBJECTID is sequential.
 key_field = ""                                 # synthesize from address + rounded lon/lat
 synth_fields = ["number", "street", "unit"]
 
 [fields]                                        # source property -> canonical name
-# CivicAddress is the STREET NAME, not a full address — verified on sample rows
-# 2026-08-20 (CivicAddress "Emily Street" vs Civic_FullAddress "58 Emily Street").
-number = "CivicNumber"
-street = "CivicAddress"                         # Municipality/Rollnumber/CODE tracked via the props blob
-unit   = "CivicUnit"                            # sparse: 122 of 21,705 non-blank (2026-08-20); kept
-                                                # selected by the oakville SUITE rule
-full   = "Civic_FullAddress"
-# Questions (sparse numeric code 1-9, 16k blank) and Comments (free text, but genuinely
-# informative — carries street-rename history like "was Fire Route 152A pre 20231204")
-# stay tracked via the props blob; no churn evidence to justify ignoring them day one.
+number = "add_num"                              # carries the suffix ("298A"); add_num_pre/add_num_suf are empty
+street = "name_body"                            # the whole street name ("Peninsula Shores Road East");
+                                                # every NENA prefix/suffix/direction/type column is empty
+unit   = "unitnumber"                           # 96 of 21,734 rows, bare ("1"). Oddities: unitnumsuffix holds
+                                                # the word "Unit"/"Units", and multi-unit ranges live only in
+                                                # add_range ("A-B") and full_add ("... Units A-B")
+full   = "full_add"                             # includes the unit ("58 Winnifred Avenue Unit 1")
 
-# Change classes (field values verified against the live layer 2026-08-20): a
-# modification touching only these fields is reported in its humanized section
-# (status changes / boundary reassignments) instead of the generic Updated
-# Addresses table.
+# Change classes (domains read from the live layer 2026-10-16): a modification
+# touching only these fields is reported in its humanized section instead of the
+# generic Updated Addresses table. pointtype is NOT a status - its domain is the
+# placement method (Building Centroid 18,574, Unknown 1,736, Other 1,049, entrances,
+# Parcel Centroid) - so a re-placement shows up as a location change plus pointtype.
 [classes]
-boundary = ["Municipality"]                     # 13 member communities, see header comment
-# Retired is uniformly "A" (active) on all 21,705 rows as of 2026-08-20 — the layer
-# currently carries zero retired records, so this class fires only if the network starts
-# publishing flips. Verified is NOT classed: legacy junk (blank/N/2005 dates/editor
-# names like "BRIAN LE*"), not a live status field.
-status = ["Retired"]
+boundary = ["municipality", "firstnation", "localroadsboard"]
+status = ["retired_date"]                       # empty on every row today

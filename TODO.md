@@ -236,7 +236,7 @@ the order to work them):
 
 | # | place | what | why now |
 |---|---|---|---|
-| 1 | west-parry-sound | re-point to NG911/9112 (21,734) or email wpsgn | down 22 days, reddens every run |
+| ~~1~~ | ~~west-parry-sound~~ | **done 2026-10-16**: re-pointed to NG911/9112, store re-baselined | — |
 | 2 | elgin | re-point to Elgin_Civic_Numbers_2026 (24,177) + licence recheck | tracked layer frozen since 06-12 |
 | 3 | middlesex | re-point to the county's live Base_Layers/MapServer/1 (34,308) | tracked item is a 2023 snapshot |
 | 4 | Tecumseh (Essex) | new dataset, 9,860 pts, OGL Essex; fix skipped.toml | first Essex points under an open licence |
@@ -255,7 +255,7 @@ west-parry-sound) cannot be tuned yet — none has published a second distinct s
 address layer on every Ontario portal (`catalogue/layers/*.csv`, theme `addresses`); these
 are the ones that change something here. Counts and dates probed live 2026-10-16.
 
-- [ ] **west-parry-sound is failing daily (urgent).** The tracked
+- [x] **west-parry-sound is failing daily (urgent).** The tracked
       `wpsgnPublic/wpsgn_opendata/FeatureServer/0` answers 500 "Service ... not started"
       (both attempts, 2026-10-15). The same server's
       `https://www.wpsgn.ca/s22/rest/services/NG911/NG911/FeatureServer/9112` ("Civic Address
@@ -274,6 +274,18 @@ are the ones that change something here. Counts and dates probed live 2026-10-16
       flipped. (2026-10-16: the daily cost is gone without either — WPS now fails in
       half a second with no retries and no longer fails the run, see the flaky-sources
       item in §4. `enabled = false` in its TOML now pauses it outright if wanted.)
+      **DONE 2026-10-16: re-pointed to NG911/9112, store re-baselined rather than diffed.**
+      Measured first: the store held a single snapshot (08-20) because the old layer was a
+      frozen export, while NG911 carries edits dated 2023-03 to 2026-10. 98.1% of identity
+      keys survived the new field map (`add_num`/`name_body`/`unitnumber`/`full_add`). The
+      ~420 that didn't are a 2023-26 edit backlog (104 Fire Route -> named-road renames, 30
+      renumbers, ~97 gone, ~130 new) plus ~120 unit re-spellings, none of it dated, so
+      diffing across the switch would have published years of edits under one day. Owner
+      chose a fresh baseline (no events, no flags). The landing page now reads "last snapshot
+      2026-10-16", and the old 08-20 baseline report is removed. Vault day filed `schema`.
+      Old store backed up at `C:\Users\kk\ontario-db-backup-2026-10-16-wps\` (it also carries
+      a stray NG911 import on top; README there says how to strip it). The info@wpsgn.ca
+      licence-scope question (§3) is still open: NG911 publishes no licence either.
 - [ ] **middlesex follows a 2023 snapshot.** `MiddlesexCountyAddressPoints` (item name
       `mc_address`) was last edited 2023-10-18 and holds 31,571. The county's live layer is
       `https://utility.arcgis.com/usrsvcs/servers/f4dd79bdd35a456c87c0c20668138c05/rest/services/MiddlesexCounty/Base_Layers/MapServer/1`,
@@ -519,6 +531,8 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
   directories are still on disk — `-2026-08-20-preignore` 1.15 GB, `-2026-08-20-remap`
   0.01 GB, `-2026-08-21-nullliterals` 2.87 GB (§5's null-literal migration backup) —
   4.0 GB in total, with ~55 clean daily imports on top of each. Operator cleanup.
+  Added 2026-10-16: `-2026-10-16-wps` (25 MB, west-parry-sound's pre-NG911 store) — droppable
+  once a few NG911 pulls have imported cleanly on the new baseline.
   Original note follows for the restore procedure. — 2.9 GB outside the repo, kept while the
   prop-hashing migration settles (§5). Both passes verified idempotent and every
   affected city's latest diff verified byte-identical the same day, so these are
