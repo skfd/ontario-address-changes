@@ -1,8 +1,8 @@
 # Onboarding a new source
 
-Ends in either a `datasets/<slug>.toml` or a `skipped.toml` entry. Both are deliverables —
-a documented rejection is worth as much as an addition, and the landing page renders the
-skipped list so coverage gaps stay reviewable.
+Ends in either a `datasets/<slug>.toml` or, when there is nothing pullable, a
+`skipped.toml` entry. Both are deliverables — a documented rejection is worth as much as an
+addition, and the landing page renders the skipped list so coverage gaps stay reviewable.
 
 ## 1. Find the source that is actually official
 
@@ -16,7 +16,8 @@ The traps, all of which have already cost time here:
 - **Dead municipal endpoints** with no ArcGIS Online migration (Belleville).
 - **Token-secured layers** returning HTTP 499 (Norfolk County).
 - **Region-wide layers** that cover many municipalities in one service (Muskoka) — fine,
-  but the TOML comment should say so.
+  but the TOML comment should say so. A member city's own layer is still onboarded
+  separately (see §2).
 
 Record the resolution path in a comment at the top of the TOML. Every existing dataset
 does this and it is the only record of why a URL is what it is.
@@ -26,8 +27,16 @@ does this and it is the only record of why a URL is what it is.
 `license_name` verbatim from the source, plus `osm_compatible`, using the existing
 vocabulary: `green-lwg`, `green-self` (self-listed on wiki Contributors under the OSMF
 self-service procedure, not yet on the OSMF list), `green-ogl`, `yellow-ogl`, `yellow-review`, `orange-ccby-waiver`,
-`red-review`, `unknown-review`. A proprietary or all-rights-reserved licence is a
-`skipped.toml` entry, not a dataset (City of Peterborough).
+`red-review`, `unknown-review`.
+
+**Licence never decides whether a live layer is tracked, only whether it is published.**
+A layer with no licence, or proprietary / all-rights-reserved terms, still gets a dataset
+with `publish_reports = false` (red on the landing, no report pages); the vault's own data
+is never published. Overlap is not a reason to skip either: a city's own layer inside a
+tracked region or county gets its own dataset, because cities usually publish fresher,
+better data than the regional roll-up. Only a provable view of a layer already tracked
+(same org, same schema, strict subset) is left out. `skipped.toml` is for sources with
+nothing pullable: dead, secured, not found, no address layer.
 
 `skipped.toml` `status` badges are a fixed set: "Dead endpoint", "Empty / secured",
 "Proprietary licence", "No address layer", "Untrusted copy", "Unstable URL", "Not found".
