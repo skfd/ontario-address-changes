@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prior art vs the tracker — {{ today }}</title>
+<style>
+  :root { --bg:#fafafa; --surface:#fff; --surface2:#f5f5f5; --border:#e0e0e0; --text:#242424;
+    --dim:#616161; --accent:#0078d4; --green:#107c10; --red:#c50f1f; --yellow:#eaa300; color-scheme:light; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#1f1f1f; --surface:#292929; --surface2:#333; --border:#525252;
+    --text:#fff; --dim:#adadad; --accent:#2899f5; --green:#54b054; --red:#dc626d; --yellow:#f2c661; color-scheme:dark; } }
+  * { box-sizing:border-box; }
+  body { margin:0; padding:40px 24px; font:14px/1.5 'Segoe UI Variable','Segoe UI',system-ui,sans-serif; background:var(--bg); color:var(--text); }
+  main { max-width:1180px; margin:0 auto; }
+  h1 { font-size:26px; font-weight:600; margin:0 0 4px; } h2 { font-size:18px; font-weight:600; margin:40px 0 8px; }
+  p.lead { color:var(--dim); margin:0 0 8px; }
+  table { border-collapse:collapse; width:100%; background:var(--surface); border:1px solid var(--border); border-radius:8px; overflow:hidden; font-size:13px; }
+  th, td { padding:6px 10px; border-bottom:1px solid var(--border); text-align:left; vertical-align:top; }
+  th { background:var(--surface2); font-weight:600; position:sticky; top:0; }
+  td.n, th.n { text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; }
+  tr.gap td { background:color-mix(in srgb, var(--red) 10%, transparent); }
+  tr.dead td { color:var(--dim); }
+  .tag { display:inline-block; font-size:11px; padding:1px 7px; border-radius:999px; background:var(--surface2); border:1px solid var(--border); }
+  .tag.red { border-color:var(--red); color:var(--red); } .tag.green { border-color:var(--green); color:var(--green); } .tag.yellow { border-color:var(--yellow); color:var(--yellow); }
+  .note { font-size:12px; color:var(--dim); }
+  details summary { cursor:pointer; color:var(--accent); margin:8px 0; }
+  .wrap { max-height:70vh; overflow:auto; border-radius:8px; }
+  .small { font-size:12px; color:var(--dim); }
+</style>
+</head>
+<body><main>
+<h1>Prior art vs the tracker</h1>
+<p class="lead">Measured {{ today }}. {{ n_measures }} measurements on file since {{ first_measured }}. Back-office: method under review, not linked from the public site.</p>
+
+<h2>Comparators</h2>
+<table>
+<tr><th>Who</th><th>Kind</th><th class="n">Ontario rows</th><th class="n">Sources</th><th>Latest data</th><th>Cadence claimed</th><th>Cadence measured</th><th class="n">Unit filled</th><th>Access</th></tr>
+{% for c in summary %}
+<tr><td><a href="{{ c.url }}">{{ c.name }}</a></td><td>{{ c.kind }}</td><td class="n">{{ c.rows|num }}</td><td class="n">{{ c.sources|num }}</td>
+<td>{{ c.last }}</td><td>{{ c.cadence_claimed }}</td><td>{{ c.cadence_measured }}</td><td class="n">{{ c.unit_pct|pct }}</td><td class="small">{{ c.access }}</td></tr>
+{% endfor %}
+</table>
+<p class="note">Rows for us and OpenAddresses are sums over sources and double-count where sources overlap (regions and their members). The municipality matrix below takes the max per municipality for us instead.</p>
+
+<h2>Coverage by municipality</h2>
+<p class="lead">{{ n_munis }} lower- and single-tier municipalities (LIO polygons). Points binned by polygon for us and Overture; NAR and ODA by census-subdivision name.</p>
+<table>
+<tr><th></th><th class="n">Ours</th><th class="n">NAR {{ latest_nar }} rows</th><th class="n">NAR locations</th><th class="n">ODA 2021</th><th class="n">Overture {{ latest_ovt }}</th></tr>
+<tr><td>Municipalities with ≥1 row</td><td class="n">{{ covered.ours }}</td><td class="n">{{ covered.nar }}</td><td class="n">{{ covered.nar_loc }}</td><td class="n">{{ covered.oda }}</td><td class="n">{{ covered.overture }}</td></tr>
+<tr><td>Rows binned to a municipality</td><td class="n">{{ tot.ours|num }}</td><td class="n">{{ tot.nar|num }}</td><td class="n">{{ tot.nar_loc|num }}</td><td class="n">{{ tot.oda|num }}</td><td class="n">{{ tot.overture|num }}</td></tr>
+</table>
+<p class="note">NAR and Overture rows are unit-level (one row per apartment where StatCan knows it). "NAR locations" counts distinct LOC_GUIDs, the building or entrance, which is what a municipal address-point layer usually holds; the Ours / NAR column divides by that.</p>
+<p><b>{{ gaps|length }} municipalities</b> where the NAR has addresses and we have none: {{ gap_rows|num }} of {{ nar_total_binned|num }} NAR rows ({{ (100*gap_rows/nar_total_binned if nar_total_binned else 0)|round(1) }}%).</p>
+<div class="wrap"><table>
+<tr><th>Municipality</th><th>Upper tier</th><th class="n">Ours</th><th>Our datasets</th><th class="n">NAR rows</th><th class="n">NAR locations</th><th class="n">Ours / NAR loc.</th><th class="n">ODA 2021</th><th class="n">Overture</th></tr>
+{% for r in table %}
+<tr class="{{ 'gap' if r.gap }}"><td>{{ r.municipality }}{% if r.collision %} <span class="tag yellow" title="another municipality shares this short name; see the type in brackets">name shared</span>{% endif %}</td>
+<td class="small">{{ r.upper_tier }}</td><td class="n">{{ r.ours|num }}</td><td class="small">{{ r.ours_sources }}</td>
+<td class="n">{{ r.nar|num }}</td><td class="n">{{ r.nar_loc|num }}</td><td class="n">{{ r.ratio|pct }}</td><td class="n">{{ r.oda|num }}</td><td class="n">{{ r.overture|num }}</td></tr>
+{% endfor %}
+</table></div>
+{% if extra_rows %}
+<details><summary>{{ extra_rows|length }} names from comparators that match no municipality polygon</summary>
+<table><tr><th>Name</th><th class="n">Ours</th><th class="n">NAR</th><th class="n">ODA</th><th class="n">Overture</th></tr>
+{% for r in extra_rows %}<tr><td>{{ r.municipality }}</td><td class="n">{{ r.ours|num }}</td><td class="n">{{ r.nar|num }}</td><td class="n">{{ r.oda|num }}</td><td class="n">{{ r.overture|num }}</td></tr>{% endfor %}
+</table><p class="note">Reserves and unorganized territories have no LIO polygon and are expected here. A municipality name here means an alias is missing in muni_aliases.csv.</p></details>
+{% endif %}
+
+<h2>Quality: field fill</h2>
+<table>
+<tr><th>Source</th><th class="n">Rows</th><th class="n">Unit</th><th class="n">Street</th><th class="n">Number</th><th class="n">Postcode</th></tr>
+{% for q in quality %}
+<tr><td>{{ q.comparator }}</td><td class="n">{{ q.rows|num }}</td><td class="n">{{ q.unit|pct(1) }}</td><td class="n">{{ q.street|pct(1) }}</td><td class="n">{{ q.number|pct(1) }}</td><td class="n">{{ q.postcode|pct(1) }}</td></tr>
+{% endfor %}
+</table>
+<p class="note">Unit fill is a property of the source as much as the pipeline: a city that publishes one point per building has few units however well it is read. Compare a source against the same jurisdiction below, not column against column here. We carry no postcode field.</p>
+
+<h2>OpenAddresses, source by source</h2>
+<p class="lead">{{ oa_rows|length }} Ontario sources in OpenAddresses. {{ oa_dead|length }} have not run successfully in 60 days. Join to our datasets is hand-kept in oa_sources.csv.</p>
+<div class="wrap"><table>
+<tr><th>OA source</th><th>Match</th><th>Ours</th><th class="n">OA rows</th><th class="n">Our rows</th><th class="n">OA / ours</th><th>OA last success</th><th class="n">Runs / yr</th><th>Our last snapshot</th><th class="n">Unit OA / ours</th><th class="n">Street OA / ours</th><th>Note</th></tr>
+{% for r in oa_rows %}
+<tr class="{{ 'dead' if r.days_stale and r.days_stale > 60 }}"><td>{{ r.oa_source }}</td>
+<td><span class="tag {{ 'green' if r.match == 'same-url' else ('red' if r.match == 'none' else '') }}">{{ r.match }}</span></td>
+<td>{{ r.our_slug or '—' }}</td><td class="n">{{ r.oa_rows|num }}</td><td class="n">{{ r.ours_rows|num }}</td><td class="n">{{ r.ratio|pct }}</td>
+<td>{{ r.last_success }}{% if r.days_stale and r.days_stale > 60 %} <span class="tag red">{{ r.days_stale|num }} d</span>{% endif %}</td>
+<td class="n">{{ r.runs_365d|num }}</td><td>{{ r.ours_last }}</td>
+<td class="n">{{ r.oa_unit|pct }} / {{ r.ours_unit|pct }}</td><td class="n">{{ r.oa_street|pct }} / {{ r.ours_street|pct }}</td><td class="small">{{ r.note }}</td></tr>
+{% endfor %}
+</table></div>
+<p><b>Ours, absent from OpenAddresses</b> ({{ ours_only|length }}): {{ ours_only|join(', ') }}</p>
+
+<h2>Licence</h2>
+<p class="lead">Our licence_name against what OpenAddresses stores for the same source and what the ODA's provider table (2021) recorded.</p>
+<div class="wrap"><table>
+<tr><th>Dataset</th><th>Our licence</th><th>Tier</th><th>OA licence text</th><th>ODA licence (2021)</th><th>Flag</th></tr>
+{% for r in licences %}
+<tr><td>{{ r.slug }}{% if r.publish_reports %} <span class="tag red">unpublished</span>{% endif %}</td><td class="small">{{ r.our_licence }}</td><td><span class="tag">{{ r.osm_compatible }}</span></td>
+<td class="small">{{ r.oa_licence or ('—' if r.oa_sources else 'not in OA') }}</td><td class="small">{{ r.oda_licence }}</td><td class="small">{{ r.flag }}</td></tr>
+{% endfor %}
+</table></div>
+</main></body></html>
