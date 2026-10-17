@@ -314,7 +314,10 @@ def _write_licences(oa_dir):
             s = sum(v for k, v in cov.items() if k in munis)
             if s > score:
                 best, score = prov, s
-        return oda.get(best) if best else None
+        # a neighbour's spillover must not count: the provider has to hold a real share of our area
+        if best and score >= 0.2 * sum(mine.values()):
+            return oda.get(best)
+        return None
 
     out = []
     for ds in registry.load_all():
