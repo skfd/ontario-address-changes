@@ -1,0 +1,24 @@
+slug = "whitby"
+provider = "Town of Whitby"
+# Found in the ontario-osm-data-sources portal sweep (2026-10-16, registry id ca/on/whitby/address-points);
+# probed live 2026-10-16: 49,090 points, lastEditDate 2026-10-06. Inside durham (48,540
+# Whitby rows). 616 rows with a null ADD_NUM are street-label points; 3,183 ADDRESS values carry
+# a "(P)" proposed marker inside the string.
+data_url = "https://services5.arcgis.com/ATdLnvuMRJk8AGkQ/arcgis/rest/services/Whitby_Address_Points/FeatureServer/0"
+access = "arcgis"
+format = "geojson"
+# Native layer SR; the geojson export arrives in WGS84, so this guards a future export-CRS switch.
+source_crs = "EPSG:26917"
+license_name = "The Corporation of the Town of Whitby Open Government License"
+osm_compatible = "yellow-ogl"
+
+[identity]
+# No id column and OBJECTID is dense: synthesize.
+key_field = ""
+synth_fields = ["number", "street", "unit"]
+
+[fields]                                        # canonical name -> source property
+number = "ADD_NUM"
+street = "ROAD_NAME"
+unit   = "UNITNUM"
+full   = "ADDRESS"

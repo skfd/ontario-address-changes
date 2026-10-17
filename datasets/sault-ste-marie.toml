@@ -1,0 +1,38 @@
+slug = "sault-ste-marie"
+provider = "City of Sault Ste. Marie"
+# Found in the ontario-osm-data-sources portal sweep (2026-10-16, registry id ca/on/sault-ste-marie/soomaps-generallayers-addresses);
+# probed live 2026-10-16: 33,316 points, DATEMODIFIED max 2025-01-30. The SooMaps layer
+# (stable URL, not the date-versioned Collection_Addresses copies).
+data_url = "https://enterprise.ssmic.com/server/rest/services/SooMaps/SooMaps_GeneralLayers/MapServer/0"
+access = "arcgis"
+format = "geojson"
+# Native layer SR; the geojson export arrives in WGS84, so this guards a future export-CRS switch.
+source_crs = "EPSG:26916"
+license_name = ""
+osm_compatible = "red-review"
+# SooMaps click-through: "not for commercial use" (skipped.toml, 2026-08-20). Tracked, not published.
+publish_reports = false
+
+ignore_fields = [
+  # Repeat the geometry.
+  "LATITUDE",
+  "LONGITUDE",
+  "UTM_X",
+  "UTM_Y",
+  # Label angle and a UNC path.
+  "ROTATION",
+  "STREETREPORT1",
+  # Edit stamps.
+  "DATEMODIFIED",
+  "LASTUSER",
+]
+
+[identity]
+# SSMICID: no nulls or duplicates, sparse values.
+key_field = "SSMICID"
+
+[fields]                                        # canonical name -> source property
+number = "CIVICNUMBER"
+street = "STREETNAME"
+unit   = "UNIT"
+postal = "POSTALCODE"

@@ -1,0 +1,24 @@
+slug = "niagara-falls-city"
+provider = "City of Niagara Falls"
+# Found in the ontario-osm-data-sources portal sweep (2026-10-16, registry id ca/on/niagara-falls-city/niagara-falls-address-points);
+# probed live 2026-10-16: 35,700 points, lastEditDate 2026-10-14, "auto-updated nightly
+# from the parcel data". Not Niagara Region's layer (niagara-falls.toml has 39,767 rows here).
+data_url = "https://services9.arcgis.com/oMFQlUUrLd1Uh1bd/arcgis/rest/services/Niagara_Falls_Address_Points/FeatureServer/0"
+access = "arcgis"
+format = "geojson"
+# Native layer SR; the geojson export arrives in WGS84, so this guards a future export-CRS switch.
+source_crs = "EPSG:2958"
+license_name = "Open Government Licence - Niagara Falls"
+osm_compatible = "yellow-ogl"
+
+[identity]
+# OBJECTID is a dense 1..35,700 rebuilt nightly. pID (parcel) + address is unique: synthesize
+# with pID. 2,146 rows have a null Street_No (street-only parcel points).
+key_field = ""
+synth_fields = ["number", "street"]
+synth_props = ["pID"]
+
+[fields]                                        # canonical name -> source property
+number = "Street_No"
+street = "StreetName"
+full   = "ADDRESS"

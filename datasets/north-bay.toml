@@ -1,0 +1,29 @@
+slug = "north-bay"
+provider = "City of North Bay"
+# Found in the ontario-osm-data-sources portal sweep (2026-10-16, registry id ca/on/north-bay/civicaddress-point-civicaddress-point);
+# probed live 2026-10-16: 21,964 points, frozen since 2023-04 (edit stamps max 2022-10).
+# Tracked to catch it coming back to life. 340 rows are outside the city (Nipissing, Commanda).
+data_url = "https://services5.arcgis.com/ItUGraUlQOjvSGOV/arcgis/rest/services/CivicAddress_Point/FeatureServer/0"
+access = "arcgis"
+format = "geojson"
+license_name = ""
+osm_compatible = "red-review"
+# northbay.ca/legal: geospatial content may not "be copied onto any other website without the
+# written agreement of or licence by the City" (skipped.toml, 2026-08-20). Tracked, not published.
+publish_reports = false
+
+ignore_fields = [
+  # Edit stamps.
+  "asq_lasteditedwhen",
+  "ADR_SOURCE_DATE",
+]
+
+[identity]
+# CIVIC_ID ('CIVIC000621'): unique, assigned (max above the row count); one blank row synthesizes.
+key_field = "CIVIC_ID"
+
+[fields]                                        # canonical name -> source property
+number = "ST_NUM"
+street = "ST_NAME"
+unit   = "UNIT"
+full   = "ST_LNG_NAM"

@@ -1,0 +1,23 @@
+slug = "pickering"
+provider = "City of Pickering"
+# Found in the ontario-osm-data-sources portal sweep (2026-10-16, registry id ca/on/pickering/opendata-municipal-address);
+# probed live 2026-10-16: 42,765 points, lastEditDate 2026-10-15, updated monthly. Inside
+# durham (42,117 Pickering rows).
+data_url = "https://services8.arcgis.com/PE9fNg6S0CDTs96v/arcgis/rest/services/OpenData/FeatureServer/0"
+access = "arcgis"
+format = "geojson"
+license_name = "City of Pickering Open Data License"
+osm_compatible = "unknown-review"
+
+[identity]
+# PIC_ID ('P_'+old OBJECTID) is gappy but 10 ids are reused for different addresses
+# (P_425253 is two places): synthesize, with type/direction to separate same-root streets.
+key_field = ""
+synth_fields = ["number", "street", "unit"]
+synth_props = ["STREETTYPE", "STREETDIRE"]
+
+[fields]                                        # canonical name -> source property
+number = "HOUSENUMBE"
+street = "STREET"
+unit   = "UNITNUMBER"
+full   = "LABEL2"

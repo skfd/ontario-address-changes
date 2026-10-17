@@ -1,0 +1,33 @@
+slug = "dryden"
+provider = "City of Dryden"
+# Found in the ontario-osm-data-sources portal sweep (2026-10-16, registry id ca/on/dryden/buildingandplanning-addresses);
+# probed live 2026-10-16: 4,753 points; edit dates null on every row, so freshness unknown.
+data_url = "https://maps.dryden.ca/arcgisdryd/rest/services/Portal/BuildingandPlanning/MapServer/0"
+access = "arcgis"
+format = "geojson"
+# Native layer SR; the geojson export arrives in WGS84, so this guards a future export-CRS switch.
+source_crs = "EPSG:26915"
+license_name = ""
+osm_compatible = "unknown-review"
+# No licence published on the service, item or portal (2026-10-16): tracked, not published.
+publish_reports = false
+
+ignore_fields = [
+  # Edit stamps (all null today).
+  "created_user",
+  "created_date",
+  "last_edited_user",
+  "last_edited_date",
+]
+
+[identity]
+# GLOBALID is unique but regenerates on a reload; ADDRESS_ID has 37 nulls and mixed
+# formats. Synthesize. 16 rows carry ADDRESS='0'.
+key_field = ""
+synth_fields = ["number", "street"]
+
+[fields]                                        # canonical name -> source property
+number = "ADDRESS"
+street = "CORSTREETNAME"
+full   = "FULLADDRESS"
+postal = "POSTALCODE"

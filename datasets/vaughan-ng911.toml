@@ -1,0 +1,31 @@
+slug = "vaughan-ng911"
+provider = "City of Vaughan — NG911"
+# Found in the ontario-osm-data-sources portal sweep (2026-10-16, registry id ca/on/vaughan/address-cov-address-cov);
+# probed live 2026-10-16: 94,002 NG911 points, frozen since 2025-10-03, Status 'C' on
+# every row. Tracked to catch it moving; vaughan.toml is the live layer.
+data_url = "https://services2.arcgis.com/9LnN9037wYhPG904/arcgis/rest/services/address_COV/FeatureServer/0"
+access = "arcgis"
+format = "geojson"
+license_name = ""
+osm_compatible = "unknown-review"
+# No licence published on the service, item or portal (2026-10-16): tracked, not published.
+publish_reports = false
+
+ignore_fields = [
+  # Repeat the geometry.
+  "Longitude",
+  "Latitude",
+  # Edit stamps.
+  "DateUpdate",
+  "LastEdtDate",
+]
+
+[identity]
+# AID: 100% populated, unique, gappy 1..96,461. NGUID is empty.
+key_field = "AID"
+
+[fields]                                        # canonical name -> source property
+number = "Add_Number"
+street = "St_Name"
+unit   = "Unit"
+postal = "Post_Code"

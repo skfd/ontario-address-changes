@@ -1,0 +1,34 @@
+slug = "tecumseh"
+provider = "Town of Tecumseh"
+# Found in the ontario-osm-data-sources portal sweep (2026-10-16, registry id ca/on/essex-county/town-of-tecumseh-address-points);
+# probed live 2026-10-16: 9,860 points; item modified 2026-08-31. The first Essex
+# County member with address points (skipped.toml said Essex had none).
+data_url = "https://gisweb.tecumseh.ca/arcgis/rest/services/OpenDataMaps/OpenDataMAP_InfraZonePropBound_Layers/MapServer/33"
+access = "arcgis"
+format = "geojson"
+# Native layer SR; the geojson export arrives in WGS84, so this guards a future export-CRS switch.
+source_crs = "EPSG:26917"
+license_name = "Open Government Licence - The Corporation of the County of Essex"
+osm_compatible = "yellow-review"
+# Licence as listed on the Essex County hub (registry); the item itself says only
+# "(c) Copyright Town of Tecumseh". Confirm in the next licence pass.
+
+ignore_fields = [
+  # Repeat the geometry.
+  "X",
+  "Y",
+]
+
+[identity]
+# GIS_ID is populated but polluted with sentinels ('T_0000', 'Lakeshore'): synthesize. No unit
+# field; 31 rows carry units inside AddressComplete. 56 rows are CITY=LAKESHORE.
+key_field = ""
+synth_fields = ["number", "street"]
+
+[fields]                                        # canonical name -> source property
+number = "CIVICNO"
+street = "STREETNAME"
+full   = "AddressComplete"
+
+[classes]
+status = ["TYPE"]

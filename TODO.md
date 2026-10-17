@@ -240,14 +240,31 @@ the order to work them):
 | ~~1~~ | ~~west-parry-sound~~ | **done 2026-10-16**: re-pointed to NG911/9112, store re-baselined | — |
 | ~~2~~ | ~~elgin~~ | **done 2026-10-16**: re-pointed to Elgin_Civic_Numbers_2026, store re-baselined, licence found (OGL, yellow) | — |
 | ~~3~~ | ~~middlesex~~ | **done 2026-10-16**: re-pointed to Base_Layers/MapServer/1, store re-baselined | — |
-| 4 | Tecumseh (Essex) | new dataset, 9,860 pts, OGL Essex; fix skipped.toml | first Essex points under an open licence |
-| 5 | Grey County | licence ask; 51k parcel labels + 10.5k Blue Mountains pts; 403 from here | skipped.toml says "no layer", now wrong |
+| ~~4~~ | ~~Tecumseh (Essex)~~ | **done 2026-10-16**: tracked (9,860), skipped.toml fixed | — |
+| 5 | Grey County | **tracked 2026-10-16** (grey 51k parcels, blue-mountains 10.5k pts, grey-assigned-addresses 1.7k), gated; licence ask still open | publish if the county grants one |
 | 6 | peel-region, waterloo, dufferin, cambridge, chatham-kent | data-integrity look: content frozen 15/16/16/10/12 weeks | live layer or periodic export? |
 | 7 | stratford, prince-edward-county, haldimand | city-tune audit pass (2+ changed snapshots, TOML untouched since 08-20) | owed since onboarding |
 | 8 | milton | licensed-layer re-point, deferred 2026-10-12 | now also the flakiest October source |
-| 9 | Ajax, Whitby, Pickering / Newmarket / Welland, Niagara Falls city / Orillia, New Tecumseth | member layers under open licences | only if durham/york/niagara/simcoe fail the LWG |
-| 10 | Oxford, North Bay, Haliburton, Sault Ste. Marie, City of Peterborough | licence asks (layers verified live) | stuck at the gate, not at the search |
+| ~~9~~ | ~~member layers~~ | **done 2026-10-16**: ajax, whitby, pickering, oshawa, newmarket, vaughan (+ vaughan-ng911), mississauga, caledon, welland, niagara-falls-city, waterloo-region tracked; Orillia/New Tecumseth are degraded copies of simcoe, not added | cities publish fresher data than the roll-up |
+| 10 | Oxford, North Bay, Haliburton, Sault Ste. Marie, City of Peterborough | **tracked 2026-10-16, publish_reports = false**; licence asks still open | the gate holds publishing only now |
 | — | Belleville, Northumberland, Lanark, Timmins, Owen Sound, Kenora | still no machine-readable layer | quarterly re-probe only |
+
+**2026-10-16 sweep onboarding, follow-ups** (24 datasets added, dufferin re-pointed to its address layer, LICENSING.md has the table):
+- [ ] Licence reads: ajax (registry names "Town of Ajax Open Data Licence v1.0"; the service
+      says only copyright), tecumseh (Essex hub OGL vs the item's "(c) Town of Tecumseh"),
+      waterloo-region (licence link 404s; hub page needs a browser). All three publish now.
+- [ ] Gated for no licence text, worth an ask: caledon, dryden, oshawa ("reference use only"
+      claim unverified), vaughan, vaughan-ng911, grey x3, gorham-ware, oliver-paipoonge.
+- [ ] Measure the daily run after the first full day: ~1.5M more rows (waterloo-region 263k,
+      mississauga 220k, vaughan 140k + 94k, oshawa 64k). Six-way parallel, but check it
+      still clears the evening window.
+- [ ] lennox-addington: the township views (GN_Civics, Loyalist, AH, Stone Mills) expose
+      STREET_NAM 100% and UNIT_IDENT the county view hides - a field-map upgrade for the
+      county store (it derives street from full and maps no unit), not new datasets.
+- [ ] Landing "addresses tracked" now double-counts overlaps (mississauga in peel-region,
+      vaughan/newmarket in york, ajax/pickering/whitby/oshawa in durham, ...). Decide whether
+      the headline should count distinct coverage.
+- [ ] city-tune audit for each new city after two changed snapshots (classes, ignore_fields).
 
 The other six August onboards (amherstburg, cobourg, halton-hills, middlesex, norfolk,
 west-parry-sound) cannot be tuned yet — none has published a second distinct snapshot.

@@ -1,0 +1,37 @@
+slug = "blue-mountains"
+provider = "Town of The Blue Mountains (via Grey County GIS)"
+# Found in the ontario-osm-data-sources portal sweep (2026-10-16, registry id ca/on/grey/service-parcellabels-address-number-blue-mountains);
+# probed live 2026-10-16: 10,509 points, every row stamped 2026 (bulk reload
+# 2026-08-13); service description "Last Update: Sept. 1, 2026". Maintained by town GIS staff.
+data_url = "https://gis.grey.ca/server/rest/services/Public/Service_ParcelLabels/MapServer/2"
+access = "arcgis"
+format = "geojson"
+# Native layer SR; the geojson export arrives in WGS84, so this guards a future export-CRS switch.
+source_crs = "EPSG:3857"
+license_name = ""
+osm_compatible = "unknown-review"
+# No licence published on the service, item or portal (2026-10-16): tracked, not published.
+publish_reports = false
+
+ignore_fields = [
+  # Repeat the geometry.
+  "nX",
+  "nY",
+  "LAT",
+  "LONG",
+  # Edit stamps.
+  "created_us",
+  "created_da",
+  "last_edite",
+  "last_edi_1",
+]
+
+[identity]
+# sCUSTID / sROLLNUM are roll numbers shared across multi-address parcels: synthesize.
+key_field = ""
+synth_fields = ["number", "street", "unit"]
+
+[fields]                                        # canonical name -> source property
+number = "nSTRNUM"
+street = "sSTRFULL"
+unit   = "sSTRUNIT"

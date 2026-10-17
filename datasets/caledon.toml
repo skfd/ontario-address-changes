@@ -1,0 +1,35 @@
+slug = "caledon"
+provider = "Town of Caledon"
+# Found in the ontario-osm-data-sources portal sweep (2026-10-16, registry id ca/on/caledon/caledon-address-points);
+# probed live 2026-10-16: 34,909 points. The registry URL is a utility.arcgis.com proxy;
+# this is the same layer on the town's own server (same count). Last item edit 2019:
+# likely frozen, tracked to catch it coming back. Inside peel-region (31,861 Caledon rows).
+data_url = "https://maps.caledon.ca/calgis/rest/services/Basemaps/Common/MapServer/2"
+access = "arcgis"
+format = "geojson"
+# Native layer SR; the geojson export arrives in WGS84, so this guards a future export-CRS switch.
+source_crs = "EPSG:26917"
+license_name = ""
+osm_compatible = "unknown-review"
+# No licence published on the service, item or portal (2026-10-16): tracked, not published.
+publish_reports = false
+
+ignore_fields = [
+  # Overlay field (overlay-fields policy: ward is vault-only).
+  "WARD",
+]
+
+# No street-name field: derive it from FULL_ADDRESS_NAME (tools/derive_street_from_full.py logic).
+street_from_full = true
+
+[identity]
+# No id column and no street-name field (street only inside FULL_ADDRESS_NAME). 2,409 rows
+# carry STREET_NO=0, a sentinel, and make up most of the 2k duplicate full addresses.
+key_field = ""
+synth_fields = ["full"]
+
+[fields]                                        # canonical name -> source property
+number = "STREET_NO"
+unit   = "STREET_UNIT"
+full   = "FULL_ADDRESS_NAME"
+postal = "POSTAL_CODE1"

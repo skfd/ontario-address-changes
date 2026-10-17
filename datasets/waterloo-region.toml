@@ -1,0 +1,34 @@
+slug = "waterloo-region"
+provider = "Region of Waterloo"
+# Found in the ontario-osm-data-sources portal sweep (2026-10-16, registry id ca/on/waterloo-region/addresses);
+# probed live 2026-10-16: 263,200 points, LastEditDate max 2026-10-14. Region-wide,
+# compiled from the area municipalities: overlaps kitchener/cambridge/waterloo, and adds the four
+# townships (Woolwich 11,089, Wilmot 8,682, North Dumfries 4,758, Wellesley 3,715). The URL is a
+# utility.arcgis.com proxy (item d4d0c6de...).
+data_url = "https://utility.arcgis.com/usrsvcs/servers/d4d0c6dedec14e59930688f3830776c6/rest/services/OpenData/OpenData/MapServer/1"
+access = "arcgis"
+format = "geojson"
+license_name = "Region of Waterloo Open Data Licence"
+osm_compatible = "unknown-review"
+# licenseInfo links regionofwaterloo.ca/.../open-data.aspx#Open-Data-Licence (now 404); the hub's
+# /pages/open-data-licence renders only in a browser. Read it in the next licence pass.
+
+ignore_fields = [
+  # Edit stamps.
+  "CreatedDate",
+  "LastEditDate",
+]
+
+[identity]
+# FireID is empty on 13% and repeats: synthesize. Only 1 duplicate group once Municipality is in.
+key_field = ""
+synth_fields = ["number", "street", "unit"]
+
+[fields]                                        # canonical name -> source property
+number = "AddressNumber"
+street = "FullStreetName"
+unit   = "UnitNumber"
+full   = "FullAddress"
+
+[classes]
+boundary = ["Municipality"]

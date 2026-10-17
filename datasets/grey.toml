@@ -1,0 +1,29 @@
+slug = "grey"
+provider = "County of Grey"
+# Found in the ontario-osm-data-sources portal sweep (2026-10-16, registry id ca/on/grey/service-parcellabels-address-number);
+# probed live 2026-10-16: 51,458 parcel polygons across 59 city values (centroided like
+# windsor/renfrew); no date field. skipped.toml's "no address layer" predates gis.grey.ca.
+# Sibling Private/Service_Parcels/3 is the same addresses padded with 13k bare parcels: not added.
+data_url = "https://gis.grey.ca/server/rest/services/Public/Service_ParcelLabels/MapServer/3"
+access = "arcgis"
+format = "geojson"
+# Native layer SR; the geojson export arrives in WGS84, so this guards a future export-CRS switch.
+source_crs = "EPSG:3857"
+license_name = ""
+osm_compatible = "unknown-review"
+# No licence published on the service, item or portal (2026-10-16): tracked, not published.
+publish_reports = false
+
+[identity]
+# No id column; ~1,076 duplicate address3 where one address spans several parcels (the
+# rounded centroid keeps them apart). Numbers carry leading zeros ('046365'); street case is mixed.
+key_field = ""
+synth_fields = ["number", "street"]
+
+[fields]                                        # canonical name -> source property
+number = "address1"
+street = "address2"
+full   = "address3"
+
+[classes]
+boundary = ["city"]

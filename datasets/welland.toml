@@ -1,0 +1,21 @@
+slug = "welland"
+provider = "City of Welland"
+# Found in the ontario-osm-data-sources portal sweep (2026-10-16, registry id ca/on/welland/welland-civic-address-points);
+# probed live 2026-10-16: 22,461 points; no date field (item modified 2026-10-07). The
+# on-prem layer; the hosted services8 copy is stale (2023). Inside niagara-falls (Region).
+data_url = "https://arcgisweb.welland.ca/serverprodpub/rest/services/OpenData/OPENDATA_Civic_Addresses_Active/MapServer/0"
+access = "arcgis"
+format = "geojson"
+# Native layer SR; the geojson export arrives in WGS84, so this guards a future export-CRS switch.
+source_crs = "EPSG:26917"
+license_name = "Open Government Licence - City of Welland"
+osm_compatible = "yellow-ogl"
+
+[identity]
+# AddId: 100% populated, unique, gappy 1..36,424 (OBJECTID is the dense rebuilt one).
+key_field = "AddId"
+
+[fields]                                        # canonical name -> source property
+number = "CivicNoLbl"
+street = "StName"
+full   = "Address"

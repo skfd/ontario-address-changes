@@ -1,0 +1,34 @@
+slug = "peterborough"
+provider = "City of Peterborough"
+# Found in the ontario-osm-data-sources portal sweep (2026-10-16, registry id ca/on/peterborough/address);
+# probed live 2026-10-16: 34,096 points, edited 2026-10-16. skipped.toml held it at the
+# licence gate (unmodified-only grant); tracked now, never published.
+data_url = "https://services1.arcgis.com/JOTjMnANji9YTrZ2/arcgis/rest/services/Address/FeatureServer/0"
+access = "arcgis"
+format = "geojson"
+# Native layer SR; the geojson export arrives in WGS84, so this guards a future export-CRS switch.
+source_crs = "EPSG:2958"
+license_name = "City of Peterborough Open Data Terms of Use"
+osm_compatible = "red-review"
+# The Terms grant copying of the UNMODIFIED datasets only (licence re-check 2026-08-20), the
+# cobourg shape: derived diff reports are not clearly licensed. Tracked, not published.
+publish_reports = false
+
+ignore_fields = [
+  # Map-label angle, not address data.
+  "ROTATION",
+]
+
+[identity]
+# ADD_ID: no nulls or duplicates, range 1..72,427 (OBJECTID is the dense one). ADDNUM=0 is a
+# sentinel on 111 rows.
+key_field = "ADD_ID"
+
+[fields]                                        # canonical name -> source property
+number = "ADDNUM"
+street = "FULL_STREETNAME"
+unit   = "BLDG_UNIT"
+full   = "ADDRESS"
+
+[classes]
+status = ["STATUS"]

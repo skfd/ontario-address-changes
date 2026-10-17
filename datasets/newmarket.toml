@@ -1,0 +1,32 @@
+slug = "newmarket"
+provider = "Town of Newmarket"
+# Found in the ontario-osm-data-sources portal sweep (2026-10-16, registry id ca/on/newmarket/opennewmarket-address);
+# probed live 2026-10-16: 34,922 points, EDIT_WHEN max 2026-10-14. An AGOL view of the
+# town's own Address service (untracked). Inside york (34,804 Newmarket rows).
+data_url = "https://services3.arcgis.com/tSwsWwbYRimLwcCZ/arcgis/rest/services/OPENNewmarket_Address_3_view/FeatureServer/0"
+access = "arcgis"
+format = "geojson"
+license_name = "Town of Newmarket Open Data Licence"
+osm_compatible = "unknown-review"
+
+ignore_fields = [
+  # Edit stamp.
+  "EDIT_WHEN",
+  # Overlay fields (overlay-fields policy).
+  "WARD",
+  "COLL_DAY",
+]
+
+[identity]
+# GLOBALID: unique on every row; OBJECTID is gappy (edits in place), so the parent is not
+# truncate-reloaded.
+key_field = "GLOBALID"
+
+[fields]                                        # canonical name -> source property
+number = "STREET_NO"
+street = "STREET_NAME"
+unit   = "STREET_UNIT"
+full   = "MUN_ADD"
+
+[classes]
+status = ["STATUS"]

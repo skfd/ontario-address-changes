@@ -1,0 +1,37 @@
+slug = "gorham-ware"
+provider = "Gorham and Ware (Lakehead Region Conservation Authority map service)"
+# Found in the ontario-osm-data-sources portal sweep (2026-10-16, registry id ca/on/nottawasaga-valley-conservation-authority/lrca-municipal-gorham-ware-house-numbers);
+# probed live 2026-10-16: 2,482 parcel polygons (centroided), 1,335 with an address; no date
+# field. LRCA data for the Thunder Bay area, hosted on NVCA's server (the registry files it under NVCA).
+data_url = "https://co-gis.nvca.on.ca:6443/arcgis/rest/services/LRCA/LRCA_Municipal/MapServer/39"
+access = "arcgis"
+format = "geojson"
+# Native layer SR; the geojson export arrives in WGS84, so this guards a future export-CRS switch.
+source_crs = "EPSG:3857"
+license_name = ""
+osm_compatible = "unknown-review"
+# No licence published on the service, item or portal (2026-10-16): tracked, not published.
+publish_reports = false
+
+ignore_fields = [
+  # Parcel geometry measures and a map-extent flag, not address data.
+  "Shape_Length",
+  "Shape_Area",
+  "Hectares",
+  "Acres",
+  "Screen_Intersect",
+]
+
+[identity]
+# ARN repeats on parcels: synthesize, with ARN to separate same-address parcels.
+key_field = ""
+synth_fields = ["number", "street"]
+synth_props = ["ARN"]
+
+[fields]                                        # canonical name -> source property
+number = "StreetNo"
+street = "StreetName"
+full   = "Address"
+
+[classes]
+boundary = ["Township"]

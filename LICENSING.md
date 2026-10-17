@@ -22,6 +22,7 @@ republication carry `publish_reports = false` in their TOML — tracking
 continues, but the site renders no report pages for them and the landing page
 marks them "licence not compatible". Currently: sdg, renfrew,
 peterborough-county, cobourg (unmodified-only grant, the Peterborough shape).
+From the 2026-10-16 sweep, also: blue-mountains, caledon, dryden, gorham-ware, grey, grey-assigned-addresses, haliburton, north-bay, oliver-paipoonge, oshawa, oxford, peterborough, sault-ste-marie, vaughan, vaughan-ng911.
 
 Tier legend: **green** = usable (LWG-listed licence or equivalent; `green-self` = self-listed on wiki Contributors under the OSMF self-service procedure) ·
 **yellow** = OGL-family variant awaiting the variant-review email ·
@@ -42,7 +43,7 @@ peterborough-county (gated); unclear-by-silence for the unknowns.
 | brant | green-cc0 | CC0 (item licenseInfo, re-tiered 2026-08-16; ODbL-compatible outright, no LWG needed; optional courtesy confirm with county) |
 | cambridge | green-lwg | Open Government Licence - City of Cambridge |
 | cornwall | green-lwg | Open Government Licence - City of Cornwall |
-| dufferin | green-self | Open Government Licence – The County of Dufferin (**self-listed on Contributors 2026-10-12**; four OSMF categories only). The tracked Entrances layer is the **item-licensed** one; the better `Address_Points` layer is covered only by the portal-wide notice, so the 2026-10-12 licence pass did not re-point it — the data-quality re-point stays a user decision (see toml)) |
+| dufferin | green-self | Open Government Licence – The County of Dufferin (**self-listed on Contributors 2026-10-12**; four OSMF categories only). The tracked Entrances layer is the **item-licensed** one; the better `Address_Points` layer is covered only by the portal-wide notice, so the 2026-10-12 licence pass did not re-point it. **Re-pointed 2026-10-16** to `Address_Points` (owner's call), fresh baseline; the self-listing reads on the county licence, which the portal-wide notice extends to this layer) |
 | greater-sudbury | green-self | Open Data Licence - City of Greater Sudbury (**self-listed on Contributors 2026-10-12**; Quinte West's approved text (open-ended exemption, PHI, by-laws, "Use")) |
 | guelph | green-lwg | Open Government Licence - City of Guelph |
 | haldimand | green-self | Open Government Licence – Haldimand County (**self-listed on Contributors 2026-10-12**; Toronto's approved text word for word) |
@@ -155,9 +156,50 @@ sault-ste-marie (SooMaps click-through: non-commercial only, expressly
 covering consumed mapservices — borderline for a free tracker; operator may
 overrule).
 
-## Counts (2026-08-20, post-onboarding-wave; oakville to green 2026-10-09; durham out of green 2026-10-11; six self-listed and lambton out of green 2026-10-12; elgin from unknown to OGL-family 2026-10-16)
+## 2026-10-16 registry sweep — 24 added, none refused
 
-green 20 (6 of them `green-self`) · OGL-family awaiting the LWG 10 · yellow-review 7
-(peel-region, durham, bruce, norfolk, halton-hills, simcoe, prince-edward-county) ·
-CC-BY waiver 1 · restrictive 6 (4 gated off the site: sdg, renfrew,
-peterborough-county, cobourg) · unknown 8 — of **53 tracked datasets**.
+The ontario-osm-data-sources portal sweep graded every address layer on every Ontario portal;
+every live, non-copy one the tracker lacked was onboarded the same evening. **New rule: licence
+decides publishing, never tracking** — a live layer with no licence or restrictive terms gets a
+dataset with `publish_reports = false`, and a member city's own layer is tracked even inside a
+tracked region (cities usually publish fresher data than the roll-up). The four refusals of
+2026-08-20 (oxford, north-bay, haliburton, sault-ste-marie) and City of Peterborough are now
+tracked, gated. Licence names marked "registry" in the TOMLs were read off a portal by the
+sweep, not at the service: ajax, tecumseh, waterloo-region want a confirming read in the next
+licence pass. Left out as provable views/copies of tracked layers: four L&A township views,
+SDG North Dundas, Douro-Dummer, Simcoe's NG911 export and New Tecumseth/Orillia copies,
+Strathroy-Caradoc 2024. Brockville is token-secured (skipped.toml).
+
+| dataset | tier | licence |
+|---|---|---|
+| ajax | unknown-review | Town of Ajax - Open Data Licence v.1.0 |
+| blue-mountains | unknown-review · **publish_reports = false** | (none published) |
+| caledon | unknown-review · **publish_reports = false** | (none published) |
+| dryden | unknown-review · **publish_reports = false** | (none published) |
+| gorham-ware | unknown-review · **publish_reports = false** | (none published) |
+| grey | unknown-review · **publish_reports = false** | (none published) |
+| grey-assigned-addresses | unknown-review · **publish_reports = false** | (none published) |
+| haliburton | red-review · **publish_reports = false** | (none published) |
+| mississauga | yellow-review | City of Mississauga Terms of Use |
+| newmarket | unknown-review | Town of Newmarket Open Data Licence |
+| niagara-falls-city | yellow-ogl | Open Government Licence - Niagara Falls |
+| north-bay | red-review · **publish_reports = false** | (none published) |
+| oliver-paipoonge | unknown-review · **publish_reports = false** | (none published) |
+| oshawa | unknown-review · **publish_reports = false** | (none published) |
+| oxford | red-review · **publish_reports = false** | (none published) |
+| peterborough | red-review · **publish_reports = false** | City of Peterborough Open Data Terms of Use |
+| pickering | unknown-review | City of Pickering Open Data License |
+| sault-ste-marie | red-review · **publish_reports = false** | (none published) |
+| tecumseh | yellow-review | Open Government Licence - The Corporation of the County of Essex |
+| vaughan | unknown-review · **publish_reports = false** | (none published) |
+| vaughan-ng911 | unknown-review · **publish_reports = false** | (none published) |
+| waterloo-region | unknown-review | Region of Waterloo Open Data Licence |
+| welland | yellow-ogl | Open Government Licence - City of Welland |
+| whitby | yellow-ogl | The Corporation of the Town of Whitby Open Government License |
+
+## Counts (2026-10-16, after the registry-sweep onboarding; tallied from the TOMLs)
+
+green 20 (13 `green-lwg`, 6 `green-self`, 1 `green-cc0`) · OGL-family awaiting the LWG 13 ·
+yellow-review 9 · CC-BY waiver 1 · restrictive 12 · unknown 22 — of **77 tracked datasets**.
+19 are gated off the site (`publish_reports = false`): sdg, renfrew, peterborough-county,
+cobourg, plus the 15 from the 2026-10-16 sweep listed above.

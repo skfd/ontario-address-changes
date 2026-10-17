@@ -1,0 +1,25 @@
+slug = "oshawa"
+provider = "City of Oshawa"
+# Found in the ontario-osm-data-sources portal sweep (2026-10-16, registry id ca/on/oshawa/oshawa-addresses);
+# probed live 2026-10-16: 64,226 points; no date field. The registry's "last edited 2017,
+# superseded by durham" looks wrong: the newest ADDRESSIDs have no durham point within 40 m, and
+# durham holds 62,940 Oshawa rows. FCODE 9920 looks like unit points, 2150 main addresses.
+data_url = "https://map.oshawa.ca/arcgis/rest/services/Operational/Parcels_AddPts/MapServer/0"
+access = "arcgis"
+format = "geojson"
+# Native layer SR; the geojson export arrives in WGS84, so this guards a future export-CRS switch.
+source_crs = "EPSG:26917"
+license_name = ""
+osm_compatible = "unknown-review"
+# Only copyright "City of Oshawa G.I.S." at the service; the registry's "Open Data Licence
+# Agreement ... for reference use only" is unverified. Tracked, not published until a licence is read.
+publish_reports = false
+
+[identity]
+# ADDRESSID: 100% populated, unique, gappy to 67,780: a real key.
+key_field = "ADDRESSID"
+
+[fields]                                        # canonical name -> source property
+number = "SITE_CIVIC_NO"
+street = "STNAME"
+unit   = "SITE_UNIT_ID"

@@ -1,0 +1,23 @@
+slug = "vaughan"
+provider = "City of Vaughan"
+# Found in the ontario-osm-data-sources portal sweep (2026-10-16, registry id ca/on/vaughan/addressdetailapps-address);
+# probed live 2026-10-16: 140,537 points, lastEditDate 2026-10-15. Inside york (110,426
+# Vaughan rows); 30k more here, mostly units (only inside CmplteAdd: "... UNIT 4").
+data_url = "https://services2.arcgis.com/9LnN9037wYhPG904/arcgis/rest/services/AddressDetailApps/FeatureServer/0"
+access = "arcgis"
+format = "geojson"
+license_name = ""
+osm_compatible = "unknown-review"
+# No licence published on the service, item or portal (2026-10-16): tracked, not published.
+publish_reports = false
+
+[identity]
+# GlobalID is unique, but OBJECTID is dense 1..N after growth: a truncate-and-reload, so GlobalIDs
+# are likely re-minted each load. Synthesize (full carries the unit).
+key_field = ""
+synth_fields = ["number", "street", "full"]
+
+[fields]                                        # canonical name -> source property
+number = "Add_Number"
+street = "St_Name"
+full   = "CmplteAdd"

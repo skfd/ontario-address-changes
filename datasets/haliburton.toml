@@ -1,0 +1,31 @@
+slug = "haliburton"
+provider = "County of Haliburton"
+# Found in the ontario-osm-data-sources portal sweep (2026-10-16, registry id ca/on/haliburton/searchlayers-3-address);
+# probed live 2026-10-16: 33,978 assessment-parcel polygons (centroided); no date field.
+# 8,617 are the placeholder "(civic address not available)" with a blank number. skipped.toml
+# held it at the licence gate (view-and-print-only terms); tracked now, never published.
+data_url = "https://gis.haliburtoncounty.ca/arcgis/rest/services/Public/SearchLayers_3/MapServer/4"
+access = "arcgis"
+format = "geojson"
+# Native layer SR; the geojson export arrives in WGS84, so this guards a future export-CRS switch.
+source_crs = "EPSG:26917"
+license_name = ""
+osm_compatible = "red-review"
+# GIS site Terms of Use grant only 'view and print a single copy' and prohibit copying and
+# publishing (skipped.toml, 2026-08-20). Tracked, not published.
+publish_reports = false
+
+[identity]
+# ARN repeats on multi-part parcels (32,712 distinct of 33,978): synthesize, TOWNSHIP to
+# separate same-named roads.
+key_field = ""
+synth_fields = ["number", "street"]
+synth_props = ["TOWNSHIP"]
+
+[fields]                                        # canonical name -> source property
+number = "ADDNUM"
+street = "STREET"
+full   = "ADDRESS"
+
+[classes]
+boundary = ["TOWNSHIP"]

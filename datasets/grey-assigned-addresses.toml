@@ -1,0 +1,28 @@
+slug = "grey-assigned-addresses"
+provider = "County of Grey — assigned addresses"
+# Found in the ontario-osm-data-sources portal sweep (2026-10-16, registry id ca/on/grey/service-parcellabels-assigned-address-points);
+# probed live 2026-10-16: 1,703 points; a work list of newly assigned civic numbers
+# (townhouses, bridges, culverts, turbines; 97 rows outside Grey), dated 2023-12 to 2026-03 in
+# the misnamed Status field. Not Grey's address stock (that is grey.toml) but its intake.
+data_url = "https://gis.grey.ca/server/rest/services/Public/Service_ParcelLabels/MapServer/4"
+access = "arcgis"
+format = "geojson"
+# Native layer SR; the geojson export arrives in WGS84, so this guards a future export-CRS switch.
+source_crs = "EPSG:3857"
+license_name = ""
+osm_compatible = "unknown-review"
+# No licence published on the service, item or portal (2026-10-16): tracked, not published.
+publish_reports = false
+
+[identity]
+# ID is filled on 105 of 1,703 rows: synthesize, with Mun to separate same-address rows.
+key_field = ""
+synth_fields = ["number", "street"]
+synth_props = ["Mun"]
+
+[fields]                                        # canonical name -> source property
+number = "address1"
+street = "address2"
+
+[classes]
+boundary = ["Mun"]

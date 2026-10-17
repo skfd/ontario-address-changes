@@ -1,0 +1,38 @@
+slug = "oxford"
+provider = "County of Oxford"
+# Found in the ontario-osm-data-sources portal sweep (2026-10-16, registry id ca/on/oxford/oxford-county-civic-address-points);
+# probed live 2026-10-16: 56,914 points, "Exported weekly", EDIT_DATE max 2026-10-09;
+# END_DATE null on every row (live addresses only).
+data_url = "https://public.oxfordcounty.ca/gis/rest/services/OpenData/OXFORD_OpenData/MapServer/0"
+access = "arcgis"
+format = "geojson"
+license_name = ""
+osm_compatible = "red-review"
+# County GIS-data terms: data "must not be used or posted on an external website" (skipped.toml,
+# 2026-08-20). Tracked, not published; ask gis@oxfordcounty.ca.
+publish_reports = false
+
+ignore_fields = [
+  # Repeat the geometry.
+  "XCOORD",
+  "YCOORD",
+  "LAT",
+  "LONG_",
+  # Edit stamps.
+  "EDIT_USERNAME",
+  "EDIT_DATE",
+]
+
+[identity]
+# ADDRESSID: 100% populated, unique, gappy to 66,238. PARENT_ADDRESSID links units to parents.
+key_field = "ADDRESSID"
+
+[fields]                                        # canonical name -> source property
+number = "ADDRESS_NUMBER"
+street = "ROADNAME"
+unit   = "UNIT"
+full   = "COMMUNITY_ADDRESS"
+postal = "Post_Code"
+
+[classes]
+boundary = ["MU"]

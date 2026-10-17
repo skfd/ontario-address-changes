@@ -1,0 +1,33 @@
+slug = "ajax"
+provider = "Town of Ajax"
+# Found in the ontario-osm-data-sources portal sweep (2026-10-16, registry id ca/on/ajax/civic-addresses-ajax-only);
+# probed live 2026-10-16: 38,433 points, LAST_EDITED_DATE max 2026-10-16. Inside durham (37,778 Ajax rows) but the
+# town's own layer, edited daily; the region roll-up is not a reason to skip it.
+data_url = "https://ajaxmaps.ajax.ca/gisernie/rest/services/Public/Ajax_Open_Data/MapServer/10"
+access = "arcgis"
+format = "geojson"
+# Native layer SR; the geojson export arrives in WGS84, so this guards a future export-CRS switch.
+source_crs = "EPSG:26917"
+license_name = "Town of Ajax - Open Data Licence v.1.0"
+osm_compatible = "unknown-review"
+# Licence as named by the registry (Ajax open-data portal); the service itself states only
+# "Town of Ajax" copyright. Confirm the licence text in the next licence pass.
+
+ignore_fields = [
+  # Repeat the geometry.
+  "X_COORD",
+  "Y_COORD",
+  # Edit stamps: change on any touch.
+  "LAST_EDITED_USER",
+  "LAST_EDITED_DATE",
+]
+
+[identity]
+# FACILITYID (= ID_CRISYS): 100% populated, 38,401 distinct of 38,433, not an OBJECTID shadow.
+key_field = "FACILITYID"
+
+[fields]                                        # canonical name -> source property
+number = "ADD__"
+street = "STREET_SUFFIX"
+unit   = "UNITS"
+full   = "FULL_ADDRESS"
