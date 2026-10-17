@@ -1,9 +1,13 @@
 slug = "waterloo"
 provider = "City of Waterloo"
-# ArcGIS Open Data shapefile export, already reprojected to EPSG:4326 by the server.
-data_url = "https://opendata.arcgis.com/api/v3/datasets/fb1ce9625c634b2dbe1d2be36d419711_0/downloads/data?format=shp&spatialRefId=4326&where=1%3D1"
-access = "static"
-format = "shapefile"
+# Re-pointed 2026-10-16 from the ArcGIS Open Data shapefile export of item
+# fb1ce9625c634b2dbe1d2be36d419711, a stale cache: one content hash across every pull since
+# 2026-06-10 (55,541 rows), while the live layer behind the same item had 55,847 rows and
+# dataLastEditDate 2026-10-07. Same fields, same ADDRESS_ID. The old store held only its
+# baseline, so the switch is a fresh baseline (backup at ontario-db-backup-2026-10-16-waterloo).
+data_url = "https://services.arcgis.com/ZpeBVw5o1kjit7LT/arcgis/rest/services/Addresses/FeatureServer/0"
+access = "arcgis"
+format = "geojson"
 license_name = "Open Government Licence – City of Waterloo"
 osm_compatible = "green-lwg"
 
