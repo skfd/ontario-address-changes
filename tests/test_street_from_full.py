@@ -60,6 +60,9 @@ def test_derives_street(full, number, street):
     ("59 N.D. WALT LANE", "59", None, "N.D. WALT LANE"),
     ("290 O'LOANE AVENUE", "290", None, "O'LOANE AVENUE"),
     ("61636 FISCHER ROAD", "6136", None, "FISCHER ROAD"),     # number typo in source
+    # caledon: a bare unit column, its designator left in full
+    ("10 PARR BOULEVARD UNIT 103", "10", "103", "PARR BOULEVARD"),
+    ("5 MAIN STREET APT 7", "5", "7", "MAIN STREET"),
 ])
 def test_derives_street_with_unit(full, number, unit, street):
     assert street_from_full(full, number, unit) == street

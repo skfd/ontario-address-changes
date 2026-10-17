@@ -278,6 +278,10 @@ def street_from_full(full, number=None, unit=None):
         bare = [t.rstrip(",").upper() for t in toks]
         for j in range(i, len(toks) - len(utoks) + 1):
             if bare[j:j + len(utoks)] == utoks:
+                # a bare unit column ("103") leaves its designator behind in
+                # full ("10 PARR BOULEVARD UNIT 103"): drop it with the unit
+                if j - 1 > i and bare[j - 1].lower() in _DESIGNATOR_WORDS:
+                    j -= 1
                 return " ".join(toks[i:j]).rstrip(",") or None
     return " ".join(toks[i:])
 
