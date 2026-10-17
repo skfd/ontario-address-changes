@@ -30,7 +30,7 @@
 </head>
 <body><main>
 <h1>Prior art vs the tracker</h1>
-<p class="lead">Measured 2026-10-17. 3466 measurements on file since 2026-10-16. Back-office: method under review, not linked from the public site.</p>
+<p class="lead">Measured 2026-10-17. 1736 measurements on file since 2026-10-17. Back-office: method under review, not linked from the public site.</p>
 
 <h2>Comparators</h2>
 <table>
@@ -61,7 +61,7 @@
 <tr><td>Municipalities with ≥1 row</td><td class="n">269</td><td class="n">414</td><td class="n">414</td><td class="n">161</td><td class="n">392</td></tr>
 <tr><td>Rows binned to a municipality</td><td class="n">5,115,430</td><td class="n">6,211,604</td><td class="n">4,162,913</td><td class="n">4,029,086</td><td class="n">5,424,604</td></tr>
 </table>
-<p class="note">NAR and Overture rows are unit-level (one row per apartment where StatCan knows it). "NAR locations" counts distinct LOC_GUIDs, the building or entrance, which is what a municipal address-point layer usually holds; the Ours / NAR column divides by that.</p>
+<p class="note">NAR and Overture rows are unit-level (one row per apartment where StatCan knows it). "NAR locations" counts distinct LOC_GUIDs, the building or entrance. Our layers sit anywhere between the two: some publish one point per building, some one per unit, so Ours / NAR loc. is a scale check (is the layer the same order of magnitude as the register?), not a completeness score. Well over 100% means a unit-level layer, well under means a thin one.</p>
 <p><b>145 municipalities</b> where the NAR has addresses and we have none: 247,086 of 6,211,604 NAR rows (4.0%).</p>
 <div class="wrap"><table>
 <tr><th>Municipality</th><th>Upper tier</th><th class="n">Ours</th><th>Our datasets</th><th class="n">NAR rows</th><th class="n">NAR locations</th><th class="n">Ours / NAR loc.</th><th class="n">ODA 2021</th><th class="n">Overture</th></tr>
@@ -1748,7 +1748,7 @@
 <p class="note">Unit fill is a property of the source as much as the pipeline: a city that publishes one point per building has few units however well it is read. Compare a source against the same jurisdiction below, not column against column here. We carry no postcode field.</p>
 
 <h2>OpenAddresses, source by source</h2>
-<p class="lead">86 Ontario sources in OpenAddresses. 21 have not run successfully in 60 days. Join to our datasets is hand-kept in oa_sources.csv.</p>
+<p class="lead">85 Ontario sources in OpenAddresses. 21 have not run successfully in 60 days. Join to our datasets is hand-kept in oa_sources.csv.</p>
 <div class="wrap"><table>
 <tr><th>OA source</th><th>Match</th><th>Ours</th><th class="n">OA rows</th><th class="n">Our rows</th><th class="n">OA / ours</th><th>OA last success</th><th class="n">Runs / yr</th><th>Our last snapshot</th><th class="n">Unit OA / ours</th><th class="n">Street OA / ours</th><th>Note</th></tr>
 
@@ -2347,251 +2347,398 @@
 <td class="n">21</td><td>2026-10-15</td>
 <td class="n">15% / 15%</td><td class="n">100% / 100%</td><td class="small"></td></tr>
 
-<tr class=""><td>city_of_mississauga</td>
-<td><span class="tag green">same-url</span></td>
-<td>mississauga</td><td class="n"></td><td class="n">219,790</td><td class="n"></td>
-<td></td>
-<td class="n"></td><td>2026-10-16</td>
-<td class="n"> / 32%</td><td class="n"> / 100%</td><td class="small"></td></tr>
-
 </table></div>
-<p><b>Ours, absent from OpenAddresses</b> (17): blue-mountains, caledon, dryden, frontenac, gorham-ware, grey-assigned-addresses, halton-hills, niagara-falls-city, north-bay, oliver-paipoonge, oshawa, peterborough-county, sarnia, tecumseh, vaughan, wellington, whitby</p>
+<p><b>Ours, absent from OpenAddresses</b> (18): blue-mountains, caledon, dryden, frontenac, gorham-ware, grey-assigned-addresses, halton-hills, mississauga, niagara-falls-city, north-bay, oliver-paipoonge, oshawa, peterborough-county, sarnia, tecumseh, vaughan, wellington, whitby</p>
 
 <h2>Licence</h2>
 <p class="lead">Our licence_name against what OpenAddresses stores for the same source and what the ODA's provider table (2021) recorded.</p>
 <div class="wrap"><table>
-<tr><th>Dataset</th><th>Our licence</th><th>Tier</th><th>OA licence text</th><th>ODA licence (2021)</th><th>Flag</th></tr>
+<tr><th>Dataset</th><th>Our licence</th><th>Tier</th><th>OA licence text</th><th>ODA provider (2021)</th><th>ODA licence (2021)</th><th>Flag</th></tr>
 
 <tr><td>ajax</td><td class="small">Town of Ajax - Open Data Licence v.1.0</td><td><span class="tag">yellow-review</span></td>
-<td class="small">Contains public sector Information made available under The Corporation of the Town of Ajax&#39;s Open Data Licence</td><td class="small">Town of Ajax Open Data License v 1.0 v1</td><td class="small">wording differs; ODA title differs</td></tr>
+<td class="small">Contains public sector Information made available under The Corporation of the Town of Ajax&#39;s Open Data Licence</td>
+<td class="small">Town of Ajax</td>
+<td class="small">Town of Ajax Open Data License v 1.0 v1</td><td class="small">wording differs; ODA title differs</td></tr>
 
 <tr><td>amherstburg</td><td class="small">None published (confirmed 2026-08-20)</td><td><span class="tag">unknown-review</span></td>
-<td class="small">—</td><td class="small"></td><td class="small">OA records no licence</td></tr>
+<td class="small"><span class="tag red">OA records none</span></td>
+<td class="small"><span class="tag">no provider match</span></td>
+<td class="small"></td><td class="small">OA records no licence</td></tr>
 
 <tr><td>barrie</td><td class="small">Open Government Licence - Barrie</td><td><span class="tag">green-self</span></td>
-<td class="small">Contains information licensed under the Open Government Licence – Barrie.</td><td class="small">open government license Barrie v1</td><td class="small">wording differs</td></tr>
+<td class="small">Contains information licensed under the Open Government Licence – Barrie.</td>
+<td class="small">Barrie</td>
+<td class="small">open government license Barrie v1</td><td class="small">wording differs</td></tr>
 
 <tr><td>blue-mountains <span class="tag red">unpublished</span></td><td class="small"></td><td><span class="tag">unknown-review</span></td>
-<td class="small">not in OA</td><td class="small"></td><td class="small"></td></tr>
+<td class="small"><span class="tag">not in OA</span></td>
+<td class="small"><span class="tag">no provider match</span></td>
+<td class="small"></td><td class="small"></td></tr>
 
 <tr><td>brampton</td><td class="small">Creative Commons Attribution 4.0 (CC BY 4.0)</td><td><span class="tag">orange-ccby-waiver</span></td>
-<td class="small">CC-BY 4.0</td><td class="small">Creative Commons vBY 4.0</td><td class="small">wording differs; ODA title differs</td></tr>
+<td class="small">CC-BY 4.0</td>
+<td class="small">City of Brampton</td>
+<td class="small">Creative Commons vBY 4.0</td><td class="small">wording differs; ODA title differs</td></tr>
 
 <tr><td>brant</td><td class="small">CC0</td><td><span class="tag">green-cc0</span></td>
-<td class="small">—</td><td class="small"></td><td class="small">OA records no licence</td></tr>
+<td class="small"><span class="tag red">OA records none</span></td>
+<td class="small">Brantford <span class="tag yellow" title="matched by where its rows fall, not by name">via coverage</span></td>
+<td class="small">Open Government Licence – Brantford v1</td><td class="small">OA records no licence; ODA title differs</td></tr>
 
 <tr><td>brantford</td><td class="small">Open Government Licence - Brantford</td><td><span class="tag">yellow-ogl</span></td>
-<td class="small">Contains information licensed under the Open Government Licence – Brantford.</td><td class="small">Open Government Licence – Brantford v1</td><td class="small">wording differs</td></tr>
+<td class="small">Contains information licensed under the Open Government Licence – Brantford.</td>
+<td class="small">Brantford</td>
+<td class="small">Open Government Licence – Brantford v1</td><td class="small">wording differs</td></tr>
 
 <tr><td>bruce</td><td class="small">BGDISC Open Data Licence</td><td><span class="tag">yellow-review</span></td>
-<td class="small">Contains information licensed under the BGDISC Open Data Licence.</td><td class="small"></td><td class="small"></td></tr>
+<td class="small">Contains information licensed under the BGDISC Open Data Licence.</td>
+<td class="small">Grey County <span class="tag yellow" title="matched by where its rows fall, not by name">via coverage</span></td>
+<td class="small">Open Data Licence – Grey County</td><td class="small">ODA title differs</td></tr>
 
 <tr><td>burlington</td><td class="small">Terms of Use for Open Data Burlington (2011)</td><td><span class="tag">red-review</span></td>
-<td class="small">Datasets are publicly available from the City under these Terms of Use</td><td class="small">Terms of Use for Open Data Burlington, September 19, 2011</td><td class="small">wording differs</td></tr>
+<td class="small">Datasets are publicly available from the City under these Terms of Use</td>
+<td class="small">Burlington</td>
+<td class="small">Terms of Use for Open Data Burlington, September 19, 2011</td><td class="small">wording differs</td></tr>
 
 <tr><td>caledon <span class="tag red">unpublished</span></td><td class="small"></td><td><span class="tag">unknown-review</span></td>
-<td class="small">not in OA</td><td class="small"></td><td class="small"></td></tr>
+<td class="small"><span class="tag">not in OA</span></td>
+<td class="small">Regional Municipality of Peel <span class="tag yellow" title="matched by where its rows fall, not by name">via coverage</span></td>
+<td class="small">Open Data Licence for The Regional Municipality of Peel v1</td><td class="small"></td></tr>
 
 <tr><td>cambridge</td><td class="small">Open Government Licence - City of Cambridge</td><td><span class="tag">green-lwg</span></td>
-<td class="small">Contains information licensed under the Open Government Licence – City of Cambridge.</td><td class="small">Open Government Licence – City of Cambridge v2</td><td class="small">wording differs</td></tr>
+<td class="small">Contains information licensed under the Open Government Licence – City of Cambridge.</td>
+<td class="small">City of Cambridge</td>
+<td class="small">Open Government Licence – City of Cambridge v2</td><td class="small">wording differs</td></tr>
 
 <tr><td>chatham-kent</td><td class="small">None published (confirmed 2026-08-20)</td><td><span class="tag">unknown-review</span></td>
-<td class="small">—</td><td class="small"></td><td class="small">OA records no licence</td></tr>
+<td class="small"><span class="tag red">OA records none</span></td>
+<td class="small"><span class="tag">no provider match</span></td>
+<td class="small"></td><td class="small">OA records no licence</td></tr>
 
 <tr><td>cobourg <span class="tag red">unpublished</span></td><td class="small">Town of Cobourg Open Data Terms of Use (revised November 1, 2021)</td><td><span class="tag">red-review</span></td>
-<td class="small">—</td><td class="small"></td><td class="small">OA records no licence</td></tr>
+<td class="small"><span class="tag red">OA records none</span></td>
+<td class="small"><span class="tag">no provider match</span></td>
+<td class="small"></td><td class="small">OA records no licence</td></tr>
 
 <tr><td>cornwall</td><td class="small">Open Government Licence - City of Cornwall</td><td><span class="tag">green-lwg</span></td>
-<td class="small">Contains information licensed under the Open Government Licence - City of Cornwall.</td><td class="small"></td><td class="small"></td></tr>
+<td class="small">Contains information licensed under the Open Government Licence - City of Cornwall.</td>
+<td class="small">Cornwall</td>
+<td class="small"></td><td class="small"></td></tr>
 
 <tr><td>dryden <span class="tag red">unpublished</span></td><td class="small"></td><td><span class="tag">unknown-review</span></td>
-<td class="small">not in OA</td><td class="small"></td><td class="small"></td></tr>
+<td class="small"><span class="tag">not in OA</span></td>
+<td class="small"><span class="tag">no provider match</span></td>
+<td class="small"></td><td class="small"></td></tr>
 
 <tr><td>dufferin</td><td class="small">Open Government Licence - County of Dufferin</td><td><span class="tag">green-self</span></td>
-<td class="small">Contains information licensed under the Open Government Licence – County of Dufferin</td><td class="small">Open Government Licence – The County of Dufferin v2</td><td class="small">wording differs</td></tr>
+<td class="small">Contains information licensed under the Open Government Licence – County of Dufferin</td>
+<td class="small">The County of Dufferin</td>
+<td class="small">Open Government Licence – The County of Dufferin v2</td><td class="small">wording differs</td></tr>
 
 <tr><td>durham</td><td class="small">Region of Durham Open Data Licence v1.0</td><td><span class="tag">yellow-review</span></td>
-<td class="small">Contains information licensed under the Open Government Licence – The Corporation of the City of Oshawa | Contains public sector Information made available under The Regional Municipality of Durham&#39;s Open Data Licence</td><td class="small"></td><td class="small">wording differs</td></tr>
+<td class="small">Contains information licensed under the Open Government Licence – The Corporation of the City of Oshawa | Contains public sector Information made available under The Regional Municipality of Durham&#39;s Open Data Licence</td>
+<td class="small">The Corporation of the City of Oshawa <span class="tag yellow" title="matched by where its rows fall, not by name">via coverage</span></td>
+<td class="small">Open Government Licence – The Corporation of the City of Oshawa v2</td><td class="small">wording differs; ODA title differs</td></tr>
 
 <tr><td>elgin</td><td class="small">Open Government Licence - County of Elgin (open-data hub, portal-wide)</td><td><span class="tag">yellow-ogl</span></td>
-<td class="small">—</td><td class="small"></td><td class="small">OA records no licence</td></tr>
+<td class="small"><span class="tag red">OA records none</span></td>
+<td class="small">Norfolk County <span class="tag yellow" title="matched by where its rows fall, not by name">via coverage</span></td>
+<td class="small">Norfolk County&#39;s Open Data Licence</td><td class="small">OA records no licence; ODA title differs</td></tr>
 
 <tr><td>frontenac</td><td class="small">Open Government Licence - County of Frontenac v1.0</td><td><span class="tag">yellow-ogl</span></td>
-<td class="small">not in OA</td><td class="small"></td><td class="small"></td></tr>
+<td class="small"><span class="tag">not in OA</span></td>
+<td class="small"><span class="tag">no provider match</span></td>
+<td class="small"></td><td class="small"></td></tr>
 
 <tr><td>gorham-ware <span class="tag red">unpublished</span></td><td class="small"></td><td><span class="tag">unknown-review</span></td>
-<td class="small">not in OA</td><td class="small"></td><td class="small"></td></tr>
+<td class="small"><span class="tag">not in OA</span></td>
+<td class="small"><span class="tag">no provider match</span></td>
+<td class="small"></td><td class="small"></td></tr>
 
 <tr><td>greater-sudbury</td><td class="small">Open Data Licence - City of Greater Sudbury</td><td><span class="tag">green-self</span></td>
-<td class="small">Contains information licensed under the Open Data Licence – City of Greater Sudbury</td><td class="small">City of Greater Sudbury Open Data Licence v1</td><td class="small">wording differs</td></tr>
+<td class="small">Contains information licensed under the Open Data Licence – City of Greater Sudbury</td>
+<td class="small">City of Greater Sudbury</td>
+<td class="small">City of Greater Sudbury Open Data Licence v1</td><td class="small">wording differs</td></tr>
 
 <tr><td>grey-assigned-addresses <span class="tag red">unpublished</span></td><td class="small"></td><td><span class="tag">unknown-review</span></td>
-<td class="small">not in OA</td><td class="small"></td><td class="small"></td></tr>
+<td class="small"><span class="tag">not in OA</span></td>
+<td class="small">Grey County <span class="tag yellow" title="matched by where its rows fall, not by name">via coverage</span></td>
+<td class="small">Open Data Licence – Grey County</td><td class="small"></td></tr>
 
 <tr><td>grey <span class="tag red">unpublished</span></td><td class="small"></td><td><span class="tag">unknown-review</span></td>
-<td class="small">—</td><td class="small">Open Data Licence – Grey County</td><td class="small">OA records no licence</td></tr>
+<td class="small"><span class="tag red">OA records none</span></td>
+<td class="small">Grey County</td>
+<td class="small">Open Data Licence – Grey County</td><td class="small">OA records no licence</td></tr>
 
 <tr><td>guelph</td><td class="small">Open Government Licence - City of Guelph</td><td><span class="tag">green-lwg</span></td>
-<td class="small">Contains information licensed under the Open Government Licence – City of Guelph</td><td class="small">City of Guelph Open Government Licence v1</td><td class="small">wording differs; ODA title differs</td></tr>
+<td class="small">Contains information licensed under the Open Government Licence – City of Guelph</td>
+<td class="small">City of Guelph</td>
+<td class="small">City of Guelph Open Government Licence v1</td><td class="small">wording differs; ODA title differs</td></tr>
 
 <tr><td>haldimand</td><td class="small">Open Government Licence - Haldimand County v1.0</td><td><span class="tag">green-self</span></td>
-<td class="small">Haldimand County&#39;s open data site sets a default license of Creative Commons Attribution-ShareAlike (CC-BY-SA)</td><td class="small">Open Government Licence - Haldimand County v1</td><td class="small">wording differs</td></tr>
+<td class="small">Haldimand County&#39;s open data site sets a default license of Creative Commons Attribution-ShareAlike (CC-BY-SA)</td>
+<td class="small">Haldimand County</td>
+<td class="small">Open Government Licence - Haldimand County v1</td><td class="small">wording differs</td></tr>
 
 <tr><td>haliburton <span class="tag red">unpublished</span></td><td class="small"></td><td><span class="tag">red-review</span></td>
-<td class="small">—</td><td class="small"></td><td class="small">OA records no licence</td></tr>
+<td class="small"><span class="tag red">OA records none</span></td>
+<td class="small">Corporation of the County of Hastings <span class="tag yellow" title="matched by where its rows fall, not by name">via coverage</span></td>
+<td class="small">Open Government License – Corporation of the County of Hastings v1</td><td class="small">OA records no licence</td></tr>
 
 <tr><td>halton-hills</td><td class="small">Open Data License - Town of Halton Hills</td><td><span class="tag">yellow-review</span></td>
-<td class="small">not in OA</td><td class="small"></td><td class="small"></td></tr>
+<td class="small"><span class="tag">not in OA</span></td>
+<td class="small"><span class="tag">no provider match</span></td>
+<td class="small"></td><td class="small"></td></tr>
 
 <tr><td>hamilton</td><td class="small">Open Data Licence – Hamilton</td><td><span class="tag">green-lwg</span></td>
-<td class="small">Contains public sector Data made available under the City of Hamilton’s Open Data Licence</td><td class="small">Open Data Licence Terms and Conditions v1.1</td><td class="small">wording differs; ODA title differs</td></tr>
+<td class="small">Contains public sector Data made available under the City of Hamilton’s Open Data Licence</td>
+<td class="small">City of Hamilton</td>
+<td class="small">Open Data Licence Terms and Conditions v1.1</td><td class="small">wording differs; ODA title differs</td></tr>
 
 <tr><td>hastings</td><td class="small">Open Government Licence - The Corporation of the County of Hastings (not found published)</td><td><span class="tag">unknown-review</span></td>
-<td class="small">Contains information licensed under the Open Government License – The Corporation of the County of Hastings</td><td class="small">Open Government License – Corporation of the County of Hastings v1</td><td class="small">wording differs</td></tr>
+<td class="small">Contains information licensed under the Open Government License – The Corporation of the County of Hastings</td>
+<td class="small">Corporation of the County of Hastings</td>
+<td class="small">Open Government License – Corporation of the County of Hastings v1</td><td class="small">wording differs</td></tr>
 
 <tr><td>huron</td><td class="small">Open Government Licence - The County of Huron</td><td><span class="tag">green-self</span></td>
-<td class="small">Contains information licensed under the Open Government Licence – The County of Huron</td><td class="small">Open Government Licence - The County of Huron</td><td class="small">wording differs</td></tr>
+<td class="small">Contains information licensed under the Open Government Licence – The County of Huron</td>
+<td class="small">The County of Huron</td>
+<td class="small">Open Government Licence - The County of Huron</td><td class="small">wording differs</td></tr>
 
 <tr><td>kawartha-lakes</td><td class="small">None published (disclaimer only, confirmed 2026-08-20)</td><td><span class="tag">unknown-review</span></td>
-<td class="small">—</td><td class="small"></td><td class="small">OA records no licence</td></tr>
+<td class="small"><span class="tag red">OA records none</span></td>
+<td class="small">District Municipality of Muskoka <span class="tag yellow" title="matched by where its rows fall, not by name">via coverage</span></td>
+<td class="small">District Municipality of Muskoka – Open Data Licence v.1.0 v1</td><td class="small">OA records no licence; ODA title differs</td></tr>
 
 <tr><td>kingston</td><td class="small">Open Data Licence - City of Kingston</td><td><span class="tag">green-lwg</span></td>
-<td class="small">Contains information licensed under the Open Data Licence - City of Kingston</td><td class="small">City of Kingston Open Data Licence 1.0 v1</td><td class="small">ODA title differs</td></tr>
+<td class="small">Contains information licensed under the Open Data Licence - City of Kingston</td>
+<td class="small">City of Kingston</td>
+<td class="small">City of Kingston Open Data Licence 1.0 v1</td><td class="small">ODA title differs</td></tr>
 
 <tr><td>kitchener</td><td class="small">Open Government Licence - The Corporation of the City of Kitchener</td><td><span class="tag">yellow-ogl</span></td>
-<td class="small">Contains information licensed under the Open Government Licence - The Corporation of the City of Kitchener.</td><td class="small">Open Government Licence - The Corporation of the City of Kitchener v1</td><td class="small"></td></tr>
+<td class="small">Contains information licensed under the Open Government Licence - The Corporation of the City of Kitchener.</td>
+<td class="small">The Corporation of the City of Kitchener</td>
+<td class="small">Open Government Licence - The Corporation of the City of Kitchener v1</td><td class="small"></td></tr>
 
 <tr><td>lambton</td><td class="small">Open Government Licence - County of Lambton</td><td><span class="tag">yellow-ogl</span></td>
-<td class="small">Contains information licensed under the Open Government Licence - County of Lambton</td><td class="small">Open Government License 2.0 - County of Lambton v2</td><td class="small"></td></tr>
+<td class="small">Contains information licensed under the Open Government Licence - County of Lambton</td>
+<td class="small">County of Lambton</td>
+<td class="small">Open Government License 2.0 - County of Lambton v2</td><td class="small"></td></tr>
 
 <tr><td>leeds-grenville</td><td class="small">Open Government Licence - United Counties of Leeds and Grenville v1.0</td><td><span class="tag">yellow-ogl</span></td>
-<td class="small">—</td><td class="small"></td><td class="small">OA records no licence</td></tr>
+<td class="small"><span class="tag red">OA records none</span></td>
+<td class="small"><span class="tag">no provider match</span></td>
+<td class="small"></td><td class="small">OA records no licence</td></tr>
 
 <tr><td>lennox-addington</td><td class="small">Open Government Licence - County of Lennox and Addington v2.0</td><td><span class="tag">yellow-ogl</span></td>
-<td class="small">Open Government Licence - County of Lennox and Addington v.2.0: free to copy, modify, publish, translate, adapt, distribute or otherwise use for any lawful purpose, including commercially, provided attribution is given. Required attribution statement if none other is specified: &#34;Contains information</td><td class="small"></td><td class="small"></td></tr>
+<td class="small">Open Government Licence - County of Lennox and Addington v.2.0: free to copy, modify, publish, translate, adapt, distribute or otherwise use for any lawful purpose, including commercially, provided attribution is given. Required attribution statement if none other is specified: &#34;Contains information</td>
+<td class="small">City of Kingston <span class="tag yellow" title="matched by where its rows fall, not by name">via coverage</span></td>
+<td class="small">City of Kingston Open Data Licence 1.0 v1</td><td class="small">ODA title differs</td></tr>
 
 <tr><td>london</td><td class="small">Terms of Use - City of London Open Data</td><td><span class="tag">red-review</span></td>
-<td class="small">These data sets are publicly available from the City under these Terms of Use.</td><td class="small">Terms of Use – City of London Open Data</td><td class="small">wording differs; ODA title differs</td></tr>
+<td class="small">These data sets are publicly available from the City under these Terms of Use.</td>
+<td class="small">City of London</td>
+<td class="small">Terms of Use – City of London Open Data</td><td class="small">wording differs; ODA title differs</td></tr>
 
 <tr><td>middlesex</td><td class="small">None published beyond as-is disclaimer (confirmed 2026-08-20, rechecked 2026-10-16)</td><td><span class="tag">unknown-review</span></td>
-<td class="small">—</td><td class="small">Middlesex County - Custom License</td><td class="small">OA records no licence; ODA title differs</td></tr>
+<td class="small"><span class="tag red">OA records none</span></td>
+<td class="small">Middlesex County</td>
+<td class="small">Middlesex County - Custom License</td><td class="small">OA records no licence; ODA title differs</td></tr>
 
 <tr><td>milton</td><td class="small">Open Government Licence - Milton</td><td><span class="tag">yellow-ogl</span></td>
-<td class="small">—</td><td class="small"></td><td class="small">OA records no licence</td></tr>
+<td class="small"><span class="tag red">OA records none</span></td>
+<td class="small">Burlington <span class="tag yellow" title="matched by where its rows fall, not by name">via coverage</span></td>
+<td class="small">Terms of Use for Open Data Burlington, September 19, 2011</td><td class="small">OA records no licence; ODA title differs</td></tr>
 
 <tr><td>mississauga</td><td class="small">City of Mississauga Terms of Use</td><td><span class="tag">yellow-review</span></td>
-<td class="small">—</td><td class="small"></td><td class="small">OA records no licence</td></tr>
+<td class="small"><span class="tag">not in OA</span></td>
+<td class="small">Regional Municipality of Peel <span class="tag yellow" title="matched by where its rows fall, not by name">via coverage</span></td>
+<td class="small">Open Data Licence for The Regional Municipality of Peel v1</td><td class="small">ODA title differs</td></tr>
 
 <tr><td>muskoka</td><td class="small">Custom terms - no reuse grant (King&#39;s Printer copyright)</td><td><span class="tag">red-review</span></td>
-<td class="small">—</td><td class="small">District Municipality of Muskoka – Open Data Licence v.1.0 v1</td><td class="small">OA records no licence; ODA title differs</td></tr>
+<td class="small"><span class="tag red">OA records none</span></td>
+<td class="small">District Municipality of Muskoka</td>
+<td class="small">District Municipality of Muskoka – Open Data Licence v.1.0 v1</td><td class="small">OA records no licence; ODA title differs</td></tr>
 
 <tr><td>newmarket</td><td class="small">Town of Newmarket Open Data Licence</td><td><span class="tag">unknown-review</span></td>
-<td class="small">Contains information licensed under the Open Data Licence – Town of Newmarket</td><td class="small">Town of Newmarket open Data Licence v1</td><td class="small">wording differs</td></tr>
+<td class="small">Contains information licensed under the Open Data Licence – Town of Newmarket</td>
+<td class="small">Town of Newmarket</td>
+<td class="small">Town of Newmarket open Data Licence v1</td><td class="small">wording differs</td></tr>
 
 <tr><td>niagara-falls-city</td><td class="small">Open Government Licence - Niagara Falls</td><td><span class="tag">yellow-ogl</span></td>
-<td class="small">not in OA</td><td class="small"></td><td class="small"></td></tr>
+<td class="small"><span class="tag">not in OA</span></td>
+<td class="small">Niagara Region <span class="tag yellow" title="matched by where its rows fall, not by name">via coverage</span></td>
+<td class="small">Open Government Licence - Niagara Region v2</td><td class="small"></td></tr>
 
 <tr><td>niagara-falls</td><td class="small">Open Government Licence - Niagara Region</td><td><span class="tag">green-lwg</span></td>
-<td class="small">Contains information licensed under the Open Government Licence - Niagara Region</td><td class="small">Open Government Licence - Niagara Region v2</td><td class="small"></td></tr>
+<td class="small">Contains information licensed under the Open Government Licence - Niagara Region</td>
+<td class="small">Niagara Region</td>
+<td class="small">Open Government Licence - Niagara Region v2</td><td class="small"></td></tr>
 
 <tr><td>norfolk</td><td class="small">Norfolk County Open Data Licence Agreement</td><td><span class="tag">yellow-review</span></td>
-<td class="small">Contains public sector Information made available under Norfolk County&#39;s Open Data Licence</td><td class="small">Norfolk County&#39;s Open Data Licence</td><td class="small">wording differs; ODA title differs</td></tr>
+<td class="small">Contains public sector Information made available under Norfolk County&#39;s Open Data Licence</td>
+<td class="small">Norfolk County</td>
+<td class="small">Norfolk County&#39;s Open Data Licence</td><td class="small">wording differs; ODA title differs</td></tr>
 
 <tr><td>north-bay <span class="tag red">unpublished</span></td><td class="small"></td><td><span class="tag">red-review</span></td>
-<td class="small">not in OA</td><td class="small"></td><td class="small"></td></tr>
+<td class="small"><span class="tag">not in OA</span></td>
+<td class="small"><span class="tag">no provider match</span></td>
+<td class="small"></td><td class="small"></td></tr>
 
 <tr><td>oakville</td><td class="small">Open Government Licence — Town of Oakville</td><td><span class="tag">green-lwg</span></td>
-<td class="small">Contains information licensed under the Open Government Licence — Town of Oakville</td><td class="small">Town of Oakville Open Data Licence v2</td><td class="small">ODA title differs</td></tr>
+<td class="small">Contains information licensed under the Open Government Licence — Town of Oakville</td>
+<td class="small">Town of Oakville</td>
+<td class="small">Town of Oakville Open Data Licence v2</td><td class="small">ODA title differs</td></tr>
 
 <tr><td>oliver-paipoonge <span class="tag red">unpublished</span></td><td class="small"></td><td><span class="tag">unknown-review</span></td>
-<td class="small">not in OA</td><td class="small"></td><td class="small"></td></tr>
+<td class="small"><span class="tag">not in OA</span></td>
+<td class="small"><span class="tag">no provider match</span></td>
+<td class="small"></td><td class="small"></td></tr>
 
 <tr><td>oshawa <span class="tag red">unpublished</span></td><td class="small"></td><td><span class="tag">unknown-review</span></td>
-<td class="small">not in OA</td><td class="small">Open Government Licence – The Corporation of the City of Oshawa v2</td><td class="small"></td></tr>
+<td class="small"><span class="tag">not in OA</span></td>
+<td class="small">The Corporation of the City of Oshawa</td>
+<td class="small">Open Government Licence – The Corporation of the City of Oshawa v2</td><td class="small"></td></tr>
 
 <tr><td>ottawa</td><td class="small">Open Government Licence – City of Ottawa 2.0</td><td><span class="tag">green-lwg</span></td>
-<td class="small">Contains information licensed under the Open Government Licence – City of Ottawa</td><td class="small">Open Government Licence – City of Ottawa v2</td><td class="small"></td></tr>
+<td class="small">Contains information licensed under the Open Government Licence – City of Ottawa</td>
+<td class="small">City of Ottawa</td>
+<td class="small">Open Government Licence – City of Ottawa v2</td><td class="small"></td></tr>
 
 <tr><td>oxford <span class="tag red">unpublished</span></td><td class="small"></td><td><span class="tag">red-review</span></td>
-<td class="small">—</td><td class="small"></td><td class="small">OA records no licence</td></tr>
+<td class="small"><span class="tag red">OA records none</span></td>
+<td class="small">Norfolk County <span class="tag yellow" title="matched by where its rows fall, not by name">via coverage</span></td>
+<td class="small">Norfolk County&#39;s Open Data Licence</td><td class="small">OA records no licence</td></tr>
 
 <tr><td>peel-region</td><td class="small">Open Data Licence - Regional Municipality of Peel v1.0</td><td><span class="tag">yellow-review</span></td>
-<td class="small">—</td><td class="small">Open Data Licence for The Regional Municipality of Peel v1</td><td class="small">OA records no licence; ODA title differs</td></tr>
+<td class="small"><span class="tag red">OA records none</span></td>
+<td class="small">Regional Municipality of Peel</td>
+<td class="small">Open Data Licence for The Regional Municipality of Peel v1</td><td class="small">OA records no licence; ODA title differs</td></tr>
 
 <tr><td>perth-county</td><td class="small">None published (confirmed 2026-08-20)</td><td><span class="tag">unknown-review</span></td>
-<td class="small">—</td><td class="small"></td><td class="small">OA records no licence</td></tr>
+<td class="small"><span class="tag red">OA records none</span></td>
+<td class="small"><span class="tag">no provider match</span></td>
+<td class="small"></td><td class="small">OA records no licence</td></tr>
 
 <tr><td>peterborough-county <span class="tag red">unpublished</span></td><td class="small">County website Terms of Use (restrictive - no copying to other websites)</td><td><span class="tag">red-review</span></td>
-<td class="small">not in OA</td><td class="small">City of Peterborough Open Data Terms of Use v2</td><td class="small">ODA title differs</td></tr>
+<td class="small"><span class="tag">not in OA</span></td>
+<td class="small">City of Peterborough</td>
+<td class="small">City of Peterborough Open Data Terms of Use v2</td><td class="small">ODA title differs</td></tr>
 
 <tr><td>peterborough <span class="tag red">unpublished</span></td><td class="small">City of Peterborough Open Data Terms of Use</td><td><span class="tag">red-review</span></td>
-<td class="small">Copyright 2017, The City of Peterborough (All rights reserved.)</td><td class="small">City of Peterborough Open Data Terms of Use v2</td><td class="small">wording differs</td></tr>
+<td class="small">Copyright 2017, The City of Peterborough (All rights reserved.)</td>
+<td class="small">City of Peterborough</td>
+<td class="small">City of Peterborough Open Data Terms of Use v2</td><td class="small">wording differs</td></tr>
 
 <tr><td>pickering</td><td class="small">City of Pickering Open Data License</td><td><span class="tag">unknown-review</span></td>
-<td class="small">—</td><td class="small">City of Pickering Open Data License v1</td><td class="small">OA records no licence</td></tr>
+<td class="small"><span class="tag red">OA records none</span></td>
+<td class="small">City of Pickering</td>
+<td class="small">City of Pickering Open Data License v1</td><td class="small">OA records no licence</td></tr>
 
 <tr><td>prince-edward-county</td><td class="small">Open Government Licence - The Corporation of the County of Prince Edward v1.0 (sibling items; not stamped on this item)</td><td><span class="tag">yellow-review</span></td>
-<td class="small">—</td><td class="small"></td><td class="small">OA records no licence</td></tr>
+<td class="small"><span class="tag red">OA records none</span></td>
+<td class="small"><span class="tag">no provider match</span></td>
+<td class="small"></td><td class="small">OA records no licence</td></tr>
 
 <tr><td>quinte-west</td><td class="small">City of Quinte West Open Data Licence</td><td><span class="tag">green-lwg</span></td>
-<td class="small">—</td><td class="small"></td><td class="small">OA records no licence</td></tr>
+<td class="small"><span class="tag red">OA records none</span></td>
+<td class="small"><span class="tag">no provider match</span></td>
+<td class="small"></td><td class="small">OA records no licence</td></tr>
 
 <tr><td>renfrew <span class="tag red">unpublished</span></td><td class="small">Restrictive site disclaimer (no redistribution without permission)</td><td><span class="tag">red-review</span></td>
-<td class="small">—</td><td class="small"></td><td class="small">OA records no licence</td></tr>
+<td class="small"><span class="tag red">OA records none</span></td>
+<td class="small">Corporation of the County of Hastings <span class="tag yellow" title="matched by where its rows fall, not by name">via coverage</span></td>
+<td class="small">Open Government License – Corporation of the County of Hastings v1</td><td class="small">OA records no licence; ODA title differs</td></tr>
 
 <tr><td>sarnia</td><td class="small">City of Sarnia Open Data Terms of Use (OGL-Canada 2.0 based)</td><td><span class="tag">yellow-ogl</span></td>
-<td class="small">not in OA</td><td class="small"></td><td class="small"></td></tr>
+<td class="small"><span class="tag">not in OA</span></td>
+<td class="small">County of Lambton <span class="tag yellow" title="matched by where its rows fall, not by name">via coverage</span></td>
+<td class="small">Open Government License 2.0 - County of Lambton v2</td><td class="small">ODA title differs</td></tr>
 
 <tr><td>sault-ste-marie <span class="tag red">unpublished</span></td><td class="small"></td><td><span class="tag">red-review</span></td>
-<td class="small">—</td><td class="small"></td><td class="small">OA records no licence</td></tr>
+<td class="small"><span class="tag red">OA records none</span></td>
+<td class="small"><span class="tag">no provider match</span></td>
+<td class="small"></td><td class="small">OA records no licence</td></tr>
 
 <tr><td>sdg <span class="tag red">unpublished</span></td><td class="small">Proprietary - all rights reserved (item licenseInfo)</td><td><span class="tag">red-review</span></td>
-<td class="small">—</td><td class="small"></td><td class="small">OA records no licence</td></tr>
+<td class="small"><span class="tag red">OA records none</span></td>
+<td class="small"><span class="tag">no provider match</span></td>
+<td class="small"></td><td class="small">OA records no licence</td></tr>
 
 <tr><td>simcoe</td><td class="small">Open Government Licence - Simcoe County</td><td><span class="tag">yellow-review</span></td>
-<td class="small">—</td><td class="small"></td><td class="small">OA records no licence</td></tr>
+<td class="small"><span class="tag red">OA records none</span></td>
+<td class="small">District Municipality of Muskoka <span class="tag yellow" title="matched by where its rows fall, not by name">via coverage</span></td>
+<td class="small">District Municipality of Muskoka – Open Data Licence v.1.0 v1</td><td class="small">OA records no licence; ODA title differs</td></tr>
 
 <tr><td>stratford</td><td class="small">None published (confirmed 2026-08-20)</td><td><span class="tag">unknown-review</span></td>
-<td class="small">—</td><td class="small"></td><td class="small">OA records no licence</td></tr>
+<td class="small"><span class="tag red">OA records none</span></td>
+<td class="small"><span class="tag">no provider match</span></td>
+<td class="small"></td><td class="small">OA records no licence</td></tr>
 
 <tr><td>tecumseh</td><td class="small">Open Government Licence - The Corporation of the County of Essex</td><td><span class="tag">yellow-review</span></td>
-<td class="small">not in OA</td><td class="small"></td><td class="small"></td></tr>
+<td class="small"><span class="tag">not in OA</span></td>
+<td class="small"><span class="tag">no provider match</span></td>
+<td class="small"></td><td class="small"></td></tr>
 
 <tr><td>thunder-bay</td><td class="small">City of Thunder Bay Open Data Licence</td><td><span class="tag">green-lwg</span></td>
-<td class="small">—</td><td class="small"></td><td class="small">OA records no licence</td></tr>
+<td class="small"><span class="tag red">OA records none</span></td>
+<td class="small"><span class="tag">no provider match</span></td>
+<td class="small"></td><td class="small">OA records no licence</td></tr>
 
 <tr><td>toronto</td><td class="small">Open Government Licence – Toronto</td><td><span class="tag">green-lwg</span></td>
-<td class="small">Contains information licensed under the Open Government Licence – Toronto</td><td class="small">Open Government Licence – Toronto v1</td><td class="small"></td></tr>
+<td class="small">Contains information licensed under the Open Government Licence – Toronto</td>
+<td class="small">Toronto</td>
+<td class="small">Open Government Licence – Toronto v1</td><td class="small"></td></tr>
 
 <tr><td>vaughan-ng911 <span class="tag red">unpublished</span></td><td class="small"></td><td><span class="tag">unknown-review</span></td>
-<td class="small">—</td><td class="small"></td><td class="small">OA records no licence</td></tr>
+<td class="small"><span class="tag red">OA records none</span></td>
+<td class="small">York Region <span class="tag yellow" title="matched by where its rows fall, not by name">via coverage</span></td>
+<td class="small">York Region Open Data Licence v1</td><td class="small">OA records no licence</td></tr>
 
 <tr><td>vaughan <span class="tag red">unpublished</span></td><td class="small"></td><td><span class="tag">unknown-review</span></td>
-<td class="small">not in OA</td><td class="small"></td><td class="small"></td></tr>
+<td class="small"><span class="tag">not in OA</span></td>
+<td class="small">York Region <span class="tag yellow" title="matched by where its rows fall, not by name">via coverage</span></td>
+<td class="small">York Region Open Data Licence v1</td><td class="small"></td></tr>
 
 <tr><td>waterloo-region</td><td class="small">Open Government Licence - Region of Waterloo v2.0</td><td><span class="tag">green-lwg</span></td>
-<td class="small">Contains information provided by the Regional Municipality of Waterloo under licence</td><td class="small">Region of Waterloo Open Data Licence v.2.0 v2</td><td class="small">wording differs; ODA title differs</td></tr>
+<td class="small">Contains information provided by the Regional Municipality of Waterloo under licence</td>
+<td class="small">Region of Waterloo</td>
+<td class="small">Region of Waterloo Open Data Licence v.2.0 v2</td><td class="small">wording differs; ODA title differs</td></tr>
 
 <tr><td>waterloo</td><td class="small">Open Government Licence – City of Waterloo</td><td><span class="tag">green-lwg</span></td>
-<td class="small">Contains information provided by the Regional Municipality of Waterloo under licence</td><td class="small">Region of Waterloo Open Data Licence v.2.0 v2</td><td class="small">wording differs; ODA title differs</td></tr>
+<td class="small">Contains information provided by the Regional Municipality of Waterloo under licence</td>
+<td class="small">Region of Waterloo</td>
+<td class="small">Region of Waterloo Open Data Licence v.2.0 v2</td><td class="small">wording differs; ODA title differs</td></tr>
 
 <tr><td>welland</td><td class="small">Open Government Licence - City of Welland</td><td><span class="tag">yellow-ogl</span></td>
-<td class="small">Contains information licensed under the Open Government Licence – City of Welland</td><td class="small">Open Government Licence – City of Welland v2</td><td class="small">wording differs</td></tr>
+<td class="small">Contains information licensed under the Open Government Licence – City of Welland</td>
+<td class="small">City of Welland</td>
+<td class="small">Open Government Licence – City of Welland v2</td><td class="small">wording differs</td></tr>
 
 <tr><td>wellington</td><td class="small">None published (confirmed 2026-08-20)</td><td><span class="tag">unknown-review</span></td>
-<td class="small">not in OA</td><td class="small"></td><td class="small"></td></tr>
+<td class="small"><span class="tag">not in OA</span></td>
+<td class="small">City of Guelph <span class="tag yellow" title="matched by where its rows fall, not by name">via coverage</span></td>
+<td class="small">City of Guelph Open Government Licence v1</td><td class="small">ODA title differs</td></tr>
 
 <tr><td>west-parry-sound</td><td class="small">Open Government License - Township of The Archipelago (v2, based on OGL-Canada 2.0)</td><td><span class="tag">yellow-ogl</span></td>
-<td class="small">Contains information licensed under the Open Government License – West Parry Sound Geography Network (WPSGN) / Township of The Archipelago.</td><td class="small"></td><td class="small">wording differs</td></tr>
+<td class="small">Contains information licensed under the Open Government License – West Parry Sound Geography Network (WPSGN) / Township of The Archipelago.</td>
+<td class="small">Township of The Archipelago <span class="tag yellow" title="matched by where its rows fall, not by name">via coverage</span></td>
+<td class="small">Open Government License Township of The Archipelago v2</td><td class="small">wording differs</td></tr>
 
 <tr><td>whitby</td><td class="small">The Corporation of the Town of Whitby Open Government License</td><td><span class="tag">yellow-ogl</span></td>
-<td class="small">not in OA</td><td class="small"></td><td class="small"></td></tr>
+<td class="small"><span class="tag">not in OA</span></td>
+<td class="small">The Corporation of the City of Oshawa <span class="tag yellow" title="matched by where its rows fall, not by name">via coverage</span></td>
+<td class="small">Open Government Licence – The Corporation of the City of Oshawa v2</td><td class="small"></td></tr>
 
 <tr><td>windsor</td><td class="small">Open Government Licence - City of Windsor v1.0</td><td><span class="tag">green-self</span></td>
-<td class="small">https://www.citywindsor.ca/opendata/Documents/OpenDataTermsofUse.pdf</td><td class="small">Open Government Licence – The Corporation of the City of Windsor v1</td><td class="small">wording differs</td></tr>
+<td class="small">https://www.citywindsor.ca/opendata/Documents/OpenDataTermsofUse.pdf</td>
+<td class="small">The Corporation of the City of Windsor</td>
+<td class="small">Open Government Licence – The Corporation of the City of Windsor v1</td><td class="small">wording differs</td></tr>
 
 <tr><td>york</td><td class="small">York Region Open Data Licence</td><td><span class="tag">green-lwg</span></td>
-<td class="small">Contains public sector information made available under The Regional Municipality of York&#39;s Open Data Licence.</td><td class="small">York Region Open Data Licence v1</td><td class="small">wording differs</td></tr>
+<td class="small">Contains public sector information made available under The Regional Municipality of York&#39;s Open Data Licence.</td>
+<td class="small">York Region</td>
+<td class="small">York Region Open Data Licence v1</td><td class="small">wording differs</td></tr>
 
 </table></div>
 </main></body></html>

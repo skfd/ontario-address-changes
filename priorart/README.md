@@ -14,7 +14,7 @@ claims about third parties' data and the method is still under review.
 | id | what | measured how |
 |---|---|---|
 | `ours` | this repo | active rows of the latest non-skipped snapshot in `data/<slug>/<slug>.db`; snapshots in the last 30 days |
-| `oa` | [OpenAddresses](https://github.com/openaddresses/openaddresses), 85 Ontario source files | `batch.openaddresses.io` per-job `count`, `stats.counts`, job history; source JSON licence. Point outputs need a login, so OA is measured per source, not per municipality |
+| `oa` | [OpenAddresses](https://github.com/openaddresses/openaddresses), 85 Ontario source files, 84 with an `addresses` layer (Mississauga's lists buildings and parcels only) | `batch.openaddresses.io` per-job `count`, `stats.counts`, job history; source JSON licence. Point outputs need a login, so OA is measured per source, not per municipality |
 | `oda` | StatCan Open Database of Addresses v1 (2021) | `ODA_ON_v1.csv` counted once by `csdname` and `provider`; `Data_Sources.csv` for licence and download date |
 | `nar` | StatCan National Address Register | each vintage under `../prototype-nar/data/<YYYYMM>/Address_35_part_*.csv`, counted by `CSD_ENG_NAME` |
 | `overture` | Overture Maps addresses theme | latest release on S3, Ontario bbox, `country='CA'`, pulled with DuckDB (bbox pushdown; ~20 s) and binned by polygon |
@@ -53,7 +53,10 @@ Where two municipalities share a short name the counts merge and the report tags
   For `ours` the report takes the **max** per municipality across our datasets, because a
   region layer and its member's layer both hold the member's addresses.
 - `licences.csv` — per dataset: our `license_name` and `osm_compatible`, OA's licence text
-  and URL for the joined sources, the ODA provider's licence title and download date.
+  and URL for the joined sources, the ODA provider's licence title and download date. The
+  ODA provider is matched by normalized provider name first, else by coverage: the provider
+  whose 2021 rows fall most heavily in the municipalities our dataset covers
+  (`oda_match` says which).
 - `report.html` — all of the above, rendered.
 
 ## Run

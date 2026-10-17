@@ -288,17 +288,45 @@ def _write_licences(oa_dir):
                 oa_lic[os.path.basename(p)[:-5]] = _oa_licence(json.load(fh))
         except Exception:  # noqa: BLE001
             pass
-    oda = {}
+    oda, oda_by_name = {}, {}
     for r in _read_csv(os.path.join(CACHE, "oda_data_sources.csv")):
         if r.get("Province / Territory", "").strip().upper() == "ON":
-            oda[_norm_provider(r["Data Provider"])] = r
+            oda[r["Data Provider"]] = r
+            oda_by_name[_norm_provider(r["Data Provider"])] = r
+    # coverage-based fallback: the ODA provider whose rows sit in our dataset's municipalities
+    ours_cov, oda_cov = defaultdict(dict), defaultdict(dict)
+    for r in _read_csv(COVERAGE):
+        if not r["municipality"]:
+            continue
+        if r["comparator"] == "ours":
+            ours_cov[r["source"]][r["municipality"]] = int(r["rows"])
+        elif r["comparator"] == "oda":
+            oda_cov[r["source"]][r["municipality"]] = oda_cov[r["source"]].get(r["municipality"], 0) + int(r["rows"])
+
+    def oda_via_coverage(slug):
+        mine = ours_cov.get(slug, {})
+        if not mine:
+            return None
+        top = max(mine.values())
+        munis = {k for k, v in mine.items() if v >= 0.02 * top}
+        best, score = None, 0
+        for prov, cov in oda_cov.items():
+            s = sum(v for k, v in cov.items() if k in munis)
+            if s > score:
+                best, score = prov, s
+        return oda.get(best) if best else None
+
     out = []
     for ds in registry.load_all():
         t = _toml(ds.slug)
         oas = by_slug.get(ds.slug, [])
         oa_texts = sorted({oa_lic.get(r["oa_source"], ("", ""))[0] for r in oas if r["match"] != "covered-by"} - {""})
         oa_urls = sorted({oa_lic.get(r["oa_source"], ("", ""))[1] for r in oas if r["match"] != "covered-by"} - {""})
-        od = oda.get(_norm_provider(t.get("provider", "")))
+        od = oda_by_name.get(_norm_provider(t.get("provider", "")))
+        oda_match = "provider name" if od else ""
+        if od is None:
+            od = oda_via_coverage(ds.slug)
+            oda_match = "coverage" if od else ""
         out.append({
             "slug": ds.slug, "provider": t.get("provider", ""),
             "our_licence": t.get("license_name", ""), "osm_compatible": t.get("osm_compatible", ""),
@@ -306,6 +334,7 @@ def _write_licences(oa_dir):
             "oa_sources": ";".join(r["oa_source"] for r in oas),
             "oa_licence": " | ".join(oa_texts)[:300], "oa_licence_url": " | ".join(oa_urls)[:300],
             "oda_provider": od["Data Provider"] if od else "",
+            "oda_match": oda_match,
             "oda_licence": (od["Licence Title"] + (" v" + od["Licence Version"] if od["Licence Version"] else "")) if od else "",
             "oda_downloaded": od["Date Downloaded"] if od else "",
         })
