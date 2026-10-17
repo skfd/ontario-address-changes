@@ -59,7 +59,7 @@ peterborough-county (gated); unclear-by-silence for the unknowns.
 | windsor | green-self | Open Government Licence – The Corporation of the City of Windsor (**self-listed on Contributors 2026-10-12**; + MFIPPA exemption, "official marks" (Niagara Region); **re-pointed 2026-10-12** to the licensed Address Polygon layer `OpenDataServices/PropertyParcels/MapServer/1` (item `6793ba07…`) — the polygons keep all synthesized keys, the Address Point layer `/0` would have re-keyed 117k) |
 | york | green-lwg | York Region Open Data Licence |
 
-## Yellow — OGL-family variants for the LWG variant-review email (8)
+## Yellow — OGL-family variants for the LWG variant-review email (9)
 
 Five of the six from 2026-08-16 (oakville went green 2026-10-09: LWG-listed
 2026-09-14) plus **five found 2026-08-20** (frontenac,
@@ -84,6 +84,7 @@ gated until the licence clears (queue state: engine
 | leeds-grenville | yellow-ogl | OGL – United Counties of Leeds and Grenville v1.0 | **found 2026-08-20** (was "attribution line only"): full OGL-Canada-style text at geohub-uclg hub terms page; DCAT binds the address dataset to it — add to email. **Re-pointed 2026-10-12** to the licensed `LG_CivicAddress_OpenData` (item `3587c701…`); the old CivicAddress item had an empty licenseInfo. Identical data, so no history change |
 | lennox-addington | yellow-ogl | OGL – County of Lennox and Addington v2.0 | **found 2026-08-20** (was unknown): item licenseInfo links the hub terms page; commercial OK, attribution line specified — add to email; the "ask gisservices@ to confirm in writing" step is now unnecessary |
 | milton | yellow-ogl | OGL – Milton | **found 2026-08-20** (was unknown): Discover Milton hub "Disclaimer and Terms of Use"; caveat — the OGL covers the open-data page whose Address Points item points at `Datasets/Address_Pts`, while we track `WebMaps/MGIS/MapServer/63` (same host/publisher); consider re-pointing — add to email. **Re-point deferred 2026-10-12**: `Address_Pts` failed every query on 2026-10-11 (HTTP 500), has no STREET_NAME/FULL_ADDRESS (street would need composing from parts normalize cannot join) and no STATUS/WARD. Reasons in the toml |
+| elgin | yellow-ogl | OGL – County of Elgin | **found 2026-10-16** (was unknown): the tracked layer was re-pointed the same day to `Elgin_Civic_Numbers_2026` (item `4ec0a122…`, empty licenseInfo). Chain: the item is in group `OD_Administrative` (`0b0a5bd5…`), which is in the catalogue of the Elgin County Open Data hub site (item `5fa753ff…`), whose licenseInfo is the full OGL text (commercial use, attribution "Contains information licensed under the Open Government Licence – County of Elgin."). Caveat: the county's other site, GeoHub (`a5a386c9…`, geohub.elgin.ca), carries non-commercial web-map terms, but the item is not in its groups. Portal-wide notice only, the dufferin shape — add to email |
 | lambton | yellow-ogl | OGL 2.0 – County of Lambton | **moved out of green 2026-10-12**: diff vs Ottawa 2.0 found an added "sole and exclusive rights" sentence and a dropped Versioning clause (as Sarnia) — in the 2026-10-12 LWG follow-up email |
 | sarnia | yellow-ogl | OGL – City of Sarnia (item licenseInfo of the renamed service) | re-tiered in the toml 2026-08-20 with the URL fix (service renamed `Addresses_Open_Data` → `Addresses_Open_Data_AGOL`, item `2ed254db85d6442a8b040213c0c6b097`); self-declared OGL-Canada 2.0 clone; already in the email |
 
@@ -110,10 +111,10 @@ gated until the licence clears (queue state: engine
 | muskoka | red-review | Custom terms, no reuse grant | King's Printer copyright + disclaimer at map.muskoka.on.ca/pages/terms-of-use; ORN road data "used under licence". Not explicitly prohibiting, so still published — but a grant should be asked for |
 | burlington + london | red-review | Open-data Terms of Use (2011-style, near-identical) | **read in full 2026-08-20**: automated retrieval permitted (by silence; revocable), and publishing derived diff reports **explicitly permitted** with pass-through (include a copy of / URL to the terms, bind recipients, no further restrictions). Our publishing is cleared once the terms URL is added to their report pages. OSM/ODbL vs the pass-through clause unresolved → stays red for OSM |
 
-## Unknown — no licence text found after a real hunt (6)
+## Unknown — no licence text found after a real hunt (5)
 
-chatham-kent, elgin, wellington, kawartha-lakes re-verified as genuine
-absences 2026-08-20 (item + DCAT + hub each checked; kawartha's hub PDF is a
+chatham-kent, wellington, kawartha-lakes re-verified as genuine
+absences 2026-08-20 (elgin too, until its hub published an OGL, found 2026-10-16) (item + DCAT + hub each checked; kawartha's hub PDF is a
 disclaimer, not a grant). Ask each to publish/state a licence or grant OSM
 permission (templates in the engine TODO).
 
@@ -121,7 +122,6 @@ permission (templates in the engine TODO).
 |---|---|---|
 | bruce | yellow-review | toml's "BGDISC Open Data Licence" is a data-sharing collaborative, not a licence; contact GIS@BruceCounty.on.ca |
 | chatham-kent | unknown-review | confirmed none published 2026-08-20 (29 datasets on their DCAT feed all licence-less; address layer not even listed on the portal) |
-| elgin | unknown-review | confirmed none published 2026-08-20 (self-hosted server + 23 hub datasets, all licence-less) |
 | hastings | unknown-review (demoted from yellow-ogl 2026-08-16) | toml's licence name has no corresponding text anywhere; item says "General use. Open Data." |
 | kawartha-lakes | unknown-review | confirmed 2026-08-20: item/DCAT/hub all carry the same as-is disclaimer, no grant, no prohibition |
 | wellington | unknown-review | confirmed none published 2026-08-20 (no hub, no org-item licence; "Free for public use." covers the Explore app, not the data — bbox note: Guelph sits wholly inside, clipping applies regardless) |
@@ -141,7 +141,7 @@ pages, county sites); evidence and quotes in each TOML.
 | simcoe | yellow-review | Open Government Licence - Simcoe County (maps.simcoe.ca/openlicense.html) | open licence exists and the site terms exempt open-data layers into it, but coverage of this exact MapServer endpoint is inferred — confirm with the county, or switch to their GeoServer WFS which is unambiguously open-data |
 | prince-edward-county | yellow-review | OGL – County of Prince Edward v1.0 (hub) | full OGL-Canada 2.0 clone recovered; the address item itself lacks the stamp — confirm, then promote to yellow-ogl |
 | cobourg | red-review · **publish_reports = false** | Town of Cobourg Open Data Terms of Use (2021) | grant covers copying/redistributing the UNMODIFIED datasets only (the City-of-Peterborough shape) → tracked, unpublished; ask mchatten@cobourg.ca |
-| middlesex | unknown-review | as-is disclaimer only (item licenseInfo) | no grant, no prohibition |
+| middlesex | unknown-review | as-is disclaimer only (item licenseInfo) | no grant, no prohibition. **Re-pointed 2026-10-16** to the county's `Base_Layers/MapServer/1` via its utility.arcgis.com proxy item `f4dd79bd…` (same owner, Colesberry); no licence on that item either, so the tier is unchanged |
 | perth-county | unknown-review | none published (confirmed) | |
 | amherstburg | unknown-review | none published (confirmed) | only Essex County muni with address points — worth an ask |
 | stratford | unknown-review | none published (confirmed) | |
@@ -155,9 +155,9 @@ sault-ste-marie (SooMaps click-through: non-commercial only, expressly
 covering consumed mapservices — borderline for a free tracker; operator may
 overrule).
 
-## Counts (2026-08-20, post-onboarding-wave; oakville to green 2026-10-09; durham out of green 2026-10-11; six self-listed and lambton out of green 2026-10-12)
+## Counts (2026-08-20, post-onboarding-wave; oakville to green 2026-10-09; durham out of green 2026-10-11; six self-listed and lambton out of green 2026-10-12; elgin from unknown to OGL-family 2026-10-16)
 
-green 20 (6 of them `green-self`) · OGL-family awaiting the LWG 9 · yellow-review 7
+green 20 (6 of them `green-self`) · OGL-family awaiting the LWG 10 · yellow-review 7
 (peel-region, durham, bruce, norfolk, halton-hills, simcoe, prince-edward-county) ·
 CC-BY waiver 1 · restrictive 6 (4 gated off the site: sdg, renfrew,
-peterborough-county, cobourg) · unknown 9 — of **53 tracked datasets**.
+peterborough-county, cobourg) · unknown 8 — of **53 tracked datasets**.

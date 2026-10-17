@@ -78,7 +78,8 @@ These cities are imported and tracking, but their field maps need a human decisi
   reports compose "number street" from the cleaner components. Not urgent and not an
   identity risk (`key_field = "ID"`, and `full` is not in `synth_fields`), but it means
   ~1.3% of displayed dufferin addresses show a number that belongs to a neighbour.
-- [ ] **elgin — `StrNum2` is the hastings trap in miniature.** Found 2026-08-10. It
+- [x] **elgin — `StrNum2` is the hastings trap in miniature.** Moot 2026-10-16: elgin was
+  re-pointed to a layer with no StrNum2, whose Civic keeps the suffix. Found 2026-08-10. It
   duplicates the mapped `StrNUM` on 21,771 of 21,785 rows, and on the 14 where they
   differ it is sometimes the *better* value — it keeps the house suffix that `StrNUM`
   drops and that `full` shows ("1" vs "1B CHATHAM ST", "47" vs "47B MILTON STREET") — but
@@ -237,8 +238,8 @@ the order to work them):
 | # | place | what | why now |
 |---|---|---|---|
 | ~~1~~ | ~~west-parry-sound~~ | **done 2026-10-16**: re-pointed to NG911/9112, store re-baselined | — |
-| 2 | elgin | re-point to Elgin_Civic_Numbers_2026 (24,177) + licence recheck | tracked layer frozen since 06-12 |
-| 3 | middlesex | re-point to the county's live Base_Layers/MapServer/1 (34,308) | tracked item is a 2023 snapshot |
+| ~~2~~ | ~~elgin~~ | **done 2026-10-16**: re-pointed to Elgin_Civic_Numbers_2026, store re-baselined, licence found (OGL, yellow) | — |
+| ~~3~~ | ~~middlesex~~ | **done 2026-10-16**: re-pointed to Base_Layers/MapServer/1, store re-baselined | — |
 | 4 | Tecumseh (Essex) | new dataset, 9,860 pts, OGL Essex; fix skipped.toml | first Essex points under an open licence |
 | 5 | Grey County | licence ask; 51k parcel labels + 10.5k Blue Mountains pts; 403 from here | skipped.toml says "no layer", now wrong |
 | 6 | peel-region, waterloo, dufferin, cambridge, chatham-kent | data-integrity look: content frozen 15/16/16/10/12 weeks | live layer or periodic export? |
@@ -286,12 +287,29 @@ are the ones that change something here. Counts and dates probed live 2026-10-16
       Old store backed up at `C:\Users\kk\ontario-db-backup-2026-10-16-wps\` (it also carries
       a stray NG911 import on top; README there says how to strip it). The info@wpsgn.ca
       licence-scope question (§3) is still open: NG911 publishes no licence either.
-- [ ] **middlesex follows a 2023 snapshot.** `MiddlesexCountyAddressPoints` (item name
+- [x] **middlesex follows a 2023 snapshot.** `MiddlesexCountyAddressPoints` (item name
       `mc_address`) was last edited 2023-10-18 and holds 31,571. The county's live layer is
       `https://utility.arcgis.com/usrsvcs/servers/f4dd79bdd35a456c87c0c20668138c05/rest/services/MiddlesexCounty/Base_Layers/MapServer/1`,
       34,308 rows. No licence on either, so the gate is unchanged. A `utility.arcgis.com`
       proxy URL: check it is stable before trusting it.
-- [ ] **elgin's tracked layer has not moved since 2026-06-12** (30 identical pulls,
+      **DONE 2026-10-16.** The proxy is registered by public AGOL item
+      `f4dd79bdd35a456c87c0c20668138c05` (same owner, Colesberry; created 2026-08-05), so it
+      lives as long as that item. Same fabric (99.0% of the old address tuples reappear) but
+      5,849 points re-placed by > 1.1 m, and the old store was baseline-only, so it was
+      re-baselined: 34,299 rows, no events, no flags; vault day filed `schema`; old store at
+      `C:\Users\kk\ontario-db-backup-2026-10-16-middlesex\`. The first pull came back
+      28,637 of 34,308: the vault fetcher paged on a plain `OBJECTID` column because the
+      MapServer omits `objectIdField` (fixed in address-vault `db63039`, the OID now comes
+      from the field type). Liveness is still unproven - no editingInfo; the 90-day
+      source-stale alert will say. Follow-ups:
+  - [ ] **Layer 0 of the same service, "Address (Units)", holds 2,298 unit points** (only
+        `STREET_UNI` + `FULLADDRES`, 465 buildings); the tracked layer 1 has 424 unit rows,
+        419 of them also in layer 0. The old export had 568 unit rows (420 here, 531 there),
+        so the re-point dropped ~148 units. Tracking layer 0 needs a second dataset
+        (`middlesex-units`?) or multi-layer support. Your call whether units matter here.
+  - [ ] **location_min_move_m** once a second distinct snapshot exists: the re-placement
+        shape (median 0 m, p90 8.4 m) looks like toronto's jitter.
+- [x] **elgin's tracked layer has not moved since 2026-06-12** (30 identical pulls,
       21,785 rows, `Public/MapServer/1` "E911", no lastEditDate). The county now publishes
       `https://services6.arcgis.com/TCQ78XR5HqDZ1SDc/arcgis/rest/services/Elgin_Civic_Numbers_2026/FeatureServer/0`
       (item `4ec0a122eed343948c0bb705733a2861`, owner `elgingis`), 24,177 rows, edited
@@ -299,6 +317,18 @@ are the ones that change something here. Counts and dates probed live 2026-10-16
       (`elgin-county-open-data-Elgin-County.hub.arcgis.com`) names "Open Government Licence -
       County of Elgin" portal-wide, which the 2026-08-20 check ("none published") predates.
       A re-point and a §3 licence recheck, the dufferin shape (portal-wide notice only).
+      **DONE 2026-10-16.** Licence chain recorded in the toml and LICENSING.md (item in group
+      `OD_Administrative`, which the open-data hub site catalogues; that site's licenseInfo
+      is the full OGL - County of Elgin; the county's GeoHub site has non-commercial terms
+      but does not list the item); tier `unknown-review` -> `yellow-ogl`, so it joins the
+      LWG email list - **your verdict, not mine: I recorded evidence**. Same fabric (94.1% of
+      (number, street first word) pairs) but no key survives - street types are spelled out
+      now - and the old store was baseline-only, so it was re-baselined: 24,176 rows, no
+      events, no flags; vault day `schema`; old store and its two raw pulls at
+      `C:\Users\kk\ontario-db-backup-2026-10-16-elgin\`. StrUNIT is "N/A" on 22,756 rows,
+      so normalize now drops exact "N/A" as null (`2c9de922a`). The layer was created in one
+      upload on 2026-10-05 and is named for the year: it may be an annual export, and the
+      90-day stale alert will tell. Issue #39 (source-stale) closes on the next hourly pass.
 - [ ] **Essex County is not "No address layer" any more.** Tecumseh publishes
       `https://gisweb.tecumseh.ca/arcgis/rest/services/OpenDataMaps/OpenDataMAP_InfraZonePropBound_Layers/MapServer/33`,
       9,860 points (number, street, suffix), catalogued under "Open Government Licence - The
@@ -471,7 +501,8 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
     OGL-L&A v2.0, milton OGL-Milton (with a layer-vs-open-data-item caveat in the
     TOML), peel-region Open Data Licence Peel v1.0 (attribution optional), sarnia
     OGL-Canada-2.0-based (found on the renamed service's item, §4's URL fix).
-  - **Confirmed none published (4):** chatham-kent, elgin, wellington, kawartha-lakes —
+  - **Confirmed none published (4):** chatham-kent, elgin (until 2026-10-16: OGL found on
+    its open-data hub, see §2), wellington, kawartha-lakes —
     a real absence, verified across item/DCAT/hub in each case, not a failed search.
     Default copyright applies; asking the municipality is the only move left.
   - **RESTRICTIVE — new problem, operator decision needed (3):** **sdg** (item
@@ -600,7 +631,7 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
     cambridge since 08-07 (66 pulls); amherstburg, cobourg, halton-hills, middlesex and
     norfolk have never changed since their 08-20 import day, and sarnia not since its
     08-20 URL fix (56 pulls each).
-    Elgin and middlesex are explained in §2 (stale layers, live replacements found);
+    Elgin and middlesex are explained in §2 (stale layers, re-pointed 2026-10-16);
     peel-region at 504k addresses and cambridge at 54k unchanged for 15 and 10 weeks
     deserve the same look — a periodic export, not a live layer, is the likely answer.
 - [x] **Flaky sources — the technical plan (written 2026-10-16; all three layers
@@ -825,6 +856,15 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
 
 Code fixes found during the audits. Every one of them changes payload hashes → a
 one-time "modified" spike, so batch them:
+
+- [ ] **"None" / "<Null>" in the canonical fields (found 2026-10-16).** `_NULL_LITERALS`
+  drops them from props only; `_clean` (the canonical number/street/unit/full) honours
+  just "N/A". Stored canonical values today: windsor number + full "None" on 696 rows,
+  norfolk unit "<Null>" 12, durham unit 5, leeds-grenville unit 2. Folding them into
+  `_CANONICAL_NULL_LITERALS` re-keys those rows (unit/number are in the synth basis), so
+  it is a full-history remap per store (`tools/remap_canonical_from_prop.py` shape), not
+  a filter edit. Small, but each is a latent mass event the day the publisher fixes its
+  export.
 
 - [x] **Extend `EDIT_METADATA_FIELDS` with the `creationdate` / `modificationdate`
   spellings.** Found 2026-08-20 during the west-parry-sound onboarding: the source

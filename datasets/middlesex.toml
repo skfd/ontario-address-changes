@@ -1,44 +1,69 @@
 slug = "middlesex"
 provider = "County of Middlesex"
-# The shared maps.middlesex.ca server died, taking six member municipalities with it;
-# the county migrated to this AGOL hosted layer (item 928ed74edad64e4aa65170fb49c46476,
-# owner Colesberry, org middlesex.maps.arcgis.com — verified genuinely Middlesex County ON),
-# found 2026-08-20. County-wide: MUNCODE covers all eight member municipalities
-# (SCT/SC Strathroy-Caradoc, MIDC Middlesex Centre, THC Thames Centre, NMID North Middlesex,
-# SMID/SWM Southwest Middlesex, LBD/LBT/LB Lucan Biddulph, AMT Adelaide Metcalfe, NEWB Newbury)
-# plus 117 null / 15 blank / 1 "I" junk rows. No London-coded rows — London is separated and
-# tracked as its own dataset. The slimmer sibling mc_address/FeatureServer/0 (30,368 rows,
-# no UNIT/MUNCODE) was rejected in favour of this one.
-data_url = "https://services.arcgis.com/vhh9rYcMiBEBPGYb/arcgis/rest/services/MiddlesexCountyAddressPoints/FeatureServer/0"
+# County-wide: MUNCODE covers the eight member municipalities (SCT Strathroy-Caradoc,
+# MIDC Middlesex Centre, THC Thames Centre, NMID North Middlesex, SWM Southwest
+# Middlesex, LB* Lucan Biddulph, AMT Adelaide Metcalfe, NEWB Newbury). No London rows -
+# London is separated and tracked as its own dataset.
+#
+# Re-pointed 2026-10-16 from the AGOL hosted MiddlesexCountyAddressPoints/FeatureServer/0
+# (item 928ed74edad64e4aa65170fb49c46476), tracked since 2026-08-20: a 2023-10-18 export
+# that never published a second distinct snapshot (31,569 rows, 15 identical pulls). This
+# is the county's own Base_Layers MapServer, reached through the utility.arcgis.com proxy
+# that its public AGOL item f4dd79bdd35a456c87c0c20668138c05 ("Middlesex County Address
+# Points", same owner Colesberry; created 2026-08-05) registers - the proxy URL lives as
+# long as that item does. 34,308 rows 2026-10-16. Newer than the export, but the
+# MapServer exposes no editingInfo, so liveness is not shown yet; the 90-day source-stale
+# alert will tell. Same fabric: 99.0% of the old (number, street, unit) tuples reappear,
+# but only 79.2% of identity keys, because 5,849 points were re-placed by more than 1.1 m
+# (median 0 m, p90 8.4 m) - the toronto jitter shape, a location_min_move_m candidate once
+# this layer has a second distinct snapshot. With nothing but a baseline in the old store,
+# it was re-baselined from this layer (old store backed up at
+# C:\Users\kk\ontario-db-backup-2026-10-16-middlesex\).
+#
+# Units: this layer carries 424 unit rows. Layer 0 of the same service, "Address (Units)",
+# holds 2,298 unit points (STREET_UNI + FULLADDRES only) across 465 buildings, including
+# 419 of those 424; of the old store's 568 unit rows, 420 are here and 531 there. Tracking
+# layer 0 too would need a second dataset or multi-layer support - not done.
+data_url = "https://utility.arcgis.com/usrsvcs/servers/f4dd79bdd35a456c87c0c20668138c05/rest/services/MiddlesexCounty/Base_Layers/MapServer/1"
 access = "arcgis"
 format = "geojson"
-# Native layer SR is EPSG:26917 (UTM 17N); the geojson export arrives already in WGS84,
-# so this is a guard for a future export-CRS switch (pass-through while in lon/lat range).
+# Native layer SR is EPSG:26917 (UTM 17N); the fetcher asks for outSR=4326, so this is
+# the guard for a future export-CRS switch (pass-through while in lon/lat range).
 source_crs = "EPSG:26917"
-# Item licenseInfo (fetched 2026-08-20) is a pure as-is disclaimer with no grant of rights:
-# "The Data is provided 'as is', without warranty, representation or condition of any kind. ...
-# The Data is provided for information purposes only."
-license_name = "None published beyond as-is disclaimer (confirmed 2026-08-20)"
+# No licenseInfo on the proxy item (checked 2026-10-16), and nothing on the MapServer
+# (copyrightText and description empty). The old item's licenseInfo (fetched 2026-08-20)
+# is a pure as-is disclaimer with no grant of rights: "The Data is provided 'as is',
+# without warranty, representation or condition of any kind. ... The Data is provided
+# for information purposes only."
+license_name = "None published beyond as-is disclaimer (confirmed 2026-08-20, rechecked 2026-10-16)"
 osm_compatible = "unknown-review"
 
+# POINT_X/POINT_Y are a coordinate echo of the geometry: median 0.00 m, p99 0.00 m, but
+# max 678 m and 32 rows past 1.1 m - stale on a few, so it can only manufacture updates.
+# The inner OBJECTID (7,260 zeros) goes as volatile by name.
+ignore_fields = ["POINT_X", "POINT_Y"]
+
 [identity]
-# No stable source id: OBJECTID_12/OBJECTID are sequential (volatile, dropped by the
-# pipeline); GlobalID is 100% populated and unique in the 2026-08-20 snapshot (31,571
-# distinct of 31,571) but may be regenerated on AGOL republish, so not trusted day one.
+# No stable source id: OBJECTID_1/OBJECTID are sequential (volatile, dropped by the
+# pipeline); GlobalID is unique (34,308 of 34,308) but has no cross-snapshot evidence on
+# this service and may be regenerated on republish, so not trusted day one. 5 duplicate
+# keys today.
 key_field = ""                                 # synthesize from address + rounded lon/lat
 synth_fields = ["number", "street", "unit"]
 
 [fields]                                        # source property -> canonical name
-# Coverage 2026-08-20: MUNNUMBER 30,994/31,571 non-blank (~98%; the rest look like
-# street-only/placeholder points), FULLADDRES 31,518. UNIT non-blank on only 568 rows
-# (~1.8%) — normal for a unit column; blanks are padded single spaces, not nulls.
+# Coverage 2026-10-16: MUNNUMBER 98.7% non-blank (the rest look like street-only or
+# placeholder points), FULLADDRES 99.8%. STREET_UNI (the old layer's UNIT, truncated by a
+# shapefile round trip) on 424 rows; blanks are padded single spaces, not nulls.
+# FULLSTREET and FULL_NAME (spelled-out type, leading spaces on number-less rows) ride
+# in props. 4 rows have no geometry and are skipped.
 number = "MUNNUMBER"
 street = "STREET_NAM"                           # STREET_TYP/STREET_DIR tracked via the props blob
-unit   = "UNIT"
+unit   = "STREET_UNI"
 full   = "FULLADDRES"
 
-# Change classes (field values verified against the latest snapshot): a
-# modification touching only these fields is reported in its humanized section
-# (boundary reassignments) instead of the generic Updated Addresses table.
+# Change classes (MUNCODE values read from the live layer 2026-10-16): a modification
+# touching only these fields is reported in its humanized section (boundary
+# reassignments) instead of the generic Updated Addresses table.
 [classes]
 boundary = ["MUNCODE"]

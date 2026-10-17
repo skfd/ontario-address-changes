@@ -1,44 +1,60 @@
 slug = "elgin"
 provider = "County of Elgin"
-data_url = "https://gisdata.elginmapping.ca/arcgis/rest/services/Public/MapServer/1"
+# Re-pointed 2026-10-16 from the self-hosted gisdata.elginmapping.ca Public/MapServer/1
+# ("E911"), tracked since 2026-06-11. That layer never moved after 06-12: 21,785 rows,
+# byte-identical on 30 pulls. This one is the county's AGOL hosted layer (item
+# 4ec0a122eed343948c0bb705733a2861, owner elgingis), 24,177 rows. Newer, but liveness is
+# not shown yet: it was created in one upload on 2026-10-05 (CreationDate == EditDate on
+# every row) and the service is named for the year, so it may be an annual export; the
+# 90-day source-stale alert will tell. Same address fabric: 94.1% of the old store's
+# (number, street first word) pairs reappear, but no identity key survives - this layer
+# spells street types out ("ROAD" for "RD") and drops the 279 number-0 rows - so the store
+# was re-baselined from this layer instead of diffing across the switch (the old store
+# and its two raw pulls are backed up at C:\Users\kk\ontario-db-backup-2026-10-16-elgin\).
+data_url = "https://services6.arcgis.com/TCQ78XR5HqDZ1SDc/arcgis/rest/services/Elgin_Civic_Numbers_2026/FeatureServer/0"
 access = "arcgis"
 format = "geojson"
-# Licence hunted 2026-08-20: confirmed NONE PUBLISHED. Self-hosted gisdata.elginmapping.ca
-# carries no licence; the county's open-data hub lists 23 datasets, all with empty licence,
-# none of them the address layer. Default copyright applies until the county states a licence.
-license_name = "None published (confirmed 2026-08-20)"
-osm_compatible = "unknown-review"
+# Native layer SR is EPSG:26917 (UTM 17N); the fetcher asks for outSR=4326, so this is
+# the guard for a future export-CRS switch (pass-through while in lon/lat range).
+source_crs = "EPSG:26917"
+# Licence found 2026-10-16 (2026-08-20 had "none published"). The item's licenseInfo is
+# empty, but it sits in group OD_Administrative (0b0a5bd54f904f90a6ea43f0509d6cae), which
+# is in the catalogue of the Elgin County Open Data hub site (item
+# 5fa753ffb94846f886b41bb04c0d7f45, elgin-county-open-data-Elgin-County.hub.arcgis.com),
+# whose licenseInfo is the full "Open Government Licence - County of Elgin": worldwide,
+# royalty-free, commercial use, attribution "Contains information licensed under the Open
+# Government Licence - County of Elgin." The county's other site, GeoHub (item
+# a5a386c92b73471a959c4f458a9e3ba3, geohub.elgin.ca), carries non-commercial web-map
+# terms, but this item is not in its groups. Portal-wide notice only - the dufferin shape.
+license_name = "Open Government Licence - County of Elgin (open-data hub, portal-wide)"
+osm_compatible = "yellow-ogl"
 
-# x/y are the worst coordinate duplicate found in any of the 42 (audit.py --coords,
-# 2026-08-10). Broken on their own terms before drift even enters: 18,716 rows hold
-# degrees and 2,720 hold UTM 17N metres IN THE SAME COLUMN. On top of that they are a
-# stale copy — median 7.76 m off the geometry, p99 584.74 m, max 1,837 m, 9,551 of 21,436
-# rows past 11 m. Phantom-only (synth identity + use_geometry, so a real move re-keys and
-# never reports as a modification), which means this can only ever manufacture updates —
-# but it would manufacture a lot of them the day the county re-syncs.
-ignore_fields = [
-  "x", "y",
-  # 911-sign condition survey ('Good', 'Damaged', 'No Sign', 'in swamp', ...) - the
-  # county's field notes on its sign hardware, not a property of the address
-  # (renfrew Comment precedent). The source has been frozen since 2026-06-11; the
-  # day it wakes, a re-survey would sweep this column en masse.
-  "Condition",
-]
+# x/y are a coordinate echo of the geometry, now in degrees on every row (the old layer
+# mixed degrees and UTM metres in one column): median 0.97 m off, p99 5.84 m, max 494 m,
+# 484 rows past 1.1 m - a stale copy that can only manufacture updates. Creator/Editor
+# are the esri editor-tracking names ("elgingis" on every row); CreationDate/EditDate go
+# globally via EDIT_METADATA_FIELDS. The old layer's Condition column is gone.
+ignore_fields = ["x", "y", "Creator", "Editor"]
 
 [identity]
-# Region-wide (all Elgin lower-tier munis in MUNI). ARN is an assessment roll number that can be
-# 1:many with civic addresses, so synthesize from the (clean) address components instead.
+# No stable source id. ARN is an assessment roll, 1:many with civic addresses (144 rows
+# on 341103000036000) and dirty ("0000" 134, "00" 77, "0" 46). GlobalID is unique but
+# has no cross-snapshot evidence and the layer is one bulk upload - revisit once there
+# are 2+ distinct snapshots. One collision today: 236 FURNIVAL ROAD twice at one point.
 key_field = ""                                 # synthesize from address + rounded lon/lat
 synth_fields = ["number", "street", "unit"]
 
 [fields]                                        # source property -> canonical name
-number = "StrNUM"
-street = "StrFULL"                              # ARN/MUNI/Condition tracked via the props blob
-unit   = "StrUNIT"
-full   = "StrNUM_StrFULL"
+number = "Civic"                                # carries the suffix ("9024A") and dash units ("10211-1")
+street = "StrFULL"                              # ARN/MUNI tracked via the props blob
+unit   = "StrUNIT"                              # "N/A" on 22,756 rows (dropped as null by normalize),
+                                                # ~437 real values, most repeating Civic's suffix
+full   = "Address"
 
-# Change classes (field values verified against the latest snapshot, 2026-08-20):
-# MUNI holds the lower-tier municipality (Aylmer, Bayham, Central Elgin, ... plus
-# one dirty '3408' row) - a reassignment publishes humanized as a boundary change.
+# Change classes (field values read from the live layer 2026-10-16): MUNI holds the
+# lower-tier municipality, upper case (CENTRAL ELGIN 7,062, MALAHIDE, BAYHAM, AYLMER,
+# SOUTHWOLD, WEST ELGIN, DUTTON/DUNWICH) with a mixed-case tail (St. Thomas 20, Bayham 5,
+# Southwold, West Elgin, "M", one null). If the county normalizes that case, those ~28
+# rows publish as boundary changes - acceptable, and true to the data.
 [classes]
 boundary = ["MUNI"]
