@@ -93,6 +93,21 @@ def test_boundary_diff_matches_full_active_sets():
         span = diff.compute_diff(ds, ids[0], ids[3])
         assert [r["full"] for r in span["added"]] == ["5 Elm Rd", "6 Elm Rd"], span
         assert [r["full"] for r in span["removed"]] == ["4 Elm Rd"], span
+
+        # The start index must serve the diff and nothing else: a plain index on
+        # min_snapshot_id took over every "active at S" query and turned each into
+        # a scan of all history (the 2026-10-19 render that ran past an hour).
+        conn = db.init_db(ds)
+        def plan(sql, args):
+            return " ".join(r[3] for r in conn.execute("EXPLAIN QUERY PLAN " + sql, args))
+        active = plan("SELECT * FROM addresses WHERE min_snapshot_id <= ? "
+                      "AND max_snapshot_id >= ?", (ids[-1], ids[-1]))
+        started = plan("SELECT * FROM addresses WHERE min_snapshot_id + 0 > ? "
+                       "AND min_snapshot_id + 0 <= ? AND max_snapshot_id >= ?",
+                       (ids[0], ids[1], ids[1]))
+        conn.close()
+        assert "idx_addr_active" in active, active
+        assert "idx_addr_start" in started, started
     finally:
         shutil.rmtree(ds.data_dir, ignore_errors=True)
 

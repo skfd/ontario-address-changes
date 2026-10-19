@@ -147,8 +147,8 @@ def _boundary(conn, old_id, new_id):
         "AND max_snapshot_id < ? AND min_snapshot_id <= ?",
         (old_id, new_id, old_id)).fetchall()
     started = conn.execute(
-        f"SELECT {cols} FROM addresses WHERE min_snapshot_id > ? "
-        "AND min_snapshot_id <= ? AND max_snapshot_id >= ?",
+        f"SELECT {cols} FROM addresses WHERE min_snapshot_id + 0 > ? "   # idx_addr_start
+        "AND min_snapshot_id + 0 <= ? AND max_snapshot_id >= ?",
         (old_id, new_id, new_id)).fetchall()
     return ({r["identity_key"]: dict(r) for r in ended},
             {r["identity_key"]: dict(r) for r in started})

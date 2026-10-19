@@ -900,28 +900,28 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
 Code fixes found during the audits. Every one of them changes payload hashes → a
 one-time "modified" spike, so batch them:
 
-- [ ] **Cache the per-snapshot diffs (found 2026-10-16).** The daily render is ~33 min
-  of CPU for 53 datasets, and almost none of it is HTML: `report.generate_all` calls
-  `_chronological_diffs`, which recomputes `diff.compute_baseline` and every consecutive
-  `diff.compute_diff` pair for every city, every day, before a single page is written.
-  That cost grows with history and is the only CPU-bound part of the run. Fix: persist
-  each pair's diff once, keyed by `(old_id, new_id)` plus a hash of the dataset config
-  that shapes it (`field_map`, `ignore_fields`/`keep_fields`, `classes`,
-  `location_min_move_m`, identity settings) — in the city DB or a sidecar — and have
-  `_chronological_diffs` read cached pairs and compute only the new one. A config edit
-  changes the hash and recomputes the whole history on the next render, which is the
-  behaviour `backfill --reapply-ignore` already relies on, so no stale pages. Expected:
-  a quiet day's render drops from ~33 min to a few; the daily run from ~80 min to ~40.
-  No hash change, no spike — render-side only. Measure before/after with the `RENDER`
-  → `END` log lines.
-- [ ] **Render cities in parallel (found 2026-10-16).** `generate_all` is one serial
-  `for ds in datasets` loop on a 12-core machine. After the diff cache lands, run the
-  per-city part (diffs, flag detection, report pages, `_card.json`) in a process pool —
-  a worker per dataset, same `--jobs` as `update` — and keep the landing page,
-  `status.json` and flags page as the serial tail once the cards are in. Watch the two
-  shared writers: `flags.record` appends to `flags.toml` (collect each worker's detected
-  entries and record them once in the parent, as `_detect_flags` already returns them),
-  and the ledger reload. Expected ~6–8x on whatever the render still costs.
+- [x] **Cache the per-snapshot diffs (found 2026-10-16).** The daily render was ~33 min
+  of CPU, almost none of it HTML: `_chronological_diffs` recomputed every consecutive
+  `diff.compute_diff` pair for every city, every day, and each one loaded *both whole
+  active sets* (~6 s a pair on toronto, 838 s for its 122 pairs). **Done 2026-10-19,
+  without a cache.** A row active at both snapshots is one span and can never be in
+  the diff, so `compute_diff` now reads only the spans that end or start between the
+  two (`diff._boundary`): same answer, cost proportional to the change. Nothing is
+  stored, so there is nothing to invalidate: config edits, backfills, remaps and
+  re-baselines are seen on the next render as before. Verified against the old method
+  on every pair in all 77 stores plus a first-to-last and a month-long span each (zero
+  mismatches; diffing 2,836 s -> 31.5 s), and `tests/test_diff_boundary.py` keeps the
+  old method as its oracle. Full `report --all`: **1 min 49 s**, pages byte-identical.
+  One trap on the way, kept in the test: a plain index on `min_snapshot_id` won the
+  query plan for every "active at S" query (`min <= S AND max >= S`), whose min side
+  matches all of history, which stalled a profiled render for over an hour and
+  re-sampled three hulls. The start index is on the expression `min_snapshot_id + 0`
+  so only `_boundary` can use it. After-measure to confirm: the 10-19 noon run's
+  `RENDER` -> `END` lines (10-18: 12:16 -> 12:49).
+- [x] **Render cities in parallel (found 2026-10-16).** Dropped 2026-10-19: with the diff
+  fix the whole render is under two minutes on one core, so a process pool and the
+  two shared writers it would have to handle (`flags.record`, the ledger reload) buy
+  nothing worth the risk. Revisit only if the render climbs back past ~10 min.
 - [ ] **Stream the GeoJSON import (found 2026-10-16).** `fetch.load_features` does one
   `json.load` of the whole file — up to ~590 MB for york/peel/toronto — and
   `db.import_snapshot` then iterates `features` once. Switch to `ijson.items(f,

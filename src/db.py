@@ -89,8 +89,12 @@ def init_db(ds):
 
         CREATE INDEX IF NOT EXISTS idx_addr_active ON addresses(max_snapshot_id);
         CREATE INDEX IF NOT EXISTS idx_addr_key_max ON addresses(identity_key, max_snapshot_id);
-        -- diff.compute_diff ranges on both ends of a span.
-        CREATE INDEX IF NOT EXISTS idx_addr_min ON addresses(min_snapshot_id);
+        -- Where a span starts, for diff._boundary. On an expression so only a
+        -- query naming `min_snapshot_id + 0` can use it: a plain index on
+        -- min_snapshot_id wins the plan for every "active at S" query
+        -- (min <= S AND max >= S), where the min side matches all of history
+        -- and idx_addr_active's side matches only the live rows.
+        CREATE INDEX IF NOT EXISTS idx_addr_start ON addresses(min_snapshot_id + 0);
     """)
     conn.commit()
     return conn
