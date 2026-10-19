@@ -118,11 +118,37 @@ def _toml(slug):
 
 
 # -------------------------------------------------------------------------- ours
+def _vault_cadence(slug, days=30):
+    """(pulls, content changes) over the last `days` from the vault catalog.
+
+    The vault records one dated snapshot per pull, changed or not; the tracker's
+    own snapshots table only began recording unchanged days on 2026-10-03, so it
+    undercounts pulls before that. A change is a day whose sha256 differs from the
+    previous stored day's."""
+    vdir = os.environ.get("ADDRESSVAULT_DIR")
+    cat = os.path.join(vdir, "catalog.db") if vdir else None
+    if not cat or not os.path.exists(cat):
+        return None, None
+    import sqlite3
+    cutoff = (date.today() - timedelta(days=days)).isoformat()
+    conn = sqlite3.connect(f"file:{cat}?mode=ro", uri=True)
+    rows = conn.execute(
+        "SELECT date, sha256 FROM snapshots WHERE slug = ? AND date > "
+        "(SELECT COALESCE(MIN(date), '') FROM snapshots WHERE slug = ?) ORDER BY date", (slug, slug)).fetchall()
+    conn.close()
+    pulls = sum(1 for d, _ in rows if d >= cutoff)
+    changes, prev = 0, None
+    for d, sha in rows:
+        if prev is not None and d >= cutoff and sha != prev:
+            changes += 1
+        prev = sha
+    return pulls, changes
+
+
 def cmd_ours(args):
-    print("ours: reading data/<slug>/<slug>.db")
+    print("ours: reading data/<slug>/<slug>.db and the vault catalog")
     munis = Municipalities()
     measures, cov = [], []
-    since30 = (datetime.now() - timedelta(days=30)).isoformat()
     for ds in registry.load_all():
         if not os.path.exists(ds.db_path):
             continue
@@ -132,11 +158,7 @@ def cmd_ours(args):
             conn.close()
             continue
         last = conn.execute("SELECT downloaded FROM snapshots WHERE id = ?", (sid,)).fetchone()[0]
-        snaps30 = conn.execute(
-            "SELECT COUNT(*) FROM snapshots WHERE skipped = 0 AND downloaded >= ?", (since30,)).fetchone()[0]
-        hashes30 = conn.execute(
-            "SELECT COUNT(DISTINCT content_hash) FROM snapshots WHERE skipped = 0 AND downloaded >= ?",
-            (since30,)).fetchone()[0]
+        pulls30, changes30 = _vault_cadence(ds.slug)
         first = conn.execute("SELECT MIN(downloaded) FROM snapshots").fetchone()[0]
         rows = conn.execute(
             "SELECT longitude, latitude, unit, street, number FROM addresses "
@@ -152,8 +174,8 @@ def cmd_ours(args):
             m(sid_str, "unit_fill", unit, n, method="canonical unit non-empty"),
             m(sid_str, "street_fill", street, n, method="canonical street non-empty"),
             m(sid_str, "number_fill", number, n, method="canonical number non-empty"),
-            m(sid_str, "snapshots_30d", snaps30, 30, "days", "non-skipped snapshots in the last 30 days"),
-            m(sid_str, "distinct_content_30d", hashes30, snaps30, "snapshots", "distinct content hashes in the last 30 days"),
+            m(sid_str, "pulls_30d", pulls30, 30, "days", "vault catalog: dated snapshots in the last 30 days"),
+            m(sid_str, "changes_30d", changes30, pulls30, "pulls", "vault catalog: days whose sha256 differs from the previous stored day"),
             m(sid_str, "last_snapshot", last[:10], method="latest non-skipped snapshot"),
             m(sid_str, "tracked_since", (first or "")[:10], method="first snapshot"),
         ]

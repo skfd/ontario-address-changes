@@ -13,8 +13,8 @@ claims about third parties' data and the method is still under review.
 
 | id | what | measured how |
 |---|---|---|
-| `ours` | this repo | active rows of the latest non-skipped snapshot in `data/<slug>/<slug>.db`; snapshots in the last 30 days |
-| `oa` | [OpenAddresses](https://github.com/openaddresses/openaddresses), 85 Ontario source files, 84 with an `addresses` layer (Mississauga's lists buildings and parcels only) | `batch.openaddresses.io` per-job `count`, `stats.counts`, job history; source JSON licence. Point outputs need a login, so OA is measured per source, not per municipality |
+| `ours` | this repo | active rows of the latest non-skipped snapshot in `data/<slug>/<slug>.db`; pulls and content changes per 30 days from the vault catalog (`$ADDRESSVAULT_DIR/catalog.db`), because our own snapshots table only began recording unchanged days on 2026-10-03 |
+| `oa` | [OpenAddresses](https://github.com/openaddresses/openaddresses), 85 Ontario source files, 84 with an `addresses` layer (Mississauga's lists buildings and parcels only); the batch service also keeps a retired `peterborough` entry, so 85 sources are measured | `batch.openaddresses.io` per-job `count`, `stats.counts`, job history; source JSON licence. Point outputs need a login, so OA is measured per source, not per municipality |
 | `oda` | StatCan Open Database of Addresses v1 (2021) | `ODA_ON_v1.csv` counted once by `csdname` and `provider`; `Data_Sources.csv` for licence and download date |
 | `nar` | StatCan National Address Register | each vintage under `../prototype-nar/data/<YYYYMM>/Address_35_part_*.csv`, counted by `CSD_ENG_NAME` |
 | `overture` | Overture Maps addresses theme | latest release on S3, Ontario bbox, `country='CA'`, pulled with DuckDB (bbox pushdown; ~20 s) and binned by polygon |
@@ -46,8 +46,10 @@ Where two municipalities share a short name the counts merge and the report tags
   Idempotent per day. Source ids: `ours:<slug>`, `oa:<source>`, `oda:<provider>`, `oda`,
   `nar:<vintage>`, `nar`, `overture:<release>`, `overture`. Measures: `rows`,
   `unit_fill`/`street_fill`/`number_fill`/`postcode_fill` (value of rows), `last_success`,
-  `days_stale`, `runs_365d`, `rows_vs_ours`, `snapshots_30d`, `distinct_content_30d`,
-  `last_snapshot`, `tracked_since`, `unbinned_rows`, `vintages`, `releases`, `providers`.
+  `days_stale`, `runs_365d`, `rows_vs_ours`, `pulls_30d` (snapshot rows, skipped or not),
+  `changes_30d` (pulls whose content differed from the previous one: the source's own
+  churn rate), `last_snapshot`, `tracked_since`, `unbinned_rows`, `vintages`, `releases`,
+  `providers`.
 - `coverage.csv` — regenerated per comparator (and vintage): `municipality, comparator,
   vintage, source, rows, unit_filled, street_filled, number_filled, postcode_filled`.
   For `ours` the report takes the **max** per municipality across our datasets, because a

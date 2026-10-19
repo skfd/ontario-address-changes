@@ -5,7 +5,7 @@ import csv
 import os
 import sys
 from collections import defaultdict
-from datetime import date
+from datetime import date, timedelta
 
 from jinja2 import Environment, FileSystemLoader
 
@@ -14,6 +14,7 @@ sys.path.insert(0, HERE)
 from muni import Municipalities  # noqa: E402
 
 OUT = os.path.join(HERE, "report.html")
+PUBLIC_OUT = os.path.join(os.path.dirname(HERE), "docs", "prior-art", "index.html")
 
 
 def _read(name):
@@ -44,7 +45,7 @@ def latest_measures(rows):
     return out
 
 
-def main():
+def main(public: bool = False):
     measures = _read("measures.csv")
     coverage = _read("coverage.csv")
     licences = _read("licences.csv")
@@ -105,7 +106,9 @@ def main():
             "nar": nar, "nar_loc": nar_loc, "oda": cc.get("oda", {}).get("rows", 0),
             "oda_sources": main_sources(cc.get("oda", {}).get("sources", {})),
             "overture": cc.get("overture", {}).get("rows", 0),
-            "ratio": _pct(ours, nar_loc), "gap": ours == 0 and nar > 0,
+            # a gap is a municipality where we hold under 5% of the register's locations:
+            # zero, or only spillover from a neighbour's layer (Belleville: 27 rows from hastings)
+            "ratio": _pct(ours, nar_loc), "gap": nar_loc > 0 and ours < 0.05 * nar_loc,
             "collision": mrow["name_collision"],
         })
     table.sort(key=lambda r: -r["nar"])
@@ -142,12 +145,18 @@ def main():
             row["rows"] = sum(_num(lm[s]["rows"]["value"]) or 0 for s in ours_ids)
             row["sources"] = len(ours_ids)
             row["last"] = max((lm[s]["last_snapshot"]["value"] for s in ours_ids if "last_snapshot" in lm[s]), default="")
-            s30 = [_num(lm[s]["snapshots_30d"]["value"]) for s in ours_ids if "snapshots_30d" in lm[s]]
-            row["cadence_measured"] = f"median {sorted(s30)[len(s30) // 2]:.0f} snapshots / 30 d" if s30 else ""
+            cutoff = (date.today() - timedelta(days=30)).isoformat()
+            mature = [s for s in ours_ids if lm[s].get("tracked_since", {}).get("value", "9999") <= cutoff]
+            pulls = sorted(_num(lm[s]["pulls_30d"]["value"]) or 0 for s in mature if "pulls_30d" in lm[s])
+            changes = sorted(_num(lm[s]["changes_30d"]["value"]) or 0 for s in mature if "changes_30d" in lm[s])
+            if pulls:
+                row["cadence_measured"] = (f"median {pulls[len(pulls) // 2]:.0f} pulls and "
+                                           f"{changes[len(changes) // 2]:.0f} content changes per 30 d, "
+                                           f"over the {len(mature)} datasets tracked 30 d or more")
             u = sum(_num(lm[s]["unit_fill"]["value"]) or 0 for s in ours_ids)
             row["unit_pct"] = _pct(u, row["rows"])
         elif cid == "oa":
-            oa_ids = [s for s in lm if s.startswith("oa:")]
+            oa_ids = [f"oa:{j['oa_source']}" for j in oa_join if f"oa:{j['oa_source']}" in lm]
             row["rows"] = sum(_num(lm[s]["rows"]["value"]) or 0 for s in oa_ids)
             row["sources"] = len(oa_ids)
             stale = {s: _num(lm[s].get("days_stale", {}).get("value")) for s in oa_ids}
@@ -173,9 +182,10 @@ def main():
 
     # ---- quality: fill rates per comparator ----------------------------------------
     quality = []
+    oa_join_ids = {f"oa:{j['oa_source']}" for j in oa_join}
     for cid, sid in (("ours", None), ("oa", None), ("oda", "oda"), ("nar", latest_sid("nar")), ("overture", latest_sid("overture"))):
         if cid in ("ours", "oa"):
-            ids = [s for s in lm if s.startswith(cid + ":") and "rows" in lm[s]]
+            ids = [s for s in lm if s.startswith(cid + ":") and "rows" in lm[s] and (cid == "ours" or s in oa_join_ids)]
             n = sum(_num(lm[s]["rows"]["value"]) or 0 for s in ids)
             def tot_of(meas):
                 return sum(_num(lm[s][meas]["value"]) or 0 for s in ids if meas in lm[s])
@@ -208,39 +218,41 @@ def main():
             "oa_street": _pct(mm.get("street_fill", {}).get("value"), oa_n),
             "ours_street": _pct(o.get("street_fill", {}).get("value"), ours_n),
             "ours_last": o.get("last_snapshot", {}).get("value", ""),
+            "ours_changes": _num(o.get("changes_30d", {}).get("value")),
+            "ours_pulls": _num(o.get("pulls_30d", {}).get("value")),
         })
     oa_rows.sort(key=lambda r: (r["match"] != "none", -(r["days_stale"] or 0)))
     oa_dead = [r for r in oa_rows if (r["days_stale"] or 0) > 60]
     ours_only = sorted(s for s in ours_by_slug if not any(s in (j["our_slug"] or "").split(";") for j in oa_join))
 
     # ---- licences ----------------------------------------------------------------
-    lic_rows = []
-    for r in licences:
-        flag = ""
-        if r["oa_sources"] and not r["oa_licence"]:
-            flag = "OA records no licence"
-        elif r["oa_licence"] and r["our_licence"] and r["oa_licence"][:25].lower() not in r["our_licence"].lower() \
-                and r["our_licence"][:25].lower() not in r["oa_licence"].lower():
-            flag = "wording differs"
-        if r["oda_licence"] and r["our_licence"] and r["oda_licence"][:20].lower() not in r["our_licence"].lower():
-            flag = (flag + "; " if flag else "") + "ODA title differs"
-        lic_rows.append({**r, "flag": flag})
+    # The only flag worth a column: OA carries the source but stores no licence for it.
+    # Wording comparisons between three parties' licence titles were tried and were noise.
+    lic_rows = [{**r, "flag": "OA records no licence" if r["oa_sources"] and not r["oa_licence"] else ""}
+                for r in licences]
 
     env = Environment(loader=FileSystemLoader(os.path.join(HERE, "templates")), autoescape=True)
     env.filters["pct"] = lambda v, d=0: "" if v is None else f"{v:.{d}f}%"
     env.filters["num"] = lambda v: "" if v in (None, "") else f"{int(round(float(v))):,}"
+    out = PUBLIC_OUT if public else OUT
     html = env.get_template("report.html").render(
-        today=date.today().isoformat(), summary=summary, quality=quality,
+        public=public, today=date.today().isoformat(), summary=summary, quality=quality,
         table=table, extra_rows=extra_rows, tot=tot, covered=covered, n_munis=len(table),
         gaps=gaps, gap_rows=gap_rows, nar_total_binned=nar_total_binned,
         latest_nar=latest_nar, latest_ovt=latest_ovt, nar_v=nar_v,
         oa_rows=oa_rows, oa_dead=oa_dead, ours_only=ours_only, licences=lic_rows,
         n_measures=len(measures), first_measured=min((r["measured_on"] for r in measures), default=""),
     )
-    with open(OUT, "w", encoding="utf-8") as fh:
+    os.makedirs(os.path.dirname(out), exist_ok=True)
+    with open(out, "w", encoding="utf-8") as fh:
         fh.write(html)
-    print(f"  wrote {OUT}")
+    print(f"  wrote {out}")
 
 
 if __name__ == "__main__":
-    main()
+    import argparse
+    ap = argparse.ArgumentParser(description="Render the prior-art report.")
+    ap.add_argument("--public", action="store_true",
+                    help="write docs/prior-art/index.html (the public copy; the daily task pushes docs/) "
+                         "instead of priorart/report.html")
+    main(public=ap.parse_args().public)

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Prior art vs the tracker — {{ today }}</title>
+<title>{% if public %}How this tracker compares with other address sources{% else %}Prior art vs the tracker — {{ today }}{% endif %}</title>
 <style>
   :root { --bg:#fafafa; --surface:#fff; --surface2:#f5f5f5; --border:#e0e0e0; --text:#242424;
     --dim:#616161; --accent:#0078d4; --green:#107c10; --red:#c50f1f; --yellow:#eaa300; color-scheme:light; }
@@ -26,11 +26,20 @@
   details summary { cursor:pointer; color:var(--accent); margin:8px 0; }
   .wrap { max-height:70vh; overflow:auto; border-radius:8px; }
   .small { font-size:12px; color:var(--dim); }
+  .back-link { display:inline-flex; gap:.35rem; font-size:12px; color:var(--dim); margin-bottom:1.25rem; }
+  footer { margin-top:48px; padding-top:16px; border-top:1px solid var(--border); font-size:12px; color:var(--dim); }
+  footer p { margin:0 0 6px; }
 </style>
 </head>
 <body><main>
+{% if public %}
+<a class="back-link" href="../index.html">← All Ontario datasets</a>
+<h1>How this tracker compares with other address sources</h1>
+<p class="lead">Measured {{ today }}, from the data each source publishes about itself. Method and raw numbers: <a href="https://github.com/skfd/ontario-address-changes/tree/main/priorart">priorart/ in the repository</a>.</p>
+{% else %}
 <h1>Prior art vs the tracker</h1>
 <p class="lead">Measured {{ today }}. {{ n_measures }} measurements on file since {{ first_measured }}. Back-office: method under review, not linked from the public site.</p>
+{% endif %}
 
 <h2>Comparators</h2>
 <table>
@@ -50,7 +59,7 @@
 <tr><td>Rows binned to a municipality</td><td class="n">{{ tot.ours|num }}</td><td class="n">{{ tot.nar|num }}</td><td class="n">{{ tot.nar_loc|num }}</td><td class="n">{{ tot.oda|num }}</td><td class="n">{{ tot.overture|num }}</td></tr>
 </table>
 <p class="note">NAR and Overture rows are unit-level (one row per apartment where StatCan knows it). "NAR locations" counts distinct LOC_GUIDs, the building or entrance. Our layers sit anywhere between the two: some publish one point per building, some one per unit, so Ours / NAR loc. is a scale check (is the layer the same order of magnitude as the register?), not a completeness score. Well over 100% means a unit-level layer, well under means a thin one.</p>
-<p><b>{{ gaps|length }} municipalities</b> where the NAR has addresses and we have none: {{ gap_rows|num }} of {{ nar_total_binned|num }} NAR rows ({{ (100*gap_rows/nar_total_binned if nar_total_binned else 0)|round(1) }}%).</p>
+<p><b>{{ gaps|length }} municipalities</b> where we hold under 5% of the register's locations (nothing, or only spillover from a neighbour's layer): {{ gap_rows|num }} of {{ nar_total_binned|num }} NAR rows ({{ (100*gap_rows/nar_total_binned if nar_total_binned else 0)|round(1) }}%). Highlighted below.</p>
 <div class="wrap"><table>
 <tr><th>Municipality</th><th>Upper tier</th><th class="n">Ours</th><th>Our datasets</th><th class="n">NAR rows</th><th class="n">NAR locations</th><th class="n">Ours / NAR loc.</th><th class="n">ODA 2021</th><th class="n">Overture</th></tr>
 {% for r in table %}
@@ -76,15 +85,16 @@
 <p class="note">Unit fill is a property of the source as much as the pipeline: a city that publishes one point per building has few units however well it is read. Compare a source against the same jurisdiction below, not column against column here. We carry no postcode field.</p>
 
 <h2>OpenAddresses, source by source</h2>
-<p class="lead">{{ oa_rows|length }} Ontario sources in OpenAddresses. {{ oa_dead|length }} have not run successfully in 60 days. Join to our datasets is hand-kept in oa_sources.csv.</p>
+<p class="lead">{{ oa_rows|length }} Ontario address sources in OpenAddresses' batch service: 84 current source files with an addresses layer plus the retired peterborough entry its history still carries (Mississauga's file has buildings and parcels only, so it is not here). {{ oa_dead|length }} have not run successfully in 60 days. Join to our datasets is hand-kept in oa_sources.csv. "Our changes" is how many of our last 30 daily pulls brought different content: the source's own churn.</p>
 <div class="wrap"><table>
-<tr><th>OA source</th><th>Match</th><th>Ours</th><th class="n">OA rows</th><th class="n">Our rows</th><th class="n">OA / ours</th><th>OA last success</th><th class="n">Runs / yr</th><th>Our last snapshot</th><th class="n">Unit OA / ours</th><th class="n">Street OA / ours</th><th>Note</th></tr>
+<tr><th>OA source</th><th>Match</th><th>Ours</th><th class="n">OA rows</th><th class="n">Our rows</th><th class="n">OA / ours</th><th>OA last success</th><th class="n">Runs / yr</th><th>Our last snapshot</th><th class="n">Our changes / 30 d</th><th class="n">Unit OA / ours</th><th class="n">Street OA / ours</th><th>Note</th></tr>
 {% for r in oa_rows %}
 <tr class="{{ 'dead' if r.days_stale and r.days_stale > 60 }}"><td>{{ r.oa_source }}</td>
 <td><span class="tag {{ 'green' if r.match == 'same-url' else ('red' if r.match == 'none' else '') }}">{{ r.match }}</span></td>
 <td>{{ r.our_slug or '—' }}</td><td class="n">{{ r.oa_rows|num }}</td><td class="n">{{ r.ours_rows|num }}</td><td class="n">{{ r.ratio|pct }}</td>
 <td>{{ r.last_success }}{% if r.days_stale and r.days_stale > 60 %} <span class="tag red">{{ r.days_stale|num }} d</span>{% endif %}</td>
 <td class="n">{{ r.runs_365d|num }}</td><td>{{ r.ours_last }}</td>
+<td class="n">{% if r.ours_pulls is not none %}{{ r.ours_changes|num }} of {{ r.ours_pulls|num }}{% endif %}</td>
 <td class="n">{{ r.oa_unit|pct }} / {{ r.ours_unit|pct }}</td><td class="n">{{ r.oa_street|pct }} / {{ r.ours_street|pct }}</td><td class="small">{{ r.note }}</td></tr>
 {% endfor %}
 </table></div>
@@ -101,4 +111,13 @@
 <td class="small">{{ r.oda_licence or '' }}</td><td class="small">{{ r.flag }}</td></tr>
 {% endfor %}
 </table></div>
+
+<footer>
+<p><b>Sources and attribution.</b> Municipal boundaries: "Municipal Boundary – Lower and Single Tier", Land Information Ontario; contains information licensed under the <a href="https://www.ontario.ca/page/open-government-licence-ontario">Open Government Licence – Ontario</a>.
+National Address Register and Open Database of Addresses: Statistics Canada, reproduced and adapted under the <a href="https://www.statcan.gc.ca/en/reference/licence">Statistics Canada Open Licence</a>; the ODA's provider table carries each provider's own licence.
+Overture Maps Foundation addresses theme, release {{ latest_ovt }}, per its <a href="https://docs.overturemaps.org/attribution/">attribution page</a>; its Canadian addresses derive from the National Address Register via OpenAddresses.
+OpenAddresses figures are the per-job statistics its <a href="https://batch.openaddresses.io/">batch service</a> publishes; source definitions are CC0.
+Our own figures come from this tracker's snapshot stores; each dataset's licence is on its own page.</p>
+<p>Row counts are not comparable one for one across sources: the register and Overture count units, most municipal layers count buildings or entrances, and regional layers overlap their members'. Every number here is a measurement of what a source published on the stated date, not a judgement of the publisher.</p>
+</footer>
 </main></body></html>

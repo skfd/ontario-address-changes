@@ -192,6 +192,21 @@
       {% endfor %}
     </div>
 
+    {% if prior_art %}
+    <div class="skipped">
+      <div class="section-header">Compared with other address sources</div>
+      <div class="cities">
+        <a class="skip-row" href="prior-art/index.html" style="text-decoration:none;color:inherit">
+          <div class="skip-main">
+            <div class="skip-name">OpenAddresses, Statistics Canada's register and database, Overture</div>
+            <div class="skip-detail">Coverage by municipality, how often each source actually changes, field fill and licence, measured from what each publishes.</div>
+          </div>
+          <span class="skip-badge">report</span>
+        </a>
+      </div>
+    </div>
+    {% endif %}
+
     {% if skipped %}
     <div class="skipped">
       <div class="section-header">{{ skipped|length }} source{{ 's' if skipped|length != 1 else '' }} probed but not added</div>

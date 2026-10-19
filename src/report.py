@@ -708,7 +708,10 @@ def generate_all(datasets):
     with open(os.path.join(DOCS_DIR, "index.html"), "w", encoding="utf-8") as f:
         f.write(_env.get_template("cities.html").render(
             cities=cities, skipped=_load_skipped(),
-            total_addresses=total_addresses, map_features=map_features))
+            total_addresses=total_addresses, map_features=map_features,
+            # the prior-art comparison is published by `priorart/render.py --public`;
+            # link it only once that page exists so a template-only deploy cannot 404
+            prior_art=os.path.exists(os.path.join(DOCS_DIR, "prior-art", "index.html"))))
     print(f"\nwrote site for {len(cities)} dataset(s) to {DOCS_DIR}")
     generate_flags_page()
 
