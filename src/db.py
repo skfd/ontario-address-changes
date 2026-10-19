@@ -89,6 +89,8 @@ def init_db(ds):
 
         CREATE INDEX IF NOT EXISTS idx_addr_active ON addresses(max_snapshot_id);
         CREATE INDEX IF NOT EXISTS idx_addr_key_max ON addresses(identity_key, max_snapshot_id);
+        -- diff.compute_diff ranges on both ends of a span.
+        CREATE INDEX IF NOT EXISTS idx_addr_min ON addresses(min_snapshot_id);
     """)
     conn.commit()
     return conn

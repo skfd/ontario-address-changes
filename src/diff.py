@@ -132,11 +132,37 @@ def addr_sort_key(r):
             r.get("unit") or "", r["identity_key"])
 
 
+def _boundary(conn, old_id, new_id):
+    """The rows that differ between the active sets at old_id and new_id.
+
+    A row active at both snapshots is one span covering both and cannot be part
+    of the diff, so only spans that end in [old_id, new_id) or start in
+    (old_id, new_id] are read: proportional to the change, not to the city.
+    Returns ({key: row} active at old only, {key: row} active at new only),
+    equal to the two _active sets minus their shared rows.
+    """
+    cols = ", ".join(_FULL_COLS)
+    ended = conn.execute(
+        f"SELECT {cols} FROM addresses WHERE max_snapshot_id >= ? "
+        "AND max_snapshot_id < ? AND min_snapshot_id <= ?",
+        (old_id, new_id, old_id)).fetchall()
+    started = conn.execute(
+        f"SELECT {cols} FROM addresses WHERE min_snapshot_id > ? "
+        "AND min_snapshot_id <= ? AND max_snapshot_id >= ?",
+        (old_id, new_id, new_id)).fetchall()
+    return ({r["identity_key"]: dict(r) for r in ended},
+            {r["identity_key"]: dict(r) for r in started})
+
+
 def compute_diff(ds, old_id, new_id):
-    """Detailed diff: added / removed / modified (with per-row `changes`)."""
+    """Detailed diff: added / removed / modified (with per-row `changes`).
+
+    Reads only the spans that end or start between the two snapshots
+    (_boundary), which is what made the daily render cheap: comparing the full
+    active sets cost ~6 s per pair on toronto, for every day of history.
+    """
     conn = db.init_db(ds)
-    old = _active(conn, old_id)
-    new = _active(conn, new_id)
+    old, new = _boundary(conn, old_id, new_id)
     conn.close()
 
     added = sorted((new[k] for k in new.keys() - old.keys()), key=addr_sort_key)
