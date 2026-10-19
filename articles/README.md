@@ -15,6 +15,11 @@ outside world was consulted:
 This is a live comparison. One variant may be dropped after review; dropping it is
 `git rm -r articles/<variant>` plus the *Two variants* section of the skill.
 
+The same pieces are rendered to HTML on the live site at
+[`/articles/`](https://skfd.github.io/ontario-address-changes/articles/) by
+`tools/render_articles.py`, which the scheduled run calls before committing. The
+research notes are not rendered; the site links to them here on GitHub.
+
 ## The months
 
 | Month | Net | Lead, offline | Lead, researched |

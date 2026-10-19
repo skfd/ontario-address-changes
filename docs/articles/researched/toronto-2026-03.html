@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nothing was demolished on Queen East — researched</title>
+  <style>
+    :root { --bg:#fafafa; --surface:#ffffff; --surface2:#f5f5f5; --border:#e0e0e0;
+      --text:#242424; --text-secondary:#424242; --text-dim:#616161; --accent:#0078d4;
+      --accent-hover:#106ebe; --accent-bg:#eff6fc; color-scheme:light; }
+    @media (prefers-color-scheme: dark) { :root { --bg:#1f1f1f; --surface:#292929; --surface2:#333333;
+      --border:#525252; --text:#ffffff; --text-secondary:#d6d6d6; --text-dim:#adadad; --accent:#2899f5;
+      --accent-hover:#3aa0f3; --accent-bg:#002848; color-scheme:dark; } }
+    * { box-sizing:border-box; }
+    body { margin:0; padding:24px 20px 64px; background:var(--bg); color:var(--text);
+      font-family:'Segoe UI Variable','Segoe UI',system-ui,-apple-system,sans-serif;
+      font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased; }
+    main { max-width:720px; margin:0 auto; }
+    a { color:var(--accent); text-decoration:none; } a:hover { text-decoration:underline; color:var(--accent-hover); }
+    .crumbs { font-size:13px; color:var(--text-dim); margin-bottom:24px; }
+    .crumbs a { color:var(--text-dim); } .crumbs a:hover { color:var(--accent); }
+    .variant { display:inline-block; font-size:11px; font-weight:600; padding:2px 8px; border-radius:999px;
+      background:var(--accent-bg); color:var(--accent); border:1px solid var(--border); vertical-align:middle; }
+    h1 { font-size:26px; line-height:1.25; font-weight:600; margin:0 0 20px; }
+    h2 { font-size:19px; font-weight:600; margin:36px 0 10px; }
+    h3 { font-size:16px; font-weight:600; margin:28px 0 8px; }
+    p { margin:0 0 14px; } li { margin:0 0 6px; }
+    blockquote { margin:0 0 14px; padding:4px 16px; border-left:3px solid var(--border); color:var(--text-secondary); }
+    table { border-collapse:collapse; width:100%; margin:0 0 18px; font-size:14px; }
+    th, td { text-align:left; vertical-align:top; padding:7px 10px; border-bottom:1px solid var(--border); }
+    th { color:var(--text-dim); font-weight:600; } tr:last-child td { border-bottom:none; }
+    th:empty { padding:0; border:none; }
+    code { font-family:Consolas,'Cascadia Mono',monospace; font-size:0.9em; background:var(--surface2); padding:1px 4px; border-radius:4px; }
+    pre { background:var(--surface2); border:1px solid var(--border); border-radius:8px; padding:12px; overflow:auto; font-size:13px; }
+    pre code { background:none; padding:0; }
+    hr { border:none; border-top:1px solid var(--border); margin:32px 0; }
+    .footer { margin-top:40px; padding-top:16px; border-top:1px solid var(--border); font-size:13px; color:var(--text-dim); }
+    .months { display:flex; flex-direction:column; gap:12px; }
+    .month { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:14px 16px; }
+    .month .when { font-size:12px; font-weight:600; color:var(--text-dim); margin-bottom:8px; }
+    .month .lead { margin:0 0 8px; font-size:15px; } .month .lead:last-child { margin-bottom:0; }
+    .month .lead .variant { margin-right:8px; }
+    .month .notes { font-size:12px; color:var(--text-dim); margin-top:8px; }
+</style>
+</head>
+<body>
+<main>
+<div class="crumbs"><a href="https://skfd.github.io/ontario-address-changes/">Ontario Address Change Tracker</a> › <a href="../index.html">Monthly articles</a> › March 2026 <span class="variant">researched</span></div><h1>Nothing was demolished on Queen East</h1>
+<p>On 6 March 2026, eleven addresses vanished from Toronto's address file in one go: 1226,
+1228, 1230, 1232, 1234, 1236, 1240, 1244, 1246, 1248 and 1250 Queen Street East, in
+Leslieville between Greenwood and Coxwell. Every one had been on file since our first
+snapshot in April 2025. None has come back.</p>
+<p>The obvious reading is a block being cleared. It is also, as far as anyone can tell,
+wrong.</p>
+<p>There is <strong>no development application, no Committee of Adjustment file, and no building or
+demolition permit</strong> filed against any of those eleven addresses, in any of the City's four
+relevant open datasets. No news coverage of a fire, a demolition or an assembly on that
+stretch. The record is empty.</p>
+<p>What the record does contain is the shape of something else entirely.</p>
+<h2>Ten numbers that were never really eleven buildings</h2>
+<p>Look at the addresses that <em>stayed</em>. The retirement takes out an interleaved run, not a
+contiguous parcel: <strong>1238 and 1242 Queen East survived</strong>, sitting between the retired
+numbers, along with 1220, 1256, 1256A and 1260.</p>
+<p>1238 is Chartwell Avondale Retirement Residence, a 79-suite home that has been in
+Leslieville over twenty years — and, in Chartwell's own words, is "nestled above a retail
+complex" with a dental clinic, banks and a bakery. That retail is leased <strong>by unit letter
+under the single number 1238</strong>: listings read "Unit F-1238 Queen St E", not a street
+number of their own. Two sign permits confirm the tenants — one for Chartwell, one for
+H&amp;R Block — both filed under 1238.</p>
+<p>Now look at the identity keys. In the City's source data, the ten retired points 1228
+through 1250 carry consecutive <code>ADDRESS_POINT_ID</code> values, 14205472 to 14205481, an
+unbroken descending run. Consecutive ids mean the ten were created in a single batch. The
+survivor, 1238, sits far away at 8407945, in the same old range as its neighbours.</p>
+<p>Ten numbers issued together, retired together, along a frontage whose businesses are
+addressed by unit under one number, with the one named point left standing. That reads as
+a cleanup — legacy per-storefront civic numbers folded back into 1238 — and not as a
+building coming down.</p>
+<p><strong>No document says so.</strong> That is an inference, and it stays labelled as one. What is
+established is the absence: nothing was permitted to be demolished there.</p>
+<h2>And the redevelopment is across the street</h2>
+<p>There <em>is</em> a live project on that block, which is exactly why this needed checking. 1233
+to 1251 Queen East — a nine-storey, 149-unit mixed-use building by Core Development and
+Woodbourne, zoning application <code>22 123730 STE 14 OZ</code>, conditional foundation permit issued
+29 January 2026 — is on the <strong>odd</strong> side, about forty metres south.</p>
+<p>Every one of those odd-side addresses is still on the file today.</p>
+<p>An article written from the address data alone, reaching for the nearest plausible cause,
+would have put a demolition and a development on the same block and been wrong twice.</p>
+<h2>By the numbers</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>New addresses</td>
+<td>50</td>
+</tr>
+<tr>
+<td>Retired addresses</td>
+<td>22</td>
+</tr>
+<tr>
+<td>Renumbered</td>
+<td>8</td>
+</tr>
+<tr>
+<td>Street renames</td>
+<td>112 addresses, 1 street</td>
+</tr>
+<tr>
+<td>Address splits</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Place-name edits</td>
+<td>386</td>
+</tr>
+<tr>
+<td>Status changes</td>
+<td>19</td>
+</tr>
+<tr>
+<td>Boundary changes</td>
+<td>8</td>
+</tr>
+<tr>
+<td><strong>Addresses on file, 27 March</strong></td>
+<td><strong>525,387</strong> (+28 over the month)</td>
+</tr>
+</tbody>
+</table>
+<h2>The lane that is a stadium</h2>
+<p><strong>YZD Lane</strong> entered the file on 3 March with exactly one address: 81 YZD Lane. It is a
+real street — the Toronto Centreline carries it as <code>LINEAR_NAME_ID 30296</code>, jurisdiction
+<strong>private</strong>, address range 81 to 81, one number on the odd side and nothing else.</p>
+<p>81 YZD Lane is <strong>Rogers Stadium</strong>, the 50,000-capacity temporary concert venue on the
+former Downsview Airport lands. Live Nation and Ticketmaster both use that address. The
+stadium opened on <strong>29 June 2025</strong>, eight months before its address reached the file.</p>
+<p>YZD is the airport's old aviation code, and now Northcrest Developments' brand for the
+whole 370-acre redevelopment. The stadium is temporary — five years or so, then the land
+turns into a neighbourhood.</p>
+<p>One thing left unadjudicated: Wikipedia gives Rogers Stadium's address as 105 Carl Hall
+Road. The promoters say 81 YZD Lane. Both are recorded here; the file has only ever
+carried the second.</p>
+<h2>476 Front Street East is a park</h2>
+<p>The new address of 25 March that arrived carrying the place name <strong>Diamond Jubilee
+Promenade</strong> turns out to be exactly what it sounds like. A 2024 City Council attachment
+listing every park in Toronto has it as <code>DIAMOND JUBILEE PROMENADE | 13 | Toronto East
+York | Neighbourhood</code>. It has a City facility page with a splash pad and a drinking
+fountain, and it sits on the north side of Front Street East in the West Don Lands, part
+of Waterfront Toronto's Front Street Promenade.</p>
+<h2>Three splits, three committee decisions</h2>
+<p>March's splits all trace to a Committee of Adjustment consent, and the dates are worth
+having:</p>
+<ul>
+<li><strong>33 Reidmount Avenue</strong> → 33A–33D, on file 3 March. Consent <code>B0033/24SC</code> with two
+  variances, approved 12 February 2025 — about a year ahead.</li>
+<li><strong>372 Glen Park Avenue</strong> → 372A–372D, on file 3 March. Consent <code>B0025/25NY</code>, heard 8
+  January 2026, for "a fourplex and accessory garden suite on each lot" — which is why
+  four suffixes appear where two lots were severed.</li>
+<li><strong>6 Shorncliffe Road</strong> → 6A–6E, on file 26 March. <strong>Nothing found.</strong> No application, no
+  permit, no committee file. Five addresses on a lot that never carried a plain number 6,
+  and no public record of why.</li>
+</ul>
+<p>Two of March's clusters also have projects behind them. The four new addresses on <strong>Perth
+Avenue</strong> belong to Castlepoint Numa and Hazelview's 18-storey, 255-unit building — which
+did not break ground until <strong>22 May 2026</strong>, two and a half months <em>after</em> the addresses
+appeared. The four on <strong>Dundas Street West</strong> in the Junction are Fora Developments' towers
+on the FreshCo plaza site. The four on <strong>King Street West</strong> have no record at all.</p>
+<h2>And then, on 17 March, the file went back to April 2025</h2>
+<p>The month's largest event changed more rows than everything above combined and changed
+nothing about the city.</p>
+<p>That day, 112 of the 122 addresses on McCaul Street were restyled "Mc Caul St". Eight
+houses on Kimbark Boulevard moved from North York to former Toronto. Eight addresses were
+renumbered backwards — 187 Front Street East to 185, 99 Haynes Avenue to 95. The place
+name was stripped from 219 points, Kennedy, Eglinton and Glencairn stations among them,
+and rewritten on 150 more.</p>
+<p>Every one of those values is the value the same record carried in our April 2025 baseline.
+On 9 July, all of it flipped back.</p>
+<p>This one needs no outside source, and no outside source would have caught it. It is
+visible only in the sequence — and only if someone was pulling the file every day.</p>
+<hr />
+<h3>How this is measured</h3>
+<p>Every day a snapshot of Toronto's Address Points dataset is pulled and diffed against the
+one before it. This piece covers the stretch between the snapshots of <strong>27 February 2026</strong>
+and <strong>27 March 2026</strong>. Counts are <strong>net</strong>. Coordinate-only changes under 50 metres are
+dropped as noise; 52 such edits on 17 March were held on those grounds.</p>
+<p>Causes come from the City's own published records, linked below. Where the record is
+silent — the Queen East eleven, 6 Shorncliffe Road, 1452–1458 King Street West, any
+council naming for YZD Lane — this piece says so. An absence of records is not proof that
+nothing happened; it is proof that nothing was filed.</p>
+<p><strong>Sources.</strong> <a href="https://open.toronto.ca/dataset/development-applications/">Development Applications</a> ·
+<a href="https://open.toronto.ca/dataset/committee-of-adjustment-applications/">Committee of Adjustment Applications</a> ·
+<a href="https://open.toronto.ca/dataset/building-permits-active-permits/">Building Permits</a> ·
+<a href="https://open.toronto.ca/dataset/toronto-centreline-tcl/">Toronto Centreline</a> ·
+<a href="https://chartwell.com/on/toronto/avondale">Chartwell Avondale Retirement Residence</a> ·
+<a href="https://urbantoronto.ca/forum/threads/toronto-1233-queen-east-35-7m-9s-core-development-studio-jci.33338/">1233 Queen East, UrbanToronto</a> ·
+<a href="https://www.livenation.com/venue/KovZ917ARzt/rogers-stadium-events">Rogers Stadium, Live Nation</a> ·
+<a href="https://urbantoronto.ca/news/2025/06/rogers-stadium-opens-sunday-downsview-torontos-largest-outdoor-concert-venue.58877">Rogers Stadium opening, UrbanToronto</a> ·
+<a href="https://www.yzd.ca/">YZD, Northcrest Developments</a> ·
+<a href="https://www.toronto.ca/legdocs/mmis/2024/cc/bgrd/backgroundfile-250430.pdf">Citywide Parks List and Classification (2024)</a> ·
+<a href="https://www.waterfrontoronto.ca/our-projects/front-street-promenade">Front Street Promenade, Waterfront Toronto</a></p>
+<p><em>Contains information licensed under the <a href="https://open.toronto.ca/open-data-license/">Open Government Licence – Toronto</a>.</em>
+Source dataset: <a href="https://open.toronto.ca/dataset/address-points-municipal-toronto-one-address-repository/">Address Points, City of Toronto Open Data</a> ·
+Daily reports: <a href="https://skfd.github.io/ontario-address-changes/toronto/">ontario-address-changes</a></p><div class="footer">Written from the tracker&#8217;s snapshot history for March 2026. Source: <a href="https://github.com/skfd/ontario-address-changes/blob/main/articles/researched/toronto-2026-03.md">Markdown on GitHub</a> · <a href="https://github.com/skfd/ontario-address-changes/blob/main/articles/research/toronto-2026-03.md">research notes</a> · <a href="https://skfd.github.io/ontario-address-changes/toronto/">daily reports</a></div>
+</main>
+</body>
+</html>

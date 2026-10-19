@@ -1,6 +1,7 @@
 # Monthly article: from the 3rd of each month, write the previous month's
 # newsletter piece for one city (offline variant, research notes, researched
-# variant) with headless Claude runs, then commit and push articles\.
+# variant) with headless Claude runs, render them to docs\articles\, then
+# commit and push.
 # Called daily at 15:00 by the kk-ontario-article scheduled task; every run
 # after the month is written exits at once, and a month held by an open flag
 # or an unfinished phase is retried the next day.
@@ -113,9 +114,12 @@ try { $due = $dueOut | ConvertFrom-Json } catch { $due = $null }
 $month = if ($due) { $due.month } else { $Month }
 
 function Publish-Articles([string]$month) {
-    # Commit whatever is in articles\ (all three files, plus the README row).
+    # Render articles\ to docs\articles\ (the site copy), then commit both:
+    # the three Markdown files plus the README row, and the HTML pages.
     # Returns $true when the tree is clean afterwards.
-    Invoke-Logged "git add articles"
+    Invoke-Logged "python tools\render_articles.py"
+    if ($LASTEXITCODE -ne 0) { Log "RENDER-FAILED articles exit=$LASTEXITCODE"; return $false }
+    Invoke-Logged "git add articles docs\articles"
     if ($LASTEXITCODE -ne 0) { return $false }
     git diff --cached --quiet
     if ($LASTEXITCODE -eq 0) { return $true }   # nothing to commit

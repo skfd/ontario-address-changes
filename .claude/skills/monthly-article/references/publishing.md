@@ -14,6 +14,11 @@ holds the daily reports the article cites. The article is the narrative layer; i
 down into the reports for anything a reader wants to check. Never let a number exist
 only in the newsletter.
 
+The site also carries an HTML copy of every article at `/articles/` (rendered by
+`tools/render_articles.py`, which the scheduled run calls before committing). That is
+the review and permalink copy, not the venue: it is not linked from the landing page
+and has no distribution of its own.
+
 **Cross-post highlights, not the article**, to where the specific month's story
 belongs:
 
