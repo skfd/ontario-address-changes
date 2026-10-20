@@ -115,8 +115,7 @@ sentence goes out without a cause. Those are the only two honest options; a plau
 guess is not a third.
 
 Finding those sources is step 5b of the loop and has its own reference:
-`references/research.md`. It applies to the researched variant of an article. The
-offline variant deliberately takes the second option every time.
+`references/research.md`.
 
 ## Numbers
 

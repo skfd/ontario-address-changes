@@ -9,9 +9,9 @@ One calendar month of a city's address file, written for a reader who likes thei
 but has never heard of a civic-address point. The tracker already knows what changed;
 this skill is about picking which of it is a story and refusing to invent the rest.
 
-Articles live in `articles/offline/` and `articles/researched/`, one file per month in
-each — `<slug>-<YYYY-MM>.md`, Markdown that pastes into Substack unchanged. See
-*Two variants* below for what separates them.
+Articles live in `articles/researched/`, one file per month — `<slug>-<YYYY-MM>.md`,
+Markdown that pastes into Substack unchanged. The findings behind each one live
+alongside in `articles/research/`.
 
 ## The loop
 
@@ -59,8 +59,8 @@ each — `<slug>-<YYYY-MM>.md`, Markdown that pastes into Substack unchanged. Se
    as the record being silent, never as a guess. File the findings in
    `articles/research/<slug>-<YYYY-MM>.md` before drafting.
 
-6. **Write it.** Each month is currently written twice — see *Two variants* below.
-   Follow the skeleton in `references/house-style.md`. The attribution footer is not
+6. **Write it.** Follow the skeleton in `references/house-style.md`. Write from the
+   brief and the research notes, not from a browser. The attribution footer is not
    optional (step 8).
 
 7. **Re-read it as the reader.** Every number in the piece must be traceable to a line
@@ -73,7 +73,7 @@ each — `<slug>-<YYYY-MM>.md`, Markdown that pastes into Substack unchanged. Se
    travels with the content to every venue it is cross-posted to.
 
 8b. **Index it.** Add the month's row to the table in `articles/README.md` — net
-   count and the lead of each variant, matching the rows above it.
+   count and the lead, matching the rows above it.
 
 9. **Commit.** One commit per article batch.
 
@@ -82,10 +82,10 @@ each — `<slug>-<YYYY-MM>.md`, Markdown that pastes into Substack unchanged. Se
 Since 2026-09-08 the previous month is written unattended: the `kk-ontario-article`
 task runs `monthly-article.ps1` daily at 15:00, which does nothing before the 3rd,
 asks `tools/article_due.py` whether the month is complete, unflagged and unwritten,
-then runs this skill headlessly in two phases (offline variant; research + researched
-variant + README row) and commits and pushes `articles/`. A month held by an open
-Toronto flag logs `WAITING` and is retried the next day; a phase that dies leaves its
-files and the next day resumes from whatever is missing. `logs/article.log` and
+then runs this skill headlessly in one pass (research notes, article, README row),
+renders `docs/articles/` and commits and pushes. A month held by an open Toronto flag
+logs `WAITING` and is retried the next day; a run that dies leaves its files and the
+next day resumes from whatever is missing. `logs/article.log` and
 `logs/article-runs.csv` hold the outcome. Months older than the previous one, and
 other cities, are still written by hand with the loop above.
 
@@ -119,23 +119,14 @@ methodology footer states it.
 | `references/verifying.md` | Queries that confirm a specific address, street, split or rename before it goes in print |
 | `references/publishing.md` | Where these go, cadence, cross-posting, licence obligations per venue |
 
-## Two variants
+## One variant, since October 2026
 
-Every month is written twice, and the only difference is step 5b:
-
-- **`articles/offline/<slug>-<YYYY-MM>.md`** — the store alone. No external facts, no
-  neighbourhood name that ward and coordinates don't give you, no acronym the file
-  doesn't spell out. Where a cause is unknown it says so and stops.
-- **`articles/researched/<slug>-<YYYY-MM>.md`** — the same month with step 5b applied:
-  sourced causes, links, and the outside record where it exists.
-
-Write the offline version first, from the brief. Then run step 5b and write the
-researched one as its own piece rather than as an annotated diff — the research usually
-changes which story leads, and a patched draft reads like a patched draft.
-
-This is a live comparison the repo owner is running, not a permanent arrangement. If one
-variant is dropped: delete its directory, delete this section, and put the survivor's
-path back into step 6.
+From March to September 2026 every month was written twice: once from the store alone
+(`articles/offline/`, no external facts, causes left unknown) and once with step 5b
+applied. The comparison ran for seven months and the researched version led on
+something else in six of them; the offline pieces were wordier and said less. The
+offline variant was dropped on 2026-10-20 (`git log -- articles/offline` has them).
+Write only the researched piece.
 
 ## Other cities
 

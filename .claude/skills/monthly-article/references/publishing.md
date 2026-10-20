@@ -40,7 +40,7 @@ publish a padded one; a missed issue costs less than a boring one.
 
 The drafts arrive on their own: the `kk-ontario-article` task writes and commits the
 previous month from the 3rd (see *The scheduled run* in the skill), so by the time
-the week starts both variants and the research notes are on `main`. Posting to
+the week starts the article and its research notes are on `main`. Posting to
 Substack and the crossposts remain a person's job.
 
 ## Licence obligations travel

@@ -76,7 +76,7 @@ Leslieville development").
    site was filed in 2024" is checkable. "The block was demolished for that development"
    usually is not, unless something says so.
 5. **Don't research the reader into a coma.** Two or three sourced explanations per
-   article. The rest of the piece stays as it is in the offline version.
+   article. The rest of the piece stays with what the file says.
 6. **Watch for the wrong city.** Ontario reuses street names, and so does the rest of
    the continent. Confirm Toronto in the source before using it.
 
@@ -87,15 +87,3 @@ what was found, URL, and a one-line confidence note — before writing the artic
 reasons: the article should be written from notes rather than from a browser, and the
 next person to touch the month can see what was already searched and came back empty.
 
-## The two variants
-
-Each month currently gets written twice, and the difference is exactly this step:
-
-- `articles/offline/<slug>-<YYYY-MM>.md` — written from the store alone. No external
-  facts, no neighbourhood names that aren't derivable from ward and coordinates, no
-  acronym expansions the file doesn't spell out.
-- `articles/researched/<slug>-<YYYY-MM>.md` — the same month with this step applied:
-  sourced causes, links, and the willingness to say what the file cannot.
-
-They are a live comparison, not a permanent arrangement. If one is dropped, delete its
-directory and this section, and fold the survivor's path back into SKILL.md step 6.

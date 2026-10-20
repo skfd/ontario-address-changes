@@ -6,9 +6,9 @@ The target month defaults to the previous calendar month.  Prints one JSON
 object and exits with:
 
   0  due      the month is complete, no open flag is dated inside it, and at
-              least one of the three article files is missing ("missing" lists
-              which of offline / research / researched)
-  2  done     all three files exist
+              least one of the two article files is missing ("missing" lists
+              which of research / researched)
+  2  done     both files exist
   3  waiting  the month is not complete yet, or an open flag is dated inside it
               ("reason" says which); try again tomorrow
   1  error    unknown city, or publish_reports = false (no article allowed)
@@ -31,7 +31,7 @@ sys.path.insert(0, os.path.join(ROOT, "tools"))
 from src import flags, registry          # noqa: E402
 import month_digest                      # noqa: E402
 
-VARIANTS = ("offline", "research", "researched")
+VARIANTS = ("research", "researched")
 
 
 def previous_month(today=None):

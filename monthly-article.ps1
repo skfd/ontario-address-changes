@@ -1,10 +1,9 @@
 # Monthly article: from the 3rd of each month, write the previous month's
-# newsletter piece for one city (offline variant, research notes, researched
-# variant) with headless Claude runs, render them to docs\articles\, then
-# commit and push.
+# newsletter piece for one city (research notes, then the article) with a
+# headless Claude run, render it to docs\articles\, then commit and push.
 # Called daily at 15:00 by the kk-ontario-article scheduled task; every run
 # after the month is written exits at once, and a month held by an open flag
-# or an unfinished phase is retried the next day.
+# or a run that died is retried the next day.
 #
 # Manual use:  .\monthly-article.ps1                     previous month, toronto
 #              .\monthly-article.ps1 -Month 2026-08      a given month (no day gate)
@@ -115,7 +114,7 @@ $month = if ($due) { $due.month } else { $Month }
 
 function Publish-Articles([string]$month) {
     # Render articles\ to docs\articles\ (the site copy), then commit both:
-    # the three Markdown files plus the README row, and the HTML pages.
+    # the two Markdown files plus the README row, and the HTML pages.
     # Returns $true when the tree is clean afterwards.
     Invoke-Logged "python tools\render_articles.py"
     if ($LASTEXITCODE -ne 0) { Log "RENDER-FAILED articles exit=$LASTEXITCODE"; return $false }
@@ -165,38 +164,22 @@ function Invoke-Claude([string]$phase, [string]$prompt) {
 $missing = @($due.missing)
 $slug = $City
 
-# Phase 1: the offline variant, from the store alone.
-if ($missing -contains 'offline') {
-    $prompt = @"
-Invoke the monthly-article skill (Skill tool) and follow it for city '$slug', month $month.
-Write ONLY the offline variant: articles/offline/$slug-$month.md. Do steps 1-5 and 6-8 of the loop for that variant.
-Do NOT run step 5b (no web research, no WebSearch/WebFetch) and do NOT write the researched variant or research notes.
-Do NOT git commit or push: the scheduled task that launched you commits afterwards.
-If 'python run.py flags' shows an open flag for $slug dated inside $month, write nothing and reply WAITING with the reason.
-When done, reply with the path of the file you wrote.
-"@
-    $code = Invoke-Claude 'offline' $prompt
-    if ($code -ne 0 -or -not (Test-Path "articles\offline\$slug-$month.md")) {
-        Log "FAILED offline exit=$code"
-        Finish $month 'offline' 'failed' 1
-    }
-}
-
-# Phase 2: research, then the researched variant as its own piece.
+# Research, then the article as its own piece.
 if (($missing -contains 'research') -or ($missing -contains 'researched')) {
     $prompt = @"
 Invoke the monthly-article skill (Skill tool) and follow it for city '$slug', month $month.
-The offline variant already exists at articles/offline/$slug-$month.md; read it, and re-run steps 3 and 5 so your numbers come from the brief and the store, not from that draft.
-Now do step 5b exactly as references/research.md describes: research the month's named things, file the findings in articles/research/$slug-$month.md, then write the researched variant articles/researched/$slug-$month.md as its own piece (steps 6-8), with sourced links and the record's silences stated as silences.
+Do steps 1-5 of the loop so your numbers come from the brief and the store.
+If 'python run.py flags' shows an open flag for $slug dated inside $month, write nothing and reply WAITING with the reason.
+Then do step 5b exactly as references/research.md describes: research the month's named things, file the findings in articles/research/$slug-$month.md, then write the article articles/researched/$slug-$month.md (steps 6-8), with sourced links and the record's silences stated as silences.
 Then add the $month row to the months table in articles/README.md, matching the existing rows.
 Do NOT git commit or push: the scheduled task that launched you commits afterwards.
 When done, reply with the paths you wrote.
 "@
-    $code = Invoke-Claude 'researched' $prompt
+    $code = Invoke-Claude 'article' $prompt
     $ok = ($code -eq 0) -and (Test-Path "articles\research\$slug-$month.md") -and (Test-Path "articles\researched\$slug-$month.md")
     if (-not $ok) {
-        Log "FAILED researched exit=$code"
-        Finish $month 'researched' 'failed' 1
+        Log "FAILED article exit=$code"
+        Finish $month 'article' 'failed' 1
     }
 }
 
