@@ -71,7 +71,12 @@ def _addr(r):
     if r.get("full"):
         return r["full"]
     parts = " ".join(p for p in (r.get("number"), r.get("street")) if p).strip()
-    return parts or r.get("identity_key", "")
+    if parts:
+        return parts
+    # a published id still names the row; a synthesized hash names nothing
+    # (windsor's 696 unaddressed parcels)
+    key = r.get("identity_key", "")
+    return "(no address)" if key.startswith("syn:") else key
 
 
 def _bearing_arrow(dx, dy):
