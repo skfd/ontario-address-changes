@@ -186,12 +186,7 @@ def canonical(ds, feature):
            if name in _CANONICAL}
     for name in _CANONICAL:
         rec.setdefault(name, None)
-    if ds.number_unit_from_full:
-        # the registry guarantees no mapped number/unit to overwrite
-        rec["number"], rec["unit"] = number_unit_from_full(rec["full"], rec["street"])
-    if ds.street_from_full:
-        # the registry guarantees no mapped street to overwrite
-        rec["street"] = street_from_full(rec["full"], rec["number"], rec["unit"])
+    derive_canonical(ds, rec)
 
     rec["longitude"] = lon
     rec["latitude"] = lat
@@ -207,6 +202,25 @@ def canonical(ds, feature):
     hash_props = {k: v for k, v in clean_props.items() if k.lower() not in keep}
     rec["identity_key"] = _identity(ds, rec, props, lon, lat)
     rec["payload_hash"] = _payload_hash(rec, hash_props)
+    return rec
+
+
+def derive_canonical(ds, rec):
+    """Fill the canonical columns a dataset derives rather than maps, in place.
+    The registry guarantees each derived column is unmapped. Shared with
+    tools/recanonicalize.py, so a history rewrite derives exactly as the importer."""
+    if ds.number_unit_from_full:
+        rec["number"], rec["unit"] = number_unit_from_full(rec["full"], rec["street"])
+    if ds.number_from_full:
+        rec["number"] = number_from_full(rec["full"])
+    if ds.unit_from_number:
+        # only when a unit was split out: a stored number is already split ("73"),
+        # and re-deriving must not blank the unit it carries
+        number, unit = unit_from_number(rec["number"])
+        if unit is not None:
+            rec["number"], rec["unit"] = number, unit
+    if ds.street_from_full:
+        rec["street"] = street_from_full(rec["full"], rec["number"], rec["unit"])
     return rec
 
 
@@ -316,10 +330,41 @@ def number_unit_from_full(full, street):
             if upper[j:j + len(stoks)] == stoks:
                 unit = " ".join(toks[j + len(stoks):]) or None
                 return " ".join(toks[:j]), unit
+    return number_from_full(full), None
+
+
+def number_from_full(full):
+    """The civic number leading a full-address string: its run of number tokens,
+    as published (Dataset.number_from_full). For sources whose number column drops
+    the house suffix the full address keeps: hastings House_No "152" against
+    Full_Add "152B JAMIESON LN" (the combined ADDRESS_NU equals this on all 31,361
+    rows, 2026-10-20), thunder-bay ADDRESS_NUMBER 963 against "963 1/2 HOLT PL".
+    A run, not one token, for the "963 1/2" shape; ordinals stop it ("108 5th
+    Concession Road"). A full that is only a number ("171", thunder-bay) is that
+    number; one with nothing number-like in front gives None.
+    """
+    if not full:
+        return None
+    toks = full.split()
     i = 0
-    while i < len(toks) - 1 and _is_number_token(toks[i]):
+    while i < len(toks) and _is_number_token(toks[i]):
         i += 1
-    return (" ".join(toks[:i]) or None), None
+    return " ".join(toks[:i]) or None
+
+
+# "12-73": unit 12 of civic number 73 (brantford STREETNUM, whose bare-integer
+# STREETNUMIN holds the right part on every hyphenated row). The right part must
+# lead with a digit; neither part may hold a hyphen of its own ("2-2-30").
+_UNIT_NUMBER_RE = re.compile(r"^([^\s-]+)-(\d[^\s-]*)$")
+
+
+def unit_from_number(number):
+    """(number, unit) for a number published as "<unit>-<number>"
+    (Dataset.unit_from_number); anything else passes through with no unit."""
+    m = _UNIT_NUMBER_RE.match(number or "")
+    if not m:
+        return number, None
+    return m.group(2), m.group(1)
 
 
 def _identity(ds, rec, props, lon, lat):

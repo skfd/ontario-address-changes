@@ -39,6 +39,12 @@ ignore_fields = [
 # number is the only link from an address to the tax roll.
 keep_fields = ["RnoTXT2"]
 
+# House_No drops the suffix Full_Add keeps ("152" vs "152B JAMIESON LN", 2,726 rows): take
+# the number from the head of Full_Add instead, which equals the combined ADDRESS_NU on all
+# 31,361 rows (2026-10-20). House_No stays tracked in props. History rewritten first by
+# tools/recanonicalize.py (number is in the synth basis, so the suffixed rows re-keyed).
+number_from_full = true
+
 [identity]
 # Region-wide (Hastings munis in MUNICIPALI). UNIQUE_ID is "HC911_<n>", a contiguous reassigned
 # sequence (not stable), so synthesize.
@@ -46,7 +52,6 @@ key_field = ""                                 # synthesize from address + round
 synth_fields = ["number", "street", "unit"]
 
 [fields]                                        # source property -> canonical name
-number = "House_No"
 street = "Rd_Name"                              # Rd_Suf/Rd_Dir/MUNICIPALI/RnoTXT2 tracked via the props blob
 unit   = "Unit"
 full   = "Full_Add"

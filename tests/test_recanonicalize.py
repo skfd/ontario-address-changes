@@ -30,7 +30,7 @@ from tools import recanonicalize
     ("526B BROOKMILL CRES", "BEAVER CREEK RD", "526B", None),
     ("526B BROOKMILL CRES", None, "526B", None),
     ("BROOKMILL CRES", "BROOKMILL CRES", None, None),          # nothing in front
-    ("70", "MAIN ST", None, None),
+    ("70", "MAIN ST", "70", None),
     (None, "MAIN ST", None, None),
 ])
 def test_number_unit_from_full(full, street, number, unit):
@@ -177,6 +177,148 @@ def test_number_unit_from_full_rewrite_keeps_keys(monkeypatch):
         conn.close()
         rows, _ = _snapshot_rows(ds)
         assert rows[0][1:3] == ("300", "2 204")
+        db.import_snapshot(ds, "snap-2026-01-02.geojson", feats)
+        assert _snapshot_rows(ds)[1][-1][1] == 1
+    finally:
+        shutil.rmtree(ds.data_dir, ignore_errors=True)
+
+
+# --- number_from_full / unit_from_number (hastings, thunder-bay, brantford) -------
+
+@pytest.mark.parametrize("full, number", [
+    ("152B JAMIESON LN", "152B"),
+    ("963 1/2 HOLT PL", "963 1/2"),
+    ("1320A HIGHWAY 61", "1320A"),                 # the street's own digits stay
+    ("108 5th Concession Road", "108"),            # ordinal stops the run
+    ("171", "171"),                                # number-only full is that number
+    ("BACK ST", None),
+    ("   ", None),
+    (None, None),
+])
+def test_number_from_full(full, number):
+    assert normalize.number_from_full(normalize._clean(full)) == number
+
+
+@pytest.mark.parametrize("number, out", [
+    ("12-73", ("73", "12")),
+    ("46-17", ("17", "46")),
+    ("A-23", ("23", "A")),
+    ("197E", ("197E", None)),
+    ("73", ("73", None)),
+    ("2-2-30", ("2-2-30", None)),                   # not one unit token
+    ("12-", ("12-", None)),
+    (None, (None, None)),
+])
+def test_unit_from_number(number, out):
+    assert normalize.unit_from_number(number) == out
+
+
+@pytest.mark.parametrize("body, msg", [
+    ('number_from_full = true\n[fields]\nnumber = "N"\nfull = "F"\n', "pick one"),
+    ('number_from_full = true\n[fields]\nstreet = "S"\n', "needs a mapped"),
+    ('unit_from_number = true\n[fields]\nnumber = "N"\nunit = "U"\n', "pick one"),
+    ('unit_from_number = true\n[fields]\nfull = "F"\n', "needs a number"),
+])
+def test_registry_rejects_bad_derivations(tmp_path, body, msg):
+    with pytest.raises(ValueError, match=msg):
+        _parse(_write(tmp_path, body))
+
+
+def test_canonical_number_from_full_then_unit_from_number():
+    ds = Dataset(slug="_t", provider="T", data_url="x", access="static", format="geojson",
+                 fields={"number": "N", "full": "F"}, unit_from_number=True)
+    rec = normalize.canonical(ds, {"properties": {"N": "12-73", "F": "12-73 MORTON AVE W"},
+                                   "geometry": {"type": "Point", "coordinates": [-80, 43]}})
+    assert (rec["number"], rec["unit"]) == ("73", "12")
+
+
+def _chain_store(synth, rows):
+    """A store with rows (number, full, min, max) at one point, under `synth`."""
+    ds = Dataset(slug="_test_recanon", provider="Test", data_url="x", access="static",
+                 format="geojson", key_field="", synth_fields=synth,
+                 fields={"street": "ST", "full": "FULL"}, number_from_full=True)
+    shutil.rmtree(ds.data_dir, ignore_errors=True)
+    conn = db.init_db(ds)
+    for sid in range(1, 5):
+        conn.execute("INSERT INTO snapshots (id, filename, downloaded, row_count, "
+                     "content_hash, skipped) VALUES (?, ?, '', 0, '', 0)",
+                     (sid, f"x-2026-01-0{sid}.geojson"))
+    for number, full, lo, hi in rows:
+        rec = {"number": number, "street": "MAIN ST", "unit": None, "full": full,
+               "longitude": -80.0, "latitude": 43.0}
+        conn.execute(
+            "INSERT INTO addresses (identity_key, min_snapshot_id, max_snapshot_id, number, "
+            "street, unit, full, longitude, latitude, props, payload_hash) "
+            "VALUES (?, ?, ?, ?, 'MAIN ST', NULL, ?, -80.0, 43.0, '{}', ?)",
+            (normalize._identity(ds, rec, {}, -80.0, 43.0), lo, hi, number, full,
+             normalize._payload_hash(rec, {})))
+    conn.commit()
+    return ds, conn
+
+
+def test_a_chain_splits_where_the_new_rule_sees_a_renumber():
+    # House_No stayed 11 while the full address went 11 -> 11A: one chain before,
+    # a retire + add under number_from_full
+    ds, conn = _chain_store(["number", "street"], [("11", "11 MAIN ST", 1, 2),
+                                                   ("11", "11A MAIN ST", 3, 4)])
+    try:
+        updates, stats = recanonicalize.plan(ds, conn)
+        assert len(stats["split"]) == 1
+        recanonicalize.apply(conn, updates)
+        assert len({r[0] for r in conn.execute("SELECT identity_key FROM addresses")}) == 2
+    finally:
+        conn.close()
+        shutil.rmtree(ds.data_dir, ignore_errors=True)
+
+
+def test_time_disjoint_chains_join_but_overlapping_ones_are_refused():
+    # number missing on snapshot 1, back from 3: one address under the new rule
+    ds, conn = _chain_store(["number", "street"], [(None, "660 MAIN ST", 1, 1),
+                                                   ("660", "660 MAIN ST", 3, 4)])
+    try:
+        updates, stats = recanonicalize.plan(ds, conn)
+        assert stats["joined"] == 1
+        recanonicalize.apply(conn, updates)
+        assert [tuple(r) for r in conn.execute(
+            "SELECT min_snapshot_id, max_snapshot_id FROM addresses ORDER BY 1")] == \
+            [(1, 1), (3, 4)]
+        assert len({r[0] for r in conn.execute("SELECT identity_key FROM addresses")}) == 1
+    finally:
+        conn.close()
+        shutil.rmtree(ds.data_dir, ignore_errors=True)
+    ds, conn = _chain_store(["number", "street"], [(None, "660 MAIN ST", 1, 3),
+                                                   ("660", "660 MAIN ST", 3, 4)])
+    try:
+        with pytest.raises(SystemExit, match="merge distinct chains"):
+            recanonicalize.plan(ds, conn)
+    finally:
+        conn.close()
+        shutil.rmtree(ds.data_dir, ignore_errors=True)
+
+
+def test_unit_from_number_rewrite_is_idempotent():
+    """A stored number is already split ("73" + unit "12"): a re-run must leave it."""
+    ds = Dataset(slug="_test_recanon", provider="Test", data_url="x", access="static",
+                 format="geojson", key_field="", synth_fields=["number", "street"],
+                 fields={"number": "N", "street": "ST", "full": "F"})
+    shutil.rmtree(ds.data_dir, ignore_errors=True)
+    feats = [{"type": "Feature",
+              "properties": {"N": f"{u}-73", "ST": "MORTON AVE W", "F": f"{u}-73 MORTON AVE W"},
+              "geometry": {"type": "Point", "coordinates": [-80.2, 43.1]}} for u in (12, 13)]
+    try:
+        db.import_snapshot(ds, "snap-2026-01-01.geojson", feats)
+        ds.unit_from_number = True
+        ds.synth_fields = ["number", "street", "unit"]
+        conn = sqlite3.connect(ds.db_path)
+        conn.row_factory = sqlite3.Row
+        old = Dataset(slug=ds.slug, provider="Test", data_url="x", access="static",
+                      format="geojson", key_field="", synth_fields=["number", "street"])
+        recanonicalize.apply(conn, recanonicalize.plan(ds, conn, old)[0])
+        conn.commit()
+        assert sorted(tuple(r) for r in conn.execute("SELECT number, unit FROM addresses")) \
+            == [("73", "12"), ("73", "13")]
+        assert recanonicalize.plan(ds, conn)[0] == []
+        conn.close()
         db.import_snapshot(ds, "snap-2026-01-02.geojson", feats)
         assert _snapshot_rows(ds)[1][-1][1] == 1
     finally:

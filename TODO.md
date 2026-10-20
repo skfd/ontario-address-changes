@@ -47,7 +47,7 @@ These cities are imported and tracking, but their field maps need a human decisi
   oakville `SUITE` rule decides it — a unit backfill is address content we want,
   and keeping the selection costs nothing (a blank canonical field displays
   nothing). Verdict noted in the TOML.
-- [ ] **hastings** — `number` maps to `House_No`, which drops the house suffix that
+- [x] **hastings** — `number` maps to `House_No`, which drops the house suffix that
   `full` (`Full_Add`) keeps: "152 JAMIESON LN" as the number vs "152B JAMIESON LN" as
   the full address, on the 2,721 rows with a `House_Suf`. The source's `ADDRESS_NU`
   carries the combined form. Decide whether to remap `number` to `ADDRESS_NU` — but
@@ -68,6 +68,20 @@ These cities are imported and tracking, but their field maps need a human decisi
   and touching-span checks, verify against the vault pull), but it derives from the stored
   canonical columns only. Hastings needs `number` read from the `ADDRESS_NU` prop, so it
   would need a prop-sourced derive step added to that tool first.
+  **Done 2026-10-20, and it was worse than a display gap.** `number_from_full = true`: the
+  head of `Full_Add` equals `ADDRESS_NU` on all 31,361 rows, and is derivable for history.
+  The verify then showed the real cost of the old key: suffix siblings at one point
+  ("295A"/"295B MILL ST") shared it, so the importer's dedupe dropped one of them - 444
+  addresses at the 06-11 baseline (417 today) were never stored, and on 16 days the other
+  sibling won and the chain switched to it. Rebuilt by replaying all 82 snapshots with
+  the new `tools/rebuild_from_pulls.py` (7 early days with no raw pull anywhere bracketed
+  from 06-11/06-24, whose hidden sets are identical): 450 keys added, all same-point
+  suffix siblings, every old active row kept at every snapshot, verify 0/0/0. Pages: the
+  baseline gains 444; a handful of past suffix-only "modified" rows now read as retired +
+  added, as any hastings renumber does (number is in the synth basis).
+  Expected follow-on: `number` left `[fields]`, so address-vault's sketch basis changed -
+  a vault-only churn flag on the next distinct pull is the known artifact
+  (vault-churn-after-field-remap). Same for thunder-bay.
 - [ ] **waterloo — the key_field only covers 29% of the city.** Found 2026-08-10 while
   ignoring its coordinate duplicate. `ADDRESS_ID` is populated on 15,861 of 55,541 rows;
   the other 39,680 fall through to `synth_fields = ["full"]`, so the city runs on two
@@ -134,7 +148,7 @@ These cities are imported and tracking, but their field maps need a human decisi
     TOMLs rather than parsed. Two thunder-bay fields that look like unit candidates are
     not: `ADDRESS_QUALIFIER` is a house-number suffix (A, B, 1/2) and `SPLITLOC` is which
     side of a split street the point is on (part of the street name, "FREDERICA ST E").
-- [ ] **brantford — units are published, embedded in the number, and unmapped.** Found
+- [x] **brantford — units are published, embedded in the number, and unmapped.** Found
   2026-08-10 by the pass above. 2,213 of 38,981 rows (5.7%) carry `STREETNUM` /
   `FULLADDRESS` in `<unit>-<number>` form, and they are unambiguously units rather than
   ranges: 177 distinct left parts share the right part "77", 138 share "21", 116 share
@@ -144,7 +158,13 @@ These cities are imported and tracking, but their field maps need a human decisi
   of brantford displays as "12-73 MORTON AVE W" with no unit field. Note the cost either
   way — identity synthesizes from `["number", "street"]`, so adding `unit` re-keys all
   38,981 rows and cannot be applied retroactively.
-- [ ] **thunder-bay — `number` drops the house suffix on 347 rows.** Found 2026-08-10, the
+  **Done 2026-10-20, retroactively.** Re-measured on the 09-18 pull: 2,226 hyphenated rows in
+  106 groups sharing a civic number (90 with five or more units, one single), and
+  `STREETNUMIN` holds the right part on every one - the publisher's own reading. The "436
+  ranges" are gone from this layer. `unit_from_number = true` splits "<unit>-<number>",
+  unit joined `synth_fields`, and `tools/recanonicalize.py --old-rev HEAD` re-keyed all
+  39,510 rows of history (no collision); verify 0/0/0, no page count moved.
+- [x] **thunder-bay — `number` drops the house suffix on 347 rows.** Found 2026-08-10, the
   hastings trap in a third city. `number` maps to `ADDRESS_NUMBER`, an Integer, so it holds
   "688" where the String `ADDRESS` column holds "688B" and `full` (`COMPLETE`) shows "688B
   CITY RD"; the two disagree on 347 of 45,098 rows. `ADDRESS` is the column that should
@@ -155,6 +175,11 @@ These cities are imported and tracking, but their field maps need a human decisi
   gap starts mattering. (2026-08-20: same verdict as hastings above — an event-free fix
   exists in principle via a history rewrite plus identity migration, see the hastings
   entry; at 347 rows it is even further from justifying that surgery.)
+  **Done 2026-10-20.** `number_from_full = true` (head of `COMPLETE`, equal to `ADDRESS` on all
+  but 2 of 45,102 rows: a bare "171", now kept, and one row with no ADDRESS). 359 rows
+  rewritten, 356 chains re-keyed, 1 split, 1 join ("660 VICTORIA AVE E" lacked a number on
+  06-11 and came back with one on 07-24 - now one address, shown as renumbered). Verify
+  0/0/0. Backups for all three in `C:\Users\kk\ontario-db-backup-2026-10-20-suffixes\`.
 - [ ] Spot-check low coverage — open a handful of the blank rows and judge: wrong
   column selected, or genuinely unaddressed points (towers, outbuildings)? Note the
   verdict in each TOML:

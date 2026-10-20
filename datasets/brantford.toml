@@ -22,10 +22,17 @@ format = "geojson"
 license_name = "Open Government Licence - Brantford"
 osm_compatible = "yellow-ogl"
 
+# Units are published inside STREETNUM as "<unit>-<number>" ("12-73 MORTON AVE W"): 2,226
+# rows, in 106 groups that share one civic number (90 with five or more units), and the bare
+# STREETNUMIN holds the right part on every one of them (2026-10-20). Split them out.
+unit_from_number = true
+
 [identity]
-# No stable source id (OBJECTID and OBJECTID_1 are both sequential); no unit field published.
+# No stable source id (OBJECTID and OBJECTID_1 are both sequential); no unit COLUMN published.
 key_field = ""                                 # synthesize from address + rounded lon/lat
-synth_fields = ["number", "street"]            # no unit field in this layer (cf. lambton)
+# unit joined 2026-10-20 with unit_from_number: without it the units of one building collapse
+# onto one key. Every row re-keyed by tools/recanonicalize.py --old-rev, history and all.
+synth_fields = ["number", "street", "unit"]
 
 [fields]                                        # source property -> canonical name
 number = "STREETNUM"                            # the COMBINED form ("197E"); STREETNUMIN is the bare integer

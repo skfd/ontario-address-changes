@@ -27,6 +27,8 @@ class Dataset:
     location_min_move_m: float = 0.0  # drop location-only modifications moving less than this (metres); 0 = off
     street_from_full: bool = False  # no street column: derive street from full minus the number (normalize.street_from_full)
     number_unit_from_full: bool = False  # no number/unit columns: split them out of full around the mapped street (normalize.number_unit_from_full)
+    number_from_full: bool = False  # number column drops the suffix: take the leading civic number of full (normalize.number_from_full)
+    unit_from_number: bool = False  # units published as "<unit>-<number>" in the number column: split them (normalize.unit_from_number)
     key_field: str = ""
     synth_fields: list = field(default_factory=lambda: ["full"])
     synth_props: list = field(default_factory=list)  # source props added to the synth basis
@@ -106,6 +108,30 @@ def _parse(path):
             raise ValueError(f"{path}: number_unit_from_full = true needs mapped "
                              "[fields] full and street")
 
+    number_from_full = raw.get("number_from_full", False)
+    unit_from_number = raw.get("unit_from_number", False)
+    for name, val in (("number_from_full", number_from_full),
+                      ("unit_from_number", unit_from_number)):
+        if not isinstance(val, bool):
+            raise ValueError(f"{path}: {name} must be true or false")
+    fmap = raw.get("fields", {})
+    if number_from_full:
+        if fmap.get("number"):
+            raise ValueError(f"{path}: number_from_full = true with a mapped "
+                             "[fields] number - pick one")
+        if not fmap.get("full"):
+            raise ValueError(f"{path}: number_from_full = true needs a mapped [fields] full")
+        if number_unit_from_full:
+            raise ValueError(f"{path}: number_from_full and number_unit_from_full - pick one")
+    if unit_from_number:
+        if fmap.get("unit"):
+            raise ValueError(f"{path}: unit_from_number = true with a mapped "
+                             "[fields] unit - pick one")
+        if not (fmap.get("number") or number_from_full):
+            raise ValueError(f"{path}: unit_from_number = true needs a number")
+        if number_unit_from_full:
+            raise ValueError(f"{path}: unit_from_number and number_unit_from_full - pick one")
+
     identity = raw.get("identity", {})
     # Geometry is the default disambiguator for a synthesized key. Dropping it
     # without adding another one would collapse every same-address row onto one
@@ -127,6 +153,8 @@ def _parse(path):
         location_min_move_m=float(floor),
         street_from_full=street_from_full,
         number_unit_from_full=number_unit_from_full,
+        number_from_full=number_from_full,
+        unit_from_number=unit_from_number,
         key_field=identity.get("key_field", ""),
         synth_fields=identity.get("synth_fields", ["full"]),
         synth_props=identity.get("synth_props", []),

@@ -14,14 +14,24 @@ the heavier surgery, and the tool proves each step before trusting it:
 
   1. Faithful derivation: a row whose canonical columns change has its stored
      identity_key recomputed from its stored columns and props with
-     normalize._identity, and it must match exactly, or the city is refused (a
+     normalize._identity - under the identity config the store was built with,
+     --old-rev's TOML when the change edits [identity] (brantford gaining unit,
+     2026-10-20) - and it must match exactly, or the city is refused (a
      synth_props or key_field prop the store cleaned away would make new keys
      unreliable). Rows that do not change keep their key and are only counted:
      newmarket keys on GLOBALID, which is_volatile strips from stored props, so
      none of its keys recompute - and nothing there moves.
-  2. One chain, one key: every version of a chain must map to the same new key.
-  3. No collision: a new key must not already belong to another chain anywhere in
-     history. Two real addresses merging is refused, never stitched.
+  2. A chain may split: versions whose identity-basis columns differ under the new
+     rule get different keys (hastings "11 WANNAMAKER LN" -> "11A ..." while
+     House_No stayed 11: a modification under the old rule, a retire + add under
+     the new one, as the importer would have recorded it). Splits are counted and
+     printed, never refused, since that is the rule taking effect.
+  3. No collision: chains that land on one new key must never be active at the same
+     snapshot - that would be two real addresses folding into one, refused, never
+     stitched. Chains that land on one key at different times are joined, as the
+     importer would have recorded a re-appearance (thunder-bay "660 VICTORIA AVE E":
+     no ADDRESS_NUMBER on 06-11, back with one from 07-24 - one address under the new
+     rule). Joins are counted and printed.
   4. Versions the rewrite makes equal, on spans that touch, are folded into one
      span by db.merge_touching_spans, as the importer would have kept them.
 
@@ -42,6 +52,11 @@ Run so far:
   2026-10-20  "None" / "<Null>" dropped from the canonical columns: windsor 696 rows
               re-keyed, norfolk 12 re-keyed, durham 5, leeds-grenville 2.
               waterloo number_unit_from_full: 55,845 rows, none re-keyed.
+  2026-10-20  suffix fixes: thunder-bay number_from_full (359 rows, 356 chains re-keyed,
+              1 split, 1 join); brantford unit_from_number + unit in the synth basis
+              (--old-rev HEAD, all 39,510 rows re-keyed); hastings number_from_full
+              (2,811 rows, 16 splits) - then rebuilt by rebuild_from_pulls.py, since
+              its verify showed 417 rows the old key had collapsed.
               All five verified against the latest vault pull (0/0/0, content_hash
               equal). Backups: C:\Users\kk\ontario-db-backup-2026-10-20-recanonicalize\
 
@@ -78,15 +93,28 @@ def backup(ds, backup_dir):
 def derive(ds, row):
     """The canonical columns the importer would compute today for a stored row."""
     rec = {c: normalize._clean(row[c]) for c in _CANONICAL}
-    if ds.number_unit_from_full:
-        rec["number"], rec["unit"] = normalize.number_unit_from_full(rec["full"], rec["street"])
-    if ds.street_from_full:
-        rec["street"] = normalize.street_from_full(rec["full"], rec["number"], rec["unit"])
-    return rec
+    return normalize.derive_canonical(ds, rec)
 
 
-def plan(ds, conn):
-    """Return (updates, stats) or exit with the reason the city is refused."""
+def old_dataset(slug, rev):
+    """The dataset as datasets/<slug>.toml read at git revision `rev`."""
+    import subprocess
+    import tempfile
+    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    text = subprocess.run(["git", "show", f"{rev}:datasets/{slug}.toml"], cwd=root,
+                          capture_output=True, check=True).stdout
+    with tempfile.TemporaryDirectory() as tmp:
+        path = os.path.join(tmp, f"{slug}.toml")
+        with open(path, "wb") as f:
+            f.write(text)
+        return registry._parse(path)
+
+
+def plan(ds, conn, old_ds=None):
+    """Return (updates, stats) or exit with the reason the city is refused.
+    `old_ds` is the config the store was built under (default: ds); only its
+    identity settings are used, to recompute the stored keys."""
+    old_ds = old_ds or ds
     keep = {k.lower() for k in ds.keep_fields}
     rows = conn.execute(
         "SELECT identity_key, min_snapshot_id, max_snapshot_id, number, street, unit, "
@@ -94,15 +122,15 @@ def plan(ds, conn):
 
     unfaithful = []
     unfaithful_untouched = 0
-    new_key_of = {}            # old key -> new key, per chain
-    split_chains = set()
+    new_keys_of = defaultdict(set)   # old key -> new keys of its versions
+    spans_of = defaultdict(list)     # new key -> (min, max, old key) of its rows
     updates = []
     for r in rows:
         props = json.loads(r["props"] or "{}")
         lon, lat = r["longitude"], r["latitude"]
         old = {c: r[c] for c in _CANONICAL}
         rec = derive(ds, r)
-        if normalize._identity(ds, old, props, lon, lat) != r["identity_key"]:
+        if normalize._identity(old_ds, old, props, lon, lat) != r["identity_key"]:
             if any(rec[c] != old[c] for c in _CANONICAL):
                 unfaithful.append(r["identity_key"])
                 continue
@@ -110,8 +138,8 @@ def plan(ds, conn):
             key = r["identity_key"]
         else:
             key = normalize._identity(ds, rec, props, lon, lat)
-        if new_key_of.setdefault(r["identity_key"], key) != key:
-            split_chains.add(r["identity_key"])
+        new_keys_of[r["identity_key"]].add(key)
+        spans_of[key].append((r["min_snapshot_id"], r["max_snapshot_id"], r["identity_key"]))
         rec["longitude"], rec["latitude"] = lon, lat
         hash_props = {k: v for k, v in props.items() if k.lower() not in keep}
         h = normalize._payload_hash(rec, hash_props)
@@ -123,22 +151,30 @@ def plan(ds, conn):
     if unfaithful:
         sys.exit(f"{ds.slug}: {len(unfaithful):,} stored keys do not recompute from the "
                  f"stored row (e.g. {unfaithful[:3]}) - refusing to re-key")
-    if split_chains:
-        sys.exit(f"{ds.slug}: {len(split_chains):,} chains would split across new keys "
-                 f"(e.g. {sorted(split_chains)[:3]}) - refusing")
 
     owners = defaultdict(set)
-    for old, new in new_key_of.items():
-        owners[new].add(old)
-    collisions = {new: olds for new, olds in owners.items() if len(olds) > 1}
+    for old, news in new_keys_of.items():
+        for new in news:
+            owners[new].add(old)
+    collisions, joined = {}, 0
+    for new, olds in owners.items():
+        if len(olds) < 2:
+            continue
+        ss = sorted(spans_of[new])
+        if any(b[0] <= a[1] for a, b in zip(ss, ss[1:])):
+            collisions[new] = olds
+        else:
+            joined += 1
     if collisions:
         sample = list(collisions.items())[:3]
         sys.exit(f"{ds.slug}: {len(collisions):,} new keys would merge distinct chains "
                  f"(e.g. {sample}) - refusing")
 
 
-    rekeyed = sum(1 for old, new in new_key_of.items() if old != new)
-    return updates, {"rows": len(rows), "chains_rekeyed": rekeyed,
+    rekeyed = sum(1 for old, news in new_keys_of.items() if news != {old})
+    split = sorted(old for old, news in new_keys_of.items() if len(news) > 1)
+    return updates, {"rows": len(rows), "chains_rekeyed": rekeyed, "split": split,
+                     "joined": joined,
                      "unfaithful_untouched": unfaithful_untouched}
 
 
@@ -189,6 +225,10 @@ def verify(ds):
     print(f"verify {ds.slug} against {os.path.basename(path)}: "
           f"{len(added)} added, {len(removed)} removed, {len(modified)} modified; "
           f"content_hash {'equal' if pulled_ch == ch else 'DIFFERS'}")
+    if added and not removed and not modified:
+        print("  only additions: rows the old rule keyed onto another row's key, which the "
+              "importer's dedupe dropped - they were never stored, so no rewrite can add "
+              "them; replay the pulls with tools/rebuild_from_pulls.py (hastings 2026-10-20)")
     return not (added or removed or modified) and pulled_ch == ch
 
 
@@ -200,6 +240,8 @@ def main():
     ap.add_argument("--verify", action="store_true",
                     help="after (or instead of, with --dry-run) the rewrite, compare "
                          "the store with the vault's latest pull")
+    ap.add_argument("--old-rev", help="git revision whose datasets/<slug>.toml the store "
+                         "was built under, when the change edits [identity] (e.g. HEAD)")
     ap.add_argument("--backup-dir", help="directory for the pre-migration copy")
     ap.add_argument("--no-backup", action="store_true")
     args = ap.parse_args()
@@ -210,7 +252,8 @@ def main():
 
     conn = sqlite3.connect(ds.db_path)
     conn.row_factory = sqlite3.Row
-    updates, stats = plan(ds, conn)
+    old_ds = old_dataset(ds.slug, args.old_rev) if args.old_rev else None
+    updates, stats = plan(ds, conn, old_ds)
     verb = "would rewrite" if args.dry_run else "rewrote"
     if updates and not args.dry_run:
         if not args.no_backup:
@@ -222,6 +265,9 @@ def main():
     conn.close()
     print(f"{ds.slug}: {verb} {len(updates):,} of {stats['rows']:,} rows, "
           f"{stats['chains_rekeyed']:,} chains re-keyed"
+          + (f", {len(stats['split']):,} of them split" if stats["split"] else "")
+          + (f", {stats['joined']:,} keys joining time-disjoint chains"
+             if stats["joined"] else "")
           + (f"; {stats['unfaithful_untouched']:,} unchanged rows whose key does not "
              "recompute, left alone" if stats["unfaithful_untouched"] else ""))
     if args.verify and not verify(ds):
