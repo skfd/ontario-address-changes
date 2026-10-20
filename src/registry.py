@@ -26,6 +26,7 @@ class Dataset:
     enabled: bool = True  # false: source paused (e.g. a dead endpoint awaiting a re-point) — `update` skips the pull, pages keep the last snapshot
     location_min_move_m: float = 0.0  # drop location-only modifications moving less than this (metres); 0 = off
     street_from_full: bool = False  # no street column: derive street from full minus the number (normalize.street_from_full)
+    number_unit_from_full: bool = False  # no number/unit columns: split them out of full around the mapped street (normalize.number_unit_from_full)
     key_field: str = ""
     synth_fields: list = field(default_factory=lambda: ["full"])
     synth_props: list = field(default_factory=list)  # source props added to the synth basis
@@ -92,6 +93,19 @@ def _parse(path):
             raise ValueError(f"{path}: street_from_full = true needs a mapped "
                              "[fields] full")
 
+    number_unit_from_full = raw.get("number_unit_from_full", False)
+    if not isinstance(number_unit_from_full, bool):
+        raise ValueError(f"{path}: number_unit_from_full must be true or false")
+    if number_unit_from_full:
+        fmap = raw.get("fields", {})
+        mapped = [k for k in ("number", "unit") if fmap.get(k)]
+        if mapped:
+            raise ValueError(f"{path}: number_unit_from_full = true with a mapped "
+                             f"[fields] {'/'.join(mapped)} - pick one")
+        if not fmap.get("full") or not fmap.get("street"):
+            raise ValueError(f"{path}: number_unit_from_full = true needs mapped "
+                             "[fields] full and street")
+
     identity = raw.get("identity", {})
     # Geometry is the default disambiguator for a synthesized key. Dropping it
     # without adding another one would collapse every same-address row onto one
@@ -112,6 +126,7 @@ def _parse(path):
         enabled=raw.get("enabled", True),
         location_min_move_m=float(floor),
         street_from_full=street_from_full,
+        number_unit_from_full=number_unit_from_full,
         key_field=identity.get("key_field", ""),
         synth_fields=identity.get("synth_fields", ["full"]),
         synth_props=identity.get("synth_props", []),

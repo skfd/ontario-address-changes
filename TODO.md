@@ -8,7 +8,7 @@ datasets onboarded 2026-08-20 are not in the appendix yet).
 
 These cities are imported and tracking, but their field maps need a human decision:
 
-- [ ] **waterloo** — no street-number field exists in the source (only the full
+- [x] **waterloo** — no street-number field exists in the source (only the full
   `CIVIC_ADDR` string). Decide: have the number parsed out of `CIVIC_ADDR`, or
   accept full-address-only display. Measured 2026-08-20: **all 55,541 active full
   values parse cleanly** as `<number>[suffix] <street>` (zero exceptions), so a
@@ -16,7 +16,16 @@ These cities are imported and tracking, but their field maps need a human decisi
   `ADDRESS_ID`, so populating `number` does not re-key; it would need the
   remap-style full-history rewrite (lennox ADD_LABEL precedent) to land event-free,
   via a parse variant of `tools/remap_canonical_from_prop.py`.
-- [ ] **lennox-addington** — no parsed street field in the source. `ADD_LABEL`
+  **Done 2026-10-20, number and unit both.** The live layer behind the 10-16 re-point
+  publishes units at the end of `CIVIC_ADDR` ("29 BARREL YARDS BLVD 1205", "300 REGINA
+  ST N 2 204", "25 WESTMOUNT RD N PH B"), and the address is `<number> <STREET_NM>[
+  <unit>]` on 55,844 of 55,845 rows, so the split anchors on the mapped street:
+  `number_unit_from_full = true` (`normalize.number_unit_from_full`). The one exception
+  is the publisher's ("526B BROOKMILL CRES" filed under BEAVER CREEK RD): number 526B,
+  no unit. Neither column is in the identity basis; the whole store was rewritten
+  first with `tools/recanonicalize.py` (55,845 rows, no re-key) and verified against
+  the 10-16 pull: 0 added/removed/modified, content_hash equal. Unit coverage 0 -> 42%.
+- [x] **lennox-addington** — no parsed street field in the source. `ADD_LABEL`
   answered half of this on 2026-08-20: it is the house number WITH its suffix
   ('137A'), not a street label — measured, then made the `number` source via a
   full-history migration (`tools/remap_canonical_from_prop.py`, 3,741 rows, no
@@ -30,6 +39,8 @@ These cities are imported and tracking, but their field maps need a human decisi
   pattern in a second city at 0.5% of rows; the other 640 are campground sites
   ("Site 14 Pickerel Park Rv Resort", "Site N/A …"), bare numbers ("70"), and
   bare street names — genuinely non-standard rural addressing, not a parse gap.
+  **Done 2026-10-03** (ticked 2026-10-20): `street_from_full = true`, history rewritten
+  by `tools/derive_street_from_full.py`, 26,168 of 26,182 rows got a street.
 - [x] **frontenac** — the source's `UnitNumber` column is 100% blank (22k rows, zero
   real values). Decide: unselect it, or keep it in case the county starts filling it.
   **Kept, closed 2026-08-20.** Re-measured: still 0 of 22,381 active rows. The
@@ -930,7 +941,7 @@ one-time "modified" spike, so batch them:
   `import_snapshot` only needs a count at the end, not `len(features)` up front. Halves
   peak memory per worker, so `--jobs` can go above 6 without the big three colliding,
   and removes the multi-second parse stall on changed days. No hash change.
-- [ ] **"None" / "<Null>" in the canonical fields (found 2026-10-16).** `_NULL_LITERALS`
+- [x] **"None" / "<Null>" in the canonical fields (found 2026-10-16).** `_NULL_LITERALS`
   drops them from props only; `_clean` (the canonical number/street/unit/full) honours
   just "N/A". Stored canonical values today: windsor number + full "None" on 696 rows,
   norfolk unit "<Null>" 12, durham unit 5, leeds-grenville unit 2. Folding them into
@@ -938,6 +949,29 @@ one-time "modified" spike, so batch them:
   it is a full-history remap per store (`tools/remap_canonical_from_prop.py` shape), not
   a filter edit. Small, but each is a latent mass event the day the publisher fixes its
   export.
+  **Done 2026-10-20.** `_CANONICAL_NULL_LITERALS` is now `_NULL_LITERALS`, and the four
+  stores were rewritten first by the new `tools/recanonicalize.py`, which may re-key:
+  it proves each moved row's stored key recomputes from the stored row, refuses a new
+  key that would fold two chains together, and refuses touching same-hash spans it
+  would create. windsor 696 rows re-keyed, norfolk 12 re-keyed, durham 5 and
+  leeds-grenville 2 (key_field cities, unit + hash only). Each verified against its
+  latest vault pull: 0 added/removed/modified, content_hash equal; re-run rewrites 0.
+  Backups in `C:\Users\kk\ontario-db-backup-2026-10-20-recanonicalize\`. Re-render moved the two baseline pages only (windsor 06-11,
+  waterloo 10-16); addressless rows now read "(no address)" instead of their `syn:`
+  hash (12 more baseline pages, label only).
+- [ ] **Touching same-hash spans in 20 stores (found 2026-10-20).** A key holding two
+  spans with no non-skipped snapshot between them and the same `payload_hash` is a span
+  the importer would have extended. The `recanonicalize.py` dry run over all 77 stores
+  found them in 20: guelph 270,430 keys, chatham-kent 56,147, huron 17,344, renfrew
+  5,591, brampton 4,687, kingston 1,094, kitchener 1,067, durham 957, simcoe 781,
+  toronto 346, york 261, hastings 163, thunder-bay 129, barrie 7, cornwall 2, milton 2,
+  and one each in bruce, hamilton, kawartha-lakes, quinte-west. Most likely left by the
+  hash backfills (2026-08-08/09/21), which rewrote each version's hash in place but
+  never merged versions that became equal. Harmless to the diff (equal hash = no
+  modification), but each is an extra row and a false "version" in history. Fix: a
+  merge pass (extend the first span's max, delete the second), dry-run and backup
+  first, verify `report --all` pages unchanged. Confirm the backfill cause before
+  fixing, in case an importer path still splits spans.
 
 - [x] **Extend `EDIT_METADATA_FIELDS` with the `creationdate` / `modificationdate`
   spellings.** Found 2026-08-20 during the west-parry-sound onboarding: the source
@@ -988,7 +1022,7 @@ one-time "modified" spike, so batch them:
   (toronto 538,407 vs 525,469 active); milton's 1 is not in the list because its
   value was `LOT = "NONE"`, uppercase, which is kept.
 
-- [ ] **Follow-up out of the above: windsor's 696 canonical `"None"` values are
+- [x] **Follow-up out of the above: windsor's 696 canonical `"None"` values are
   still there, and clearing them needs an identity migration.** The props fix
   cannot reach them: `normalize.canonical` derives `number`/`full` from the *raw*
   feature via `_clean`, not from the cleaned props blob, so those 696 unaddressed
@@ -1220,9 +1254,9 @@ human's attention, not a flag.
 | sdg | 31,845 | 100 | 100 | 3 | 100 |
 | thunder-bay | 45,049 | 100 | 100 | — | 100 |
 | toronto | 525,438 | 100 | 100 | — | 100 |
-| waterloo | 55,541 | — | 100 | — | 100 |
+| waterloo | 55,845 | 100 | 100 | 42 | 100 |
 | wellington | 42,892 | 100 | 98 | 1 | — |
-| windsor | 118,841 | 100 | 99 | 29 | 100 |
+| windsor | 118,843 | 99 | 99 | 29 | 99 |
 | york | 431,535 | 100 | 100 | 15 | 100 |
 
 `—` = field not selected in the TOML. `0*` = selected but all source values blank.

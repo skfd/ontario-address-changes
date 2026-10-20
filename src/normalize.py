@@ -72,11 +72,12 @@ EDIT_METADATA_FIELDS = frozenset({
 # of 24,177 rows, and no store held the exact spelling anywhere when it was added.
 _NULL_LITERALS = frozenset({"None", "<Null>", "N/A"})
 
-# The literals _clean drops from the canonical fields too. Only "N/A": "None" and
-# "<Null>" already sit in stored canonical values (windsor number/full 696,
-# norfolk unit 12, durham 5, leeds-grenville 2, measured 2026-10-16), so honouring
-# them here re-keys those stores - a migration of its own, not a filter tweak.
-_CANONICAL_NULL_LITERALS = frozenset({"N/A"})
+# The literals _clean drops from the canonical fields too: the same set. "None" and
+# "<Null>" joined 2026-10-20 with a full-history rewrite of the four stores that held
+# them (tools/recanonicalize.py: windsor number/full 696, re-keyed; norfolk unit 12,
+# re-keyed; durham unit 5 and leeds-grenville unit 2, key_field cities), so the day a
+# publisher fixes its export lands as nothing rather than a mass event.
+_CANONICAL_NULL_LITERALS = _NULL_LITERALS
 
 _CANONICAL = ("number", "street", "unit", "full")
 
@@ -185,6 +186,9 @@ def canonical(ds, feature):
            if name in _CANONICAL}
     for name in _CANONICAL:
         rec.setdefault(name, None)
+    if ds.number_unit_from_full:
+        # the registry guarantees no mapped number/unit to overwrite
+        rec["number"], rec["unit"] = number_unit_from_full(rec["full"], rec["street"])
     if ds.street_from_full:
         # the registry guarantees no mapped street to overwrite
         rec["street"] = street_from_full(rec["full"], rec["number"], rec["unit"])
@@ -222,8 +226,8 @@ def _is_number_token(tok):
 def street_from_full(full, number=None, unit=None):
     """Street name derived from a full-address string, for sources that publish
     no street column (Dataset.street_from_full). A pure function of the three
-    canonical columns, so the importer and tools/derive_street_from_full.py can
-    never disagree about a row.
+    canonical columns, so the importer and tools/derive_street_from_full.py (or
+    tools/recanonicalize.py) can never disagree about a row.
 
     1. The number as published leads the full address ("137A Main St" with
        number "137A", "C01 Unit A 310 Bridge St" with that whole run as the
@@ -284,6 +288,38 @@ def street_from_full(full, number=None, unit=None):
                     j -= 1
                 return " ".join(toks[i:j]).rstrip(",") or None
     return " ".join(toks[i:])
+
+
+def number_unit_from_full(full, street):
+    """(number, unit) split out of a full-address string around the mapped street,
+    for sources that publish only the full address and the street name
+    (Dataset.number_unit_from_full). Waterloo's CIVIC_ADDR is
+    "<number> <STREET_NM>[ <unit>]" on all but one row of 55,845 (measured
+    2026-10-20): "29 BARREL YARDS BLVD 1205", "300 REGINA ST N 2 204" (tower 2,
+    unit 204), "25 WESTMOUNT RD N PH B". A pure function of two canonical columns,
+    so the importer and tools/recanonicalize.py cannot disagree about a row.
+
+    The first occurrence of the street after at least one leading token anchors
+    the split: everything before it is the number, everything after it the unit,
+    both as published. A street not found in the address (the publisher's own
+    mismatch, "526B BROOKMILL CRES" filed under BEAVER CREEK RD) falls back to the
+    leading civic-number tokens for the number and no unit; nothing number-like
+    in front gives None for both.
+    """
+    if not full:
+        return None, None
+    toks = full.split()
+    if street:
+        stoks = [t.upper() for t in street.split()]
+        upper = [t.upper() for t in toks]
+        for j in range(1, len(toks) - len(stoks) + 1):
+            if upper[j:j + len(stoks)] == stoks:
+                unit = " ".join(toks[j + len(stoks):]) or None
+                return " ".join(toks[:j]), unit
+    i = 0
+    while i < len(toks) - 1 and _is_number_token(toks[i]):
+        i += 1
+    return (" ".join(toks[:i]) or None), None
 
 
 def _identity(ds, rec, props, lon, lat):

@@ -84,11 +84,11 @@ def test_na_is_null_in_canonical_fields_and_props():
     assert leaked["payload_hash"] == absent["payload_hash"]
 
 
-def test_none_literal_still_reaches_canonical_fields():
-    """windsor stores "None" as number/full on 696 rows; dropping it in _clean
-    would re-key them, so only props treat it as null for now."""
-    assert normalize._clean("None") == "None"
-    assert normalize._clean("<Null>") == "<Null>"
+def test_none_literal_dropped_from_canonical_fields():
+    """Since 2026-10-20 _clean drops the same literals as props: windsor's 696
+    "None" number/full rows were re-keyed by tools/recanonicalize.py first."""
+    assert normalize._clean("None") is None
+    assert normalize._clean("<Null>") is None
 
 def test_real_words_that_only_look_null_are_kept():
     """Only the exact-case serializer spellings go.
