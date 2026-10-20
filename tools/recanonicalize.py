@@ -22,12 +22,8 @@ the heavier surgery, and the tool proves each step before trusting it:
   2. One chain, one key: every version of a chain must map to the same new key.
   3. No collision: a new key must not already belong to another chain anywhere in
      history. Two real addresses merging is refused, never stitched.
-  4. No hidden merge: after the rewrite, no key the rewrite touched may hold two
-     spans that touch (no non-skipped snapshot between them) with the same
-     payload_hash - a span the importer would have extended. Refused rather than
-     merged; none has occurred. Only touched keys are checked: 20 stores already
-     hold such pairs from earlier hash backfills (guelph 270k keys, 2026-10-20),
-     which is a separate cleanup (TODO.md section 5).
+  4. Versions the rewrite makes equal, on spans that touch, are folded into one
+     span by db.merge_touching_spans, as the importer would have kept them.
 
 The values come from the stored canonical columns, not raw features: a stored mapped
 column is _clean(raw) under the old rules, and _clean is idempotent, so applying the
@@ -101,7 +97,6 @@ def plan(ds, conn):
     new_key_of = {}            # old key -> new key, per chain
     split_chains = set()
     updates = []
-    after = []                 # (key, min, max, hash) after the rewrite
     for r in rows:
         props = json.loads(r["props"] or "{}")
         lon, lat = r["longitude"], r["latitude"]
@@ -120,7 +115,6 @@ def plan(ds, conn):
         rec["longitude"], rec["latitude"] = lon, lat
         hash_props = {k: v for k, v in props.items() if k.lower() not in keep}
         h = normalize._payload_hash(rec, hash_props)
-        after.append((key, r["min_snapshot_id"], r["max_snapshot_id"], h))
         if key != r["identity_key"] or h != r["payload_hash"] or \
                 any(rec[c] != r[c] for c in _CANONICAL):
             updates.append((key, rec["number"], rec["street"], rec["unit"], rec["full"],
@@ -142,23 +136,6 @@ def plan(ds, conn):
         sys.exit(f"{ds.slug}: {len(collisions):,} new keys would merge distinct chains "
                  f"(e.g. {sample}) - refusing")
 
-    live = [r[0] for r in conn.execute(
-        "SELECT id FROM snapshots WHERE skipped = 0 ORDER BY id")]
-    touched = {u[0] for u in updates}
-    spans = defaultdict(list)
-    for key, lo, hi, h in after:
-        if key in touched:
-            spans[key].append((lo, hi, h))
-    touching = set()
-    for key, ss in spans.items():
-        ss.sort()
-        for (lo1, hi1, h1), (lo2, hi2, h2) in zip(ss, ss[1:]):
-            gap = [s for s in live if hi1 < s < lo2]
-            if h1 == h2 and not gap:
-                touching.add(key)
-    if touching:
-        sys.exit(f"{ds.slug}: {len(touching):,} keys would hold touching spans with the "
-                 f"same hash (e.g. {sorted(touching)[:3]}) - would need a span merge, refusing")
 
     rekeyed = sum(1 for old, new in new_key_of.items() if old != new)
     return updates, {"rows": len(rows), "chains_rekeyed": rekeyed,
@@ -175,6 +152,7 @@ def apply(conn, updates):
         "WHERE identity_key = ? AND min_snapshot_id = ?", updates)
     conn.execute("UPDATE addresses SET identity_key = substr(identity_key, 6) "
                  "WHERE identity_key LIKE '~mig~%'")
+    db.merge_touching_spans(conn)
     sid = conn.execute("SELECT MAX(id) FROM snapshots WHERE skipped = 0").fetchone()[0]
     if sid is not None:
         rows = conn.execute(

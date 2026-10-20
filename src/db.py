@@ -354,6 +354,54 @@ def import_snapshot(ds, filepath, features, headers=None):
     return curr_id
 
 
+def merge_touching_spans(conn, dry_run=False):
+    """Fold each pair of a key's spans that the importer would have kept as one.
+
+    Two spans of one key touch when no non-skipped snapshot lies between them; with
+    the same payload_hash they are a span the importer would have extended, since it
+    only opens a new span when the hash differs. The importer cannot leave such a
+    pair, but the tools that rewrite hashes in place can (backfill_props_hash.py,
+    above all --reapply-ignore, which makes versions that differed only in a
+    now-ignored field equal): measured 2026-10-20, 20 stores held them, guelph
+    53,849 keys. Every hash-rewriting tool calls this after its rewrite.
+
+    The first span is extended over the later one, which is deleted, as an
+    extension would have done: the first row's props stand (they can only differ
+    in keep_fields, outside the hash). Active sets at every non-skipped snapshot
+    are unchanged, so diffs, histories and content_hash are too.
+    Returns (keys merged, rows deleted). Caller commits.
+    """
+    from bisect import bisect_right
+    live = [r[0] for r in conn.execute(
+        "SELECT id FROM snapshots WHERE skipped = 0 ORDER BY id")]
+    rows = conn.execute(
+        "SELECT identity_key, min_snapshot_id, max_snapshot_id, payload_hash "
+        "FROM addresses WHERE identity_key IN ("
+        "  SELECT identity_key FROM addresses GROUP BY identity_key HAVING COUNT(*) > 1) "
+        "ORDER BY identity_key, min_snapshot_id").fetchall()
+    extend, delete, keys = [], [], set()
+    cur = None                                  # [key, min, max, hash] being grown
+    for key, lo, hi, h in rows:
+        if cur and cur[0] == key and cur[3] == h:
+            nxt = bisect_right(live, cur[2])     # first live snapshot after cur
+            if nxt == len(live) or live[nxt] >= lo:
+                delete.append((key, lo))
+                cur[2] = hi
+                keys.add(key)
+                continue
+        if cur and cur[0] in keys:
+            extend.append((cur[2], cur[0], cur[1]))
+        cur = [key, lo, hi, h]
+    if cur and cur[0] in keys:
+        extend.append((cur[2], cur[0], cur[1]))
+    if not dry_run and delete:
+        conn.executemany("DELETE FROM addresses WHERE identity_key = ? "
+                         "AND min_snapshot_id = ?", delete)
+        conn.executemany("UPDATE addresses SET max_snapshot_id = ? "
+                         "WHERE identity_key = ? AND min_snapshot_id = ?", extend)
+    return len(keys), len(delete)
+
+
 def get_snapshots(ds):
     conn = init_db(ds)
     rows = conn.execute("SELECT * FROM snapshots ORDER BY id").fetchall()

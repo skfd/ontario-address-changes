@@ -108,6 +108,9 @@ def migrate(ds, dry_run=False, reapply_ignore=False):
         rehashed = True
 
     if not dry_run:
+        # versions the rewrite made equal fold into one span, as the importer
+        # would have kept them (db.merge_touching_spans)
+        db.merge_touching_spans(conn)
         conn.commit()
     conn.close()
     return len(updates), rehashed

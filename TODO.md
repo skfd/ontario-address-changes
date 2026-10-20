@@ -963,7 +963,7 @@ one-time "modified" spike, so batch them:
   Backups in `C:\Users\kk\ontario-db-backup-2026-10-20-recanonicalize\`. Re-render moved the two baseline pages only (windsor 06-11,
   waterloo 10-16); addressless rows now read "(no address)" instead of their `syn:`
   hash (12 more baseline pages, label only).
-- [ ] **Touching same-hash spans in 20 stores (found 2026-10-20).** A key holding two
+- [x] **Touching same-hash spans in 20 stores (found 2026-10-20).** A key holding two
   spans with no non-skipped snapshot between them and the same `payload_hash` is a span
   the importer would have extended. The `recanonicalize.py` dry run over all 77 stores
   found them in 20 (keys / pairs): guelph 53,849 / 270,430, chatham-kent 56,147,
@@ -977,6 +977,17 @@ one-time "modified" spike, so batch them:
   merge pass (extend the first span's max, delete the second), dry-run and backup
   first, verify `report --all` pages unchanged. Confirm the backfill cause before
   fixing, in case an importer path still splits spans.
+  **Done 2026-10-20.** Cause confirmed: the importer cannot leave such a pair (it extends
+  on an equal hash and inserts only the keys it did not extend); every boundary sits on
+  a past re-hash, e.g. guelph's five whole-city ones (07-24, 07-29, 08-04, 08-09, 08-30)
+  and chatham-kent 09-30. New `db.merge_touching_spans`, run over the 20 stores by
+  `tools/merge_touching_spans.py`: 359,012 rows folded, re-run 0. The active set at
+  every live snapshot of all 20 stores fingerprinted identical before/after, and
+  `report --all` left every report page byte-identical; only the landing-map hulls
+  moved (even-stride sample over row order). Backups in
+  `C:\Users\kk\ontario-db-backup-2026-10-20-mergespans\`. The four hash-rewriting
+  tools (backfill_props_hash, remap_canonical_from_prop, derive_street_from_full,
+  recanonicalize) now call the merge themselves, so no new pairs are left behind.
 
 - [x] **Extend `EDIT_METADATA_FIELDS` with the `creationdate` / `modificationdate`
   spellings.** Found 2026-08-20 during the west-parry-sound onboarding: the source
