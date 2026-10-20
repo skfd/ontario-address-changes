@@ -963,6 +963,18 @@ one-time "modified" spike, so batch them:
   fix the whole render is under two minutes on one core, so a process pool and the
   two shared writers it would have to handle (`flags.record`, the ledger reload) buy
   nothing worth the risk. Revisit only if the render climbs back past ~10 min.
+- [ ] **Audit what the importer's dedupe drops, per city (found 2026-10-20).** `db._records`
+  keeps the first row per identity_key and drops the rest ("note: N duplicate identity_key
+  rows dropped"). That is harmless only when the dropped rows are identical to the kept
+  one: hastings' old key hid 444 distinct suffix siblings behind that line for four
+  months (fixed by rebuild, see section 1). Measured on the latest pulls: hastings' 6
+  remaining drops are byte-identical; **windsor drops 14,490 rows a day (12,127 keys) and
+  none is identical** - the PropertyParcels layer carries several parcel records per
+  address point, differing in `propertyrsn`, `Frontage`, `Depth`, `AmandaArea`, `Ward`.
+  Which parcel's attributes are stored then depends on file order, so a reordered export
+  reads as modifications that are not real. Decide per city: ignore the parcel attributes
+  (they are not address data), or key on something that separates the records. Sweep the
+  other 76 stores' drop counts first.
 - [ ] **Stream the GeoJSON import (found 2026-10-16).** `fetch.load_features` does one
   `json.load` of the whole file — up to ~590 MB for york/peel/toronto — and
   `db.import_snapshot` then iterates `features` once. Switch to `ijson.items(f,
