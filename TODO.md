@@ -264,9 +264,10 @@ the order to work them):
       Addresses item e48315e9?), tecumseh (may the County of Essex OGL license the Town's points?).
 - [ ] Gated for no licence text, worth an ask: caledon, dryden, oshawa ("reference use only"
       claim unverified), vaughan, vaughan-ng911, grey x3, gorham-ware, oliver-paipoonge.
-- [ ] Measure the daily run after the first full day: ~1.5M more rows (waterloo-region 263k,
-      mississauga 220k, vaughan 140k + 94k, oshawa 64k). Six-way parallel, but check it
-      still clears the evening window.
+- [x] Measure the daily run after the first full day: ~1.5M more rows (waterloo-region 263k,
+      mississauga 220k, vaughan 140k + 94k, oshawa 64k). **Clears easily, 2026-10-20:**
+      START 12:00 -> END 12:15, one attempt; ottawa is the long pole (760 s), then simcoe
+      (343 s). The ~1.5 h runs before 10-19 were the render, not the extra rows.
 - [x] ~~lennox-addington field-map upgrade~~ **declined 2026-10-16**: the tracked Public View
       carries a view filter, `(SUBUNITTYPE <> 'Public Redact' AND ADD_LABEL <> 'Unknown Address')
       OR (...)`; every view that exposes STREET_NAM/UNIT_IDENT (the four township views and
@@ -916,8 +917,8 @@ one-time "modified" spike, so batch them:
   query plan for every "active at S" query (`min <= S AND max >= S`), whose min side
   matches all of history, which stalled a profiled render for over an hour and
   re-sampled three hulls. The start index is on the expression `min_snapshot_id + 0`
-  so only `_boundary` can use it. After-measure to confirm: the 10-19 noon run's
-  `RENDER` -> `END` lines (10-18: 12:16 -> 12:49).
+  so only `_boundary` can use it. **Measured on the 10-20 noon run:** `RENDER` -> `END`
+  12:13:42 -> 12:15:34, 1 min 52 s (10-18: 12:16 -> 12:49), and the whole run 15.5 min.
 - [x] **Render cities in parallel (found 2026-10-16).** Dropped 2026-10-19: with the diff
   fix the whole render is under two minutes on one core, so a process pool and the
   two shared writers it would have to handle (`flags.record`, the ledger reload) buy
