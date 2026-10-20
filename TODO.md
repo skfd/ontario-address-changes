@@ -64,6 +64,10 @@ These cities are imported and tracking, but their field maps need a human decisi
   collisions, keep each row's version chain paired. Derivable in principle (keys are
   computed from stored fields), but it is surgery on the one non-retroactive layer;
   spec it as its own tool with a collision dry-run if the display gap ever justifies it.
+  2026-10-20: `tools/recanonicalize.py` now does the re-key half (faithfulness, collision
+  and touching-span checks, verify against the vault pull), but it derives from the stored
+  canonical columns only. Hastings needs `number` read from the `ADDRESS_NU` prop, so it
+  would need a prop-sourced derive step added to that tool first.
 - [ ] **waterloo — the key_field only covers 29% of the city.** Found 2026-08-10 while
   ignoring its coordinate duplicate. `ADDRESS_ID` is populated on 15,861 of 55,541 rows;
   the other 39,680 fall through to `synth_fields = ["full"]`, so the city runs on two
@@ -962,12 +966,13 @@ one-time "modified" spike, so batch them:
 - [ ] **Touching same-hash spans in 20 stores (found 2026-10-20).** A key holding two
   spans with no non-skipped snapshot between them and the same `payload_hash` is a span
   the importer would have extended. The `recanonicalize.py` dry run over all 77 stores
-  found them in 20: guelph 270,430 keys, chatham-kent 56,147, huron 17,344, renfrew
-  5,591, brampton 4,687, kingston 1,094, kitchener 1,067, durham 957, simcoe 781,
-  toronto 346, york 261, hastings 163, thunder-bay 129, barrie 7, cornwall 2, milton 2,
-  and one each in bruce, hamilton, kawartha-lakes, quinte-west. Most likely left by the
-  hash backfills (2026-08-08/09/21), which rewrote each version's hash in place but
-  never merged versions that became equal. Harmless to the diff (equal hash = no
+  found them in 20 (keys / pairs): guelph 53,849 / 270,430, chatham-kent 56,147,
+  huron 17,344, renfrew 4,834 / 5,591, brampton 2,742 / 4,687, kingston 1,091 / 1,094,
+  kitchener 1,067, durham 957, simcoe 402 / 781, york 261, toronto 191 / 346, hastings
+  163, thunder-bay 129, barrie 7, cornwall 2, milton 2, and one each in bruce, hamilton,
+  kawartha-lakes, quinte-west (one figure = one pair per key). Most likely left by the
+  hash backfills and `--reapply-ignore` passes, which rewrote each version's hash in place
+  but never merged versions that became equal. Harmless to the diff (equal hash = no
   modification), but each is an extra row and a false "version" in history. Fix: a
   merge pass (extend the first span's max, delete the second), dry-run and backup
   first, verify `report --all` pages unchanged. Confirm the backfill cause before

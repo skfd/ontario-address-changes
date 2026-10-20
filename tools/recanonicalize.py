@@ -149,16 +149,16 @@ def plan(ds, conn):
     for key, lo, hi, h in after:
         if key in touched:
             spans[key].append((lo, hi, h))
-    touching = []
+    touching = set()
     for key, ss in spans.items():
         ss.sort()
         for (lo1, hi1, h1), (lo2, hi2, h2) in zip(ss, ss[1:]):
             gap = [s for s in live if hi1 < s < lo2]
             if h1 == h2 and not gap:
-                touching.append(key)
+                touching.add(key)
     if touching:
         sys.exit(f"{ds.slug}: {len(touching):,} keys would hold touching spans with the "
-                 f"same hash (e.g. {touching[:3]}) - would need a span merge, refusing")
+                 f"same hash (e.g. {sorted(touching)[:3]}) - would need a span merge, refusing")
 
     rekeyed = sum(1 for old, new in new_key_of.items() if old != new)
     return updates, {"rows": len(rows), "chains_rekeyed": rekeyed,
