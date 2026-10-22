@@ -179,11 +179,19 @@ if ($null -eq $due) {
 # Runs one headless Claude phase. The prompt goes in through stdin from a file
 # (a console stdin can make -p wait for input under Task Scheduler); output
 # is teed to the log. Returns claude's exit code.
+$script:limitLine = $null
 function Invoke-Claude([string]$phase, [string]$prompt) {
     $promptFile = "$logDir\article-prompt-$phase.txt"
     Set-Content -Path $promptFile -Value $prompt -Encoding UTF8
     Log "PHASE $phase $(Get-Date -Format o)"
-    Invoke-Logged "type `"$promptFile`" | `"$claude`" -p --permission-mode dontAsk --allowedTools $claudeTools"
+    $script:limitLine = $null
+    cmd /c "type `"$promptFile`" | `"$claude`" -p --permission-mode dontAsk --allowedTools $claudeTools 2>&1" | ForEach-Object {
+        Add-Content $logFile $_; Write-Host $_
+        # The plan's session limit: claude -p prints one line and exits 1 at
+        # once. Every further city would do the same (2026-10-22: 31 cities
+        # "failed" in two minutes), so the caller stops the batch instead.
+        if ($_ -match "hit your session limit|usage limit") { $script:limitLine = "$_" }
+    }
     return $LASTEXITCODE
 }
 
@@ -240,6 +248,12 @@ When done, reply with the paths you wrote.
 "@
     $claudeRuns++
     $code = Invoke-Claude "$slug-$mo" $prompt
+    if ($script:limitLine) {
+        # Nothing was written for this city; it stays due for the next run.
+        Log "LIMIT $slug $mo $($script:limitLine)"
+        Record $slug $mo 'article' 'limit' $since; Count 'limit'
+        Finish $mo 'batch' "limit ($($script:limitLine))" 0
+    }
     $ok = ($code -eq 0) -and (Test-Path "articles\research\$slug-$mo.md") -and (Test-Path "articles\researched\$slug-$mo.md")
     if (-not $ok) {
         Log "FAILED $slug $mo exit=$code"
