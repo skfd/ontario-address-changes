@@ -11,22 +11,18 @@ The same pieces are rendered to HTML on the live site at
 `tools/render_articles.py`, which the scheduled run calls before committing. The
 research notes are not rendered; the site links to them here on GitHub.
 
-From March to September 2026 each month was also written a second time from the store
-alone, with no outside facts (`offline/`). The researched version led on something else
-in six of the seven months, and the offline pieces were wordier and said less, so that
-variant was dropped on 2026-10-20. `git log -- articles/offline` has them.
-
 ## The months
 
-| Month | Net | Lead |
-|---|---|---|
-| 2026-03 | +28 | A block of Queen East retires, and *nothing was demolished*: ten consecutive point ids folded back into 1238, and the development is across the street |
-| 2026-04 | +29 | Eleven addresses off the even side of Secord Ave; the demolition permit was issued **25 Mar 2021** — the file is five years behind, and the surviving evens are the unpermitted next phase |
-| 2026-05 | +19 | Chloe Cooley St debuts, reserved; By-law 182-2026 names it, and the City's own report repeats the wrong enslaver's name from a 2007 plaque |
-| 2026-06 | +15 | An address for an unbuilt station entrance, under a name Metrolinx has since dropped; and Hamilton publishes the `R`-suffix and half-number rules Toronto doesn't |
-| 2026-07 | +12 | Crosstown West gets its addresses, and the nine of them are a **contract's parts list**; the park "renamings" are restorations of decisions up to ten years old |
-| 2026-08 | +7 | Twelve retirements that are still on file, the file swapping which record it keeps for an address; the swapped addresses are buildings the City dated years ago (Yonge/Glebe rezoned **2010**, Hullmark Centre, Alter); a park council renamed on 30 July reached the file in **20 days**; a 2023 permit named 530 Duplex Ave before the file did |
-| 2026-09 | −105 | The 13 Carlaw Ave doors were the **Riverdale Shopping Centre**, demolished for the Ontario Line's Gerrard portal (permit completed **15 Dec 2025**); the station rename trails Metrolinx by 17½ months; three new lanes, each over a finished laneway suite |
+| Month | City | Net | Lead |
+|---|---|---|---|
+| 2026-03 | toronto | +28 | A block of Queen East retires, and *nothing was demolished*: ten consecutive point ids folded back into 1238, and the development is across the street |
+| 2026-04 | toronto | +29 | Eleven addresses off the even side of Secord Ave; the demolition permit was issued **25 Mar 2021** — the file is five years behind, and the surviving evens are the unpermitted next phase |
+| 2026-05 | toronto | +19 | Chloe Cooley St debuts, reserved; By-law 182-2026 names it, and the City's own report repeats the wrong enslaver's name from a 2007 plaque |
+| 2026-06 | toronto | +15 | An address for an unbuilt station entrance, under a name Metrolinx has since dropped; and Hamilton publishes the `R`-suffix and half-number rules Toronto doesn't |
+| 2026-07 | toronto | +12 | Crosstown West gets its addresses, and the nine of them are a **contract's parts list**; the park "renamings" are restorations of decisions up to ten years old |
+| 2026-08 | toronto | +7 | Twelve retirements that are still on file, the file swapping which record it keeps for an address; the swapped addresses are buildings the City dated years ago (Yonge/Glebe rezoned **2010**, Hullmark Centre, Alter); a park council renamed on 30 July reached the file in **20 days**; a 2023 permit named 530 Duplex Ave before the file did |
+| 2026-09 | toronto | −105 | The 13 Carlaw Ave doors were the **Riverdale Shopping Centre**, demolished for the Ontario Line's Gerrard portal (permit completed **15 Dec 2025**); the station rename trails Metrolinx by 17½ months; three new lanes, each over a finished laneway suite |
+| 2026-09 | windsor | 0 | Nothing changed: 30 reads, the file unchanged since 11 June 2026 |
 
 February 2026 is deliberately absent: observation starts 2026-02-12, so its first
 fortnight was never seen. October 2026 is still open.

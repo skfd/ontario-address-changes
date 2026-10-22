@@ -50,26 +50,157 @@ def months_available(ds):
     return out
 
 
-def complete_months(ds):
-    """Months observed end to end, i.e. worth writing a monthly article about.
+def _store_complete_months(ds):
+    """The store-only rule: the snapshot immediately BEFORE the month falls in the
+    month right before it (so the month opens where the previous one closed) and
+    at least one snapshot follows the month.
 
-    Bounded on both sides is not enough: toronto's store opens with two archive
-    snapshots months apart, so 2026-02 has a "previous" snapshot from the
-    September before it and its first fortnight is simply unobserved. The test
-    is that the snapshot immediately BEFORE the month falls in the month right
-    before it (so the month opens where the previous one closed) and that at
-    least one snapshot follows the month (so its tail is closed off)."""
+    Enough for a city whose file changes every few days (toronto), wrong for a
+    quiet one: a month in which the source published the same file every day
+    has no non-skipped snapshot at all, and the store alone cannot tell that
+    month from one in which the city was never pulled."""
     snaps = diff.nonskipped(ds)
     dates = [diff.snap_date(s) for s in snaps]
     months, out = months_available(ds), []
     keys = list(months)
     for mo in keys[1:-1]:
         first = dates.index(months[mo][0])
-        y, m = int(mo[:4]), int(mo[5:])
-        prev_mo = f"{y - 1}-12" if m == 1 else f"{y}-{m - 1:02d}"
-        if dates[first - 1][:7] == prev_mo:
+        if dates[first - 1][:7] == prev_month(mo):
             out.append(mo)
     return out
+
+
+def prev_month(mo):
+    y, m = int(mo[:4]), int(mo[5:])
+    return f"{y - 1}-12" if m == 1 else f"{y}-{m - 1:02d}"
+
+
+def next_month(mo):
+    y, m = int(mo[:4]), int(mo[5:])
+    return f"{y + 1}-01" if m == 12 else f"{y}-{m + 1:02d}"
+
+
+def days_in_month(mo):
+    import calendar
+    return calendar.monthrange(int(mo[:4]), int(mo[5:]))[1]
+
+
+# ---- the vault's pull calendar ----
+#
+# The vault (ADDRESSVAULT_DIR/catalog.db) records every pull day per city,
+# changed or not: snapshots(slug, date, unchanged_since). That is the record
+# of *observation*, which the store does not keep - an unchanged pull leaves
+# no non-skipped snapshot - and it is what lets a month with no edits be told
+# apart from a month nobody looked at.
+
+OBSERVED_MIN_SHARE = 2 / 3   # pull days / calendar days before a month counts as watched
+OPENING_GRACE_DAYS = 3       # a first pull this late in the month still opens it
+
+
+def _vault_db():
+    import sqlite3
+    root = os.environ.get("ADDRESSVAULT_DIR")
+    if not root:
+        return None
+    path = os.path.join(root, "catalog.db")
+    if not os.path.exists(path):
+        return None
+    return sqlite3.connect(f"file:{path}?mode=ro", uri=True)
+
+
+def vault_calendar(slug):
+    """{month: {"days": [pull dates], "failed": [dates], "unchanged_since": {date: since}}}
+    for every month the vault pulled this city, or None when there is no vault."""
+    db = _vault_db()
+    if db is None:
+        return None
+    out = collections.OrderedDict()
+    for date, since in db.execute(
+            "SELECT date, unchanged_since FROM snapshots WHERE slug = ? ORDER BY date", (slug,)):
+        mo = out.setdefault(date[:7], {"days": [], "failed": [], "unchanged_since": {}})
+        mo["days"].append(date)
+        mo["unchanged_since"][date] = since
+    for (date,) in db.execute(
+            "SELECT DISTINCT date FROM jobs WHERE slug = ? AND kind = 'pull' AND state = 'failed' "
+            "ORDER BY date", (slug,)):
+        mo = out.setdefault(date[:7], {"days": [], "failed": [], "unchanged_since": {}})
+        if date not in mo["days"]:
+            mo["failed"].append(date)
+    db.close()
+    return out
+
+
+def observation(ds, month):
+    """How well the vault watched one month: pull days, failed days, whether the
+    month is bounded on both sides. None when the vault has nothing for it."""
+    cal = vault_calendar(ds.slug)
+    if not cal or month not in cal:
+        return None
+    mo = cal[month]
+    before = prev_month(month) in cal or (mo["days"] and mo["days"][0][8:] <= f"{OPENING_GRACE_DAYS:02d}")
+    after = any(k > month for k in cal)
+    days = len(mo["days"])
+    share = days / days_in_month(month)
+    return {"pull_days": days, "failed_days": len(mo["failed"]),
+            "first_pull": mo["days"][0] if mo["days"] else None,
+            "last_pull": mo["days"][-1] if mo["days"] else None,
+            "opened": bool(before), "closed": bool(after),
+            "watched": bool(before and after and share >= OBSERVED_MIN_SHARE)}
+
+
+def complete_months(ds):
+    """Months worth writing a monthly article about: observed end to end.
+
+    Two ways in. The store's own rule (the month opens where the previous one
+    closed, with real snapshots) covers a city whose file changes often, and
+    every month before the vault pulled daily. The vault's pull calendar
+    covers the rest: a pull in the previous month or the first days of this
+    one, a pull after it, and at least two thirds of its days read - which is
+    what lets a month with no edits count. A month that passes neither is not
+    "quiet", it is unobserved, and it is left out. Either way the store holds
+    a non-skipped snapshot before the month to diff the month against."""
+    snaps = diff.nonskipped(ds)
+    if not snaps:
+        return []
+    first_store = diff.snap_date(snaps[0])[:7]
+    out = set(_store_complete_months(ds))
+    cal = vault_calendar(ds.slug) or {}
+    today = __import__("datetime").date.today().strftime("%Y-%m")
+    for mo in cal:
+        if first_store < mo < today and observation(ds, mo)["watched"]:
+            out.add(mo)
+    return sorted(out)
+
+
+# ---- attribution ----
+
+SITE = "https://skfd.github.io/ontario-address-changes/"
+_LICENCE_WORDS = ("licence", "license", "cc0", "cc by", "creative commons", "terms of use")
+_NO_LICENCE = ("none published", "no reuse grant", "not found", "custom terms",
+               "proprietary", "restrictive", "disclaimer")
+
+
+def licence_label(ds):
+    """The licence's name without the notes the TOML keeps beside it, or '' when
+    license_name records that nothing is published."""
+    name = (ds.license_name or "").strip()
+    base = name.split(" (")[0].strip()
+    low = base.lower()
+    if not base or any(w in low for w in _NO_LICENCE) or not any(w in low for w in _LICENCE_WORDS):
+        return ""
+    return base
+
+
+def attribution(ds):
+    """The source line every article carries, in Markdown. One of two shapes:
+    a licence attribution when the publisher names one, or a plain source
+    statement when the dataset TOML records that no licence is published.
+    publish_reports stays the only gate on whether the article exists."""
+    label = licence_label(ds)
+    src = f"[{ds.provider}]({ds.data_url})" if ds.data_url else ds.provider
+    if label:
+        return f"*Contains information licensed under the {label}.* Source dataset: {src}"
+    return f"*Source: {src}; no open licence is published for this data.*"
 
 
 # ---- aggregation ----
@@ -152,20 +283,26 @@ def _sample(rows, n=SAMPLE_N):
 def digest(ds, month):
     snaps = diff.nonskipped(ds)
     in_month = [s for s in snaps if month_of(s) == month]
-    if not in_month:
-        raise SystemExit(f"no snapshots for {ds.slug} in {month}")
-    first_idx = snaps.index(in_month[0])
-    if first_idx == 0:
+    before = [s for s in snaps if month_of(s) < month]
+    if not before:
         raise SystemExit(f"{month} is {ds.slug}'s first observed month - nothing to diff "
                          "its opening against")
-    opening = snaps[first_idx - 1]     # last snapshot before the month
-    closing = in_month[-1]
+    obs = observation(ds, month)
+    if not in_month and not (obs and obs["watched"]):
+        raise SystemExit(f"no snapshots for {ds.slug} in {month}, and the vault did not "
+                         "watch it end to end")
+    opening = before[-1]               # last snapshot before the month
+    # A watched month with no non-skipped snapshot is a month in which every
+    # pull came back as the file already on file: the diff is empty by
+    # construction, and the closing snapshot is the opening one.
+    closing = in_month[-1] if in_month else opening
+    first_idx = snaps.index(in_month[0]) if in_month else None
     ledger = flags.load_ledger()
 
     # --- per-day (gross) ---
     timeline, held_notes = [], []
     gross = collections.Counter()
-    for prev, cur in zip(snaps[first_idx - 1:], in_month):
+    for prev, cur in (zip(snaps[first_idx - 1:], in_month) if in_month else ()):
         d, notes = _held_diff(ds, ledger, prev, cur)
         cats = _categorize(ds, d["modified"])
         day = {"date": diff.snap_date(cur), "added": len(d["added"]),
@@ -200,16 +337,22 @@ def digest(ds, month):
     debut = [dict(x, date=diff.snap_date(s)) for s in in_month for x in by_sid.get(s["id"], [])]
     debut.sort(key=lambda x: -x["count"])
 
+    quiet = (not net["added"] and not net["removed"] and not net_cats
+             and not any(gross.values()))
     return {
         "meta": {
             "slug": ds.slug, "provider": ds.provider, "month": month,
             "license_name": ds.license_name, "source_url": ds.data_url,
+            "attribution": attribution(ds),
+            "site_url": f"{SITE}{ds.slug}/",
             "opening_snapshot": diff.snap_date(opening),
             "closing_snapshot": diff.snap_date(closing),
             "snapshot_dates": [diff.snap_date(s) for s in in_month],
             "snapshot_count": len(in_month),
             "row_count_open": opening["row_count"],
             "row_count_close": closing["row_count"],
+            "observation": obs,
+            "quiet": quiet,
             "held_events": held_notes,
         },
         "net": {
@@ -282,12 +425,24 @@ def _table(rows, cols):
 
 def as_text(g):
     m, net = g["meta"], g["net"]
-    o = [f"# {m['provider']} - {m['month']}",
-         f"{m['snapshot_count']} snapshots ({m['snapshot_dates'][0]} .. {m['snapshot_dates'][-1]}); "
-         f"net measured {m['opening_snapshot']} -> {m['closing_snapshot']}",
-         f"rows: {m['row_count_open']:,} -> {m['row_count_close']:,} "
-         f"({m['row_count_close'] - m['row_count_open']:+,})",
-         f"licence: {m['license_name']}"]
+    o = [f"# {m['provider']} - {m['month']}"]
+    if m["snapshot_count"]:
+        o.append(f"{m['snapshot_count']} snapshots ({m['snapshot_dates'][0]} .. {m['snapshot_dates'][-1]}); "
+                 f"net measured {m['opening_snapshot']} -> {m['closing_snapshot']}")
+    else:
+        o.append("no changed snapshot in the month; the file on record is still the one "
+                 f"from {m['opening_snapshot']}")
+    obs = m.get("observation")
+    if obs:
+        o.append(f"observed: {obs['pull_days']} pull days ({obs['first_pull']} .. {obs['last_pull']}), "
+                 f"{obs['failed_days']} failed" + ("" if obs["watched"] else "  [NOT watched end to end]"))
+    o += [f"rows: {m['row_count_open']:,} -> {m['row_count_close']:,} "
+          f"({m['row_count_close'] - m['row_count_open']:+,})",
+          f"licence: {m['license_name']}",
+          f"attribution line: {m['attribution']}",
+          f"site: {m['site_url']}"]
+    if m["quiet"]:
+        o.append("QUIET MONTH: nothing changed - net and gross are both zero")
     if m["held_events"]:
         o.append("HELD (flags.toml, excluded from every number below):")
         o += ["  " + h for h in m["held_events"]]
@@ -403,9 +558,14 @@ def main():
     ds = registry.load(a.city)
     if a.months or not a.month:
         avail, done = months_available(ds), set(complete_months(ds))
-        for mo, dates in avail.items():
-            print(f"{mo}  {len(dates):>3} snapshots  {dates[0]} .. {dates[-1]}"
-                  f"{'  [complete]' if mo in done else ''}")
+        cal = vault_calendar(ds.slug) or {}
+        for mo in sorted(set(avail) | set(cal)):
+            dates = avail.get(mo, [])
+            snaps = (f"{len(dates):>3} snapshots  {dates[0]} .. {dates[-1]}" if dates
+                     else "  0 snapshots" + " " * 26)
+            obs = observation(ds, mo)
+            watched = (f"  {obs['pull_days']:>2} pull days" if obs else "  (no vault record)")
+            print(f"{mo}  {snaps}{watched}{'  [complete]' if mo in done else ''}")
         return
 
     g = digest(ds, a.month)
