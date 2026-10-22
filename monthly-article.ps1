@@ -192,26 +192,26 @@ function Count([string]$outcome) { $counts[$outcome] = 1 + [int]$counts[$outcome
 $claudeRuns = 0
 
 foreach ($item in $due) {
-    $slug = $item.city; $month = $item.month
+    $slug = $item.city; $mo = $item.month
     $since = Get-Date
     # (if/elseif, not switch: `continue` inside a switch block leaves the
     # switch, not the foreach, and a done city would fall through to Claude.)
     if ($item.status -eq 'done') { continue }
     elseif ($item.status -eq 'waiting') {
-        Log "WAITING $slug $month $($item.reason)"
-        Record $slug $month 'check' 'waiting' $since; Count 'waiting'; continue
+        Log "WAITING $slug $mo $($item.reason)"
+        Record $slug $mo 'check' 'waiting' $since; Count 'waiting'; continue
     }
     elseif ($item.status -ne 'due') {
-        Log "ERROR $slug $month $($item.reason)"
-        Record $slug $month 'check' 'error' $since; Count 'error'; continue
+        Log "ERROR $slug $mo $($item.reason)"
+        Record $slug $mo 'check' 'error' $since; Count 'error'; continue
     }
 
     if ($item.quiet) {
         # Nothing changed: a fixed shape, no Claude.
-        Invoke-Logged "python tools\article_quiet.py --city $slug --month $month"
-        if ($LASTEXITCODE -ne 0) { Log "QUIET-FAILED $slug $month exit=$LASTEXITCODE"; Record $slug $month 'quiet' 'failed' $since; Count 'failed'; continue }
-        if (Publish-Articles $slug $month) { Record $slug $month 'publish' 'quiet' $since; Count 'quiet' }
-        else { Record $slug $month 'publish' 'publish-failed' $since; Count 'publish-failed' }
+        Invoke-Logged "python tools\article_quiet.py --city $slug --month $mo"
+        if ($LASTEXITCODE -ne 0) { Log "QUIET-FAILED $slug $mo exit=$LASTEXITCODE"; Record $slug $mo 'quiet' 'failed' $since; Count 'failed'; continue }
+        if (Publish-Articles $slug $mo) { Record $slug $mo 'publish' 'quiet' $since; Count 'quiet' }
+        else { Record $slug $mo 'publish' 'publish-failed' $since; Count 'publish-failed' }
         continue
     }
 
@@ -219,38 +219,39 @@ foreach ($item in $due) {
     # fits the task's time limit; what is left over is picked up tomorrow.
     $elapsed = ((Get-Date) - $runStart).TotalMinutes
     if ($claudeRuns -ge $MaxClaude -or $elapsed -ge $BudgetMinutes) {
-        Log "DEFERRED $slug $month (runs=$claudeRuns elapsed=$([int]$elapsed)m)"
+        Log "DEFERRED $slug $mo (runs=$claudeRuns elapsed=$([int]$elapsed)m)"
         Count 'deferred'; continue     # one CSV row for all of them, at the end
     }
     if (-not (Wait-Online -Minutes 10)) {
         Log "OFFLINE $(Get-Date -Format o)"
-        Record $slug $month 'check' 'offline' $since
-        Finish $month 'check' 'offline' 0
+        Record $slug $mo 'check' 'offline' $since
+        Finish $mo 'check' 'offline' 0
     }
 
     $prompt = @"
-Invoke the monthly-article skill (Skill tool) and follow it for city '$slug', month $month.
-Do steps 1-5 of the loop so your numbers come from the brief and the store: 'python tools/month_digest.py --city $slug --month $month'.
-If 'python run.py flags' shows an open flag for $slug dated inside $month, write nothing and reply WAITING with the reason.
-Then do step 5b exactly as references/research.md describes: research the month's named things, file the findings in articles/research/$slug-$month.md, then write the article articles/researched/$slug-$month.md (steps 6-8), with sourced links and the record's silences stated as silences.
+Invoke the monthly-article skill (Skill tool) and follow it for city '$slug', month $mo.
+Do steps 1-5 of the loop so your numbers come from the brief and the store: 'python tools/month_digest.py --city $slug --month $mo'.
+If 'python run.py flags' shows an open flag for $slug dated inside $mo, write nothing and reply WAITING with the reason.
+Then do step 5b exactly as references/research.md describes: research the month's named things, file the findings in articles/research/$slug-$mo.md, then write the article articles/researched/$slug-$mo.md (steps 6-8), with sourced links and the record's silences stated as silences.
 The attribution footer is the 'attribution line' printed in the brief's header, verbatim, plus the 'site' link; do not compose a licence line of your own.
-Then add the $month row for $slug to the months table in articles/README.md: '| $month | $slug | <net> | <lead> |', keeping the table ordered by month then city.
+Then add the $mo row for $slug to the months table in articles/README.md: '| $mo | $slug | <net> | <lead> |', keeping the table ordered by month then city.
 Do NOT git commit or push: the script that launched you commits afterwards.
 When done, reply with the paths you wrote.
 "@
     $claudeRuns++
-    $code = Invoke-Claude "$slug-$month" $prompt
-    $ok = ($code -eq 0) -and (Test-Path "articles\research\$slug-$month.md") -and (Test-Path "articles\researched\$slug-$month.md")
+    $code = Invoke-Claude "$slug-$mo" $prompt
+    $ok = ($code -eq 0) -and (Test-Path "articles\research\$slug-$mo.md") -and (Test-Path "articles\researched\$slug-$mo.md")
     if (-not $ok) {
-        Log "FAILED $slug $month exit=$code"
-        Record $slug $month 'article' 'failed' $since; Count 'failed'
+        Log "FAILED $slug $mo exit=$code"
+        Record $slug $mo 'article' 'failed' $since; Count 'failed'
         continue
     }
-    if (Publish-Articles $slug $month) { Record $slug $month 'publish' 'written' $since; Count 'written' }
-    else { Record $slug $month 'publish' 'publish-failed' $since; Count 'publish-failed' }
+    if (Publish-Articles $slug $mo) { Record $slug $mo 'publish' 'written' $since; Count 'written' }
+    else { Record $slug $mo 'publish' 'publish-failed' $since; Count 'publish-failed' }
 }
 
-if ($counts['deferred']) { Record "$($counts['deferred']) cities" $Month 'check' 'deferred' $runStart }
+$batchMonth = if ($Month) { $Month } elseif ($due.Count) { $due[-1].month } else { '' }
+if ($counts['deferred']) { Record "$($counts['deferred']) cities" $batchMonth 'check' 'deferred' $runStart }
 $summary = ($counts.GetEnumerator() | Sort-Object Name | ForEach-Object { "$($_.Name)=$($_.Value)" }) -join ' '
 if (-not $summary) { $summary = 'done' }
-Finish $Month 'batch' $summary $(if ($counts['failed'] -or $counts['publish-failed'] -or $counts['error']) { 1 } else { 0 })
+Finish $batchMonth 'batch' $summary $(if ($counts['failed'] -or $counts['publish-failed'] -or $counts['error']) { 1 } else { 0 })
