@@ -33,6 +33,6 @@ snapshot whenever its contents differ from the last one kept. September 2026 pro
 new snapshot; the diff from the last snapshot before the month to the last one in
 it is therefore empty on every count. The 30 reads are recorded in the
 tracker's pull calendar, which is what separates a quiet month from an unobserved
-one. Daily reports for this city: [https://skfd.github.io/ontario-address-changes/windsor/](https://skfd.github.io/ontario-address-changes/windsor/).
+one.
 
 *Contains information licensed under the Open Government Licence - City of Windsor v1.0.* Source dataset: [City of Windsor](https://mappmycity.ca/arcgis/rest/services/OpenDataServices/PropertyParcels/MapServer/1) · Daily reports: [ontario-address-changes](https://skfd.github.io/ontario-address-changes/windsor/)

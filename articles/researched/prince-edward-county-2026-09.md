@@ -33,6 +33,6 @@ snapshot whenever its contents differ from the last one kept. September 2026 pro
 new snapshot; the diff from the last snapshot before the month to the last one in
 it is therefore empty on every count. The 30 reads are recorded in the
 tracker's pull calendar, which is what separates a quiet month from an unobserved
-one. Daily reports for this city: [https://skfd.github.io/ontario-address-changes/prince-edward-county/](https://skfd.github.io/ontario-address-changes/prince-edward-county/).
+one.
 
 *Contains information licensed under the Open Government Licence - The Corporation of the County of Prince Edward v1.0.* Source dataset: [The Corporation of the County of Prince Edward](https://services1.arcgis.com/4HnHVMMKSNypEIkS/arcgis/rest/services/HostedFeatures___Property_Info/FeatureServer/0) · Daily reports: [ontario-address-changes](https://skfd.github.io/ontario-address-changes/prince-edward-county/)

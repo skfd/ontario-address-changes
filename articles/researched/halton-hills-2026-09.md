@@ -33,6 +33,6 @@ snapshot whenever its contents differ from the last one kept. September 2026 pro
 new snapshot; the diff from the last snapshot before the month to the last one in
 it is therefore empty on every count. The 30 reads are recorded in the
 tracker's pull calendar, which is what separates a quiet month from an unobserved
-one. Daily reports for this city: [https://skfd.github.io/ontario-address-changes/halton-hills/](https://skfd.github.io/ontario-address-changes/halton-hills/).
+one.
 
 *Contains information licensed under the Open Data License - Town of Halton Hills.* Source dataset: [Town of Halton Hills](https://services3.arcgis.com/Nn3SWZrtm4WZaUtd/arcgis/rest/services/Civic_Address_(od)/FeatureServer/152) · Daily reports: [ontario-address-changes](https://skfd.github.io/ontario-address-changes/halton-hills/)

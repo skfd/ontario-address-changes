@@ -33,6 +33,6 @@ snapshot whenever its contents differ from the last one kept. September 2026 pro
 new snapshot; the diff from the last snapshot before the month to the last one in
 it is therefore empty on every count. The 28 reads are recorded in the
 tracker's pull calendar, which is what separates a quiet month from an unobserved
-one. Daily reports for this city: [https://skfd.github.io/ontario-address-changes/cambridge/](https://skfd.github.io/ontario-address-changes/cambridge/).
+one.
 
 *Contains information licensed under the Open Government Licence - City of Cambridge.* Source dataset: [City of Cambridge](https://maps.cambridge.ca/arcgispub03/rest/services/OpenData1/FeatureServer/13) · Daily reports: [ontario-address-changes](https://skfd.github.io/ontario-address-changes/cambridge/)

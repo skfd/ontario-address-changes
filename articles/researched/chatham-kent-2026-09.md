@@ -33,6 +33,6 @@ snapshot whenever its contents differ from the last one kept. September 2026 pro
 new snapshot; the diff from the last snapshot before the month to the last one in
 it is therefore empty on every count. The 30 reads are recorded in the
 tracker's pull calendar, which is what separates a quiet month from an unobserved
-one. Daily reports for this city: [https://skfd.github.io/ontario-address-changes/chatham-kent/](https://skfd.github.io/ontario-address-changes/chatham-kent/).
+one.
 
 *Source: [Municipality of Chatham-Kent](https://services1.arcgis.com/BlSm9A1poQIGIz9S/arcgis/rest/services/Municipality_of_Chatham_Kent_Addesses/FeatureServer/9); no open licence is published for this data.* · Daily reports: [ontario-address-changes](https://skfd.github.io/ontario-address-changes/chatham-kent/)

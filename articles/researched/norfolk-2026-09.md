@@ -33,6 +33,6 @@ snapshot whenever its contents differ from the last one kept. September 2026 pro
 new snapshot; the diff from the last snapshot before the month to the last one in
 it is therefore empty on every count. The 30 reads are recorded in the
 tracker's pull calendar, which is what separates a quiet month from an unobserved
-one. Daily reports for this city: [https://skfd.github.io/ontario-address-changes/norfolk/](https://skfd.github.io/ontario-address-changes/norfolk/).
+one.
 
 *Contains information licensed under the Norfolk County Open Data Licence Agreement.* Source dataset: [Norfolk County](https://services1.arcgis.com/mSGV2hCLXHNsfQqK/arcgis/rest/services/Civic_Addresses/FeatureServer/0) · Daily reports: [ontario-address-changes](https://skfd.github.io/ontario-address-changes/norfolk/)

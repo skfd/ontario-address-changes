@@ -33,6 +33,6 @@ snapshot whenever its contents differ from the last one kept. September 2026 pro
 new snapshot; the diff from the last snapshot before the month to the last one in
 it is therefore empty on every count. The 30 reads are recorded in the
 tracker's pull calendar, which is what separates a quiet month from an unobserved
-one. Daily reports for this city: [https://skfd.github.io/ontario-address-changes/kawartha-lakes/](https://skfd.github.io/ontario-address-changes/kawartha-lakes/).
+one.
 
 *Source: [City of Kawartha Lakes](https://services3.arcgis.com/RQBDTPtsbT0jebs7/arcgis/rest/services/CKL_Address_Point_View/FeatureServer/0); no open licence is published for this data.* · Daily reports: [ontario-address-changes](https://skfd.github.io/ontario-address-changes/kawartha-lakes/)
