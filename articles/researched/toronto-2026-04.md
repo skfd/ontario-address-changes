@@ -120,8 +120,8 @@ about addressing at all.
 
 So: two of these three are laneway or garden suites, on the City's own permit records.
 That the `R` suffix is *how Toronto numbers rear suites* is an inference, and nothing
-published says it. My offline draft of this month asserted the direction from geometry
-and happened to be right, which is not the same as having known.
+published says it. A first reading of the geometry asserted the direction and happened
+to be right, which is not the same as having known.
 
 The third, **885R Caledonia Road**, has no public-record explanation whatsoever — zero
 building permits, zero committee applications, zero development applications. It exists,

@@ -32,20 +32,20 @@ usual `legdocs/mmis/2026/te/decisions/2026-07-0{8,9}-te34-dd.htm` URLs (404); TM
   location 12, place_name 8, renumbered 1, splits 4; rows 525,469 → 525,364 (−105).
   Gross status 184. No events held (brief `HELD` empty); `tools/article_due.py --city toronto
   --month 2026-09` returns `status: due`, which it only does with no open Toronto flag in the
-  month. Matches the offline draft. Derived figures in the offline draft recomputed from the
+  month. Matches the first draft. Derived figures in the first draft recomputed from the
   store (identity-key diff 113 → 136): 63 removals whose `full` stays active, 66 gone (10 of
   them reserved); 8 additions whose `full` was already on file (2 of them replacing a removed
   row), 16 new; 194 RESERVED→REGULAR, 55 with a same-`full` row removed, 178 first seen on
   snapshot 1, top street Florence Ave 7, Etobicoke-Lakeshore 48 of 194; 19 Structure Entrance
   removals. All match.
-- **Offline draft spot-checked against the store:** Carlaw ids (439=13971685, 447=13971686,
+- **First draft spot-checked against the store:** Carlaw ids (439=13971685, 447=13971686,
   451–463=13971687–13971693, so nine consecutive), last seen 2026-09-11 (snapshot 123),
   gone 09-14 — correct. Lavender/Lowell/Cree ids 30026322–30026334, last seen 09-15, gone
   09-16 — correct. Station place names — correct. Lanes — correct.
 - **60 and 64 Roselawn Ave** were last seen on the 2026-09-01 snapshot and are absent from
   09-03 (snapshot 118). August's researched article said they "came off the file on
   1 September"; strictly they were last *on* it on 1 September and off by the 3rd. Not
-  in the offline September draft at all (they are two of the 129 removals).
+  in the first September draft at all (they are two of the 129 removals).
 - **Station points (snapshot 138):** 1175 Eglinton Ave E (43.71996, −79.33914) Land,
   RESERVED; 817 Don Mills Rd (43.72139, −79.33881) Land, REGULAR, nearest 1180 Eglinton Ave E
   67 m; 6 Gervais Dr (43.72175, −79.33694) Structure Entrance, REGULAR, nearest 825 Don

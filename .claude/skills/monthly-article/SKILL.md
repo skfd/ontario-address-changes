@@ -119,15 +119,6 @@ methodology footer states it.
 | `references/verifying.md` | Queries that confirm a specific address, street, split or rename before it goes in print |
 | `references/publishing.md` | Where these go, cadence, cross-posting, licence obligations per venue |
 
-## One variant, since October 2026
-
-From March to September 2026 every month was written twice: once from the store alone
-(`articles/offline/`, no external facts, causes left unknown) and once with step 5b
-applied. The comparison ran for seven months and the researched version led on
-something else in six of them; the offline pieces were wordier and said less. The
-offline variant was dropped on 2026-10-20 (`git log -- articles/offline` has them).
-Write only the researched piece.
-
 ## Other cities
 
 Nothing here is Toronto-specific except the field names in the brief (`PLACE_NAME`,

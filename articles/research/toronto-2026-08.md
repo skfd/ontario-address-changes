@@ -49,7 +49,7 @@ Committee of Adjustment active `51fd09cd-99d6-430a-9d42-c24a937b0cb0`, closed
   seven as `Location; MAINT_STAGE` (5 and 9 Sheppard Ave E, 4763/4771/4773 Yonge St,
   2 and 4 Anndale Dr — the Hullmark block, moved 0–39 m) and one as
   `MAINT_STAGE; PLACE_NAME; PLACE_NAME_ALL` (12 Willingdon Blvd, label carried across).
-  41 + 7 + 1 = 49, and 49 is what the offline draft's own bullets enumerate. All 49 had
+  41 + 7 + 1 = 49, and 49 is what the first draft's own bullets enumerate. All 49 had
   been reserved since snapshot 1.
 - **Place-name edits: 6 listed + 2 under `Location; PLACE_NAME; PLACE_NAME_ALL`.** The two
   are 5 Leaside Park Dr (*Leaside Park* → *Leaside Park, Leaside Park Outdoor Pool*, moved
@@ -60,7 +60,7 @@ Committee of Adjustment active `51fd09cd-99d6-430a-9d42-c24a937b0cb0`, closed
   2026-08-18; everything else in the month's coordinate churn is under the 50 m floor.
   The 421–429A Yonge St re-versioning on 2026-08-10 is sub-10 m jitter plus
   `ADDRESS_CLASS_DESC`, an ignored field.
-- **Corrections to the offline draft (`articles/offline/toronto-2026-08.md`), found while
+- **Corrections to the first draft, found while
   verifying it:** (1) it grouped 12 Willingdon Blvd with the 2157 Lake Shore Blvd W /
   Annie Craig / Marine Parade points as one 17 August cluster; the store puts 12 Willingdon
   at 43.64825, −79.51060, about 3.6 km from 2157 Lake Shore (43.62532, −79.47953). (2) it
@@ -241,7 +241,7 @@ Store coords: 5 (43.63907, -79.41105), 9 (43.63903, -79.41119), 25 (43.63881, -7
 
 **Searched:** CKAN dev-applications, active/cleared permits, CoA for 604/610 Bay, 130 Elizabeth, 63–107 Edward (odd); live address points for side-of-street; `"610 Bay Street" "130 Elizabeth Street" development application`; `"Coach Terminal" 610 Bay Street demolition OR construction 2026 Kilmer Tricon`; `"Edward Street" "610 Bay" Kilmer Tricon paramedic 2026` (empty); `site:toronto.ca legdocs "604-610 Bay Street and 130 Elizabeth Street"`.
 
-**FACT — the side of the street** (the research prompt guessed "north"; the offline draft never said). City staff report *Construction Staging Area - 610 Bay Street and 130 Elizabeth Street*, Director, Traffic Management → Toronto and East York Community Council, **18 December 2025**, Ward 11:
+**FACT — the side of the street** (the research prompt guessed "north"; the first draft never said). City staff report *Construction Staging Area - 610 Bay Street and 130 Elizabeth Street*, Director, Traffic Management → Toronto and East York Community Council, **18 December 2025**, Ward 11:
 > "EllisDon is constructing two affordable housing projects: a 44-storey residential tower at 130 Elizabeth Street, and a 16-storey residential tower at 610 Bay Street. The two development sites are located on the south side of Edward Street, between Chestnut Street and Bay Street."
 > "The proposed sidewalk closures are required for a period of 39 months, from January 31, 2026 to April 30, 2029."
 <https://www.toronto.ca/legdocs/mmis/2026/te/bgrd/backgroundfile-261275.pdf>
