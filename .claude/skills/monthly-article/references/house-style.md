@@ -98,9 +98,23 @@ completing, not of construction happening, and paperwork has slow months.
 A quiet month is also the right place to explain one mechanic properly (what a
 retired address means, why a number goes backwards) since there is room for it.
 
+## The nothing-changed shape
+
+Below quiet there is nothing: a month the vault read every day and every read came
+back as the file already on record. That piece is not written by hand —
+`tools/article_quiet.py` produces it from a fixed shape — but the shape is part of
+the series and the hand-written pieces should sit beside it without a seam: a title
+that says nothing changed, how many reads said so and since when the file has stood,
+a zero table with the total on file, one honest paragraph on what an unchanged
+publication does and does not mean (the file not moving is not the city not moving),
+and the footer. No research, no guess at why. It says "the file was not updated",
+never "no addresses were assigned".
+
 ## Length
 
-The series runs 1,300-1,700 words (March to July 2026). A month that comes out at twice that is not twice as interesting; it is a
+Toronto runs 1,300-1,700 words (March to July 2026); a small city's month is often
+400, and that is the right length for it. A month that comes out at twice what its
+material supports is not twice as interesting; it is a
 piece that kept every finding. Cut supporting items before cutting sentences from the
 lead, and keep the research file as the place where everything found gets to stay.
 

@@ -34,16 +34,23 @@ research notes are not rendered; the site links to them here on GitHub.
 | 2026-09 | toronto | −105 | The 13 Carlaw Ave doors were the **Riverdale Shopping Centre**, demolished for the Ontario Line's Gerrard portal (permit completed **15 Dec 2025**); the station rename trails Metrolinx by 17½ months; three new lanes, each over a finished laneway suite |
 | 2026-09 | windsor | 0 | Nothing changed: 30 reads, the file unchanged since 11 June 2026 |
 
-February 2026 is deliberately absent: observation starts 2026-02-12, so its first
-fortnight was never seen. October 2026 is still open.
+Toronto's February 2026 is deliberately absent: observation starts 2026-02-12, so its
+first fortnight was never seen. Every city is written from September 2026 on (the
+first month the whole registry was watched end to end), including the months in
+which nothing changed — those say so, in a fixed shape from `tools/article_quiet.py`,
+on the evidence of the vault's pull calendar. The 19 datasets whose licence forbids
+republication (`publish_reports = false`) get no article. October 2026 is still open.
 
 ## Writing the next one
 
 Normally nothing: from the 3rd of each month the `kk-ontario-article` scheduled task
-(`monthly-article.ps1`) writes the previous month unattended — the research notes, the
-article and this table's row — renders the site copy, and commits and pushes them. It waits a day
-whenever Toronto has an open flag inside the month. `logs/article-runs.csv` says what
-each day's run did. By hand, for an older month or another city:
+(`monthly-article.ps1`) writes the previous month for every city unattended — the
+research notes, the article and this table's row — renders the site copy, and commits
+and pushes after each city. Quiet months cost no Claude run; months with changes are
+capped at a few headless runs a day, so the whole registry takes about a week. It
+waits a day on any city with an open flag inside the month. `logs/article-runs.csv`
+says what each day's run did, one row per city-month. By hand, for an older month or
+one city:
 
 ```
 python tools/month_digest.py --city toronto --months              # which months qualify

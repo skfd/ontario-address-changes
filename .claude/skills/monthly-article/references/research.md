@@ -35,6 +35,26 @@ Search the **address with the street** (`"1226 Queen Street East" Toronto`), not
 number alone. For a range, search the corner or the assembly ("Queen Greenwood
 Leslieville development").
 
+### Every other city
+
+The table above is Toronto's. The same questions have the same kinds of answer
+everywhere, under different names:
+
+| Kind of question | Go here |
+|---|---|
+| A new street, a rename | The municipality's council or committee agenda (street naming is a by-law: search `site:<municipality>.ca` for the street name plus "by-law" or "street naming"); the county or region's agenda for upper-tier roads |
+| What is being built | The municipality's planning or development-applications page (many are ArcGIS hubs or "Application Status" portals); the plan of subdivision name, which the new street usually belongs to |
+| Why a block came off | Local press first — the regional daily or weekly, CBC's regional desk — then the demolition or site-plan item in the agenda |
+| A whole subdivision arriving at once | The developer's own project page names the phase and the street names; the registered plan number is in the agenda |
+| Counties and regions (hastings, simcoe, york...) | The addresses belong to a lower-tier municipality; find which one from the brief's place name or ward field, then search that municipality, not the county |
+| A name's history | Wikipedia, the Canadian Encyclopedia, Ontario Heritage Trust, the local historical society |
+
+Smaller municipalities have thinner records and the search comes back empty more
+often. That is fine: the piece says the record is silent and moves on. Do not reach
+for a Toronto source (UrbanToronto, blogTO, the Toronto CKAN) for a city it does not
+cover, and do not let a same-named street in another municipality through — Ontario
+reuses "Main Street" and "King Street" in nearly every town.
+
 ### What actually works, from the first five months of doing this
 
 - **Toronto's CKAN open data beats web search for a single address.** `datastore_search`

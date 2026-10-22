@@ -19,9 +19,14 @@ alongside in `articles/research/`.
    ```
    python tools/month_digest.py --city toronto --months
    ```
-   Only `[complete]` months qualify: the month opens where the previous one closed and
-   at least one snapshot follows it. A month whose first fortnight was never observed
-   would silently under-report — say so and skip it rather than writing a thin piece.
+   Only `[complete]` months qualify, by either of two tests: the store's own (the month
+   opens where the previous one closed and at least one snapshot follows it) or the
+   vault's pull calendar (a pull before the month, one after, and at least two thirds
+   of its days read — which is what lets a month with *no* edits count). A month that
+   passes neither was not watched end to end and would silently under-report — say so
+   and skip it rather than writing a thin piece. A complete month with nothing in it
+   is written by `tools/article_quiet.py`, not by this loop; the brief says
+   `QUIET MONTH` in its header when that applies.
 
 2. **Check the flag queue before trusting any number.**
    ```
@@ -66,28 +71,38 @@ alongside in `articles/research/`.
 7. **Re-read it as the reader.** Every number in the piece must be traceable to a line
    in the brief. Cut any sentence that survives only because it was hard to research.
 
-8. **Attribution.** Every article carries the source line for the city's licence —
-   `license_name` from `datasets/<slug>.toml`. For Toronto: *"Contains information
-   licensed under the Open Government Licence – Toronto."* Link the source dataset and
-   link the day's report on the live site, so a reader can check any claim. Attribution
-   travels with the content to every venue it is cross-posted to.
+8. **Attribution.** Every article carries the source line for the city's licence,
+   and the brief's header prints it ready-made as `attribution line:` — either
+   *"Contains information licensed under the <licence>."* with the source dataset
+   linked, or, where `datasets/<slug>.toml` records that no licence is published, a
+   plain source statement. Use it verbatim (`month_digest.attribution(ds)` is the
+   one place the wording lives), then link the city's reports on the live site (the
+   brief's `site:` line) so a reader can check any claim. Attribution travels with
+   the content to every venue it is cross-posted to.
 
-8b. **Index it.** Add the month's row to the table in `articles/README.md` — net
-   count and the lead, matching the rows above it.
+8b. **Index it.** Add the month's row to the table in `articles/README.md` —
+   `| <month> | <slug> | <net> | <lead> |`, keeping the table ordered by month then
+   city, matching the rows around it.
 
 9. **Commit.** One commit per article batch.
 
 ## The scheduled run
 
-Since 2026-09-08 the previous month is written unattended: the `kk-ontario-article`
-task runs `monthly-article.ps1` daily at 15:00, which does nothing before the 3rd,
-asks `tools/article_due.py` whether the month is complete, unflagged and unwritten,
-then runs this skill headlessly in one pass (research notes, article, README row),
-renders `docs/articles/` and commits and pushes. A month held by an open Toronto flag
-logs `WAITING` and is retried the next day; a run that dies leaves its files and the
-next day resumes from whatever is missing. `logs/article.log` and
-`logs/article-runs.csv` hold the outcome. Months older than the previous one, and
-other cities, are still written by hand with the loop above.
+Since 2026-09-08 the previous month is written unattended, and since 2026-10-22 for
+every city whose licence allows it: the `kk-ontario-article` task runs
+`monthly-article.ps1` daily at 15:00, which does nothing before the 3rd, asks
+`tools/article_due.py --all` which city-months are complete, unflagged and unwritten,
+and then works through them one city at a time. A month in which nothing changed
+(`quiet` in the due list) is written by `tools/article_quiet.py` from a fixed shape;
+a month with changes gets a headless run of this skill in one pass (research notes,
+article, README row). After each city it renders `docs/articles/`, commits and pushes,
+so a run that dies keeps what it finished. The Claude runs are capped per day
+(`-MaxClaude 6`, `-BudgetMinutes 150`, inside the task's 4 h limit) and the rest is
+`DEFERRED` to the next day, so a month with thirty busy cities takes about a week.
+A month held by an open flag logs `WAITING` and is retried the next day.
+`logs/article.log` and `logs/article-runs.csv` (one row per city-month) hold the
+outcome. Months older than the previous one are still written by hand with the loop
+above, or with `.\monthly-article.ps1 -Month 2026-08` for a whole batch.
 
 ## Numbers: net vs gross
 
@@ -121,8 +136,12 @@ methodology footer states it.
 
 ## Other cities
 
-Nothing here is Toronto-specific except the field names in the brief (`PLACE_NAME`,
-`WARD_NAME`) and the licence line. `--city <slug>` works for all 53 datasets, but
-check `publish_reports` in the dataset's TOML first: four cities are tracked under
-licences that forbid republication, and an article quoting their rows is exactly the
-republication the gate exists to prevent. Those cities get no article.
+Every city gets the same piece. Nothing here is Toronto-specific except the field
+names in the brief (`PLACE_NAME`, `WARD_NAME`) and the Toronto rows of the research
+table; `references/research.md` says where the answers live for everyone else.
+`--city <slug>` works for all 77 datasets, but only the 58 with `publish_reports =
+true` get an article: the other 19 are tracked under licences that forbid
+republication, and an article quoting their rows is exactly the republication the
+gate exists to prevent. `article_due --all` already leaves them out. A small city's
+month is a small piece — the quiet-month shape in `references/house-style.md` is the
+norm outside Toronto, not the exception.
