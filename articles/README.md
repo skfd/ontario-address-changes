@@ -22,6 +22,7 @@ research notes are not rendered; the site links to them here on GitHub.
 | 2026-07 | toronto | +12 | Crosstown West gets its addresses, and the nine of them are a **contract's parts list**; the park "renamings" are restorations of decisions up to ten years old |
 | 2026-08 | toronto | +7 | Twelve retirements that are still on file, the file swapping which record it keeps for an address; the swapped addresses are buildings the City dated years ago (Yonge/Glebe rezoned **2010**, Hullmark Centre, Alter); a park council renamed on 30 July reached the file in **20 days**; a 2023 permit named 530 Duplex Ave before the file did |
 | 2026-09 | amherstburg | 0 | Nothing changed: 29 reads, the file unchanged since 20 August 2026 |
+| 2026-09 | barrie | +23 | The five townhomes the City approved at 159 Huronia Rd (**13 Aug 2025**) get Units 1 and 2 on 151–159; the five St Paul's Cres lots at the rebuilt Yonge corner gain Yonge numbers 905–919 alongside their old ones, and the City has moved that intersection 90 m north; 174 addresses on Strawberry, Sunflower and Blue Forest flip *Current→Pending* in one day, words the City never defines |
 | 2026-09 | cambridge | 0 | Nothing changed: 28 reads, the file unchanged since 7 August 2026 |
 | 2026-09 | chatham-kent | 0 | Nothing changed: 30 reads, the file unchanged since 24 July 2026 |
 | 2026-09 | halton-hills | 0 | Nothing changed: 30 reads, the file unchanged since 20 August 2026 |
