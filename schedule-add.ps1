@@ -3,10 +3,11 @@
 #                       datasets, then commit + push docs). New cities in
 #                       datasets\*.toml are picked up automatically.
 #   kk-ontario-article  daily 15:00  monthly-article.ps1 (from the 3rd of each
-#                       month, write the previous month's Toronto newsletter
-#                       piece with headless Claude, commit + push articles\).
-#                       Exits at once on every other day; 15:00 keeps it clear
-#                       of the noon run's git even after two retries.
+#                       month, write the monthly newsletter pieces due across
+#                       every publishable city: quiet months from a fixed shape,
+#                       the rest with headless Claude up to a daily cap; render,
+#                       commit + push after each city). Exits at once before the
+#                       3rd; 15:00 keeps it clear of the noon run's git.
 
 $projectDir = $PSScriptRoot
 $taskName   = "kk-ontario-update"
@@ -38,9 +39,10 @@ Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Se
 Write-Host ("Registered {0}: daily {1:HH:mm} via daily-update.ps1, log: {2}" -f $taskName, $runAt, $logFile)
 Write-Host "Retry: daily-update.ps1 itself reruns up to 3 attempts, 15 min apart, on failure."
 
-# The article writer. Long limit: two headless Claude phases with web research
-# can take an hour or more. No RestartCount: a failed phase is retried by the
-# next day's run, which resumes from whichever article files are missing.
+# The article writer. Long limit: each researched article is a headless Claude
+# run with web research, 40-60 min, and a day's run writes several before its
+# own budget stops it. No RestartCount: a failed or deferred city is retried by
+# the next day's run, which resumes from whatever is missing.
 $articleTask  = "kk-ontario-article"
 $articleAt    = Get-Date "15:00"
 $articleLog   = "$projectDir\logs\article.log"
