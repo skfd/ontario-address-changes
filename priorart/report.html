@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Prior art vs the tracker — 2026-10-19</title>
+<title>Prior art vs the tracker — 2026-10-21</title>
 <style>
   :root { --bg:#fafafa; --surface:#fff; --surface2:#f5f5f5; --border:#e0e0e0; --text:#242424;
     --dim:#616161; --accent:#0078d4; --green:#107c10; --red:#c50f1f; --yellow:#eaa300; color-scheme:light; }
@@ -34,15 +34,15 @@
 <body><main>
 
 <h1>Prior art vs the tracker</h1>
-<p class="lead">Measured 2026-10-19. 3318 measurements on file since 2026-10-17. Back-office: method under review, not linked from the public site.</p>
+<p class="lead">Measured 2026-10-21. 5054 measurements on file since 2026-10-17. Back-office: method under review, not linked from the public site.</p>
 
 
 <h2>Comparators</h2>
 <table>
 <tr><th>Who</th><th>Kind</th><th class="n">Ontario rows</th><th class="n">Sources</th><th>Latest data</th><th>Cadence claimed</th><th>Cadence measured</th><th class="n">Unit filled</th><th>Access</th></tr>
 
-<tr><td><a href="https://skfd.github.io/ontario-address-changes/">Ontario Address Change Tracker</a></td><td>tracker</td><td class="n">6,347,664</td><td class="n">77</td>
-<td>2026-10-18</td><td>daily</td><td>median 30 pulls and 5 content changes per 30 d, over the 48 datasets tracked 30 d or more</td><td class="n">15%</td><td class="small">local SQLite</td></tr>
+<tr><td><a href="https://skfd.github.io/ontario-address-changes/">Ontario Address Change Tracker</a></td><td>tracker</td><td class="n">6,348,208</td><td class="n">77</td>
+<td>2026-10-21</td><td>daily</td><td>median 31 pulls and 5 content changes per 30 d, over the 48 datasets tracked 30 d or more</td><td class="n">16%</td><td class="small">local SQLite</td></tr>
 
 <tr><td><a href="https://github.com/openaddresses/openaddresses">OpenAddresses</a></td><td>registry</td><td class="n">7,313,840</td><td class="n">85</td>
 <td>2026-10-16</td><td>weekly batch</td><td>63 of 85 sources ran in the last 14 d</td><td class="n">15%</td><td class="small">public API; outputs need a login</td></tr>
@@ -54,7 +54,7 @@
 <td>2026-06-01</td><td>semi-annual</td><td>202412, 202507, 202606</td><td class="n">35%</td><td class="small">public zip per vintage</td></tr>
 
 <tr><td><a href="https://docs.overturemaps.org/guides/addresses/">Overture Maps addresses theme</a></td><td>global</td><td class="n">5,433,763</td><td class="n">1</td>
-<td>2026-09-23</td><td>monthly release</td><td>releases 2026-08-19.0, 2026-09-23.0, 2026-09-23.1</td><td class="n">39%</td><td class="small">public S3 parquet</td></tr>
+<td>2026-10-21</td><td>monthly release</td><td>releases 2026-09-23.0, 2026-09-23.1, 2026-10-21.0</td><td class="n">39%</td><td class="small">public S3 parquet</td></tr>
 
 </table>
 <p class="note">Rows for us and OpenAddresses are sums over sources and double-count where sources overlap (regions and their members). The municipality matrix below takes the max per municipality for us instead.</p>
@@ -62,9 +62,9 @@
 <h2>Coverage by municipality</h2>
 <p class="lead">414 lower- and single-tier municipalities (LIO polygons). Points binned by polygon for us and Overture; NAR and ODA by census-subdivision name.</p>
 <table>
-<tr><th></th><th class="n">Ours</th><th class="n">NAR 202606 rows</th><th class="n">NAR locations</th><th class="n">ODA 2021</th><th class="n">Overture 2026-09-23.1</th></tr>
+<tr><th></th><th class="n">Ours</th><th class="n">NAR 202606 rows</th><th class="n">NAR locations</th><th class="n">ODA 2021</th><th class="n">Overture 2026-10-21.0</th></tr>
 <tr><td>Municipalities with ≥1 row</td><td class="n">269</td><td class="n">414</td><td class="n">414</td><td class="n">161</td><td class="n">392</td></tr>
-<tr><td>Rows binned to a municipality</td><td class="n">5,115,524</td><td class="n">6,211,604</td><td class="n">4,162,913</td><td class="n">4,029,086</td><td class="n">5,424,604</td></tr>
+<tr><td>Rows binned to a municipality</td><td class="n">5,116,068</td><td class="n">6,211,604</td><td class="n">4,162,913</td><td class="n">4,029,086</td><td class="n">5,424,604</td></tr>
 </table>
 <p class="note">NAR and Overture rows are unit-level (one row per apartment where StatCan knows it). "NAR locations" counts distinct LOC_GUIDs, the building or entrance. Our layers sit anywhere between the two: some publish one point per building, some one per unit, so Ours / NAR loc. is a scale check (is the layer the same order of magnitude as the register?), not a completeness score. Well over 100% means a unit-level layer, well under means a thin one.</p>
 <p><b>165 municipalities</b> where we hold under 5% of the register's locations (nothing, or only spillover from a neighbour's layer): 378,572 of 6,211,604 NAR rows (6.1%). Highlighted below.</p>
@@ -72,11 +72,11 @@
 <tr><th>Municipality</th><th>Upper tier</th><th class="n">Ours</th><th>Our datasets</th><th class="n">NAR rows</th><th class="n">NAR locations</th><th class="n">Ours / NAR loc.</th><th class="n">ODA 2021</th><th class="n">Overture</th></tr>
 
 <tr class=""><td>TORONTO</td>
-<td class="small"></td><td class="n">525,372</td><td class="small">toronto</td>
+<td class="small"></td><td class="n">525,371</td><td class="small">toronto</td>
 <td class="n">1,314,780</td><td class="n">488,296</td><td class="n">108%</td><td class="n">527,026</td><td class="n">1,303,261</td></tr>
 
 <tr class=""><td>OTTAWA</td>
-<td class="small"></td><td class="n">404,466</td><td class="small">ottawa</td>
+<td class="small"></td><td class="n">404,486</td><td class="small">ottawa</td>
 <td class="n">466,970</td><td class="n">312,058</td><td class="n">130%</td><td class="n">383,870</td><td class="n">439,918</td></tr>
 
 <tr class=""><td>MISSISSAUGA</td>
@@ -84,7 +84,7 @@
 <td class="n">266,947</td><td class="n">142,313</td><td class="n">186%</td><td class="n">235,674</td><td class="n">262,023</td></tr>
 
 <tr class=""><td>HAMILTON (CITY) <span class="tag yellow" title="another municipality shares this short name; see the type in brackets">name shared</span></td>
-<td class="small"></td><td class="n">274,565</td><td class="small">hamilton</td>
+<td class="small"></td><td class="n">274,572</td><td class="small">hamilton</td>
 <td class="n">246,683</td><td class="n">162,840</td><td class="n">169%</td><td class="n">256,046</td><td class="n">233,047</td></tr>
 
 <tr class=""><td>LONDON</td>
@@ -92,7 +92,7 @@
 <td class="n">197,565</td><td class="n">110,370</td><td class="n">130%</td><td class="n">135,412</td><td class="n">186,546</td></tr>
 
 <tr class=""><td>BRAMPTON</td>
-<td class="small">REGIONAL MUNICIPALITY OF PEEL</td><td class="n">249,931</td><td class="small">brampton, peel-region</td>
+<td class="small">REGIONAL MUNICIPALITY OF PEEL</td><td class="n">249,959</td><td class="small">brampton, peel-region</td>
 <td class="n">193,240</td><td class="n">156,069</td><td class="n">160%</td><td class="n">340,187</td><td class="n">186,493</td></tr>
 
 <tr class=""><td>MARKHAM</td>
@@ -112,16 +112,16 @@
 <td class="n">104,521</td><td class="n">76,908</td><td class="n">155%</td><td class="n">76,754</td><td class="n">101,788</td></tr>
 
 <tr class=""><td>OAKVILLE</td>
-<td class="small">REGIONAL MUNICIPALITY OF HALTON</td><td class="n">71,159</td><td class="small">oakville</td>
+<td class="small">REGIONAL MUNICIPALITY OF HALTON</td><td class="n">71,161</td><td class="small">oakville</td>
 <td class="n">83,698</td><td class="n">60,152</td><td class="n">118%</td><td class="n">66,891</td><td class="n">81,158</td></tr>
 
 <tr class=""><td>BURLINGTON</td>
-<td class="small">REGIONAL MUNICIPALITY OF HALTON</td><td class="n">60,347</td><td class="small">burlington</td>
+<td class="small">REGIONAL MUNICIPALITY OF HALTON</td><td class="n">60,346</td><td class="small">burlington</td>
 <td class="n">79,250</td><td class="n">48,103</td><td class="n">125%</td><td class="n">59,493</td><td class="n">78,151</td></tr>
 
 <tr class=""><td>GREATER SUDBURY</td>
-<td class="small"></td><td class="n">70,160</td><td class="small">greater-sudbury</td>
-<td class="n">77,513</td><td class="n">55,032</td><td class="n">127%</td><td class="n">66,766</td><td class="n">68,630</td></tr>
+<td class="small"></td><td class="n">70,174</td><td class="small">greater-sudbury</td>
+<td class="n">77,513</td><td class="n">55,032</td><td class="n">128%</td><td class="n">66,766</td><td class="n">68,630</td></tr>
 
 <tr class=""><td>RICHMOND HILL</td>
 <td class="small">REGIONAL MUNICIPALITY OF YORK</td><td class="n">79,724</td><td class="small">york</td>
@@ -132,7 +132,7 @@
 <td class="n">73,338</td><td class="n">51,186</td><td class="n">125%</td><td class="n">58,005</td><td class="n">70,894</td></tr>
 
 <tr class=""><td>KINGSTON</td>
-<td class="small"></td><td class="n">77,687</td><td class="small">kingston</td>
+<td class="small"></td><td class="n">77,698</td><td class="small">kingston</td>
 <td class="n">67,207</td><td class="n">42,221</td><td class="n">184%</td><td class="n">65,659</td><td class="n">64,235</td></tr>
 
 <tr class=""><td>ST CATHARINES</td>
@@ -140,7 +140,7 @@
 <td class="n">64,354</td><td class="n">42,296</td><td class="n">129%</td><td class="n">57,195</td><td class="n">62,651</td></tr>
 
 <tr class=""><td>GUELPH</td>
-<td class="small"></td><td class="n">53,613</td><td class="small">guelph</td>
+<td class="small"></td><td class="n">53,614</td><td class="small">guelph</td>
 <td class="n">62,833</td><td class="n">38,607</td><td class="n">139%</td><td class="n">51,255</td><td class="n">60,958</td></tr>
 
 <tr class=""><td>BARRIE</td>
@@ -172,7 +172,7 @@
 <td class="n">47,005</td><td class="n">33,025</td><td class="n">118%</td><td class="n">35,276</td><td class="n">45,888</td></tr>
 
 <tr class=""><td>MILTON</td>
-<td class="small">REGIONAL MUNICIPALITY OF HALTON</td><td class="n">46,383</td><td class="small">milton</td>
+<td class="small">REGIONAL MUNICIPALITY OF HALTON</td><td class="n">46,384</td><td class="small">milton</td>
 <td class="n">44,487</td><td class="n">36,763</td><td class="n">126%</td><td class="n">1</td><td class="n">35,996</td></tr>
 
 <tr class=""><td>NIAGARA FALLS</td>
@@ -284,7 +284,7 @@
 <td class="n">16,778</td><td class="n">14,822</td><td class="n">115%</td><td class="n">16,075</td><td class="n">11,862</td></tr>
 
 <tr class=""><td>ORILLIA</td>
-<td class="small"></td><td class="n">13,376</td><td class="small">simcoe</td>
+<td class="small"></td><td class="n">13,379</td><td class="small">simcoe</td>
 <td class="n">16,763</td><td class="n">10,681</td><td class="n">125%</td><td class="n">0</td><td class="n">15,065</td></tr>
 
 <tr class=""><td>STRATFORD</td>
@@ -304,15 +304,15 @@
 <td class="n">14,895</td><td class="n">13,733</td><td class="n">112%</td><td class="n">0</td><td class="n">9,937</td></tr>
 
 <tr class=""><td>WASAGA BEACH</td>
-<td class="small">COUNTY OF SIMCOE</td><td class="n">17,078</td><td class="small">simcoe</td>
+<td class="small">COUNTY OF SIMCOE</td><td class="n">17,080</td><td class="small">simcoe</td>
 <td class="n">14,895</td><td class="n">13,836</td><td class="n">123%</td><td class="n">0</td><td class="n">12,230</td></tr>
 
 <tr class=""><td>COLLINGWOOD</td>
-<td class="small">COUNTY OF SIMCOE</td><td class="n">15,325</td><td class="small">simcoe</td>
+<td class="small">COUNTY OF SIMCOE</td><td class="n">15,336</td><td class="small">simcoe</td>
 <td class="n">14,685</td><td class="n">11,077</td><td class="n">138%</td><td class="n">0</td><td class="n">12,106</td></tr>
 
 <tr class=""><td>PRINCE EDWARD</td>
-<td class="small"></td><td class="n">27,367</td><td class="small">prince-edward-county</td>
+<td class="small"></td><td class="n">27,369</td><td class="small">prince-edward-county</td>
 <td class="n">14,116</td><td class="n">12,563</td><td class="n">218%</td><td class="n">0</td><td class="n">8,173</td></tr>
 
 <tr class=""><td>EAST GWILLIMBURY</td>
@@ -340,7 +340,7 @@
 <td class="n">12,020</td><td class="n">9,701</td><td class="n">1%</td><td class="n">0</td><td class="n">9,371</td></tr>
 
 <tr class=""><td>ORANGEVILLE</td>
-<td class="small">COUNTY OF DUFFERIN</td><td class="n">9,493</td><td class="small">dufferin</td>
+<td class="small">COUNTY OF DUFFERIN</td><td class="n">9,496</td><td class="small">dufferin</td>
 <td class="n">11,881</td><td class="n">8,995</td><td class="n">106%</td><td class="n">19,660</td><td class="n">11,208</td></tr>
 
 <tr class=""><td>BROCKVILLE</td>
@@ -380,7 +380,7 @@
 <td class="n">10,351</td><td class="n">9,257</td><td class="n">118%</td><td class="n">0</td><td class="n">7,899</td></tr>
 
 <tr class=""><td>ORO-MEDONTE</td>
-<td class="small">COUNTY OF SIMCOE</td><td class="n">12,384</td><td class="small">simcoe</td>
+<td class="small">COUNTY OF SIMCOE</td><td class="n">12,385</td><td class="small">simcoe</td>
 <td class="n">10,264</td><td class="n">9,773</td><td class="n">127%</td><td class="n">0</td><td class="n">7,449</td></tr>
 
 <tr class=""><td>PORT COLBORNE</td>
@@ -392,11 +392,11 @@
 <td class="n">10,078</td><td class="n">9,934</td><td class="n">110%</td><td class="n">1</td><td class="n">5,460</td></tr>
 
 <tr class=""><td>TECUMSEH</td>
-<td class="small">COUNTY OF ESSEX</td><td class="n">9,762</td><td class="small">tecumseh</td>
+<td class="small">COUNTY OF ESSEX</td><td class="n">9,763</td><td class="small">tecumseh</td>
 <td class="n">10,045</td><td class="n">8,969</td><td class="n">109%</td><td class="n">0</td><td class="n">8,971</td></tr>
 
 <tr class=""><td>BRACEBRIDGE</td>
-<td class="small">DISTRICT MUNICIPALITY OF MUSKOKA</td><td class="n">12,232</td><td class="small">muskoka</td>
+<td class="small">DISTRICT MUNICIPALITY OF MUSKOKA</td><td class="n">12,233</td><td class="small">muskoka</td>
 <td class="n">9,868</td><td class="n">8,523</td><td class="n">144%</td><td class="n">10,811</td><td class="n">5,721</td></tr>
 
 <tr class=""><td>KING</td>
@@ -408,7 +408,7 @@
 <td class="n">9,584</td><td class="n">8,828</td><td class="n">0%</td><td class="n">0</td><td class="n">5,947</td></tr>
 
 <tr class=""><td>SOUTH FRONTENAC</td>
-<td class="small">COUNTY OF FRONTENAC</td><td class="n">11,469</td><td class="small">frontenac</td>
+<td class="small">COUNTY OF FRONTENAC</td><td class="n">11,471</td><td class="small">frontenac</td>
 <td class="n">9,453</td><td class="n">9,252</td><td class="n">124%</td><td class="n">0</td><td class="n">5,547</td></tr>
 
 <tr class=""><td>SCUGOG</td>
@@ -416,7 +416,7 @@
 <td class="n">9,365</td><td class="n">8,717</td><td class="n">114%</td><td class="n">9,467</td><td class="n">7,391</td></tr>
 
 <tr class=""><td>TILLSONBURG</td>
-<td class="small">COUNTY OF OXFORD</td><td class="n">9,333</td><td class="small">oxford</td>
+<td class="small">COUNTY OF OXFORD</td><td class="n">9,334</td><td class="small">oxford</td>
 <td class="n">9,364</td><td class="n">6,984</td><td class="n">134%</td><td class="n">2</td><td class="n">8,173</td></tr>
 
 <tr class="gap"><td>KINGSVILLE</td>
@@ -440,7 +440,7 @@
 <td class="n">8,886</td><td class="n">7,863</td><td class="n">106%</td><td class="n">8,222</td><td class="n">7,214</td></tr>
 
 <tr class=""><td>SPRINGWATER</td>
-<td class="small">COUNTY OF SIMCOE</td><td class="n">10,504</td><td class="small">simcoe</td>
+<td class="small">COUNTY OF SIMCOE</td><td class="n">10,505</td><td class="small">simcoe</td>
 <td class="n">8,813</td><td class="n">8,467</td><td class="n">124%</td><td class="n">0</td><td class="n">5,330</td></tr>
 
 <tr class=""><td>SELWYN</td>
@@ -476,7 +476,7 @@
 <td class="n">8,061</td><td class="n">7,542</td><td class="n">118%</td><td class="n">0</td><td class="n">5,268</td></tr>
 
 <tr class=""><td>GREATER NAPANEE</td>
-<td class="small">COUNTY OF LENNOX AND ADDINGTON</td><td class="n">9,512</td><td class="small">lennox-addington</td>
+<td class="small">COUNTY OF LENNOX AND ADDINGTON</td><td class="n">9,514</td><td class="small">lennox-addington</td>
 <td class="n">8,008</td><td class="n">6,673</td><td class="n">143%</td><td class="n">0</td><td class="n">5,033</td></tr>
 
 <tr class=""><td>MUSKOKA LAKES</td>
@@ -508,7 +508,7 @@
 <td class="n">7,676</td><td class="n">6,376</td><td class="n">0%</td><td class="n">0</td><td class="n">4,828</td></tr>
 
 <tr class=""><td>MIDDLESEX CENTRE</td>
-<td class="small">COUNTY OF MIDDLESEX</td><td class="n">8,015</td><td class="small">middlesex</td>
+<td class="small">COUNTY OF MIDDLESEX</td><td class="n">8,016</td><td class="small">middlesex</td>
 <td class="n">7,647</td><td class="n">7,042</td><td class="n">114%</td><td class="n">7,441</td><td class="n">4,224</td></tr>
 
 <tr class=""><td>PETAWAWA</td>
@@ -540,7 +540,7 @@
 <td class="n">6,827</td><td class="n">6,155</td><td class="n">118%</td><td class="n">6,860</td><td class="n">3,777</td></tr>
 
 <tr class=""><td>CLEARVIEW</td>
-<td class="small">COUNTY OF SIMCOE</td><td class="n">8,234</td><td class="small">simcoe</td>
+<td class="small">COUNTY OF SIMCOE</td><td class="n">8,236</td><td class="small">simcoe</td>
 <td class="n">6,699</td><td class="n">6,338</td><td class="n">130%</td><td class="n">4</td><td class="n">4,466</td></tr>
 
 <tr class="gap"><td>MISSISSIPPI MILLS</td>
@@ -700,7 +700,7 @@
 <td class="n">4,596</td><td class="n">4,376</td><td class="n">140%</td><td class="n">1</td><td class="n">1,822</td></tr>
 
 <tr class=""><td>SEGUIN</td>
-<td class="small"></td><td class="n">5,820</td><td class="small">west-parry-sound</td>
+<td class="small"></td><td class="n">5,821</td><td class="small">west-parry-sound</td>
 <td class="n">4,512</td><td class="n">4,453</td><td class="n">131%</td><td class="n">5,664</td><td class="n">493</td></tr>
 
 <tr class=""><td>RENFREW</td>
@@ -824,11 +824,11 @@
 <td class="n">3,611</td><td class="n">2,733</td><td class="n">103%</td><td class="n">0</td><td class="n">3,305</td></tr>
 
 <tr class=""><td>MONO</td>
-<td class="small">COUNTY OF DUFFERIN</td><td class="n">4,312</td><td class="small">dufferin</td>
+<td class="small">COUNTY OF DUFFERIN</td><td class="n">4,314</td><td class="small">dufferin</td>
 <td class="n">3,595</td><td class="n">3,351</td><td class="n">129%</td><td class="n">4,283</td><td class="n">2,381</td></tr>
 
 <tr class=""><td>HASTINGS HIGHLANDS</td>
-<td class="small">COUNTY OF HASTINGS</td><td class="n">4,589</td><td class="small">hastings</td>
+<td class="small">COUNTY OF HASTINGS</td><td class="n">4,617</td><td class="small">hastings</td>
 <td class="n">3,590</td><td class="n">3,462</td><td class="n">133%</td><td class="n">4,054</td><td class="n">1,716</td></tr>
 
 <tr class=""><td>SHELBURNE</td>
@@ -904,8 +904,8 @@
 <td class="n">3,242</td><td class="n">2,988</td><td class="n">0%</td><td class="n">0</td><td class="n">2,163</td></tr>
 
 <tr class=""><td>TWEED</td>
-<td class="small">COUNTY OF HASTINGS</td><td class="n">3,845</td><td class="small">hastings</td>
-<td class="n">3,242</td><td class="n">2,964</td><td class="n">130%</td><td class="n">3,460</td><td class="n">1,848</td></tr>
+<td class="small">COUNTY OF HASTINGS</td><td class="n">3,984</td><td class="small">hastings</td>
+<td class="n">3,242</td><td class="n">2,964</td><td class="n">134%</td><td class="n">3,460</td><td class="n">1,848</td></tr>
 
 <tr class=""><td>NORTH KAWARTHA</td>
 <td class="small">COUNTY OF PETERBOROUGH</td><td class="n">4,290</td><td class="small">peterborough-county</td>
@@ -924,7 +924,7 @@
 <td class="n">3,119</td><td class="n">2,946</td><td class="n">133%</td><td class="n">0</td><td class="n">2,046</td></tr>
 
 <tr class=""><td>PUSLINCH</td>
-<td class="small">COUNTY OF WELLINGTON</td><td class="n">3,233</td><td class="small">wellington</td>
+<td class="small">COUNTY OF WELLINGTON</td><td class="n">3,234</td><td class="small">wellington</td>
 <td class="n">3,117</td><td class="n">2,925</td><td class="n">111%</td><td class="n">6</td><td class="n">1,802</td></tr>
 
 <tr class=""><td>WAINFLEET</td>
@@ -980,12 +980,12 @@
 <td class="n">2,707</td><td class="n">2,368</td><td class="n">107%</td><td class="n">2,511</td><td class="n">1,227</td></tr>
 
 <tr class=""><td>NORTH MIDDLESEX</td>
-<td class="small">COUNTY OF MIDDLESEX</td><td class="n">3,359</td><td class="small">middlesex</td>
+<td class="small">COUNTY OF MIDDLESEX</td><td class="n">3,361</td><td class="small">middlesex</td>
 <td class="n">2,639</td><td class="n">2,435</td><td class="n">138%</td><td class="n">2,897</td><td class="n">1,494</td></tr>
 
 <tr class=""><td>MARMORA AND LAKE</td>
-<td class="small">COUNTY OF HASTINGS</td><td class="n">3,165</td><td class="small">hastings</td>
-<td class="n">2,621</td><td class="n">2,443</td><td class="n">130%</td><td class="n">2,919</td><td class="n">1,296</td></tr>
+<td class="small">COUNTY OF HASTINGS</td><td class="n">3,205</td><td class="small">hastings</td>
+<td class="n">2,621</td><td class="n">2,443</td><td class="n">131%</td><td class="n">2,919</td><td class="n">1,296</td></tr>
 
 <tr class="gap"><td>ESPANOLA</td>
 <td class="small"></td><td class="n">0</td><td class="small"></td>
@@ -1020,7 +1020,7 @@
 <td class="n">2,342</td><td class="n">2,088</td><td class="n">115%</td><td class="n">2,051</td><td class="n">911</td></tr>
 
 <tr class=""><td>CENTRE HASTINGS</td>
-<td class="small">COUNTY OF HASTINGS</td><td class="n">2,809</td><td class="small">hastings</td>
+<td class="small">COUNTY OF HASTINGS</td><td class="n">2,820</td><td class="small">hastings</td>
 <td class="n">2,337</td><td class="n">2,097</td><td class="n">134%</td><td class="n">2,566</td><td class="n">1,246</td></tr>
 
 <tr class=""><td>NORTH HURON</td>
@@ -1040,7 +1040,7 @@
 <td class="n">2,283</td><td class="n">2,215</td><td class="n">0%</td><td class="n">0</td><td class="n">41</td></tr>
 
 <tr class=""><td>STIRLING-RAWDON</td>
-<td class="small">COUNTY OF HASTINGS</td><td class="n">2,711</td><td class="small">hastings</td>
+<td class="small">COUNTY OF HASTINGS</td><td class="n">2,723</td><td class="small">hastings</td>
 <td class="n">2,249</td><td class="n">2,071</td><td class="n">131%</td><td class="n">2,295</td><td class="n">1,363</td></tr>
 
 <tr class=""><td>SOUTHWOLD</td>
@@ -1056,8 +1056,8 @@
 <td class="n">2,158</td><td class="n">2,047</td><td class="n">111%</td><td class="n">0</td><td class="n">674</td></tr>
 
 <tr class=""><td>BANCROFT</td>
-<td class="small">COUNTY OF HASTINGS</td><td class="n">2,718</td><td class="small">hastings</td>
-<td class="n">2,155</td><td class="n">1,756</td><td class="n">155%</td><td class="n">2,572</td><td class="n">916</td></tr>
+<td class="small">COUNTY OF HASTINGS</td><td class="n">2,785</td><td class="small">hastings</td>
+<td class="n">2,155</td><td class="n">1,756</td><td class="n">159%</td><td class="n">2,572</td><td class="n">916</td></tr>
 
 <tr class="gap"><td>HEARST</td>
 <td class="small"></td><td class="n">0</td><td class="small"></td>
@@ -1092,8 +1092,8 @@
 <td class="n">1,802</td><td class="n">1,499</td><td class="n">0%</td><td class="n">0</td><td class="n">366</td></tr>
 
 <tr class=""><td>TYENDINAGA</td>
-<td class="small">COUNTY OF HASTINGS</td><td class="n">2,282</td><td class="small">hastings</td>
-<td class="n">1,799</td><td class="n">1,764</td><td class="n">129%</td><td class="n">1,910</td><td class="n">1,466</td></tr>
+<td class="small">COUNTY OF HASTINGS</td><td class="n">2,285</td><td class="small">hastings</td>
+<td class="n">1,799</td><td class="n">1,764</td><td class="n">130%</td><td class="n">1,910</td><td class="n">1,466</td></tr>
 
 <tr class=""><td>NORTH ALGONA WILBERFORCE</td>
 <td class="small">COUNTY OF RENFREW</td><td class="n">2,350</td><td class="small">renfrew</td>
@@ -1176,7 +1176,7 @@
 <td class="n">1,471</td><td class="n">1,410</td><td class="n">0%</td><td class="n">0</td><td class="n">0</td></tr>
 
 <tr class=""><td>AMARANTH</td>
-<td class="small">COUNTY OF DUFFERIN</td><td class="n">2,313</td><td class="small">dufferin</td>
+<td class="small">COUNTY OF DUFFERIN</td><td class="n">2,314</td><td class="small">dufferin</td>
 <td class="n">1,467</td><td class="n">1,454</td><td class="n">159%</td><td class="n">2,161</td><td class="n">893</td></tr>
 
 <tr class=""><td>MULMUR</td>
@@ -1232,8 +1232,8 @@
 <td class="n">1,312</td><td class="n">1,229</td><td class="n">0%</td><td class="n">0</td><td class="n">30</td></tr>
 
 <tr class=""><td>FARADAY</td>
-<td class="small">COUNTY OF HASTINGS</td><td class="n">1,607</td><td class="small">hastings</td>
-<td class="n">1,261</td><td class="n">1,185</td><td class="n">136%</td><td class="n">1,424</td><td class="n">758</td></tr>
+<td class="small">COUNTY OF HASTINGS</td><td class="n">1,637</td><td class="small">hastings</td>
+<td class="n">1,261</td><td class="n">1,185</td><td class="n">138%</td><td class="n">1,424</td><td class="n">758</td></tr>
 
 <tr class=""><td>ADMASTON/BROMLEY</td>
 <td class="small">COUNTY OF RENFREW</td><td class="n">1,721</td><td class="small">renfrew</td>
@@ -1300,8 +1300,8 @@
 <td class="n">1,007</td><td class="n">1,000</td><td class="n">153%</td><td class="n">1,494</td><td class="n">595</td></tr>
 
 <tr class=""><td>MADOC</td>
-<td class="small">COUNTY OF HASTINGS</td><td class="n">1,259</td><td class="small">hastings</td>
-<td class="n">1,005</td><td class="n">980</td><td class="n">128%</td><td class="n">1,045</td><td class="n">792</td></tr>
+<td class="small">COUNTY OF HASTINGS</td><td class="n">1,270</td><td class="small">hastings</td>
+<td class="n">1,005</td><td class="n">980</td><td class="n">130%</td><td class="n">1,045</td><td class="n">792</td></tr>
 
 <tr class=""><td>BROOKE-ALVINSTON</td>
 <td class="small">COUNTY OF LAMBTON</td><td class="n">1,378</td><td class="small">lambton</td>
@@ -1340,8 +1340,8 @@
 <td class="n">817</td><td class="n">738</td><td class="n">0%</td><td class="n">0</td><td class="n">377</td></tr>
 
 <tr class=""><td>DESERONTO</td>
-<td class="small">COUNTY OF HASTINGS</td><td class="n">968</td><td class="small">hastings</td>
-<td class="n">794</td><td class="n">698</td><td class="n">139%</td><td class="n">934</td><td class="n">43</td></tr>
+<td class="small">COUNTY OF HASTINGS</td><td class="n">995</td><td class="small">hastings</td>
+<td class="n">794</td><td class="n">698</td><td class="n">143%</td><td class="n">934</td><td class="n">43</td></tr>
 
 <tr class="gap"><td>NIPIGON</td>
 <td class="small"></td><td class="n">0</td><td class="small"></td>
@@ -1364,8 +1364,8 @@
 <td class="n">733</td><td class="n">733</td><td class="n">0%</td><td class="n">0</td><td class="n">0</td></tr>
 
 <tr class=""><td>WOLLASTON</td>
-<td class="small">COUNTY OF HASTINGS</td><td class="n">1,037</td><td class="small">hastings</td>
-<td class="n">704</td><td class="n">696</td><td class="n">149%</td><td class="n">929</td><td class="n">135</td></tr>
+<td class="small">COUNTY OF HASTINGS</td><td class="n">1,054</td><td class="small">hastings</td>
+<td class="n">704</td><td class="n">696</td><td class="n">151%</td><td class="n">929</td><td class="n">135</td></tr>
 
 <tr class="gap"><td>MCMURRICH/MONTEITH</td>
 <td class="small"></td><td class="n">3</td><td class="small">muskoka</td>
@@ -1380,8 +1380,8 @@
 <td class="n">689</td><td class="n">584</td><td class="n">0%</td><td class="n">0</td><td class="n">7</td></tr>
 
 <tr class=""><td>TUDOR AND CASHEL</td>
-<td class="small">COUNTY OF HASTINGS</td><td class="n">943</td><td class="small">hastings</td>
-<td class="n">685</td><td class="n">670</td><td class="n">141%</td><td class="n">843</td><td class="n">214</td></tr>
+<td class="small">COUNTY OF HASTINGS</td><td class="n">964</td><td class="small">hastings</td>
+<td class="n">685</td><td class="n">670</td><td class="n">144%</td><td class="n">843</td><td class="n">214</td></tr>
 
 <tr class="gap"><td>IGNACE</td>
 <td class="small"></td><td class="n">0</td><td class="small"></td>
@@ -1400,8 +1400,8 @@
 <td class="n">627</td><td class="n">599</td><td class="n">0%</td><td class="n">0</td><td class="n">322</td></tr>
 
 <tr class=""><td>CARLOW/MAYO</td>
-<td class="small">COUNTY OF HASTINGS</td><td class="n">889</td><td class="small">hastings</td>
-<td class="n">623</td><td class="n">604</td><td class="n">147%</td><td class="n">798</td><td class="n">215</td></tr>
+<td class="small">COUNTY OF HASTINGS</td><td class="n">901</td><td class="small">hastings</td>
+<td class="n">623</td><td class="n">604</td><td class="n">149%</td><td class="n">798</td><td class="n">215</td></tr>
 
 <tr class="gap"><td>CHISHOLM</td>
 <td class="small"></td><td class="n">0</td><td class="small"></td>
@@ -1480,8 +1480,8 @@
 <td class="n">457</td><td class="n">455</td><td class="n">0%</td><td class="n">0</td><td class="n">103</td></tr>
 
 <tr class=""><td>LIMERICK</td>
-<td class="small">COUNTY OF HASTINGS</td><td class="n">712</td><td class="small">hastings</td>
-<td class="n">445</td><td class="n">421</td><td class="n">169%</td><td class="n">623</td><td class="n">138</td></tr>
+<td class="small">COUNTY OF HASTINGS</td><td class="n">716</td><td class="small">hastings</td>
+<td class="n">445</td><td class="n">421</td><td class="n">170%</td><td class="n">623</td><td class="n">138</td></tr>
 
 <tr class="gap"><td>RED ROCK</td>
 <td class="small"></td><td class="n">0</td><td class="small"></td>
@@ -1739,7 +1739,7 @@
 <table>
 <tr><th>Source</th><th class="n">Rows</th><th class="n">Unit</th><th class="n">Street</th><th class="n">Number</th><th class="n">Postcode</th></tr>
 
-<tr><td>ours</td><td class="n">6,347,664</td><td class="n">15.3%</td><td class="n">99.9%</td><td class="n">98.5%</td><td class="n"></td></tr>
+<tr><td>ours</td><td class="n">6,348,208</td><td class="n">15.7%</td><td class="n">99.9%</td><td class="n">99.4%</td><td class="n"></td></tr>
 
 <tr><td>oa</td><td class="n">7,313,840</td><td class="n">15.4%</td><td class="n">98.8%</td><td class="n">98.0%</td><td class="n">4.4%</td></tr>
 
@@ -1747,7 +1747,7 @@
 
 <tr><td>nar:202606</td><td class="n">6,246,543</td><td class="n">34.9%</td><td class="n">100.0%</td><td class="n">100.0%</td><td class="n">99.9%</td></tr>
 
-<tr><td>overture:2026-09-23.1</td><td class="n">5,433,763</td><td class="n">38.7%</td><td class="n">100.0%</td><td class="n">100.0%</td><td class="n">100.0%</td></tr>
+<tr><td>overture:2026-10-21.0</td><td class="n">5,433,763</td><td class="n">38.7%</td><td class="n">100.0%</td><td class="n">100.0%</td><td class="n">100.0%</td></tr>
 
 </table>
 <p class="note">Unit fill is a property of the source as much as the pipeline: a city that publishes one point per building has few units however well it is read. Compare a source against the same jurisdiction below, not column against column here. We carry no postcode field.</p>
@@ -1760,7 +1760,7 @@
 <tr class="dead"><td>belleville</td>
 <td><span class="tag red">none</span></td>
 <td>—</td><td class="n">18,648</td><td class="n"></td><td class="n"></td>
-<td>2020-08-21 <span class="tag red">2,250 d</span></td>
+<td>2020-08-21 <span class="tag red">2,252 d</span></td>
 <td class="n">0</td><td></td>
 <td class="n"></td>
 <td class="n">0% / </td><td class="n">100% / </td><td class="small">OA entry dead since 2020-08; no public address layer found (skipped.toml)</td></tr>
@@ -1768,7 +1768,7 @@
 <tr class="dead"><td>couchicing</td>
 <td><span class="tag red">none</span></td>
 <td>—</td><td class="n">197</td><td class="n"></td><td class="n"></td>
-<td>2020-08-21 <span class="tag red">2,250 d</span></td>
+<td>2020-08-21 <span class="tag red">2,252 d</span></td>
 <td class="n">0</td><td></td>
 <td class="n"></td>
 <td class="n">0% / </td><td class="n">100% / </td><td class="small">Asset-inventory layer; dead since 2020-08</td></tr>
@@ -1776,7 +1776,7 @@
 <tr class="dead"><td>lasalle</td>
 <td><span class="tag red">none</span></td>
 <td>—</td><td class="n">14,977</td><td class="n"></td><td class="n"></td>
-<td>2020-08-21 <span class="tag red">2,250 d</span></td>
+<td>2020-08-21 <span class="tag red">2,252 d</span></td>
 <td class="n">0</td><td></td>
 <td class="n"></td>
 <td class="n">0% / </td><td class="n">100% / </td><td class="small">Static cache file; Essex member with no live layer found</td></tr>
@@ -1784,7 +1784,7 @@
 <tr class="dead"><td>northumberland</td>
 <td><span class="tag red">none</span></td>
 <td>—</td><td class="n">44,205</td><td class="n"></td><td class="n"></td>
-<td>2020-08-21 <span class="tag red">2,250 d</span></td>
+<td>2020-08-21 <span class="tag red">2,252 d</span></td>
 <td class="n">0</td><td></td>
 <td class="n"></td>
 <td class="n">0% / </td><td class="n">0% / </td><td class="small">OA reads a 2017 parcel layer (dead); county publishes no address layer (skipped.toml); cobourg covers one member</td></tr>
@@ -1792,7 +1792,7 @@
 <tr class="dead"><td>rainy_river</td>
 <td><span class="tag red">none</span></td>
 <td>—</td><td class="n">41</td><td class="n"></td><td class="n"></td>
-<td>2020-08-21 <span class="tag red">2,250 d</span></td>
+<td>2020-08-21 <span class="tag red">2,252 d</span></td>
 <td class="n">0</td><td></td>
 <td class="n"></td>
 <td class="n">0% / </td><td class="n">95% / </td><td class="small">Asset-inventory layer; dead since 2020-08</td></tr>
@@ -1800,7 +1800,7 @@
 <tr class="dead"><td>seine_river</td>
 <td><span class="tag red">none</span></td>
 <td>—</td><td class="n">102</td><td class="n"></td><td class="n"></td>
-<td>2020-08-21 <span class="tag red">2,250 d</span></td>
+<td>2020-08-21 <span class="tag red">2,252 d</span></td>
 <td class="n">0</td><td></td>
 <td class="n"></td>
 <td class="n">0% / </td><td class="n">88% / </td><td class="small">Asset-inventory layer; dead since 2020-08</td></tr>
@@ -1808,7 +1808,7 @@
 <tr class="dead"><td>peterborough</td>
 <td><span class="tag red">none</span></td>
 <td>—</td><td class="n">31,286</td><td class="n"></td><td class="n"></td>
-<td>2021-01-08 <span class="tag red">2,110 d</span></td>
+<td>2021-01-08 <span class="tag red">2,112 d</span></td>
 <td class="n">0</td><td></td>
 <td class="n"></td>
 <td class="n">0% / </td><td class="n">100% / </td><td class="small">OA entry dead since 2021-01 (we track peterborough-county from a different AGOL layer)</td></tr>
@@ -1816,7 +1816,7 @@
 <tr class="dead"><td>grey_dufferin</td>
 <td><span class="tag red">none</span></td>
 <td>—</td><td class="n">9,150</td><td class="n"></td><td class="n"></td>
-<td>2021-12-10 <span class="tag red">1,774 d</span></td>
+<td>2021-12-10 <span class="tag red">1,776 d</span></td>
 <td class="n">0</td><td></td>
 <td class="n"></td>
 <td class="n">0% / </td><td class="n">84% / </td><td class="small">Conservation-authority TOC layer on maps.simcoe.ca; last ran 2021-12</td></tr>
@@ -1825,7 +1825,7 @@
 <td><span class="tag red">none</span></td>
 <td>—</td><td class="n">158,336</td><td class="n"></td><td class="n"></td>
 <td>2026-10-16</td>
-<td class="n">23</td><td></td>
+<td class="n">22</td><td></td>
 <td class="n"></td>
 <td class="n">0% / </td><td class="n">98% / </td><td class="small">Static cache zip uploaded to OA; the county publishes no live address layer (skipped.toml); amherstburg and tecumseh cover two members</td></tr>
 
@@ -1833,7 +1833,7 @@
 <td><span class="tag red">none</span></td>
 <td>—</td><td class="n">173,745</td><td class="n"></td><td class="n"></td>
 <td>2026-10-16</td>
-<td class="n">23</td><td></td>
+<td class="n">22</td><td></td>
 <td class="n"></td>
 <td class="n">9% / </td><td class="n">100% / </td><td class="small">Static cache zip; burlington + oakville + milton + halton-hills cover all four members</td></tr>
 
@@ -1848,145 +1848,145 @@
 <tr class="dead"><td>haliburton</td>
 <td><span class="tag ">jurisdiction</span></td>
 <td>haliburton</td><td class="n">33,786</td><td class="n">33,975</td><td class="n">99%</td>
-<td>2020-08-21 <span class="tag red">2,250 d</span></td>
+<td>2020-08-21 <span class="tag red">2,252 d</span></td>
 <td class="n">0</td><td>2026-10-16</td>
-<td class="n">0 of 2</td>
+<td class="n">0 of 5</td>
 <td class="n">0% / 0%</td><td class="n">100% / 100%</td><td class="small">OA reads SearchLayers/0 (dead since 2020-08); we read SearchLayers_3/4</td></tr>
 
 <tr class="dead"><td>lucan_biddulph</td>
 <td><span class="tag ">covered-by</span></td>
-<td>middlesex</td><td class="n">1,903</td><td class="n">34,299</td><td class="n"></td>
-<td>2020-08-21 <span class="tag red">2,250 d</span></td>
-<td class="n">0</td><td>2026-10-16</td>
-<td class="n">1 of 30</td>
+<td>middlesex</td><td class="n">1,903</td><td class="n">34,302</td><td class="n"></td>
+<td>2020-08-21 <span class="tag red">2,252 d</span></td>
+<td class="n">0</td><td>2026-10-20</td>
+<td class="n">2 of 31</td>
 <td class="n">0% / 1%</td><td class="n">100% / 100%</td><td class="small">Middlesex member; OA entry dead since 2020-08; our county layer covers it</td></tr>
 
 <tr class="dead"><td>newbury</td>
 <td><span class="tag ">covered-by</span></td>
-<td>middlesex</td><td class="n">223</td><td class="n">34,299</td><td class="n"></td>
-<td>2020-08-21 <span class="tag red">2,250 d</span></td>
-<td class="n">0</td><td>2026-10-16</td>
-<td class="n">1 of 30</td>
+<td>middlesex</td><td class="n">223</td><td class="n">34,302</td><td class="n"></td>
+<td>2020-08-21 <span class="tag red">2,252 d</span></td>
+<td class="n">0</td><td>2026-10-20</td>
+<td class="n">2 of 31</td>
 <td class="n">0% / 1%</td><td class="n">100% / 100%</td><td class="small">Middlesex member; OA entry dead since 2020-08</td></tr>
 
 <tr class="dead"><td>north_glengarry</td>
 <td><span class="tag ">covered-by</span></td>
 <td>sdg</td><td class="n">4,239</td><td class="n">31,645</td><td class="n"></td>
-<td>2020-08-21 <span class="tag red">2,250 d</span></td>
-<td class="n">0</td><td>2026-10-16</td>
-<td class="n">9 of 30</td>
+<td>2020-08-21 <span class="tag red">2,252 d</span></td>
+<td class="n">0</td><td>2026-10-20</td>
+<td class="n">11 of 31</td>
 <td class="n">0% / 3%</td><td class="n">100% / 100%</td><td class="small">Static cache zip; our SDG county layer covers it</td></tr>
 
 <tr class="dead"><td>north_middlesex</td>
 <td><span class="tag ">covered-by</span></td>
-<td>middlesex</td><td class="n">2,813</td><td class="n">34,299</td><td class="n"></td>
-<td>2020-08-21 <span class="tag red">2,250 d</span></td>
-<td class="n">0</td><td>2026-10-16</td>
-<td class="n">1 of 30</td>
+<td>middlesex</td><td class="n">2,813</td><td class="n">34,302</td><td class="n"></td>
+<td>2020-08-21 <span class="tag red">2,252 d</span></td>
+<td class="n">0</td><td>2026-10-20</td>
+<td class="n">2 of 31</td>
 <td class="n">0% / 1%</td><td class="n">100% / 100%</td><td class="small">Middlesex member; OA entry dead since 2020-08</td></tr>
 
 <tr class="dead"><td>seguin</td>
 <td><span class="tag ">covered-by</span></td>
-<td>west-parry-sound</td><td class="n">20,370</td><td class="n">21,734</td><td class="n"></td>
-<td>2020-08-21 <span class="tag red">2,250 d</span></td>
-<td class="n">0</td><td>2026-10-16</td>
-<td class="n">1 of 9</td>
+<td>west-parry-sound</td><td class="n">20,370</td><td class="n">21,735</td><td class="n"></td>
+<td>2020-08-21 <span class="tag red">2,252 d</span></td>
+<td class="n">0</td><td>2026-10-21</td>
+<td class="n">4 of 10</td>
 <td class="n">0% / 0%</td><td class="n">100% / 100%</td><td class="small">WPSGN open-data layer; dead since 2020-08; our NG911 layer covers it</td></tr>
 
 <tr class="dead"><td>southwest-middlesex</td>
 <td><span class="tag ">covered-by</span></td>
-<td>middlesex</td><td class="n">2,657</td><td class="n">34,299</td><td class="n"></td>
-<td>2020-08-21 <span class="tag red">2,250 d</span></td>
-<td class="n">0</td><td>2026-10-16</td>
-<td class="n">1 of 30</td>
+<td>middlesex</td><td class="n">2,657</td><td class="n">34,302</td><td class="n"></td>
+<td>2020-08-21 <span class="tag red">2,252 d</span></td>
+<td class="n">0</td><td>2026-10-20</td>
+<td class="n">2 of 31</td>
 <td class="n">0% / 1%</td><td class="n">100% / 100%</td><td class="small">Middlesex member; OA entry dead since 2020-08</td></tr>
 
 <tr class="dead"><td>strathroy-caradoc</td>
 <td><span class="tag ">covered-by</span></td>
-<td>middlesex</td><td class="n">8,577</td><td class="n">34,299</td><td class="n"></td>
-<td>2020-08-21 <span class="tag red">2,250 d</span></td>
-<td class="n">0</td><td>2026-10-16</td>
-<td class="n">1 of 30</td>
+<td>middlesex</td><td class="n">8,577</td><td class="n">34,302</td><td class="n"></td>
+<td>2020-08-21 <span class="tag red">2,252 d</span></td>
+<td class="n">0</td><td>2026-10-20</td>
+<td class="n">2 of 31</td>
 <td class="n">0% / 1%</td><td class="n">100% / 100%</td><td class="small">Middlesex member; OA entry dead since 2020-08</td></tr>
 
 <tr class="dead"><td>thames_centre</td>
 <td><span class="tag ">covered-by</span></td>
-<td>middlesex</td><td class="n">5,320</td><td class="n">34,299</td><td class="n"></td>
-<td>2020-08-21 <span class="tag red">2,250 d</span></td>
-<td class="n">0</td><td>2026-10-16</td>
-<td class="n">1 of 30</td>
+<td>middlesex</td><td class="n">5,320</td><td class="n">34,302</td><td class="n"></td>
+<td>2020-08-21 <span class="tag red">2,252 d</span></td>
+<td class="n">0</td><td>2026-10-20</td>
+<td class="n">2 of 31</td>
 <td class="n">0% / 1%</td><td class="n">100% / 100%</td><td class="small">Middlesex member; OA entry dead since 2020-08</td></tr>
 
 <tr class="dead"><td>west_parry_sound_district</td>
 <td><span class="tag green">same-url</span></td>
-<td>west-parry-sound</td><td class="n">20,407</td><td class="n">21,734</td><td class="n">94%</td>
-<td>2020-08-21 <span class="tag red">2,250 d</span></td>
-<td class="n">0</td><td>2026-10-16</td>
-<td class="n">1 of 9</td>
+<td>west-parry-sound</td><td class="n">20,407</td><td class="n">21,735</td><td class="n">94%</td>
+<td>2020-08-21 <span class="tag red">2,252 d</span></td>
+<td class="n">0</td><td>2026-10-21</td>
+<td class="n">4 of 10</td>
 <td class="n">0% / 0%</td><td class="n">100% / 100%</td><td class="small"></td></tr>
 
 <tr class="dead"><td>niagara_region</td>
 <td><span class="tag ">jurisdiction</span></td>
 <td>niagara-falls</td><td class="n">197,591</td><td class="n">208,286</td><td class="n">95%</td>
-<td>2023-04-07 <span class="tag red">1,291 d</span></td>
+<td>2023-04-07 <span class="tag red">1,293 d</span></td>
 <td class="n">0</td><td>2026-10-01</td>
-<td class="n">1 of 30</td>
+<td class="n">1 of 31</td>
 <td class="n">0% / 12%</td><td class="n">100% / 100%</td><td class="small">OA reads the CKAN download (last ran 2023-03); we read the AGOL layer</td></tr>
 
 <tr class="dead"><td>simcoe</td>
 <td><span class="tag green">same-url</span></td>
-<td>simcoe</td><td class="n">228,918</td><td class="n">190,432</td><td class="n">120%</td>
-<td>2025-07-04 <span class="tag red">472 d</span></td>
-<td class="n">0</td><td>2026-10-17</td>
-<td class="n">22 of 28</td>
+<td>simcoe</td><td class="n">228,918</td><td class="n">190,452</td><td class="n">120%</td>
+<td>2025-07-04 <span class="tag red">474 d</span></td>
+<td class="n">0</td><td>2026-10-21</td>
+<td class="n">24 of 29</td>
 <td class="n">0% / 6%</td><td class="n">100% / 100%</td><td class="small">OA&#39;s run has not succeeded since 2025-07</td></tr>
 
 <tr class="dead"><td>middlesex_centre</td>
 <td><span class="tag ">covered-by</span></td>
-<td>middlesex</td><td class="n">30,993</td><td class="n">34,299</td><td class="n"></td>
-<td>2025-11-14 <span class="tag red">339 d</span></td>
-<td class="n">3</td><td>2026-10-16</td>
-<td class="n">1 of 30</td>
+<td>middlesex</td><td class="n">30,993</td><td class="n">34,302</td><td class="n"></td>
+<td>2025-11-14 <span class="tag red">341 d</span></td>
+<td class="n">3</td><td>2026-10-20</td>
+<td class="n">2 of 31</td>
 <td class="n">2% / 1%</td><td class="n">100% / 100%</td><td class="small">Middlesex member; OA last ran 2025-11</td></tr>
 
 <tr class=""><td>brant</td>
 <td><span class="tag ">jurisdiction</span></td>
 <td>brant</td><td class="n">19,357</td><td class="n">19,363</td><td class="n">100%</td>
 <td>2026-09-18</td>
-<td class="n">19</td><td>2026-10-17</td>
-<td class="n">11 of 30</td>
+<td class="n">18</td><td>2026-10-17</td>
+<td class="n">13 of 31</td>
 <td class="n">0% / 8%</td><td class="n">0% / 95%</td><td class="small">OA reads the old maps.brant.ca server; we read the AGOL open-data view</td></tr>
 
 <tr class=""><td>amherstburg</td>
 <td><span class="tag ">jurisdiction</span></td>
 <td>amherstburg</td><td class="n">10,836</td><td class="n">10,924</td><td class="n">99%</td>
 <td>2026-10-16</td>
-<td class="n">23</td><td>2026-08-20</td>
-<td class="n">0 of 29</td>
+<td class="n">22</td><td>2026-08-20</td>
+<td class="n">0 of 30</td>
 <td class="n">0% / 0%</td><td class="n">100% / 100%</td><td class="small">OA reads the Parcels layer; we read Address_Points on the same server</td></tr>
 
 <tr class=""><td>brantford</td>
 <td><span class="tag green">same-url</span></td>
 <td>brantford</td><td class="n">38,999</td><td class="n">38,999</td><td class="n">100%</td>
 <td>2026-10-16</td>
-<td class="n">23</td><td>2026-09-18</td>
-<td class="n">12 of 30</td>
-<td class="n">0% / 0%</td><td class="n">100% / 100%</td><td class="small"></td></tr>
+<td class="n">22</td><td>2026-09-18</td>
+<td class="n">12 of 31</td>
+<td class="n">0% / 6%</td><td class="n">100% / 100%</td><td class="small"></td></tr>
 
 <tr class=""><td>bruce</td>
 <td><span class="tag green">same-url</span></td>
 <td>bruce</td><td class="n">51,808</td><td class="n">51,806</td><td class="n">100%</td>
 <td>2026-10-16</td>
 <td class="n">4</td><td>2026-10-16</td>
-<td class="n">9 of 30</td>
+<td class="n">9 of 31</td>
 <td class="n">7% / 7%</td><td class="n">100% / 100%</td><td class="small"></td></tr>
 
 <tr class=""><td>chatham_kent</td>
 <td><span class="tag ">jurisdiction</span></td>
 <td>chatham-kent</td><td class="n">58,726</td><td class="n">58,809</td><td class="n">100%</td>
 <td>2026-10-16</td>
-<td class="n">23</td><td>2026-09-30</td>
-<td class="n">1 of 30</td>
+<td class="n">22</td><td>2026-09-30</td>
+<td class="n">1 of 31</td>
 <td class="n">20% / 0%</td><td class="n">100% / 100%</td><td class="small">OA reads a static cache zip; we read the live AGOL layer</td></tr>
 
 <tr class=""><td>city_of_ajax</td>
@@ -1994,7 +1994,7 @@
 <td>ajax</td><td class="n">38,433</td><td class="n">38,400</td><td class="n">100%</td>
 <td>2026-10-16</td>
 <td class="n">4</td><td>2026-10-16</td>
-<td class="n">0 of 2</td>
+<td class="n">0 of 5</td>
 <td class="n">1% / 1%</td><td class="n">100% / 99%</td><td class="small"></td></tr>
 
 <tr class=""><td>city_of_barrie</td>
@@ -2002,23 +2002,23 @@
 <td>barrie</td><td class="n">60,886</td><td class="n">60,886</td><td class="n">100%</td>
 <td>2026-10-16</td>
 <td class="n">4</td><td>2026-10-18</td>
-<td class="n">5 of 30</td>
+<td class="n">5 of 31</td>
 <td class="n">15% / 15%</td><td class="n">100% / 100%</td><td class="small"></td></tr>
 
 <tr class=""><td>city_of_brampton</td>
 <td><span class="tag green">same-url</span></td>
-<td>brampton</td><td class="n">253,719</td><td class="n">249,946</td><td class="n">102%</td>
+<td>brampton</td><td class="n">253,719</td><td class="n">249,974</td><td class="n">101%</td>
 <td>2026-10-16</td>
-<td class="n">21</td><td>2026-10-18</td>
-<td class="n">29 of 30</td>
+<td class="n">20</td><td>2026-10-21</td>
+<td class="n">30 of 31</td>
 <td class="n">27% / 28%</td><td class="n">100% / 100%</td><td class="small"></td></tr>
 
 <tr class=""><td>city_of_burlington</td>
 <td><span class="tag green">same-url</span></td>
-<td>burlington</td><td class="n">60,354</td><td class="n">60,354</td><td class="n">100%</td>
+<td>burlington</td><td class="n">60,354</td><td class="n">60,353</td><td class="n">100%</td>
 <td>2026-10-16</td>
-<td class="n">23</td><td>2026-10-16</td>
-<td class="n">6 of 30</td>
+<td class="n">22</td><td>2026-10-21</td>
+<td class="n">9 of 31</td>
 <td class="n">17% / 17%</td><td class="n">100% / 100%</td><td class="small"></td></tr>
 
 <tr class=""><td>city_of_cambridge</td>
@@ -2026,23 +2026,23 @@
 <td>cambridge</td><td class="n">54,025</td><td class="n">54,025</td><td class="n">100%</td>
 <td>2026-10-16</td>
 <td class="n">4</td><td>2026-08-07</td>
-<td class="n">0 of 28</td>
+<td class="n">0 of 29</td>
 <td class="n">22% / 22%</td><td class="n">100% / 100%</td><td class="small"></td></tr>
 
 <tr class=""><td>city_of_guelph</td>
 <td><span class="tag green">same-url</span></td>
-<td>guelph</td><td class="n">53,853</td><td class="n">53,853</td><td class="n">100%</td>
+<td>guelph</td><td class="n">53,853</td><td class="n">53,854</td><td class="n">100%</td>
 <td>2026-10-16</td>
-<td class="n">4</td><td>2026-10-08</td>
-<td class="n">3 of 30</td>
+<td class="n">4</td><td>2026-10-21</td>
+<td class="n">5 of 31</td>
 <td class="n">24% / 24%</td><td class="n">100% / 100%</td><td class="small"></td></tr>
 
 <tr class=""><td>city_of_hamilton</td>
 <td><span class="tag green">same-url</span></td>
-<td>hamilton</td><td class="n">274,725</td><td class="n">274,573</td><td class="n">100%</td>
+<td>hamilton</td><td class="n">274,725</td><td class="n">274,580</td><td class="n">100%</td>
 <td>2026-10-16</td>
-<td class="n">23</td><td>2026-10-12</td>
-<td class="n">8 of 30</td>
+<td class="n">22</td><td>2026-10-19</td>
+<td class="n">9 of 31</td>
 <td class="n">37% / 37%</td><td class="n">100% / 100%</td><td class="small"></td></tr>
 
 <tr class=""><td>city_of_hanover</td>
@@ -2050,31 +2050,31 @@
 <td>grey</td><td class="n">3,238</td><td class="n">51,441</td><td class="n"></td>
 <td>2026-10-16</td>
 <td class="n">4</td><td>2026-10-17</td>
-<td class="n">0 of 2</td>
+<td class="n">0 of 5</td>
 <td class="n">0% / 0%</td><td class="n">88% / 100%</td><td class="small">Grey County member; our grey county layer covers it; candidate for its own dataset</td></tr>
 
 <tr class=""><td>city_of_kawartha_lakes</td>
 <td><span class="tag green">same-url</span></td>
 <td>kawartha-lakes</td><td class="n">44,246</td><td class="n">44,246</td><td class="n">100%</td>
 <td>2026-10-16</td>
-<td class="n">23</td><td>2026-10-03</td>
-<td class="n">3 of 30</td>
+<td class="n">22</td><td>2026-10-03</td>
+<td class="n">2 of 31</td>
 <td class="n">0% / 9%</td><td class="n">100% / 100%</td><td class="small"></td></tr>
 
 <tr class=""><td>city_of_kingston</td>
 <td><span class="tag green">same-url</span></td>
-<td>kingston</td><td class="n">77,687</td><td class="n">77,687</td><td class="n">100%</td>
+<td>kingston</td><td class="n">77,687</td><td class="n">77,698</td><td class="n">100%</td>
 <td>2026-10-16</td>
-<td class="n">8</td><td>2026-10-17</td>
-<td class="n">19 of 29</td>
+<td class="n">8</td><td>2026-10-21</td>
+<td class="n">21 of 30</td>
 <td class="n">40% / 40%</td><td class="n">100% / 100%</td><td class="small"></td></tr>
 
 <tr class=""><td>city_of_kitchener</td>
 <td><span class="tag green">same-url</span></td>
 <td>kitchener</td><td class="n">132,329</td><td class="n">132,329</td><td class="n">100%</td>
 <td>2026-10-16</td>
-<td class="n">23</td><td>2026-10-11</td>
-<td class="n">4 of 30</td>
+<td class="n">22</td><td>2026-10-11</td>
+<td class="n">4 of 31</td>
 <td class="n">0% / 45%</td><td class="n">100% / 100%</td><td class="small"></td></tr>
 
 <tr class=""><td>city_of_london</td>
@@ -2082,39 +2082,39 @@
 <td>london</td><td class="n">143,138</td><td class="n">143,138</td><td class="n">100%</td>
 <td>2026-10-16</td>
 <td class="n">10</td><td>2026-09-23</td>
-<td class="n">1 of 30</td>
+<td class="n">1 of 31</td>
 <td class="n">18% / 18%</td><td class="n">100% / 100%</td><td class="small"></td></tr>
 
 <tr class=""><td>city_of_markham</td>
 <td><span class="tag ">covered-by</span></td>
 <td>york</td><td class="n">431,861</td><td class="n">431,861</td><td class="n"></td>
 <td>2026-10-16</td>
-<td class="n">22</td><td>2026-10-15</td>
-<td class="n">30 of 30</td>
+<td class="n">21</td><td>2026-10-15</td>
+<td class="n">31 of 31</td>
 <td class="n">0% / 15%</td><td class="n">100% / 100%</td><td class="small">York Region&#39;s OpenData/Location layer; our york dataset is the same region feed</td></tr>
 
 <tr class=""><td>city_of_niagara_falls</td>
 <td><span class="tag green">same-url</span></td>
 <td>niagara-falls</td><td class="n">208,286</td><td class="n">208,286</td><td class="n">100%</td>
 <td>2026-10-16</td>
-<td class="n">23</td><td>2026-10-01</td>
-<td class="n">1 of 30</td>
+<td class="n">22</td><td>2026-10-01</td>
+<td class="n">1 of 31</td>
 <td class="n">12% / 12%</td><td class="n">100% / 100%</td><td class="small">OA&#39;s &#39;Niagara Falls&#39; is the Niagara Region layer (our niagara-falls slug is that layer too)</td></tr>
 
 <tr class=""><td>city_of_oakville</td>
 <td><span class="tag green">same-url</span></td>
-<td>oakville</td><td class="n">71,159</td><td class="n">71,159</td><td class="n">100%</td>
+<td>oakville</td><td class="n">71,159</td><td class="n">71,161</td><td class="n">100%</td>
 <td>2026-10-16</td>
-<td class="n">23</td><td>2026-10-09</td>
-<td class="n">6 of 30</td>
+<td class="n">22</td><td>2026-10-21</td>
+<td class="n">7 of 31</td>
 <td class="n">8% / 8%</td><td class="n">100% / 100%</td><td class="small"></td></tr>
 
 <tr class=""><td>city_of_ottawa</td>
 <td><span class="tag green">same-url</span></td>
-<td>ottawa</td><td class="n">404,490</td><td class="n">404,489</td><td class="n">100%</td>
+<td>ottawa</td><td class="n">404,490</td><td class="n">404,509</td><td class="n">100%</td>
 <td>2026-10-16</td>
-<td class="n">19</td><td>2026-10-16</td>
-<td class="n">12 of 30</td>
+<td class="n">18</td><td>2026-10-21</td>
+<td class="n">14 of 31</td>
 <td class="n">10% / 10%</td><td class="n">100% / 100%</td><td class="small"></td></tr>
 
 <tr class=""><td>city_of_peterborough</td>
@@ -2122,15 +2122,15 @@
 <td>peterborough</td><td class="n">34,096</td><td class="n">34,096</td><td class="n">100%</td>
 <td>2026-10-16</td>
 <td class="n">4</td><td>2026-10-16</td>
-<td class="n">0 of 2</td>
+<td class="n">0 of 5</td>
 <td class="n">12% / 12%</td><td class="n">100% / 100%</td><td class="small"></td></tr>
 
 <tr class=""><td>city_of_pickering</td>
 <td><span class="tag ">jurisdiction</span></td>
 <td>pickering</td><td class="n">42,766</td><td class="n">42,764</td><td class="n">100%</td>
 <td>2026-10-16</td>
-<td class="n">22</td><td>2026-10-16</td>
-<td class="n">0 of 2</td>
+<td class="n">21</td><td>2026-10-16</td>
+<td class="n">0 of 5</td>
 <td class="n">23% / 20%</td><td class="n">100% / 100%</td><td class="small">OA reads the old maps.pickering.ca server; we read the AGOL open-data layer</td></tr>
 
 <tr class=""><td>city_of_saint_catherines</td>
@@ -2138,15 +2138,15 @@
 <td>niagara-falls</td><td class="n">208,286</td><td class="n">208,286</td><td class="n">100%</td>
 <td>2026-10-16</td>
 <td class="n">4</td><td>2026-10-01</td>
-<td class="n">1 of 30</td>
+<td class="n">1 of 31</td>
 <td class="n">12% / 12%</td><td class="n">100% / 100%</td><td class="small">Same Niagara Region layer registered twice in OA</td></tr>
 
 <tr class=""><td>city_of_sault_ste_marie</td>
 <td><span class="tag green">same-url</span></td>
 <td>sault-ste-marie</td><td class="n">33,316</td><td class="n">33,316</td><td class="n">100%</td>
 <td>2026-10-16</td>
-<td class="n">23</td><td>2026-10-16</td>
-<td class="n">0 of 2</td>
+<td class="n">22</td><td>2026-10-16</td>
+<td class="n">0 of 5</td>
 <td class="n">5% / 5%</td><td class="n">100% / 100%</td><td class="small"></td></tr>
 
 <tr class=""><td>city_of_thunder_bay</td>
@@ -2154,15 +2154,15 @@
 <td>thunder-bay</td><td class="n">44,746</td><td class="n">45,102</td><td class="n">99%</td>
 <td>2026-10-16</td>
 <td class="n">4</td><td>2026-09-09</td>
-<td class="n">0 of 30</td>
+<td class="n">0 of 31</td>
 <td class="n">0% / 0%</td><td class="n">100% / 100%</td><td class="small">Different view of the same AGOL org</td></tr>
 
 <tr class=""><td>city_of_toronto</td>
 <td><span class="tag ">jurisdiction</span></td>
-<td>toronto</td><td class="n">525,372</td><td class="n">525,372</td><td class="n">100%</td>
+<td>toronto</td><td class="n">525,372</td><td class="n">525,371</td><td class="n">100%</td>
 <td>2026-10-16</td>
-<td class="n">23</td><td>2026-10-16</td>
-<td class="n">20 of 30</td>
+<td class="n">22</td><td>2026-10-21</td>
+<td class="n">23 of 31</td>
 <td class="n">0% / 0%</td><td class="n">100% / 100%</td><td class="small">Same CKAN dataset; OA pins a different resource id</td></tr>
 
 <tr class=""><td>city_of_vaughan</td>
@@ -2170,31 +2170,31 @@
 <td>vaughan-ng911</td><td class="n">94,002</td><td class="n">94,002</td><td class="n">100%</td>
 <td>2026-10-16</td>
 <td class="n">4</td><td>2026-10-16</td>
-<td class="n">0 of 2</td>
+<td class="n">0 of 5</td>
 <td class="n">0% / 0%</td><td class="n">100% / 100%</td><td class="small"></td></tr>
 
 <tr class=""><td>city_of_waterloo</td>
 <td><span class="tag ">jurisdiction</span></td>
 <td>waterloo</td><td class="n">55,543</td><td class="n">55,845</td><td class="n">99%</td>
 <td>2026-10-16</td>
-<td class="n">23</td><td>2026-10-16</td>
-<td class="n">1 of 30</td>
-<td class="n">0% / 0%</td><td class="n">100% / 100%</td><td class="small">OA reads an opendata.arcgis.com download; we read the AGOL FeatureServer</td></tr>
+<td class="n">22</td><td>2026-10-16</td>
+<td class="n">1 of 31</td>
+<td class="n">0% / 42%</td><td class="n">100% / 100%</td><td class="small">OA reads an opendata.arcgis.com download; we read the AGOL FeatureServer</td></tr>
 
 <tr class=""><td>city_of_welland</td>
 <td><span class="tag ">jurisdiction</span></td>
 <td>welland</td><td class="n">22,461</td><td class="n">22,461</td><td class="n">100%</td>
 <td>2026-10-16</td>
 <td class="n">4</td><td>2026-10-16</td>
-<td class="n">0 of 2</td>
+<td class="n">0 of 5</td>
 <td class="n">0% / 0%</td><td class="n">100% / 100%</td><td class="small">Same service; OA reads layer 0 of a sibling service</td></tr>
 
 <tr class=""><td>city_of_windsor</td>
 <td><span class="tag ">jurisdiction</span></td>
 <td>windsor</td><td class="n">132,450</td><td class="n">118,843</td><td class="n">111%</td>
 <td>2026-10-16</td>
-<td class="n">22</td><td>2026-10-12</td>
-<td class="n">1 of 30</td>
+<td class="n">21</td><td>2026-10-12</td>
+<td class="n">1 of 31</td>
 <td class="n">43% / 29%</td><td class="n">100% / 99%</td><td class="small">OA reads PropertyParcels/0; we read OpenDataServices/PropertyParcels/1</td></tr>
 
 <tr class=""><td>cobourg</td>
@@ -2202,7 +2202,7 @@
 <td>cobourg</td><td class="n">7,837</td><td class="n">7,837</td><td class="n">100%</td>
 <td>2026-10-16</td>
 <td class="n">4</td><td>2026-08-20</td>
-<td class="n">0 of 30</td>
+<td class="n">0 of 31</td>
 <td class="n">7% / 7%</td><td class="n">100% / 100%</td><td class="small"></td></tr>
 
 <tr class=""><td>cornwall</td>
@@ -2210,31 +2210,31 @@
 <td>cornwall</td><td class="n">20,705</td><td class="n">20,704</td><td class="n">100%</td>
 <td>2026-10-16</td>
 <td class="n">4</td><td>2026-10-17</td>
-<td class="n">6 of 30</td>
+<td class="n">6 of 31</td>
 <td class="n">15% / 15%</td><td class="n">100% / 100%</td><td class="small"></td></tr>
 
 <tr class=""><td>dufferin</td>
 <td><span class="tag green">same-url</span></td>
-<td>dufferin</td><td class="n">27,075</td><td class="n">28,300</td><td class="n">96%</td>
+<td>dufferin</td><td class="n">27,075</td><td class="n">28,306</td><td class="n">96%</td>
 <td>2026-10-16</td>
-<td class="n">23</td><td>2026-10-16</td>
-<td class="n">1 of 30</td>
+<td class="n">22</td><td>2026-10-21</td>
+<td class="n">2 of 31</td>
 <td class="n">0% / 0%</td><td class="n">100% / 100%</td><td class="small"></td></tr>
 
 <tr class=""><td>elgin</td>
 <td><span class="tag ">jurisdiction</span></td>
 <td>elgin</td><td class="n">21,788</td><td class="n">24,176</td><td class="n">90%</td>
 <td>2026-10-16</td>
-<td class="n">23</td><td>2026-10-16</td>
-<td class="n">1 of 30</td>
+<td class="n">22</td><td>2026-10-16</td>
+<td class="n">1 of 31</td>
 <td class="n">0% / 2%</td><td class="n">94% / 100%</td><td class="small">OA reads the old gisdata.elginmapping.ca server; we read the 2026 AGOL layer</td></tr>
 
 <tr class=""><td>greater_sudbury</td>
 <td><span class="tag green">same-url</span></td>
-<td>greater-sudbury</td><td class="n">70,206</td><td class="n">70,163</td><td class="n">100%</td>
+<td>greater-sudbury</td><td class="n">70,206</td><td class="n">70,177</td><td class="n">100%</td>
 <td>2026-10-16</td>
-<td class="n">4</td><td>2026-10-18</td>
-<td class="n">27 of 30</td>
+<td class="n">4</td><td>2026-10-21</td>
+<td class="n">29 of 31</td>
 <td class="n">0% / 14%</td><td class="n">100% / 100%</td><td class="small"></td></tr>
 
 <tr class=""><td>grey</td>
@@ -2242,7 +2242,7 @@
 <td>grey</td><td class="n">51,458</td><td class="n">51,441</td><td class="n">100%</td>
 <td>2026-10-16</td>
 <td class="n">4</td><td>2026-10-17</td>
-<td class="n">0 of 2</td>
+<td class="n">0 of 5</td>
 <td class="n">0% / 0%</td><td class="n">100% / 100%</td><td class="small"></td></tr>
 
 <tr class=""><td>haldimand</td>
@@ -2250,63 +2250,63 @@
 <td>haldimand</td><td class="n">26,607</td><td class="n">26,601</td><td class="n">100%</td>
 <td>2026-10-16</td>
 <td class="n">6</td><td>2026-10-17</td>
-<td class="n">3 of 30</td>
+<td class="n">3 of 31</td>
 <td class="n">7% / 7%</td><td class="n">95% / 95%</td><td class="small"></td></tr>
 
 <tr class=""><td>hastings</td>
 <td><span class="tag green">same-url</span></td>
-<td>hastings</td><td class="n">31,358</td><td class="n">30,933</td><td class="n">101%</td>
+<td>hastings</td><td class="n">31,358</td><td class="n">31,355</td><td class="n">100%</td>
 <td>2026-10-16</td>
-<td class="n">4</td><td>2026-10-17</td>
-<td class="n">21 of 30</td>
+<td class="n">4</td><td>2026-10-20</td>
+<td class="n">23 of 31</td>
 <td class="n">5% / 5%</td><td class="n">100% / 100%</td><td class="small"></td></tr>
 
 <tr class=""><td>huron</td>
 <td><span class="tag green">same-url</span></td>
 <td>huron</td><td class="n">38,383</td><td class="n">38,381</td><td class="n">100%</td>
 <td>2026-10-16</td>
-<td class="n">22</td><td>2026-10-10</td>
-<td class="n">4 of 30</td>
+<td class="n">21</td><td>2026-10-10</td>
+<td class="n">3 of 31</td>
 <td class="n">0% / 11%</td><td class="n">100% / 100%</td><td class="small"></td></tr>
 
 <tr class=""><td>lambton</td>
 <td><span class="tag green">same-url</span></td>
 <td>lambton</td><td class="n">57,017</td><td class="n">57,011</td><td class="n">100%</td>
 <td>2026-10-16</td>
-<td class="n">24</td><td>2026-10-15</td>
-<td class="n">5 of 30</td>
+<td class="n">23</td><td>2026-10-15</td>
+<td class="n">5 of 31</td>
 <td class="n">0% / 0%</td><td class="n">100% / 100%</td><td class="small"></td></tr>
 
 <tr class=""><td>leeds_grenville</td>
 <td><span class="tag ">jurisdiction</span></td>
 <td>leeds-grenville</td><td class="n">54,251</td><td class="n">54,251</td><td class="n">100%</td>
 <td>2026-10-16</td>
-<td class="n">23</td><td>2026-10-06</td>
-<td class="n">1 of 30</td>
+<td class="n">22</td><td>2026-10-06</td>
+<td class="n">1 of 31</td>
 <td class="n">2% / 2%</td><td class="n">100% / 100%</td><td class="small">Same AGOL org; OA reads CivicAddress/0</td></tr>
 
 <tr class=""><td>lennoxaddington</td>
 <td><span class="tag ">jurisdiction</span></td>
-<td>lennox-addington</td><td class="n">27,383</td><td class="n">26,171</td><td class="n">105%</td>
+<td>lennox-addington</td><td class="n">27,383</td><td class="n">26,173</td><td class="n">105%</td>
 <td>2026-10-16</td>
-<td class="n">4</td><td>2026-10-14</td>
-<td class="n">5 of 30</td>
+<td class="n">4</td><td>2026-10-21</td>
+<td class="n">6 of 31</td>
 <td class="n">0% / 0%</td><td class="n">100% / 100%</td><td class="small">Same AGOL org; different view</td></tr>
 
 <tr class=""><td>milton</td>
 <td><span class="tag green">same-url</span></td>
-<td>milton</td><td class="n">46,433</td><td class="n">46,433</td><td class="n">100%</td>
+<td>milton</td><td class="n">46,433</td><td class="n">46,434</td><td class="n">100%</td>
 <td>2026-10-16</td>
-<td class="n">23</td><td>2026-10-15</td>
-<td class="n">13 of 28</td>
+<td class="n">22</td><td>2026-10-21</td>
+<td class="n">13 of 29</td>
 <td class="n">8% / 8%</td><td class="n">100% / 100%</td><td class="small"></td></tr>
 
 <tr class=""><td>muskoka</td>
 <td><span class="tag ">jurisdiction</span></td>
-<td>muskoka</td><td class="n">66,951</td><td class="n">66,555</td><td class="n">101%</td>
+<td>muskoka</td><td class="n">66,951</td><td class="n">66,556</td><td class="n">101%</td>
 <td>2026-10-16</td>
-<td class="n">4</td><td>2026-10-17</td>
-<td class="n">20 of 30</td>
+<td class="n">4</td><td>2026-10-19</td>
+<td class="n">21 of 31</td>
 <td class="n">27% / 27%</td><td class="n">100% / 100%</td><td class="small">Same utility.arcgis.com proxy; different layer path</td></tr>
 
 <tr class=""><td>newmarket</td>
@@ -2314,7 +2314,7 @@
 <td>newmarket</td><td class="n">34,922</td><td class="n">34,922</td><td class="n">100%</td>
 <td>2026-10-16</td>
 <td class="n">4</td><td>2026-10-16</td>
-<td class="n">0 of 2</td>
+<td class="n">0 of 5</td>
 <td class="n">18% / 18%</td><td class="n">100% / 100%</td><td class="small">Same AGOL org; OA reads the older Addresses layer</td></tr>
 
 <tr class=""><td>norfolk</td>
@@ -2322,103 +2322,103 @@
 <td>norfolk</td><td class="n">35,121</td><td class="n">35,119</td><td class="n">100%</td>
 <td>2026-10-16</td>
 <td class="n">4</td><td>2026-08-20</td>
-<td class="n">0 of 30</td>
+<td class="n">0 of 31</td>
 <td class="n">10% / 10%</td><td class="n">100% / 100%</td><td class="small"></td></tr>
 
 <tr class=""><td>orangeville</td>
 <td><span class="tag ">covered-by</span></td>
-<td>dufferin</td><td class="n">12,040</td><td class="n">28,300</td><td class="n"></td>
+<td>dufferin</td><td class="n">12,040</td><td class="n">28,306</td><td class="n"></td>
 <td>2026-10-16</td>
-<td class="n">23</td><td>2026-10-16</td>
-<td class="n">1 of 30</td>
+<td class="n">22</td><td>2026-10-21</td>
+<td class="n">2 of 31</td>
 <td class="n">23% / 0%</td><td class="n">100% / 100%</td><td class="small">Live OGL-Orangeville layer; our dufferin county layer covers it; candidate for its own dataset</td></tr>
 
 <tr class=""><td>oshawa</td>
 <td><span class="tag green">same-url</span></td>
 <td>durham</td><td class="n">253,571</td><td class="n">253,560</td><td class="n">100%</td>
 <td>2026-10-16</td>
-<td class="n">22</td><td>2026-09-15</td>
-<td class="n">0 of 30</td>
+<td class="n">21</td><td>2026-09-15</td>
+<td class="n">0 of 31</td>
 <td class="n">100% / 8%</td><td class="n">100% / 100%</td><td class="small">OA&#39;s &#39;oshawa&#39; is the Durham Region open-data layer</td></tr>
 
 <tr class=""><td>oxford</td>
 <td><span class="tag green">same-url</span></td>
-<td>oxford</td><td class="n">56,914</td><td class="n">56,914</td><td class="n">100%</td>
+<td>oxford</td><td class="n">56,914</td><td class="n">56,915</td><td class="n">100%</td>
 <td>2026-10-16</td>
-<td class="n">4</td><td>2026-10-16</td>
-<td class="n">0 of 2</td>
+<td class="n">4</td><td>2026-10-20</td>
+<td class="n">1 of 5</td>
 <td class="n">12% / 12%</td><td class="n">100% / 100%</td><td class="small"></td></tr>
 
 <tr class=""><td>parry_sound</td>
 <td><span class="tag green">same-url</span></td>
-<td>west-parry-sound</td><td class="n">21,734</td><td class="n">21,734</td><td class="n">100%</td>
+<td>west-parry-sound</td><td class="n">21,734</td><td class="n">21,735</td><td class="n">100%</td>
 <td>2026-10-16</td>
-<td class="n">4</td><td>2026-10-16</td>
-<td class="n">1 of 9</td>
+<td class="n">4</td><td>2026-10-21</td>
+<td class="n">4 of 10</td>
 <td class="n">0% / 0%</td><td class="n">100% / 100%</td><td class="small"></td></tr>
 
 <tr class=""><td>peel-region</td>
 <td><span class="tag green">same-url</span></td>
 <td>peel-region</td><td class="n">503,923</td><td class="n">503,923</td><td class="n">100%</td>
 <td>2026-10-16</td>
-<td class="n">19</td><td>2026-06-11</td>
-<td class="n">0 of 30</td>
+<td class="n">18</td><td>2026-06-11</td>
+<td class="n">0 of 31</td>
 <td class="n">33% / 33%</td><td class="n">100% / 100%</td><td class="small"></td></tr>
 
 <tr class=""><td>perth</td>
 <td><span class="tag ">jurisdiction</span></td>
 <td>perth-county</td><td class="n">15,301</td><td class="n">18,717</td><td class="n">82%</td>
 <td>2026-10-16</td>
-<td class="n">23</td><td>2026-10-07</td>
-<td class="n">1 of 30</td>
+<td class="n">22</td><td>2026-10-07</td>
+<td class="n">1 of 31</td>
 <td class="n">0% / 6%</td><td class="n">100% / 100%</td><td class="small">OA reads a static cache zip; we read the NG911 AGOL view</td></tr>
 
 <tr class=""><td>prince_edward</td>
 <td><span class="tag green">same-url</span></td>
-<td>prince-edward-county</td><td class="n">27,581</td><td class="n">27,413</td><td class="n">101%</td>
+<td>prince-edward-county</td><td class="n">27,581</td><td class="n">27,415</td><td class="n">101%</td>
 <td>2026-10-16</td>
-<td class="n">4</td><td>2026-10-17</td>
-<td class="n">3 of 30</td>
+<td class="n">4</td><td>2026-10-20</td>
+<td class="n">5 of 31</td>
 <td class="n">1% / 1%</td><td class="n">100% / 100%</td><td class="small"></td></tr>
 
 <tr class=""><td>quinte_west</td>
 <td><span class="tag green">same-url</span></td>
 <td>quinte-west</td><td class="n">20,337</td><td class="n">20,325</td><td class="n">100%</td>
 <td>2026-10-16</td>
-<td class="n">23</td><td>2026-10-17</td>
-<td class="n">6 of 30</td>
+<td class="n">22</td><td>2026-10-17</td>
+<td class="n">5 of 31</td>
 <td class="n">5% / 5%</td><td class="n">100% / 100%</td><td class="small"></td></tr>
 
 <tr class=""><td>renfrew</td>
 <td><span class="tag ">jurisdiction</span></td>
 <td>renfrew</td><td class="n">54,029</td><td class="n">46,952</td><td class="n">115%</td>
 <td>2026-10-16</td>
-<td class="n">23</td><td>2026-09-24</td>
-<td class="n">1 of 30</td>
+<td class="n">22</td><td>2026-09-24</td>
+<td class="n">1 of 31</td>
 <td class="n">3% / 1%</td><td class="n">77% / 100%</td><td class="small">OA reads a static cache zip; we read the county&#39;s live SiteStructureAddressPoint</td></tr>
 
 <tr class=""><td>stormont_dundas_glengarry</td>
 <td><span class="tag green">same-url</span></td>
 <td>sdg</td><td class="n">33,664</td><td class="n">31,645</td><td class="n">106%</td>
 <td>2026-10-16</td>
-<td class="n">23</td><td>2026-10-16</td>
-<td class="n">9 of 30</td>
+<td class="n">22</td><td>2026-10-20</td>
+<td class="n">11 of 31</td>
 <td class="n">7% / 3%</td><td class="n">100% / 100%</td><td class="small"></td></tr>
 
 <tr class=""><td>stratford</td>
 <td><span class="tag ">jurisdiction</span></td>
 <td>stratford</td><td class="n">12,796</td><td class="n">14,884</td><td class="n">86%</td>
 <td>2026-10-16</td>
-<td class="n">23</td><td>2026-10-14</td>
-<td class="n">2 of 30</td>
+<td class="n">22</td><td>2026-10-14</td>
+<td class="n">2 of 31</td>
 <td class="n">6% / 11%</td><td class="n">99% / 99%</td><td class="small">OA reads a static cache zip; we read the live GIS server</td></tr>
 
 <tr class=""><td>township_of_durham</td>
 <td><span class="tag green">same-url</span></td>
 <td>durham</td><td class="n">253,571</td><td class="n">253,560</td><td class="n">100%</td>
 <td>2026-10-16</td>
-<td class="n">23</td><td>2026-09-15</td>
-<td class="n">0 of 30</td>
+<td class="n">22</td><td>2026-09-15</td>
+<td class="n">0 of 31</td>
 <td class="n">8% / 8%</td><td class="n">100% / 100%</td><td class="small"></td></tr>
 
 <tr class=""><td>waterloo</td>
@@ -2426,15 +2426,15 @@
 <td>waterloo-region</td><td class="n">263,200</td><td class="n">263,199</td><td class="n">100%</td>
 <td>2026-10-16</td>
 <td class="n">4</td><td>2026-10-16</td>
-<td class="n">0 of 2</td>
+<td class="n">0 of 5</td>
 <td class="n">35% / 35%</td><td class="n">100% / 100%</td><td class="small"></td></tr>
 
 <tr class=""><td>york</td>
 <td><span class="tag green">same-url</span></td>
 <td>york</td><td class="n">431,861</td><td class="n">431,861</td><td class="n">100%</td>
 <td>2026-10-16</td>
-<td class="n">21</td><td>2026-10-15</td>
-<td class="n">30 of 30</td>
+<td class="n">20</td><td>2026-10-15</td>
+<td class="n">31 of 31</td>
 <td class="n">15% / 15%</td><td class="n">100% / 100%</td><td class="small"></td></tr>
 
 </table></div>
@@ -2835,7 +2835,7 @@
 <footer>
 <p><b>Sources and attribution.</b> Municipal boundaries: "Municipal Boundary – Lower and Single Tier", Land Information Ontario; contains information licensed under the <a href="https://www.ontario.ca/page/open-government-licence-ontario">Open Government Licence – Ontario</a>.
 National Address Register and Open Database of Addresses: Statistics Canada, reproduced and adapted under the <a href="https://www.statcan.gc.ca/en/reference/licence">Statistics Canada Open Licence</a>; the ODA's provider table carries each provider's own licence.
-Overture Maps Foundation addresses theme, release 2026-09-23.1, per its <a href="https://docs.overturemaps.org/attribution/">attribution page</a>; its Canadian addresses derive from the National Address Register via OpenAddresses.
+Overture Maps Foundation addresses theme, release 2026-10-21.0, per its <a href="https://docs.overturemaps.org/attribution/">attribution page</a>; its Canadian addresses derive from the National Address Register via OpenAddresses.
 OpenAddresses figures are the per-job statistics its <a href="https://batch.openaddresses.io/">batch service</a> publishes; source definitions are CC0.
 Our own figures come from this tracker's snapshot stores; each dataset's licence is on its own page.</p>
 <p>Row counts are not comparable one for one across sources: the register and Overture count units, most municipal layers count buildings or entrances, and regional layers overlap their members'. Every number here is a measurement of what a source published on the stated date, not a judgement of the publisher.</p>
