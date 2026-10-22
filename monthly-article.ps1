@@ -167,7 +167,10 @@ $dueArgs = if ($City) { "--city $City" } else { "--all" }
 if ($Month) { $dueArgs += " --month $Month" }
 $dueOut = cmd /c "python tools\article_due.py $dueArgs 2>&1"
 Log "DUE exit=$LASTEXITCODE $dueOut"
-try { $due = @($dueOut | ConvertFrom-Json) } catch { $due = $null }
+# ForEach-Object unrolls the array: Windows PowerShell 5.1's ConvertFrom-Json
+# hands a JSON list back as ONE object, and @() of that is a one-item array
+# whose .status is every status at once (2026-10-22: the batch skipped all 32).
+try { $due = @(($dueOut -join '') | ConvertFrom-Json | ForEach-Object { $_ }) } catch { $due = $null }
 if ($null -eq $due) {
     Record $City $Month 'check' 'error' $runStart
     Finish $Month 'check' 'error' 1
