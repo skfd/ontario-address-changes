@@ -127,6 +127,17 @@ if (-not (Wait-UpdateDone 90)) {
     Finish '' 'gate' 'waiting' 0
 }
 
+# One batch at a time: a hand-started batch during the day and the 15:00
+# task would both edit README.md and push. The task's IgnoreNew policy only
+# covers its own instances, so check for any other live monthly-article.ps1.
+$others = @(Get-CimInstance Win32_Process -Filter "Name = 'powershell.exe' OR Name = 'pwsh.exe'" -ErrorAction SilentlyContinue |
+    Where-Object { $_.CommandLine -like '*monthly-article.ps1*' -and $_.ProcessId -ne $PID })
+if ($others.Count -gt 0) {
+    Log "BUSY another monthly-article.ps1 is running (pid $($others[0].ProcessId))"
+    Record '' '' 'gate' 'busy' $runStart
+    Finish '' 'gate' 'busy' 0
+}
+
 function Publish-Articles([string]$city, [string]$month) {
     # Render articles\ to docs\articles\ (the site copy), then commit both:
     # the Markdown files plus the README row, and the HTML pages. Returns
@@ -206,7 +217,7 @@ foreach ($item in $due) {
     $elapsed = ((Get-Date) - $runStart).TotalMinutes
     if ($claudeRuns -ge $MaxClaude -or $elapsed -ge $BudgetMinutes) {
         Log "DEFERRED $slug $month (runs=$claudeRuns elapsed=$([int]$elapsed)m)"
-        Record $slug $month 'check' 'deferred' $since; Count 'deferred'; continue
+        Count 'deferred'; continue     # one CSV row for all of them, at the end
     }
     if (-not (Wait-Online -Minutes 10)) {
         Log "OFFLINE $(Get-Date -Format o)"
@@ -236,6 +247,7 @@ When done, reply with the paths you wrote.
     else { Record $slug $month 'publish' 'publish-failed' $since; Count 'publish-failed' }
 }
 
+if ($counts['deferred']) { Record "$($counts['deferred']) cities" $Month 'check' 'deferred' $runStart }
 $summary = ($counts.GetEnumerator() | Sort-Object Name | ForEach-Object { "$($_.Name)=$($_.Value)" }) -join ' '
 if (-not $summary) { $summary = 'done' }
 Finish $Month 'batch' $summary $(if ($counts['failed'] -or $counts['publish-failed'] -or $counts['error']) { 1 } else { 0 })

@@ -352,6 +352,7 @@ def digest(ds, month):
             "row_count_open": opening["row_count"],
             "row_count_close": closing["row_count"],
             "observation": obs,
+            "complete": month in complete_months(ds),
             "quiet": quiet,
             "held_events": held_notes,
         },
@@ -435,7 +436,8 @@ def as_text(g):
     obs = m.get("observation")
     if obs:
         o.append(f"observed: {obs['pull_days']} pull days ({obs['first_pull']} .. {obs['last_pull']}), "
-                 f"{obs['failed_days']} failed" + ("" if obs["watched"] else "  [NOT watched end to end]"))
+                 f"{obs['failed_days']} failed"
+                 + ("" if obs["watched"] or m.get("complete") else "  [NOT watched end to end]"))
     o += [f"rows: {m['row_count_open']:,} -> {m['row_count_close']:,} "
           f"({m['row_count_close'] - m['row_count_open']:+,})",
           f"licence: {m['license_name']}",

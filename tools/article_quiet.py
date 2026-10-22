@@ -86,7 +86,7 @@ snapshot whenever its contents differ from the last one kept. {label} produced n
 new snapshot; the diff from the last snapshot before the month to the last one in
 it is therefore empty on every count. The {days} reads are recorded in the
 tracker's pull calendar, which is what separates a quiet month from an unobserved
-one. Daily reports for this city: [{m['site_url']}]({m['site_url']}).
+one.
 
 {m['attribution']} · Daily reports: [ontario-address-changes]({m['site_url']})
 """

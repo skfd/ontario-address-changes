@@ -102,12 +102,15 @@ def main():
     last = previous_month()
 
     if a.all:
+        # --month with --all means exactly that month (a batch for August);
+        # without it, every month from --since to the previous one.
+        lo, hi = (a.month, a.month) if a.month else (a.since, last)
         out = []
         for ds in registry.load_all():
             if not ds.publish_reports:
                 continue
             for month in month_digest.complete_months(ds):
-                if a.since <= month <= (a.month or last):
+                if lo <= month <= hi:
                     out.append(decide(ds, month, ledger, complete=[month]))
         out.sort(key=lambda d: (d["month"], d["city"]))
         print(json.dumps(out))
