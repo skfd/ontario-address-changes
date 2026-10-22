@@ -660,7 +660,7 @@ Press (per WebFetch summary, 11 Dec 2023): Stay Inn Hospitality; site "Previousl
 - FACT — TPA *Appendix A: Off-Street Parking Facilities Owned/Managed by Toronto Parking Authority* (2024): "131 912 Eglinton Ave W Surface Owned 26 … Serves businesses within Upper Village BIA along Eglinton Ave W."; "53 803 Richmond St W Surface Owned 48 … Serves Queen West retail/commercial. Site is encumbered by significant Toronto Water infrastructure. Designated by TPA Board for Residential Overnight Parking."; "503 12 Willingdon Blvd Surface Owned 64 … Serves Royal York Station/ Businesses along Bloor St W in The Kingsway BIA." <https://www.toronto.ca/legdocs/mmis/2024/pa/bgrd/backgroundfile-244114.pdf>
 - Green P pages exist (JS shells; URL only): <https://parking.greenp.com/carpark/131_912-eglinton-avenue-west/> · <https://parking.greenp.com/carpark/53_803-richmond-street-west/> · <https://parking.greenp.com/carpark/503_12-willingdon-blvd/>
 - **Nothing found:** any closure, opening or redevelopment of 131 or 53 (a search snippet claiming 131 is "owned by TTC with development potential flagged by CreateTO" is contradicted by the TPA's own table — discard). The 2019 CBC "People or parking?" story is about a different lot at Caledonia and Eglinton. Nothing found on any 2026 construction at 503 beyond a Green P URL slug reading "partial-construction-reduced-spaces".
-- **12 Willingdon Blvd is at Royal York station, in The Kingsway** — about 3.6 km from the 2157 Lake Shore Blvd W points the offline draft grouped it with. The only thing tying it to them is the same-day reserved→regular swap (old point 20102975 retired, 30139050 regularised, label carried across).
+- **12 Willingdon Blvd is at Royal York station, in The Kingsway** — about 3.6 km from the 2157 Lake Shore Blvd W points the first draft grouped it with. The only thing tying it to them is the same-day reserved→regular swap (old point 20102975 retired, 30139050 regularised, label carried across).
 
 **Confidence: confirmed** exists, all three; no event to lag against.
 
@@ -693,7 +693,7 @@ Press (per WebFetch summary, 11 Dec 2023): Stay Inn Hospitality; site "Previousl
 - ArcGIS layer "Address Point" (description: "Point representation of authorized addresses within the City of Toronto"): `MAINT_STAGE` string(10), `domain: null`. <https://gis.toronto.ca/arcgis/rest/services/cot_geospatial27/MapServer/101?f=pjson>
 - City page: "The City of Toronto's Land and Property Surveys team is responsible for assigning and maintaining street names and property addresses across the city" — no status vocabulary. <https://www.toronto.ca/services-payments/building-construction/city-owned-land-and-property-surveys/municipal-numbering-of-a-property/>
 
-**FACT (empirical, live layer, 2026-09-08):** exactly two values exist — `REGULAR` 517,771 points, `RESERVED` 7,711; `ADDRESS_STATUS` is null everywhere. The offline draft's gloss ("a number that has been assigned but is not yet in service") is a reading of the word, not a City definition; the researched article says so.
+**FACT (empirical, live layer, 2026-09-08):** exactly two values exist — `REGULAR` 517,771 points, `RESERVED` 7,711; `ADDRESS_STATUS` is null everywhere. The first draft's gloss ("a number that has been assigned but is not yet in service") is a reading of the word, not a City definition; the researched article says so.
 
 ---
 
