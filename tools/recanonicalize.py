@@ -59,6 +59,10 @@ Run so far:
               its verify showed 417 rows the old key had collapsed.
               All five verified against the latest vault pull (0/0/0, content_hash
               equal). Backups: C:\Users\kk\ontario-db-backup-2026-10-20-recanonicalize\
+  2026-10-23  prince-edward-county key_field "" -> "NGUID" (--old-rev HEAD): 27,436
+              rows, 27,430 chains re-keyed, 11 joins (real edits the synth key had
+              split). Verify showed 182 added only - suffix siblings - so rebuilt.
+              Backup: C:\Users\kk\ontario-db-backup-2026-10-23-pec-nguid\
 
 Not part of the daily run. Safe to re-run: it is idempotent.
 """

@@ -36,6 +36,11 @@ Run so far:
               every one a suffix sibling at a shared point; every old active row kept;
               verify against the 10-20 pull 0/0/0. Backup:
               C:\Users\kk\ontario-db-backup-2026-10-20-suffixes\hastings.pre-rebuild.db
+  2026-10-23  prince-edward-county (NGUID key, after recanonicalize re-keyed the store
+              so old and new keys compare): 23 snapshots, all raw. 27,436 -> 27,618
+              rows, up to 182 added per snapshot (94B/94C Wilolea shape); every old
+              active row kept; verify against the 10-20 pull 0/0/0. Backup:
+              C:\Users\kk\ontario-db-backup-2026-10-23-pec-nguid\prince-edward-county.pre-rebuild.db
 
 Not part of the daily run.
 """
