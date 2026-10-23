@@ -295,7 +295,7 @@ the order to work them):
 | ~~4~~ | ~~Tecumseh (Essex)~~ | **done 2026-10-16**: tracked (9,860), skipped.toml fixed | — |
 | 5 | Grey County | **tracked 2026-10-16** (grey 51k parcels, blue-mountains 10.5k pts, grey-assigned-addresses 1.7k), gated; licence ask still open | publish if the county grants one |
 | 6 | peel-region, waterloo, dufferin, cambridge, chatham-kent | data-integrity look: content frozen 15/16/16/10/12 weeks | live layer or periodic export? |
-| 7 | stratford, prince-edward-county, haldimand | city-tune audit pass (2+ changed snapshots, TOML untouched since 08-20) | owed since onboarding |
+| ~~7~~ | ~~stratford, prince-edward-county, haldimand~~ | **done 2026-10-23**: PEC re-keyed on NGUID (survived the 10-19 reload) and rebuilt from pulls, +182 suffix siblings the synth key had collapsed; stratford ignores G_COLL, haldimand PCL_RN/TMP_PCL_RN (pre-emptive, operator call; backfill --reapply-ignore, verify 0/0/0). Haldimand watch: ADDR_PT ("PreType") holds house suffixes on 19 of 25 filled rows while 50 stay in ADDR_HN - a cleanup moving them is ~50 retire+add pairs | — |
 | 8 | milton | licensed-layer re-point, deferred 2026-10-12 | now also the flakiest October source |
 | ~~9~~ | ~~member layers~~ | **done 2026-10-16**: ajax, whitby, pickering, oshawa, newmarket, vaughan (+ vaughan-ng911), mississauga, caledon, welland, niagara-falls-city, waterloo-region tracked; Orillia/New Tecumseth are degraded copies of simcoe, not added | cities publish fresher data than the roll-up |
 | 10 | Oxford, North Bay, Haliburton, Sault Ste. Marie, City of Peterborough | **tracked 2026-10-16, publish_reports = false**; licence asks still open | the gate holds publishing only now |

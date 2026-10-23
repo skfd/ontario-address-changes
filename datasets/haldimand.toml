@@ -28,7 +28,10 @@ osm_compatible = "green-self"
 
 # CENTROID_X/CENTROID_Y duplicate the point geometry as WGS84 lon/lat (verified against
 # sample geometries 2026-08-20); tracked as coordinates already.
-ignore_fields = ["CENTROID_X", "CENTROID_Y"]
+# PCL_RN / TMP_PCL_RN are parcel assessment-roll keys from the tax system (1:many with
+# addresses, see [identity]) - the guelph ROLL_NO precedent. Ignored 2026-10-23 ahead of any
+# churn (0 changes in 9 distinct snapshots 08-20..10-22), operator's call.
+ignore_fields = ["CENTROID_X", "CENTROID_Y", "PCL_RN", "TMP_PCL_RN"]
 
 [identity]
 # No stable source id. OBJECTID is sequential; PCL_RN is the parcel assessment roll and

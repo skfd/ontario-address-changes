@@ -17,6 +17,13 @@ format = "geojson"
 license_name = "None published (confirmed 2026-08-20)"
 osm_compatible = "unknown-review"
 
+ignore_fields = [
+  # Garbage-collection day (MONDAY..FRIDAY, TUESDAY & FRIDAY, PRIVATE, blank on 98.7% filled):
+  # a service overlay, vault-only by the 2026-10-12 overlay policy. Ignored 2026-10-23 ahead of
+  # any churn (0 changed rows in 3 snapshots 08-20..10-14), operator's call.
+  "G_COLL",
+]
+
 [identity]
 # No stable source id in the public view: OBJECTID is sequential and sparse (values reach 45k+
 # for 14,873 rows — re-minted), globalIdField is empty, and the item snippet states internal
@@ -36,10 +43,6 @@ street = "ST_NAME"
 unit   = "UNIT"                                 # 1,589 of 14,873 populated (~11%) — normal
 full   = "FULL_ADDRESS"
 
-# G_COLL is the garbage-collection day (MONDAY..FRIDAY, TUESDAY & FRIDAY, PRIVATE, blank) —
-# service metadata riding on the address layer that may churn seasonally on route changes. Not
-# ignored day one (no churn evidence yet, house rule), but it is the likely first ignore_fields
-# candidate when history arrives.
 
 # [classes] deferred: no status / municipality / place-name style field in the source; nothing
 # obvious surfaced in sampling. Revisit after a couple of snapshots of observed transitions.
