@@ -40,7 +40,14 @@ osm_compatible = "yellow-review"
 #   key_field (that is an identity migration — full-history surgery, not a config edit).
 # - SADDGUID_pec: 27,497 of 27,580 filled, only 27,178 distinct (blanks + dupes). Rejected.
 # - OBJECTID sequential, volatile by definition.
-key_field = ""                                 # synthesize from address + rounded lon/lat
+# PROMOTED 2026-10-23: NGUID survived the 2026-10-19 truncate-and-reload (created_date
+# now 2026-10-19 on every row): all 27,413 stored NGUIDs carried through 19->20 unchanged,
+# 27,389 since the 08-20 baseline, and no synth key ever held two NGUIDs. The synth key
+# above collapsed 182 suffix siblings at a shared point (94B/94C Wilolea - the hastings
+# trap: number drops AddNum_Suf) and split 11 real edits into retire+add. Store rebuilt
+# from the raw pulls (tools/rebuild_from_pulls.py). synth_fields stay as the fallback for
+# a blank NGUID.
+key_field = "NGUID"
 synth_fields = ["number", "street", "unit"]
 
 [fields]                                        # source property -> canonical name
