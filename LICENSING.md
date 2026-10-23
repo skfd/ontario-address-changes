@@ -197,9 +197,18 @@ Strathroy-Caradoc 2024. Brockville is token-secured (skipped.toml).
 | welland | yellow-ogl | Open Government Licence - City of Welland |
 | whitby | yellow-ogl | The Corporation of the Town of Whitby Open Government License |
 
-## Counts (2026-10-16, after the registry-sweep onboarding; tallied from the TOMLs)
+## 2026-10-23 — Leamington
+
+Found by the hub-blind-spot check: the layer is in the County of Essex AGOL org but not shared
+to the county Hub, so the County OGL that carries tecumseh does not obviously reach it.
+
+| dataset | tier | licence |
+|---|---|---|
+| leamington | unknown-review · **publish_reports = false** | (none published: item licenseInfo, accessInformation and layer copyrightText all empty, read 2026-10-23) - ask Leamington / County of Essex GIS whether the County OGL covers it |
+
+## Counts (2026-10-23, after Leamington; tallied from the TOMLs)
 
 green 21 (14 `green-lwg`, 6 `green-self`, 1 `green-cc0`) · OGL-family awaiting the LWG 13 ·
-yellow-review 10 · CC-BY waiver 1 · restrictive 12 · unknown 20 — of **77 tracked datasets**.
-19 are gated off the site (`publish_reports = false`): sdg, renfrew, peterborough-county,
-cobourg, plus the 15 from the 2026-10-16 sweep listed above.
+yellow-review 10 · CC-BY waiver 1 · restrictive 12 · unknown 21 — of **78 tracked datasets**.
+20 are gated off the site (`publish_reports = false`): sdg, renfrew, peterborough-county,
+cobourg, the 15 from the 2026-10-16 sweep listed above, and leamington.

@@ -164,6 +164,13 @@ These cities are imported and tracking, but their field maps need a human decisi
   ranges" are gone from this layer. `unit_from_number = true` splits "<unit>-<number>",
   unit joined `synth_fields`, and `tools/recanonicalize.py --old-rev HEAD` re-keyed all
   39,510 rows of history (no collision); verify 0/0/0, no page count moved.
+- [ ] **leamington — units sit inside `Addressche` between number and street.** Found
+  2026-10-23 at onboarding: 479 of 11,424 rows (4.2%) read "24 UNIT 300 SEACLIFF DRIVE EAST",
+  "1217 FLR 01 MERSEA RD 2", "20 APT 3 FOUNDRY STREET"; 142 number+street groups (718 rows)
+  share one civic address. Not `number_unit_from_full`'s shape (unit after the street), which
+  would read the number as "24 UNIT 300". Identity is GlobalID, so a parse (a designator word
+  plus one token between `AddressNum` and `StreetName`) changes display only, no re-key.
+  Low stakes while the city is gated off the site.
 - [x] **thunder-bay — `number` drops the house suffix on 347 rows.** Found 2026-08-10, the
   hastings trap in a third city. `number` maps to `ADDRESS_NUMBER`, an Integer, so it holds
   "688" where the String `ADDRESS` column holds "688B" and `full` (`COMPLETE`) shows "688B
@@ -292,7 +299,7 @@ the order to work them):
 | 8 | milton | licensed-layer re-point, deferred 2026-10-12 | now also the flakiest October source |
 | ~~9~~ | ~~member layers~~ | **done 2026-10-16**: ajax, whitby, pickering, oshawa, newmarket, vaughan (+ vaughan-ng911), mississauga, caledon, welland, niagara-falls-city, waterloo-region tracked; Orillia/New Tecumseth are degraded copies of simcoe, not added | cities publish fresher data than the roll-up |
 | 10 | Oxford, North Bay, Haliburton, Sault Ste. Marie, City of Peterborough | **tracked 2026-10-16, publish_reports = false**; licence asks still open | the gate holds publishing only now |
-| 11 | Leamington (Essex) | **found 2026-10-22**, not yet onboarded: `services6.arcgis.com/baycHE2iKJaT7Upn/arcgis/rest/services/SDEAddressPts/FeatureServer/3`, 11,424 points (AddressNum, StreetName, MatchAddress; no stable id but GlobalID), against 9,701 NAR locations; companion `Parcels_CIVIC/FeatureServer/0` (11,685 parcels, edited 2026-08-14). No licenseInfo on the item: track with publish_reports = false, Amherstburg-style | the only gap the hub-blind-spot check turned up; in the County of Essex org, missed because the sweep reads the Hub, not the REST root |
+| ~~11~~ | ~~Leamington (Essex)~~ | **done 2026-10-23**: tracked (11,423 baseline), key GlobalID, publish_reports = false (no licence on the item, not on the county Hub); layer last edited 2025-07-08, so watch that it moves; unit parse queued in §1 | — |
 | — | Belleville, Northumberland, Lanark, Timmins, Owen Sound, Kenora | still no machine-readable layer | quarterly re-probe only |
 
 **2026-10-16 sweep onboarding, follow-ups** (24 datasets added, dufferin re-pointed to its address layer, LICENSING.md has the table):

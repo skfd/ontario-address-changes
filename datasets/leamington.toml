@@ -1,0 +1,48 @@
+slug = "leamington"
+provider = "Municipality of Leamington"
+# Found 2026-10-22 by the hub-blind-spot check: the layer sits in the County of Essex AGOL org
+# (owner dsimpson_leamington, item 5628a315631e462ea3fcee331f8cb477 "911 Address pts") but is
+# not shared to the county Hub, which is all the 2026-10-16 sweep read. Probed live 2026-10-23:
+# 11,424 points against 9,701 NAR locations. Item created 2025-06-09; all three editingInfo
+# stamps equal the item's modified date (2025-07-08), so this is one hosted upload with no
+# edits since - it may be a static copy; check that it moves before relying on its cadence
+# (the prince-edward-county caveat). Companion Parcels_CIVIC/FeatureServer/0 (11,685 parcels,
+# edited 2026-08-14) is parcels, not addresses. Layer 4 of this service,
+# SDE_PointPelee_AddressPts, is 21 Point Pelee park facilities (Name + a bare civic number, no
+# street) - not tracked.
+data_url = "https://services6.arcgis.com/baycHE2iKJaT7Upn/arcgis/rest/services/SDEAddressPts/FeatureServer/3"
+access = "arcgis"
+format = "geojson"
+# Native layer SR; the geojson export arrives in WGS84, so this guards a future export-CRS switch
+# (the amherstburg/tecumseh precedent).
+source_crs = "EPSG:26917"
+# Read 2026-10-23: item licenseInfo, accessInformation and the layer copyrightText are all
+# empty. The County of Essex OGL that carries tecumseh is granted through the county Hub, and
+# this item is not on the Hub, so it does not obviously reach it. Ask Leamington (or County of
+# Essex) GIS whether the County OGL covers it.
+license_name = "None published (read 2026-10-23)"
+osm_compatible = "unknown-review"
+publish_reports = false
+
+[identity]
+# GlobalID: unique on all 11,424 rows. OBJECTID is gappy (1..45,333 for 11,424 rows), so the
+# hosted copy carries the SDE source's ids rather than renumbering on upload - the
+# elgin/perth-county reading. If a re-share ever mints fresh GlobalIDs (a homogeneous
+# retire-all/add-all), the fallback is synth_fields = ["full"]: 0 collisions with 5dp
+# geometry on 2026-10-23, against 114 for number+street, which collapses the units below.
+key_field = "GlobalID"
+
+[fields]                                        # canonical name -> source property
+number = "AddressNum"                           # keeps suffixes ("10B", 401 rows); 9 blank
+street = "StreetName"                           # long form ("TALBOT ROAD EAST"); 49 blank
+full   = "Addressche"                           # "<number> [<unit>] <street>"; 8 blank
+# MatchStName / MatchAddress are the geocoder-abbreviated forms ("TALBOT RD E") and ride in the
+# props blob. No ignore_fields day one: no history yet.
+# unit: no unit COLUMN, but 479 rows (4.2%) carry one inside Addressche BETWEEN number and
+# street - "24 UNIT 300 SEACLIFF DRIVE EAST", "1217 FLR 01 MERSEA RD 2", "20 APT 3 FOUNDRY
+# STREET" - so 142 number+street groups (718 rows) share one civic address. That is not
+# number_unit_from_full's shape (unit after the street, waterloo), so it would read the number
+# as "24 UNIT 300". Parse queued in TODO.md section 1; with a GlobalID key it changes display
+# only, not identity.
+
+# [classes] deferred: no transitions observed yet, and no status/boundary column exists.
