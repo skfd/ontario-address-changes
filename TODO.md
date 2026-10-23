@@ -292,6 +292,7 @@ the order to work them):
 | 8 | milton | licensed-layer re-point, deferred 2026-10-12 | now also the flakiest October source |
 | ~~9~~ | ~~member layers~~ | **done 2026-10-16**: ajax, whitby, pickering, oshawa, newmarket, vaughan (+ vaughan-ng911), mississauga, caledon, welland, niagara-falls-city, waterloo-region tracked; Orillia/New Tecumseth are degraded copies of simcoe, not added | cities publish fresher data than the roll-up |
 | 10 | Oxford, North Bay, Haliburton, Sault Ste. Marie, City of Peterborough | **tracked 2026-10-16, publish_reports = false**; licence asks still open | the gate holds publishing only now |
+| 11 | Leamington (Essex) | **found 2026-10-22**, not yet onboarded: `services6.arcgis.com/baycHE2iKJaT7Upn/arcgis/rest/services/SDEAddressPts/FeatureServer/3`, 11,424 points (AddressNum, StreetName, MatchAddress; no stable id but GlobalID), against 9,701 NAR locations; companion `Parcels_CIVIC/FeatureServer/0` (11,685 parcels, edited 2026-08-14). No licenseInfo on the item: track with publish_reports = false, Amherstburg-style | the only gap the hub-blind-spot check turned up; in the County of Essex org, missed because the sweep reads the Hub, not the REST root |
 | — | Belleville, Northumberland, Lanark, Timmins, Owen Sound, Kenora | still no machine-readable layer | quarterly re-probe only |
 
 **2026-10-16 sweep onboarding, follow-ups** (24 datasets added, dufferin re-pointed to its address layer, LICENSING.md has the table):
