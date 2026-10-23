@@ -31,6 +31,7 @@ research notes are not rendered; the site links to them here on GitHub.
 | 2026-09 | cambridge | 0 | Nothing changed: 28 reads, the file unchanged since 7 August 2026 |
 | 2026-09 | chatham-kent | 0 | Nothing changed: 30 reads, the file unchanged since 24 July 2026 |
 | 2026-09 | cornwall | +48 | 501 Tenth St E arrives with Units 1–16 on four floors (**11 Sep**), alongside 11 units at 950 Marlborough, four at 933 and a new 489 Pacific: 33 addresses within 150 m, and nothing public says what was built; all 24 K6K 0B7 addresses on Mauricy St rewritten (23 to K6K 0A1, the code listings already used; 3190 to K6K 0C2); a second "3166 Mauricy" whose number field says 3170 |
+| 2026-09 | durham | +1 | 3575 Sideline 34 in Green River, Pickering, renumbered 3561 in place (**14 Sep**), with an undefined state field reading 1 for that one day, the third such day since June; 10727 Concession 3 in Uxbridge fills the gap between 10700 and 10729 (**2 Sep**); nothing public on record for either |
 | 2026-09 | halton-hills | 0 | Nothing changed: 30 reads, the file unchanged since 20 August 2026 |
 | 2026-09 | kawartha-lakes | 0 | Nothing changed: 30 reads, the file unchanged since 1 August 2026 |
 | 2026-09 | norfolk | 0 | Nothing changed: 30 reads, the file unchanged since 20 August 2026 |
