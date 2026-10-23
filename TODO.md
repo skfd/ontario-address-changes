@@ -635,6 +635,16 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
 
 - [ ] **Re-probe `skipped.toml` quarterly** — endpoints come back or migrate
   (5 of 5 originally-dead cities were eventually recovered via ArcGIS Online).
+- [ ] **Revisit Orangeville and Hanover as their own datasets, around 2027-10.** Both
+  publish live layers that OpenAddresses reads (Orangeville `gis.orangeville.ca/arcgis/
+  rest/services/Location/SiteAddress/MapServer/0`, OGL-Orangeville; Hanover
+  `gis.grey.ca/server/rest/services/Public/Service_HanoverAssets/FeatureServer/16`).
+  Declined 2026-10-22 because our county layers already hold them in full (dufferin 106%,
+  grey 109% of the NAR's locations; `priorart/report.html`). Re-check two things: whether
+  the municipal layer moves on a different **cadence** than the county's (it may be the
+  upstream the county copies from, so changes would show here first), and whether its
+  **data differs** (rows, units, suffixes, fields) from the county's rows inside the town.
+  A one-off pull of each into a scratch store and a diff against the county rows covers both.
 - [x] **Delete the 2026-08-09 store backups** — DONE 2026-08-20: deleted
   `ontario-db-backup-2026-08-09` (2.69 GB), `-2026-08-09-preignore` (0.19 GB) and
   also `-2026-08-10` (0.24 GB, the elgin/peel/waterloo reapply backup this item
