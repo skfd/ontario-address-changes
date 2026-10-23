@@ -74,7 +74,14 @@ function Wait-Online([int]$Minutes) {
 
 $runStart = Get-Date
 $startLine = "START $(Get-Date -Format o) city=$(if ($City) { $City } else { 'all' })"
-Set-Content $logFile $startLine
+
+# Another live batch? Looked up before the log is touched: a run that will
+# only say BUSY must append to the live batch's log, not truncate it
+# (2026-10-23: the 15:00 task wiped the hand-started batch's log). Matched on
+# "-File", so a query that merely mentions the script name does not count.
+$others = @(Get-CimInstance Win32_Process -Filter "Name = 'powershell.exe' OR Name = 'pwsh.exe'" -ErrorAction SilentlyContinue |
+    Where-Object { $_.CommandLine -like '*-File*monthly-article.ps1*' -and $_.ProcessId -ne $PID })
+if ($others.Count -gt 0) { Add-Content $logFile $startLine } else { Set-Content $logFile $startLine }
 Write-Host $startLine
 
 # One CSV row per city-month the run touched (and one for a run that never
@@ -132,9 +139,10 @@ if (-not (Wait-UpdateDone 90)) {
 
 # One batch at a time: a hand-started batch during the day and the 15:00
 # task would both edit README.md and push. The task's IgnoreNew policy only
-# covers its own instances, so check for any other live monthly-article.ps1.
+# covers its own instances, so check for any other live monthly-article.ps1
+# (again: the update wait above can last 90 minutes).
 $others = @(Get-CimInstance Win32_Process -Filter "Name = 'powershell.exe' OR Name = 'pwsh.exe'" -ErrorAction SilentlyContinue |
-    Where-Object { $_.CommandLine -like '*monthly-article.ps1*' -and $_.ProcessId -ne $PID })
+    Where-Object { $_.CommandLine -like '*-File*monthly-article.ps1*' -and $_.ProcessId -ne $PID })
 if ($others.Count -gt 0) {
     Log "BUSY another monthly-article.ps1 is running (pid $($others[0].ProcessId))"
     Record '' '' 'gate' 'busy' $runStart
