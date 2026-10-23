@@ -62,6 +62,7 @@ research notes are not rendered; the site links to them here on GitHub.
 | 2026-09 | stratford | 0 | Nothing changed: 30 reads, the file unchanged since 20 August 2026 |
 | 2026-09 | thunder-bay | +4 | 1075 Central Ave gets its own number on 1091 Central's parcel (**9 Sep**), the land council rezoned for a 15,049.5 m² retail warehouse and gas bar in **Apr 2025** and reported sold to Costco in Dec 2025, as 1091 loses its *City Owned* label; 1077 Central and 1112 Premier Way join other parcels nearby with nothing public on record; four of five "retirements" are points moved 7–54 m and re-keyed by the tracker |
 | 2026-09 | toronto | −105 | The 13 Carlaw Ave doors were the **Riverdale Shopping Centre**, demolished for the Ontario Line's Gerrard portal (permit completed **15 Dec 2025**); the station rename trails Metrolinx by 17½ months; three new lanes, each over a finished laneway suite |
+| 2026-09 | wellington | +30 | 145, 151, 153 and 155 Sideroad 18 fill the run from 145 to 157 in Fergus (**16 Sep**), 800 m from the 961 St. David St N site council approved; 6734 Wellington Rd 16 gets Units 1–5 spread over 390 m with the plain 6734 kept (**18 Sep**); nothing public on either; all five retirements replaced on or beside the same spot (19→17 Gilkison, 135→131 Kertland, 415 Maiden Lane→St George/St Patrick St W); 11 of 16 are moved points re-keyed |
 | 2026-09 | windsor | 0 | Nothing changed: 30 reads, the file unchanged since 11 June 2026 |
 
 Toronto's February 2026 is deliberately absent: observation starts 2026-02-12, so its
