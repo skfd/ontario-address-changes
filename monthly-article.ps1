@@ -24,7 +24,10 @@ param(
     [string]$Month,
     [int]$FromDay = 3,
     [int]$MaxClaude = 6,
-    [int]$BudgetMinutes = 150
+    [int]$BudgetMinutes = 150,
+    # Model for the headless runs; empty = the account default. Set it when the
+    # default model's credits run out (2026-10-23: "out of usage credits").
+    [string]$Model = ''
 )
 
 $projectDir = $PSScriptRoot
@@ -185,12 +188,14 @@ function Invoke-Claude([string]$phase, [string]$prompt) {
     Set-Content -Path $promptFile -Value $prompt -Encoding UTF8
     Log "PHASE $phase $(Get-Date -Format o)"
     $script:limitLine = $null
-    cmd /c "type `"$promptFile`" | `"$claude`" -p --permission-mode dontAsk --allowedTools $claudeTools 2>&1" | ForEach-Object {
+    $modelArg = if ($Model) { " --model $Model" } else { '' }
+    cmd /c "type `"$promptFile`" | `"$claude`" -p$modelArg --permission-mode dontAsk --allowedTools $claudeTools 2>&1" | ForEach-Object {
         Add-Content $logFile $_; Write-Host $_
-        # The plan's session limit: claude -p prints one line and exits 1 at
-        # once. Every further city would do the same (2026-10-22: 31 cities
-        # "failed" in two minutes), so the caller stops the batch instead.
-        if ($_ -match "hit your session limit|usage limit") { $script:limitLine = "$_" }
+        # The plan's limits: claude -p prints one line and exits 1 at once.
+        # Every further city would do the same (2026-10-22: 31 cities
+        # "failed" in two minutes on the session limit; 2026-10-23: 26 on
+        # "You're out of usage credits"), so the caller stops the batch.
+        if ($_ -match "hit your session limit|usage limit|out of usage credits") { $script:limitLine = "$_" }
     }
     return $LASTEXITCODE
 }
