@@ -347,6 +347,31 @@ the order to work them):
   TOML comment saying it can is wrong). Watch grey: 129 points moved 1.4-9 m on 10-17.
   **amherstburg, cobourg, halton-hills, norfolk have been byte-identical since 08-20** -
   frozen sources, a data-integrity look, not a tuning one.
+  **Looked 2026-10-23** (64-65 identical daily pulls each since 08-20; all four stores
+  baseline-only, so any re-point is a fresh baseline):
+  - **norfolk: stale hosted copy.** The AGOL layer was last edited 2025-11-10 (a bulk
+    republish), 35,121 rows. The county's own `gis.norfolk.ca` serves the same feature
+    class at 35,253, newest record created 2026-10-20 (245 created since 2025-11-10).
+    Candidate: `https://gis.norfolk.ca/arcgis/rest/services/Services_Public_GISviewer/Land_Records_Public/MapServer/2`
+    (same fields + COMMENTS, OID `OBJECTID`, maxRecordCount 1000; avoid CityView_GISviewer/2,
+    whose LastModified is rewritten nightly). The server 403s urllib's default User-Agent.
+    The licence covers the AGOL open-data item, not this viewer service.
+  - [ ] **halton-hills: one-shot export** (all 21,900 rows created 2025-10-17). The town's
+    `https://map.haltonhills.ca/awse/rest/services/eP/MapServer/0` has 21,902 and ~20
+    differences, but no date fields to prove it is live itself. Re-probe its count and max
+    OBJECTID (888,739 on 10-23) around **2026-11-06**; if it moved, re-point (street becomes
+    `STR_FULL`, no unit column - parse from `ADDR_FULL`, `unit_from_full` precedent;
+    GlobalID shared with the current layer, a key candidate). Ask gis@haltonhills.ca to
+    refresh the (od) item meanwhile.
+  - [ ] **cobourg: stale copy of a slow town.** AGOL bulk-republished 2026-05-08 (7,837); its
+    source `https://geo.cobourg.ca/server/rest/services/Operations/FireQuickLookup/MapServer/10`
+    has 7,846, ~2 new points a month. Re-point there if AGOL hasn't moved by **2026-12-01**
+    (ignore CREATED_DATE/LAST_EDITED_DATE; STATUS is a class candidate). Not the editable
+    Operations/Property/FeatureServer/30 (anonymous edits open; 9,999 rows incl. 1,399 more units).
+  - [ ] **amherstburg: unknown, likely batch-fed.** Its own edit layer; `Type` tags show
+    monthly loads Sep 2024-Feb 2025, nothing tagged 2026; no alternative anywhere (Essex has
+    no points). Watch to **2026-12-31**, then ask building@amherstburg.ca whether it still
+    gets batches.
 
 The other six August onboards (amherstburg, cobourg, halton-hills, middlesex, norfolk,
 west-parry-sound) cannot be tuned yet — none has published a second distinct snapshot.
