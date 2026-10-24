@@ -639,6 +639,35 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
   the URLs their open licences literally cover~~ (2026-10-12: windsor re-pointed,
   with barrie and leeds-grenville; milton deferred, reasons in milton.toml).
 
+## 3b. Monthly articles
+
+September 2026 is written for all 44 publishable city-months (11 quiet, 33 researched)
+and live, unlisted, at <https://skfd.github.io/ontario-address-changes/articles/>. The
+two items after the review wait on it: a style change found there should land before
+70 more pieces are written in the old style, and before the pieces get a public link.
+
+- [ ] **Review the style of the September pieces.** Compare the two batches, which
+  were written by different models. Barrie, Brampton, Brant, Brantford, Bruce and
+  Burlington (and Toronto) came from the default model, which fanned out parallel
+  research agents: longer, 10-28 sources in each research note. Cornwall through York came from Opus 5.5
+  after the default model ran out of usage credits on 2026-10-23: one research pass,
+  shorter, mostly 1-10 sources (York 14). Quiet months (e.g. Amherstburg, Windsor) use a fixed
+  shape from `tools/article_quiet.py`. House style lives in
+  `.claude/skills/monthly-article/references/house-style.md`; changes go there so
+  every later run picks them up.
+- [ ] **After the review: decide on backfilling July and August 2026** for the cities
+  other than Toronto — about 36 city-months each, 5 quiet each, so roughly 70
+  researched pieces at 2-25 min apiece. Each plan session window allowed 1-6 before
+  the limit stopped the batch, so this is several days of plan usage competing with
+  every other session. Run one month at a time:
+  `.\monthly-article.ps1 -Month 2026-08 -MaxClaude 40 -BudgetMinutes 420` (add
+  `-Model claude-opus-5-5` if the default model is out of credits). The batch stops
+  cleanly at a limit and resumes where it left off on the next run.
+- [ ] **After the review: link the articles from the landing page.** The link belongs
+  in `templates/cities.html` (`docs/index.html` is regenerated every render), the way
+  the prior-art comparison is linked; it shows on the next daily render. Until then the
+  pages are reachable only by URL.
+
 ## 4. Periodic / ops chores
 
 - [ ] **Re-probe `skipped.toml` quarterly** — endpoints come back or migrate
