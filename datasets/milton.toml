@@ -19,6 +19,11 @@ format = "geojson"
 #     normalize cannot do, and two of those are in ignore_fields below, so they were never stored
 #     and tools/remap_canonical_from_prop.py cannot rebuild history from them.
 #  3. It has no STATUS or WARD, so both [classes] go. Address_ID is there, so identity would hold.
+# 2026-10-23, re-checked: still not switched, now a decline rather than a deferral. Both layers
+# served and counted 46,437; Address_Pts is a 13-field subset of MGIS/63's 24 (no STREET_NAME,
+# FULL_ADDRESS, STATUS, WARD, HISTORY) - the same data, cut down. The October flakiness on MGIS/63
+# was 10-11 and 10-12 only; the vault pulled it cleanly every day 10-13..10-23. Revisit only if
+# MGIS/63 goes away or the licence page starts naming layers.
 license_name = "Open Government Licence - Milton"
 osm_compatible = "yellow-ogl"
 
