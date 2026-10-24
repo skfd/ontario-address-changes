@@ -66,6 +66,8 @@ Run so far:
               rows, 27,430 chains re-keyed, 11 joins (real edits the synth key had
               split). Verify showed 182 added only - suffix siblings - so rebuilt.
               Backup: C:\Users\kk\ontario-db-backup-2026-10-23-pec-nguid\
+  2026-10-23  leamington unit_from_full: 488 of 11,423 rows, none re-keyed (GlobalID).
+              Verify 0/0/0. Backup: C:\Users\kk\ontario-db-backup-2026-10-23-leamington-unit\
 
 Not part of the daily run. Safe to re-run: it is idempotent.
 """

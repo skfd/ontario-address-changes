@@ -164,13 +164,21 @@ These cities are imported and tracking, but their field maps need a human decisi
   ranges" are gone from this layer. `unit_from_number = true` splits "<unit>-<number>",
   unit joined `synth_fields`, and `tools/recanonicalize.py --old-rev HEAD` re-keyed all
   39,510 rows of history (no collision); verify 0/0/0, no page count moved.
-- [ ] **leamington — units sit inside `Addressche` between number and street.** Found
+- [x] **leamington — units sit inside `Addressche` between number and street.** Found
   2026-10-23 at onboarding: 479 of 11,424 rows (4.2%) read "24 UNIT 300 SEACLIFF DRIVE EAST",
   "1217 FLR 01 MERSEA RD 2", "20 APT 3 FOUNDRY STREET"; 142 number+street groups (718 rows)
   share one civic address. Not `number_unit_from_full`'s shape (unit after the street), which
   would read the number as "24 UNIT 300". Identity is GlobalID, so a parse (a designator word
   plus one token between `AddressNum` and `StreetName`) changes display only, no re-key.
   Low stakes while the city is gated off the site.
+  **Done 2026-10-23:** `unit_from_full = true` (`normalize.unit_from_full`), unit kept with
+  its designator ("UNIT 300", "FLR 01"; UPPER/LOWER/REAR/FRONT alone), anchored on the mapped
+  number and street columns. 488 of 488 rows of that shape parsed; history rewritten by
+  `tools/recanonicalize.py` (488 rows, 0 re-keyed, verify 0/0/0), which now keeps a source-id
+  key under an unchanged `key_field` without recomputing it. `[fields]` unchanged, so no
+  vault churn. Left unparsed: 68 rows with the unit *after* the street (`7 CHERRY LANE UNIT
+  1..49`, `109 ROBSON ROAD UNIT 101..904`) and 14 messy rows. Adding the trailing shape with
+  the same anchoring would take same-address groups from 9 (96 rows) to about 2.
 - [x] **thunder-bay — `number` drops the house suffix on 347 rows.** Found 2026-08-10, the
   hastings trap in a third city. `number` maps to `ADDRESS_NUMBER`, an Integer, so it holds
   "688" where the String `ADDRESS` column holds "688B" and `full` (`COMPLETE`) shows "688B
