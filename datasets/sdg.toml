@@ -19,8 +19,16 @@ publish_reports = false
 [identity]
 # Region-wide layer: all six SDG townships (North/South Dundas, Glengarry, Stormont).
 # The catalogue's separate "North Glengarry" entry is a subset of this layer.
-key_field = "Unique_ID"                        # municipality-prefixed stable id (e.g. SS_30001), populated on all but 1 row
-synth_fields = ["number", "street", "unit"]    # fallback for the lone null Unique_ID row
+# Unique_ID = municipality prefix + SDGCivicID (e.g. SS_30001). NOT populated on all but
+# 1 row, as this said until 2026-10-23: where SDGCivicID is null/0 (~1,860 rows at the
+# 06-11 baseline, ~2,010 on the 10-23 pull) it is the bare prefix (ND_, NG_, NS_, SD_, SG_,
+# SS_), and 7 full ids are duplicated (SG_54093 x6, ND_12280 x4, ...). 13 keys stand for
+# 1,863+ distinct addresses; the importer keeps one of each, so the rest are never stored.
+# Switch to a pure synth key (key_field = "") approved 2026-10-23 but NOT applied: the
+# history rebuild cannot bracket 06-12..06-23 (no raw pull; the hidden set changes across
+# the gap). Do not flip key_field without migrating the store (recanonicalize.py notes).
+key_field = "Unique_ID"
+synth_fields = ["number", "street", "unit"]    # fallback for rows with a null Unique_ID
 
 [fields]                                        # source property -> canonical name
 number = "Address_Nu"
