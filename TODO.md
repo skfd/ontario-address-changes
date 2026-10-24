@@ -686,41 +686,14 @@ two items after the review wait on it: a style change found there should land be
   upstream the county copies from, so changes would show here first), and whether its
   **data differs** (rows, units, suffixes, fields) from the county's rows inside the town.
   A one-off pull of each into a scratch store and a diff against the county rows covers both.
-- [x] **Delete the 2026-08-09 store backups** — DONE 2026-08-20: deleted
-  `ontario-db-backup-2026-08-09` (2.69 GB), `-2026-08-09-preignore` (0.19 GB) and
-  also `-2026-08-10` (0.24 GB, the elgin/peel/waterloo reapply backup this item
-  never listed but the same drop rule covered — clean runs had imported on top of
-  all three). **Still kept, gate not met:** `-2026-08-20-preignore` (1.15 GB, 17
-  cities) and `-2026-08-20-remap` (lennox), because today's tuning/remap landed
-  *after* today's noon run — droppable once the 2026-08-21 run imports cleanly.
-  **Gate met long ago, not yet dropped (checked 2026-10-16):** all three remaining
-  directories are still on disk — `-2026-08-20-preignore` 1.15 GB, `-2026-08-20-remap`
-  0.01 GB, `-2026-08-21-nullliterals` 2.87 GB (§5's null-literal migration backup) —
-  4.0 GB in total, with ~55 clean daily imports on top of each. Operator cleanup.
-  Added 2026-10-16: `-2026-10-16-wps` (25 MB, west-parry-sound's pre-NG911 store) — droppable
-  once a few NG911 pulls have imported cleanly on the new baseline.
-  Original note follows for the restore procedure. — 2.9 GB outside the repo, kept while the
-  prop-hashing migration settles (§5). Both passes verified idempotent and every
-  affected city's latest diff verified byte-identical the same day, so these are
-  belt-and-braces rather than a pending rollback:
-  - `C:\Users\kk\ontario-db-backup-2026-08-09\` — all 42, 2.7 GB, pre-migration
-  - `C:\Users\kk\ontario-db-backup-2026-08-09-preignore\` — the five `--reapply-ignore`
-    cities, 190 MB, post-global pass. The narrower rollback point, and the only one
-    that can undo `--reapply-ignore` alone.
-  - `C:\Users\kk\ontario-db-backup-2026-08-20-preignore\` — the 17 cities whose
-    ignore_fields changed in the 2026-08-20 flag-review + tuning pass, 1.2 GB, taken
-    before that day's `--reapply-ignore` run. Same drop rule: safe once a daily run
-    has imported cleanly on top (after 2026-08-21).
-
-  Reasonable to drop once a daily run has imported cleanly on top of the migration
-  (i.e. after 2026-08-10 noon). Restoring either is a plain file copy over
-  `data/<slug>/<slug>.db` with the scheduled task idle.
-
-  **That gate is met** (2026-08-10): `logs/runs.csv` records 12:00:02 → 12:33:26, one
-  attempt, exit 0 — the first full daily run against the migrated stores. Both
-  directories were confirmed intact and matching what this note claims (126 files /
-  2.69 GB, 5 files / 0.19 GB). Deletion itself is the operator's to run; tick this off
-  once it has.
+- [x] **Delete the gate-met store backups** — DONE 2026-10-23 (the 08-09 and 08-10 sets
+  went 2026-08-20): deleted `-2026-08-20-preignore` (1.2 GB), `-2026-08-20-remap` (12 MB),
+  `-2026-08-21-nullliterals` (2.9 GB) and `-2026-10-16-wps` (25 MB; seven NG911 pulls had
+  imported cleanly on the new baseline). Still on disk, under the same rule (droppable once
+  a few clean imports land on top; restore = file copy over `data/<slug>/<slug>.db` with the
+  scheduled task idle): `-2026-10-16-{dufferin,elgin,middlesex,waterloo}` (~0.1 GB, the
+  10-16 re-baselines, gate met), `-2026-10-20-{mergespans,recanonicalize,suffixes}` (2.2 GB),
+  `-2026-10-23-{pec-nguid,pre-ignore}` (73 MB, too new).
 - [ ] **Watch the daily scheduled task** — check `logs/` and that the site commit/push
   ran. `addressvault report` is the first command (per-city-per-day: checked, unchanged,
   failed, or no attempt); `health.py --blocks --runs` is the project-side second.
