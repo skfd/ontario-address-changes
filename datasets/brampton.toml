@@ -25,6 +25,11 @@ ignore_fields = [
 
 [identity]
 key_field = "ADDRESS_ID"                       # stable municipal address id, 100% populated (GIS_ID/OBJECTID are sequential)
+# ADDRESS_ID names the address, not the point: an address can carry a PRIMARY point plus
+# SECONDARY / FRONTDOOR ones under the same id (10-23 pull: PRIMARY 249,290, SECONDARY
+# 3,202, FRONTDOOR 1,299; 3,149 ids shared). Store the PRIMARY one - under the old
+# file-order dedupe 1,206 of those ids sat at a non-primary point (2026-10-24).
+prefer = {field = "ADDRESS_TYPE", value = "PRIMARY"}
 synth_fields = ["number", "street", "unit"]    # fallback only if a row ever lacks ADDRESS_ID
 
 [fields]                                        # source property -> canonical name

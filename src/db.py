@@ -106,23 +106,68 @@ def _last_snapshot(conn):
     ).fetchone()
 
 
+def tiebreak_rank(ds, feature, rec):
+    """Sort key over rows sharing an identity_key; the lowest is the one stored.
+
+    A pure function of the row, so which row a pull's duplicate group keeps no longer
+    depends on file order. Until 2026-10-24 the first row in the file won, and exports
+    that reorder between pulls swapped the stored row back and forth: greater-sudbury
+    key 105696 alternated between "1545 Redfern Street" and "119 Vaillancourt
+    Crescent", muskoka coordinates flipped on 114 of 199 duplicate keys, and brampton
+    stored 1,206 of its 3,149 shared ADDRESS_IDs at a SECONDARY or FRONTDOOR point.
+
+    1. Dataset.prefer ([identity] prefer = {field, value}): a row whose raw prop
+       holds the value first (brampton ADDRESS_TYPE = "PRIMARY").
+    2. Then the row's content in order: number, street, unit, full, longitude,
+       latitude, stored props. Rows equal on all of it are identical as stored, so
+       this is a total order on everything the store can tell apart.
+
+    Content rather than payload_hash, though either is total: a hash re-rolls the
+    winner whenever any member of the group changes at all, while content moves it
+    only when a change crosses another member's value. For coordinate-only
+    duplicates (muskoka: one address and roll number at two points metres apart)
+    the westernmost point keeps winning while both jitter by a metre, and its own
+    jitter stays under location_min_move_m; a hash order would swap between the
+    two points on half of all republishes, each swap a fake relocation.
+    """
+    return _rank(_preferred(ds, feature), rec)
+
+
+def _preferred(ds, feature):
+    """0 when the raw feature carries Dataset.prefer's value, else 1."""
+    if not ds.prefer:
+        return 1
+    field, value = ds.prefer
+    return 0 if normalize._clean((feature.get("properties") or {}).get(field)) == value else 1
+
+
+def _rank(preferred, rec):
+    return (preferred, rec["number"] or "", rec["street"] or "", rec["unit"] or "",
+            rec["full"] or "", rec["longitude"], rec["latitude"], rec["props"])
+
+
 def _records(ds, features):
-    """Normalize features and dedupe by identity_key (keep first)."""
-    seen = set()
-    out = []
+    """Normalize features and dedupe by identity_key, keeping the row tiebreak_rank
+    puts first in each group (not the first in the file). Consumes `features` once
+    and keeps no feature, only its prefer bit, so a streamed pull stays streamed."""
+    best = {}           # key -> (rec, prefer bit)
     dups = 0
     for feat in features:
         rec = normalize.canonical(ds, feat)
         if rec is None:
             continue
-        if rec["identity_key"] in seen:
-            dups += 1
+        key = rec["identity_key"]
+        pref = _preferred(ds, feat)
+        held = best.get(key)
+        if held is None:
+            best[key] = (rec, pref)
             continue
-        seen.add(rec["identity_key"])
-        out.append(rec)
+        dups += 1
+        if _rank(pref, rec) < _rank(held[1], held[0]):
+            best[key] = (rec, pref)
     if dups:
         print(f"  note: {dups:,} duplicate identity_key rows dropped")
-    return out
+    return [rec for rec, _ in best.values()]
 
 
 def _content_hash(records):

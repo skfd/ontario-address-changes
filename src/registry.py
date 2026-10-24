@@ -34,6 +34,7 @@ class Dataset:
     synth_fields: list = field(default_factory=lambda: ["full"])
     synth_props: list = field(default_factory=list)  # source props added to the synth basis
     use_geometry: bool = True  # include rounded lon/lat in the synth basis
+    prefer: tuple = ()  # (source prop, value): among rows sharing an identity_key, keep one carrying it (db._records)
     fields: dict = field(default_factory=dict)
     ignore_fields: list = field(default_factory=list)  # source props excluded from change detection
     keep_fields: list = field(default_factory=list)  # ignored fields still stored in props for consumers
@@ -156,6 +157,19 @@ def _parse(path):
     if identity.get("use_geometry", True) is False and not identity.get("synth_props"):
         raise ValueError(f"{path}: identity.use_geometry = false needs synth_props "
                          "to disambiguate")
+    # Which of several rows sharing a key is stored (db._records): one whose `field`
+    # holds `value` wins before the content order. brampton's ADDRESS_ID covers an
+    # address's PRIMARY, SECONDARY and FRONTDOOR points.
+    prefer = identity.get("prefer", {})
+    if prefer != {}:
+        if (not isinstance(prefer, dict) or set(prefer) != {"field", "value"}
+                or not all(isinstance(v, str) and v.strip() for v in prefer.values())):
+            raise ValueError(f'{path}: identity.prefer must be {{field = "PROP", '
+                             'value = "VALUE"}, both non-empty strings')
+        if prefer["field"].lower() in {k.lower() for k in raw.get("ignore_fields", [])}:
+            raise ValueError(f"{path}: identity.prefer field {prefer['field']!r} is in "
+                             "ignore_fields - it would pick the stored row while its "
+                             "own changes go unseen")
     return Dataset(
         slug=raw["slug"],
         provider=raw["provider"],
@@ -177,6 +191,7 @@ def _parse(path):
         synth_fields=identity.get("synth_fields", ["full"]),
         synth_props=identity.get("synth_props", []),
         use_geometry=identity.get("use_geometry", True),
+        prefer=(prefer["field"], prefer["value"]) if prefer else (),
         fields=raw.get("fields", {}),
         ignore_fields=raw.get("ignore_fields", []),
         keep_fields=keep,

@@ -427,7 +427,13 @@ def _identity(ds, rec, props, lon, lat):
             return str(key).strip()
     # synthesize from configured display fields + geometry
     parts = [str(rec.get(f) or "").strip().upper() for f in ds.synth_fields]
-    parts += [str(props.get(p) or "").strip().upper() for p in ds.synth_props]
+    # _clean, not a bare strip: a synth prop holding a serializer's null ("<Null>",
+    # muskoka StreetQual on 5 rows) is absent from the stored props, so a key built
+    # from the raw literal could never be recomputed from the store (recanonicalize)
+    # and would re-key the row the day the publisher fixes its export. A no-op for
+    # every store when added (2026-10-24: all synth_props keys recompute, and no
+    # latest pull carries a literal in a synth prop).
+    parts += [(_clean(props.get(p) or "") or "").upper() for p in ds.synth_props]
     if ds.use_geometry:
         # 5 dp is ~1.1 m. A source whose coordinates jitter at that scale on
         # republish would mint a new key for every jittered row, so such a
