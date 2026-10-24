@@ -41,13 +41,23 @@ osm_compatible = "yellow-ogl"
 ignore_fields = ["creation_date", "revision_date"]
 
 [identity]
-# No usable source id. add_pt_key and civicid are empty on every row. parcelid is the
-# assessment roll (the old Rollnumber: 1:many, up to 47 rows on 490301001375000, 105
-# "none"). globalid is 100% populated and unique but has no cross-snapshot evidence on
-# this service yet and may regenerate on republish (brant precedent) - revisit once
-# there are 2+ snapshots of this layer. OBJECTID is sequential.
-key_field = ""                                 # synthesize from address + rounded lon/lat
-synth_fields = ["number", "street", "unit"]
+# globalid since 2026-10-23 (synthesized from address + point before). Measured across
+# the four distinct pulls of this layer (10-16, 10-19, 10-20, 10-21): 100% populated and
+# unique on every one, and all 21,734 ids of 10-16 kept the same value through 10-21 - no
+# regeneration on republish (the brant worry). It carried both renumbers under one id:
+# 146 -> 146A Christie Bay Road (10-19) and 44 -> 30 Emily Street (10-20), each with an
+# extra_data note ("orig set to 44, chgnd to 30 ..."); 10-21 added one id (1 Nest
+# Subdivision Temp). Under the synth key each renumber was a retire + new address; under
+# globalid it is the modification it is. The store was re-baselined by replaying its
+# pulls under this key (backup: C:\Users\kk\ontario-db-backup-2026-10-23-rekey\west-parry-sound\);
+# recanonicalize could not re-key it, since is_volatile strips globalid from stored props
+# (the key itself is read from the raw feature, as newmarket's GLOBALID is).
+# Not usable: add_pt_key and civicid are empty on every row. parcelid is the assessment
+# roll (the old Rollnumber: 1:many, up to 47 rows on 490301001375000, 105 "none").
+# OBJECTID is sequential. extra_data stays tracked (operator call, 2026-10-23): it is
+# the editors' change note and carries real data ("Water Access", "Now Road Access").
+key_field = "globalid"
+synth_fields = ["number", "street", "unit"]    # fallback only if a row ever lacks globalid
 
 [fields]                                        # source property -> canonical name
 number = "add_num"                              # carries the suffix ("298A"); add_num_pre/add_num_suf are empty

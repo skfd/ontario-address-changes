@@ -30,8 +30,24 @@ ignore_fields = [
 ]
 
 [identity]
-# FACILITYID (= ID_CRISYS): 100% populated, 38,401 distinct of 38,433, not an OBJECTID shadow.
-key_field = "FACILITYID"
+# Synthesized since 2026-10-23. FACILITYID (= ID_CRISYS) was the key from 10-16: 100%
+# populated, 38,401 distinct of 38,433, not an OBJECTID shadow - but not unique. 24
+# FACILITYIDs are shared by 56 rows (2 to 4 each), and the importer's dedupe keeps the
+# first row per key, so 32 real addresses were never stored: key 46307 kept "26A DORIC ST"
+# and dropped "26 DORIC ST"; key 431 kept "282 MONARCH AV" and dropped 292 and 272; key
+# 3121 holds 2948/2952/2956/2960 EBONY ST. Mostly a suffix sibling (165/165A WHITEFOOT
+# CR, 16/16A FLETCHER AV) or a neighbour. Measured on the 10-16 pull (every pull since is
+# byte-identical): number + street + unit + rounded point gives 38,432 distinct keys on
+# 38,432 rows with geometry, 0 collisions (full alone or number + street also gave 0;
+# the house basis was taken). The point is load-bearing: 82 number/street/unit groups
+# (224 rows) repeat the same text and are told apart only by location, and with one
+# distinct pull so far there is no measure of coordinate jitter on republish - watch
+# for retire + new pairs at the same address. The store was re-baselined by replaying
+# its pulls under this key (backup: C:\Users\kk\ontario-db-backup-2026-10-23-rekey\ajax\).
+# Not used instead: OBJECTID, the layer's row id (distinct, 1..58,037 in file order; the
+# pipeline strips it as volatile). One row has no geometry (85 OSWELL DRIVE).
+key_field = ""                                 # synthesize from address + rounded lon/lat
+synth_fields = ["number", "street", "unit"]
 
 [fields]                                        # canonical name -> source property
 number = "ADD__"

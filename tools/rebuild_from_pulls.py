@@ -41,6 +41,13 @@ Run so far:
               rows, up to 182 added per snapshot (94B/94C Wilolea shape); every old
               active row kept; verify against the 10-20 pull 0/0/0. Backup:
               C:\Users\kk\ontario-db-backup-2026-10-23-pec-nguid\prince-edward-county.pre-rebuild.db
+  2026-10-23  ajax (FACILITYID -> synth number/street/unit) and west-parry-sound (synth ->
+              globalid): key-basis changes, so the (key, hash) subset check cannot pass by
+              construction. Built with --old-rev HEAD, no --swap; checked instead that every
+              old payload_hash (as a multiset) stays active at every non-skipped snapshot,
+              then swap(). ajax 38,400 -> 38,432 rows (32 hidden addresses back); wps 21,737
+              rows on 21,735 keys (two renumbers now modifications). Verify 0/0/0 each.
+              Backups: C:\Users\kk\ontario-db-backup-2026-10-23-rekey\<slug>\
 
 Not part of the daily run.
 """
