@@ -323,3 +323,113 @@ def test_unit_from_number_rewrite_is_idempotent():
         assert _snapshot_rows(ds)[1][-1][1] == 1
     finally:
         shutil.rmtree(ds.data_dir, ignore_errors=True)
+
+
+# --- unit_from_full (leamington: the unit between the number and the street) -------
+
+@pytest.mark.parametrize("full, number, street, unit", [
+    # real leamington shapes
+    ("24 UNIT 300 SEACLIFF DRIVE EAST", "24", "SEACLIFF DRIVE EAST", "UNIT 300"),
+    ("1217 FLR 01 MERSEA RD 2", "1217", "MERSEA RD 2", "FLR 01"),   # the 2 is the street's
+    ("20 APT 3 FOUNDRY STREET", "20", "FOUNDRY STREET", "APT 3"),
+    ("10B SUITE 101 MAIN STREET", "10B", "MAIN STREET", "SUITE 101"),
+    ("3 BLDG 2 IROQUOIS ROAD", "3", "IROQUOIS ROAD", "BLDG 2"),
+    ("437 LOWER OAK STREET EAST", "437", "OAK STREET EAST", "LOWER"),
+    ("1327 REAR MERSEA RD 6", "1327", "MERSEA RD 6", "REAR"),
+    ("20 apt b foundry st", "20", "FOUNDRY ST", "apt b"),          # case kept as published
+    # no unit
+    ("259 MERSEA RD 15", "259", "MERSEA RD 15", None),
+    ("4 LOWER ROAD", "4", "LOWER ROAD", None),                      # LOWER is the street's
+    # left unparsed rather than guessed
+    ("7 CHERRY LANE UNIT 1", "7", "CHERRY LANE", None),             # after the street
+    ("3 IROQUOIS ROAD  BLD 2", "3", "IROQUOIS ROAD", None),
+    ("17 APT B CLARK STREET EAST APT B", "17", "CLARK STREET EAST", None),   # doubled
+    ("5 ERIE STREET NORTH", "5-15", "ERIE STREET NORTH", None),     # number mismatch
+    ("717 HIGHWAY 77", "717", "MERSEA RD 7", None),                 # street mismatch
+    ("12 OLD MAIN ST", "12", "MAIN ST", None),                      # not a designator
+    ("12 UNIT MAIN ST", "12", "MAIN ST", None),                     # pair word, no token
+    ("12 UPPER 2 MAIN ST", "12", "MAIN ST", None),                  # lone word with a token
+    ("12 UNIT 3 4 MAIN ST", "12", "MAIN ST", None),
+    (None, "12", "MAIN ST", None),
+    ("12 UNIT 3 MAIN ST", None, "MAIN ST", None),
+    ("12 UNIT 3 MAIN ST", "12", None, None),
+])
+def test_unit_from_full(full, number, street, unit):
+    assert normalize.unit_from_full(full, number, street) == unit
+
+
+def test_registry_parses_unit_from_full(tmp_path):
+    ds = _parse(_write(tmp_path, 'unit_from_full = true\n'
+                                 '[fields]\nnumber = "N"\nstreet = "S"\nfull = "F"\n'))
+    assert ds.unit_from_full and "unit" not in ds.fields
+
+
+@pytest.mark.parametrize("body, msg", [
+    ('unit_from_full = true\n[fields]\nnumber = "N"\nstreet = "S"\nfull = "F"\nunit = "U"\n',
+     "pick one"),
+    ('unit_from_full = true\n[fields]\nstreet = "S"\nfull = "F"\n', "needs mapped"),
+    ('unit_from_full = true\n[fields]\nnumber = "N"\nfull = "F"\n', "needs mapped"),
+    ('unit_from_full = true\n[fields]\nnumber = "N"\nstreet = "S"\n', "needs mapped"),
+    ('unit_from_full = true\nunit_from_number = true\n'
+     '[fields]\nnumber = "N"\nstreet = "S"\nfull = "F"\n', "pick one"),
+    ('unit_from_full = "yes"\n[fields]\nnumber = "N"\nstreet = "S"\nfull = "F"\n',
+     "true or false"),
+])
+def test_registry_rejects_bad_unit_from_full(tmp_path, body, msg):
+    with pytest.raises(ValueError, match=msg):
+        _parse(_write(tmp_path, body))
+
+
+def _leamington_feat(gid, num, st, full, lon):
+    return {"type": "Feature",
+            "properties": {"GlobalID": gid, "N": num, "ST": st, "F": full},
+            "geometry": {"type": "Point", "coordinates": [lon, 42.05]}}
+
+
+def test_canonical_unit_from_full_leaves_unaffected_rows_alone():
+    ds = Dataset(slug="_t", provider="T", data_url="x", access="static", format="geojson",
+                 key_field="GlobalID", fields={"number": "N", "street": "ST", "full": "F"})
+    feats = [_leamington_feat("a", "24", "SEACLIFF DRIVE EAST",
+                              "24 UNIT 300 SEACLIFF DRIVE EAST", -82.6),
+             _leamington_feat("b", "259", "MERSEA RD 15", "259 MERSEA RD 15", -82.5),
+             _leamington_feat("c", "7", "CHERRY LANE", "7 CHERRY LANE UNIT 1", -82.4)]
+    before = [normalize.canonical(ds, f) for f in feats]
+    ds.unit_from_full = True
+    after = [normalize.canonical(ds, f) for f in feats]
+    assert [r["unit"] for r in after] == ["UNIT 300", None, None]
+    assert [r["identity_key"] for r in after] == ["a", "b", "c"]
+    assert after[0]["payload_hash"] != before[0]["payload_hash"]
+    assert after[1:] == before[1:]
+
+
+def test_unit_from_full_rewrite_keeps_globalid_keys():
+    """GlobalID is volatile, so the stored props cannot recompute the key; the key comes
+    from the source id, not the canonical columns, so it is kept - and the next import
+    of the same pull is a skip."""
+    ds = Dataset(slug="_test_recanon", provider="Test", data_url="x", access="static",
+                 format="geojson", key_field="GlobalID",
+                 fields={"number": "N", "street": "ST", "full": "F"})
+    shutil.rmtree(ds.data_dir, ignore_errors=True)
+    feats = [_leamington_feat("{A}", "24", "SEACLIFF DRIVE EAST",
+                              "24 UNIT 300 SEACLIFF DRIVE EAST", -82.6),
+             _leamington_feat("{B}", "24", "SEACLIFF DRIVE EAST",
+                              "24 UNIT 301 SEACLIFF DRIVE EAST", -82.6),
+             _leamington_feat("{C}", "259", "MERSEA RD 15", "259 MERSEA RD 15", -82.5)]
+    try:
+        db.import_snapshot(ds, "snap-2026-01-01.geojson", feats)
+        ds.unit_from_full = True
+        conn = sqlite3.connect(ds.db_path)
+        conn.row_factory = sqlite3.Row
+        updates, stats = recanonicalize.plan(ds, conn)
+        assert len(updates) == 2 and stats["chains_rekeyed"] == 0
+        recanonicalize.apply(conn, updates)
+        conn.commit()
+        assert sorted(tuple(r) for r in conn.execute(
+            "SELECT identity_key, unit FROM addresses")) == \
+            [("{A}", "UNIT 300"), ("{B}", "UNIT 301"), ("{C}", None)]
+        assert recanonicalize.plan(ds, conn)[0] == []
+        conn.close()
+        db.import_snapshot(ds, "snap-2026-01-02.geojson", feats)
+        assert _snapshot_rows(ds)[1][-1][1] == 1
+    finally:
+        shutil.rmtree(ds.data_dir, ignore_errors=True)

@@ -29,6 +29,7 @@ class Dataset:
     number_unit_from_full: bool = False  # no number/unit columns: split them out of full around the mapped street (normalize.number_unit_from_full)
     number_from_full: bool = False  # number column drops the suffix: take the leading civic number of full (normalize.number_from_full)
     unit_from_number: bool = False  # units published as "<unit>-<number>" in the number column: split them (normalize.unit_from_number)
+    unit_from_full: bool = False  # units published inside full between number and street: take them out (normalize.unit_from_full)
     key_field: str = ""
     synth_fields: list = field(default_factory=lambda: ["full"])
     synth_props: list = field(default_factory=list)  # source props added to the synth basis
@@ -132,6 +133,22 @@ def _parse(path):
         if number_unit_from_full:
             raise ValueError(f"{path}: unit_from_number and number_unit_from_full - pick one")
 
+    unit_from_full = raw.get("unit_from_full", False)
+    if not isinstance(unit_from_full, bool):
+        raise ValueError(f"{path}: unit_from_full must be true or false")
+    if unit_from_full:
+        if fmap.get("unit"):
+            raise ValueError(f"{path}: unit_from_full = true with a mapped "
+                             "[fields] unit - pick one")
+        missing = [k for k in ("number", "street", "full") if not fmap.get(k)]
+        if missing:
+            raise ValueError(f"{path}: unit_from_full = true needs mapped "
+                             f"[fields] {'/'.join(missing)}")
+        for other, on in (("number_unit_from_full", number_unit_from_full),
+                          ("unit_from_number", unit_from_number)):
+            if on:
+                raise ValueError(f"{path}: unit_from_full and {other} - pick one")
+
     identity = raw.get("identity", {})
     # Geometry is the default disambiguator for a synthesized key. Dropping it
     # without adding another one would collapse every same-address row onto one
@@ -155,6 +172,7 @@ def _parse(path):
         number_unit_from_full=number_unit_from_full,
         number_from_full=number_from_full,
         unit_from_number=unit_from_number,
+        unit_from_full=unit_from_full,
         key_field=identity.get("key_field", ""),
         synth_fields=identity.get("synth_fields", ["full"]),
         synth_props=identity.get("synth_props", []),

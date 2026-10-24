@@ -24,6 +24,11 @@ license_name = "None published (read 2026-10-23)"
 osm_compatible = "unknown-review"
 publish_reports = false
 
+# Units ride inside Addressche between the number and the street (no unit column):
+# normalize.unit_from_full takes them out as published, anchored on AddressNum and
+# StreetName. See the [fields] note.
+unit_from_full = true
+
 [identity]
 # GlobalID: unique on all 11,424 rows. OBJECTID is gappy (1..45,333 for 11,424 rows), so the
 # hosted copy carries the SDE source's ids rather than renumbering on upload - the
@@ -38,11 +43,18 @@ street = "StreetName"                           # long form ("TALBOT ROAD EAST")
 full   = "Addressche"                           # "<number> [<unit>] <street>"; 8 blank
 # MatchStName / MatchAddress are the geocoder-abbreviated forms ("TALBOT RD E") and ride in the
 # props blob. No ignore_fields day one: no history yet.
-# unit: no unit COLUMN, but 479 rows (4.2%) carry one inside Addressche BETWEEN number and
-# street - "24 UNIT 300 SEACLIFF DRIVE EAST", "1217 FLR 01 MERSEA RD 2", "20 APT 3 FOUNDRY
-# STREET" - so 142 number+street groups (718 rows) share one civic address. That is not
-# number_unit_from_full's shape (unit after the street, waterloo), so it would read the number
-# as "24 UNIT 300". Parse queued in TODO.md section 1; with a GlobalID key it changes display
-# only, not identity.
+# unit: no unit COLUMN; unit_from_full above derives it (2026-10-23, measured on 11,423
+# stored rows). Addressche is "<AddressNum> <StreetName>" on 10,804 and
+# "<AddressNum> <unit> <StreetName>" on 488, every one designator-led: UNIT 262, APT 88,
+# SUITE 59, FLR 45, BLDG 3 (each + one token: "24 UNIT 300 SEACLIFF DRIVE EAST",
+# "1217 FLR 01 MERSEA RD 2" - street "MERSEA RD 2", so the 2 is the street's) and the
+# positional UPPER 11, LOWER 9, REAR 7, FRONT 4 standing alone ("437 LOWER OAK STREET
+# EAST"; "4 LOWER ROAD" stays whole - LOWER ROAD is the StreetName). Left unparsed (unit
+# stays blank): 69 rows with the unit AFTER the street (waterloo's shape: 7 CHERRY LANE
+# UNIT 1..49 x35, 109 ROBSON ROAD UNIT 101..904 x33, "3 IROQUOIS ROAD  BLD 2"), two doubled
+# ("17 APT B CLARK STREET EAST APT B"), and 11 number/street mismatches ("275 ERIE STREET
+# SOUTH" under 269 x6, "717 HIGHWAY 77" under MERSEA RD 7). Shared number+street(+unit)
+# groups: 141 (710 rows) -> 9 (96). GlobalID keys, so display only - no re-key; [fields]
+# is unchanged, so the vault's sketch basis is too.
 
 # [classes] deferred: no transitions observed yet, and no status/boundary column exists.

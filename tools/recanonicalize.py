@@ -20,7 +20,10 @@ the heavier surgery, and the tool proves each step before trusting it:
      synth_props or key_field prop the store cleaned away would make new keys
      unreliable). Rows that do not change keep their key and are only counted:
      newmarket keys on GLOBALID, which is_volatile strips from stored props, so
-     none of its keys recompute - and nothing there moves.
+     none of its keys recompute - and nothing there moves. A source-id key under an
+     unchanged key_field is kept without the check, changed row or not: it comes
+     from a raw prop, not the canonical columns, so no derivation can move it
+     (leamington unit_from_full on GlobalID, 2026-10-23).
   2. A chain may split: versions whose identity-basis columns differ under the new
      rule get different keys (hastings "11 WANNAMAKER LN" -> "11A ..." while
      House_No stayed 11: a modification under the old rule, a retire + add under
@@ -134,7 +137,14 @@ def plan(ds, conn, old_ds=None):
         lon, lat = r["longitude"], r["latitude"]
         old = {c: r[c] for c in _CANONICAL}
         rec = derive(ds, r)
-        if normalize._identity(old_ds, old, props, lon, lat) != r["identity_key"]:
+        if (ds.key_field and ds.key_field == old_ds.key_field
+                and not r["identity_key"].startswith("syn:")):
+            # a source-id key (leamington GlobalID): taken from a raw prop, never from
+            # the canonical columns, so no derivation can move it - and is_volatile
+            # may have stripped that prop from the stored blob, so it cannot be
+            # recomputed to prove it either
+            key = r["identity_key"]
+        elif normalize._identity(old_ds, old, props, lon, lat) != r["identity_key"]:
             if any(rec[c] != old[c] for c in _CANONICAL):
                 unfaithful.append(r["identity_key"])
                 continue
