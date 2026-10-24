@@ -27,9 +27,17 @@ location_min_move_m = 2
 # minted new keys for 28,250 of 65,279 addresses, leaving 157,666 keys for a 66k-row
 # city. Address + PropertyNum is stable across that boundary (0 churn) at the cost of
 # 279 same-address-same-roll rows collapsing onto shared keys.
-key_field = ""                                 # synthesize from address + roll number
+#
+# StreetQual joined the basis 2026-10-24: it holds the house suffix StreetNumber drops
+# ("149" + "A" for "149 A MUSKOKA RD"; A 184, B 127, C 31, D 8 on the 10-23 pull), so
+# suffix siblings on one roll number shared a key and only one was ever stored. On the
+# 10-23 pull it splits 37 shared keys into 82 (45 addresses recovered); the 339 keys
+# still shared (407 rows dropped) are all coordinate-only - same address, roll and
+# props at two or more points - which use_geometry = false collapses by design, and
+# db.tiebreak_rank keeps the westernmost point of each.
+key_field = ""                                 # synthesize from address + roll number + suffix
 synth_fields = ["number", "street", "unit"]
-synth_props = ["PropertyNum"]
+synth_props = ["PropertyNum", "StreetQual"]
 use_geometry = false
 
 [fields]                                        # source property -> canonical name
