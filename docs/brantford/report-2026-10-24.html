@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>City of Brantford Address Changes — Saturday, Oct 24, 2026</title>
+  <style>
+    :root {
+      --bg: #fafafa; --surface: #ffffff; --surface2: #f5f5f5; --surface3: #ebebeb;
+      --border: #e0e0e0; --border-strong: #d1d1d1; --text: #242424;
+      --text-secondary: #424242; --text-dim: #616161; --accent: #0078d4;
+      --accent-hover: #106ebe; --accent-bg: #eff6fc; --green: #107c10;
+      --green-bg: #f1faf1; --green-tint: #9fd89f; --red: #c50f1f; --red-bg: #fdf3f4;
+      --red-tint: #eeacb2; --yellow: #eaa300; --yellow-bg: #fefbf4; --yellow-tint: #f9e2ae;
+      --purple: #881798; --purple-bg: #f9f3fb; --teal: #038387; --teal-bg: #f0fafa;
+      --shadow-4: 0 2px 4px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --shadow-8: 0 4px 8px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --card-bg: #ffffff; --card-hover: #f5f5f5; color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1f1f1f; --surface: #292929; --surface2: #333333; --surface3: #3d3d3d;
+        --border: #525252; --border-strong: #666666; --text: #ffffff;
+        --text-secondary: #d6d6d6; --text-dim: #adadad; --accent: #2899f5;
+        --accent-hover: #3aa0f3; --accent-bg: #002848; --green: #54b054;
+        --green-bg: #052505; --green-tint: #107c10; --red: #dc626d; --red-bg: #3b0509;
+        --red-tint: #c50f1f; --yellow: #f2c661; --yellow-bg: #463100; --yellow-tint: #eaa300;
+        --purple: #d29ddb; --purple-bg: #3a1040; --teal: #58c0c4; --teal-bg: #013638;
+        --shadow-4: 0 2px 4px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --shadow-8: 0 4px 8px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --card-bg: #333333; --card-hover: #3d3d3d; color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI Variable','Segoe UI',system-ui,-apple-system,sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.5; padding: 2rem;
+      max-width: 1100px; margin: 0 auto; font-size: 14px; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; color: var(--accent-hover); }
+    .back-link { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 12px;
+      color: var(--text-dim); margin-bottom: 1.5rem; transition: color 0.1s; }
+    .back-link:hover { color: var(--accent); text-decoration: none; }
+    h1 { font-size: 24px; font-weight: 600; margin-bottom: 4px; }
+    .subtitle { color: var(--text-secondary); font-size: 14px; margin-bottom: 12px; }
+    .explainer { color: var(--text-secondary); font-size: 13px; line-height: 1.5;
+      margin-bottom: 24px; padding: 12px 16px; background: var(--surface);
+      border-radius: 8px; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px; margin-bottom: 24px; }
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px;
+      padding: 16px; box-shadow: var(--shadow-4); transition: box-shadow 0.1s; }
+    .card:hover { box-shadow: var(--shadow-8); }
+    .card .label { font-size: 12px; color: var(--text-dim); font-weight: 400; }
+    .card .value { font-size: 28px; font-weight: 600; margin-top: 4px; }
+    .card .value.green { color: var(--green); } .card .value.red { color: var(--red); }
+    .card .value.yellow { color: var(--yellow); } .card .value.accent { color: var(--accent); }
+    .card .value.purple { color: var(--purple); }
+    .card .value.teal { color: var(--teal); }
+    .sparkline { display: block; margin-top: 6px; overflow: visible; opacity: 0.9; }
+    .sparkline-label { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+    .section { margin-bottom: 24px; }
+    .section h2 { font-size: 16px; font-weight: 600; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px; }
+    .badge { font-size: 12px; padding: 2px 8px; border-radius: 999px; font-weight: 600; }
+    .badge-green { background: var(--green-bg); color: var(--green); }
+    .badge-red { background: var(--red-bg); color: var(--red); }
+    .badge-yellow { background: var(--yellow-bg); color: var(--yellow); }
+    .badge-accent { background: var(--accent-bg); color: var(--accent); }
+    .badge-purple { background: var(--purple-bg); color: var(--purple); }
+    .badge-teal { background: var(--teal-bg); color: var(--teal); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface);
+      border-radius: 8px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    thead { background: var(--surface2); }
+    th { text-align: left; padding: 8px 12px; font-weight: 600; color: var(--text-dim);
+      font-size: 12px; cursor: pointer; user-select: none; border-bottom: 1px solid var(--border); }
+    th:hover { color: var(--accent); }
+    td { padding: 8px 12px; border-top: 1px solid var(--border); }
+    tr:hover td { background: var(--surface2); }
+    .old-val { color: var(--red); text-decoration: line-through; }
+    .new-val { color: var(--green); }
+    .arrow-val { color: var(--text-dim); text-align: center; white-space: nowrap; }
+    .map-link { display: inline-flex; align-items: center; margin-left: 0.4em;
+      color: var(--accent); vertical-align: middle; white-space: nowrap; font-size: 12px; }
+    .map-link:hover { color: var(--accent-hover); }
+    .map-link svg { width: 14px; height: 14px; }
+    .change-field { color: var(--yellow); font-weight: 600; }
+    .bar-chart { margin-top: 8px; }
+    .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 12px; }
+    .bar-label { width: 180px; text-align: right; color: var(--text-secondary); flex-shrink: 0;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .bar-track { flex: 1; height: 8px; background: var(--surface2); border-radius: 4px;
+      overflow: hidden; position: relative; }
+    .bar-fill { height: 100%; border-radius: 4px; transition: width 0.15s ease; }
+    .bar-fill.green { background: var(--green); } .bar-fill.red { background: var(--red); }
+    .bar-count { width: 40px; font-size: 12px; color: var(--text-dim); }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+    .empty { color: var(--text-dim); font-style: italic; padding: 16px; }
+    .truncated { color: var(--text-dim); font-size: 12px; margin-top: 8px; }
+    .collapsible-toggle { background: transparent; border: 1px solid var(--border);
+      color: var(--accent); padding: 5px 12px; border-radius: 4px; cursor: pointer;
+      font-size: 12px; font-family: inherit; margin-bottom: 12px; transition: background 0.1s; }
+    .collapsible-toggle:hover { background: var(--surface2); }
+    details.rename-group { background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; margin-bottom: 8px; box-shadow: var(--shadow-4); }
+    details.rename-group summary { padding: 10px 14px; cursor: pointer; font-size: 13px; }
+    details.rename-group[open] summary { border-bottom: 1px solid var(--border); }
+    details.rename-group table { border: none; box-shadow: none; border-radius: 0; }
+    details.rename-group .truncated { padding: 0 14px 10px; margin-top: 0; }
+    .rename-count { color: var(--text-dim); font-size: 12px; margin-left: 6px; }
+    .no-changes-banner { background: var(--green-bg); border: 1px solid var(--green-tint);
+      color: var(--green); padding: 16px; border-radius: 8px; margin-bottom: 24px;
+      text-align: center; font-weight: 600; font-size: 14px; }
+    .baseline-banner { background: var(--accent-bg); border: 1px solid var(--accent);
+      color: var(--accent); padding: 16px; border-radius: 8px; margin-bottom: 24px; font-size: 13px; }
+    .generated-at { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-dim); }
+    .history { font-size: 12.5px; color: var(--text-secondary); white-space: nowrap; }
+    .history .a { color: var(--green); font-weight: 500; }
+    .history .r { color: var(--red); font-weight: 500; }
+    .history .dot { color: var(--text-dim); margin: 0 4px; }
+    .history-none { color: var(--text-dim); font-style: italic; font-size: 12.5px; }
+    .info-wrap { position: relative; display: inline-flex; vertical-align: middle; }
+    .info-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+      height: 18px; padding: 0 8px 0 7px; border-radius: 999px; border: none;
+      color: #fff; background: var(--accent); cursor: help; font-size: 11px; font-weight: 600;
+      font-style: normal; font-family: inherit; line-height: 1; white-space: nowrap; }
+    .info-btn .glyph { font-style: italic; font-weight: 700;
+      font-family: Georgia, 'Times New Roman', serif; }
+    .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn,
+    .info-wrap:focus .info-btn { background: var(--accent-hover); }
+    .info-pop { display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 20;
+      width: 320px; max-width: 80vw; padding: 12px 14px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-8);
+      font-size: 12.5px; font-weight: 400; color: var(--text-secondary); line-height: 1.5; }
+    .info-wrap:hover .info-pop, .info-wrap:focus-within .info-pop,
+    .info-wrap:focus .info-pop { display: block; }
+    .info-pop strong { display: block; color: var(--text); font-size: 12px; margin-bottom: 4px; }
+    .info-pop ul { list-style: none; margin: 0 0 10px; padding: 0; }
+    .info-pop li { padding: 1px 0 1px 14px; position: relative; }
+    .info-pop li::before { content: "·"; position: absolute; left: 4px; color: var(--text-dim); }
+    .info-pop .note { color: var(--text-dim); font-size: 11.5px; margin: 0 0 10px; }
+    .info-pop .muted { color: var(--text-dim); font-style: italic; }
+  </style>
+<script data-goatcounter="https://osm-ontario.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+
+  <a class="back-link" href="index.html">← Back to City of Brantford reports</a>
+
+  <h1>City of Brantford — Address Changes</h1>
+  <p class="subtitle">
+    Changes between  and Saturday, Oct 24, 2026
+    · 39,000 total addresses
+  </p>
+
+  
+
+  <div class="cards">
+    <div class="card"><div class="label">Total Addresses</div>
+      <div class="value accent">39,000</div></div>
+    <div class="card"><div class="label">New Addresses</div>
+      <div class="value green">+38</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#107c10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,14.2 19.7,13.8 37.3,15.9 55.0,17.6 72.7,13.4 90.3,17.6 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#107c10"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Retired Addresses</div>
+      <div class="value red">−37</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#c50f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,15.0 19.7,13.7 37.3,16.7 55.0,18.0 72.7,18.0 90.3,18.0 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#c50f1f"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Updated Addresses <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (STREETNUM)</li><li>Street name (STREETNAME)</li><li>Full address (FULLADDRESS)</li><li>Coordinates (latitude, longitude)</li><li>POSTALCODE</li><li>STNUMSUFF</li><li>STREETNUMIN</li><li>STREETTYPE</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span></div>
+      <div class="value yellow">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Renumbered</div>
+      <div class="value accent">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#0078d4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#0078d4"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Street Renames</div>
+      <div class="value purple">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#9141ac" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#9141ac"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    
+    <div class="card"><div class="label">Location Adjustments</div>
+      <div class="value" style="color: var(--text-dim)">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#808080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#808080"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+  </div>
+
+  
+  <div class="section">
+    <h2>Change Breakdown</h2>
+    <div class="stats-grid">
+      
+      <div class="card"><div class="label">Top Streets by New Addresses</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">MEMORIAL</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">18</span></div>
+        <div class="bar-row"><span class="bar-label">HAYHURST</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:56.0%"></div></div>
+          <span class="bar-count">10</span></div>
+        <div class="bar-row"><span class="bar-label">NORTH PARK</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:56.0%"></div></div>
+          <span class="bar-count">10</span></div>
+      </div></div>
+      
+      <div class="card"><div class="label">Top Streets by Retired Addresses</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">MEMORIAL</span>
+          <div class="bar-track"><div class="bar-fill red" style="width:100.0%"></div></div>
+          <span class="bar-count">18</span></div>
+        <div class="bar-row"><span class="bar-label">NORTH PARK</span>
+          <div class="bar-track"><div class="bar-fill red" style="width:56.0%"></div></div>
+          <span class="bar-count">10</span></div>
+        <div class="bar-row"><span class="bar-label">HAYHURST</span>
+          <div class="bar-track"><div class="bar-fill red" style="width:50.0%"></div></div>
+          <span class="bar-count">9</span></div>
+      </div></div>
+      
+    </div>
+  </div>
+  
+
+  <div class="section">
+    <h2>New Addresses <span class="badge badge-green">38</span></h2>
+    
+    <details class="rename-group">
+      <summary>332 NORTH PARK <span class="arrow-val">→</span> <span class="new-val">10 units (1–10)</span><span class="rename-count">10 new addresses · original address remains</span></summary>
+      <table>
+        <thead><tr><th>Address</th><th>Unit</th><th>History</th><th>Map</th></tr></thead>
+        <tbody>
+          
+          <tr><td>1-332 NORTH PARK ST</td><td>1</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17177&mlon=-80.25990#map=18/43.17177/-80.25990" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>2-332 NORTH PARK ST</td><td>2</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17179&mlon=-80.25988#map=18/43.17179/-80.25988" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>3-332 NORTH PARK ST</td><td>3</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17186&mlon=-80.25985#map=18/43.17186/-80.25985" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>4-332 NORTH PARK ST</td><td>4</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17189&mlon=-80.25983#map=18/43.17189/-80.25983" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>5-332 NORTH PARK ST</td><td>5</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17194&mlon=-80.25979#map=18/43.17194/-80.25979" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>6-332 NORTH PARK ST</td><td>6</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17196&mlon=-80.25977#map=18/43.17196/-80.25977" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>7-332 NORTH PARK ST</td><td>7</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17201&mlon=-80.25973#map=18/43.17201/-80.25973" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>8-332 NORTH PARK ST</td><td>8</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17204&mlon=-80.25971#map=18/43.17204/-80.25971" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>9-332 NORTH PARK ST</td><td>9</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17209&mlon=-80.25968#map=18/43.17209/-80.25968" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>10-332 NORTH PARK ST</td><td>10</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17211&mlon=-80.25966#map=18/43.17211/-80.25966" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+    </details>
+    
+    <details class="rename-group">
+      <summary>50 HAYHURST <span class="arrow-val">→</span> <span class="new-val">10 units (62–71)</span><span class="rename-count">10 new addresses · original address remains</span></summary>
+      <table>
+        <thead><tr><th>Address</th><th>Unit</th><th>History</th><th>Map</th></tr></thead>
+        <tbody>
+          
+          <tr><td>62-50 HAYHURST RD</td><td>62</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17304&mlon=-80.26203#map=18/43.17304/-80.26203" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>63-50 HAYHURST RD</td><td>63</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17302&mlon=-80.26205#map=18/43.17302/-80.26205" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>64-50 HAYHURST RD</td><td>64</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17297&mlon=-80.26208#map=18/43.17297/-80.26208" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>65-50 HAYHURST RD</td><td>65</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17294&mlon=-80.26210#map=18/43.17294/-80.26210" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>66-50 HAYHURST RD</td><td>66</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17289&mlon=-80.26214#map=18/43.17289/-80.26214" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>67-50 HAYHURST RD</td><td>67</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17287&mlon=-80.26216#map=18/43.17287/-80.26216" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>68-50 HAYHURST RD</td><td>68</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17281&mlon=-80.26218#map=18/43.17281/-80.26218" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>69-50 HAYHURST RD</td><td>69</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17278&mlon=-80.26220#map=18/43.17278/-80.26220" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>70-50 HAYHURST RD</td><td>70</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17273&mlon=-80.26226#map=18/43.17273/-80.26226" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>71-50 HAYHURST RD</td><td>71</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17270&mlon=-80.26228#map=18/43.17270/-80.26228" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+    </details>
+    
+    <details class="rename-group">
+      <summary>56 MEMORIAL <span class="arrow-val">→</span> <span class="new-val">9 units (11, 12, 14, 15, 16, 17, 18, 19, …)</span><span class="rename-count">9 new addresses · original address remains</span></summary>
+      <table>
+        <thead><tr><th>Address</th><th>Unit</th><th>History</th><th>Map</th></tr></thead>
+        <tbody>
+          
+          <tr><td>11-56 MEMORIAL DR</td><td>11</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17225&mlon=-80.25996#map=18/43.17225/-80.25996" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>12-56 MEMORIAL DR</td><td>12</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17228&mlon=-80.26004#map=18/43.17228/-80.26004" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>14-56 MEMORIAL DR</td><td>14</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17230&mlon=-80.26007#map=18/43.17230/-80.26007" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>15-56 MEMORIAL DR</td><td>15</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17233&mlon=-80.26016#map=18/43.17233/-80.26016" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>16-56 MEMORIAL DR</td><td>16</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17234&mlon=-80.26020#map=18/43.17234/-80.26020" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>17-56 MEMORIAL DR</td><td>17</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17237&mlon=-80.26027#map=18/43.17237/-80.26027" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>18-56 MEMORIAL DR</td><td>18</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17239&mlon=-80.26031#map=18/43.17239/-80.26031" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>19-56 MEMORIAL DR</td><td>19</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17242&mlon=-80.26039#map=18/43.17242/-80.26039" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>20-56 MEMORIAL DR</td><td>20</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17243&mlon=-80.26043#map=18/43.17243/-80.26043" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+    </details>
+    
+    <details class="rename-group">
+      <summary>68 MEMORIAL <span class="arrow-val">→</span> <span class="new-val">9 units (53–61)</span><span class="rename-count">9 new addresses · original address remains</span></summary>
+      <table>
+        <thead><tr><th>Address</th><th>Unit</th><th>History</th><th>Map</th></tr></thead>
+        <tbody>
+          
+          <tr><td>53-68 MEMORIAL DR</td><td>53</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17276&mlon=-80.26123#map=18/43.17276/-80.26123" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>54-68 MEMORIAL DR</td><td>54</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17277&mlon=-80.26126#map=18/43.17277/-80.26126" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>55-68 MEMORIAL DR</td><td>55</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17280&mlon=-80.26135#map=18/43.17280/-80.26135" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>56-68 MEMORIAL DR</td><td>56</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17281&mlon=-80.26139#map=18/43.17281/-80.26139" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>57-68 MEMORIAL DR</td><td>57</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17284&mlon=-80.26147#map=18/43.17284/-80.26147" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>58-68 MEMORIAL DR</td><td>58</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17285&mlon=-80.26151#map=18/43.17285/-80.26151" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>59-68 MEMORIAL DR</td><td>59</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17289&mlon=-80.26159#map=18/43.17289/-80.26159" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>60-68 MEMORIAL DR</td><td>60</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17290&mlon=-80.26163#map=18/43.17290/-80.26163" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>61-68 MEMORIAL DR</td><td>61</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17293&mlon=-80.26171#map=18/43.17293/-80.26171" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+    </details>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Retired Addresses <span class="badge badge-red">37</span></h2>
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-removed',0)">Address</th><th onclick="sortTable('t-removed',1)">Street</th>
+        <th onclick="sortTable('t-removed',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-removed">
+        
+        <tr><td>62-50 HAYHURST RD</td><td>HAYHURST</td><td>62</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17300&mlon=-80.26203#map=18/43.17300/-80.26203" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>64-50 HAYHURST RD</td><td>HAYHURST</td><td>64</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17293&mlon=-80.26206#map=18/43.17293/-80.26206" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>65-50 HAYHURST RD</td><td>HAYHURST</td><td>65</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17289&mlon=-80.26209#map=18/43.17289/-80.26209" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>66-50 HAYHURST RD</td><td>HAYHURST</td><td>66</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17284&mlon=-80.26210#map=18/43.17284/-80.26210" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>67-50 HAYHURST RD</td><td>HAYHURST</td><td>67</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17280&mlon=-80.26213#map=18/43.17280/-80.26213" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>68-50 HAYHURST RD</td><td>HAYHURST</td><td>68</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17276&mlon=-80.26216#map=18/43.17276/-80.26216" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>69-50 HAYHURST RD</td><td>HAYHURST</td><td>69</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17272&mlon=-80.26219#map=18/43.17272/-80.26219" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>70-50 HAYHURST RD</td><td>HAYHURST</td><td>70</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17269&mlon=-80.26222#map=18/43.17269/-80.26222" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>71-50 HAYHURST RD</td><td>HAYHURST</td><td>71</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17265&mlon=-80.26225#map=18/43.17265/-80.26225" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>11-56 MEMORIAL DR</td><td>MEMORIAL</td><td>11</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17222&mlon=-80.25994#map=18/43.17222/-80.25994" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>12-56 MEMORIAL DR</td><td>MEMORIAL</td><td>12</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17223&mlon=-80.25999#map=18/43.17223/-80.25999" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>14-56 MEMORIAL DR</td><td>MEMORIAL</td><td>14</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17226&mlon=-80.26006#map=18/43.17226/-80.26006" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>15-56 MEMORIAL DR</td><td>MEMORIAL</td><td>15</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17229&mlon=-80.26014#map=18/43.17229/-80.26014" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>16-56 MEMORIAL DR</td><td>MEMORIAL</td><td>16</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17232&mlon=-80.26020#map=18/43.17232/-80.26020" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>17-56 MEMORIAL DR</td><td>MEMORIAL</td><td>17</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17234&mlon=-80.26027#map=18/43.17234/-80.26027" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>18-56 MEMORIAL DR</td><td>MEMORIAL</td><td>18</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17237&mlon=-80.26033#map=18/43.17237/-80.26033" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>19-56 MEMORIAL DR</td><td>MEMORIAL</td><td>19</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17240&mlon=-80.26040#map=18/43.17240/-80.26040" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>20-56 MEMORIAL DR</td><td>MEMORIAL</td><td>20</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17241&mlon=-80.26045#map=18/43.17241/-80.26045" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>53-68 MEMORIAL DR</td><td>MEMORIAL</td><td>53</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17273&mlon=-80.26124#map=18/43.17273/-80.26124" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>54-68 MEMORIAL DR</td><td>MEMORIAL</td><td>54</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17275&mlon=-80.26131#map=18/43.17275/-80.26131" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>55-68 MEMORIAL DR</td><td>MEMORIAL</td><td>55</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17278&mlon=-80.26137#map=18/43.17278/-80.26137" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>56-68 MEMORIAL DR</td><td>MEMORIAL</td><td>56</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17280&mlon=-80.26143#map=18/43.17280/-80.26143" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>57-68 MEMORIAL DR</td><td>MEMORIAL</td><td>57</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17282&mlon=-80.26149#map=18/43.17282/-80.26149" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>58-68 MEMORIAL DR</td><td>MEMORIAL</td><td>58</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17284&mlon=-80.26155#map=18/43.17284/-80.26155" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>59-68 MEMORIAL DR</td><td>MEMORIAL</td><td>59</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17287&mlon=-80.26162#map=18/43.17287/-80.26162" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>60-68 MEMORIAL DR</td><td>MEMORIAL</td><td>60</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17290&mlon=-80.26169#map=18/43.17290/-80.26169" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>61-68 MEMORIAL DR</td><td>MEMORIAL</td><td>61</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17293&mlon=-80.26176#map=18/43.17293/-80.26176" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1-332 NORTH PARK ST</td><td>NORTH PARK</td><td>1</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17213&mlon=-80.25970#map=18/43.17213/-80.25970" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10-332 NORTH PARK ST</td><td>NORTH PARK</td><td>10</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17176&mlon=-80.25996#map=18/43.17176/-80.25996" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2-332 NORTH PARK ST</td><td>NORTH PARK</td><td>2</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17209&mlon=-80.25973#map=18/43.17209/-80.25973" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3-332 NORTH PARK ST</td><td>NORTH PARK</td><td>3</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17204&mlon=-80.25975#map=18/43.17204/-80.25975" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>4-332 NORTH PARK ST</td><td>NORTH PARK</td><td>4</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17200&mlon=-80.25978#map=18/43.17200/-80.25978" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>5-332 NORTH PARK ST</td><td>NORTH PARK</td><td>5</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17196&mlon=-80.25981#map=18/43.17196/-80.25981" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6-332 NORTH PARK ST</td><td>NORTH PARK</td><td>6</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17192&mlon=-80.25985#map=18/43.17192/-80.25985" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>7-332 NORTH PARK ST</td><td>NORTH PARK</td><td>7</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17188&mlon=-80.25988#map=18/43.17188/-80.25988" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>8-332 NORTH PARK ST</td><td>NORTH PARK</td><td>8</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17183&mlon=-80.25992#map=18/43.17183/-80.25992" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>9-332 NORTH PARK ST</td><td>NORTH PARK</td><td>9</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.17180&mlon=-80.25994#map=18/43.17180/-80.25994" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Updated Addresses <span class="badge badge-yellow">0</span>
+      <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (STREETNUM)</li><li>Street name (STREETNAME)</li><li>Full address (FULLADDRESS)</li><li>Coordinates (latitude, longitude)</li><li>POSTALCODE</li><li>STNUMSUFF</li><li>STREETNUMIN</li><li>STREETTYPE</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <p class="muted">None — every source field is compared.</p>
+    </span>
+  </span></h2>
+    
+    <p class="empty">No addresses updated.</p>
+  </div>
+
+  <div class="section">
+    <h2>Renumbered Addresses <span class="badge badge-accent">0</span></h2>
+    
+    <p class="empty">No addresses renumbered.</p>
+  </div>
+
+  <div class="section">
+    <h2>Street Renames <span class="badge badge-purple">0</span></h2>
+    <p class="empty">No street renames.</p>
+  </div>
+
+  
+
+  
+
+  
+
+  <div class="section">
+    <h2>Location Adjustments <span class="badge" style="background: var(--surface2); color: var(--text-dim)">0</span></h2>
+    
+    <p class="empty">No location adjustments.</p>
+  </div>
+
+  <div class="generated-at">Data pulled Oct 24, 2026 at 12:05 PM · source licence: Open Government Licence - Brantford</div>
+
+  <script>
+    function sortTable(tbodyId, col) {
+      const tbody = document.getElementById(tbodyId);
+      if (!tbody) return;
+      const rows = Array.from(tbody.rows);
+      const dir = tbody.dataset.sortDir === 'asc' ? 'desc' : 'asc';
+      tbody.dataset.sortDir = dir;
+      rows.sort((a, b) => {
+        const av = a.cells[col]?.textContent.trim() || '';
+        const bv = b.cells[col]?.textContent.trim() || '';
+        const an = parseFloat(av), bn = parseFloat(bv);
+        if (!isNaN(an) && !isNaN(bn)) return dir === 'asc' ? an - bn : bn - an;
+        return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+      });
+      rows.forEach(r => tbody.appendChild(r));
+    }
+  </script>
+</body>
+
+</html>
