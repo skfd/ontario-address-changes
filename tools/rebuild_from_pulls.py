@@ -112,6 +112,9 @@ Run so far:
               --stored-day frontenac-2026-07-16.geojson); greater-sudbury 71,091 -> 70,698
               (6 flapping keys now one version each); lennox-addington, grey, renfrew,
               durham, caledon, cornwall, blue-mountains, waterloo-region, haldimand: 1-2
+              keys each. brampton ([identity] prefer ADDRESS_TYPE = PRIMARY): 1,348 keys
+              store another of their rows at some snapshot, 253,639 -> 253,647 rows, 2 skip
+              flags changed (first run died at 09-17 on a killed restic dump; re-run clean).
               keys each. Every one verified 0/0/0 against its latest vault pull.
               Backups: C:\Users\kk\ontario-db-backup-2026-10-24-tiebreak\
 

@@ -1100,7 +1100,8 @@ one-time "modified" spike, so batch them:
   row first (brampton ADDRESS_TYPE = PRIMARY), then content order (number, street, unit,
   full, lon, lat, props) - content rather than payload_hash because hash order still swapped
   muskoka's kept point 70 times over its pulls, content order 0. History rewritten with
-  `rebuild_from_pulls.py --tiebreak` for the 13 cities where the kept row ever differed;
+  `rebuild_from_pulls.py --tiebreak` for the 14 cities where the kept row ever differed
+  (brampton: 1,348 keys now keep their PRIMARY point);
   greater-sudbury's six flapping keys are now one version each (105696 was 45). muskoka got
   StreetQual in its key the same night (45 suffix siblings back). Each verified 0/0/0.
   Four cities need nothing new (hamilton, haliburton, huron, pickering: the rule picks the
