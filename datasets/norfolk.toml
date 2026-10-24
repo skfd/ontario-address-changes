@@ -6,7 +6,16 @@ provider = "Norfolk County"
 # appeared and was found 2026-08-20; 35,121 rows re-verified live the same day.
 # Layer is stored in Web Mercator (102100) but f=geojson exports WGS84 lon/lat (verified
 # on sample rows), so no source_crs is needed.
-data_url = "https://services1.arcgis.com/mSGV2hCLXHNsfQqK/arcgis/rest/services/Civic_Addresses/FeatureServer/0"
+# Re-pointed 2026-10-23 to the county's own server: the AGOL item above stopped moving
+# (lastEditDate 2025-11-10, a bulk republish of ~15 of the owner's items; 35,121 rows and
+# 64 identical daily pulls since 08-20), while gis.norfolk.ca serves the same feature class
+# live - 35,253 rows, newest DateCreated 2026-10-20 on the CityView layer, 245 created since
+# 2025-11-10. Same fields plus COMMENTS; OID OBJECTID (was FID). Avoid CityView_GISviewer/2:
+# its LastModified is rewritten nightly on every row. The server 403s urllib's default
+# User-Agent (requests' is fine). The store was baseline-only, so fresh baseline. Licence:
+# the open-data agreement below is on the AGOL item; operator call (2026-10-23) that it
+# covers the county's own copy of the same data (windsor precedent) - keep publishing.
+data_url = "https://gis.norfolk.ca/arcgis/rest/services/Services_Public_GISviewer/Land_Records_Public/MapServer/2"
 access = "arcgis"
 format = "geojson"
 # Item licenseInfo (fetched 2026-08-20) is a bespoke "Open Data Licence Agreement":
