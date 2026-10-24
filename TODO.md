@@ -1019,6 +1019,36 @@ one-time "modified" spike, so batch them:
   reads as modifications that are not real. Decide per city: ignore the parcel attributes
   (they are not address data), or key on something that separates the records. Sweep the
   other 76 stores' drop counts first.
+  **Swept 2026-10-23, all 78 latest vault pulls** (the log can't answer it: `_records` runs
+  only on a fresh import, so 63 cities that recorded "no changes" printed no line). 42 cities
+  drop nothing; most of the rest drop rows that differ only in ignored/volatile fields.
+  Real problems, by stake (scripts + per-city JSON in `%TEMP%\dedupe-audit\`):
+  - **sdg: 2,019 distinct addresses (~6%) never stored.** `Unique_ID` is a bare township
+    prefix (`ND_`, `SS_`, ...) on the 2,012 rows with no SDGCivicID; 13 keys hold them all.
+    The TOML's "populated on all but 1 row" is wrong. Fix: treat a prefix-only key as blank
+    (falls back to synth, 14 real upstream dups left) or go pure synth (0 collisions); either
+    way `rebuild_from_pulls.py` then `recanonicalize.py --verify` (hastings precedent).
+  - **windsor: no address hidden, parcel attributes by file order.** 14,490 rows/12,127 keys
+    differ only in `propertyrsn`/`Frontage`/`Depth`/`AmandaArea`, and on 4,704 also `Ward`.
+    Ignoring all five (ward is vault-only by the overlay policy) leaves 0; the
+    `[classes] boundary = ["Ward"]` line then goes dead and should go. Hashes only:
+    `tools/backfill_props_hash.py --reapply-ignore --city windsor`.
+  - **brampton: 1,206 addresses stored at a SECONDARY/FRONTDOOR point.** `ADDRESS_ID` repeats
+    across point types; no config fix (coords are hashed, no row filter). Stable so far.
+  - **greater-sudbury: fake events now.** Key 105696 alternates between "1545 Redfern Street"
+    and "119 Vaillancourt Crescent" across snapshots; duplicate ADDRESSIDs upstream.
+  - **muskoka: 46 suffix siblings hidden** (`StreetQual` not in the key) and coordinates
+    flipping on 114 of 199 keys. `synth_props = ["PropertyNum", "StreetQual"]` recovers 45;
+    re-key, so rebuild + recanonicalize.
+  - **ajax: 32 hidden** behind 24 FACILITYIDs; pure synth gives 0 collisions; baseline-only,
+    so re-baseline.
+  - **durham: 11 hidden** (MXADDRESSCODE shared by unit/suffix siblings; REGION_ID unique,
+    stability unmeasured) - report upstream; a 253k re-key isn't worth 11 rows.
+  - Small (frontenac 3, renfrew 1, lennox-addington 23, cornwall, caledon, grey, haliburton,
+    hamilton, pickering, blue-mountains, waterloo-region, huron, haldimand): no change.
+  - Cross-cutting: a **deterministic tie-break** in `db._records` (PRIMARY first, then lowest
+    payload_hash) would stop the sudbury and muskoka flips and make brampton keep PRIMARY.
+    No re-key; one round of modifications on affected keys unless backfilled.
 - [ ] **Stream the GeoJSON import (found 2026-10-16).** `fetch.load_features` does one
   `json.load` of the whole file — up to ~590 MB for york/peel/toronto — and
   `db.import_snapshot` then iterates `features` once. Switch to `ijson.items(f,
