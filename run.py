@@ -48,7 +48,8 @@ def cmd_download(args):
         print(f"\n=== {ds.slug} ===")
         try:
             filepath, features = fetch.fetch(ds, force=args.force)
-            print(f"  fetched {len(features):,} features -> {filepath}")
+            count = sum(1 for _ in features)  # a stream: count it, don't hold it
+            print(f"  fetched {count:,} features -> {filepath}")
         except Exception as e:
             print(f"  ERROR: {e}")
 
@@ -98,7 +99,7 @@ def _update_serial(datasets, args):
         try:
             filepath = fetch.fetch_path(ds, force=args.force)
             # Filename check before the (expensive) full parse: a rerun of an
-            # already-imported snapshot skips json.load entirely.
+            # already-imported snapshot never opens the GeoJSON at all.
             if db.already_imported(ds, filepath):
                 print(f"  already imported: {os.path.basename(filepath)}")
                 db.record_check(ds, filepath, *fetch.latest_check(ds))

@@ -3,7 +3,8 @@
 The tracker no longer pulls city sites directly. ``fetch`` pulls the dataset's
 latest snapshot through address-vault (the central tiered store) and returns the
 same ``(filepath, features)`` contract the importer and diff expect: the saved
-GeoJSON path plus its features parsed into memory (EPSG:4326). The dataset's
+GeoJSON path plus an iterator over its features (EPSG:4326), streamed one at a
+time rather than parsed whole. The dataset's
 data-source keys are byte-compatible with the vault's Source, so it is seeded
 straight from the dataset config.
 
@@ -11,6 +12,9 @@ Requires ADDRESSVAULT_DIR to point at the vault folder.
 """
 
 import json
+from itertools import islice
+
+import ijson
 
 
 def _vault(ds):
@@ -65,8 +69,32 @@ def failure_streaks():
 
 
 def load_features(path):
-    with open(path, encoding="utf-8") as f:
-        return json.load(f).get("features", [])
+    """Stream the features of a GeoJSON FeatureCollection, one at a time.
+
+    An iterator, not a list: one pass only. A caller that needs ``len``,
+    indexing or a second pass must wrap it in ``list()``. Nothing but
+    ``features`` is read from the collection (no caller wants ``crs`` etc.).
+
+    Values come out exactly as ``json.load`` would give them -- they feed the
+    payload and content hashes, so any drift is a phantom mass event.
+    ``use_float=True`` keeps ijson from yielding ``Decimal`` for non-integers.
+    Where yajl refuses what ``json.load`` accepts (NaN/Infinity, integers past
+    int64, float overflow) the file is re-read with ``json.load`` for the rest,
+    so those come out identical too, just without the memory saving. The one
+    silent difference left is a lone UTF-16 surrogate escape (a backslash-u
+    D800..DFFF with no partner), which yajl turns into ``?``; none of the 227
+    hot vault pulls carries a surrogate escape at all (2026-10-23).
+    """
+    done = 0
+    try:
+        with open(path, "rb") as f:
+            for feat in ijson.items(f, "features.item", use_float=True):
+                yield feat
+                done += 1
+    except ijson.JSONError:
+        with open(path, encoding="utf-8") as f:
+            features = json.load(f).get("features", [])
+        yield from islice(features, done, None)
 
 
 def fetch(ds, force=False):

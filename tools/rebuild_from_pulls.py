@@ -143,7 +143,8 @@ def rebuild(ds, old_ds):
     last_features = None
     for sid, fn, sk in snaps:
         if paths[fn]:
-            features = load_features(paths[fn])
+            # list, not the stream: an unchanged day after it re-imports these.
+            features = list(load_features(paths[fn]))
             source = "raw"
         elif sk:
             features = last_features             # an unchanged day: same content

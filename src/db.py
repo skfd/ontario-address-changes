@@ -248,7 +248,10 @@ def record_check(ds, filepath, check_date, checked_at):
 
 
 def import_snapshot(ds, filepath, features, headers=None):
-    """Import normalized features as a new snapshot using SCD-2 delta logic."""
+    """Import normalized features as a new snapshot using SCD-2 delta logic.
+
+    ``features`` is any iterable, consumed once -- typically the stream from
+    ``fetch.load_features``; it is not touched at all if already imported."""
     conn = init_db(ds)
     headers = headers or {}
     filename = os.path.basename(filepath)
@@ -309,7 +312,7 @@ def import_snapshot(ds, filepath, features, headers=None):
     conn.executemany(
         f"INSERT INTO staging ({', '.join(_STAGING_COLS)}) "
         f"VALUES ({', '.join('?' * len(_STAGING_COLS))})",
-        [tuple(r[c] for c in _STAGING_COLS) for r in records])
+        (tuple(r[c] for c in _STAGING_COLS) for r in records))
     conn.execute("CREATE INDEX idx_staging_key ON staging(identity_key)")
 
     cols = ", ".join(_STAGING_COLS)
