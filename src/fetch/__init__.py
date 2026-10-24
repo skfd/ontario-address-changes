@@ -81,8 +81,9 @@ def load_features(path):
     Where yajl refuses what ``json.load`` accepts (NaN/Infinity, integers past
     int64, float overflow) the file is re-read with ``json.load`` for the rest,
     so those come out identical too, just without the memory saving. The one
-    silent difference left is a lone UTF-16 surrogate escape (a backslash-u
-    D800..DFFF with no partner), which yajl turns into ``?``; none of the 227
+    silent difference left is a lone *high* surrogate escape (a backslash-u
+    D800..DBFF with no low half), which yajl turns into ``?`` (a lone low one
+    raises, so it falls back like the rest); none of the 227
     hot vault pulls carries a surrogate escape at all (2026-10-23).
     """
     done = 0
