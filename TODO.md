@@ -337,6 +337,16 @@ the order to work them):
 - [x] Landing "addresses tracked" double-counted overlaps: decided 2026-10-16 to keep the
       plain sum and relabel it "address records" (tooltip explains the overlap).
 - [ ] city-tune audit for each new city after two changed snapshots (classes, ignore_fields).
+  **First pass 2026-10-23:** only tecumseh, west-parry-sound and middlesex have 2+ changed
+  snapshots. Proposals: tecumseh ignore `GIS_ID`/`GIS_ID_OLD` (placeholder `T_0000` gets a
+  real id 1-3 days after a point appears: 5 rows so far); middlesex ignore `FULL_NAME`
+  (derived echo, 1 solo change); west-parry-sound could key on `globalid` (stable on all
+  21,734 across 10-19..10-21, carried the 44->30 Emily St renumber), but it needs a
+  re-baseline, since stored props drop globalid. All three key on address + coords, so a
+  move or renumber reads as retire + add and `location_min_move_m` can't help (middlesex's
+  TOML comment saying it can is wrong). Watch grey: 129 points moved 1.4-9 m on 10-17.
+  **amherstburg, cobourg, halton-hills, norfolk have been byte-identical since 08-20** -
+  frozen sources, a data-integrity look, not a tuning one.
 
 The other six August onboards (amherstburg, cobourg, halton-hills, middlesex, norfolk,
 west-parry-sound) cannot be tuned yet — none has published a second distinct snapshot.
