@@ -340,10 +340,19 @@ def test_unit_from_number_rewrite_is_idempotent():
     # no unit
     ("259 MERSEA RD 15", "259", "MERSEA RD 15", None),
     ("4 LOWER ROAD", "4", "LOWER ROAD", None),                      # LOWER is the street's
+    # after the street: a pair designator and its token only
+    ("7 CHERRY LANE UNIT 1", "7", "CHERRY LANE", "UNIT 1"),
+    ("109 ROBSON ROAD UNIT 904", "109", "ROBSON ROAD", "UNIT 904"),
+    ("3 IROQUOIS ROAD  BLD 2", "3", "IROQUOIS ROAD", "BLD 2"),      # doubled space
+    ("1217 MERSEA RD 2 APT 3", "1217", "MERSEA RD 2", "APT 3"),
+    ("7 CHERRY LANE REAR", "7", "CHERRY LANE", None),               # lone word: street's?
+    ("7 CHERRY LANE UNIT", "7", "CHERRY LANE", None),
+    ("7 CHERRY LANE UNIT 1 2", "7", "CHERRY LANE", None),
+    ("7 OLD CHERRY LANE UNIT 1", "7", "CHERRY LANE", None),         # street not next
+    ("8 CHERRY LANE UNIT 1", "7", "CHERRY LANE", None),             # number mismatch
     # left unparsed rather than guessed
-    ("7 CHERRY LANE UNIT 1", "7", "CHERRY LANE", None),             # after the street
-    ("3 IROQUOIS ROAD  BLD 2", "3", "IROQUOIS ROAD", None),
     ("17 APT B CLARK STREET EAST APT B", "17", "CLARK STREET EAST", None),   # doubled
+    ("44 APT 2 CLARK STREET WEST APT 2", "44", "CLARK STREET WEST", None),
     ("5 ERIE STREET NORTH", "5-15", "ERIE STREET NORTH", None),     # number mismatch
     ("717 HIGHWAY 77", "717", "MERSEA RD 7", None),                 # street mismatch
     ("12 OLD MAIN ST", "12", "MAIN ST", None),                      # not a designator
@@ -392,14 +401,17 @@ def test_canonical_unit_from_full_leaves_unaffected_rows_alone():
     feats = [_leamington_feat("a", "24", "SEACLIFF DRIVE EAST",
                               "24 UNIT 300 SEACLIFF DRIVE EAST", -82.6),
              _leamington_feat("b", "259", "MERSEA RD 15", "259 MERSEA RD 15", -82.5),
-             _leamington_feat("c", "7", "CHERRY LANE", "7 CHERRY LANE UNIT 1", -82.4)]
+             _leamington_feat("c", "7", "CHERRY LANE", "7 CHERRY LANE UNIT 1", -82.4),
+             _leamington_feat("d", "17", "CLARK STREET EAST",
+                              "17 APT B CLARK STREET EAST APT B", -82.3)]
     before = [normalize.canonical(ds, f) for f in feats]
     ds.unit_from_full = True
     after = [normalize.canonical(ds, f) for f in feats]
-    assert [r["unit"] for r in after] == ["UNIT 300", None, None]
-    assert [r["identity_key"] for r in after] == ["a", "b", "c"]
+    assert [r["unit"] for r in after] == ["UNIT 300", None, "UNIT 1", None]
+    assert [r["identity_key"] for r in after] == ["a", "b", "c", "d"]
     assert after[0]["payload_hash"] != before[0]["payload_hash"]
-    assert after[1:] == before[1:]
+    assert after[2]["payload_hash"] != before[2]["payload_hash"]
+    assert (after[1], after[3]) == (before[1], before[3])
 
 
 def test_unit_from_full_rewrite_keeps_globalid_keys():
@@ -433,3 +445,14 @@ def test_unit_from_full_rewrite_keeps_globalid_keys():
         assert _snapshot_rows(ds)[1][-1][1] == 1
     finally:
         shutil.rmtree(ds.data_dir, ignore_errors=True)
+
+
+@pytest.mark.parametrize("slug", ["perth-county", "lennox-addington", "waterloo"])
+def test_unit_from_full_stays_off_the_other_full_address_parsers(slug):
+    """perth-county / lennox-addington (street_from_full) and waterloo
+    (number_unit_from_full) parse their own vocabularies; the trailing-unit extension
+    of unit_from_full must not reach them."""
+    from src import registry
+    ds = registry.load(slug)
+    assert not ds.unit_from_full
+    assert normalize._DESIGNATOR_WORDS == {"site", "unit", "apt", "suite"}

@@ -336,43 +336,53 @@ def number_unit_from_full(full, street):
 
 
 # unit_from_full's vocabulary, measured on leamington's Addressche (2026-10-23): pair
-# designators take exactly one following token ("UNIT 300", "FLR 01", "BLDG 2"); the
-# positional ones stand alone ("437 LOWER OAK STREET EAST"). Kept apart from
-# _DESIGNATOR_WORDS, whose street_from_full parses lennox-addington and perth-county.
-_UNIT_PAIR_WORDS = frozenset({"UNIT", "APT", "SUITE", "FLR", "BLDG"})
+# designators take exactly one following token ("UNIT 300", "FLR 01", "BLDG 2", and
+# the one trailing "BLD 2"); the positional ones stand alone ("437 LOWER OAK STREET
+# EAST"). Kept apart from _DESIGNATOR_WORDS, whose street_from_full parses
+# lennox-addington and perth-county.
+_UNIT_PAIR_WORDS = frozenset({"UNIT", "APT", "SUITE", "FLR", "BLDG", "BLD"})
 _UNIT_LONE_WORDS = frozenset({"UPPER", "LOWER", "REAR", "FRONT"})
 
 
 def unit_from_full(full, number, street):
-    """The unit a full-address string carries BETWEEN the mapped number and the
-    mapped street, as published (Dataset.unit_from_full). Leamington's Addressche
-    is "<AddressNum> <StreetName>" on 10,804 of 11,423 rows and
-    "<AddressNum> <unit> <StreetName>" on 488 more (measured 2026-10-23):
-    "24 UNIT 300 SEACLIFF DRIVE EAST", "1217 FLR 01 MERSEA RD 2" (street
-    "MERSEA RD 2", so the trailing 2 is the street's own), "437 LOWER OAK STREET
-    EAST". A pure function of three canonical columns, so the importer and
+    """The unit a full-address string carries next to the mapped number and street,
+    as published (Dataset.unit_from_full). Leamington's Addressche is
+    "<AddressNum> <StreetName>" on 10,804 of 11,423 rows, "<AddressNum> <unit>
+    <StreetName>" on 488 more and "<AddressNum> <StreetName> <unit>" on 69
+    (measured 2026-10-23): "24 UNIT 300 SEACLIFF DRIVE EAST", "1217 FLR 01 MERSEA
+    RD 2" (street "MERSEA RD 2", so the trailing 2 is the street's own), "437
+    LOWER OAK STREET EAST"; "7 CHERRY LANE UNIT 12", "3 IROQUOIS ROAD  BLD 2". A
+    pure function of three canonical columns, so the importer and
     tools/recanonicalize.py cannot disagree about a row.
 
-    The address must be exactly number + unit + street, token for token and
-    case-insensitively, with the unit one pair designator and its token or one
-    positional word alone. Anything else - no unit, a unit after the street
-    (waterloo's shape), a doubled one, a number or street the address does not
-    lead and end with - gives None: an unparsed row keeps no unit rather than a
-    guessed one.
+    The address must lead with the number and be exactly number + unit + street
+    or number + street + unit, token for token and case-insensitively. Between
+    number and street the unit is one pair designator and its token or one
+    positional word alone; after the street only a pair designator and its token
+    counts, since a lone trailing word is as likely the street's own. Anything
+    else - no unit, a doubled one ("17 APT B CLARK STREET EAST APT B"), a number
+    or street the address does not carry where expected - gives None: an
+    unparsed row keeps no unit rather than a guessed one.
     """
     if not (full and number and street):
         return None
     toks = full.split()
-    n, s = len(number.split()), len(street.split())
     upper = [t.upper() for t in toks]
-    if (upper[:n] != [t.upper() for t in number.split()]
-            or upper[len(toks) - s:] != [t.upper() for t in street.split()]):
+    ntoks = [t.upper() for t in number.split()]
+    stoks = [t.upper() for t in street.split()]
+    n, s = len(ntoks), len(stoks)
+    if upper[:n] != ntoks:
         return None
-    mid = toks[n:len(toks) - s]
-    if len(mid) == 2 and mid[0].upper() in _UNIT_PAIR_WORDS:
-        return " ".join(mid)
-    if len(mid) == 1 and mid[0].upper() in _UNIT_LONE_WORDS:
-        return mid[0]
+    if upper[len(toks) - s:] == stoks:
+        mid = toks[n:len(toks) - s]
+        if len(mid) == 2 and mid[0].upper() in _UNIT_PAIR_WORDS:
+            return " ".join(mid)
+        if len(mid) == 1 and mid[0].upper() in _UNIT_LONE_WORDS:
+            return mid[0]
+    if upper[n:n + s] == stoks:
+        tail = toks[n + s:]
+        if len(tail) == 2 and tail[0].upper() in _UNIT_PAIR_WORDS:
+            return " ".join(tail)
     return None
 
 

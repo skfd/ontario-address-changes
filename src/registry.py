@@ -29,7 +29,7 @@ class Dataset:
     number_unit_from_full: bool = False  # no number/unit columns: split them out of full around the mapped street (normalize.number_unit_from_full)
     number_from_full: bool = False  # number column drops the suffix: take the leading civic number of full (normalize.number_from_full)
     unit_from_number: bool = False  # units published as "<unit>-<number>" in the number column: split them (normalize.unit_from_number)
-    unit_from_full: bool = False  # units published inside full between number and street: take them out (normalize.unit_from_full)
+    unit_from_full: bool = False  # units published inside full, between number and street or after the street: take them out (normalize.unit_from_full)
     key_field: str = ""
     synth_fields: list = field(default_factory=lambda: ["full"])
     synth_props: list = field(default_factory=list)  # source props added to the synth basis
