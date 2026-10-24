@@ -312,6 +312,10 @@ the order to work them):
       Addresses item e48315e9?), tecumseh (may the County of Essex OGL license the Town's points?).
 - [ ] Gated for no licence text, worth an ask: caledon, dryden, oshawa ("reference use only"
       claim unverified), vaughan, vaughan-ng911, grey x3, gorham-ware, oliver-paipoonge.
+      **Asks drafted 2026-10-23** for all of these plus the gated five from August and
+      leamington, with contacts off official pages: address-importer-friend
+      `future-work/multi-city/license-contacts-todo.md` section E. New there: ajax's hub
+      settings say "CC-BY-SA", not the OGL clone read on 10-16 - ask which applies.
 - [x] Measure the daily run after the first full day: ~1.5M more rows (waterloo-region 263k,
       mississauga 220k, vaughan 140k + 94k, oshawa 64k). **Clears easily, 2026-10-20:**
       START 12:00 -> END 12:15, one attempt; ottawa is the long pole (760 s), then simcoe
