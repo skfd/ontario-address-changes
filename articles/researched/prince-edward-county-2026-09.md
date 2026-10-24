@@ -1,7 +1,7 @@
 # Nothing changed in The Corporation of the County of Prince Edward's address file in September 2026
 
 The tracker read The Corporation of the County of Prince Edward's address file on 30 days in September 2026, and every read came back as the same file: the one first seen on 20 August 2026. No address was added, retired, renumbered or renamed, and no street name
-moved. The file holds 27,393 records, the same 27,393 it held at the end of the month before.
+moved. The file holds 27,575 records, the same 27,575 it held at the end of the month before.
 
 ## By the numbers
 
@@ -12,7 +12,7 @@ moved. The file holds 27,393 records, the same 27,393 it held at the end of the 
 | Renumbered | 0 |
 | Street renames | 0 |
 | Address splits | 0 |
-| Total on file at month end | 27,393 |
+| Total on file at month end | 27,575 |
 
 ## What a quiet month means
 
