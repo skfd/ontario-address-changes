@@ -694,6 +694,18 @@ two items after the review wait on it: a style change found there should land be
   scheduled task idle): `-2026-10-16-{dufferin,elgin,middlesex,waterloo}` (~0.1 GB, the
   10-16 re-baselines, gate met), `-2026-10-20-{mergespans,recanonicalize,suffixes}` (2.2 GB),
   `-2026-10-23-{pec-nguid,pre-ignore}` (73 MB, too new).
+- [ ] **Import refusals never escalate (found 2026-10-23).** Peterborough's pull was
+  refused all three attempts on 10-23 (29,062 of 34,096: a publisher-side partial reload,
+  whole again by 20:00 the same day; vault verdict `artifact`, signature added to the
+  data-integrity skill's `corrupt-pulls.md`). It fixes itself on the next pull. The gap it
+  showed does not: `failure_streaks()` counts only vault jobs `failed`/`refused`, and the
+  vault logged this pull `done`; the refusal lives only in this repo's `blocks` table, and
+  `run.py` `_split_known_outages` treats an import refusal as having no streak. So a layer
+  that stayed short would fail the run every day forever and never open a `source-down`
+  issue: the west-parry-sound blind spot again, through a different door. Fix: count
+  consecutive pull days with an active block toward the same N = 3. Also, `active_block`'s
+  docstring and `corrupt-pulls.md` call the block's "3 attempt(s)" days; it is three tries
+  inside one run. Check 10-24: `health.py --blocks --city peterborough` should be empty.
 - [ ] **Watch the daily scheduled task** — check `logs/` and that the site commit/push
   ran. `addressvault report` is the first command (per-city-per-day: checked, unchanged,
   failed, or no attempt); `health.py --blocks --runs` is the project-side second.

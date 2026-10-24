@@ -6,7 +6,7 @@ wrong in the permissive direction and the store carries a fake event forever
 
 ## Signatures seen in production
 
-All three are now refused before anything is written, so you will meet them as a *block*
+All four are now refused before anything is written, so you will meet them as a *block*
 rather than as a recorded snapshot. They are still the shapes to recognise.
 
 - **Truncated pull** — row count an exact multiple of 2000. Address-vault's ArcGIS paging
@@ -17,6 +17,13 @@ rather than as a recorded snapshot. They are still the shapes to recognise.
   2026-06-28. Where identity is synthesized this also re-keys the whole city, so it reads
   as "every address retired and re-added" rather than "every address modified".
 - **Row-count cliff** — no round number, just far fewer rows than yesterday.
+- **Publisher-side partial reload** — the source itself is short, so the vault's count probe
+  agrees with the pull and its truncation check passes; only this repo's 5% row-drop guard
+  catches it. Peterborough 2026-10-23: 29,062 of 34,096, OBJECTIDs 1-29,000 intact, the gap
+  starting at a round batch boundary (29,001), plus a small tail of rows re-numbered past
+  it. What vanished was the newest ACTV addresses, whole subdivisions, which is not what a
+  real retirement looks like. The layer was whole again that evening. Wait for the next
+  pull; don't re-baseline. Verdict `artifact`.
 
 ## Reading a block
 
