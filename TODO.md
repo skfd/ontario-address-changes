@@ -1061,7 +1061,9 @@ one-time "modified" spike, so batch them:
   only on a fresh import, so 63 cities that recorded "no changes" printed no line). 42 cities
   drop nothing; most of the rest drop rows that differ only in ignored/volatile fields.
   Real problems, by stake (scripts + per-city JSON in `%TEMP%\dedupe-audit\`):
-  - **sdg: 2,019 distinct addresses (~6%) never stored.** `Unique_ID` is a bare township
+  - **sdg: 2,019 distinct addresses (~6%) never stored.** **Done 2026-10-24:** pure synth, history
+    rebuilt (32,072 -> 34,130 rows; the June no-pull gap dated by evidence,
+    `tools/gap-dates/sdg.toml`). Was: `Unique_ID` is a bare township
     prefix (`ND_`, `SS_`, ...) on the 2,012 rows with no SDGCivicID; 13 keys hold them all.
     The TOML's "populated on all but 1 row" is wrong. Fix: treat a prefix-only key as blank
     (falls back to synth, 14 real upstream dups left) or go pure synth (0 collisions); either
@@ -1070,7 +1072,7 @@ one-time "modified" spike, so batch them:
     differ only in `propertyrsn`/`Frontage`/`Depth`/`AmandaArea`, and on 4,704 also `Ward`.
     Ignoring all five (ward is vault-only by the overlay policy) leaves 0; the
     `[classes] boundary = ["Ward"]` line then goes dead and should go. Hashes only:
-    `tools/backfill_props_hash.py --reapply-ignore --city windsor`.
+    `tools/backfill_props_hash.py --reapply-ignore --city windsor`. **Done 2026-10-23**, verify 0/0/0.
   - **brampton: 1,206 addresses stored at a SECONDARY/FRONTDOOR point.** `ADDRESS_ID` repeats
     across point types; no config fix (coords are hashed, no row filter). Stable so far.
   - **greater-sudbury: fake events now.** Key 105696 alternates between "1545 Redfern Street"
@@ -1079,7 +1081,7 @@ one-time "modified" spike, so batch them:
     flipping on 114 of 199 keys. `synth_props = ["PropertyNum", "StreetQual"]` recovers 45;
     re-key, so rebuild + recanonicalize.
   - **ajax: 32 hidden** behind 24 FACILITYIDs; pure synth gives 0 collisions; baseline-only,
-    so re-baseline.
+    so re-baseline. **Done 2026-10-23** by replaying its pulls: 38,400 -> 38,432.
   - **durham: 11 hidden** (MXADDRESSCODE shared by unit/suffix siblings; REGION_ID unique,
     stability unmeasured) - report upstream; a 253k re-key isn't worth 11 rows.
   - Small (frontenac 3, renfrew 1, lennox-addington 23, cornwall, caledon, grey, haliburton,
@@ -1087,13 +1089,18 @@ one-time "modified" spike, so batch them:
   - Cross-cutting: a **deterministic tie-break** in `db._records` (PRIMARY first, then lowest
     payload_hash) would stop the sudbury and muskoka flips and make brampton keep PRIMARY.
     No re-key; one round of modifications on affected keys unless backfilled.
-- [ ] **Stream the GeoJSON import (found 2026-10-16).** `fetch.load_features` does one
+- [x] **Stream the GeoJSON import (found 2026-10-16).** `fetch.load_features` does one
   `json.load` of the whole file — up to ~590 MB for york/peel/toronto — and
   `db.import_snapshot` then iterates `features` once. Switch to `ijson.items(f,
   "features.item")` (the vault already depends on ijson) and pass the iterator through;
   `import_snapshot` only needs a count at the end, not `len(features)` up front. Halves
   peak memory per worker, so `--jobs` can go above 6 without the big three colliding,
   and removes the multi-second parse stall on changed days. No hash change.
+  **Done 2026-10-23.** `load_features` is a generator over `ijson.items(..., use_float=True)`
+  (falls back to `json.load` on what yajl refuses: NaN, >int64, 1e400). On the real 10-23
+  pulls: toronto 2,128 -> 659 MB peak for a full import, york 1,599 -> 599 MB, contents and
+  `_content_hash` identical; 1.5-3 s *slower* per city (ijson parses slower than json.load),
+  so the stall moved into the import rather than vanishing.
 - [x] **"None" / "<Null>" in the canonical fields (found 2026-10-16).** `_NULL_LITERALS`
   drops them from props only; `_clean` (the canonical number/street/unit/full) honours
   just "N/A". Stored canonical values today: windsor number + full "None" on 696 rows,
