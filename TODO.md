@@ -179,6 +179,7 @@ These cities are imported and tracking, but their field maps need a human decisi
   vault churn. Left unparsed: 68 rows with the unit *after* the street (`7 CHERRY LANE UNIT
   1..49`, `109 ROBSON ROAD UNIT 101..904`) and 14 messy rows. Adding the trailing shape with
   the same anchoring would take same-address groups from 9 (96 rows) to about 2.
+  **Trailing shape added 2026-10-24** (designator + one token after the street): 69 more rows.
 - [x] **thunder-bay — `number` drops the house suffix on 347 rows.** Found 2026-08-10, the
   hastings trap in a third city. `number` maps to `ADDRESS_NUMBER`, an Integer, so it holds
   "688" where the String `ADDRESS` column holds "688B" and `full` (`COMPLETE`) shows "688B
@@ -713,6 +714,12 @@ two items after the review wait on it: a style change found there should land be
   `.\monthly-article.ps1 -Month 2026-08 -MaxClaude 40 -BudgetMinutes 420` (add
   `-Model claude-opus-5-5` if the default model is out of credits). The batch stops
   cleanly at a limit and resumes where it left off on the next run.
+- [ ] **Re-check three September pieces after the 2026-10-24 render.** The dedupe tie-break
+  and muskoka's key change moved their numbers: greater-sudbury "54 location edits" -> 7
+  (gross significant 47 -> 18, net 17 -> 16), muskoka "95 location edits against 87 net" ->
+  87/87, brampton net significant 29 -> 33, gross 59 -> 63 (agent's estimates; take the
+  numbers from the re-rendered pages). The monthly-article skill covers "update an article
+  after a re-render changed the numbers".
 - [ ] **After the review: link the articles from the landing page.** The link belongs
   in `templates/cities.html` (`docs/index.html` is regenerated every render), the way
   the prior-art comparison is linked; it shows on the next daily render. Until then the
@@ -1089,6 +1096,16 @@ one-time "modified" spike, so batch them:
   - Cross-cutting: a **deterministic tie-break** in `db._records` (PRIMARY first, then lowest
     payload_hash) would stop the sudbury and muskoka flips and make brampton keep PRIMARY.
     No re-key; one round of modifications on affected keys unless backfilled.
+  **Tie-break done 2026-10-24.** `db.tiebreak_rank`: an `[identity] prefer = {field, value}`
+  row first (brampton ADDRESS_TYPE = PRIMARY), then content order (number, street, unit,
+  full, lon, lat, props) - content rather than payload_hash because hash order still swapped
+  muskoka's kept point 70 times over its pulls, content order 0. History rewritten with
+  `rebuild_from_pulls.py --tiebreak` for the 13 cities where the kept row ever differed;
+  greater-sudbury's six flapping keys are now one version each (105696 was 45). muskoka got
+  StreetQual in its key the same night (45 suffix siblings back). Each verified 0/0/0.
+  Four cities need nothing new (hamilton, haliburton, huron, pickering: the rule picks the
+  stored row everywhere). lambton has an older, separate problem: its store does not replay
+  from its June pull at all (56,897 pairs differ at snapshot 1) - not looked into.
 - [x] **Stream the GeoJSON import (found 2026-10-16).** `fetch.load_features` does one
   `json.load` of the whole file — up to ~590 MB for york/peel/toronto — and
   `db.import_snapshot` then iterates `features` once. Switch to `ijson.items(f,

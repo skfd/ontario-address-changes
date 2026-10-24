@@ -106,6 +106,14 @@ Run so far:
               every snapshot; a second build was row-for-row identical; verify against
               the 10-22 pull 0/0/0. Backups:
               C:\Users\kk\ontario-db-backup-2026-10-24-sdg-synth\
+  2026-10-24  --tiebreak (db.tiebreak_rank: [identity] prefer first, then content):
+              muskoka (after recanonicalize --old-rev d94800ee1 for StreetQual in the
+              key: 66,697 chains re-keyed, 26 split) 108,091 -> 108,173; frontenac (with
+              --stored-day frontenac-2026-07-16.geojson); greater-sudbury 71,091 -> 70,698
+              (6 flapping keys now one version each); lennox-addington, grey, renfrew,
+              durham, caledon, cornwall, blue-mountains, waterloo-region, haldimand: 1-2
+              keys each. Every one verified 0/0/0 against its latest vault pull.
+              Backups: C:\Users\kk\ontario-db-backup-2026-10-24-tiebreak\
 
 Not part of the daily run.
 """

@@ -77,6 +77,10 @@ Run so far:
               rows was dated from the store's visible events. Verify against the 10-22
               pull 0/0/0, content_hash equal; a re-run rewrites 0.
               Backup: C:\Users\kk\ontario-db-backup-2026-10-24-sdg-synth\
+  2026-10-24  leamington unit_from_full after the street too: 69 rows, none re-keyed.
+              muskoka synth_props + StreetQual (--old-rev d94800ee1): 108,091 rows,
+              66,697 chains re-keyed, 26 split; then rebuild_from_pulls --tiebreak added
+              the 45 suffix siblings. Verify 0/0/0 each. Backups: C:\Users\kk\ontario-db-backup-2026-10-24-tiebreak\
 
 Not part of the daily run. Safe to re-run: it is idempotent.
 """
