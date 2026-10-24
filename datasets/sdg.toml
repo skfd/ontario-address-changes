@@ -23,12 +23,30 @@ publish_reports = false
 # 1 row, as this said until 2026-10-23: where SDGCivicID is null/0 (~1,860 rows at the
 # 06-11 baseline, ~2,010 on the 10-23 pull) it is the bare prefix (ND_, NG_, NS_, SD_, SG_,
 # SS_), and 7 full ids are duplicated (SG_54093 x6, ND_12280 x4, ...). 13 keys stand for
-# 1,863+ distinct addresses; the importer keeps one of each, so the rest are never stored.
-# Switch to a pure synth key (key_field = "") approved 2026-10-23 but NOT applied: the
-# history rebuild cannot bracket 06-12..06-23 (no raw pull; the hidden set changes across
-# the gap). Do not flip key_field without migrating the store (recanonicalize.py notes).
-key_field = "Unique_ID"
-synth_fields = ["number", "street", "unit"]    # fallback for rows with a null Unique_ID
+# 1,863+ distinct addresses; the importer kept one of each, so the rest were never stored.
+# Pure synth key since 2026-10-24 (operator decision 2026-10-23): number + street + unit +
+# point at 5 dp. Unique_ID stays in the props blob, tracked like any other field. On the
+# 06-11 and 06-24 pulls the new key has 0 collisions (it shows 1,863 / 1,910 addresses the
+# old key hid). The store was migrated, not left to churn: recanonicalize.py --old-rev re-keyed
+# the history, then rebuild_from_pulls.py --gap-dates replayed the pulls to add the hidden
+# rows. No raw pull exists for 06-12..06-23, where 53 hidden addresses appear and 6 go; they
+# were dated from the old store's visible events (rebuild_from_pulls.py "Run so far"):
+# 36 Timberline Dr appear 06-15 (its 11 id-less rows appeared that day), Labrosse St
+# 20A-22B go and 24A-26B appear 06-22 (20A-22B got NS_3706-3711 that day, 5-16 m off),
+# Airport Rd 19686-1..9 appear 06-23 (parent 19686 SG_51406 retired that day; -1 is on its
+# point), Patterson St 199/201 go 06-18 (Armstrong Rd 199/201 NS_3731/3732 appeared on
+# their exact points that day), and 4 with no evidence nearby (Farran's Point Rd 5366,
+# Kenyon Concession Rd 1 19769, Kenyon Concession Rd 3 18750/18800) appear 06-24, the
+# first pull that shows them - which turns 06-24 from a skip into a 4-add day.
+# Result 2026-10-24: 32,072 -> 34,130 rows, 1,863 (06-11) to 2,020 (10-23) addresses back;
+# 17 more raw days that were skips now record a change to a once-hidden row; every old
+# active payload kept at every snapshot; verify 0/0/0. Backups and the dates file:
+# C:\Users\kk\ontario-db-backup-2026-10-24-sdg-synth\
+# Consequence: a move past ~1 m is now a retire + add, not a modification (the 06-12
+# structure-snapping day, 52 points moved 30-70 m, is recorded that way).
+key_field = ""
+synth_fields = ["number", "street", "unit"]
+use_geometry = true
 
 [fields]                                        # source property -> canonical name
 number = "Address_Nu"

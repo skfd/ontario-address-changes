@@ -68,11 +68,15 @@ Run so far:
               Backup: C:\Users\kk\ontario-db-backup-2026-10-23-pec-nguid\
   2026-10-23  leamington unit_from_full: 488 of 11,423 rows, none re-keyed (GlobalID).
               Verify 0/0/0. Backup: C:\Users\kk\ontario-db-backup-2026-10-23-leamington-unit\
-  2026-10-23  sdg key_field "Unique_ID" -> "" (--old-rev HEAD), --dry-run ONLY: would
-              rewrite 32,060 of 32,072 rows, 31,877 chains re-keyed, 177 splits, 13 joins.
-              Not applied: rebuild_from_pulls.py would refuse - no raw pull for 06-12..06-23
-              and the hidden set changes across that gap (1,863 at 06-11, 1,910 at 06-24:
-              53 added, 6 gone). Store untouched; TOML still on Unique_ID.
+  2026-10-24  sdg key_field "Unique_ID" -> "" (--old-rev HEAD): 32,060 of 32,072 rows,
+              31,877 chains re-keyed, 177 splits (52 on 06-12, the 30-70 m structure
+              snap, now retire + add; 47 on 06-18, Saphire -> Sapphire Dr), 13 joins.
+              Then rebuilt by rebuild_from_pulls.py --gap-dates: the bare-prefix and
+              duplicated Unique_IDs had hidden 1,863-2,020 addresses, and the hidden set
+              changes across the 06-12..06-23 gap with no raw pull, so each of those 59
+              rows was dated from the store's visible events. Verify against the 10-22
+              pull 0/0/0, content_hash equal; a re-run rewrites 0.
+              Backup: C:\Users\kk\ontario-db-backup-2026-10-24-sdg-synth\
 
 Not part of the daily run. Safe to re-run: it is idempotent.
 """
