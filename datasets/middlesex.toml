@@ -41,7 +41,10 @@ osm_compatible = "unknown-review"
 # POINT_X/POINT_Y are a coordinate echo of the geometry: median 0.00 m, p99 0.00 m, but
 # max 678 m and 32 rows past 1.1 m - stale on a few, so it can only manufacture updates.
 # The inner OBJECTID (7,260 zeros) goes as volatile by name.
-ignore_fields = ["POINT_X", "POINT_Y"]
+# FULL_NAME is a derived echo of number + FULLSTREET; FULLADDRES is the mapped full. Its one
+# solo change in history was a backfill (5658 CATHERINE ST, 2026-10-20). Ignored 2026-10-23
+# with --reapply-ignore.
+ignore_fields = ["POINT_X", "POINT_Y", "FULL_NAME"]
 
 [identity]
 # No stable source id: OBJECTID_1/OBJECTID are sequential (volatile, dropped by the

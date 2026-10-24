@@ -24,6 +24,12 @@ ignore_fields = [
   # Repeat the geometry.
   "X",
   "Y",
+  # Internal GIS feature ids, not address content. New points arrive with the placeholder
+  # T_0000 and get a real id 1-3 days later: 5 rows changed on GIS_ID alone, all
+  # T_0000 -> T_98xx (2026-10-19, 10-22). GIS_ID_OLD is the legacy id (125 zeros, 265 blank).
+  # Ignored 2026-10-23 with --reapply-ignore; neither is in the key.
+  "GIS_ID",
+  "GIS_ID_OLD",
 ]
 
 [identity]

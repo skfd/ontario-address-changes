@@ -55,6 +55,14 @@ ignore_fields = [
   # tools/backfill_props_hash.py --reapply-ignore the same day, so the switch re-hashes
   # nothing on their account; the values remain in the vault's pre-switch snapshots.
   "RollNumber", "roll_number",
+  # Parcel attributes, not address data. One address point carries several parcel records
+  # (14,490 duplicate-key rows on 12,127 keys, 2026-10-23 dedupe audit), and these are what
+  # differ between them, so which parcel's values got stored depended on file order.
+  # Ward is vault-only by the overlay policy too; with all five ignored the duplicates are
+  # hash-identical and the store no longer depends on file order. Removed from the whole
+  # history with backfill_props_hash.py --reapply-ignore the same day. This retires the
+  # [classes] boundary = ["Ward"] line: an ignored field never reaches the diff.
+  "propertyrsn", "Frontage", "Depth", "AmandaArea", "Ward",
 ]
 
 [identity]
@@ -72,13 +80,8 @@ synth_fields = ["number", "street", "unit"]
 # not 100%. A global _clean_props fix for literal "None" values is queued in TODO.md §5
 # (toronto is the big holder at 525k rows).
 number = "street_address"
-street = "street_name"                          # street_suffix/street_direction/Ward tracked via the props blob
+street = "street_name"                          # street_suffix/street_direction tracked via the props blob
 unit   = "unit_number"
 full   = "Address"
 
-# Change classes (field values verified against the latest snapshot): a
-# modification touching only these fields is reported in its humanized section
-# (place renames / status changes / boundary reassignments) instead of the
-# generic Updated Addresses table.
-[classes]
-boundary = ["Ward"]
+# No [classes]: the one it had, boundary = ["Ward"], went when Ward was ignored (2026-10-23).
