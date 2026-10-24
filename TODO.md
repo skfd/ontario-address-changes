@@ -356,6 +356,9 @@ the order to work them):
     (same fields + COMMENTS, OID `OBJECTID`, maxRecordCount 1000; avoid CityView_GISviewer/2,
     whose LastModified is rewritten nightly). The server 403s urllib's default User-Agent.
     The licence covers the AGOL open-data item, not this viewer service.
+    **Re-pointed 2026-10-23** (operator: keep publishing, the item's licence read as covering
+    the county's own copy): fresh baseline, 35,251 rows; 34,933 of 35,119 old keys survive,
+    318 new, 186 gone. Vault day filed `schema`. Backup `ontario-db-backup-2026-10-23-norfolk`.
   - [ ] **halton-hills: one-shot export** (all 21,900 rows created 2025-10-17). The town's
     `https://map.haltonhills.ca/awse/rest/services/eP/MapServer/0` has 21,902 and ~20
     differences, but no date fields to prove it is live itself. Re-probe its count and max
