@@ -1611,5 +1611,9 @@ fields = ["HOUSESTYLE"]
 scope = "46,634 rows changed the same field set [HOUSESTYLE] (96% of the day's 48,443 modifications)"
 detail = "top: None -> 'Apartment' (43,863), None -> 'Townhouse' (1,484), None -> 'Detached' (1,081)"
 detected = "2026-10-24"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-10-26"
+rule = "datasets/peel-region.toml: ignore_fields += HOUSESTYLE; backfill_props_hash --reapply-ignore --city peel-region (441,766 rows, DB backed up)"
+note = "HOUSESTYLE (building type) filled on 46,634 blank rows (None->Apartment 43,863, Townhouse 1,484, Detached 1,081); no number/street/unit moved. Building attribute filled on half-filled nodes, the overlay-field shape: technical, ignored like ward/garbage overlays."
 

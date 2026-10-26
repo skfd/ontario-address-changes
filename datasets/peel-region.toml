@@ -17,7 +17,12 @@ osm_compatible = "yellow-review"
 # so this copy riding along would MASK genuine relocations rather than merely invent
 # updates. Ignored outright rather than kept — the geometry itself is stored, so nothing
 # is lost.
-ignore_fields = ["LATITUDE", "LONGITUDE"]
+#
+# HOUSESTYLE (building type: Apartment/Townhouse/Detached/...) is a building attribute, not
+# address data -- the overlay-field shape. Flagged 2026-10-24: Peel filled it on 46,634
+# blank rows (43,863 -> 'Apartment') with no address moving; ignored per the owner's
+# overlay policy (vault keeps it).
+ignore_fields = ["LATITUDE", "LONGITUDE", "HOUSESTYLE"]
 
 [identity]
 # Region-wide: Mississauga (264k), Brampton (207k), Caledon (32k). NOTE: the Brampton points here
