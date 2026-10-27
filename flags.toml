@@ -1617,3 +1617,32 @@ reviewed = "2026-10-26"
 rule = "datasets/peel-region.toml: ignore_fields += HOUSESTYLE; backfill_props_hash --reapply-ignore --city peel-region (441,766 rows, DB backed up)"
 note = "HOUSESTYLE (building type) filled on 46,634 blank rows (None->Apartment 43,863, Townhouse 1,484, Detached 1,081); no number/street/unit moved. Building attribute filled on half-filled nodes, the overlay-field shape: technical, ignored like ward/garbage overlays."
 
+[[flag]]
+slug = "guelph"
+date = "2026-10-27"
+signature = "mass-modified"
+fields = ["HAS_UNIT"]
+scope = "1,873 rows changed the same field set [HAS_UNIT] (74% of the day's 2,536 modifications)"
+detail = "top: 'N' -> 'Y' (1,871), 'Y' -> 'N' (2)"
+detected = "2026-10-27"
+status = "open"
+
+[[flag]]
+slug = "guelph"
+date = "2026-10-27"
+signature = "mass-modified"
+fields = ["NAME"]
+scope = "650 rows changed the same field set [NAME] (26% of the day's 2,536 modifications)"
+detail = "top: 'Solstice 1' -> None (161), 'Wellington Woods (Married Student Res.)' -> None (141), 'The Hampton' -> None (46)"
+detected = "2026-10-27"
+status = "open"
+
+[[flag]]
+slug = "simcoe"
+date = "2026-10-27"
+signature = "mass-modified"
+fields = ["location"]
+scope = "507 rows changed the same field set [location] (100% of the day's 507 modifications)"
+detected = "2026-10-27"
+status = "open"
+
