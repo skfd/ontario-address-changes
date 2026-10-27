@@ -29,6 +29,10 @@ ignore_fields = [
   "ADDLEG", "LABEL",
   # Property-registry join keys, rekeyed in batches upstream.
   "PIN", "GPID", "ROLL_NO",
+  # Derived Y/N copy of UNIT_NO; 1,871 unit rows recomputed N->Y on 2026-10-27.
+  "HAS_UNIT",
+  # Building/landmark labels, not address parts; all blanked by the source on 2026-10-27.
+  "NAME", "LANDMKNAME", "ADDLOCINFO",
 ]
 
 # Ignored for change detection (above) but still written to props: the parcel /
