@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Regional Municipality of York Address Changes — Wednesday, Oct 28, 2026</title>
+  <style>
+    :root {
+      --bg: #fafafa; --surface: #ffffff; --surface2: #f5f5f5; --surface3: #ebebeb;
+      --border: #e0e0e0; --border-strong: #d1d1d1; --text: #242424;
+      --text-secondary: #424242; --text-dim: #616161; --accent: #0078d4;
+      --accent-hover: #106ebe; --accent-bg: #eff6fc; --green: #107c10;
+      --green-bg: #f1faf1; --green-tint: #9fd89f; --red: #c50f1f; --red-bg: #fdf3f4;
+      --red-tint: #eeacb2; --yellow: #eaa300; --yellow-bg: #fefbf4; --yellow-tint: #f9e2ae;
+      --purple: #881798; --purple-bg: #f9f3fb; --teal: #038387; --teal-bg: #f0fafa;
+      --shadow-4: 0 2px 4px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --shadow-8: 0 4px 8px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --card-bg: #ffffff; --card-hover: #f5f5f5; color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1f1f1f; --surface: #292929; --surface2: #333333; --surface3: #3d3d3d;
+        --border: #525252; --border-strong: #666666; --text: #ffffff;
+        --text-secondary: #d6d6d6; --text-dim: #adadad; --accent: #2899f5;
+        --accent-hover: #3aa0f3; --accent-bg: #002848; --green: #54b054;
+        --green-bg: #052505; --green-tint: #107c10; --red: #dc626d; --red-bg: #3b0509;
+        --red-tint: #c50f1f; --yellow: #f2c661; --yellow-bg: #463100; --yellow-tint: #eaa300;
+        --purple: #d29ddb; --purple-bg: #3a1040; --teal: #58c0c4; --teal-bg: #013638;
+        --shadow-4: 0 2px 4px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --shadow-8: 0 4px 8px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --card-bg: #333333; --card-hover: #3d3d3d; color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI Variable','Segoe UI',system-ui,-apple-system,sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.5; padding: 2rem;
+      max-width: 1100px; margin: 0 auto; font-size: 14px; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; color: var(--accent-hover); }
+    .back-link { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 12px;
+      color: var(--text-dim); margin-bottom: 1.5rem; transition: color 0.1s; }
+    .back-link:hover { color: var(--accent); text-decoration: none; }
+    h1 { font-size: 24px; font-weight: 600; margin-bottom: 4px; }
+    .subtitle { color: var(--text-secondary); font-size: 14px; margin-bottom: 12px; }
+    .explainer { color: var(--text-secondary); font-size: 13px; line-height: 1.5;
+      margin-bottom: 24px; padding: 12px 16px; background: var(--surface);
+      border-radius: 8px; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px; margin-bottom: 24px; }
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px;
+      padding: 16px; box-shadow: var(--shadow-4); transition: box-shadow 0.1s; }
+    .card:hover { box-shadow: var(--shadow-8); }
+    .card .label { font-size: 12px; color: var(--text-dim); font-weight: 400; }
+    .card .value { font-size: 28px; font-weight: 600; margin-top: 4px; }
+    .card .value.green { color: var(--green); } .card .value.red { color: var(--red); }
+    .card .value.yellow { color: var(--yellow); } .card .value.accent { color: var(--accent); }
+    .card .value.purple { color: var(--purple); }
+    .card .value.teal { color: var(--teal); }
+    .sparkline { display: block; margin-top: 6px; overflow: visible; opacity: 0.9; }
+    .sparkline-label { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+    .section { margin-bottom: 24px; }
+    .section h2 { font-size: 16px; font-weight: 600; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px; }
+    .badge { font-size: 12px; padding: 2px 8px; border-radius: 999px; font-weight: 600; }
+    .badge-green { background: var(--green-bg); color: var(--green); }
+    .badge-red { background: var(--red-bg); color: var(--red); }
+    .badge-yellow { background: var(--yellow-bg); color: var(--yellow); }
+    .badge-accent { background: var(--accent-bg); color: var(--accent); }
+    .badge-purple { background: var(--purple-bg); color: var(--purple); }
+    .badge-teal { background: var(--teal-bg); color: var(--teal); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface);
+      border-radius: 8px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    thead { background: var(--surface2); }
+    th { text-align: left; padding: 8px 12px; font-weight: 600; color: var(--text-dim);
+      font-size: 12px; cursor: pointer; user-select: none; border-bottom: 1px solid var(--border); }
+    th:hover { color: var(--accent); }
+    td { padding: 8px 12px; border-top: 1px solid var(--border); }
+    tr:hover td { background: var(--surface2); }
+    .old-val { color: var(--red); text-decoration: line-through; }
+    .new-val { color: var(--green); }
+    .arrow-val { color: var(--text-dim); text-align: center; white-space: nowrap; }
+    .map-link { display: inline-flex; align-items: center; margin-left: 0.4em;
+      color: var(--accent); vertical-align: middle; white-space: nowrap; font-size: 12px; }
+    .map-link:hover { color: var(--accent-hover); }
+    .map-link svg { width: 14px; height: 14px; }
+    .change-field { color: var(--yellow); font-weight: 600; }
+    .bar-chart { margin-top: 8px; }
+    .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 12px; }
+    .bar-label { width: 180px; text-align: right; color: var(--text-secondary); flex-shrink: 0;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .bar-track { flex: 1; height: 8px; background: var(--surface2); border-radius: 4px;
+      overflow: hidden; position: relative; }
+    .bar-fill { height: 100%; border-radius: 4px; transition: width 0.15s ease; }
+    .bar-fill.green { background: var(--green); } .bar-fill.red { background: var(--red); }
+    .bar-count { width: 40px; font-size: 12px; color: var(--text-dim); }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+    .empty { color: var(--text-dim); font-style: italic; padding: 16px; }
+    .truncated { color: var(--text-dim); font-size: 12px; margin-top: 8px; }
+    .collapsible-toggle { background: transparent; border: 1px solid var(--border);
+      color: var(--accent); padding: 5px 12px; border-radius: 4px; cursor: pointer;
+      font-size: 12px; font-family: inherit; margin-bottom: 12px; transition: background 0.1s; }
+    .collapsible-toggle:hover { background: var(--surface2); }
+    details.rename-group { background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; margin-bottom: 8px; box-shadow: var(--shadow-4); }
+    details.rename-group summary { padding: 10px 14px; cursor: pointer; font-size: 13px; }
+    details.rename-group[open] summary { border-bottom: 1px solid var(--border); }
+    details.rename-group table { border: none; box-shadow: none; border-radius: 0; }
+    details.rename-group .truncated { padding: 0 14px 10px; margin-top: 0; }
+    .rename-count { color: var(--text-dim); font-size: 12px; margin-left: 6px; }
+    .no-changes-banner { background: var(--green-bg); border: 1px solid var(--green-tint);
+      color: var(--green); padding: 16px; border-radius: 8px; margin-bottom: 24px;
+      text-align: center; font-weight: 600; font-size: 14px; }
+    .baseline-banner { background: var(--accent-bg); border: 1px solid var(--accent);
+      color: var(--accent); padding: 16px; border-radius: 8px; margin-bottom: 24px; font-size: 13px; }
+    .generated-at { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-dim); }
+    .history { font-size: 12.5px; color: var(--text-secondary); white-space: nowrap; }
+    .history .a { color: var(--green); font-weight: 500; }
+    .history .r { color: var(--red); font-weight: 500; }
+    .history .dot { color: var(--text-dim); margin: 0 4px; }
+    .history-none { color: var(--text-dim); font-style: italic; font-size: 12.5px; }
+    .info-wrap { position: relative; display: inline-flex; vertical-align: middle; }
+    .info-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+      height: 18px; padding: 0 8px 0 7px; border-radius: 999px; border: none;
+      color: #fff; background: var(--accent); cursor: help; font-size: 11px; font-weight: 600;
+      font-style: normal; font-family: inherit; line-height: 1; white-space: nowrap; }
+    .info-btn .glyph { font-style: italic; font-weight: 700;
+      font-family: Georgia, 'Times New Roman', serif; }
+    .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn,
+    .info-wrap:focus .info-btn { background: var(--accent-hover); }
+    .info-pop { display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 20;
+      width: 320px; max-width: 80vw; padding: 12px 14px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-8);
+      font-size: 12.5px; font-weight: 400; color: var(--text-secondary); line-height: 1.5; }
+    .info-wrap:hover .info-pop, .info-wrap:focus-within .info-pop,
+    .info-wrap:focus .info-pop { display: block; }
+    .info-pop strong { display: block; color: var(--text); font-size: 12px; margin-bottom: 4px; }
+    .info-pop ul { list-style: none; margin: 0 0 10px; padding: 0; }
+    .info-pop li { padding: 1px 0 1px 14px; position: relative; }
+    .info-pop li::before { content: "·"; position: absolute; left: 4px; color: var(--text-dim); }
+    .info-pop .note { color: var(--text-dim); font-size: 11.5px; margin: 0 0 10px; }
+    .info-pop .muted { color: var(--text-dim); font-style: italic; }
+  </style>
+<script data-goatcounter="https://osm-ontario.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+
+  <a class="back-link" href="index.html">← Back to Regional Municipality of York reports</a>
+
+  <h1>Regional Municipality of York — Address Changes</h1>
+  <p class="subtitle">
+    Changes between  and Wednesday, Oct 28, 2026
+    · 431,969 total addresses
+  </p>
+
+  
+
+  <div class="cards">
+    <div class="card"><div class="label">Total Addresses</div>
+      <div class="value accent">431,969</div></div>
+    <div class="card"><div class="label">New Addresses</div>
+      <div class="value green">+106</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#107c10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,17.5 19.7,17.2 37.3,17.8 55.0,7.3 72.7,17.8 90.3,17.7 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#107c10"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Retired Addresses</div>
+      <div class="value red">−0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#c50f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,17.3 37.3,17.3 55.0,2.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#c50f1f"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Updated Addresses <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (FULL_STREET_NAME)</li><li>Unit (SUITE_NUMBER)</li><li>Full address (FULL_CIVIC_ADDR)</li><li>Coordinates (latitude, longitude)</li><li>ADDRS_PNT_TYPE</li><li>ADD_NUM_SUFFIX</li><li>COUNTRY</li><li>LIFESTATUS</li><li>MAIL_ADDRESS_NUMBER</li><li>MAIL_ADDRESS_NUMBER_SUFFIX</li><li>MAIL_COMMUNITY_NAME</li><li>MAIL_FULL_ADDRESS_TEXT</li><li>MAIL_POSTAL_CODE</li><li>MAIL_PROVINCE</li><li>MAIL_STATUS</li><li>MAIL_STREET_NAME</li><li>MAIL_STREET_TYPE</li><li>MAIL_SUITE_NUMBER</li><li>MAIL_UNIT_DESIGNATOR</li><li>MUNICIPALITY</li><li>PNT_GIS_ID</li><li>PREFIX_DIRECTION</li><li>PREFIX_TYPE</li><li>STREET_NAME</li><li>STREET_NAME_ID</li><li>STREET_TYPE</li><li>SUFFIX_DIRECTION</li><li>UNIT_DESIGNATOR</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>PARID</li><li>PRO_DATE</li></ul>
+      
+    </span>
+  </span></div>
+      <div class="value yellow">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,10.0 55.0,2.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Renumbered</div>
+      <div class="value accent">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#0078d4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,2.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#0078d4"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Street Renames</div>
+      <div class="value purple">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#9141ac" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#9141ac"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    <div class="card"><div class="label">Status Changes</div>
+      <div class="value teal">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#038387" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#038387"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    <div class="card"><div class="label">Boundary Changes</div>
+      <div class="value teal">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#038387" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#038387"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    <div class="card"><div class="label">Location Adjustments</div>
+      <div class="value" style="color: var(--text-dim)">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#808080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,17.4 19.7,18.0 37.3,18.0 55.0,2.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#808080"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+  </div>
+
+  
+  <div class="section">
+    <h2>Change Breakdown</h2>
+    <div class="stats-grid">
+      
+      <div class="card"><div class="label">Top Streets by New Addresses</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">Jadestone Drive</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">43</span></div>
+        <div class="bar-row"><span class="bar-label">Sandpiper Crescent</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:65.0%"></div></div>
+          <span class="bar-count">28</span></div>
+        <div class="bar-row"><span class="bar-label">Bethridge Way</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:42.0%"></div></div>
+          <span class="bar-count">18</span></div>
+        <div class="bar-row"><span class="bar-label">Harjones Avenue</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:40.0%"></div></div>
+          <span class="bar-count">17</span></div>
+      </div></div>
+      
+      
+    </div>
+  </div>
+  
+
+  <div class="section">
+    <h2>New Addresses <span class="badge badge-green">106</span></h2>
+    
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-added',0)">Address</th><th onclick="sortTable('t-added',1)">Street</th>
+        <th onclick="sortTable('t-added',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-added">
+        
+        <tr><td>3 Bethridge Way</td><td>Bethridge Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97822&mlon=-79.27112#map=18/43.97822/-79.27112" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>7 Bethridge Way</td><td>Bethridge Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97830&mlon=-79.27116#map=18/43.97830/-79.27116" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>11 Bethridge Way</td><td>Bethridge Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97839&mlon=-79.27120#map=18/43.97839/-79.27120" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>15 Bethridge Way</td><td>Bethridge Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97847&mlon=-79.27123#map=18/43.97847/-79.27123" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>19 Bethridge Way</td><td>Bethridge Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97856&mlon=-79.27127#map=18/43.97856/-79.27127" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>23 Bethridge Way</td><td>Bethridge Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97864&mlon=-79.27131#map=18/43.97864/-79.27131" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>27 Bethridge Way</td><td>Bethridge Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97873&mlon=-79.27135#map=18/43.97873/-79.27135" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>31 Bethridge Way</td><td>Bethridge Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97882&mlon=-79.27138#map=18/43.97882/-79.27138" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>35 Bethridge Way</td><td>Bethridge Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97890&mlon=-79.27142#map=18/43.97890/-79.27142" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>39 Bethridge Way</td><td>Bethridge Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97898&mlon=-79.27146#map=18/43.97898/-79.27146" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>42 Bethridge Way</td><td>Bethridge Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97879&mlon=-79.27194#map=18/43.97879/-79.27194" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>43 Bethridge Way</td><td>Bethridge Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97906&mlon=-79.27149#map=18/43.97906/-79.27149" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>46 Bethridge Way</td><td>Bethridge Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97887&mlon=-79.27197#map=18/43.97887/-79.27197" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>47 Bethridge Way</td><td>Bethridge Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97914&mlon=-79.27153#map=18/43.97914/-79.27153" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>50 Bethridge Way</td><td>Bethridge Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97895&mlon=-79.27201#map=18/43.97895/-79.27201" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>51 Bethridge Way</td><td>Bethridge Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97922&mlon=-79.27157#map=18/43.97922/-79.27157" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>54 Bethridge Way</td><td>Bethridge Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97903&mlon=-79.27204#map=18/43.97903/-79.27204" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>55 Bethridge Way</td><td>Bethridge Way</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97930&mlon=-79.27163#map=18/43.97930/-79.27163" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>27 Harjones Avenue</td><td>Harjones Avenue</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97820&mlon=-79.26912#map=18/43.97820/-79.26912" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>31 Harjones Avenue</td><td>Harjones Avenue</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97829&mlon=-79.26915#map=18/43.97829/-79.26915" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>35 Harjones Avenue</td><td>Harjones Avenue</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97840&mlon=-79.26918#map=18/43.97840/-79.26918" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>50 Harjones Avenue</td><td>Harjones Avenue</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97856&mlon=-79.26978#map=18/43.97856/-79.26978" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>54 Harjones Avenue</td><td>Harjones Avenue</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97865&mlon=-79.26982#map=18/43.97865/-79.26982" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>58 Harjones Avenue</td><td>Harjones Avenue</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97873&mlon=-79.26985#map=18/43.97873/-79.26985" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>62 Harjones Avenue</td><td>Harjones Avenue</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97882&mlon=-79.26989#map=18/43.97882/-79.26989" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>66 Harjones Avenue</td><td>Harjones Avenue</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97890&mlon=-79.26992#map=18/43.97890/-79.26992" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>70 Harjones Avenue</td><td>Harjones Avenue</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97899&mlon=-79.26996#map=18/43.97899/-79.26996" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>74 Harjones Avenue</td><td>Harjones Avenue</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97907&mlon=-79.26999#map=18/43.97907/-79.26999" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>78 Harjones Avenue</td><td>Harjones Avenue</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97915&mlon=-79.27003#map=18/43.97915/-79.27003" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>82 Harjones Avenue</td><td>Harjones Avenue</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97924&mlon=-79.27006#map=18/43.97924/-79.27006" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>86 Harjones Avenue</td><td>Harjones Avenue</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97932&mlon=-79.27010#map=18/43.97932/-79.27010" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>90 Harjones Avenue</td><td>Harjones Avenue</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97940&mlon=-79.27014#map=18/43.97940/-79.27014" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>94 Harjones Avenue</td><td>Harjones Avenue</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97950&mlon=-79.27018#map=18/43.97950/-79.27018" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>98 Harjones Avenue</td><td>Harjones Avenue</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97960&mlon=-79.27022#map=18/43.97960/-79.27022" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>102 Harjones Avenue</td><td>Harjones Avenue</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97970&mlon=-79.27027#map=18/43.97970/-79.27027" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3 Jadestone Drive</td><td>Jadestone Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97822&mlon=-79.26954#map=18/43.97822/-79.26954" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>7 Jadestone Drive</td><td>Jadestone Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97820&mlon=-79.26965#map=18/43.97820/-79.26965" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>11 Jadestone Drive</td><td>Jadestone Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97818&mlon=-79.26977#map=18/43.97818/-79.26977" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>15 Jadestone Drive</td><td>Jadestone Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97815&mlon=-79.26988#map=18/43.97815/-79.26988" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>19 Jadestone Drive</td><td>Jadestone Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97812&mlon=-79.26999#map=18/43.97812/-79.26999" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>23 Jadestone Drive</td><td>Jadestone Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97809&mlon=-79.27010#map=18/43.97809/-79.27010" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>27 Jadestone Drive</td><td>Jadestone Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97806&mlon=-79.27021#map=18/43.97806/-79.27021" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>31 Jadestone Drive</td><td>Jadestone Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97803&mlon=-79.27035#map=18/43.97803/-79.27035" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>35 Jadestone Drive</td><td>Jadestone Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97800&mlon=-79.27046#map=18/43.97800/-79.27046" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>39 Jadestone Drive</td><td>Jadestone Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97797&mlon=-79.27058#map=18/43.97797/-79.27058" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>43 Jadestone Drive</td><td>Jadestone Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97794&mlon=-79.27070#map=18/43.97794/-79.27070" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>47 Jadestone Drive</td><td>Jadestone Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97791&mlon=-79.27082#map=18/43.97791/-79.27082" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>51 Jadestone Drive</td><td>Jadestone Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97789&mlon=-79.27094#map=18/43.97789/-79.27094" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>55 Jadestone Drive</td><td>Jadestone Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97786&mlon=-79.27106#map=18/43.97786/-79.27106" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>59 Jadestone Drive</td><td>Jadestone Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97784&mlon=-79.27118#map=18/43.97784/-79.27118" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>63 Jadestone Drive</td><td>Jadestone Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97780&mlon=-79.27135#map=18/43.97780/-79.27135" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>89 Jadestone Drive</td><td>Jadestone Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97759&mlon=-79.27257#map=18/43.97759/-79.27257" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>93 Jadestone Drive</td><td>Jadestone Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97757&mlon=-79.27270#map=18/43.97757/-79.27270" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>97 Jadestone Drive</td><td>Jadestone Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97757&mlon=-79.27284#map=18/43.97757/-79.27284" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>101 Jadestone Drive</td><td>Jadestone Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97758&mlon=-79.27297#map=18/43.97758/-79.27297" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>105 Jadestone Drive</td><td>Jadestone Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97760&mlon=-79.27311#map=18/43.97760/-79.27311" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>109 Jadestone Drive</td><td>Jadestone Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97763&mlon=-79.27324#map=18/43.97763/-79.27324" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>113 Jadestone Drive</td><td>Jadestone Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97766&mlon=-79.27337#map=18/43.97766/-79.27337" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>117 Jadestone Drive</td><td>Jadestone Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97768&mlon=-79.27350#map=18/43.97768/-79.27350" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>121 Jadestone Drive</td><td>Jadestone Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97787&mlon=-79.27396#map=18/43.97787/-79.27396" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>125 Jadestone Drive</td><td>Jadestone Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97795&mlon=-79.27400#map=18/43.97795/-79.27400" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>129 Jadestone Drive</td><td>Jadestone Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97804&mlon=-79.27401#map=18/43.97804/-79.27401" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>133 Jadestone Drive</td><td>Jadestone Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97813&mlon=-79.27397#map=18/43.97813/-79.27397" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>137 Jadestone Drive</td><td>Jadestone Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97822&mlon=-79.27394#map=18/43.97822/-79.27394" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>141 Jadestone Drive</td><td>Jadestone Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97830&mlon=-79.27390#map=18/43.97830/-79.27390" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>145 Jadestone Drive</td><td>Jadestone Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97839&mlon=-79.27386#map=18/43.97839/-79.27386" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>149 Jadestone Drive</td><td>Jadestone Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97848&mlon=-79.27383#map=18/43.97848/-79.27383" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>153 Jadestone Drive</td><td>Jadestone Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97856&mlon=-79.27379#map=18/43.97856/-79.27379" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>157 Jadestone Drive</td><td>Jadestone Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97864&mlon=-79.27372#map=18/43.97864/-79.27372" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>161 Jadestone Drive</td><td>Jadestone Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97872&mlon=-79.27351#map=18/43.97872/-79.27351" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>165 Jadestone Drive</td><td>Jadestone Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97872&mlon=-79.27335#map=18/43.97872/-79.27335" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>169 Jadestone Drive</td><td>Jadestone Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97869&mlon=-79.27320#map=18/43.97869/-79.27320" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>173 Jadestone Drive</td><td>Jadestone Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97866&mlon=-79.27305#map=18/43.97866/-79.27305" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>177 Jadestone Drive</td><td>Jadestone Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97863&mlon=-79.27289#map=18/43.97863/-79.27289" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>181 Jadestone Drive</td><td>Jadestone Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97864&mlon=-79.27274#map=18/43.97864/-79.27274" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>185 Jadestone Drive</td><td>Jadestone Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97867&mlon=-79.27259#map=18/43.97867/-79.27259" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>189 Jadestone Drive</td><td>Jadestone Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97871&mlon=-79.27244#map=18/43.97871/-79.27244" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>193 Jadestone Drive</td><td>Jadestone Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97874&mlon=-79.27228#map=18/43.97874/-79.27228" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2 Sandpiper Crescent</td><td>Sandpiper Crescent</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97831&mlon=-79.27072#map=18/43.97831/-79.27072" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3 Sandpiper Crescent</td><td>Sandpiper Crescent</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97845&mlon=-79.27017#map=18/43.97845/-79.27017" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6 Sandpiper Crescent</td><td>Sandpiper Crescent</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97839&mlon=-79.27076#map=18/43.97839/-79.27076" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>7 Sandpiper Crescent</td><td>Sandpiper Crescent</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97854&mlon=-79.27021#map=18/43.97854/-79.27021" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 Sandpiper Crescent</td><td>Sandpiper Crescent</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97848&mlon=-79.27079#map=18/43.97848/-79.27079" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>11 Sandpiper Crescent</td><td>Sandpiper Crescent</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97863&mlon=-79.27025#map=18/43.97863/-79.27025" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>14 Sandpiper Crescent</td><td>Sandpiper Crescent</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97856&mlon=-79.27083#map=18/43.97856/-79.27083" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>15 Sandpiper Crescent</td><td>Sandpiper Crescent</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97871&mlon=-79.27029#map=18/43.97871/-79.27029" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>18 Sandpiper Crescent</td><td>Sandpiper Crescent</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97864&mlon=-79.27087#map=18/43.97864/-79.27087" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>19 Sandpiper Crescent</td><td>Sandpiper Crescent</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97880&mlon=-79.27032#map=18/43.97880/-79.27032" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>22 Sandpiper Crescent</td><td>Sandpiper Crescent</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97873&mlon=-79.27090#map=18/43.97873/-79.27090" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>23 Sandpiper Crescent</td><td>Sandpiper Crescent</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97889&mlon=-79.27036#map=18/43.97889/-79.27036" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>26 Sandpiper Crescent</td><td>Sandpiper Crescent</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97881&mlon=-79.27094#map=18/43.97881/-79.27094" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>27 Sandpiper Crescent</td><td>Sandpiper Crescent</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97898&mlon=-79.27040#map=18/43.97898/-79.27040" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>30 Sandpiper Crescent</td><td>Sandpiper Crescent</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97890&mlon=-79.27097#map=18/43.97890/-79.27097" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>31 Sandpiper Crescent</td><td>Sandpiper Crescent</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97906&mlon=-79.27044#map=18/43.97906/-79.27044" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>34 Sandpiper Crescent</td><td>Sandpiper Crescent</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97898&mlon=-79.27101#map=18/43.97898/-79.27101" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>35 Sandpiper Crescent</td><td>Sandpiper Crescent</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97915&mlon=-79.27047#map=18/43.97915/-79.27047" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>38 Sandpiper Crescent</td><td>Sandpiper Crescent</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97906&mlon=-79.27105#map=18/43.97906/-79.27105" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>39 Sandpiper Crescent</td><td>Sandpiper Crescent</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97924&mlon=-79.27051#map=18/43.97924/-79.27051" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>42 Sandpiper Crescent</td><td>Sandpiper Crescent</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97915&mlon=-79.27108#map=18/43.97915/-79.27108" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>43 Sandpiper Crescent</td><td>Sandpiper Crescent</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97933&mlon=-79.27055#map=18/43.97933/-79.27055" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>46 Sandpiper Crescent</td><td>Sandpiper Crescent</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97923&mlon=-79.27112#map=18/43.97923/-79.27112" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>47 Sandpiper Crescent</td><td>Sandpiper Crescent</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97941&mlon=-79.27059#map=18/43.97941/-79.27059" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>50 Sandpiper Crescent</td><td>Sandpiper Crescent</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97931&mlon=-79.27116#map=18/43.97931/-79.27116" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>51 Sandpiper Crescent</td><td>Sandpiper Crescent</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97950&mlon=-79.27063#map=18/43.97950/-79.27063" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>54 Sandpiper Crescent</td><td>Sandpiper Crescent</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97940&mlon=-79.27119#map=18/43.97940/-79.27119" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>55 Sandpiper Crescent</td><td>Sandpiper Crescent</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.97959&mlon=-79.27066#map=18/43.97959/-79.27066" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Retired Addresses <span class="badge badge-red">0</span></h2>
+    <p class="empty">No addresses retired.</p>
+  </div>
+
+  <div class="section">
+    <h2>Updated Addresses <span class="badge badge-yellow">0</span>
+      <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (FULL_STREET_NAME)</li><li>Unit (SUITE_NUMBER)</li><li>Full address (FULL_CIVIC_ADDR)</li><li>Coordinates (latitude, longitude)</li><li>ADDRS_PNT_TYPE</li><li>ADD_NUM_SUFFIX</li><li>COUNTRY</li><li>LIFESTATUS</li><li>MAIL_ADDRESS_NUMBER</li><li>MAIL_ADDRESS_NUMBER_SUFFIX</li><li>MAIL_COMMUNITY_NAME</li><li>MAIL_FULL_ADDRESS_TEXT</li><li>MAIL_POSTAL_CODE</li><li>MAIL_PROVINCE</li><li>MAIL_STATUS</li><li>MAIL_STREET_NAME</li><li>MAIL_STREET_TYPE</li><li>MAIL_SUITE_NUMBER</li><li>MAIL_UNIT_DESIGNATOR</li><li>MUNICIPALITY</li><li>PNT_GIS_ID</li><li>PREFIX_DIRECTION</li><li>PREFIX_TYPE</li><li>STREET_NAME</li><li>STREET_NAME_ID</li><li>STREET_TYPE</li><li>SUFFIX_DIRECTION</li><li>UNIT_DESIGNATOR</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>PARID</li><li>PRO_DATE</li></ul>
+      
+    </span>
+  </span></h2>
+    
+    <p class="empty">No addresses updated.</p>
+  </div>
+
+  <div class="section">
+    <h2>Renumbered Addresses <span class="badge badge-accent">0</span></h2>
+    
+    <p class="empty">No addresses renumbered.</p>
+  </div>
+
+  <div class="section">
+    <h2>Street Renames <span class="badge badge-purple">0</span></h2>
+    <p class="empty">No street renames.</p>
+  </div>
+
+  
+
+  
+  <div class="section">
+    <h2>Status Changes <span class="badge badge-teal">0</span></h2>
+    <p class="empty">No status changes.</p>
+  </div>
+  
+
+  
+  <div class="section">
+    <h2>Boundary Changes <span class="badge badge-teal">0</span></h2>
+    <p class="empty">No ward or municipality reassignments.</p>
+  </div>
+  
+
+  <div class="section">
+    <h2>Location Adjustments <span class="badge" style="background: var(--surface2); color: var(--text-dim)">0</span></h2>
+    
+    <p class="empty">No location adjustments.</p>
+  </div>
+
+  <div class="generated-at">Data pulled Oct 28, 2026 at 12:04 PM · source licence: York Region Open Data Licence</div>
+
+  <script>
+    function sortTable(tbodyId, col) {
+      const tbody = document.getElementById(tbodyId);
+      if (!tbody) return;
+      const rows = Array.from(tbody.rows);
+      const dir = tbody.dataset.sortDir === 'asc' ? 'desc' : 'asc';
+      tbody.dataset.sortDir = dir;
+      rows.sort((a, b) => {
+        const av = a.cells[col]?.textContent.trim() || '';
+        const bv = b.cells[col]?.textContent.trim() || '';
+        const an = parseFloat(av), bn = parseFloat(bv);
+        if (!isNaN(an) && !isNaN(bn)) return dir === 'asc' ? an - bn : bn - an;
+        return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+      });
+      rows.forEach(r => tbody.appendChild(r));
+    }
+  </script>
+</body>
+
+</html>
