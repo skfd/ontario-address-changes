@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>County of Bruce Address Changes — Thursday, Oct 29, 2026</title>
+  <style>
+    :root {
+      --bg: #fafafa; --surface: #ffffff; --surface2: #f5f5f5; --surface3: #ebebeb;
+      --border: #e0e0e0; --border-strong: #d1d1d1; --text: #242424;
+      --text-secondary: #424242; --text-dim: #616161; --accent: #0078d4;
+      --accent-hover: #106ebe; --accent-bg: #eff6fc; --green: #107c10;
+      --green-bg: #f1faf1; --green-tint: #9fd89f; --red: #c50f1f; --red-bg: #fdf3f4;
+      --red-tint: #eeacb2; --yellow: #eaa300; --yellow-bg: #fefbf4; --yellow-tint: #f9e2ae;
+      --purple: #881798; --purple-bg: #f9f3fb; --teal: #038387; --teal-bg: #f0fafa;
+      --shadow-4: 0 2px 4px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --shadow-8: 0 4px 8px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --card-bg: #ffffff; --card-hover: #f5f5f5; color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1f1f1f; --surface: #292929; --surface2: #333333; --surface3: #3d3d3d;
+        --border: #525252; --border-strong: #666666; --text: #ffffff;
+        --text-secondary: #d6d6d6; --text-dim: #adadad; --accent: #2899f5;
+        --accent-hover: #3aa0f3; --accent-bg: #002848; --green: #54b054;
+        --green-bg: #052505; --green-tint: #107c10; --red: #dc626d; --red-bg: #3b0509;
+        --red-tint: #c50f1f; --yellow: #f2c661; --yellow-bg: #463100; --yellow-tint: #eaa300;
+        --purple: #d29ddb; --purple-bg: #3a1040; --teal: #58c0c4; --teal-bg: #013638;
+        --shadow-4: 0 2px 4px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --shadow-8: 0 4px 8px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --card-bg: #333333; --card-hover: #3d3d3d; color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI Variable','Segoe UI',system-ui,-apple-system,sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.5; padding: 2rem;
+      max-width: 1100px; margin: 0 auto; font-size: 14px; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; color: var(--accent-hover); }
+    .back-link { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 12px;
+      color: var(--text-dim); margin-bottom: 1.5rem; transition: color 0.1s; }
+    .back-link:hover { color: var(--accent); text-decoration: none; }
+    h1 { font-size: 24px; font-weight: 600; margin-bottom: 4px; }
+    .subtitle { color: var(--text-secondary); font-size: 14px; margin-bottom: 12px; }
+    .explainer { color: var(--text-secondary); font-size: 13px; line-height: 1.5;
+      margin-bottom: 24px; padding: 12px 16px; background: var(--surface);
+      border-radius: 8px; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px; margin-bottom: 24px; }
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px;
+      padding: 16px; box-shadow: var(--shadow-4); transition: box-shadow 0.1s; }
+    .card:hover { box-shadow: var(--shadow-8); }
+    .card .label { font-size: 12px; color: var(--text-dim); font-weight: 400; }
+    .card .value { font-size: 28px; font-weight: 600; margin-top: 4px; }
+    .card .value.green { color: var(--green); } .card .value.red { color: var(--red); }
+    .card .value.yellow { color: var(--yellow); } .card .value.accent { color: var(--accent); }
+    .card .value.purple { color: var(--purple); }
+    .card .value.teal { color: var(--teal); }
+    .sparkline { display: block; margin-top: 6px; overflow: visible; opacity: 0.9; }
+    .sparkline-label { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+    .section { margin-bottom: 24px; }
+    .section h2 { font-size: 16px; font-weight: 600; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px; }
+    .badge { font-size: 12px; padding: 2px 8px; border-radius: 999px; font-weight: 600; }
+    .badge-green { background: var(--green-bg); color: var(--green); }
+    .badge-red { background: var(--red-bg); color: var(--red); }
+    .badge-yellow { background: var(--yellow-bg); color: var(--yellow); }
+    .badge-accent { background: var(--accent-bg); color: var(--accent); }
+    .badge-purple { background: var(--purple-bg); color: var(--purple); }
+    .badge-teal { background: var(--teal-bg); color: var(--teal); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface);
+      border-radius: 8px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    thead { background: var(--surface2); }
+    th { text-align: left; padding: 8px 12px; font-weight: 600; color: var(--text-dim);
+      font-size: 12px; cursor: pointer; user-select: none; border-bottom: 1px solid var(--border); }
+    th:hover { color: var(--accent); }
+    td { padding: 8px 12px; border-top: 1px solid var(--border); }
+    tr:hover td { background: var(--surface2); }
+    .old-val { color: var(--red); text-decoration: line-through; }
+    .new-val { color: var(--green); }
+    .arrow-val { color: var(--text-dim); text-align: center; white-space: nowrap; }
+    .map-link { display: inline-flex; align-items: center; margin-left: 0.4em;
+      color: var(--accent); vertical-align: middle; white-space: nowrap; font-size: 12px; }
+    .map-link:hover { color: var(--accent-hover); }
+    .map-link svg { width: 14px; height: 14px; }
+    .change-field { color: var(--yellow); font-weight: 600; }
+    .bar-chart { margin-top: 8px; }
+    .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 12px; }
+    .bar-label { width: 180px; text-align: right; color: var(--text-secondary); flex-shrink: 0;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .bar-track { flex: 1; height: 8px; background: var(--surface2); border-radius: 4px;
+      overflow: hidden; position: relative; }
+    .bar-fill { height: 100%; border-radius: 4px; transition: width 0.15s ease; }
+    .bar-fill.green { background: var(--green); } .bar-fill.red { background: var(--red); }
+    .bar-count { width: 40px; font-size: 12px; color: var(--text-dim); }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+    .empty { color: var(--text-dim); font-style: italic; padding: 16px; }
+    .truncated { color: var(--text-dim); font-size: 12px; margin-top: 8px; }
+    .collapsible-toggle { background: transparent; border: 1px solid var(--border);
+      color: var(--accent); padding: 5px 12px; border-radius: 4px; cursor: pointer;
+      font-size: 12px; font-family: inherit; margin-bottom: 12px; transition: background 0.1s; }
+    .collapsible-toggle:hover { background: var(--surface2); }
+    details.rename-group { background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; margin-bottom: 8px; box-shadow: var(--shadow-4); }
+    details.rename-group summary { padding: 10px 14px; cursor: pointer; font-size: 13px; }
+    details.rename-group[open] summary { border-bottom: 1px solid var(--border); }
+    details.rename-group table { border: none; box-shadow: none; border-radius: 0; }
+    details.rename-group .truncated { padding: 0 14px 10px; margin-top: 0; }
+    .rename-count { color: var(--text-dim); font-size: 12px; margin-left: 6px; }
+    .no-changes-banner { background: var(--green-bg); border: 1px solid var(--green-tint);
+      color: var(--green); padding: 16px; border-radius: 8px; margin-bottom: 24px;
+      text-align: center; font-weight: 600; font-size: 14px; }
+    .baseline-banner { background: var(--accent-bg); border: 1px solid var(--accent);
+      color: var(--accent); padding: 16px; border-radius: 8px; margin-bottom: 24px; font-size: 13px; }
+    .generated-at { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-dim); }
+    .history { font-size: 12.5px; color: var(--text-secondary); white-space: nowrap; }
+    .history .a { color: var(--green); font-weight: 500; }
+    .history .r { color: var(--red); font-weight: 500; }
+    .history .dot { color: var(--text-dim); margin: 0 4px; }
+    .history-none { color: var(--text-dim); font-style: italic; font-size: 12.5px; }
+    .info-wrap { position: relative; display: inline-flex; vertical-align: middle; }
+    .info-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+      height: 18px; padding: 0 8px 0 7px; border-radius: 999px; border: none;
+      color: #fff; background: var(--accent); cursor: help; font-size: 11px; font-weight: 600;
+      font-style: normal; font-family: inherit; line-height: 1; white-space: nowrap; }
+    .info-btn .glyph { font-style: italic; font-weight: 700;
+      font-family: Georgia, 'Times New Roman', serif; }
+    .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn,
+    .info-wrap:focus .info-btn { background: var(--accent-hover); }
+    .info-pop { display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 20;
+      width: 320px; max-width: 80vw; padding: 12px 14px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-8);
+      font-size: 12.5px; font-weight: 400; color: var(--text-secondary); line-height: 1.5; }
+    .info-wrap:hover .info-pop, .info-wrap:focus-within .info-pop,
+    .info-wrap:focus .info-pop { display: block; }
+    .info-pop strong { display: block; color: var(--text); font-size: 12px; margin-bottom: 4px; }
+    .info-pop ul { list-style: none; margin: 0 0 10px; padding: 0; }
+    .info-pop li { padding: 1px 0 1px 14px; position: relative; }
+    .info-pop li::before { content: "·"; position: absolute; left: 4px; color: var(--text-dim); }
+    .info-pop .note { color: var(--text-dim); font-size: 11.5px; margin: 0 0 10px; }
+    .info-pop .muted { color: var(--text-dim); font-style: italic; }
+  </style>
+<script data-goatcounter="https://osm-ontario.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+
+  <a class="back-link" href="index.html">← Back to County of Bruce reports</a>
+
+  <h1>County of Bruce — Address Changes</h1>
+  <p class="subtitle">
+    Changes between  and Thursday, Oct 29, 2026
+    · 51,833 total addresses
+  </p>
+
+  
+
+  <div class="cards">
+    <div class="card"><div class="label">Total Addresses</div>
+      <div class="value accent">51,833</div></div>
+    <div class="card"><div class="label">New Addresses</div>
+      <div class="value green">+41</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#107c10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,14.9 19.7,15.7 37.3,16.0 55.0,15.7 72.7,10.6 90.3,17.6 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#107c10"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Retired Addresses</div>
+      <div class="value red">−14</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#c50f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,16.1 19.7,13.3 37.3,16.1 55.0,14.2 72.7,2.0 90.3,17.1 108.0,4.8"/><circle cx="108.0" cy="4.8" r="2" fill="#c50f1f"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Updated Addresses <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (AddrNum)</li><li>Street name (RoadName)</li><li>Unit (Unit)</li><li>Full address (CivicAddress)</li><li>Coordinates (latitude, longitude)</li><li>Municipality</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>ARN</li></ul>
+      
+    </span>
+  </span></div>
+      <div class="value yellow">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Renumbered</div>
+      <div class="value accent">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#0078d4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#0078d4"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Street Renames</div>
+      <div class="value purple">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#9141ac" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#9141ac"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    
+    <div class="card"><div class="label">Boundary Changes</div>
+      <div class="value teal">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#038387" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#038387"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    <div class="card"><div class="label">Location Adjustments</div>
+      <div class="value" style="color: var(--text-dim)">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#808080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#808080"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+  </div>
+
+  
+  <div class="section">
+    <h2>Change Breakdown</h2>
+    <div class="stats-grid">
+      
+      <div class="card"><div class="label">Top Streets by New Addresses</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">BLANCHFIELD RD</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">3</span></div>
+        <div class="bar-row"><span class="bar-label">SOUTH RANKIN ST</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">3</span></div>
+      </div></div>
+      
+      <div class="card"><div class="label">Top Streets by Retired Addresses</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">SOUTH RANKIN ST</span>
+          <div class="bar-track"><div class="bar-fill red" style="width:100.0%"></div></div>
+          <span class="bar-count">3</span></div>
+      </div></div>
+      
+    </div>
+  </div>
+  
+
+  <div class="section">
+    <h2>New Addresses <span class="badge badge-green">41</span></h2>
+    
+    <details class="rename-group">
+      <summary>240 SOUTH RANKIN ST <span class="arrow-val">→</span> <span class="new-val">2 units (1, 2)</span><span class="rename-count">2 new addresses</span></summary>
+      <table>
+        <thead><tr><th>Address</th><th>Unit</th><th>History</th><th>Map</th></tr></thead>
+        <tbody>
+          
+          <tr><td>240 SOUTH RANKIN ST, Unit 1</td><td>1</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.50206&mlon=-81.35999#map=18/44.50206/-81.35999" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>240 SOUTH RANKIN ST, Unit 2</td><td>2</td>
+            <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.50208&mlon=-81.35994#map=18/44.50208/-81.35994" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+    </details>
+    
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-added',0)">Address</th><th onclick="sortTable('t-added',1)">Street</th>
+        <th onclick="sortTable('t-added',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-added">
+        
+        <tr><td>315 ALBERT ST</td><td>ALBERT ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.30577&mlon=-81.27075#map=18/44.30577/-81.27075" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>66 ANGLESIA ST N</td><td>ANGLESIA ST N</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.49271&mlon=-81.35840#map=18/44.49271/-81.35840" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>432 BALSAM ST</td><td>BALSAM ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.47796&mlon=-81.37932#map=18/44.47796/-81.37932" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>11 BIRCH TRL</td><td>BIRCH TRL</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.47727&mlon=-81.38354#map=18/44.47727/-81.38354" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>304 BLANCHFIELD RD</td><td>BLANCHFIELD RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.50998&mlon=-81.36496#map=18/44.50998/-81.36496" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>338 BLANCHFIELD RD</td><td>BLANCHFIELD RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.51100&mlon=-81.36392#map=18/44.51100/-81.36392" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>342 BLANCHFIELD RD</td><td>BLANCHFIELD RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.51120&mlon=-81.36365#map=18/44.51120/-81.36365" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>389 BLIND LINE</td><td>BLIND LINE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.56572&mlon=-81.22396#map=18/44.56572/-81.22396" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>363 BOB ST</td><td>BOB ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.95453&mlon=-81.51160#map=18/43.95453/-81.51160" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>588 BRUCE ROAD 11</td><td>BRUCE ROAD 11</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.31098&mlon=-81.17371#map=18/44.31098/-81.17371" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1721 BRUCE ROAD 20</td><td>BRUCE ROAD 20</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.23811&mlon=-81.36587#map=18/44.23811/-81.36587" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>747 BRUCE ROAD 3</td><td>BRUCE ROAD 3</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.08593&mlon=-81.19339#map=18/44.08593/-81.19339" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>457 CLARENDON ST</td><td>CLARENDON ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.49462&mlon=-81.35862#map=18/44.49462/-81.35862" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1707 CONCESSION 10</td><td>CONCESSION 10</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.09272&mlon=-81.57984#map=18/44.09272/-81.57984" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>308 CONCESSION 2 SDR</td><td>CONCESSION 2 SDR</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.12930&mlon=-81.05699#map=18/44.12930/-81.05699" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>255 CONCESSION 8</td><td>CONCESSION 8</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.21900&mlon=-81.08234#map=18/44.21900/-81.08234" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>279 CONCESSION 8</td><td>CONCESSION 8</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.21866&mlon=-81.08533#map=18/44.21866/-81.08533" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>531 ECKFORD AVE</td><td>ECKFORD AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.51752&mlon=-81.35673#map=18/44.51752/-81.35673" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>104 FOURTH ST</td><td>FOURTH ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.11764&mlon=-81.15248#map=18/44.11764/-81.15248" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>109 FOURTH ST</td><td>FOURTH ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.11716&mlon=-81.15266#map=18/44.11716/-81.15266" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2 FOWLIE RD</td><td>FOWLIE RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.92007&mlon=-81.36763#map=18/44.92007/-81.36763" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>55 HARKINS RD</td><td>HARKINS RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.18765&mlon=-81.33226#map=18/45.18765/-81.33226" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>19 HEMLOCK ST</td><td>HEMLOCK ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.51234&mlon=-81.36015#map=18/44.51234/-81.36015" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>137 HIDDEN VALLEY RD</td><td>HIDDEN VALLEY RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.15521&mlon=-81.46171#map=18/45.15521/-81.46171" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3328 HIGHWAY 9</td><td>HIGHWAY 9</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.09250&mlon=-81.31505#map=18/44.09250/-81.31505" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>133 HURON DR</td><td>HURON DR</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.11419&mlon=-81.54232#map=18/45.11419/-81.54232" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>29 LAKEVIEW AVE</td><td>LAKEVIEW AVE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.73124&mlon=-81.25672#map=18/44.73124/-81.25672" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>37 LARSEN COVE RD S</td><td>LARSEN COVE RD S</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.02938&mlon=-81.45826#map=18/45.02938/-81.45826" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>377 MCLEAN CRES</td><td>MCLEAN CRES</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.45310&mlon=-81.38764#map=18/44.45310/-81.38764" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>22 MITCHELL ST</td><td>MITCHELL ST</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.00508&mlon=-81.29185#map=18/44.00508/-81.29185" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>23 PARADISE DR</td><td>PARADISE DR</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.86722&mlon=-81.34202#map=18/44.86722/-81.34202" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>905 PARKPLACE</td><td>PARKPLACE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.13851&mlon=-81.67874#map=18/44.13851/-81.67874" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>915 PARKPLACE</td><td>PARKPLACE</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.13963&mlon=-81.67789#map=18/44.13963/-81.67789" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>71 PEDWELL PT DR</td><td>PEDWELL PT DR</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.11992&mlon=-81.54891#map=18/45.11992/-81.54891" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>73 PEDWELL PT DR</td><td>PEDWELL PT DR</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.11978&mlon=-81.54917#map=18/45.11978/-81.54917" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>723 PIKE BAY RD</td><td>PIKE BAY RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.87551&mlon=-81.31896#map=18/44.87551/-81.31896" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>317 SHAW RD</td><td>SHAW RD</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.90952&mlon=-81.33818#map=18/44.90952/-81.33818" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1041 SIDEROAD 25 NORTH</td><td>SIDEROAD 25 NORTH</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.23683&mlon=-81.10382#map=18/44.23683/-81.10382" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>242 SOUTH RANKIN ST, Unit 2</td><td>SOUTH RANKIN ST</td><td>2</td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.50211&mlon=-81.35976#map=18/44.50211/-81.35976" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Retired Addresses <span class="badge badge-red">14</span></h2>
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-removed',0)">Address</th><th onclick="sortTable('t-removed',1)">Street</th>
+        <th onclick="sortTable('t-removed',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-removed">
+        
+        <tr><td>325 ALBERT ST</td><td>ALBERT ST</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.30577&mlon=-81.27075#map=18/44.30577/-81.27075" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>304 BLANCHFIELD RD</td><td>BLANCHFIELD RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.50994&mlon=-81.36501#map=18/44.50994/-81.36501" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>389 BLIND LINE</td><td>BLIND LINE</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.56565&mlon=-81.22250#map=18/44.56565/-81.22250" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>363 BOB ST</td><td>BOB ST</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.95438&mlon=-81.51117#map=18/43.95438/-81.51117" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1721 BRUCE ROAD 20</td><td>BRUCE ROAD 20</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.23811&mlon=-81.36574#map=18/44.23811/-81.36574" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>457 CLARENDON ST</td><td>CLARENDON ST</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.49471&mlon=-81.35856#map=18/44.49471/-81.35856" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1707 CONCESSION 10</td><td>CONCESSION 10</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.09240&mlon=-81.57911#map=18/44.09240/-81.57911" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>55 HARKINS RD</td><td>HARKINS RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.18753&mlon=-81.33246#map=18/45.18753/-81.33246" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>137 HIDDEN VALLEY RD</td><td>HIDDEN VALLEY RD</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.15513&mlon=-81.46144#map=18/45.15513/-81.46144" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>377 MCLEAN CR</td><td>MCLEAN CR</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.45310&mlon=-81.38764#map=18/44.45310/-81.38764" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>73 PEDWELL PT DR</td><td>PEDWELL PT DR</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=45.11963&mlon=-81.54929#map=18/45.11963/-81.54929" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>240 SOUTH RANKIN ST, Unit 1</td><td>SOUTH RANKIN ST</td><td>1</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.50207&mlon=-81.35995#map=18/44.50207/-81.35995" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>240 SOUTH RANKIN ST, Unit 2</td><td>SOUTH RANKIN ST</td><td>2</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.50211&mlon=-81.35997#map=18/44.50211/-81.35997" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>242 SOUTH RANKIN ST, Unit 2</td><td>SOUTH RANKIN ST</td><td>2</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.50214&mlon=-81.35984#map=18/44.50214/-81.35984" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Updated Addresses <span class="badge badge-yellow">0</span>
+      <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (AddrNum)</li><li>Street name (RoadName)</li><li>Unit (Unit)</li><li>Full address (CivicAddress)</li><li>Coordinates (latitude, longitude)</li><li>Municipality</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>ARN</li></ul>
+      
+    </span>
+  </span></h2>
+    
+    <p class="empty">No addresses updated.</p>
+  </div>
+
+  <div class="section">
+    <h2>Renumbered Addresses <span class="badge badge-accent">0</span></h2>
+    
+    <p class="empty">No addresses renumbered.</p>
+  </div>
+
+  <div class="section">
+    <h2>Street Renames <span class="badge badge-purple">0</span></h2>
+    <p class="empty">No street renames.</p>
+  </div>
+
+  
+
+  
+
+  
+  <div class="section">
+    <h2>Boundary Changes <span class="badge badge-teal">0</span></h2>
+    <p class="empty">No ward or municipality reassignments.</p>
+  </div>
+  
+
+  <div class="section">
+    <h2>Location Adjustments <span class="badge" style="background: var(--surface2); color: var(--text-dim)">0</span></h2>
+    
+    <p class="empty">No location adjustments.</p>
+  </div>
+
+  <div class="generated-at">Data pulled Oct 29, 2026 at 12:06 PM · source licence: BGDISC Open Data Licence</div>
+
+  <script>
+    function sortTable(tbodyId, col) {
+      const tbody = document.getElementById(tbodyId);
+      if (!tbody) return;
+      const rows = Array.from(tbody.rows);
+      const dir = tbody.dataset.sortDir === 'asc' ? 'desc' : 'asc';
+      tbody.dataset.sortDir = dir;
+      rows.sort((a, b) => {
+        const av = a.cells[col]?.textContent.trim() || '';
+        const bv = b.cells[col]?.textContent.trim() || '';
+        const an = parseFloat(av), bn = parseFloat(bv);
+        if (!isNaN(an) && !isNaN(bn)) return dir === 'asc' ? an - bn : bn - an;
+        return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+      });
+      rows.forEach(r => tbody.appendChild(r));
+    }
+  </script>
+</body>
+
+</html>
