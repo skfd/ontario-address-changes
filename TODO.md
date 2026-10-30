@@ -1128,6 +1128,38 @@ one-time "modified" spike, so batch them:
   Four cities need nothing new (hamilton, haliburton, huron, pickering: the rule picks the
   stored row everywhere). lambton has an older, separate problem: its store does not replay
   from its June pull at all (56,897 pairs differ at snapshot 1) - not looked into.
+- [ ] **lambton replay: cause found 2026-10-30, fix is a design call.** `rebuild_from_pulls.py`
+  hands today's `datasets/lambton.toml` to `normalize.canonical` for every raw day, but the
+  publisher renamed every column on 2026-09-15 (`STNUM/STNAME/ADDRESS` -> `Add_Number/St_Name/
+  full_add`, commit e07858647). On the June pulls (`data/lambton/lambton-2026-06-10.geojson`,
+  06-24 byte-identical) none of today's names exist, so number/street/full are null on all
+  56,903 features and the synth key degrades to geometry only: 56,897 missing + 56,897 extra,
+  zero keys in common. Replayed under the pre-switch map (`a3370d580`) the same pull gives
+  0/0 against snapshot 1, and snapshot 16 (06-25, from the vault) also 0/0; snapshot 50
+  replays 0/0 under today's map. So snapshots 1-20 fail, 21+ are fine. **The live store is
+  right** (56,158 keys survive the switch, 739 gone, 824 new, as the TOML comment and the
+  six 09-15 flags say); its 6 June duplicate keys are identical-hash pairs, so the 10-24
+  tie-break picks the stored row and lambton needs no rebuild today. The item only blocks
+  a future one - and the same shape is coming for wps (NENA re-point, kept history next
+  time) and elgin 2027. Dead ends: `--stored-day` cannot bracket snapshot 1 (no raw pull
+  before it) and would re-inject canonical columns under today's names; translating June
+  pulls into the new schema cannot reproduce any June payload_hash (`full_add` embeds
+  Inc_Muni, props roster differs) and would erase the filed 09-15 technical event.
+  Options, pick one when a lambton rebuild is actually needed:
+  1. **Era-aware replay in the tool** (recommended): `--map-rev REV --map-until FILENAME`
+     (repeatable); for snapshots up to that filename build the dataset via
+     `recanonicalize.old_dataset` (already imported there) and pass the swapped fields /
+     synth / ignore / classes per snapshot. Key basis is the same in both eras, so no
+     re-key, no history rewrite, ~30 lines. Needs cold vault pulls for 06-25 and every
+     post-switch non-skipped day (`--dump-dir`), and `--tiebreak` (or a widened excuse)
+     because snapshot 16 replays as a skip - its stored "change" was a hashing artifact.
+  2. **Copy snapshots/addresses <= 20 verbatim, replay from 21.** Fewest pulls, no re-key;
+     but a future rule that must reach June rows (number_from_full, a synth change) can't be
+     replayed into copied rows - they'd need `recanonicalize.py` separately.
+  3. **Era-aware TOML** (`[fields]` + `[fields.until."2026-09-14"]`, consumed by registry ->
+     normalize with a date). Fixes replay, `recanonicalize --verify` and the wps/elgin cases
+     in one place, but touches the daily importer and every tool across 77 datasets. Only
+     if publisher renames become routine.
 - [x] **Stream the GeoJSON import (found 2026-10-16).** `fetch.load_features` does one
   `json.load` of the whole file — up to ~590 MB for york/peel/toronto — and
   `db.import_snapshot` then iterates `features` once. Switch to `ijson.items(f,
