@@ -15,8 +15,8 @@ provider = "County of Middlesex"
 # MapServer exposes no editingInfo, so liveness is not shown yet; the 90-day source-stale
 # alert will tell. Same fabric: 99.0% of the old (number, street, unit) tuples reappear,
 # but only 79.2% of identity keys, because 5,849 points were re-placed by more than 1.1 m
-# (median 0 m, p90 8.4 m) - the toronto jitter shape, a location_min_move_m candidate once
-# this layer has a second distinct snapshot. With nothing but a baseline in the old store,
+# (median 0 m, p90 8.4 m) - export-vs-live, one-off: five distinct pulls since (to 2026-10-30)
+# moved nothing, so no location_min_move_m (it would be inert anyway, coords are in the key). With nothing but a baseline in the old store,
 # it was re-baselined from this layer (old store backed up at
 # C:\Users\kk\ontario-db-backup-2026-10-16-middlesex\).
 #

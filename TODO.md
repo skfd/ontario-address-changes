@@ -367,15 +367,29 @@ the order to work them):
     `STR_FULL`, no unit column - parse from `ADDR_FULL`, `unit_from_full` precedent;
     GlobalID shared with the current layer, a key candidate). Ask gis@haltonhills.ca to
     refresh the (od) item meanwhile.
+    **Re-probed 2026-10-30 (a week early): neither layer moved.** Candidate still 21,902 /
+    max OBJECTID 888,739; AGOL item still 21,900, its editingInfo stamp 2025-11-28 (an
+    overwrite, before tracking began). Draft map if it ever moves: number=STR_NUM,
+    street=STR_FULL, unit parsed from ADDR_FULL, full=ADDR_FULL, classes status=ADDR_STAT /
+    boundary=ADDR_COMM, ignore Latitude/Longitude. Next look: **2026-12-01** with cobourg.
   - [ ] **cobourg: stale copy of a slow town.** AGOL bulk-republished 2026-05-08 (7,837); its
     source `https://geo.cobourg.ca/server/rest/services/Operations/FireQuickLookup/MapServer/10`
     has 7,846, ~2 new points a month. Re-point there if AGOL hasn't moved by **2026-12-01**
     (ignore CREATED_DATE/LAST_EDITED_DATE; STATUS is a class candidate). Not the editable
     Operations/Property/FeatureServer/30 (anonymous edits open; 9,999 rows incl. 1,399 more units).
+    **AGOL moved 2026-10-27** (found 10-30): bulk republish (all three editingInfo stamps
+    equal, same signature as 05-08, so a ~5.5-month cadence), now 7,846 = the source. The
+    store took it cleanly as snapshot 25: 11 added, 1 modified, 2 gone, 7,834 of 7,837 synth
+    keys survived the OBJECTID re-mint; new rows are subdivision growth (61-161 Kerr St E,
+    737 New Amherst Blvd). The 12-01 trigger no longer applies; what is left is an owner
+    call on whether a semi-annual republish is good enough or the daily source is worth a
+    re-point (gated city, so no public cost either way). Leave it unless the cadence slips.
   - [ ] **amherstburg: unknown, likely batch-fed.** Its own edit layer; `Type` tags show
     monthly loads Sep 2024-Feb 2025, nothing tagged 2026; no alternative anywhere (Essex has
     no points). Watch to **2026-12-31**, then ask building@amherstburg.ca whether it still
-    gets batches.
+    gets batches. Re-probed 2026-10-30: still 10,925, Type tags unchanged (newest Feb 2025),
+    no editingInfo and no date-typed field, so liveness cannot be shown; date stands.
+    north-bay re-read the same day: data stamp still 2023-04-24, frozen, 1 distinct pull.
 
 The other six August onboards (amherstburg, cobourg, halton-hills, middlesex, norfolk,
 west-parry-sound) cannot be tuned yet — none has published a second distinct snapshot.
@@ -437,8 +451,12 @@ are the ones that change something here. Counts and dates probed live 2026-10-16
         (no second dataset). An import does: noted in address-importer-friend
         `future-work/multi-city/onboarding-queue.md` (parked section) so a middlesex import
         takes its units from layer 0.
-  - [ ] **location_min_move_m** once a second distinct snapshot exists: the re-placement
+  - [x] **location_min_move_m** once a second distinct snapshot exists: the re-placement
         shape (median 0 m, p90 8.4 m) looks like toronto's jitter.
+        **No floor, closed 2026-10-30.** Five distinct snapshots since the re-baseline (34,299
+        -> 34,307, eight new civic addresses, zero retirements, zero modifications); over all
+        34,299 persisted keys the move distribution is 0 m everywhere. The 8.4 m p90 was
+        export-vs-live, one-off. The floor would be inert anyway (coords in the key).
 - [x] **elgin's tracked layer has not moved since 2026-06-12** (30 identical pulls,
       21,785 rows, `Public/MapServer/1` "E911", no lastEditDate). The county now publishes
       `https://services6.arcgis.com/TCQ78XR5HqDZ1SDc/arcgis/rest/services/Elgin_Civic_Numbers_2026/FeatureServer/0`
