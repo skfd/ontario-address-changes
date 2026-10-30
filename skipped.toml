@@ -13,39 +13,39 @@
 [[skipped]]
 name = "City of Belleville"
 status = "Dead endpoint"
-detail = "gis.city.belleville.on.ca services root is empty (and its TLS cert is broken). Re-probed 2026-08-20: the city's new AGOL org (BellevilleGIS, ~60 public services) has no address layer, and Hastings County's CivicAddresses excludes the separated city."
+detail = "gis.city.belleville.on.ca services root is empty (and its TLS cert is broken). Re-probed 2026-08-20 and 2026-10-30: the city's AGOL org (BellevilleGIS, 71 public services, hub 70 datasets) has no address layer - its Parcels carry ROLL/ParcelID only - and Hastings County's CivicAddresses excludes the separated city (no MUNICIPALI code for Belleville)."
 
 [[skipped]]
 name = "Northumberland County"
 status = "No address layer"
-detail = "Re-probed 2026-08-20: the server is back (moved /arcgis to /server) but the full service sweep shows roads/parks/wards only - no address points. Cobourg (recovered separately) now partially covers the county."
+detail = "Re-probed 2026-08-20 and 2026-10-30: the server is back (moved /arcgis to /server, 46 services) and the AGOL org has 199 more, but no address points anywhere - the only civic-address layer is 421 road polylines from 2019, and Parcel_Fabric_2025 (6,437 polygons with STREET_NUM/STREET_NAM) is one lower tier's fabric, a weak fallback at best. Cobourg (tracked, gated) covers part of the county."
 
 [[skipped]]
 name = "Lanark County"
 status = "Not found"
-detail = "Re-hunted 2026-08-20: the public map is a CommunityPAL MapGuide viewer by vendor CGIS Spatial Solutions - no ArcGIS REST, no AGOL content, no downloads. Needs an inquiry to the county or the vendor (Timmins is on the same stack; one ask could unlock both)."
+detail = "Re-probed 2026-10-30: the CommunityPAL MapGuide viewer still exposes nothing, but CGIS's newer SLIMS Viewer (cgis.com/publicmaps/?c=LanarkCounty) serves a county-wide Civic Addresses dataset (id 83040, ~36k points keyed by roll number, created 2026-05, tiles rebuilt daily) as public MVT tiles and geobuf/flatgeobuf exports. Attributes are roll number + street number only (the street name sits on the Assessment Parcels dataset, joinable by roll), the geojson export is broken server-side, and the only terms are the CGIS disclaimer. Needs an MVT/geobuf access type, the parcel join and a licence ask before onboarding; Timmins is on the same stack, so one piece of work covers both."
 
 [[skipped]]
 name = "Essex County"
 status = "No address layer"
-detail = "Re-hunted 2026-08-20: the county's real open-data hub was found (county + 7 municipalities) but holds centerlines/bridges/LiDAR - no address points in the full catalogue. Amherstburg (recovered separately) and Tecumseh (found by the ontario-osm-data-sources sweep, tracked from 2026-10-16) are the members with points."
+detail = "Re-probed 2026-10-30: still no county-wide points (hub 120 datasets, cwserver OpenData 5 services). The county AGOL org does hold a Kingsville layer, MESH_WFL1/FeatureServer/0 'KingAddress_Sep25' (10,270 points, CIVIC/HOUSE_NO/STREET, owner rpalmini_kingsville, last edited 2025-10-28, no licence) - a dated snapshot inside a staff working map, a lead for a vault-only onboarding or a Kingsville ask. Amherstburg, Tecumseh and Leamington are tracked; LaSalle, Lakeshore, Essex and Pelee have nothing."
 
 [[skipped]]
 name = "Timmins"
 status = "Not found"
-detail = "Re-hunted 2026-08-20: only a CommunityPAL MapGuide viewer by vendor CGIS Spatial Solutions (same stack as Lanark County) - no ArcGIS REST, no AGOL org. One vendor/city inquiry could unlock both."
+detail = "Re-probed 2026-10-30: the CommunityPAL viewer is unchanged, but CGIS's SLIMS Viewer (cgis.com/publicmaps/?c=Timmins) added a Civic Addresses dataset on 2026-09-23 (id 98640, ~20-30k points with duplicate roll keys, tiles rebuilt daily) served as public MVT tiles. Attributes are roll number + street number only (the full address string is on the Assessment Parcels dataset), the geojson export is broken server-side, terms are the CGIS disclaimer. Same stack as Lanark County - one MVT/geobuf access type and one vendor ask would cover both."
 
 [[skipped]]
 name = "Owen Sound"
 status = "No address layer"
-detail = "Re-hunted 2026-08-20: the city's new public GIS (PUBLIC_GIS_WFL1, 15 layers) has zoning/parks/transit/parcels but no address points; weak fallback is address attributes on the Parcels polygons."
+detail = "Re-probed 2026-10-30: the city org (48 services) still has no address points; Parcels (8,072 polygons, 2024-02) carries address1-3 as a weak fallback. Grey County's tracked parcel-label layer already holds ~6,770 Owen Sound rows (city spelt five ways), so the city is covered from the county side."
 
 [[skipped]]
 name = "Kenora"
 status = "No address layer"
-detail = "Re-hunted 2026-08-20: city AGOL org is live (13 public services - zoning, roads, ownership) but publishes no address or parcel-address layer."
+detail = "Re-probed 2026-08-20 and 2026-10-30: city AGOL org is live (13 public services - zoning, roads, ownership, trails) but publishes no address or parcel-address layer."
 
 [[skipped]]
 name = "City of Brockville"
 status = "Empty / secured"
-detail = "Found by the ontario-osm-data-sources sweep (8,796 civic address points, last updated 2017), but probed 2026-10-16 the PSDCitywide FeatureServer, MapServer and folder all answer 499 Token Required; the public services root lists only CloudPermit and Utilities."
+detail = "Found by the ontario-osm-data-sources sweep (8,796 civic address points, last updated 2017). Probed 2026-10-16 and 2026-10-30: the PSDCitywide services, the PublicOnly folder and the layer count all answer 499 Token Required, and the city AGOL org (37 services) has roads only. The tracked United Counties of Leeds and Grenville layer carries 8,737 City of Brockville points (MUN = 'CITY OF BROCKVILLE', edited 2026-10-06, OGL), so the city is already covered from the county side."

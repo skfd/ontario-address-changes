@@ -309,7 +309,10 @@ the order to work them):
 | ~~9~~ | ~~member layers~~ | **done 2026-10-16**: ajax, whitby, pickering, oshawa, newmarket, vaughan (+ vaughan-ng911), mississauga, caledon, welland, niagara-falls-city, waterloo-region tracked; Orillia/New Tecumseth are degraded copies of simcoe, not added | cities publish fresher data than the roll-up |
 | 10 | Oxford, North Bay, Haliburton, Sault Ste. Marie, City of Peterborough | **tracked 2026-10-16, publish_reports = false**; licence asks still open | the gate holds publishing only now |
 | ~~11~~ | ~~Leamington (Essex)~~ | **done 2026-10-23**: tracked (11,423 baseline), key GlobalID, publish_reports = false (no licence on the item, not on the county Hub); layer last edited 2025-07-08, so watch that it moves; unit parse queued in §1 | — |
-| — | Belleville, Northumberland, Lanark, Timmins, Owen Sound, Kenora | still no machine-readable layer | quarterly re-probe only |
+| — | Belleville, Northumberland, Kenora | still no machine-readable layer (re-probed 2026-10-30, unchanged) | quarterly re-probe, next ~2027-01-30 |
+| 12 | Lanark County, Timmins | **lead 2026-10-30**: CGIS's new SLIMS Viewer serves both as public MVT tiles + geobuf (roll number + street number only; street name on the Assessment Parcels dataset) | needs an MVT/geobuf access type, a roll join and a vendor/licence ask - one piece of work for both, see §2 item below |
+| 13 | Kingsville (Essex) | **lead 2026-10-30**: `MESH_WFL1/FeatureServer/0` in the county org, 10,270 points, no licence, last edited 2025-10-28 | vault-only onboarding or a Kingsville ask; dated snapshot, not a feed |
+| ~~—~~ | ~~Owen Sound, Brockville~~ | **covered 2026-10-30**: grey holds ~6,770 Owen Sound rows, leeds-grenville 8,737 Brockville rows | — |
 
 **2026-10-16 sweep onboarding, follow-ups** (24 datasets added, dufferin re-pointed to its address layer, LICENSING.md has the table):
 - [x] Licence reads (2026-10-16, evidence in each TOML + LICENSING.md): waterloo-region is
@@ -538,7 +541,8 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
   live, verified address layer again** (every URL below probed with a field-list read
   and a returnCountOnly count). Each recovered one is now an onboarding decision
   (licence + city-tune pass), not a search problem:
-  - [ ] Belleville — **still nothing.** Old server's services root is empty (and its
+  - [ ] Belleville — **still nothing** (re-probed 2026-10-30: 71 services, no address layer,
+        Parcels carry ROLL/ParcelID only). Old server's services root is empty (and its
         TLS cert is broken); the city now has an AGOL org (`BellevilleGIS`, hub
         `opendata-bellevillegis.hub.arcgis.com`, ~60 public services) but no address
         layer in it. Hastings County's `CivicAddresses` does NOT cover Belleville
@@ -557,7 +561,9 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
         Licence text not exposed via REST.
   - [ ] Northumberland County — server back (`/arcgis` moved to `/server`) but the full
         service sweep shows roads/parks/wards only — **no address layer.** (Cobourg
-        below now partially covers the county.)
+        below now partially covers the county.) Re-probed 2026-10-30: unchanged; the AGOL
+        org's `Parcel_Fabric_2025` (6,437 polygons, one lower tier, STREET_NUM/STREET_NAM)
+        is the only fallback and not worth it.
   - [x] Haldimand County (onboarded 2026-08-20) — **migrated to a new server**:
         `https://gis.haldimandcounty.ca/server/rest/services/Topo/AddressPoints/FeatureServer/0`
         (NG911AddressPoints), 26,602 rows, NG911-style parsed fields + unit + Status.
@@ -615,22 +621,48 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
         `https://gis.haliburtoncounty.ca/arcgis/rest/services/Public/SearchLayers_2/MapServer/4`
         ("Address", polygon, 33,980 rows, ARN/ADDNUM/STREET/TOWNSHIP). Usable only if
         centroids are acceptable (cf. windsor's parcel centroids — precedent exists).
-  - [ ] Lanark County — still nothing machine-readable: public map is a CommunityPAL
-        **MapGuide** viewer by vendor CGIS Spatial Solutions (`cgis.com/cpal?map=Lanark`),
-        no REST, no AGOL content. Needs an email to the county or the vendor.
-  - [ ] Timmins — same CGIS/MapGuide situation (`cgis.com/cpal?map=Timmins`); one
-        vendor inquiry could unlock both it and Lanark.
-  - [ ] Essex County — still nothing: the county hub (data-essexcounty.opendata.arcgis.com,
-        county + 7 munis) holds centerlines/bridges/LiDAR but no address points
-        (full DCAT grepped). Amherstburg above is the lone exception.
-  - [ ] Grey County — still nothing, and a new fact: maps.grey.ca is their Hub
+  - [ ] Lanark County — was nothing machine-readable (CommunityPAL MapGuide viewer, no REST).
+        **Lead 2026-10-30:** CGIS's newer SLIMS Viewer (`cgis.com/publicmaps/?c=LanarkCounty`)
+        has a county-wide "Civic Addresses" dataset 83040 (created 2026-05, updated 09-30,
+        tiles rebuilt daily; ~36k points, 15-digit roll keys) on public routes:
+        `cgis.com/api2/public/LanarkCounty/tiles/83040/{x}/{y}/{z}?t=<tileset ts>` (MVT) and
+        `.../geometry/83040.geobuf|.flatgeobuf?t=...`; `.geojson` 500s server-side. Attributes
+        are roll + street_number only - the street name is on "Assessment Parcels" 85360
+        (`location`, joinable by roll). Terms: the CGIS disclaimer, no open licence. See the
+        CGIS item below. Perth, Mississippi Mills and Smiths Falls have their own instances.
+  - [ ] Timmins — same stack. **Lead 2026-10-30:** SLIMS `?c=Timmins` added "Civic
+        Addresses" 98640 on 2026-09-23 (updated 10-26, tiles daily), ~20-30k points with
+        duplicate roll keys (one per roll+unit, likely), roll + street_number only; full
+        string on Assessment Parcels 98638. Same routes, same broken geojson, same terms.
+  - [ ] Essex County — still nothing county-wide (re-probed 2026-10-30: hub 120 datasets,
+        cwserver OpenData 5 services). Amherstburg, tecumseh and leamington are tracked.
+        **Lead 2026-10-30, Kingsville:** the county org's `MESH_WFL1/FeatureServer/0`
+        "KingAddress_Sep25" (item 72dcf35a…, owner rpalmini_kingsville, public): 10,270
+        points, CIVIC/HOUSE_NO/STREET, last edited 2025-10-28, no licence - a dated
+        snapshot inside a staff working map, so a vault-only onboarding (it would sit
+        frozen until the next drop) or an ask to Kingsville for the live layer. LaSalle,
+        Lakeshore, Essex and Pelee: nothing.
+  - [x] Grey County (tracked 2026-10-16, gated) — was: still nothing, and a new fact: maps.grey.ca is their Hub
         (catalogue enumerated — no addresses); geo.grey.ca / restgeo.grey.ca remain
         down (522/timeout), a persistent outage rather than a transient one.
-  - [ ] Owen Sound — still nothing: new public GIS backed by `PUBLIC_GIS_WFL1`
-        (15 layers, no addresses); weak fallback is address attributes on the
-        Parcels polygons.
+  - [x] Owen Sound — still nothing of its own (re-probed 2026-10-30: 48 services, Parcels
+        address1-3 the only fallback), but **covered since 2026-10-16 by grey**: the tracked
+        parcel-label layer holds ~6,770 Owen Sound rows (city spelt five ways in `city`).
   - [ ] Kenora — still nothing: city org live (13 public services), no address or
-        parcel-address layer.
+        parcel-address layer. Re-probed 2026-10-30: unchanged.
+  - [x] Brockville — PSDCitywide, the PublicOnly folder and the count all 499 Token Required
+        (2026-10-16, 2026-10-30), city org roads only; but **covered by leeds-grenville**:
+        8,737 rows with MUN = 'CITY OF BROCKVILLE' (edited 2026-10-06, OGL), matching the
+        PSD layer's 8,796.
+  - [ ] **CGIS SLIMS as a source type (Lanark + Timmins, found 2026-10-30).** Three
+        decisions before either is trackable: (1) a new `access` kind in address-vault for
+        MVT-tile sweeps or the geobuf/flatgeobuf export (the export is one file per
+        dataset, simplest; the `t=` tileset stamp changes daily); (2) the street name - join
+        Civic Addresses to Assessment Parcels `location` by roll number, or ask CGIS /
+        the county for the records route; (3) licence - only the CGIS disclaimer exists,
+        so an ask to Lanark County and Timmins (the data is theirs, CGIS hosts it) before
+        anything publishes; vault-only is fine meanwhile. The probe scripts and raw
+        results are in `%TEMP%eprobe_2026-10-30\` (not kept).
 - [ ] Special cases — need a decision, not a search:
   - [x] **Norfolk County** (onboarded 2026-08-20) — resolved itself 2026-08-20: the county published an OPEN
         sibling of the secured layer.
