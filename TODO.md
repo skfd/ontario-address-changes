@@ -472,16 +472,19 @@ are the ones that change something here. Counts and dates probed live 2026-10-16
         the county publishes next year's as a new service and freezes this one, the 90-day
         source-stale issue is the signal, and the fix is another re-point (this time with
         history, so a flagged switch day as for lambton 2026-09-15, not a fresh baseline).
-- [ ] **Essex County is not "No address layer" any more.** Tecumseh publishes
+- [x] **Essex County is not "No address layer" any more.** (Ticked 2026-10-30: tecumseh tracked
+      2026-10-16, leamington 2026-10-23, skipped.toml entry rewritten; queue rows 4 and 11.) Tecumseh publishes
       `https://gisweb.tecumseh.ca/arcgis/rest/services/OpenDataMaps/OpenDataMAP_InfraZonePropBound_Layers/MapServer/33`,
       9,860 points (number, street, suffix), catalogued under "Open Government Licence - The
       Corporation of the County of Essex". A new dataset; fix the skipped.toml entry either way.
-- [ ] **Grey County has an address fabric again**, on `gis.grey.ca/server`:
+- [x] **Grey County has an address fabric again** (ticked 2026-10-30: grey, blue-mountains and
+      grey-assigned-addresses tracked 2026-10-16, gated; the licence ask is the open half, queue row 5), on `gis.grey.ca/server`:
       `Public/Service_ParcelLabels/MapServer/3` (51,458 county-wide addresses on parcel
       polygons, centroiding needed) and `.../MapServer/2` (10,509 Blue Mountains points). No
       licence published, and it answered 403 from here on 2026-10-16. Update skipped.toml
       from "No address layer" to the licence gate.
-- [ ] **Member layers under open licences, in regions we track:** Ajax (38,381, Ajax Open
+- [x] **Member layers under open licences, in regions we track** (ticked 2026-10-30: all tracked
+      2026-10-16 except Orillia / New Tecumseth, degraded copies of simcoe; queue row 9)**:** Ajax (38,381, Ajax Open
       Data Licence v1.0), Whitby (49,090, Whitby OGL) and Pickering (42,743, Pickering Open
       Data License) inside durham, which is yellow-review on the Region's own licence;
       Newmarket (34,923) inside york; Welland (22,461, OGL Welland) and Niagara Falls city
