@@ -1,0 +1,46 @@
+slug = "kingsville"
+provider = "Town of Kingsville"
+# Found 2026-10-30 by the quarterly re-probe of skipped.toml (Essex County): the layer sits in
+# the County of Essex AGOL org under a Kingsville staff account (owner rpalmini_kingsville, item
+# 72dcf35a55104717ba950e75209eedfb "MESH_WFL1", a working map of streetlights / streets /
+# sidewalks / parcels), not on the county Hub - the leamington shape. Layer 0 is named
+# "KingAddress_Sep25": 10,270 points. Item created 2025-10-28 and all three editingInfo stamps
+# equal that same minute, so it is one upload of a September-2025 export with no edits since.
+# Expect it to sit frozen until the next drop (if any); the 90-day source-stale alert will say.
+# Companion Kingsville layer AddressPublic/0 (15,521 assessment polygons, 2025-06-11) has empty
+# attribute columns in samples - not an alternative. Extent lon -82.83..-82.64, lat 42.00..42.18 =
+# Kingsville only; no overlap with any tracked dataset.
+data_url = "https://services6.arcgis.com/baycHE2iKJaT7Upn/arcgis/rest/services/MESH_WFL1/FeatureServer/0"
+access = "arcgis"
+format = "geojson"
+# Native layer SR is Web Mercator; the geojson export arrives in WGS84, so this guards a future
+# export-CRS switch (the leamington / tecumseh precedent).
+source_crs = "EPSG:3857"
+# Read 2026-10-30: item licenseInfo and accessInformation empty, no layer copyrightText. The
+# County of Essex OGL that carries tecumseh is granted through the county Hub, and this item is
+# not on the Hub (and is a staff working map, not an open-data item). Ask Kingsville GIS for the
+# live layer and its terms; nothing publishes until then.
+license_name = "None published (read 2026-10-30)"
+osm_compatible = "unknown-review"
+publish_reports = false
+
+[identity]
+# FID is a shapefile export id (1..10,270, dense) - re-minted on any republish, so not a key.
+# No GlobalID. Synthesize from number + street + 5 dp point: measured 2026-10-30 on all 10,270
+# rows, one 5 dp point is shared, so at most one collision. Without geometry 135 (number,
+# street) groups hold 862 rows, almost all the 916 blank-number points (unaddressed lots on a
+# named street, "  CENTENNIAL CRES") - geometry is what keeps them apart.
+key_field = ""
+synth_fields = ["number", "street"]
+
+[fields]                                        # canonical name -> source property
+number = "HOUSE_NO"                             # string; 916 blank (single space, normalize drops it), 2,128 distinct
+street = "STREET"                               # abbreviated types ("CENTENNIAL CRES", "COUNTY RD 31"); 14 blank
+full   = "CIVIC"                                # "<number> <street>" on 10,235 rows; 30 blank
+# CIVIC disagrees with HOUSE_NO + STREET on 35 rows (2026-10-30): a handful where CIVIC holds the
+# address the columns lack ("1650 REGENT ST" under HOUSE_NO blank / STREET "N/S REGENT ST"), a
+# few where it names another road ("1579 ALBUNA TOWNLINE" vs STREET "COUNTY RD 31"), and 10
+# range addresses ("1555-1557 COUNTY RD 34", "16-20 DIMAR DR" - semis, not units). No unit
+# column and no unit tokens in CIVIC, so nothing to parse. No ignore_fields day one: no history.
+
+# [classes] deferred: four fields, no status or municipality column.

@@ -662,7 +662,7 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
         the county for the records route; (3) licence - only the CGIS disclaimer exists,
         so an ask to Lanark County and Timmins (the data is theirs, CGIS hosts it) before
         anything publishes; vault-only is fine meanwhile. The probe scripts and raw
-        results are in `%TEMP%eprobe_2026-10-30\` (not kept).
+        results are in `%TEMP%\reprobe_2026-10-30\` for now (temporary, not committed).
 - [ ] Special cases — need a decision, not a search:
   - [x] **Norfolk County** (onboarded 2026-08-20) — resolved itself 2026-08-20: the county published an OPEN
         sibling of the secured layer.

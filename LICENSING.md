@@ -206,9 +206,19 @@ to the county Hub, so the County OGL that carries tecumseh does not obviously re
 |---|---|---|
 | leamington | unknown-review · **publish_reports = false** | (none published: item licenseInfo, accessInformation and layer copyrightText all empty, read 2026-10-23) - ask Leamington / County of Essex GIS whether the County OGL covers it |
 
-## Counts (2026-10-23, after Leamington; tallied from the TOMLs)
+## 2026-10-30 — Kingsville
+
+Found by the quarterly re-probe of skipped.toml (Essex County): the layer is in the County of Essex
+AGOL org under a Kingsville staff account, inside a staff working map ("MESH_WFL1"), not on the
+county Hub - the leamington shape again, so the County OGL does not obviously reach it.
+
+| dataset | tier | licence |
+|---|---|---|
+| kingsville | unknown-review · **publish_reports = false** | (none published: item licenseInfo and accessInformation empty, no layer copyrightText, read 2026-10-30) - ask Kingsville GIS for the live layer and its terms |
+
+## Counts (2026-10-30, after Kingsville; tallied from the TOMLs)
 
 green 21 (14 `green-lwg`, 6 `green-self`, 1 `green-cc0`) · OGL-family awaiting the LWG 13 ·
-yellow-review 10 · CC-BY waiver 1 · restrictive 12 · unknown 21 — of **78 tracked datasets**.
-20 are gated off the site (`publish_reports = false`): sdg, renfrew, peterborough-county,
-cobourg, the 15 from the 2026-10-16 sweep listed above, and leamington.
+yellow-review 10 · CC-BY waiver 1 · restrictive 12 · unknown 22 — of **79 tracked datasets**.
+21 are gated off the site (`publish_reports = false`): sdg, renfrew, peterborough-county,
+cobourg, the 15 from the 2026-10-16 sweep listed above, leamington and kingsville.
