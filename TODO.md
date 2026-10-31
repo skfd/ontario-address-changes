@@ -1,6 +1,6 @@
 # Operator TODO — ontario-address-changes
 
-Last updated: 2026-10-16. Tasks for the human operator. Field-coverage numbers come
+Last updated: 2026-10-31. Tasks for the human operator. Field-coverage numbers come
 from an audit of all 42 tracked cities (latest snapshot in each city DB; the 11
 datasets onboarded 2026-08-20 are not in the appendix yet).
 
@@ -310,8 +310,8 @@ the order to work them):
 | 10 | Oxford, North Bay, Haliburton, Sault Ste. Marie, City of Peterborough | **tracked 2026-10-16, publish_reports = false**; licence asks still open | the gate holds publishing only now |
 | ~~11~~ | ~~Leamington (Essex)~~ | **done 2026-10-23**: tracked (11,423 baseline), key GlobalID, publish_reports = false (no licence on the item, not on the county Hub); layer last edited 2025-07-08, so watch that it moves; unit parse queued in §1 | — |
 | — | Belleville, Northumberland, Kenora | still no machine-readable layer (re-probed 2026-10-30, unchanged) | quarterly re-probe, next ~2027-01-30 |
-| 12 | Lanark County, Timmins | **lead 2026-10-30**: CGIS's new SLIMS Viewer serves both as public MVT tiles + geobuf (roll number + street number only; street name on the Assessment Parcels dataset) | needs an MVT/geobuf access type, a roll join and a vendor/licence ask - one piece of work for both, see §2 item below |
-| 13 | Kingsville (Essex) | **lead 2026-10-30**: `MESH_WFL1/FeatureServer/0` in the county org, 10,270 points, no licence, last edited 2025-10-28 | vault-only onboarding or a Kingsville ask; dated snapshot, not a feed |
+| ~~12~~ | ~~Lanark County, Timmins~~ | **done 2026-10-31**: `slims` access kind built in address-vault (geobuf export + parcel join by roll), lanark 37,215 and timmins 29,532 baselined, gated; licence ask to Lanark County / Timmins still open | — |
+| ~~13~~ | ~~Kingsville (Essex)~~ | **done 2026-10-30**: tracked vault-only (10,269 rows, gated) from `MESH_WFL1/FeatureServer/0`, one Sep-2025 upload; ask drafted 2026-10-31 (requests@kingsville.ca) | — |
 | ~~—~~ | ~~Owen Sound, Brockville~~ | **covered 2026-10-30**: grey holds ~6,770 Owen Sound rows, leeds-grenville 8,737 Brockville rows | — |
 
 **2026-10-16 sweep onboarding, follow-ups** (24 datasets added, dufferin re-pointed to its address layer, LICENSING.md has the table):
@@ -629,7 +629,7 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
         `https://gis.haliburtoncounty.ca/arcgis/rest/services/Public/SearchLayers_2/MapServer/4`
         ("Address", polygon, 33,980 rows, ARN/ADDNUM/STREET/TOWNSHIP). Usable only if
         centroids are acceptable (cf. windsor's parcel centroids — precedent exists).
-  - [ ] Lanark County — was nothing machine-readable (CommunityPAL MapGuide viewer, no REST).
+  - [x] Lanark County (tracked 2026-10-31, gated) — was nothing machine-readable (CommunityPAL MapGuide viewer, no REST).
         **Lead 2026-10-30:** CGIS's newer SLIMS Viewer (`cgis.com/publicmaps/?c=LanarkCounty`)
         has a county-wide "Civic Addresses" dataset 83040 (created 2026-05, updated 09-30,
         tiles rebuilt daily; ~36k points, 15-digit roll keys) on public routes:
@@ -638,13 +638,13 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
         are roll + street_number only - the street name is on "Assessment Parcels" 85360
         (`location`, joinable by roll). Terms: the CGIS disclaimer, no open licence. See the
         CGIS item below. Perth, Mississippi Mills and Smiths Falls have their own instances.
-  - [ ] Timmins — same stack. **Lead 2026-10-30:** SLIMS `?c=Timmins` added "Civic
+  - [x] Timmins (tracked 2026-10-31, gated) — same stack. **Lead 2026-10-30:** SLIMS `?c=Timmins` added "Civic
         Addresses" 98640 on 2026-09-23 (updated 10-26, tiles daily), ~20-30k points with
         duplicate roll keys (one per roll+unit, likely), roll + street_number only; full
         string on Assessment Parcels 98638. Same routes, same broken geojson, same terms.
   - [ ] Essex County — still nothing county-wide (re-probed 2026-10-30: hub 120 datasets,
         cwserver OpenData 5 services). Amherstburg, tecumseh and leamington are tracked.
-        **Lead 2026-10-30, Kingsville:** the county org's `MESH_WFL1/FeatureServer/0`
+        **Kingsville tracked 2026-10-30, gated (10,269 rows); ask drafted 10-31.** Was: the county org's `MESH_WFL1/FeatureServer/0`
         "KingAddress_Sep25" (item 72dcf35a…, owner rpalmini_kingsville, public): 10,270
         points, CIVIC/HOUSE_NO/STREET, last edited 2025-10-28, no licence - a dated
         snapshot inside a staff working map, so a vault-only onboarding (it would sit
@@ -662,7 +662,20 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
         (2026-10-16, 2026-10-30), city org roads only; but **covered by leeds-grenville**:
         8,737 rows with MUN = 'CITY OF BROCKVILLE' (edited 2026-10-06, OGL), matching the
         PSD layer's 8,796.
-  - [ ] **CGIS SLIMS as a source type (Lanark + Timmins, found 2026-10-30).** Three
+  - [x] **CGIS SLIMS as a source type (Lanark + Timmins, found 2026-10-30).** **Built 2026-10-31**
+        (owner's call): address-vault `fetch/slims.py` downloads the civic and parcel `.geobuf`
+        exports (work without `t=`; `.flatgeobuf` 500s on parcels, `.geojson` everywhere), joins
+        parcel `location` to civic rows by roll, explodes each roll's MultiPoint, writes WGS84
+        geojson - so the archived pull is a derived product, said in the TOMLs. `data_url` grammar
+        `.../geometry/<civicId>.geobuf?join=<parcelId>`; dep `geobuf` (optional extra `slims`),
+        decoder applies the spec precision default the CGIS header omits. DegradedPull below a 50%
+        join rate. Join: lanark 100% of 36,153 rolls; timmins 86.3% (2,703 parcels publish no
+        location). Baselines lanark 37,215 (790 rolls carry 2-20 points), timmins 29,532 (7,358
+        points have no number; one roll has 123 points). Field map number = street_number, full =
+        location, `street_from_full`; key synth number + roll + geometry (location kept out of the
+        basis so a short parcels export shows as a held mass change, not a re-key). Only the
+        2% feature-count flag guards truncation (no count endpoint). Open: the licence ask to
+        Lanark County and Timmins (CGIS hosts, the data is theirs). Three decisions were
         decisions before either is trackable: (1) a new `access` kind in address-vault for
         MVT-tile sweeps or the geobuf/flatgeobuf export (the export is one file per
         dataset, simplest; the `t=` tileset stamp changes daily); (2) the street name - join
