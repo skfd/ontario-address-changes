@@ -7,7 +7,7 @@ from dataclasses import dataclass, field
 DATASETS_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "datasets")
 
 _REQUIRED = ("slug", "provider", "data_url", "access", "format")
-_VALID_ACCESS = ("arcgis", "static")
+_VALID_ACCESS = ("arcgis", "static", "slims")  # slims: CGIS SLIMS Viewer geobuf export (address-vault fetch/slims.py)
 _VALID_FORMAT = ("geojson", "shapefile")
 _VALID_CLASSES = ("place_name", "status", "boundary")
 

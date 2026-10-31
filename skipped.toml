@@ -21,19 +21,9 @@ status = "No address layer"
 detail = "Re-probed 2026-08-20 and 2026-10-30: the server is back (moved /arcgis to /server, 46 services) and the AGOL org has 199 more, but no address points anywhere - the only civic-address layer is 421 road polylines from 2019, and Parcel_Fabric_2025 (6,437 polygons with STREET_NUM/STREET_NAM) is one lower tier's fabric, a weak fallback at best. Cobourg (tracked, gated) covers part of the county."
 
 [[skipped]]
-name = "Lanark County"
-status = "Not found"
-detail = "Nothing trackable yet. Re-probed 2026-10-30: the CommunityPAL MapGuide viewer still exposes nothing, but CGIS's newer SLIMS Viewer (cgis.com/publicmaps/?c=LanarkCounty) serves a county-wide Civic Addresses dataset (id 83040, ~36k points keyed by roll number, created 2026-05, tiles rebuilt daily) as public MVT tiles and geobuf/flatgeobuf exports. Attributes are roll number + street number only (the street name sits on the Assessment Parcels dataset, joinable by roll), the geojson export is broken server-side, and the only terms are the CGIS disclaimer. Needs an MVT/geobuf access type, the parcel join and a licence ask before onboarding; Timmins is on the same stack, so one piece of work covers both."
-
-[[skipped]]
 name = "Essex County"
 status = "No address layer"
 detail = "Re-probed 2026-10-30: still no county-wide points (hub 120 datasets, cwserver OpenData 5 services). The county AGOL org does hold a Kingsville layer, MESH_WFL1/FeatureServer/0 'KingAddress_Sep25' (10,270 points, CIVIC/HOUSE_NO/STREET, owner rpalmini_kingsville, last edited 2025-10-28, no licence) - a dated snapshot inside a staff working map, tracked as kingsville from 2026-10-30, gated. Amherstburg, Tecumseh, Leamington and Kingsville are tracked; LaSalle, Lakeshore, Essex and Pelee have nothing."
-
-[[skipped]]
-name = "Timmins"
-status = "Not found"
-detail = "Nothing trackable yet. Re-probed 2026-10-30: the CommunityPAL viewer is unchanged, but CGIS's SLIMS Viewer (cgis.com/publicmaps/?c=Timmins) added a Civic Addresses dataset on 2026-09-23 (id 98640, ~20-30k points with duplicate roll keys, tiles rebuilt daily) served as public MVT tiles. Attributes are roll number + street number only (the full address string is on the Assessment Parcels dataset), the geojson export is broken server-side, terms are the CGIS disclaimer. Same stack as Lanark County - one MVT/geobuf access type and one vendor ask would cover both."
 
 [[skipped]]
 name = "Owen Sound"

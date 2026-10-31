@@ -21,10 +21,10 @@ of many datasets. Adding a city is a config file, not code.
 ## How it works
 
 - **Registry** — one TOML per dataset in `datasets/`. It names the source URL,
-  how to fetch it (`arcgis` REST query, or `static` file), the field map, and
+  how to fetch it (`arcgis` REST query, `static` file, or `slims` CGIS viewer export), the field map, and
   how to identify a record across snapshots.
 - **Fetch** (`src/fetch/`) — pulls the dataset's latest snapshot from
-  `address-vault` (`Vault().pull(slug)`), which owns the `arcgis`/`static`
+  `address-vault` (`Vault().pull(slug)`), which owns the `arcgis`/`static`/`slims`
   acquisition and reprojection to EPSG:4326 and keeps the dated history. Requires
   `ADDRESSVAULT_DIR` set to the vault folder.
 - **Normalize** (`src/normalize.py`) — applies the field map to a small canonical

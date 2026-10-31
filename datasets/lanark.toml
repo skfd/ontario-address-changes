@@ -1,0 +1,62 @@
+slug = "lanark"
+provider = "Lanark County"
+# Resolution path: skipped since 2026-08-20 ("CommunityPAL MapGuide viewer by CGIS, no REST, no
+# downloads"); the 2026-10-30 quarterly re-probe found CGIS's newer SLIMS Viewer
+# (cgis.com/publicmaps/?c=LanarkCounty) listing a county-wide "Civic Addresses" dataset 83040
+# (created 2026-05-12, config updated 2026-09-30, tiles rebuilt daily) whose whole-file geobuf
+# export sits on a public route. Tracked from 2026-10-31 through the vault's `slims` access
+# (address-vault fetch/slims.py). Dataset description, verbatim: "Civic addresses pulled from
+# the municipal tax system unless the municipality has not subscribed to that service. If not,
+# the civic address data comes from MPAC's assessment roll data." Perth, Mississippi Mills and
+# Smiths Falls run their own SLIMS instances with their own Civic Addresses datasets (not
+# tracked; this county layer covers 2026-10-31 extents lon -76.9..-75.7, lat 44.6..45.4).
+#
+# THE ARCHIVED PULL IS A DERIVED PRODUCT, NOT A RAW ONE. The civic dataset carries a 15-digit
+# roll number and street_number only; the street name is on "Assessment Parcels" 85360
+# (`location`, e.g. "2125 SCOTCH LINE"). The vault's fetcher joins the two by roll (`?join=` in
+# data_url), renames the export's column UUIDs to the viewer's column names, and explodes each
+# roll's MultiPoint into one Point per position (36,153 rolls -> 37,219 points on 2026-10-31;
+# 790 rolls carry 2..20 points). What the vault archives, and this store imports, is that join.
+# Join measured 2026-10-31: 36,153 of 36,153 rolls found a parcel location (100.0%).
+data_url = "https://www.cgis.com/api2/public/LanarkCounty/geometry/83040.geobuf?join=85360"
+access = "slims"
+format = "geojson"
+# The export is lon/lat (the geobuf header omits its precision; the fetcher applies the spec
+# default and refuses a pull that decodes outside +-180/90), so no source_crs.
+# Terms read 2026-10-31: the only text is CGIS's CommunityPAL disclaimer ("Users Should Confirm
+# Information ... The data represents an actual reproduction of data provided to CGIS, and is
+# collected from various sources and will change over time without notice"). No open licence,
+# no reuse grant; the data is the county's and CGIS hosts it. Ask Lanark County (and CGIS) before
+# anything publishes; vault-only meanwhile.
+license_name = "None published - CGIS viewer disclaimer only (read 2026-10-31)"
+osm_compatible = "unknown-review"
+publish_reports = false
+
+# No street column anywhere: street is derived from `location` minus the street number
+# (normalize.street_from_full, the lennox-addington precedent). Measured 2026-10-31 on the
+# 37,219 points: every one gets a street (location is "<number> <street>" on all of them;
+# 37,005 lead with street_number exactly, 214 carry a range the number is one end of:
+# "326-330 SALTER RD" under 326, "295 297 Burchill Rd" under 297). Street is not in the
+# identity basis, so a parcel-side rename never re-keys a row.
+street_from_full = true
+
+[identity]
+# No record key: the roll number is unique per export feature (36,153) but repeats across the
+# points a roll's MultiPoint explodes into, so it cannot key on its own. Synthesize from number
+# + roll + 5 dp point: 4 collisions on 37,219 points (exact duplicate positions on one roll).
+# `location` (and the street derived from it) is kept OUT of the basis on purpose: it comes
+# from the parcel join, the fragile half of the fetch - a short parcels export would otherwise
+# re-key every row it missed instead of showing as a mass full/street change the flag pipeline
+# holds. number + location + 5 dp would collide 64 times (2026-10-31).
+key_field = ""
+synth_fields = ["number"]
+synth_props = ["roll"]
+
+[fields]                                        # canonical name -> source property
+number = "street_number"                        # as published: "487", "112 - 112A", "267/269"; never blank
+full   = "location"                             # joined from Assessment Parcels by roll; "<number> <street>"
+# roll: the 15-digit assessment roll number (the export's __map_key__), in the synth basis above.
+# unit: none - the civic dataset has no unit column, and `location` carries none. No
+# ignore_fields day one: no history.
+
+# [classes] deferred: three fields, no status or municipality column.

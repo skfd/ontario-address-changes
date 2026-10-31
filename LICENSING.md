@@ -216,9 +216,19 @@ county Hub - the leamington shape again, so the County OGL does not obviously re
 |---|---|---|
 | kingsville | unknown-review · **publish_reports = false** | (none published: item licenseInfo and accessInformation empty, no layer copyrightText, read 2026-10-30) - ask Kingsville GIS for the live layer and its terms |
 
-## Counts (2026-10-30, after Kingsville; tallied from the TOMLs)
+## 2026-10-31 — Lanark County, Timmins
+
+Both served by CGIS's SLIMS Viewer (the vendor hosts, the municipality owns the data); the only
+terms anywhere are the CGIS CommunityPAL disclaimer. New `slims` access kind in address-vault.
+
+| dataset | tier | licence |
+|---|---|---|
+| lanark | unknown-review · **publish_reports = false** | (none published - CGIS viewer disclaimer only, read 2026-10-31) - ask Lanark County GIS under what terms the civic-address data may be reused |
+| timmins | unknown-review · **publish_reports = false** | (none published - CGIS viewer disclaimer only, read 2026-10-31) - ask the City of Timmins the same |
+
+## Counts (2026-10-31, after Lanark and Timmins; tallied from the TOMLs)
 
 green 21 (14 `green-lwg`, 6 `green-self`, 1 `green-cc0`) · OGL-family awaiting the LWG 13 ·
-yellow-review 10 · CC-BY waiver 1 · restrictive 12 · unknown 22 — of **79 tracked datasets**.
-21 are gated off the site (`publish_reports = false`): sdg, renfrew, peterborough-county,
-cobourg, the 15 from the 2026-10-16 sweep listed above, leamington and kingsville.
+yellow-review 10 · CC-BY waiver 1 · restrictive 12 · unknown 24 — of **81 tracked datasets**.
+23 are gated off the site (`publish_reports = false`): sdg, renfrew, peterborough-county,
+cobourg, the 15 from the 2026-10-16 sweep listed above, leamington, kingsville, lanark and timmins.

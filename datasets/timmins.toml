@@ -1,0 +1,65 @@
+slug = "timmins"
+provider = "City of Timmins"
+# Resolution path: skipped since 2026-08-20 (same CGIS CommunityPAL stack as Lanark County, no
+# REST); the 2026-10-30 quarterly re-probe found CGIS's SLIMS Viewer (cgis.com/publicmaps/
+# ?c=Timmins) had added a "Civic Addresses" dataset 98640 on 2026-09-23 (config updated
+# 2026-10-26, tiles rebuilt daily) with a public whole-file geobuf export. Tracked from
+# 2026-10-31 through the vault's `slims` access (address-vault fetch/slims.py). Dataset
+# description: "Civic addresses for CPAL". The config lists a `prime_sub` column the export
+# never emits (2026-10-31); if it ever does it shows up as a new field.
+#
+# THE ARCHIVED PULL IS A DERIVED PRODUCT, NOT A RAW ONE. The civic dataset carries a roll number
+# and street_number only; the address string is on "Assessment Parcels" 98638 (`location`,
+# e.g. "585 ALGONQUIN BLVD E"). The vault's fetcher joins the two by the 15-digit roll (the
+# export's __map_key__; its __key__ is the roll padded to 19 digits, one feature per roll either
+# way), renames the export's column UUIDs to the viewer's column names, and explodes each roll's
+# MultiPoint into one Point per position (19,697 rolls -> 29,538 points on 2026-10-31; 4,986
+# rolls carry 2..123 points - the earlier tile sweep's "duplicate roll keys" were these). What
+# the vault archives, and this store imports, is that join.
+# Join measured 2026-10-31: 16,994 of 19,697 rolls found a parcel location (86.3%); the other
+# 2,703 parcels publish no location at all (2,525 more parcels read "flagged parcel", which the
+# fetcher treats as null - none of them carried a civic point).
+data_url = "https://www.cgis.com/api2/public/Timmins/geometry/98640.geobuf?join=98638"
+access = "slims"
+format = "geojson"
+# The export is lon/lat (the geobuf header omits its precision; the fetcher applies the spec
+# default and refuses a pull that decodes outside +-180/90), so no source_crs.
+# Terms read 2026-10-31: the only text is CGIS's CommunityPAL disclaimer ("Users Should Confirm
+# Information ... The data represents an actual reproduction of data provided to CGIS, and is
+# collected from various sources and will change over time without notice"). No open licence,
+# no reuse grant; the data is the city's and CGIS hosts it. Ask Timmins (and CGIS) before
+# anything publishes; vault-only meanwhile.
+license_name = "None published - CGIS viewer disclaimer only (read 2026-10-31)"
+osm_compatible = "unknown-review"
+publish_reports = false
+
+# No street column anywhere: street is derived from `location` minus the street number
+# (normalize.street_from_full, the lennox-addington precedent). Measured 2026-10-31 on the
+# 29,538 points: 22,180 (75.1%) get a street - every point that has a street_number, and
+# location leads with it exactly on all of them. The rest have no number: 7,358 points (on
+# 4,292 rolls), of which 2,862 carry a road or water name as location ("HIGHWAY 101",
+# "KENOGAMISSI LAKE" - unnumbered lots) and 4,496 carry nothing. They import as rows with no
+# number and no street (full on the first group), keyed by roll + position; that is what the
+# source publishes, and dropping them would hide the day they get a number.
+street_from_full = true
+
+[identity]
+# No record key: the roll number is unique per export feature (19,697) but repeats across the
+# points a roll's MultiPoint explodes into (one roll holds 123), so it cannot key on its own.
+# Synthesize from number + roll + 5 dp point: 6 collisions on 29,538 points (exact duplicate
+# positions on one roll). `location` (and the derived street) is kept OUT of the basis on
+# purpose: it comes from the parcel join, the fragile half of the fetch - a short parcels export
+# would otherwise re-key every row it missed instead of showing as a mass full/street change
+# the flag pipeline holds. number + location + 5 dp would collide 116 times (2026-10-31).
+key_field = ""
+synth_fields = ["number"]
+synth_props = ["roll"]
+
+[fields]                                        # canonical name -> source property
+number = "street_number"                        # as published ("585"); absent on 7,358 of 29,538 points
+full   = "location"                             # joined from Assessment Parcels by roll; "<number> <street>" or a road/water name
+# roll: the 15-digit assessment roll number (the export's __map_key__), in the synth basis above.
+# unit: none - no unit column, and `location` carries none (prime_sub is never emitted). No
+# ignore_fields day one: no history.
+
+# [classes] deferred: three fields, no status or municipality column.
