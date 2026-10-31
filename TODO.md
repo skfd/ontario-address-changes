@@ -387,6 +387,14 @@ the order to work them):
     737 New Amherst Blvd). The 12-01 trigger no longer applies; what is left is an owner
     call on whether a semi-annual republish is good enough or the daily source is worth a
     re-point (gated city, so no public cost either way). Leave it unless the cadence slips.
+    **Re-pointed 2026-10-31 (owner's call) as a continuation, not a baseline:** same four mapped
+    columns, same native SR, 7,846 of 7,846 synth keys survive with identical coordinates, so
+    the store kept its history; snapshot 29 is +0/-0/~7,846 (props roster grew by ten: STATUS,
+    Roll_Num, RoutingStreetExtKey, ADD_TYPE, FDMID, ROTATION, four constants), pre-ruled technical
+    in flags.toml before the import, vault day filed `schema`. CREATED_DATE/LAST_EDITED_DATE never
+    reach props (EDIT_METADATA_FIELDS). STATUS {Correct 7,728, Needs Attention 116, Not Checked 2}
+    is a class candidate once a transition is seen; Roll_Num/RoutingStreetExtKey are ignore
+    candidates once they churn. Backup `backups/2026-10-31-cobourg/`. LAST_EDITED_DATE max 10-14.
   - [ ] **amherstburg: unknown, likely batch-fed.** Its own edit layer; `Type` tags show
     monthly loads Sep 2024-Feb 2025, nothing tagged 2026; no alternative anywhere (Essex has
     no points). Watch to **2026-12-31**, then ask building@amherstburg.ca whether it still

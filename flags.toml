@@ -1681,3 +1681,28 @@ scope = "197 rows changed the same field set [location] (100% of the day's 197 m
 detected = "2026-10-30"
 status = "open"
 
+[[flag]]
+slug = "cobourg"
+date = "2026-10-31"
+signature = "mass-modified"
+fields = ["ANNOFLAG", "COMMUNITY", "PROV", "Roll_Num", "RoutingStreetExtKey", "SITE", "STATUS"]
+scope = "7,208 rows changed the same field set [ANNOFLAG, COMMUNITY, PROV, Roll_Num, RoutingStreetExtKey, SITE, STATUS] (92% of the day's 7,846 modifications)"
+detected = "2026-10-31"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-10-31"
+rule = "datasets/cobourg.toml re-pointed from the AGOL copy to the town's MapServer (2026-10-31); pre-ruled before the import"
+note = "Owner: technical. Same 7,846 points (100% synth-key survival, 0 canonical-field changes); the source server publishes ten props the AGOL copy stripped, so every row re-hashed once. Not an address change."
+
+[[flag]]
+slug = "cobourg"
+date = "2026-10-31"
+signature = "mass-modified"
+fields = ["ADD_TYPE", "ANNOFLAG", "COMMUNITY", "PROV", "Roll_Num", "RoutingStreetExtKey", "SITE", "STATUS"]
+scope = "527 rows changed the same field set [ADD_TYPE, ANNOFLAG, COMMUNITY, PROV, Roll_Num, RoutingStreetExtKey, SITE, STATUS] (7% of the day's 7,846 modifications)"
+detected = "2026-10-31"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-10-31"
+rule = "datasets/cobourg.toml re-pointed from the AGOL copy to the town's MapServer (2026-10-31); pre-ruled before the import"
+note = "Owner: technical. The ADD_TYPE = A (apartment / multi-unit) subset of the same switch-day re-hash; same points, new props, no address change."

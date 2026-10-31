@@ -5,11 +5,27 @@ provider = "Town of Cobourg"
 # found 2026-08-20. Layer "Address Points", 7,837 rows verified live 2026-08-20.
 # Layer description: built 2020 for 911/roll-number/labelling purposes, every point
 # hand-vetted; entrances and unit points included alongside buildings.
-data_url = "https://services5.arcgis.com/bD7yhukP2irPxz1v/arcgis/rest/services/Address_Points/FeatureServer/0"
+# Re-pointed 2026-10-31 from the AGOL copy (services5.arcgis.com/bD7yhukP2irPxz1v/
+# arcgis/rest/services/Address_Points/FeatureServer/0) to the town's own server. The AGOL
+# layer is a bulk republish of this one roughly every 5.5 months (2026-05-08, 2026-10-27;
+# all editingInfo stamps equal each time), while this MapServer layer is the live edit
+# fabric (LAST_EDITED_DATE max 2026-10-14, CREATED_DATE max the same day; ~2 points/month).
+# Probed 2026-10-31: 7,846 rows = AGOL 10-27; objectIdField is absent but OBJECTID is typed
+# esriFieldTypeOID so the vault pages on it; maxRecordCount 2000; geoJSON supported; no
+# editingInfo; default urllib UA answers 200. Measured against the live store's snapshot 25
+# (2026-10-27, 7,846 rows): 7,846/7,846 synth keys survive (same number/street/unit, same
+# 5 dp coordinates), 0 canonical-field differences, so the store CONTINUES rather than
+# re-baselining. Every row re-hashed once on the switch day because ten props the AGOL copy
+# never carried appear (ADD_TYPE, ANNOFLAG, COMMUNITY, FDMID, PROV, ROTATION, Roll_Num,
+# RoutingStreetExtKey, SITE, STATUS); pre-ruled technical in flags.toml (lambton 09-15 shape).
+# NOT the editable Operations/Property/FeatureServer/30 (anonymous edits open; 9,999 rows
+# incl. 1,399 extra unit points).
+data_url = "https://geo.cobourg.ca/server/rest/services/Operations/FireQuickLookup/MapServer/10"
 access = "arcgis"
 format = "geojson"
-# Native layer SR is EPSG:26917 (UTM 17N); the geojson export arrives already in WGS84,
-# so this is a guard for a future export-CRS switch (pass-through while in lon/lat range).
+# Native layer SR is EPSG:26917 (UTM 17N) on both the old AGOL copy and the town's MapServer;
+# the vault asks for outSR=4326 so coordinates arrive in WGS84, and this is a guard for a
+# future export-CRS switch (pass-through while in lon/lat range).
 source_crs = "EPSG:26917"
 # Bespoke terms (fetched 2026-08-20 from the hub Terms of Use page, revised 2021-11-01):
 # grant is "a non-exclusive, non-transferable, license to copy and use the unmodified Open
@@ -50,6 +66,21 @@ full   = "Complete_Add"                         # verified full address string (
 # uniformly "Y" across all 7,837 rows today (source docs say Y/No controls labelling) and
 # Add_Label echoes ADDNUM or the range ("325", "4-8"). Not ignored day one — precedent says
 # wait for churn evidence before adding ignore_fields.
+
+# Fields the MapServer carries that the AGOL copy did not (first seen 2026-10-31), none of
+# them acted on yet - the rule here is churn evidence first:
+# - CREATED_DATE / LAST_EDITED_DATE: esri editor tracking, already dropped by the built-in
+#   EDIT_METADATA_FIELDS list in src/normalize.py, so they never reach props. No
+#   ignore_fields entry is needed for them.
+# - Roll_Num (tax roll number, 7,326 distinct, "0"/blank on ~470 rows) and
+#   RoutingStreetExtKey (749 distinct, a routing-system street key): foreign-system join
+#   keys, the guelph ROLL_NO/PIN shape. ignore_fields candidates once they churn.
+# - ANNOFLAG (1), SITE (99), PROV ("ON"), COMMUNITY ("COBOURG"): one value each on all
+#   7,846 rows; ADD_TYPE "A" on 557 rows (= apartments / multiple units, per the layer
+#   description); FDMID (39) and ROTATION (37) sparse label-placement helpers.
+# - STATUS: QA state with domain AddressStatus - Correct 7,728 / Needs Attention 116 /
+#   Not Checked 2 on 2026-10-31. A [classes] status candidate; not enabled until a
+#   snapshot shows actual transitions.
 
 # Change classes (field values verified against the live layer 2026-08-20): a
 # modification touching only these fields is reported in its humanized section
