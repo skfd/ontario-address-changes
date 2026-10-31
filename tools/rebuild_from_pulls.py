@@ -65,6 +65,22 @@ and a row on one side only is not. Skip flags may change either way (a day whose
 "change" was the export reordering a duplicate pair becomes a skip - greater-sudbury
 72 such days); ids and filenames may not. All of it is printed.
 
+--map-rev REV --map-until FILENAME (repeatable, paired in order) is for a publisher
+that renamed its columns mid-history (lambton 2026-09-15: STNUM/STNAME/ADDRESS became
+Add_Number/St_Name/Unit/full_add, commit e07858647). Today's TOML maps none of the old
+names, so under it a pre-switch pull keys with null number and street - 56,897 pairs
+differ at snapshot 1 - while under the TOML of its own day it replays exactly. Each
+snapshot whose pull filename sorts <= FILENAME is replayed under datasets/<slug>.toml
+as of REV: fields, synth basis, ignore / keep fields, classes, the *_from_full flags,
+source_crs, prefer - the whole file - in every step (features, canonical, collisions,
+stored rows, tie-break, import); later snapshots use today's TOML. The era TOML also
+stands as the old rule on its days (the old store was built under it), so --old-rev
+reaches post-era snapshots only: a rule change that must reach era rows needs an era
+revision carrying it. The key basis must agree across the boundary for the (key, hash)
+check to pass by construction (lambton: synth number|street + point in both eras, so
+no re-key and no history rewrite). The assignment is printed before the replay. The
+same shape is due for wps (NENA re-point) and elgin 2027.
+
 The new store is built beside the old one (data/_rebuild_<slug>/) and swapped in only
 with --swap, after a backup into --backup-dir. downloaded / remote_* timestamps are
 carried over from the old snapshots table. Checks, all printed:
@@ -117,6 +133,15 @@ Run so far:
               flags changed (first run died at 09-17 on a killed restic dump; re-run clean).
               keys each. Every one verified 0/0/0 against its latest vault pull.
               Backups: C:\Users\kk\ontario-db-backup-2026-10-24-tiebreak\
+  2026-10-31  lambton, a proof of --map-rev only (no swap: the live store is right):
+              --old-rev HEAD --map-rev a3370d580 --map-until lambton-2026-08-24.geojson
+              --tiebreak --dump-dir. 51 snapshots, 1-20 under the pre-switch TOML,
+              21-51 under today's; 11 restic dumps (06-25..08-24, 09-15..10-02, 10-09,
+              10-15), 9 min. Every active row equal at every snapshot - key, hash,
+              canonical columns, point, props - 113,918 rows both; snapshot 16 became
+              a skip (its stored content_hash differed from 15's with no row change),
+              so the 56,897 snapshot-1 rows, all re-hashed or retired at 21, close at
+              max_snapshot_id 1 instead of 16 - the only span difference.
 
 Not part of the daily run.
 """
@@ -179,6 +204,33 @@ def features(ds, path, dump_dir=None):
         os.remove(target)
 
 
+def era_dataset(eras, ds, filename):
+    """The dataset a snapshot replays under: of the (until, dataset) eras whose `until`
+    the pull filename sorts <= to, the earliest; `ds` (today's) past the last one."""
+    for until, era in sorted(eras, key=lambda e: e[0]):
+        if filename <= until:
+            return era
+    return ds
+
+
+def _print_eras(eras, ds, snaps):
+    """One line per era: which snapshot ids replay under which TOML."""
+    if not eras:
+        return
+    names = {id(era): f"--map-rev #{i + 1} (until {until})"
+             for i, (until, era) in enumerate(sorted(eras, key=lambda e: e[0]))}
+    names[id(ds)] = "today's TOML"
+    runs = []
+    for sid, fn, _ in snaps:
+        name = names[id(era_dataset(eras, ds, fn))]
+        if runs and runs[-1][0] == name:
+            runs[-1][2] = sid
+        else:
+            runs.append([name, sid, sid])
+    print("eras: " + "; ".join(f"{a}-{b} -> {n}" if a != b else f"{a} -> {n}"
+                               for n, a, b in runs))
+
+
 def _collisions(ds, old_ds, features):
     """(hidden, kept). hidden = {new key: (feature, payload_hash)}: features whose
     new-rule key is distinct but whose old-rule key collided with an earlier row's - the
@@ -222,11 +274,21 @@ def load_gap_dates(path):
     return out
 
 
-def _plan_gaps(ds, old_ds, snaps, paths, bracket, gap_dates, dump_dir=None):
+def _rules(eras, ds, old_ds):
+    """filename -> (dataset to replay under, the old rule that day). Inside an era
+    both are the era TOML; past the last era, today's and --old-rev's."""
+    def rules(fn):
+        era = era_dataset(eras, ds, fn)
+        return (era, era) if era is not ds else (ds, old_ds)
+    return rules
+
+
+def _plan_gaps(ds, old_ds, snaps, paths, bracket, gap_dates, dump_dir=None, eras=()):
     """What each no-pull gap day gets beyond its stored rows. Returns
     ({gap sid: [hidden features]}, {gap sid: {old key: kept new key}}, {sids that may
     flip from a skip into a change}), or exits with the reason it cannot."""
-    coll = {fn: _collisions(ds, old_ds, features(ds, paths[fn], dump_dir))
+    rules = _rules(eras, ds, old_ds)
+    coll = {fn: _collisions(*rules(fn), features(ds, paths[fn], dump_dir))
             for fn in {f for pair in bracket.values() for f in pair}}
     date_of = {sid: _DATE.search(fn).group() for sid, fn, _ in snaps}
     sid_of = {fn: sid for sid, fn, _ in snaps}
@@ -251,7 +313,7 @@ def _plan_gaps(ds, old_ds, snaps, paths, bracket, gap_dates, dump_dir=None):
         for k in sorted(diff):
             kind, side = ("gone", hb) if k in hb else ("added", ha)
             if k not in (gap_dates or {}):
-                r = normalize.canonical(ds, side[k][0])
+                r = normalize.canonical(rules(b if kind == "gone" else a)[0], side[k][0])
                 undated.append(f"{k} ({kind}: {r['full'] or (r['number'], r['street'])})")
                 continue
             listed, date = gap_dates[k]
@@ -357,13 +419,17 @@ def _active(conn, sid):
         "WHERE min_snapshot_id <= ? AND max_snapshot_id >= ?", (sid, sid)).fetchall())
 
 
-def rebuild(ds, old_ds, gap_dates=None, tiebreak=False, dump_dir=None, stored_days=()):
+def rebuild(ds, old_ds, gap_dates=None, tiebreak=False, dump_dir=None, stored_days=(),
+            eras=()):
+    """`eras`: [(until filename, dataset)] from --map-rev / --map-until (era_dataset)."""
     tmp = dataclasses.replace(ds, slug=f"_rebuild_{ds.slug}")
     shutil.rmtree(tmp.data_dir, ignore_errors=True)
     if os.path.exists(tmp.db_path):
         sys.exit(f"cannot clear {tmp.data_dir} (open elsewhere?) - not rebuilding over it")
     old = sqlite3.connect(f"file:{ds.db_path}?mode=ro", uri=True)
     snaps = old.execute("SELECT id, filename, skipped FROM snapshots ORDER BY id").fetchall()
+    rules = _rules(eras, ds, old_ds)
+    _print_eras(eras, ds, snaps)
 
     unknown = set(stored_days) - {fn for _, fn, sk in snaps if not sk}
     if unknown:
@@ -378,20 +444,27 @@ def rebuild(ds, old_ds, gap_dates=None, tiebreak=False, dump_dir=None, stored_da
         if not before or not after:
             sys.exit(f"{fn}: no raw pull on one side of the gap - cannot bracket it")
         bracket[sid] = (before[-1], after[0])
-    inject, kept, flips = _plan_gaps(ds, old_ds, snaps, paths, bracket, gap_dates, dump_dir)
+    inject, kept, flips = _plan_gaps(ds, old_ds, snaps, paths, bracket, gap_dates, dump_dir,
+                                     eras)
     groups_at = {}
     if tiebreak and bracket:            # two passes: contested anywhere, then those rows
         files = sorted({f for pair in bracket.values() for f in pair})
         keys = set()
         for fn in files:
-            keys |= set(_contested(ds, features(ds, paths[fn], dump_dir)))
+            keys |= set(_contested(rules(fn)[0], features(ds, paths[fn], dump_dir)))
         for fn in files:
-            groups_at[fn] = _groups(ds, features(ds, paths[fn], dump_dir), keys)
+            groups_at[fn] = _groups(rules(fn)[0], features(ds, paths[fn], dump_dir), keys)
 
     contested = {}                       # sid -> {key: candidate hashes}, --tiebreak
-    last_features = None
+    last_features, last_path = None, None
     for sid, fn, sk in snaps:
-        if paths[fn]:
+        dse, olde = rules(fn)
+        if paths[fn] and paths[fn] == last_path:
+            # the same file as the previous day (the vault resolves a run of unchanged
+            # days to one pull): read once, not dumped again per day
+            feats = last_features
+            source = "raw, same file as the previous snapshot"
+        elif paths[fn]:
             # list, not the stream: an unchanged day after it re-imports these.
             feats = features(ds, paths[fn], dump_dir)
             source = "raw"
@@ -399,12 +472,12 @@ def rebuild(ds, old_ds, gap_dates=None, tiebreak=False, dump_dir=None, stored_da
             feats = last_features                # an unchanged day: same content
             source = "previous"
         else:
-            stored = _stored_features(old, sid, ds)
+            stored = _stored_features(old, sid, dse)
             keys, on_kept = set(), {}
             for f in stored:
-                kn = normalize.canonical(ds, f)["identity_key"]
+                kn = normalize.canonical(dse, f)["identity_key"]
                 keys.add(kn)
-                ko = normalize.canonical(old_ds, f)["identity_key"]
+                ko = normalize.canonical(olde, f)["identity_key"]
                 if ko in kept[sid]:
                     on_kept.setdefault(ko, set()).add(kn)
             moved = sorted(ko for ko, kn in kept[sid].items() if on_kept.get(ko) != {kn})
@@ -412,7 +485,7 @@ def rebuild(ds, old_ds, gap_dates=None, tiebreak=False, dump_dir=None, stored_da
                 sys.exit(f"snapshot {sid}: the stored row on colliding keys {moved[:3]} is "
                          f"not the one the old rule kept before the gap - refusing")
             extra = inject[sid]
-            dup = keys & {normalize.canonical(ds, f)["identity_key"] for f in extra}
+            dup = keys & {normalize.canonical(dse, f)["identity_key"] for f in extra}
             if dup:
                 sys.exit(f"snapshot {sid}: {len(dup)} hidden keys are stored keys that day "
                          f"(e.g. {sorted(dup)[:2]}) - refusing")
@@ -426,10 +499,10 @@ def rebuild(ds, old_ds, gap_dates=None, tiebreak=False, dump_dir=None, stored_da
                            f"{changed} keys' candidates differ across the gap")
         print(f"  {sid:>3} {fn}  ({source})")
         if tiebreak:
-            contested[sid] = {k: set(g) for k, g in _contested(ds, feats).items()}
+            contested[sid] = {k: set(g) for k, g in _contested(dse, feats).items()}
         _next_snapshot_id(tmp, sid)
-        db.import_snapshot(tmp, fn, feats)
-        last_features = feats
+        db.import_snapshot(dataclasses.replace(dse, slug=tmp.slug), fn, feats)
+        last_features, last_path = feats, paths[fn]
 
     new = sqlite3.connect(tmp.db_path)
     new_snaps = new.execute("SELECT id, filename, skipped FROM snapshots ORDER BY id").fetchall()
@@ -540,14 +613,25 @@ def main():
     ap.add_argument("--dump-dir",
                     help="stream cold pulls out of the archive into this directory, "
                          "one at a time, instead of thawing them")
+    ap.add_argument("--map-rev", action="append", default=[], metavar="REV",
+                    help="replay snapshots up to the paired --map-until under "
+                         "datasets/<slug>.toml as of this git revision (repeatable, "
+                         "paired in order; see above)")
+    ap.add_argument("--map-until", action="append", default=[], metavar="FILENAME",
+                    help="the last pull filename (inclusive, string order) the paired "
+                         "--map-rev applies to")
     ap.add_argument("--swap", action="store_true", help="swap the rebuilt store in")
     ap.add_argument("--backup-dir")
     args = ap.parse_args()
+    if len(args.map_rev) != len(args.map_until):
+        ap.error("--map-rev and --map-until come in pairs")
     ds = registry.load(args.city)
     from tools.recanonicalize import old_dataset
     gap_dates = load_gap_dates(args.gap_dates) if args.gap_dates else None
+    eras = [(until, old_dataset(ds.slug, rev))
+            for rev, until in zip(args.map_rev, args.map_until)]
     tmp = rebuild(ds, old_dataset(ds.slug, args.old_rev), gap_dates, args.tiebreak,
-                  args.dump_dir, args.stored_day)
+                  args.dump_dir, args.stored_day, eras)
     if args.swap:
         if not args.backup_dir:
             sys.exit("--swap needs --backup-dir")

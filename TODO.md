@@ -1168,7 +1168,13 @@ one-time "modified" spike, so batch them:
   Four cities need nothing new (hamilton, haliburton, huron, pickering: the rule picks the
   stored row everywhere). lambton has an older, separate problem: its store does not replay
   from its June pull at all (56,897 pairs differ at snapshot 1) - not looked into.
-- [ ] **lambton replay: cause found 2026-10-30, fix is a design call.** `rebuild_from_pulls.py`
+- [x] **lambton replay: cause found 2026-10-30, fix is a design call.** **Option 1 built 2026-10-31:**
+  `rebuild_from_pulls.py --map-rev REV --map-until FILENAME` (repeatable, paired) replays snapshots
+  up to that pull filename under the TOML at REV; verified on lambton (`--map-rev a3370d580
+  --map-until lambton-2026-08-24.geojson --tiebreak`, 11 restic dumps, 9 min): 0/0/0 at all 51
+  snapshots, 113,918 rows both sides; the one flip is snapshot 16 change -> skip (hash artifact).
+  Inside an era the era TOML is also the old rule, so `--old-rev` reaches post-era snapshots only.
+  Six tests in `tests/test_rebuild_eras.py`. Output store was at `data/_rebuild_lambton/`, removed. `rebuild_from_pulls.py`
   hands today's `datasets/lambton.toml` to `normalize.canonical` for every raw day, but the
   publisher renamed every column on 2026-09-15 (`STNUM/STNAME/ADDRESS` -> `Add_Number/St_Name/
   full_add`, commit e07858647). On the June pulls (`data/lambton/lambton-2026-06-10.geojson`,
