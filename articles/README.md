@@ -74,6 +74,7 @@ research notes are not rendered; the site links to them here on GitHub.
 | 2026-10 | burlington | −1 | 2082, 2086 and 2090 James St leave the file as 2088 turns *Active* (**16 Oct**), the corner where Mattamy broke ground on the 13-storey Martha James condos in Jan 2023; 548 and 550 Burlington Ave go and 1389 Caroline St turns *Active* on 548's spot (**19 Oct**), after a Committee of Adjustment agenda says the two lots were consolidated for a house fronting Caroline; Northshore's 498 and 496 Plains Rd E stop being *Pending*; 2298 Queensway Dr arrives between 2294 and 2300, where council approved 24 townhouses |
 | 2026-10 | cambridge | 0 | Nothing changed: 30 reads, the file unchanged since 7 August 2026 |
 | 2026-10 | chatham-kent | 0 | Nothing changed: 30 reads, the file unchanged since 30 September 2026 |
+| 2026-10 | halton-hills | 0 | Nothing changed: 30 reads, the file unchanged since 20 August 2026 |
 
 Toronto's February 2026 is deliberately absent: observation starts 2026-02-12, so its
 first fortnight was never seen. Every city is written from September 2026 on (the
