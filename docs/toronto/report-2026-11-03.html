@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>City of Toronto Address Changes — Tuesday, Nov 03, 2026</title>
+  <style>
+    :root {
+      --bg: #fafafa; --surface: #ffffff; --surface2: #f5f5f5; --surface3: #ebebeb;
+      --border: #e0e0e0; --border-strong: #d1d1d1; --text: #242424;
+      --text-secondary: #424242; --text-dim: #616161; --accent: #0078d4;
+      --accent-hover: #106ebe; --accent-bg: #eff6fc; --green: #107c10;
+      --green-bg: #f1faf1; --green-tint: #9fd89f; --red: #c50f1f; --red-bg: #fdf3f4;
+      --red-tint: #eeacb2; --yellow: #eaa300; --yellow-bg: #fefbf4; --yellow-tint: #f9e2ae;
+      --purple: #881798; --purple-bg: #f9f3fb; --teal: #038387; --teal-bg: #f0fafa;
+      --shadow-4: 0 2px 4px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --shadow-8: 0 4px 8px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --card-bg: #ffffff; --card-hover: #f5f5f5; color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1f1f1f; --surface: #292929; --surface2: #333333; --surface3: #3d3d3d;
+        --border: #525252; --border-strong: #666666; --text: #ffffff;
+        --text-secondary: #d6d6d6; --text-dim: #adadad; --accent: #2899f5;
+        --accent-hover: #3aa0f3; --accent-bg: #002848; --green: #54b054;
+        --green-bg: #052505; --green-tint: #107c10; --red: #dc626d; --red-bg: #3b0509;
+        --red-tint: #c50f1f; --yellow: #f2c661; --yellow-bg: #463100; --yellow-tint: #eaa300;
+        --purple: #d29ddb; --purple-bg: #3a1040; --teal: #58c0c4; --teal-bg: #013638;
+        --shadow-4: 0 2px 4px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --shadow-8: 0 4px 8px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --card-bg: #333333; --card-hover: #3d3d3d; color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI Variable','Segoe UI',system-ui,-apple-system,sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.5; padding: 2rem;
+      max-width: 1100px; margin: 0 auto; font-size: 14px; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; color: var(--accent-hover); }
+    .back-link { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 12px;
+      color: var(--text-dim); margin-bottom: 1.5rem; transition: color 0.1s; }
+    .back-link:hover { color: var(--accent); text-decoration: none; }
+    h1 { font-size: 24px; font-weight: 600; margin-bottom: 4px; }
+    .subtitle { color: var(--text-secondary); font-size: 14px; margin-bottom: 12px; }
+    .explainer { color: var(--text-secondary); font-size: 13px; line-height: 1.5;
+      margin-bottom: 24px; padding: 12px 16px; background: var(--surface);
+      border-radius: 8px; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px; margin-bottom: 24px; }
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px;
+      padding: 16px; box-shadow: var(--shadow-4); transition: box-shadow 0.1s; }
+    .card:hover { box-shadow: var(--shadow-8); }
+    .card .label { font-size: 12px; color: var(--text-dim); font-weight: 400; }
+    .card .value { font-size: 28px; font-weight: 600; margin-top: 4px; }
+    .card .value.green { color: var(--green); } .card .value.red { color: var(--red); }
+    .card .value.yellow { color: var(--yellow); } .card .value.accent { color: var(--accent); }
+    .card .value.purple { color: var(--purple); }
+    .card .value.teal { color: var(--teal); }
+    .sparkline { display: block; margin-top: 6px; overflow: visible; opacity: 0.9; }
+    .sparkline-label { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+    .section { margin-bottom: 24px; }
+    .section h2 { font-size: 16px; font-weight: 600; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px; }
+    .badge { font-size: 12px; padding: 2px 8px; border-radius: 999px; font-weight: 600; }
+    .badge-green { background: var(--green-bg); color: var(--green); }
+    .badge-red { background: var(--red-bg); color: var(--red); }
+    .badge-yellow { background: var(--yellow-bg); color: var(--yellow); }
+    .badge-accent { background: var(--accent-bg); color: var(--accent); }
+    .badge-purple { background: var(--purple-bg); color: var(--purple); }
+    .badge-teal { background: var(--teal-bg); color: var(--teal); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface);
+      border-radius: 8px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    thead { background: var(--surface2); }
+    th { text-align: left; padding: 8px 12px; font-weight: 600; color: var(--text-dim);
+      font-size: 12px; cursor: pointer; user-select: none; border-bottom: 1px solid var(--border); }
+    th:hover { color: var(--accent); }
+    td { padding: 8px 12px; border-top: 1px solid var(--border); }
+    tr:hover td { background: var(--surface2); }
+    .old-val { color: var(--red); text-decoration: line-through; }
+    .new-val { color: var(--green); }
+    .arrow-val { color: var(--text-dim); text-align: center; white-space: nowrap; }
+    .map-link { display: inline-flex; align-items: center; margin-left: 0.4em;
+      color: var(--accent); vertical-align: middle; white-space: nowrap; font-size: 12px; }
+    .map-link:hover { color: var(--accent-hover); }
+    .map-link svg { width: 14px; height: 14px; }
+    .change-field { color: var(--yellow); font-weight: 600; }
+    .bar-chart { margin-top: 8px; }
+    .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 12px; }
+    .bar-label { width: 180px; text-align: right; color: var(--text-secondary); flex-shrink: 0;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .bar-track { flex: 1; height: 8px; background: var(--surface2); border-radius: 4px;
+      overflow: hidden; position: relative; }
+    .bar-fill { height: 100%; border-radius: 4px; transition: width 0.15s ease; }
+    .bar-fill.green { background: var(--green); } .bar-fill.red { background: var(--red); }
+    .bar-count { width: 40px; font-size: 12px; color: var(--text-dim); }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+    .empty { color: var(--text-dim); font-style: italic; padding: 16px; }
+    .truncated { color: var(--text-dim); font-size: 12px; margin-top: 8px; }
+    .collapsible-toggle { background: transparent; border: 1px solid var(--border);
+      color: var(--accent); padding: 5px 12px; border-radius: 4px; cursor: pointer;
+      font-size: 12px; font-family: inherit; margin-bottom: 12px; transition: background 0.1s; }
+    .collapsible-toggle:hover { background: var(--surface2); }
+    details.rename-group { background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; margin-bottom: 8px; box-shadow: var(--shadow-4); }
+    details.rename-group summary { padding: 10px 14px; cursor: pointer; font-size: 13px; }
+    details.rename-group[open] summary { border-bottom: 1px solid var(--border); }
+    details.rename-group table { border: none; box-shadow: none; border-radius: 0; }
+    details.rename-group .truncated { padding: 0 14px 10px; margin-top: 0; }
+    .rename-count { color: var(--text-dim); font-size: 12px; margin-left: 6px; }
+    .no-changes-banner { background: var(--green-bg); border: 1px solid var(--green-tint);
+      color: var(--green); padding: 16px; border-radius: 8px; margin-bottom: 24px;
+      text-align: center; font-weight: 600; font-size: 14px; }
+    .baseline-banner { background: var(--accent-bg); border: 1px solid var(--accent);
+      color: var(--accent); padding: 16px; border-radius: 8px; margin-bottom: 24px; font-size: 13px; }
+    .generated-at { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-dim); }
+    .history { font-size: 12.5px; color: var(--text-secondary); white-space: nowrap; }
+    .history .a { color: var(--green); font-weight: 500; }
+    .history .r { color: var(--red); font-weight: 500; }
+    .history .dot { color: var(--text-dim); margin: 0 4px; }
+    .history-none { color: var(--text-dim); font-style: italic; font-size: 12.5px; }
+    .info-wrap { position: relative; display: inline-flex; vertical-align: middle; }
+    .info-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+      height: 18px; padding: 0 8px 0 7px; border-radius: 999px; border: none;
+      color: #fff; background: var(--accent); cursor: help; font-size: 11px; font-weight: 600;
+      font-style: normal; font-family: inherit; line-height: 1; white-space: nowrap; }
+    .info-btn .glyph { font-style: italic; font-weight: 700;
+      font-family: Georgia, 'Times New Roman', serif; }
+    .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn,
+    .info-wrap:focus .info-btn { background: var(--accent-hover); }
+    .info-pop { display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 20;
+      width: 320px; max-width: 80vw; padding: 12px 14px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-8);
+      font-size: 12.5px; font-weight: 400; color: var(--text-secondary); line-height: 1.5; }
+    .info-wrap:hover .info-pop, .info-wrap:focus-within .info-pop,
+    .info-wrap:focus .info-pop { display: block; }
+    .info-pop strong { display: block; color: var(--text); font-size: 12px; margin-bottom: 4px; }
+    .info-pop ul { list-style: none; margin: 0 0 10px; padding: 0; }
+    .info-pop li { padding: 1px 0 1px 14px; position: relative; }
+    .info-pop li::before { content: "·"; position: absolute; left: 4px; color: var(--text-dim); }
+    .info-pop .note { color: var(--text-dim); font-size: 11.5px; margin: 0 0 10px; }
+    .info-pop .muted { color: var(--text-dim); font-style: italic; }
+  </style>
+<script data-goatcounter="https://osm-ontario.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+
+  <a class="back-link" href="index.html">← Back to City of Toronto reports</a>
+
+  <h1>City of Toronto — Address Changes</h1>
+  <p class="subtitle">
+    Changes between  and Tuesday, Nov 03, 2026
+    · 525,321 total addresses
+  </p>
+
+  
+
+  <div class="cards">
+    <div class="card"><div class="label">Total Addresses</div>
+      <div class="value accent">525,321</div></div>
+    <div class="card"><div class="label">New Addresses</div>
+      <div class="value green">+0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#107c10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,2.0 37.3,2.0 55.0,18.0 72.7,4.7 90.3,10.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#107c10"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Retired Addresses</div>
+      <div class="value red">−47</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#c50f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,17.3 72.7,16.3 90.3,12.6 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#c50f1f"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Updated Addresses <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (LINEAR_NAME_FULL)</li><li>Full address (ADDRESS_FULL)</li><li>Coordinates (latitude, longitude)</li><li>ADDRESS_POINT_ID</li><li>GENERAL_USE</li><li>GENERAL_USE_CODE</li><li>LINEAR_NAME_DESC</li><li>MAINT_STAGE</li><li>MUNICIPALITY</li><li>MUNICIPALITY_NAME</li><li>PLACE_NAME</li><li>PLACE_NAME_ALL</li><li>WARD</li><li>WARD_NAME</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>ADDRESS_CLASS</li><li>ADDRESS_CLASS_DESC</li><li>ADDRESS_ID</li><li>ADDRESS_ID_LINK</li><li>ADDRESS_POINT_ID_LINK</li><li>ADDRESS_STRING_ID</li><li>CENTRELINE_ID</li><li>CENTRELINE_MEASURE</li><li>CENTRELINE_OFFSET</li><li>CENTRELINE_SIDE</li><li>CLASS_FAMILY</li><li>CLASS_FAMILY_DESC</li><li>HI_NUM</li><li>HI_NUM_SUF</li><li>LINEAR_NAME</li><li>LINEAR_NAME_DIR</li><li>LINEAR_NAME_ID</li><li>LINEAR_NAME_TYPE</li><li>LO_NUM</li><li>LO_NUM_SUF</li></ul>
+      
+    </span>
+  </span></div>
+      <div class="value yellow">7</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,15.7 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,15.7 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Renumbered</div>
+      <div class="value accent">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#0078d4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,2.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#0078d4"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Street Renames</div>
+      <div class="value purple">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#9141ac" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#9141ac"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    <div class="card"><div class="label">Place Renames</div>
+      <div class="value teal">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#038387" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#038387"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    <div class="card"><div class="label">Status Changes</div>
+      <div class="value teal">71</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#038387" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,16.4 72.7,16.6 90.3,13.5 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#038387"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    <div class="card"><div class="label">Boundary Changes</div>
+      <div class="value teal">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#038387" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#038387"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    <div class="card"><div class="label">Location Adjustments</div>
+      <div class="value" style="color: var(--text-dim)">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#808080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,2.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#808080"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+  </div>
+
+  
+  <div class="section">
+    <h2>Change Breakdown</h2>
+    <div class="stats-grid">
+      
+      
+      <div class="card"><div class="label">Top Streets by Retired Addresses</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">Kingston Rd</span>
+          <div class="bar-track"><div class="bar-fill red" style="width:100.0%"></div></div>
+          <span class="bar-count">3</span></div>
+      </div></div>
+      
+      <div class="card"><div class="label">Most Frequently Updated Fields</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">MAINT_STAGE</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">78</span></div>
+        <div class="bar-row"><span class="bar-label">Location</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:6.0%"></div></div>
+          <span class="bar-count">5</span></div>
+        <div class="bar-row"><span class="bar-label">PLACE_NAME</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:3.0%"></div></div>
+          <span class="bar-count">2</span></div>
+        <div class="bar-row"><span class="bar-label">PLACE_NAME_ALL</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:3.0%"></div></div>
+          <span class="bar-count">2</span></div>
+      </div></div>
+    </div>
+  </div>
+  
+
+  <div class="section">
+    <h2>New Addresses <span class="badge badge-green">0</span></h2>
+    
+    <p class="empty">No new addresses.</p>
+  </div>
+
+  <div class="section">
+    <h2>Retired Addresses <span class="badge badge-red">47</span></h2>
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-removed',0)">Address</th><th onclick="sortTable('t-removed',1)">Street</th>
+        <th onclick="sortTable('t-removed',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-removed">
+        
+        <tr><td>590 Annette St</td><td>Annette St</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65982&mlon=-79.48177#map=18/43.65982/-79.48177" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>592 Annette St</td><td>Annette St</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65979&mlon=-79.48181#map=18/43.65979/-79.48181" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>18 Austin Ter</td><td>Austin Ter</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67886&mlon=-79.40974#map=18/43.67886/-79.40974" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>20 Austin Ter</td><td>Austin Ter</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67881&mlon=-79.40978#map=18/43.67881/-79.40978" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>69 Bellefair Ave</td><td>Bellefair Ave</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67268&mlon=-79.30067#map=18/43.67268/-79.30067" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>303 Bogert Ave</td><td>Bogert Ave</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75740&mlon=-79.42498#map=18/43.75740/-79.42498" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>109 Boulton Ave</td><td>Boulton Ave</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66254&mlon=-79.34777#map=18/43.66254/-79.34777" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>111 Boulton Ave</td><td>Boulton Ave</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66255&mlon=-79.34780#map=18/43.66255/-79.34780" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>15 Brydon Dr</td><td>Brydon Dr</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71409&mlon=-79.57077#map=18/43.71409/-79.57077" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>19 Brydon Dr</td><td>Brydon Dr</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71429&mlon=-79.57093#map=18/43.71429/-79.57093" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>355 Coxwell Ave</td><td>Coxwell Ave</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67577&mlon=-79.32011#map=18/43.67577/-79.32011" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>43 Cummings St</td><td>Cummings St</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66284&mlon=-79.34622#map=18/43.66284/-79.34622" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>45 Cummings St</td><td>Cummings St</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66284&mlon=-79.34613#map=18/43.66284/-79.34613" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 Cuthbert Cres</td><td>Cuthbert Cres</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70144&mlon=-79.39356#map=18/43.70144/-79.39356" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>20 Daniels St</td><td>Daniels St</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.62947&mlon=-79.49603#map=18/43.62947/-79.49603" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>111A De Grassi St</td><td>De Grassi St</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66262&mlon=-79.34670#map=18/43.66262/-79.34670" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>12 Deep Dene Dr</td><td>Deep Dene Dr</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78539&mlon=-79.16893#map=18/43.78539/-79.16893" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>154 Delta St</td><td>Delta St</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.60439&mlon=-79.53671#map=18/43.60439/-79.53671" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>31 East Dr</td><td>East Dr</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67826&mlon=-79.49887#map=18/43.67826/-79.49887" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>35 Frances Ave</td><td>Frances Ave</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.63107&mlon=-79.48953#map=18/43.63107/-79.48953" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>30 Gilder Dr</td><td>Gilder Dr</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73714&mlon=-79.25653#map=18/43.73714/-79.25653" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>20 Gormley Ave</td><td>Gormley Ave</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69469&mlon=-79.39819#map=18/43.69469/-79.39819" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>189 Hay Ave</td><td>Hay Ave</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.61706&mlon=-79.50828#map=18/43.61706/-79.50828" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>5 Kimberley Ave</td><td>Kimberley Ave</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68135&mlon=-79.29730#map=18/43.68135/-79.29730" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>17 Kingsley Ave</td><td>Kingsley Ave</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66823&mlon=-79.45288#map=18/43.66823/-79.45288" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1316 Kingston Rd</td><td>Kingston Rd</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68499&mlon=-79.27539#map=18/43.68499/-79.27539" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1318 Kingston Rd</td><td>Kingston Rd</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68505&mlon=-79.27531#map=18/43.68505/-79.27531" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1320 Kingston Rd</td><td>Kingston Rd</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68513&mlon=-79.27523#map=18/43.68513/-79.27523" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>209 Mavety St</td><td>Mavety St</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66459&mlon=-79.46517#map=18/43.66459/-79.46517" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>587 Oakwood Ave</td><td>Oakwood Ave</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69622&mlon=-79.44203#map=18/43.69622/-79.44203" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>4 Orrell Ave</td><td>Orrell Ave</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65674&mlon=-79.53003#map=18/43.65674/-79.53003" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>7 Orrell Ave</td><td>Orrell Ave</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65633&mlon=-79.53003#map=18/43.65633/-79.53003" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3025 Queen St E</td><td>Queen St E</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67477&mlon=-79.27673#map=18/43.67477/-79.27673" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3027 Queen St E</td><td>Queen St E</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67514&mlon=-79.27679#map=18/43.67514/-79.27679" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>9 Relmar Rd</td><td>Relmar Rd</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68904&mlon=-79.41380#map=18/43.68904/-79.41380" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>141 Riverview Dr</td><td>Riverview Dr</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73283&mlon=-79.39135#map=18/43.73283/-79.39135" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1210 Roselawn Ave</td><td>Roselawn Ave</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69951&mlon=-79.45632#map=18/43.69951/-79.45632" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>165 Spalding Rd</td><td>Spalding Rd</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73220&mlon=-79.47167#map=18/43.73220/-79.47167" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>7 Staffordshire Pl</td><td>Staffordshire Pl</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.59897&mlon=-79.53225#map=18/43.59897/-79.53225" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>5789 Steeles Ave E</td><td>Steeles Ave E</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.83328&mlon=-79.26242#map=18/43.83328/-79.26242" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1 Talwood Dr</td><td>Talwood Dr</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73814&mlon=-79.35651#map=18/43.73814/-79.35651" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3 Talwood Dr</td><td>Talwood Dr</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73818&mlon=-79.35624#map=18/43.73818/-79.35624" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>859 The Queensway</td><td>The Queensway</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.62426&mlon=-79.51029#map=18/43.62426/-79.51029" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 Vice Regent Blvd</td><td>Vice Regent Blvd</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71241&mlon=-79.58994#map=18/43.71241/-79.58994" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3350 Weston Rd</td><td>Weston Rd</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74555&mlon=-79.54155#map=18/43.74555/-79.54155" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3 Wheeler Ave</td><td>Wheeler Ave</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67069&mlon=-79.29895#map=18/43.67069/-79.29895" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>8 Wheeler Ave</td><td>Wheeler Ave</td><td></td>
+          <td><span class="history"><span class="a">+ 2025-04-01</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67082&mlon=-79.29939#map=18/43.67082/-79.29939" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Updated Addresses <span class="badge badge-yellow">7</span>
+      <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (ADDRESS_NUMBER)</li><li>Street name (LINEAR_NAME_FULL)</li><li>Full address (ADDRESS_FULL)</li><li>Coordinates (latitude, longitude)</li><li>ADDRESS_POINT_ID</li><li>GENERAL_USE</li><li>GENERAL_USE_CODE</li><li>LINEAR_NAME_DESC</li><li>MAINT_STAGE</li><li>MUNICIPALITY</li><li>MUNICIPALITY_NAME</li><li>PLACE_NAME</li><li>PLACE_NAME_ALL</li><li>WARD</li><li>WARD_NAME</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>ADDRESS_CLASS</li><li>ADDRESS_CLASS_DESC</li><li>ADDRESS_ID</li><li>ADDRESS_ID_LINK</li><li>ADDRESS_POINT_ID_LINK</li><li>ADDRESS_STRING_ID</li><li>CENTRELINE_ID</li><li>CENTRELINE_MEASURE</li><li>CENTRELINE_OFFSET</li><li>CENTRELINE_SIDE</li><li>CLASS_FAMILY</li><li>CLASS_FAMILY_DESC</li><li>HI_NUM</li><li>HI_NUM_SUF</li><li>LINEAR_NAME</li><li>LINEAR_NAME_DIR</li><li>LINEAR_NAME_ID</li><li>LINEAR_NAME_TYPE</li><li>LO_NUM</li><li>LO_NUM_SUF</li></ul>
+      
+    </span>
+  </span></h2>
+    
+    
+    <table>
+      <thead><tr><th>Address</th><th>What Changed</th><th>Before</th><th></th><th>After</th><th>Map</th></tr></thead>
+      <tbody>
+        
+  <tr><td rowspan="2">592 Annette St</td>
+    <td class="change-field">MAINT_STAGE</td>
+    <td class="old-val">RESERVED</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">REGULAR</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65980&mlon=-79.48182#map=18/43.65980/-79.48182" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">43.65981, -79.48179<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65981&mlon=-79.48179#map=19/43.65981/-79.48179" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↙ 2.7m</td>
+    <td class="new-val">43.65980, -79.48182<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65980&mlon=-79.48182#map=19/43.65980/-79.48182" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="2">109A Boulton Ave</td>
+    <td class="change-field">MAINT_STAGE</td>
+    <td class="old-val">RESERVED</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">REGULAR</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66242&mlon=-79.34775#map=18/43.66242/-79.34775" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">43.66243, -79.34775<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66243&mlon=-79.34775#map=19/43.66243/-79.34775" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↓ 1.1m</td>
+    <td class="new-val">43.66242, -79.34775<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66242&mlon=-79.34775#map=19/43.66242/-79.34775" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="2">12 Deep Dene Dr</td>
+    <td class="change-field">MAINT_STAGE</td>
+    <td class="old-val">RESERVED</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">REGULAR</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78545&mlon=-79.16904#map=18/43.78545/-79.16904" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">43.78541, -79.16901<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78541&mlon=-79.16901#map=19/43.78541/-79.16901" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↖ 5.1m</td>
+    <td class="new-val">43.78545, -79.16904<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78545&mlon=-79.16904#map=19/43.78545/-79.16904" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="2">31B East Dr</td>
+    <td class="change-field">MAINT_STAGE</td>
+    <td class="old-val">RESERVED</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">REGULAR</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67822&mlon=-79.49893#map=18/43.67822/-79.49893" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">43.67822, -79.49891<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67822&mlon=-79.49891#map=19/43.67822/-79.49891" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">← 1.6m</td>
+    <td class="new-val">43.67822, -79.49893<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67822&mlon=-79.49893#map=19/43.67822/-79.49893" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="3">209 Mavety St</td>
+    <td class="change-field">MAINT_STAGE</td>
+    <td class="old-val">RESERVED</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">REGULAR</td>
+    <td rowspan="3"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66455&mlon=-79.46524#map=18/43.66455/-79.46524" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">CommunitiCare Health</td>
+    </tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">CommunitiCare Health</td>
+    </tr>
+  <tr><td rowspan="3">587 Oakwood Ave</td>
+    <td class="change-field">MAINT_STAGE</td>
+    <td class="old-val">RESERVED</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">REGULAR</td>
+    <td rowspan="3"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69618&mlon=-79.44204#map=18/43.69618/-79.44204" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">PLACE_NAME</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">The Open Bible Church</td>
+    </tr>
+  <tr>
+    <td class="change-field">PLACE_NAME_ALL</td>
+    <td class="old-val">—</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">The Open Bible Church</td>
+    </tr>
+  <tr><td rowspan="2">10 Wheeler Ave</td>
+    <td class="change-field">MAINT_STAGE</td>
+    <td class="old-val">RESERVED</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">REGULAR</td>
+    <td rowspan="2"><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67084&mlon=-79.29935#map=18/43.67084/-79.29935" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">43.67085, -79.29936<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67085&mlon=-79.29936#map=19/43.67085/-79.29936" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">↘ 1.4m</td>
+    <td class="new-val">43.67084, -79.29935<a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67084&mlon=-79.29935#map=19/43.67084/-79.29935" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Renumbered Addresses <span class="badge badge-accent">0</span></h2>
+    
+    <p class="empty">No addresses renumbered.</p>
+  </div>
+
+  <div class="section">
+    <h2>Street Renames <span class="badge badge-purple">0</span></h2>
+    <p class="empty">No street renames.</p>
+  </div>
+
+  
+  <div class="section">
+    <h2>Place Renames <span class="badge badge-teal">0</span></h2>
+    <p class="empty">No place or building names changed.</p>
+  </div>
+  
+
+  
+  <div class="section">
+    <h2>Status Changes <span class="badge badge-teal">71</span></h2>
+    
+  <details class="rename-group">
+    <summary><span class="change-field">MAINT_STAGE:</span> <span class="old-val">RESERVED</span> <span class="arrow-val">→</span> <span class="new-val">REGULAR</span><span class="rename-count">71 addresses</span></summary>
+    <table>
+      <tbody>
+        
+        <tr><td>590 Annette St</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65982&mlon=-79.48173#map=18/43.65982/-79.48173" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>18 Austin Ter</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67884&mlon=-79.40973#map=18/43.67884/-79.40973" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>20 Austin Ter</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67886&mlon=-79.40980#map=18/43.67886/-79.40980" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>67 Bellefair Ave</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67258&mlon=-79.30065#map=18/43.67258/-79.30065" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>69 Bellefair Ave</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67264&mlon=-79.30068#map=18/43.67264/-79.30068" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>303 Bogert Ave</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75740&mlon=-79.42493#map=18/43.75740/-79.42493" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>305 Bogert Ave</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.75739&mlon=-79.42500#map=18/43.75739/-79.42500" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>109B Boulton Ave</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66247&mlon=-79.34778#map=18/43.66247/-79.34778" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>111 Boulton Ave</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66254&mlon=-79.34781#map=18/43.66254/-79.34781" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>15 Brydon Dr</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71404&mlon=-79.57075#map=18/43.71404/-79.57075" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>19 Brydon Dr</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71429&mlon=-79.57088#map=18/43.71429/-79.57088" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>26 Burma Dr</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.62945&mlon=-79.49597#map=18/43.62945/-79.49597" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>355 Coxwell Ave</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67577&mlon=-79.32020#map=18/43.67577/-79.32020" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>43A Cummings St</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66286&mlon=-79.34623#map=18/43.66286/-79.34623" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>43B Cummings St</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66286&mlon=-79.34617#map=18/43.66286/-79.34617" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>45 Cummings St</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66287&mlon=-79.34613#map=18/43.66287/-79.34613" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 Cuthbert Cres</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70141&mlon=-79.39355#map=18/43.70141/-79.39355" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>12 Cuthbert Cres</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.70144&mlon=-79.39359#map=18/43.70144/-79.39359" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>20 Daniels St</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.62942&mlon=-79.49606#map=18/43.62942/-79.49606" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 Deep Dene Dr</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.78536&mlon=-79.16892#map=18/43.78536/-79.16892" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>154A Delta St</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.60437&mlon=-79.53669#map=18/43.60437/-79.53669" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>154B Delta St</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.60440&mlon=-79.53670#map=18/43.60440/-79.53670" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>31A East Dr</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67823&mlon=-79.49886#map=18/43.67823/-79.49886" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>35A Frances Ave</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.63099&mlon=-79.48950#map=18/43.63099/-79.48950" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>35B Frances Ave</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.63105&mlon=-79.48950#map=18/43.63105/-79.48950" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>26 Gilder Dr</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73690&mlon=-79.25692#map=18/43.73690/-79.25692" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>30 Gilder Dr</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73699&mlon=-79.25645#map=18/43.73699/-79.25645" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>20A Gormley Ave</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69466&mlon=-79.39814#map=18/43.69466/-79.39814" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>20B Gormley Ave</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69466&mlon=-79.39818#map=18/43.69466/-79.39818" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>189 Hay Ave</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.61709&mlon=-79.50825#map=18/43.61709/-79.50825" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>191 Hay Ave</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.61707&mlon=-79.50833#map=18/43.61707/-79.50833" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>5A Kimberley Ave</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68133&mlon=-79.29726#map=18/43.68133/-79.29726" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>5B Kimberley Ave</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68136&mlon=-79.29728#map=18/43.68136/-79.29728" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>17 Kingsley Ave</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66821&mlon=-79.45287#map=18/43.66821/-79.45287" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1316 Kingston Rd</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68503&mlon=-79.27542#map=18/43.68503/-79.27542" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1318 Kingston Rd</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68498&mlon=-79.27531#map=18/43.68498/-79.27531" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1322 Kingston Rd</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68507&mlon=-79.27519#map=18/43.68507/-79.27519" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>589 Oakwood Ave</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69622&mlon=-79.44206#map=18/43.69622/-79.44206" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>591 Oakwood Ave</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69627&mlon=-79.44208#map=18/43.69627/-79.44208" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>7A Orrell Ave</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65632&mlon=-79.52999#map=18/43.65632/-79.52999" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>7B Orrell Ave</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.65629&mlon=-79.53011#map=18/43.65629/-79.53011" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>485 Perth Ave</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66748&mlon=-79.45292#map=18/43.66748/-79.45292" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3025 Queen St E</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67479&mlon=-79.27675#map=18/43.67479/-79.27675" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3027 Queen St E</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67513&mlon=-79.27676#map=18/43.67513/-79.27676" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>75 Queen&#39;s Plate Dr</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71289&mlon=-79.59095#map=18/43.71289/-79.59095" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>9A Relmar Rd</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68900&mlon=-79.41381#map=18/43.68900/-79.41381" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>9B Relmar Rd</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.68905&mlon=-79.41383#map=18/43.68905/-79.41383" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>121 Riverview Dr</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73301&mlon=-79.39205#map=18/43.73301/-79.39205" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>141 Riverview Dr</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73282&mlon=-79.39131#map=18/43.73282/-79.39131" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1210A Roselawn Ave</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69948&mlon=-79.45627#map=18/43.69948/-79.45627" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1210B Roselawn Ave</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.69947&mlon=-79.45632#map=18/43.69947/-79.45632" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>163 Spalding Rd</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73217&mlon=-79.47156#map=18/43.73217/-79.47156" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>165 Spalding Rd</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73216&mlon=-79.47168#map=18/43.73216/-79.47168" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>7 Staffordshire Pl</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.59909&mlon=-79.53199#map=18/43.59909/-79.53199" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>15 Staffordshire Pl</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.59867&mlon=-79.53290#map=18/43.59867/-79.53290" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>5705 Steeles Ave E</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.83314&mlon=-79.26328#map=18/43.83314/-79.26328" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>380 Symington Ave</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.66788&mlon=-79.45239#map=18/43.66788/-79.45239" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1 Talwood Dr</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73812&mlon=-79.35650#map=18/43.73812/-79.35650" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3 Talwood Dr</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73813&mlon=-79.35640#map=18/43.73813/-79.35640" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>48 Tangmere Rd</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.73815&mlon=-79.35623#map=18/43.73815/-79.35623" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>859 The Queensway</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.62414&mlon=-79.50994#map=18/43.62414/-79.50994" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>863 The Queensway</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.62449&mlon=-79.51011#map=18/43.62449/-79.51011" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>865 The Queensway</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.62447&mlon=-79.51019#map=18/43.62447/-79.51019" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>867 The Queensway</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.62445&mlon=-79.51029#map=18/43.62445/-79.51029" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>869 The Queensway</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.62443&mlon=-79.51039#map=18/43.62443/-79.51039" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>871 The Queensway</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.62438&mlon=-79.51057#map=18/43.62438/-79.51057" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>873 The Queensway</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.62436&mlon=-79.51067#map=18/43.62436/-79.51067" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 Vice Regent Blvd</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.71237&mlon=-79.59003#map=18/43.71237/-79.59003" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3340 Weston Rd</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74508&mlon=-79.54135#map=18/43.74508/-79.54135" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3350 Weston Rd</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.74549&mlon=-79.54148#map=18/43.74549/-79.54148" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>8 Wheeler Ave</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.67081&mlon=-79.29934#map=18/43.67081/-79.29934" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+  </details>
+  
+    
+  </div>
+  
+
+  
+  <div class="section">
+    <h2>Boundary Changes <span class="badge badge-teal">0</span></h2>
+    <p class="empty">No ward or municipality reassignments.</p>
+  </div>
+  
+
+  <div class="section">
+    <h2>Location Adjustments <span class="badge" style="background: var(--surface2); color: var(--text-dim)">0</span></h2>
+    
+    <p class="empty">No location adjustments.</p>
+  </div>
+
+  <div class="generated-at">Data pulled Nov 03, 2026 at 11:03 AM · source licence: Open Government Licence – Toronto</div>
+
+  <script>
+    function sortTable(tbodyId, col) {
+      const tbody = document.getElementById(tbodyId);
+      if (!tbody) return;
+      const rows = Array.from(tbody.rows);
+      const dir = tbody.dataset.sortDir === 'asc' ? 'desc' : 'asc';
+      tbody.dataset.sortDir = dir;
+      rows.sort((a, b) => {
+        const av = a.cells[col]?.textContent.trim() || '';
+        const bv = b.cells[col]?.textContent.trim() || '';
+        const an = parseFloat(av), bn = parseFloat(bv);
+        if (!isNaN(an) && !isNaN(bn)) return dir === 'asc' ? an - bn : bn - an;
+        return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+      });
+      rows.forEach(r => tbody.appendChild(r));
+    }
+  </script>
+</body>
+
+</html>
