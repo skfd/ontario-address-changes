@@ -66,6 +66,7 @@ research notes are not rendered; the site links to them here on GitHub.
 | 2026-09 | windsor | 0 | Nothing changed: 30 reads, the file unchanged since 11 June 2026 |
 | 2026-09 | york | +14 | 263 Oxford St in Richmond Hill becomes 263A/B plus 1–10 Direzze Ct (**5 Sep**), ten numbers where Pinewalk's notice (**14 Aug 2025**) proposed two singles and eight semis; 180 and 182 Centre Cres in Aurora become 50 Industrial Pkwy N on a record that reads "merging of 180 and 182 centre", and four Tyler/Temperance lots beside the Aurora United Church–Amica site leave; seven Newmarket "B" units, the letter the Town gives registered ARUs; 12 of 32 additions are lots re-fronted onto other streets; 7030 and 7070 Woodbine swap points |
 | 2026-10 | amherstburg | 0 | Nothing changed: 30 reads, the file unchanged since 20 August 2026 |
+| 2026-10 | barrie | −2,475 | The tracker moves to Barrie's licensed open-data layer (**12 Oct**), which leaves out most *Pending* addresses: 2,504 drop out of view and no address is retired, and 195 Lakeshore Dr, 1 McDonald St and 102 Patterson Rd come back *Current* on the 26th; 20 houses gain a Unit 1 (49 Logan Crt Units 1 and 2), where By-law 2020-010 requires additional units to be registered; ten Durham Ave townhouses (173–193) get a parcel each (**5 Oct**); "new" Peel St is a field quirk; 32 Bradford St appears 87 m from the stadium site |
 
 Toronto's February 2026 is deliberately absent: observation starts 2026-02-12, so its
 first fortnight was never seen. Every city is written from September 2026 on (the
