@@ -77,6 +77,7 @@ research notes are not rendered; the site links to them here on GitHub.
 | 2026-10 | halton-hills | 0 | Nothing changed: 30 reads, the file unchanged since 20 August 2026 |
 | 2026-10 | london | 0 | Nothing changed: 30 reads, the file unchanged since 23 September 2026 |
 | 2026-10 | sarnia | 0 | Nothing changed: 30 reads, the file unchanged since 20 August 2026 |
+| 2026-10 | thunder-bay | 0 | Nothing changed: 30 reads, the file unchanged since 9 September 2026 |
 
 Toronto's February 2026 is deliberately absent: observation starts 2026-02-12, so its
 first fortnight was never seen. Every city is written from September 2026 on (the
