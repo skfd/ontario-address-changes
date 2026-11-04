@@ -75,6 +75,7 @@ research notes are not rendered; the site links to them here on GitHub.
 | 2026-10 | cambridge | 0 | Nothing changed: 30 reads, the file unchanged since 7 August 2026 |
 | 2026-10 | chatham-kent | 0 | Nothing changed: 30 reads, the file unchanged since 30 September 2026 |
 | 2026-10 | cornwall | +12 | 624 and 626 Second St E and 207 Baldwin Av leave the file as 205 Baldwin gains Units A–D (**24 Oct**), four numbers on one polygon that an old listing calls a fourplex, and nothing public says why; 502 and 504 Walton each gain a Unit A (**15 Oct**), four addresses where property.ca lists a fourplex, and 506 gains A–C; 21 and 23 Portland Dr relabelled twice in two days as basement units arrive; 13 of 15 additions are units, with 189 Woodland Dr and 1692 Woodward Ct the only new numbers |
+| 2026-10 | durham | −1 | 3355 Elsa Storry Ave in Pickering had two records 62 m apart, and the one among the 3370s came off (**23 Oct**), so no address left; the same day 3530–3542 Brickyard Dr and 1728–1738 Mineral Springs Way moved 3–5 m north, the only edits on the Region's layer; 35 other doubled addresses remain; nothing public says why for any of them |
 | 2026-10 | halton-hills | 0 | Nothing changed: 30 reads, the file unchanged since 20 August 2026 |
 | 2026-10 | london | 0 | Nothing changed: 30 reads, the file unchanged since 23 September 2026 |
 | 2026-10 | sarnia | 0 | Nothing changed: 30 reads, the file unchanged since 20 August 2026 |
