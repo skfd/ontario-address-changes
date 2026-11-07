@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>City of Kawartha Lakes Address Changes — Saturday, Nov 07, 2026</title>
+  <style>
+    :root {
+      --bg: #fafafa; --surface: #ffffff; --surface2: #f5f5f5; --surface3: #ebebeb;
+      --border: #e0e0e0; --border-strong: #d1d1d1; --text: #242424;
+      --text-secondary: #424242; --text-dim: #616161; --accent: #0078d4;
+      --accent-hover: #106ebe; --accent-bg: #eff6fc; --green: #107c10;
+      --green-bg: #f1faf1; --green-tint: #9fd89f; --red: #c50f1f; --red-bg: #fdf3f4;
+      --red-tint: #eeacb2; --yellow: #eaa300; --yellow-bg: #fefbf4; --yellow-tint: #f9e2ae;
+      --purple: #881798; --purple-bg: #f9f3fb; --teal: #038387; --teal-bg: #f0fafa;
+      --shadow-4: 0 2px 4px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --shadow-8: 0 4px 8px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --card-bg: #ffffff; --card-hover: #f5f5f5; color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1f1f1f; --surface: #292929; --surface2: #333333; --surface3: #3d3d3d;
+        --border: #525252; --border-strong: #666666; --text: #ffffff;
+        --text-secondary: #d6d6d6; --text-dim: #adadad; --accent: #2899f5;
+        --accent-hover: #3aa0f3; --accent-bg: #002848; --green: #54b054;
+        --green-bg: #052505; --green-tint: #107c10; --red: #dc626d; --red-bg: #3b0509;
+        --red-tint: #c50f1f; --yellow: #f2c661; --yellow-bg: #463100; --yellow-tint: #eaa300;
+        --purple: #d29ddb; --purple-bg: #3a1040; --teal: #58c0c4; --teal-bg: #013638;
+        --shadow-4: 0 2px 4px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --shadow-8: 0 4px 8px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --card-bg: #333333; --card-hover: #3d3d3d; color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI Variable','Segoe UI',system-ui,-apple-system,sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.5; padding: 2rem;
+      max-width: 1100px; margin: 0 auto; font-size: 14px; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; color: var(--accent-hover); }
+    .back-link { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 12px;
+      color: var(--text-dim); margin-bottom: 1.5rem; transition: color 0.1s; }
+    .back-link:hover { color: var(--accent); text-decoration: none; }
+    h1 { font-size: 24px; font-weight: 600; margin-bottom: 4px; }
+    .subtitle { color: var(--text-secondary); font-size: 14px; margin-bottom: 12px; }
+    .explainer { color: var(--text-secondary); font-size: 13px; line-height: 1.5;
+      margin-bottom: 24px; padding: 12px 16px; background: var(--surface);
+      border-radius: 8px; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px; margin-bottom: 24px; }
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px;
+      padding: 16px; box-shadow: var(--shadow-4); transition: box-shadow 0.1s; }
+    .card:hover { box-shadow: var(--shadow-8); }
+    .card .label { font-size: 12px; color: var(--text-dim); font-weight: 400; }
+    .card .value { font-size: 28px; font-weight: 600; margin-top: 4px; }
+    .card .value.green { color: var(--green); } .card .value.red { color: var(--red); }
+    .card .value.yellow { color: var(--yellow); } .card .value.accent { color: var(--accent); }
+    .card .value.purple { color: var(--purple); }
+    .card .value.teal { color: var(--teal); }
+    .sparkline { display: block; margin-top: 6px; overflow: visible; opacity: 0.9; }
+    .sparkline-label { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+    .section { margin-bottom: 24px; }
+    .section h2 { font-size: 16px; font-weight: 600; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px; }
+    .badge { font-size: 12px; padding: 2px 8px; border-radius: 999px; font-weight: 600; }
+    .badge-green { background: var(--green-bg); color: var(--green); }
+    .badge-red { background: var(--red-bg); color: var(--red); }
+    .badge-yellow { background: var(--yellow-bg); color: var(--yellow); }
+    .badge-accent { background: var(--accent-bg); color: var(--accent); }
+    .badge-purple { background: var(--purple-bg); color: var(--purple); }
+    .badge-teal { background: var(--teal-bg); color: var(--teal); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface);
+      border-radius: 8px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    thead { background: var(--surface2); }
+    th { text-align: left; padding: 8px 12px; font-weight: 600; color: var(--text-dim);
+      font-size: 12px; cursor: pointer; user-select: none; border-bottom: 1px solid var(--border); }
+    th:hover { color: var(--accent); }
+    td { padding: 8px 12px; border-top: 1px solid var(--border); }
+    tr:hover td { background: var(--surface2); }
+    .old-val { color: var(--red); text-decoration: line-through; }
+    .new-val { color: var(--green); }
+    .arrow-val { color: var(--text-dim); text-align: center; white-space: nowrap; }
+    .map-link { display: inline-flex; align-items: center; margin-left: 0.4em;
+      color: var(--accent); vertical-align: middle; white-space: nowrap; font-size: 12px; }
+    .map-link:hover { color: var(--accent-hover); }
+    .map-link svg { width: 14px; height: 14px; }
+    .change-field { color: var(--yellow); font-weight: 600; }
+    .bar-chart { margin-top: 8px; }
+    .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 12px; }
+    .bar-label { width: 180px; text-align: right; color: var(--text-secondary); flex-shrink: 0;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .bar-track { flex: 1; height: 8px; background: var(--surface2); border-radius: 4px;
+      overflow: hidden; position: relative; }
+    .bar-fill { height: 100%; border-radius: 4px; transition: width 0.15s ease; }
+    .bar-fill.green { background: var(--green); } .bar-fill.red { background: var(--red); }
+    .bar-count { width: 40px; font-size: 12px; color: var(--text-dim); }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+    .empty { color: var(--text-dim); font-style: italic; padding: 16px; }
+    .truncated { color: var(--text-dim); font-size: 12px; margin-top: 8px; }
+    .collapsible-toggle { background: transparent; border: 1px solid var(--border);
+      color: var(--accent); padding: 5px 12px; border-radius: 4px; cursor: pointer;
+      font-size: 12px; font-family: inherit; margin-bottom: 12px; transition: background 0.1s; }
+    .collapsible-toggle:hover { background: var(--surface2); }
+    details.rename-group { background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; margin-bottom: 8px; box-shadow: var(--shadow-4); }
+    details.rename-group summary { padding: 10px 14px; cursor: pointer; font-size: 13px; }
+    details.rename-group[open] summary { border-bottom: 1px solid var(--border); }
+    details.rename-group table { border: none; box-shadow: none; border-radius: 0; }
+    details.rename-group .truncated { padding: 0 14px 10px; margin-top: 0; }
+    .rename-count { color: var(--text-dim); font-size: 12px; margin-left: 6px; }
+    .no-changes-banner { background: var(--green-bg); border: 1px solid var(--green-tint);
+      color: var(--green); padding: 16px; border-radius: 8px; margin-bottom: 24px;
+      text-align: center; font-weight: 600; font-size: 14px; }
+    .baseline-banner { background: var(--accent-bg); border: 1px solid var(--accent);
+      color: var(--accent); padding: 16px; border-radius: 8px; margin-bottom: 24px; font-size: 13px; }
+    .generated-at { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-dim); }
+    .history { font-size: 12.5px; color: var(--text-secondary); white-space: nowrap; }
+    .history .a { color: var(--green); font-weight: 500; }
+    .history .r { color: var(--red); font-weight: 500; }
+    .history .dot { color: var(--text-dim); margin: 0 4px; }
+    .history-none { color: var(--text-dim); font-style: italic; font-size: 12.5px; }
+    .info-wrap { position: relative; display: inline-flex; vertical-align: middle; }
+    .info-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+      height: 18px; padding: 0 8px 0 7px; border-radius: 999px; border: none;
+      color: #fff; background: var(--accent); cursor: help; font-size: 11px; font-weight: 600;
+      font-style: normal; font-family: inherit; line-height: 1; white-space: nowrap; }
+    .info-btn .glyph { font-style: italic; font-weight: 700;
+      font-family: Georgia, 'Times New Roman', serif; }
+    .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn,
+    .info-wrap:focus .info-btn { background: var(--accent-hover); }
+    .info-pop { display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 20;
+      width: 320px; max-width: 80vw; padding: 12px 14px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-8);
+      font-size: 12.5px; font-weight: 400; color: var(--text-secondary); line-height: 1.5; }
+    .info-wrap:hover .info-pop, .info-wrap:focus-within .info-pop,
+    .info-wrap:focus .info-pop { display: block; }
+    .info-pop strong { display: block; color: var(--text); font-size: 12px; margin-bottom: 4px; }
+    .info-pop ul { list-style: none; margin: 0 0 10px; padding: 0; }
+    .info-pop li { padding: 1px 0 1px 14px; position: relative; }
+    .info-pop li::before { content: "·"; position: absolute; left: 4px; color: var(--text-dim); }
+    .info-pop .note { color: var(--text-dim); font-size: 11.5px; margin: 0 0 10px; }
+    .info-pop .muted { color: var(--text-dim); font-style: italic; }
+  </style>
+<script data-goatcounter="https://osm-ontario.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+
+  <a class="back-link" href="index.html">← Back to City of Kawartha Lakes reports</a>
+
+  <h1>City of Kawartha Lakes — Address Changes</h1>
+  <p class="subtitle">
+    Changes between  and Saturday, Nov 07, 2026
+    · 44,233 total addresses
+  </p>
+
+  
+
+  <div class="cards">
+    <div class="card"><div class="label">Total Addresses</div>
+      <div class="value accent">44,233</div></div>
+    <div class="card"><div class="label">New Addresses</div>
+      <div class="value green">+1</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#107c10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,2.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#107c10"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Retired Addresses</div>
+      <div class="value red">−29</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#c50f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,17.4 55.0,16.9 72.7,14.1 90.3,18.0 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#c50f1f"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Updated Addresses <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (StreetNumber)</li><li>Street name (StreetNameFull)</li><li>Unit (UnitNumber)</li><li>Full address (FullAddress)</li><li>Coordinates (latitude, longitude)</li><li>ARUApproved</li><li>AddressID</li><li>HwyCountyNum</li><li>MultiUnitLot</li><li>PlaceName</li><li>SingleLowerTier</li><li>StreetNameAlt</li><li>StreetNumberPrefix</li><li>StreetNumberSuffix</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>StreetAddress</li><li>StreetDirectionAbrv</li><li>StreetDirectionSuffix</li><li>StreetNameBody</li><li>StreetNumSuffixConcat</li><li>StreetSegmentID</li><li>StreetTypeSuffix</li><li>StreetTypeSuffixAbrv</li><li>Xlong</li><li>Ylat</li></ul>
+      
+    </span>
+  </span></div>
+      <div class="value yellow">5</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,11.4 37.3,16.1 55.0,6.7 72.7,2.0 90.3,11.4 108.0,13.3"/><circle cx="108.0" cy="13.3" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Renumbered</div>
+      <div class="value accent">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#0078d4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,2.0 55.0,18.0 72.7,2.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#0078d4"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Street Renames</div>
+      <div class="value purple">91</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#9141ac" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,14.7 90.3,18.0 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#9141ac"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    
+    <div class="card"><div class="label">Boundary Changes</div>
+      <div class="value teal">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#038387" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#038387"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    <div class="card"><div class="label">Location Adjustments</div>
+      <div class="value" style="color: var(--text-dim)">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#808080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,16.9 55.0,18.0 72.7,2.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#808080"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+  </div>
+
+  
+  <div class="section">
+    <h2>Change Breakdown</h2>
+    <div class="stats-grid">
+      
+      
+      
+      <div class="card"><div class="label">Most Frequently Updated Fields</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">Full Address</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">96</span></div>
+        <div class="bar-row"><span class="bar-label">Street</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:98.0%"></div></div>
+          <span class="bar-count">94</span></div>
+        <div class="bar-row"><span class="bar-label">HwyCountyNum</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:1.0%"></div></div>
+          <span class="bar-count">1</span></div>
+        <div class="bar-row"><span class="bar-label">Location</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:1.0%"></div></div>
+          <span class="bar-count">1</span></div>
+        <div class="bar-row"><span class="bar-label">StreetNameAlt</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:1.0%"></div></div>
+          <span class="bar-count">1</span></div>
+      </div></div>
+    </div>
+  </div>
+  
+
+  <div class="section">
+    <h2>New Addresses <span class="badge badge-green">1</span></h2>
+    
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-added',0)">Address</th><th onclick="sortTable('t-added',1)">Street</th>
+        <th onclick="sortTable('t-added',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-added">
+        
+        <tr><td>671 Esker Road, Emily Twp, Kawartha Lakes</td><td>Esker Road</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.36042&mlon=-78.61989#map=18/44.36042/-78.61989" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Retired Addresses <span class="badge badge-red">29</span></h2>
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-removed',0)">Address</th><th onclick="sortTable('t-removed',1)">Street</th>
+        <th onclick="sortTable('t-removed',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-removed">
+        
+        <tr><td>47 Beaver Point Road, Laxton Twp, Kawartha Lakes</td><td>Beaver Point Road</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.71864&mlon=-78.79658#map=18/44.71864/-78.79658" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>4382 Boundary Road, Manvers Twp, Kawartha Lakes</td><td>Boundary Road</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.09142&mlon=-78.56327#map=18/44.09142/-78.56327" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1009 Centreline Road, Emily Twp, Kawartha Lakes</td><td>Centreline Road</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.42797&mlon=-78.56656#map=18/44.42797/-78.56656" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>122 Cosh&#39;s Road, Verulam Twp, Kawartha Lakes</td><td>Cosh&#39;s Road</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.55118&mlon=-78.57650#map=18/44.55118/-78.57650" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>280 Digby/Laxton Boundary Road, Laxton Twp, Kawartha Lakes</td><td>Digby/Laxton Boundary Road</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.72878&mlon=-78.97945#map=18/44.72878/-78.97945" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>545 Esker Road, Emily Twp, Kawartha Lakes</td><td>Esker Road</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.36042&mlon=-78.61989#map=18/44.36042/-78.61989" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>671 Esker Road, Emily Twp, Kawartha Lakes</td><td>Esker Road</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.36042&mlon=-78.61989#map=18/44.36042/-78.61989" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1161 Frank Hill Road, Emily Twp, Kawartha Lakes</td><td>Frank Hill Road</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.37113&mlon=-78.47474#map=18/44.37113/-78.47474" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>111 Hazel Street, Verulam Twp, Kawartha Lakes</td><td>Hazel Street</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.47440&mlon=-78.66293#map=18/44.47440/-78.66293" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>4178 Highway 7, Emily Twp, Kawartha Lakes</td><td>Highway 7</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.30283&mlon=-78.53631#map=18/44.30283/-78.53631" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>380 Highway 7A, Manvers Twp, Kawartha Lakes</td><td>Highway 7A</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.16300&mlon=-78.68988#map=18/44.16300/-78.68988" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1258 Kawartha Lakes Road 8, Verulam Twp, Kawartha Lakes</td><td>Kawartha Lakes Road 8</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.53103&mlon=-78.64600#map=18/44.53103/-78.64600" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1624 Kirkfield Road, Eldon Twp, Kawartha Lakes</td><td>Kirkfield Road</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.54897&mlon=-78.98074#map=18/44.54897/-78.98074" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>39 Leslie Frost Lane, Pleasant Point (Fenelon), Kawartha Lakes</td><td>Leslie Frost Lane</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.45169&mlon=-78.70730#map=18/44.45169/-78.70730" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2 Lifford Road, Manvers Twp, Kawartha Lakes</td><td>Lifford Road</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.18108&mlon=-78.67673#map=18/44.18108/-78.67673" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>176 Lifford Road, Manvers Twp, Kawartha Lakes</td><td>Lifford Road</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.18801&mlon=-78.65748#map=18/44.18801/-78.65748" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>88 - 6 Mary Street West, Lindsay, Kawartha Lakes</td><td>Mary Street West</td><td>6</td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.34560&mlon=-78.73831#map=18/44.34560/-78.73831" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>574 Monck Road, Dalton Twp, Kawartha Lakes</td><td>Monck Road</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.72102&mlon=-79.11438#map=18/44.72102/-79.11438" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>2704 Monck Road, Laxton Twp, Kawartha Lakes</td><td>Monck Road</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.71748&mlon=-78.90166#map=18/44.71748/-78.90166" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>406 North Mountain Road, Bexley Twp, Kawartha Lakes</td><td>North Mountain Road</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.65376&mlon=-78.91654#map=18/44.65376/-78.91654" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>311 Oliver&#39;s Road, Verulam Twp, Kawartha Lakes</td><td>Oliver&#39;s Road</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.57571&mlon=-78.57457#map=18/44.57571/-78.57457" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>704 Pigeon Lake Road, Ops Twp, Kawartha Lakes</td><td>Pigeon Lake Road</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.37537&mlon=-78.64673#map=18/44.37537/-78.64673" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>79 Portage Road, Eldon Twp, Kawartha Lakes</td><td>Portage Road</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.51917&mlon=-79.07555#map=18/44.51917/-79.07555" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>148 Queen Street, Lindsay, Kawartha Lakes</td><td>Queen Street</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.36103&mlon=-78.72260#map=18/44.36103/-78.72260" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>119 Ridge Drive, Bexley Twp, Kawartha Lakes</td><td>Ridge Drive</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.56035&mlon=-78.86509#map=18/44.56035/-78.86509" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>1059 Settlers Road, Ops Twp, Kawartha Lakes</td><td>Settlers Road</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.41231&mlon=-78.68826#map=18/44.41231/-78.68826" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>588 Sturgeon Road, Emily Twp, Kawartha Lakes</td><td>Sturgeon Road</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.35170&mlon=-78.58346#map=18/44.35170/-78.58346" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>60 West Street, Bobcaygeon, Kawartha Lakes</td><td>West Street</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.54173&mlon=-78.55690#map=18/44.54173/-78.55690" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>255 West Street South, Fenelon Twp, Kawartha Lakes</td><td>West Street South</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-11</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.50992&mlon=-78.73225#map=18/44.50992/-78.73225" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Updated Addresses <span class="badge badge-yellow">5</span>
+      <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (StreetNumber)</li><li>Street name (StreetNameFull)</li><li>Unit (UnitNumber)</li><li>Full address (FullAddress)</li><li>Coordinates (latitude, longitude)</li><li>ARUApproved</li><li>AddressID</li><li>HwyCountyNum</li><li>MultiUnitLot</li><li>PlaceName</li><li>SingleLowerTier</li><li>StreetNameAlt</li><li>StreetNumberPrefix</li><li>StreetNumberSuffix</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>StreetAddress</li><li>StreetDirectionAbrv</li><li>StreetDirectionSuffix</li><li>StreetNameBody</li><li>StreetNumSuffixConcat</li><li>StreetSegmentID</li><li>StreetTypeSuffix</li><li>StreetTypeSuffixAbrv</li><li>Xlong</li><li>Ylat</li></ul>
+      
+    </span>
+  </span></h2>
+    
+    
+    <table>
+      <thead><tr><th>Address</th><th>What Changed</th><th>Before</th><th></th><th>After</th><th>Map</th></tr></thead>
+      <tbody>
+        
+  <tr><td rowspan="3">734 Eldon Road, Mariposa Twp, Kawartha Lakes</td>
+    <td class="change-field">Street</td>
+    <td class="old-val">Eldon Drive</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Eldon Road</td>
+    <td rowspan="3"><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.31235&mlon=-78.87245#map=18/44.31235/-78.87245" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">734 Eldon Drive, Mariposa Twp, Kawartha Lakes</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">734 Eldon Road, Mariposa Twp, Kawartha Lakes</td>
+    </tr>
+  <tr>
+    <td class="change-field">Location</td>
+    <td class="old-val">44.30050, -78.91667<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.30050&mlon=-78.91667#map=19/44.30050/-78.91667" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    <td class="arrow-val">→ 3761.6m</td>
+    <td class="new-val">44.31235, -78.87245<a class="map-link" href="https://www.openstreetmap.org/?mlat=44.31235&mlon=-78.87245#map=19/44.31235/-78.87245" target="_blank" rel="noopener" title="View on OpenStreetMap">↗</a></td>
+    </tr>
+  <tr><td rowspan="3">101 Shadow Lake Road 53 Bexley Twp, Kawartha Lakes</td>
+    <td class="change-field">Street</td>
+    <td class="old-val">Rockfern Road</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Shadow Lake Road 53</td>
+    <td rowspan="3"><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.67856&mlon=-78.79577#map=18/44.67856/-78.79577" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">101 Rockfern Road, Bexley Twp, Kawartha Lakes</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">101 Shadow Lake Road 53 Bexley Twp, Kawartha Lakes</td>
+    </tr>
+  <tr>
+    <td class="change-field">StreetNameAlt</td>
+    <td class="old-val">Shadow Lake Road 53</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Rockfern Road</td>
+    </tr>
+  <tr><td rowspan="3">166 Springdale Drive, Lindsay, Kawartha Lakes</td>
+    <td class="change-field">Street</td>
+    <td class="old-val">Angeline Street North</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">Springdale Drive</td>
+    <td rowspan="3"><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.37264&mlon=-78.75972#map=18/44.37264/-78.75972" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">166 Angeline Street North, Lindsay, Kawartha Lakes</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">166 Springdale Drive, Lindsay, Kawartha Lakes</td>
+    </tr>
+  <tr>
+    <td class="change-field">HwyCountyNum</td>
+    <td class="old-val">4</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">—</td>
+    </tr>
+  <tr><td rowspan="1">93 Sugarbush Trail, Fenelon Twp, Kawartha Lakes</td>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">93 Sugar Bush Trail, Fenelon Twp, Kawartha Lakes</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">93 Sugarbush Trail, Fenelon Twp, Kawartha Lakes</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.54702&mlon=-78.74879#map=18/44.54702/-78.74879" target="_blank" rel="noopener">View ↗</a></td></tr>
+  <tr><td rowspan="1">102 Sugarbush Trail, Fenelon Twp, Kawartha Lakes</td>
+    <td class="change-field">Full Address</td>
+    <td class="old-val">102 Sugar Bush Trail, Fenelon Twp, Kawartha Lakes</td>
+    <td class="arrow-val"></td>
+    <td class="new-val">102 Sugarbush Trail, Fenelon Twp, Kawartha Lakes</td>
+    <td rowspan="1"><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.54616&mlon=-78.74975#map=18/44.54616/-78.74975" target="_blank" rel="noopener">View ↗</a></td></tr>
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Renumbered Addresses <span class="badge badge-accent">0</span></h2>
+    
+    <p class="empty">No addresses renumbered.</p>
+  </div>
+
+  <div class="section">
+    <h2>Street Renames <span class="badge badge-purple">91</span></h2>
+    
+    
+    <details class="rename-group">
+      <summary><span class="old-val">Bond Street</span> <span class="arrow-val">→</span> <span class="new-val">Bond Street East</span><span class="rename-count">35 addresses</span></summary>
+      <table>
+        <tbody>
+          
+          <tr><td>7 Bond Street East, Fenelon Falls, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.53797&mlon=-78.73432#map=18/44.53797/-78.73432" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>8 Bond Street East, Fenelon Falls, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.53771&mlon=-78.73499#map=18/44.53771/-78.73499" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>12 Bond Street East, Fenelon Falls, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.53748&mlon=-78.73491#map=18/44.53748/-78.73491" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>16 Bond Street East, Fenelon Falls, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.53738&mlon=-78.73474#map=18/44.53738/-78.73474" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>20 Bond Street East, Fenelon Falls, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.53727&mlon=-78.73457#map=18/44.53727/-78.73457" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>24 Bond Street East, Fenelon Falls, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.53717&mlon=-78.73440#map=18/44.53717/-78.73440" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>25 Bond Street East, Fenelon Falls, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.53759&mlon=-78.73388#map=18/44.53759/-78.73388" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>28 Bond Street East, Fenelon Falls, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.53707&mlon=-78.73424#map=18/44.53707/-78.73424" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>32 Bond Street East, Fenelon Falls, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.53697&mlon=-78.73408#map=18/44.53697/-78.73408" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>36 Bond Street East, Fenelon Falls, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.53686&mlon=-78.73391#map=18/44.53686/-78.73391" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>40 Bond Street East, Fenelon Falls, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.53676&mlon=-78.73374#map=18/44.53676/-78.73374" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>44 Bond Street East, Fenelon Falls, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.53665&mlon=-78.73357#map=18/44.53665/-78.73357" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>47 Bond Street East, Fenelon Falls, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.53708&mlon=-78.73282#map=18/44.53708/-78.73282" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>48 Bond Street East, Fenelon Falls, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.53655&mlon=-78.73341#map=18/44.53655/-78.73341" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>52 Bond Street East, Fenelon Falls, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.53644&mlon=-78.73324#map=18/44.53644/-78.73324" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>56 Bond Street East, Fenelon Falls, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.53644&mlon=-78.73299#map=18/44.53644/-78.73299" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>60 Bond Street East, Fenelon Falls, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.53634&mlon=-78.73283#map=18/44.53634/-78.73283" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>63 Bond Street East, Fenelon Falls, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.53661&mlon=-78.73209#map=18/44.53661/-78.73209" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>64 Bond Street East, Fenelon Falls, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.53603&mlon=-78.73241#map=18/44.53603/-78.73241" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>72 Bond Street East, Fenelon Falls, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.53578&mlon=-78.73222#map=18/44.53578/-78.73222" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>76 Bond Street East, Fenelon Falls, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.53566&mlon=-78.73200#map=18/44.53566/-78.73200" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>77 Bond Street East, Fenelon Falls, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.53619&mlon=-78.73140#map=18/44.53619/-78.73140" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>83 Bond Street East, Fenelon Falls, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.53600&mlon=-78.73120#map=18/44.53600/-78.73120" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>84 Bond Street East, Fenelon Falls, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.53548&mlon=-78.73177#map=18/44.53548/-78.73177" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>87 Bond Street East, Fenelon Falls, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.53556&mlon=-78.73058#map=18/44.53556/-78.73058" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>90 Bond Street East, Fenelon Falls, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.53534&mlon=-78.73151#map=18/44.53534/-78.73151" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>95 Bond Street East, Fenelon Falls, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.53553&mlon=-78.73029#map=18/44.53553/-78.73029" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>96 Bond Street East, Fenelon Falls, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.53524&mlon=-78.73133#map=18/44.53524/-78.73133" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>98 Bond Street East, Fenelon Falls, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.53518&mlon=-78.73122#map=18/44.53518/-78.73122" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>102 Bond Street East, Fenelon Falls, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.53506&mlon=-78.73109#map=18/44.53506/-78.73109" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>106 Bond Street East, Fenelon Falls, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.53497&mlon=-78.73089#map=18/44.53497/-78.73089" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>110 Bond Street East, Fenelon Falls, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.53486&mlon=-78.73072#map=18/44.53486/-78.73072" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>118 Bond Street East, Fenelon Falls, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.53471&mlon=-78.73046#map=18/44.53471/-78.73046" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>124 Bond Street East, Fenelon Falls, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.53454&mlon=-78.73019#map=18/44.53454/-78.73019" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>128 Bond Street East, Fenelon Falls, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.53440&mlon=-78.72996#map=18/44.53440/-78.72996" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+      
+    </details>
+    
+    <details class="rename-group">
+      <summary><span class="old-val">Sugar Bush Trail</span> <span class="arrow-val">→</span> <span class="new-val">Sugarbush Trail</span><span class="rename-count">33 addresses</span></summary>
+      <table>
+        <tbody>
+          
+          <tr><td>2 Sugarbush Trail, Fenelon Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.55434&mlon=-78.74425#map=18/44.55434/-78.74425" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>4 Sugarbush Trail, Fenelon Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.55381&mlon=-78.74444#map=18/44.55381/-78.74444" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>7 Sugarbush Trail, Fenelon Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.55349&mlon=-78.74402#map=18/44.55349/-78.74402" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>14 Sugarbush Trail, Fenelon Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.55337&mlon=-78.74515#map=18/44.55337/-78.74515" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>17 Sugarbush Trail, Fenelon Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.55271&mlon=-78.74483#map=18/44.55271/-78.74483" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>20 Sugarbush Trail, Fenelon Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.55300&mlon=-78.74571#map=18/44.55300/-78.74571" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>22 Sugarbush Trail, Fenelon Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.55282&mlon=-78.74605#map=18/44.55282/-78.74605" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>27 Sugarbush Trail, Fenelon Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.55203&mlon=-78.74545#map=18/44.55203/-78.74545" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>28 Sugarbush Trail, Fenelon Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.55229&mlon=-78.74636#map=18/44.55229/-78.74636" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>34 Sugarbush Trail, Fenelon Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.55212&mlon=-78.74673#map=18/44.55212/-78.74673" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>35 Sugarbush Trail, Fenelon Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.55158&mlon=-78.74595#map=18/44.55158/-78.74595" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>37 Sugarbush Trail, Fenelon Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.55136&mlon=-78.74611#map=18/44.55136/-78.74611" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>41 Sugarbush Trail, Fenelon Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.55115&mlon=-78.74628#map=18/44.55115/-78.74628" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>42 Sugarbush Trail, Fenelon Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.55131&mlon=-78.74722#map=18/44.55131/-78.74722" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>43 Sugarbush Trail, Fenelon Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.55094&mlon=-78.74654#map=18/44.55094/-78.74654" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>46 Sugarbush Trail, Fenelon Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.55108&mlon=-78.74749#map=18/44.55108/-78.74749" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>47 Sugarbush Trail, Fenelon Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.55067&mlon=-78.74667#map=18/44.55067/-78.74667" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>51 Sugarbush Trail, Fenelon Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.55039&mlon=-78.74673#map=18/44.55039/-78.74673" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>52 Sugarbush Trail, Fenelon Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.55144&mlon=-78.74648#map=18/44.55144/-78.74648" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>55 Sugarbush Trail, Fenelon Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.55014&mlon=-78.74683#map=18/44.55014/-78.74683" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>57 Sugarbush Trail, Fenelon Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.54978&mlon=-78.74703#map=18/44.54978/-78.74703" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>58 Sugarbush Trail, Fenelon Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.54952&mlon=-78.74759#map=18/44.54952/-78.74759" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>83 Sugarbush Trail, Fenelon Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.54790&mlon=-78.74792#map=18/44.54790/-78.74792" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>84 Sugarbush Trail, Fenelon Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.54802&mlon=-78.74893#map=18/44.54802/-78.74893" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>85 Sugarbush Trail, Fenelon Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.54767&mlon=-78.74812#map=18/44.54767/-78.74812" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>86 Sugarbush Trail, Fenelon Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.54777&mlon=-78.74906#map=18/44.54777/-78.74906" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>87 Sugarbush Trail, Fenelon Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.54743&mlon=-78.74829#map=18/44.54743/-78.74829" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>89 Sugarbush Trail, Fenelon Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.54721&mlon=-78.74853#map=18/44.54721/-78.74853" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>90 Sugarbush Trail, Fenelon Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.54762&mlon=-78.74942#map=18/44.54762/-78.74942" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>94 Sugarbush Trail, Fenelon Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.54737&mlon=-78.74955#map=18/44.54737/-78.74955" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>97 Sugarbush Trail, Fenelon Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.54674&mlon=-78.74903#map=18/44.54674/-78.74903" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>98 Sugarbush Trail, Fenelon Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.54714&mlon=-78.74972#map=18/44.54714/-78.74972" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>100 Sugarbush Trail, Fenelon Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.54687&mlon=-78.74999#map=18/44.54687/-78.74999" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+      
+    </details>
+    
+    <details class="rename-group">
+      <summary><span class="old-val">Ball Isle Island</span> <span class="arrow-val">→</span> <span class="new-val">Ball Island</span><span class="rename-count">9 addresses</span></summary>
+      <table>
+        <tbody>
+          
+          <tr><td>2 Ball Island, Bexley Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.60968&mlon=-78.80776#map=18/44.60968/-78.80776" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>20 Ball Island, Bexley Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.61050&mlon=-78.80794#map=18/44.61050/-78.80794" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>28 Ball Island, Bexley Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.61173&mlon=-78.80738#map=18/44.61173/-78.80738" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>40 Ball Island, Bexley Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.61208&mlon=-78.80651#map=18/44.61208/-78.80651" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>58 Ball Island, Bexley Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.61304&mlon=-78.80545#map=18/44.61304/-78.80545" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>76 Ball Island, Bexley Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.61257&mlon=-78.80494#map=18/44.61257/-78.80494" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>86 Ball Island, Bexley Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.61168&mlon=-78.80536#map=18/44.61168/-78.80536" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>94 Ball Island, Bexley Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.61114&mlon=-78.80586#map=18/44.61114/-78.80586" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>102 Ball Island, Bexley Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.61061&mlon=-78.80642#map=18/44.61061/-78.80642" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+      
+    </details>
+    
+    <details class="rename-group">
+      <summary><span class="old-val">Stone Gate Road</span> <span class="arrow-val">→</span> <span class="new-val">Stonegate Drive</span><span class="rename-count">3 addresses</span></summary>
+      <table>
+        <tbody>
+          
+          <tr><td>102 Stonegate Drive, Bexley Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.58549&mlon=-78.87220#map=18/44.58549/-78.87220" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>104 Stonegate Drive, Bexley Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.58553&mlon=-78.87194#map=18/44.58553/-78.87194" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>106 Stonegate Drive, Bexley Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.58560&mlon=-78.87167#map=18/44.58560/-78.87167" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+      
+    </details>
+    
+    <details class="rename-group">
+      <summary><span class="old-val">County Road 36</span> <span class="arrow-val">→</span> <span class="new-val">Kawartha Lakes Road 36</span><span class="rename-count">2 addresses</span></summary>
+      <table>
+        <tbody>
+          
+          <tr><td>1202C Kawartha Lakes Road 36, Ops Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.41348&mlon=-78.69183#map=18/44.41348/-78.69183" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+          <tr><td>1202 Kawartha Lakes Road 36, Ops Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.41468&mlon=-78.69241#map=18/44.41468/-78.69241" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+      
+    </details>
+    
+    <details class="rename-group">
+      <summary><span class="old-val">Bayview Road</span> <span class="arrow-val">→</span> <span class="new-val">Bayview Drive</span><span class="rename-count">1 address</span></summary>
+      <table>
+        <tbody>
+          
+          <tr><td>14 Bayview Drive, Somerville Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.62253&mlon=-78.80496#map=18/44.62253/-78.80496" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+      
+    </details>
+    
+    <details class="rename-group">
+      <summary><span class="old-val">County Road 121</span> <span class="arrow-val">→</span> <span class="new-val">Kawartha Lakes Road 121</span><span class="rename-count">1 address</span></summary>
+      <table>
+        <tbody>
+          
+          <tr><td>1089 Kawartha Lakes Road 121, Verulam Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.56386&mlon=-78.71209#map=18/44.56386/-78.71209" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+      
+    </details>
+    
+    <details class="rename-group">
+      <summary><span class="old-val">County Road 41</span> <span class="arrow-val">→</span> <span class="new-val">Kawartha Lakes Road 41</span><span class="rename-count">1 address</span></summary>
+      <table>
+        <tbody>
+          
+          <tr><td>259 Kawartha Lakes Road 41, Bexley Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.64065&mlon=-78.90386#map=18/44.64065/-78.90386" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+      
+    </details>
+    
+    <details class="rename-group">
+      <summary><span class="old-val">George Street North</span> <span class="arrow-val">→</span> <span class="new-val">George Street</span><span class="rename-count">1 address</span></summary>
+      <table>
+        <tbody>
+          
+          <tr><td>1 George Street, Bethany, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.18276&mlon=-78.56919#map=18/44.18276/-78.56919" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+      
+    </details>
+    
+    <details class="rename-group">
+      <summary><span class="old-val">Queen Street</span> <span class="arrow-val">→</span> <span class="new-val">Queen Street South</span><span class="rename-count">1 address</span></summary>
+      <table>
+        <tbody>
+          
+          <tr><td>65 Queen Street South, Omemee, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.29599&mlon=-78.55221#map=18/44.29599/-78.55221" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+      
+    </details>
+    
+    <details class="rename-group">
+      <summary><span class="old-val">Snug Harbour</span> <span class="arrow-val">→</span> <span class="new-val">Snug Harbour Road</span><span class="rename-count">1 address</span></summary>
+      <table>
+        <tbody>
+          
+          <tr><td>318 Snug Harbour Road, Snug Harbour, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.43624&mlon=-78.71850#map=18/44.43624/-78.71850" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+      
+    </details>
+    
+    <details class="rename-group">
+      <summary><span class="old-val">Sugar Bush Trail</span> <span class="arrow-val">→</span> <span class="new-val">Sugar Bush Road</span><span class="rename-count">1 address</span></summary>
+      <table>
+        <tbody>
+          
+          <tr><td>70 Sugar Bush Road, Manvers Twp, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.16941&mlon=-78.73547#map=18/44.16941/-78.73547" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+      
+    </details>
+    
+    <details class="rename-group">
+      <summary><span class="old-val">West Street</span> <span class="arrow-val">→</span> <span class="new-val">West Street North</span><span class="rename-count">1 address</span></summary>
+      <table>
+        <tbody>
+          
+          <tr><td>66 West Street North, Fenelon Falls, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.53625&mlon=-78.74399#map=18/44.53625/-78.74399" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+      
+    </details>
+    
+    <details class="rename-group">
+      <summary><span class="old-val">William Street</span> <span class="arrow-val">→</span> <span class="new-val">William Street North</span><span class="rename-count">1 address</span></summary>
+      <table>
+        <tbody>
+          
+          <tr><td>459 William Street North, Lindsay, Kawartha Lakes</td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=44.37801&mlon=-78.75109#map=18/44.37801/-78.75109" target="_blank" rel="noopener">View ↗</a></td></tr>
+          
+        </tbody>
+      </table>
+      
+    </details>
+    
+    
+  </div>
+
+  
+
+  
+
+  
+  <div class="section">
+    <h2>Boundary Changes <span class="badge badge-teal">0</span></h2>
+    <p class="empty">No ward or municipality reassignments.</p>
+  </div>
+  
+
+  <div class="section">
+    <h2>Location Adjustments <span class="badge" style="background: var(--surface2); color: var(--text-dim)">0</span></h2>
+    
+    <p class="empty">No location adjustments.</p>
+  </div>
+
+  <div class="generated-at">Data pulled Nov 07, 2026 at 11:06 AM · source licence: None published (disclaimer only, confirmed 2026-08-20)</div>
+
+  <script>
+    function sortTable(tbodyId, col) {
+      const tbody = document.getElementById(tbodyId);
+      if (!tbody) return;
+      const rows = Array.from(tbody.rows);
+      const dir = tbody.dataset.sortDir === 'asc' ? 'desc' : 'asc';
+      tbody.dataset.sortDir = dir;
+      rows.sort((a, b) => {
+        const av = a.cells[col]?.textContent.trim() || '';
+        const bv = b.cells[col]?.textContent.trim() || '';
+        const an = parseFloat(av), bn = parseFloat(bv);
+        if (!isNaN(an) && !isNaN(bn)) return dir === 'asc' ? an - bn : bn - an;
+        return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+      });
+      rows.forEach(r => tbody.appendChild(r));
+    }
+  </script>
+</body>
+
+</html>
