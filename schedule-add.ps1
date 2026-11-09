@@ -1,4 +1,4 @@
-# Registers two scheduled tasks:
+# Registers the scheduled tasks (see each block below for the rest):
 #   kk-ontario-update   daily 12:00  daily-update.ps1 (parallel update of all
 #                       datasets, then commit + push docs). New cities in
 #                       datasets\*.toml are picked up automatically.
@@ -85,3 +85,35 @@ $flagsSettings = New-ScheduledTaskSettingsSet `
 Register-ScheduledTask -TaskName $flagsTask -Action $flagsAction -Trigger $flagsTrigger -Settings $flagsSettings -Force | Out-Null
 
 Write-Host ("Registered {0}: hourly 18:00-22:00 via review-flags.ps1, log: {1}" -f $flagsTask, $flagsLog)
+
+# The off-machine backup: vault restic repo + catalog + stores to two restic
+# repos, Google Drive and Backblaze B2. 14:20 sits after the noon run's retry
+# budget (~2 h), and backup-offsite.ps1 waits for it anyway if it is still going.
+# Skipped until at least one destination is configured (see the header of
+# backup-offsite.ps1), so a fresh machine does not fail every day.
+$backupTask   = "kk-ontario-backup"
+$backupAt     = Get-Date "14:20"
+$backupLog    = "$projectDir\logs\backup.log"
+$backupScript = "$projectDir\backup-offsite.ps1"
+$backupDests  = @(& powershell -NoProfile -ExecutionPolicy Bypass -File $backupScript -ListDestinations)
+
+if ($backupDests) {
+    $backupAction = New-ScheduledTaskAction `
+        -Execute "powershell.exe" `
+        -Argument "-NoProfile -ExecutionPolicy Bypass -File `"$backupScript`""
+
+    $backupTrigger = New-ScheduledTaskTrigger -Daily -At $backupAt
+
+    # Long limit: a day's delta is small, but a laptop off for a week, or a
+    # Sunday check of both repos, can take a while over home upload speeds.
+    $backupSettings = New-ScheduledTaskSettingsSet `
+        -ExecutionTimeLimit (New-TimeSpan -Hours 6) `
+        -StartWhenAvailable
+
+    Register-ScheduledTask -TaskName $backupTask -Action $backupAction -Trigger $backupTrigger -Settings $backupSettings -Force | Out-Null
+
+    $names = ($backupDests | ForEach-Object { ($_ -split "`t")[0] }) -join ', '
+    Write-Host ("Registered {0}: daily {1:HH:mm} via backup-offsite.ps1 to {2}, log: {3}" -f $backupTask, $backupAt, $names, $backupLog)
+} else {
+    Write-Host "Skipped $backupTask`: no backup destination configured yet (see backup-offsite.ps1 header)."
+}
