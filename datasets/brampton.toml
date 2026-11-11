@@ -17,8 +17,11 @@ location_min_move_m = 25
 # address itself (flags 2026-06-20..08-16). REG_PLAN_NUMBER is the registered
 # sibling of DRAFT_PLAN_NUMBER: a subdivision's 61 points got the draft number
 # on 2026-09-02 and the registered one on 09-09 (flags 2026-09-02, 09-09).
+# REG_PLAN_ASSUMP_DATE is the date the city assumed a registered plan; it was
+# stamped None -> 2026-09-23 on 157 points of six subdivision streets at once
+# (flag 2026-11-10). Plan administration, not an address change.
 ignore_fields = [
-  "C_OF_A", "CITY_FILE", "DRAFT_PLAN_NUMBER", "REG_PLAN_NUMBER", "CONDO_PLAN_NUMBER",
+  "C_OF_A", "CITY_FILE", "DRAFT_PLAN_NUMBER", "REG_PLAN_NUMBER", "REG_PLAN_ASSUMP_DATE", "CONDO_PLAN_NUMBER",
   "PERMIT_ISSUEDATE", "PERMIT_NO", "PERMIT_TYPE", "SUB_TYPE", "WORK_TYPE",
   "OCCUPANCY_DATE",
 ]

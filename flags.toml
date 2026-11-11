@@ -1822,7 +1822,11 @@ fields = ["REG_PLAN_ASSUMP_DATE"]
 scope = "157 rows changed the same field set [REG_PLAN_ASSUMP_DATE] (99% of the day's 158 modifications)"
 detail = "top: None -> 1790121600000 (157)"
 detected = "2026-11-10"
-status = "open"
+status = "reviewed"
+verdict = "technical"
+reviewed = "2026-11-10"
+rule = "datasets/brampton.toml: ignore_fields += REG_PLAN_ASSUMP_DATE; backfill_props_hash --reapply-ignore --city brampton (221,004 rows, backup in backups/2026-11-10-brampton-regplanassump/)"
+note = "Plan-administration metadata, not an address change: 157 rows (157 of the day's 158 modifications) had only REG_PLAN_ASSUMP_DATE change, all the same transition None -> 1790121600000 (2026-09-23), on six subdivision streets (Queen Mary 65, Unassigned 28, Callahan 23, Lost Canyon 15, Jenna 14, Demaris 10, plus 2). That is the date the city assumed the registered plan; number, street, unit and location did not change. Same family as REG_PLAN_NUMBER/DRAFT_PLAN_NUMBER, already ignored for brampton."
 
 [[flag]]
 slug = "simcoe"
