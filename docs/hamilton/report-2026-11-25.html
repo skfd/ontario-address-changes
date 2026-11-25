@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>City of Hamilton Address Changes — Wednesday, Nov 25, 2026</title>
+  <style>
+    :root {
+      --bg: #fafafa; --surface: #ffffff; --surface2: #f5f5f5; --surface3: #ebebeb;
+      --border: #e0e0e0; --border-strong: #d1d1d1; --text: #242424;
+      --text-secondary: #424242; --text-dim: #616161; --accent: #0078d4;
+      --accent-hover: #106ebe; --accent-bg: #eff6fc; --green: #107c10;
+      --green-bg: #f1faf1; --green-tint: #9fd89f; --red: #c50f1f; --red-bg: #fdf3f4;
+      --red-tint: #eeacb2; --yellow: #eaa300; --yellow-bg: #fefbf4; --yellow-tint: #f9e2ae;
+      --purple: #881798; --purple-bg: #f9f3fb; --teal: #038387; --teal-bg: #f0fafa;
+      --shadow-4: 0 2px 4px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --shadow-8: 0 4px 8px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+      --card-bg: #ffffff; --card-hover: #f5f5f5; color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1f1f1f; --surface: #292929; --surface2: #333333; --surface3: #3d3d3d;
+        --border: #525252; --border-strong: #666666; --text: #ffffff;
+        --text-secondary: #d6d6d6; --text-dim: #adadad; --accent: #2899f5;
+        --accent-hover: #3aa0f3; --accent-bg: #002848; --green: #54b054;
+        --green-bg: #052505; --green-tint: #107c10; --red: #dc626d; --red-bg: #3b0509;
+        --red-tint: #c50f1f; --yellow: #f2c661; --yellow-bg: #463100; --yellow-tint: #eaa300;
+        --purple: #d29ddb; --purple-bg: #3a1040; --teal: #58c0c4; --teal-bg: #013638;
+        --shadow-4: 0 2px 4px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --shadow-8: 0 4px 8px rgba(0,0,0,0.28), 0 0 2px rgba(0,0,0,0.24);
+        --card-bg: #333333; --card-hover: #3d3d3d; color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI Variable','Segoe UI',system-ui,-apple-system,sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.5; padding: 2rem;
+      max-width: 1100px; margin: 0 auto; font-size: 14px; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; color: var(--accent-hover); }
+    .back-link { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 12px;
+      color: var(--text-dim); margin-bottom: 1.5rem; transition: color 0.1s; }
+    .back-link:hover { color: var(--accent); text-decoration: none; }
+    h1 { font-size: 24px; font-weight: 600; margin-bottom: 4px; }
+    .subtitle { color: var(--text-secondary); font-size: 14px; margin-bottom: 12px; }
+    .explainer { color: var(--text-secondary); font-size: 13px; line-height: 1.5;
+      margin-bottom: 24px; padding: 12px 16px; background: var(--surface);
+      border-radius: 8px; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px; margin-bottom: 24px; }
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px;
+      padding: 16px; box-shadow: var(--shadow-4); transition: box-shadow 0.1s; }
+    .card:hover { box-shadow: var(--shadow-8); }
+    .card .label { font-size: 12px; color: var(--text-dim); font-weight: 400; }
+    .card .value { font-size: 28px; font-weight: 600; margin-top: 4px; }
+    .card .value.green { color: var(--green); } .card .value.red { color: var(--red); }
+    .card .value.yellow { color: var(--yellow); } .card .value.accent { color: var(--accent); }
+    .card .value.purple { color: var(--purple); }
+    .card .value.teal { color: var(--teal); }
+    .sparkline { display: block; margin-top: 6px; overflow: visible; opacity: 0.9; }
+    .sparkline-label { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+    .section { margin-bottom: 24px; }
+    .section h2 { font-size: 16px; font-weight: 600; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px; }
+    .badge { font-size: 12px; padding: 2px 8px; border-radius: 999px; font-weight: 600; }
+    .badge-green { background: var(--green-bg); color: var(--green); }
+    .badge-red { background: var(--red-bg); color: var(--red); }
+    .badge-yellow { background: var(--yellow-bg); color: var(--yellow); }
+    .badge-accent { background: var(--accent-bg); color: var(--accent); }
+    .badge-purple { background: var(--purple-bg); color: var(--purple); }
+    .badge-teal { background: var(--teal-bg); color: var(--teal); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface);
+      border-radius: 8px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-4); }
+    thead { background: var(--surface2); }
+    th { text-align: left; padding: 8px 12px; font-weight: 600; color: var(--text-dim);
+      font-size: 12px; cursor: pointer; user-select: none; border-bottom: 1px solid var(--border); }
+    th:hover { color: var(--accent); }
+    td { padding: 8px 12px; border-top: 1px solid var(--border); }
+    tr:hover td { background: var(--surface2); }
+    .old-val { color: var(--red); text-decoration: line-through; }
+    .new-val { color: var(--green); }
+    .arrow-val { color: var(--text-dim); text-align: center; white-space: nowrap; }
+    .map-link { display: inline-flex; align-items: center; margin-left: 0.4em;
+      color: var(--accent); vertical-align: middle; white-space: nowrap; font-size: 12px; }
+    .map-link:hover { color: var(--accent-hover); }
+    .map-link svg { width: 14px; height: 14px; }
+    .change-field { color: var(--yellow); font-weight: 600; }
+    .bar-chart { margin-top: 8px; }
+    .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 12px; }
+    .bar-label { width: 180px; text-align: right; color: var(--text-secondary); flex-shrink: 0;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .bar-track { flex: 1; height: 8px; background: var(--surface2); border-radius: 4px;
+      overflow: hidden; position: relative; }
+    .bar-fill { height: 100%; border-radius: 4px; transition: width 0.15s ease; }
+    .bar-fill.green { background: var(--green); } .bar-fill.red { background: var(--red); }
+    .bar-count { width: 40px; font-size: 12px; color: var(--text-dim); }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+    .empty { color: var(--text-dim); font-style: italic; padding: 16px; }
+    .truncated { color: var(--text-dim); font-size: 12px; margin-top: 8px; }
+    .collapsible-toggle { background: transparent; border: 1px solid var(--border);
+      color: var(--accent); padding: 5px 12px; border-radius: 4px; cursor: pointer;
+      font-size: 12px; font-family: inherit; margin-bottom: 12px; transition: background 0.1s; }
+    .collapsible-toggle:hover { background: var(--surface2); }
+    details.rename-group { background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; margin-bottom: 8px; box-shadow: var(--shadow-4); }
+    details.rename-group summary { padding: 10px 14px; cursor: pointer; font-size: 13px; }
+    details.rename-group[open] summary { border-bottom: 1px solid var(--border); }
+    details.rename-group table { border: none; box-shadow: none; border-radius: 0; }
+    details.rename-group .truncated { padding: 0 14px 10px; margin-top: 0; }
+    .rename-count { color: var(--text-dim); font-size: 12px; margin-left: 6px; }
+    .no-changes-banner { background: var(--green-bg); border: 1px solid var(--green-tint);
+      color: var(--green); padding: 16px; border-radius: 8px; margin-bottom: 24px;
+      text-align: center; font-weight: 600; font-size: 14px; }
+    .baseline-banner { background: var(--accent-bg); border: 1px solid var(--accent);
+      color: var(--accent); padding: 16px; border-radius: 8px; margin-bottom: 24px; font-size: 13px; }
+    .generated-at { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-dim); }
+    .history { font-size: 12.5px; color: var(--text-secondary); white-space: nowrap; }
+    .history .a { color: var(--green); font-weight: 500; }
+    .history .r { color: var(--red); font-weight: 500; }
+    .history .dot { color: var(--text-dim); margin: 0 4px; }
+    .history-none { color: var(--text-dim); font-style: italic; font-size: 12.5px; }
+    .info-wrap { position: relative; display: inline-flex; vertical-align: middle; }
+    .info-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+      height: 18px; padding: 0 8px 0 7px; border-radius: 999px; border: none;
+      color: #fff; background: var(--accent); cursor: help; font-size: 11px; font-weight: 600;
+      font-style: normal; font-family: inherit; line-height: 1; white-space: nowrap; }
+    .info-btn .glyph { font-style: italic; font-weight: 700;
+      font-family: Georgia, 'Times New Roman', serif; }
+    .info-wrap:hover .info-btn, .info-wrap:focus-within .info-btn,
+    .info-wrap:focus .info-btn { background: var(--accent-hover); }
+    .info-pop { display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 20;
+      width: 320px; max-width: 80vw; padding: 12px 14px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-8);
+      font-size: 12.5px; font-weight: 400; color: var(--text-secondary); line-height: 1.5; }
+    .info-wrap:hover .info-pop, .info-wrap:focus-within .info-pop,
+    .info-wrap:focus .info-pop { display: block; }
+    .info-pop strong { display: block; color: var(--text); font-size: 12px; margin-bottom: 4px; }
+    .info-pop ul { list-style: none; margin: 0 0 10px; padding: 0; }
+    .info-pop li { padding: 1px 0 1px 14px; position: relative; }
+    .info-pop li::before { content: "·"; position: absolute; left: 4px; color: var(--text-dim); }
+    .info-pop .note { color: var(--text-dim); font-size: 11.5px; margin: 0 0 10px; }
+    .info-pop .muted { color: var(--text-dim); font-style: italic; }
+  </style>
+<script data-goatcounter="https://osm-ontario.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+
+  <a class="back-link" href="index.html">← Back to City of Hamilton reports</a>
+
+  <h1>City of Hamilton — Address Changes</h1>
+  <p class="subtitle">
+    Changes between  and Wednesday, Nov 25, 2026
+    · 274,789 total addresses
+  </p>
+
+  
+
+  <div class="cards">
+    <div class="card"><div class="label">Total Addresses</div>
+      <div class="value accent">274,789</div></div>
+    <div class="card"><div class="label">New Addresses</div>
+      <div class="value green">+145</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#107c10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,17.8 19.7,17.8 37.3,18.0 55.0,14.5 72.7,16.9 90.3,16.7 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#107c10"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Retired Addresses</div>
+      <div class="value red">−2</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#c50f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,2.0 19.7,2.0 37.3,18.0 55.0,18.0 72.7,10.0 90.3,2.0 108.0,2.0"/><circle cx="108.0" cy="2.0" r="2" fill="#c50f1f"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Updated Addresses <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (NUMBER_COMPLETE)</li><li>Street name (FULL_STREET_NAME)</li><li>Unit (UNIT_NUMBER_COMPLETE)</li><li>Coordinates (latitude, longitude)</li><li>COMMUNITY</li><li>COUNTRY</li><li>MUNICIPALITY</li><li>POSTAL_CODE</li><li>PROVINCE</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>STREET_NAME</li><li>STREET_SUFFIX_DIRECTION</li><li>STREET_SUFFIX_TYPE</li></ul>
+      
+    </span>
+  </span></div>
+      <div class="value yellow">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#eaa300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,17.5 55.0,18.0 72.7,18.0 90.3,2.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#eaa300"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Renumbered</div>
+      <div class="value accent">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#0078d4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#0078d4"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    <div class="card"><div class="label">Street Renames</div>
+      <div class="value purple">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#9141ac" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#9141ac"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    
+    
+    <div class="card"><div class="label">Boundary Changes</div>
+      <div class="value teal">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#038387" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#038387"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+    
+    <div class="card"><div class="label">Location Adjustments</div>
+      <div class="value" style="color: var(--text-dim)">0</div>
+      <svg class="sparkline" viewBox="0 0 110 20" width="110" height="20" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#808080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="2.0,18.0 19.7,18.0 37.3,18.0 55.0,18.0 72.7,18.0 90.3,18.0 108.0,18.0"/><circle cx="108.0" cy="18.0" r="2" fill="#808080"/></svg><div class="sparkline-label">7-snapshot trend</div></div>
+  </div>
+
+  
+  <div class="section">
+    <h2>Change Breakdown</h2>
+    <div class="stats-grid">
+      
+      <div class="card"><div class="label">Top Streets by New Addresses</div><div class="bar-chart">
+        
+        
+        <div class="bar-row"><span class="bar-label">Chief Bartlett Drive</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:100.0%"></div></div>
+          <span class="bar-count">40</span></div>
+        <div class="bar-row"><span class="bar-label">Blain Drive</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:82.0%"></div></div>
+          <span class="bar-count">33</span></div>
+        <div class="bar-row"><span class="bar-label">Awrey Terrace</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:72.0%"></div></div>
+          <span class="bar-count">29</span></div>
+        <div class="bar-row"><span class="bar-label">McSherry Lane</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:55.0%"></div></div>
+          <span class="bar-count">22</span></div>
+        <div class="bar-row"><span class="bar-label">McGann Avenue</span>
+          <div class="bar-track"><div class="bar-fill green" style="width:45.0%"></div></div>
+          <span class="bar-count">18</span></div>
+      </div></div>
+      
+      
+    </div>
+  </div>
+  
+
+  <div class="section">
+    <h2>New Addresses <span class="badge badge-green">145</span></h2>
+    
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-added',0)">Address</th><th onclick="sortTable('t-added',1)">Street</th>
+        <th onclick="sortTable('t-added',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-added">
+        
+        <tr><td>20 Alway Road</td><td>Alway Road</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12520&mlon=-79.82612#map=18/43.12520/-79.82612" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>4 Awrey Terrace</td><td>Awrey Terrace</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12501&mlon=-79.82669#map=18/43.12501/-79.82669" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>6 Awrey Terrace</td><td>Awrey Terrace</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12503&mlon=-79.82677#map=18/43.12503/-79.82677" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>8 Awrey Terrace</td><td>Awrey Terrace</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12504&mlon=-79.82686#map=18/43.12504/-79.82686" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>10 Awrey Terrace</td><td>Awrey Terrace</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12506&mlon=-79.82694#map=18/43.12506/-79.82694" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>12 Awrey Terrace</td><td>Awrey Terrace</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12508&mlon=-79.82702#map=18/43.12508/-79.82702" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>14 Awrey Terrace</td><td>Awrey Terrace</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12510&mlon=-79.82710#map=18/43.12510/-79.82710" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>16 Awrey Terrace</td><td>Awrey Terrace</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12512&mlon=-79.82718#map=18/43.12512/-79.82718" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>18 Awrey Terrace</td><td>Awrey Terrace</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12514&mlon=-79.82726#map=18/43.12514/-79.82726" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>22 Awrey Terrace</td><td>Awrey Terrace</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12515&mlon=-79.82734#map=18/43.12515/-79.82734" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>24 Awrey Terrace</td><td>Awrey Terrace</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12517&mlon=-79.82742#map=18/43.12517/-79.82742" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>26 Awrey Terrace</td><td>Awrey Terrace</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12519&mlon=-79.82750#map=18/43.12519/-79.82750" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>28 Awrey Terrace</td><td>Awrey Terrace</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12521&mlon=-79.82758#map=18/43.12521/-79.82758" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>30 Awrey Terrace</td><td>Awrey Terrace</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12523&mlon=-79.82766#map=18/43.12523/-79.82766" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>32 Awrey Terrace</td><td>Awrey Terrace</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12525&mlon=-79.82774#map=18/43.12525/-79.82774" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>34 Awrey Terrace</td><td>Awrey Terrace</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12526&mlon=-79.82782#map=18/43.12526/-79.82782" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>38 Awrey Terrace</td><td>Awrey Terrace</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12528&mlon=-79.82790#map=18/43.12528/-79.82790" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>40 Awrey Terrace</td><td>Awrey Terrace</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12530&mlon=-79.82798#map=18/43.12530/-79.82798" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>42 Awrey Terrace</td><td>Awrey Terrace</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12532&mlon=-79.82806#map=18/43.12532/-79.82806" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>44 Awrey Terrace</td><td>Awrey Terrace</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12534&mlon=-79.82814#map=18/43.12534/-79.82814" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>46 Awrey Terrace</td><td>Awrey Terrace</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12536&mlon=-79.82822#map=18/43.12536/-79.82822" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>48 Awrey Terrace</td><td>Awrey Terrace</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12537&mlon=-79.82830#map=18/43.12537/-79.82830" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>50 Awrey Terrace</td><td>Awrey Terrace</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12539&mlon=-79.82838#map=18/43.12539/-79.82838" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>54 Awrey Terrace</td><td>Awrey Terrace</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12541&mlon=-79.82846#map=18/43.12541/-79.82846" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>56 Awrey Terrace</td><td>Awrey Terrace</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12543&mlon=-79.82854#map=18/43.12543/-79.82854" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>58 Awrey Terrace</td><td>Awrey Terrace</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12545&mlon=-79.82862#map=18/43.12545/-79.82862" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>60 Awrey Terrace</td><td>Awrey Terrace</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12547&mlon=-79.82870#map=18/43.12547/-79.82870" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>62 Awrey Terrace</td><td>Awrey Terrace</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12548&mlon=-79.82878#map=18/43.12548/-79.82878" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>64 Awrey Terrace</td><td>Awrey Terrace</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12550&mlon=-79.82886#map=18/43.12550/-79.82886" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>66 Awrey Terrace</td><td>Awrey Terrace</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12552&mlon=-79.82894#map=18/43.12552/-79.82894" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>72 Blain Drive</td><td>Blain Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12253&mlon=-79.82740#map=18/43.12253/-79.82740" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>76 Blain Drive</td><td>Blain Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12251&mlon=-79.82728#map=18/43.12251/-79.82728" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>80 Blain Drive</td><td>Blain Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12248&mlon=-79.82715#map=18/43.12248/-79.82715" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>83 Blain Drive</td><td>Blain Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12280&mlon=-79.82690#map=18/43.12280/-79.82690" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>84 Blain Drive</td><td>Blain Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12245&mlon=-79.82703#map=18/43.12245/-79.82703" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>87 Blain Drive</td><td>Blain Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12277&mlon=-79.82677#map=18/43.12277/-79.82677" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>88 Blain Drive</td><td>Blain Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12242&mlon=-79.82690#map=18/43.12242/-79.82690" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>91 Blain Drive</td><td>Blain Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12274&mlon=-79.82663#map=18/43.12274/-79.82663" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>92 Blain Drive</td><td>Blain Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12239&mlon=-79.82677#map=18/43.12239/-79.82677" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>95 Blain Drive</td><td>Blain Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12271&mlon=-79.82650#map=18/43.12271/-79.82650" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>96 Blain Drive</td><td>Blain Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12236&mlon=-79.82665#map=18/43.12236/-79.82665" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>99 Blain Drive</td><td>Blain Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12268&mlon=-79.82637#map=18/43.12268/-79.82637" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>100 Blain Drive</td><td>Blain Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12233&mlon=-79.82652#map=18/43.12233/-79.82652" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>103 Blain Drive</td><td>Blain Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12265&mlon=-79.82623#map=18/43.12265/-79.82623" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>104 Blain Drive</td><td>Blain Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12231&mlon=-79.82640#map=18/43.12231/-79.82640" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>107 Blain Drive</td><td>Blain Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12262&mlon=-79.82610#map=18/43.12262/-79.82610" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>108 Blain Drive</td><td>Blain Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12228&mlon=-79.82627#map=18/43.12228/-79.82627" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>111 Blain Drive</td><td>Blain Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12259&mlon=-79.82597#map=18/43.12259/-79.82597" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>112 Blain Drive</td><td>Blain Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12225&mlon=-79.82615#map=18/43.12225/-79.82615" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>115 Blain Drive</td><td>Blain Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12256&mlon=-79.82583#map=18/43.12256/-79.82583" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>116 Blain Drive</td><td>Blain Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12222&mlon=-79.82602#map=18/43.12222/-79.82602" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>119 Blain Drive</td><td>Blain Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12253&mlon=-79.82570#map=18/43.12253/-79.82570" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>120 Blain Drive</td><td>Blain Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12219&mlon=-79.82590#map=18/43.12219/-79.82590" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>124 Blain Drive</td><td>Blain Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12217&mlon=-79.82577#map=18/43.12217/-79.82577" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>128 Blain Drive</td><td>Blain Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12217&mlon=-79.82564#map=18/43.12217/-79.82564" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>132 Blain Drive</td><td>Blain Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12220&mlon=-79.82551#map=18/43.12220/-79.82551" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>136 Blain Drive</td><td>Blain Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12225&mlon=-79.82541#map=18/43.12225/-79.82541" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>140 Blain Drive</td><td>Blain Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12233&mlon=-79.82534#map=18/43.12233/-79.82534" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>144 Blain Drive</td><td>Blain Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12242&mlon=-79.82529#map=18/43.12242/-79.82529" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>148 Blain Drive</td><td>Blain Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12251&mlon=-79.82526#map=18/43.12251/-79.82526" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>152 Blain Drive</td><td>Blain Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12260&mlon=-79.82522#map=18/43.12260/-79.82522" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>156 Blain Drive</td><td>Blain Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12270&mlon=-79.82518#map=18/43.12270/-79.82518" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>160 Blain Drive</td><td>Blain Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12279&mlon=-79.82514#map=18/43.12279/-79.82514" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>4 Chief Bartlett Drive</td><td>Chief Bartlett Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12063&mlon=-79.82820#map=18/43.12063/-79.82820" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>8 Chief Bartlett Drive</td><td>Chief Bartlett Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12060&mlon=-79.82808#map=18/43.12060/-79.82808" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>12 Chief Bartlett Drive</td><td>Chief Bartlett Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12057&mlon=-79.82795#map=18/43.12057/-79.82795" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>16 Chief Bartlett Drive</td><td>Chief Bartlett Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12054&mlon=-79.82783#map=18/43.12054/-79.82783" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>20 Chief Bartlett Drive</td><td>Chief Bartlett Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12051&mlon=-79.82771#map=18/43.12051/-79.82771" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>24 Chief Bartlett Drive</td><td>Chief Bartlett Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12048&mlon=-79.82759#map=18/43.12048/-79.82759" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>28 Chief Bartlett Drive</td><td>Chief Bartlett Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12046&mlon=-79.82746#map=18/43.12046/-79.82746" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>32 Chief Bartlett Drive</td><td>Chief Bartlett Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12043&mlon=-79.82734#map=18/43.12043/-79.82734" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>36 Chief Bartlett Drive</td><td>Chief Bartlett Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12040&mlon=-79.82722#map=18/43.12040/-79.82722" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>40 Chief Bartlett Drive</td><td>Chief Bartlett Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12037&mlon=-79.82709#map=18/43.12037/-79.82709" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>44 Chief Bartlett Drive</td><td>Chief Bartlett Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12034&mlon=-79.82697#map=18/43.12034/-79.82697" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>48 Chief Bartlett Drive</td><td>Chief Bartlett Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12031&mlon=-79.82685#map=18/43.12031/-79.82685" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>52 Chief Bartlett Drive</td><td>Chief Bartlett Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12028&mlon=-79.82673#map=18/43.12028/-79.82673" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>56 Chief Bartlett Drive</td><td>Chief Bartlett Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12027&mlon=-79.82660#map=18/43.12027/-79.82660" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>60 Chief Bartlett Drive</td><td>Chief Bartlett Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12028&mlon=-79.82647#map=18/43.12028/-79.82647" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>64 Chief Bartlett Drive</td><td>Chief Bartlett Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12030&mlon=-79.82635#map=18/43.12030/-79.82635" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>68 Chief Bartlett Drive</td><td>Chief Bartlett Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12035&mlon=-79.82624#map=18/43.12035/-79.82624" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>72 Chief Bartlett Drive</td><td>Chief Bartlett Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12042&mlon=-79.82616#map=18/43.12042/-79.82616" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>75 Chief Bartlett Drive</td><td>Chief Bartlett Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12059&mlon=-79.82656#map=18/43.12059/-79.82656" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>76 Chief Bartlett Drive</td><td>Chief Bartlett Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12050&mlon=-79.82610#map=18/43.12050/-79.82610" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>79 Chief Bartlett Drive</td><td>Chief Bartlett Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12068&mlon=-79.82653#map=18/43.12068/-79.82653" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>80 Chief Bartlett Drive</td><td>Chief Bartlett Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12059&mlon=-79.82605#map=18/43.12059/-79.82605" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>83 Chief Bartlett Drive</td><td>Chief Bartlett Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12078&mlon=-79.82649#map=18/43.12078/-79.82649" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>84 Chief Bartlett Drive</td><td>Chief Bartlett Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12068&mlon=-79.82602#map=18/43.12068/-79.82602" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>87 Chief Bartlett Drive</td><td>Chief Bartlett Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12087&mlon=-79.82645#map=18/43.12087/-79.82645" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>88 Chief Bartlett Drive</td><td>Chief Bartlett Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12077&mlon=-79.82598#map=18/43.12077/-79.82598" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>91 Chief Bartlett Drive</td><td>Chief Bartlett Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12096&mlon=-79.82641#map=18/43.12096/-79.82641" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>92 Chief Bartlett Drive</td><td>Chief Bartlett Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12086&mlon=-79.82594#map=18/43.12086/-79.82594" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>95 Chief Bartlett Drive</td><td>Chief Bartlett Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12106&mlon=-79.82637#map=18/43.12106/-79.82637" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>96 Chief Bartlett Drive</td><td>Chief Bartlett Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12096&mlon=-79.82590#map=18/43.12096/-79.82590" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>99 Chief Bartlett Drive</td><td>Chief Bartlett Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12115&mlon=-79.82634#map=18/43.12115/-79.82634" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>100 Chief Bartlett Drive</td><td>Chief Bartlett Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12105&mlon=-79.82587#map=18/43.12105/-79.82587" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>103 Chief Bartlett Drive</td><td>Chief Bartlett Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12125&mlon=-79.82630#map=18/43.12125/-79.82630" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>104 Chief Bartlett Drive</td><td>Chief Bartlett Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12114&mlon=-79.82583#map=18/43.12114/-79.82583" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>107 Chief Bartlett Drive</td><td>Chief Bartlett Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12134&mlon=-79.82626#map=18/43.12134/-79.82626" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>108 Chief Bartlett Drive</td><td>Chief Bartlett Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12123&mlon=-79.82579#map=18/43.12123/-79.82579" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>111 Chief Bartlett Drive</td><td>Chief Bartlett Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12143&mlon=-79.82622#map=18/43.12143/-79.82622" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>112 Chief Bartlett Drive</td><td>Chief Bartlett Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12132&mlon=-79.82576#map=18/43.12132/-79.82576" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>115 Chief Bartlett Drive</td><td>Chief Bartlett Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12153&mlon=-79.82619#map=18/43.12153/-79.82619" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>116 Chief Bartlett Drive</td><td>Chief Bartlett Drive</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12141&mlon=-79.82572#map=18/43.12141/-79.82572" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3105 Fletcher Road</td><td>Fletcher Road</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12480&mlon=-79.82626#map=18/43.12480/-79.82626" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3 McGann Avenue</td><td>McGann Avenue</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12217&mlon=-79.82755#map=18/43.12217/-79.82755" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>7 McGann Avenue</td><td>McGann Avenue</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12214&mlon=-79.82743#map=18/43.12214/-79.82743" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>11 McGann Avenue</td><td>McGann Avenue</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12211&mlon=-79.82731#map=18/43.12211/-79.82731" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>15 McGann Avenue</td><td>McGann Avenue</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12208&mlon=-79.82718#map=18/43.12208/-79.82718" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>19 McGann Avenue</td><td>McGann Avenue</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12205&mlon=-79.82706#map=18/43.12205/-79.82706" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>23 McGann Avenue</td><td>McGann Avenue</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12202&mlon=-79.82694#map=18/43.12202/-79.82694" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>27 McGann Avenue</td><td>McGann Avenue</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12199&mlon=-79.82682#map=18/43.12199/-79.82682" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>31 McGann Avenue</td><td>McGann Avenue</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12196&mlon=-79.82669#map=18/43.12196/-79.82669" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>35 McGann Avenue</td><td>McGann Avenue</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12194&mlon=-79.82657#map=18/43.12194/-79.82657" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>39 McGann Avenue</td><td>McGann Avenue</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12191&mlon=-79.82645#map=18/43.12191/-79.82645" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>43 McGann Avenue</td><td>McGann Avenue</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12188&mlon=-79.82632#map=18/43.12188/-79.82632" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>47 McGann Avenue</td><td>McGann Avenue</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12185&mlon=-79.82620#map=18/43.12185/-79.82620" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>51 McGann Avenue</td><td>McGann Avenue</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12182&mlon=-79.82608#map=18/43.12182/-79.82608" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>55 McGann Avenue</td><td>McGann Avenue</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12179&mlon=-79.82596#map=18/43.12179/-79.82596" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>59 McGann Avenue</td><td>McGann Avenue</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12176&mlon=-79.82583#map=18/43.12176/-79.82583" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>63 McGann Avenue</td><td>McGann Avenue</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12173&mlon=-79.82571#map=18/43.12173/-79.82571" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>67 McGann Avenue</td><td>McGann Avenue</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12170&mlon=-79.82559#map=18/43.12170/-79.82559" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>71 McGann Avenue</td><td>McGann Avenue</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12168&mlon=-79.82547#map=18/43.12168/-79.82547" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>3 McSherry Lane</td><td>McSherry Lane</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12163&mlon=-79.82666#map=18/43.12163/-79.82666" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>4 McSherry Lane</td><td>McSherry Lane</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12174&mlon=-79.82716#map=18/43.12174/-79.82716" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>7 McSherry Lane</td><td>McSherry Lane</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12154&mlon=-79.82670#map=18/43.12154/-79.82670" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>8 McSherry Lane</td><td>McSherry Lane</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12165&mlon=-79.82721#map=18/43.12165/-79.82721" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>11 McSherry Lane</td><td>McSherry Lane</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12144&mlon=-79.82673#map=18/43.12144/-79.82673" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>12 McSherry Lane</td><td>McSherry Lane</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12156&mlon=-79.82725#map=18/43.12156/-79.82725" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>15 McSherry Lane</td><td>McSherry Lane</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12135&mlon=-79.82677#map=18/43.12135/-79.82677" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>16 McSherry Lane</td><td>McSherry Lane</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12147&mlon=-79.82729#map=18/43.12147/-79.82729" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>19 McSherry Lane</td><td>McSherry Lane</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12125&mlon=-79.82681#map=18/43.12125/-79.82681" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>20 McSherry Lane</td><td>McSherry Lane</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12137&mlon=-79.82732#map=18/43.12137/-79.82732" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>23 McSherry Lane</td><td>McSherry Lane</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12116&mlon=-79.82685#map=18/43.12116/-79.82685" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>24 McSherry Lane</td><td>McSherry Lane</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12128&mlon=-79.82737#map=18/43.12128/-79.82737" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>27 McSherry Lane</td><td>McSherry Lane</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12107&mlon=-79.82688#map=18/43.12107/-79.82688" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>28 McSherry Lane</td><td>McSherry Lane</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12118&mlon=-79.82740#map=18/43.12118/-79.82740" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>31 McSherry Lane</td><td>McSherry Lane</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12097&mlon=-79.82692#map=18/43.12097/-79.82692" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>32 McSherry Lane</td><td>McSherry Lane</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12109&mlon=-79.82744#map=18/43.12109/-79.82744" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>35 McSherry Lane</td><td>McSherry Lane</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12088&mlon=-79.82696#map=18/43.12088/-79.82696" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>36 McSherry Lane</td><td>McSherry Lane</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12100&mlon=-79.82747#map=18/43.12100/-79.82747" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>39 McSherry Lane</td><td>McSherry Lane</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12078&mlon=-79.82700#map=18/43.12078/-79.82700" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>40 McSherry Lane</td><td>McSherry Lane</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12090&mlon=-79.82750#map=18/43.12090/-79.82750" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>43 McSherry Lane</td><td>McSherry Lane</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12069&mlon=-79.82704#map=18/43.12069/-79.82704" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>44 McSherry Lane</td><td>McSherry Lane</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12081&mlon=-79.82754#map=18/43.12081/-79.82754" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>4 Teskey Crescent</td><td>Teskey Crescent</td><td></td>
+          <td><span class="history-none">First appearance</span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.11998&mlon=-79.82893#map=18/43.11998/-79.82893" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Retired Addresses <span class="badge badge-red">2</span></h2>
+    
+    <table>
+      <thead><tr><th onclick="sortTable('t-removed',0)">Address</th><th onclick="sortTable('t-removed',1)">Street</th>
+        <th onclick="sortTable('t-removed',2)">Unit</th><th>History</th><th>Map</th></tr></thead>
+      <tbody id="t-removed">
+        
+        <tr><td>3105 Fletcher Road</td><td>Fletcher Road</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-07-29</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12197&mlon=-79.82563#map=18/43.12197/-79.82563" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+        <tr><td>4 Teskey Crescent</td><td>Teskey Crescent</td><td></td>
+          <td><span class="history"><span class="a">+ 2026-06-09</span></span></td><td><a class="map-link" href="https://www.openstreetmap.org/?mlat=43.12000&mlon=-79.82892#map=18/43.12000/-79.82892" target="_blank" rel="noopener">View ↗</a></td></tr>
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  <div class="section">
+    <h2>Updated Addresses <span class="badge badge-yellow">0</span>
+      <span class="info-wrap" tabindex="0" role="button" aria-label="Which fields are compared for changes">
+    <span class="info-btn"><span class="glyph">i</span> Fields</span>
+    <span class="info-pop">
+      <strong>Compared for changes</strong>
+      <ul><li>Street number (NUMBER_COMPLETE)</li><li>Street name (FULL_STREET_NAME)</li><li>Unit (UNIT_NUMBER_COMPLETE)</li><li>Coordinates (latitude, longitude)</li><li>COMMUNITY</li><li>COUNTRY</li><li>MUNICIPALITY</li><li>POSTAL_CODE</li><li>PROVINCE</li></ul>
+      <strong>Ignored (changes here are not counted)</strong>
+      <ul><li>STREET_NAME</li><li>STREET_SUFFIX_DIRECTION</li><li>STREET_SUFFIX_TYPE</li></ul>
+      
+    </span>
+  </span></h2>
+    
+    <p class="empty">No addresses updated.</p>
+  </div>
+
+  <div class="section">
+    <h2>Renumbered Addresses <span class="badge badge-accent">0</span></h2>
+    
+    <p class="empty">No addresses renumbered.</p>
+  </div>
+
+  <div class="section">
+    <h2>Street Renames <span class="badge badge-purple">0</span></h2>
+    <p class="empty">No street renames.</p>
+  </div>
+
+  
+
+  
+
+  
+  <div class="section">
+    <h2>Boundary Changes <span class="badge badge-teal">0</span></h2>
+    <p class="empty">No ward or municipality reassignments.</p>
+  </div>
+  
+
+  <div class="section">
+    <h2>Location Adjustments <span class="badge" style="background: var(--surface2); color: var(--text-dim)">0</span></h2>
+    
+    <p class="empty">No location adjustments.</p>
+  </div>
+
+  <div class="generated-at">Data pulled Nov 25, 2026 at 11:01 AM · source licence: Open Data Licence – Hamilton</div>
+
+  <script>
+    function sortTable(tbodyId, col) {
+      const tbody = document.getElementById(tbodyId);
+      if (!tbody) return;
+      const rows = Array.from(tbody.rows);
+      const dir = tbody.dataset.sortDir === 'asc' ? 'desc' : 'asc';
+      tbody.dataset.sortDir = dir;
+      rows.sort((a, b) => {
+        const av = a.cells[col]?.textContent.trim() || '';
+        const bv = b.cells[col]?.textContent.trim() || '';
+        const an = parseFloat(av), bn = parseFloat(bv);
+        if (!isNaN(an) && !isNaN(bn)) return dir === 'asc' ? an - bn : bn - an;
+        return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+      });
+      rows.forEach(r => tbody.appendChild(r));
+    }
+  </script>
+</body>
+
+</html>
