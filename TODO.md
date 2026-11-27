@@ -1,6 +1,16 @@
 # Operator TODO — ontario-address-changes
 
+Tasks for the human operator, **open items only**, as of the last full update (2026-10-31)
+unless an item says otherwise. Finished items, history and the full text of shortened items
+live in [TODO-archive/](TODO-archive/), one file per section, linked under each heading.
+When an item is done, move it there verbatim; don't leave it here ticked. The old
+field-coverage appendix is [TODO-archive/field-coverage-appendix.md](TODO-archive/field-coverage-appendix.md).
+
 ## 1. Complete field selection for tracked cities
+
+Closed (waterloo, lennox-addington, hastings, thunder-bay, brantford and leamington field maps;
+the 2026-08-10 full/unit checks; elgin StrNum2; frontenac):
+[TODO-archive/2026-11-27-s1-field-selection.md](TODO-archive/2026-11-27-s1-field-selection.md).
 
 These cities are imported and tracking, but their field maps need a human decision:
 
@@ -32,8 +42,13 @@ These cities are imported and tracking, but their field maps need a human decisi
 - [ ] Spot-check low coverage — open a handful of the blank rows and judge: wrong
   column selected, or genuinely unaddressed points (towers, outbuildings)? Note the
   verdict in each TOML:
+  All four listed (dufferin, elgin, brant, windsor) were checked 2026-08-10/08-20 and the
+  verdicts are in the archive; the item itself was never ticked.
 
 ## 1b. Fields the sources have added since we last looked
+
+All closed 2026-08-08 to 2026-10-16 (every new field was handled or an empty schema slot):
+[TODO-archive/2026-11-27-s1-field-selection.md](TODO-archive/2026-11-27-s1-field-selection.md), §1b.
 
 ## 2. Find data sources for uncovered cities
 
@@ -46,6 +61,18 @@ the order to work them):
 | 10 | Oxford, North Bay, Haliburton, Sault Ste. Marie, City of Peterborough | **tracked 2026-10-16, publish_reports = false**; licence asks still open | the gate holds publishing only now |
 | — | Belleville, Northumberland, Kenora | still no machine-readable layer (re-probed 2026-10-30, unchanged) | quarterly re-probe, next ~2027-01-30 |
 
+Closed rows, closed items and the August probe notes:
+[TODO-archive/2026-11-27-s2-data-sources.md](TODO-archive/2026-11-27-s2-data-sources.md).
+Still open inside them (as of 2026-10-31):
+- [ ] Licence asks for the cities tracked gated at the end of October: Lanark County and
+      Timmins (tracked 2026-10-31), Kingsville (tracked 2026-10-30, ask drafted 2026-10-31).
+- [ ] west-parry-sound: the info@wpsgn.ca licence-scope question (§3) is open; NG911
+      publishes no licence either.
+- [ ] Watches from the 10-23 queue rows: leamington's layer was last edited 2025-07-08
+      (watch that it moves); cambridge is also covered by waterloo-region (compare once
+      that has a few weeks); haldimand's ADDR_PT holds house suffixes on 19 of 25 filled
+      rows (a cleanup would be ~50 retire+add pairs).
+
 **2026-10-16 sweep onboarding, follow-ups** (24 datasets added, dufferin re-pointed to its address layer, LICENSING.md has the table):
 - [ ] Confirmation asks, publishing already: ajax (does the site-wide OGL cover Civic
       Addresses item e48315e9?), tecumseh (may the County of Essex OGL license the Town's points?).
@@ -56,6 +83,9 @@ the order to work them):
       `future-work/multi-city/license-contacts-todo.md` section E. New there: ajax's hub
       settings say "CC-BY-SA", not the OGL clone read on 10-16 - ask which applies.
 - [ ] city-tune audit for each new city after two changed snapshots (classes, ignore_fields).
+  The 2026-10-23 first pass (proposals for tecumseh, middlesex, west-parry-sound, all since
+  applied in their TOMLs; a grey watch) and the look at four frozen sources (norfolk re-pointed 2026-10-23) are in the
+  archive. Frozen sources still open:
   - [ ] **halton-hills: one-shot export** (all 21,900 rows created 2025-10-17). The town's
     `https://map.haltonhills.ca/awse/rest/services/eP/MapServer/0` has 21,902 and ~20
     differences, but no date fields to prove it is live itself. Re-probe its count and max
@@ -68,6 +98,10 @@ the order to work them):
     overwrite, before tracking began). Draft map if it ever moves: number=STR_NUM,
     street=STR_FULL, unit parsed from ADDR_FULL, full=ADDR_FULL, classes status=ADDR_STAT /
     boundary=ADDR_COMM, ignore Latitude/Longitude. Next look: **2026-12-01** with cobourg.
+  - [ ] **cobourg** — re-pointed 2026-10-31 (owner's call) to the town's live MapServer as a
+    continuation, history kept. Left open: STATUS is a class candidate once a transition is
+    seen; Roll_Num/RoutingStreetExtKey are ignore candidates once they churn. Never ticked;
+    full text in the archive.
   - [ ] **amherstburg: unknown, likely batch-fed.** Its own edit layer; `Type` tags show
     monthly loads Sep 2024-Feb 2025, nothing tagged 2026; no alternative anywhere (Essex has
     no points). Watch to **2026-12-31**, then ask building@amherstburg.ca whether it still
@@ -79,6 +113,8 @@ the order to work them):
 address layer on every Ontario portal (`catalogue/layers/*.csv`, theme `addresses`); these
 are the ones that change something here. Counts and dates probed live 2026-10-16.
 
+All its items are closed (west-parry-sound, middlesex and elgin re-pointed 2026-10-16; Essex,
+Grey and the member layers tracked) except two that came out of the elgin re-point:
   - [ ] **Elgin's OGL: take it to the wiki** (licence verdict agreed 2026-10-16). The OSMF
         self-service route, as for the six self-listed 2026-10-12: diff the hub's "Open
         Government Licence - County of Elgin" against the Ottawa Open Data Licence 2.0 into
@@ -92,6 +128,7 @@ are the ones that change something here. Counts and dates probed live 2026-10-16
         the county publishes next year's as a new service and freezes this one, the 90-day
         source-stale issue is the signal, and the fix is another re-point (this time with
         history, so a flagged switch day as for lambton 2026-09-15, not a fresh baseline).
+
 Cities/counties with no working source (full reasons in `skipped.toml`, shown on the
 landing page). ArcGIS Online search is exhausted for all of these — next steps are
 human ones: browse each municipality's own open-data/GIS page, check provincial
@@ -101,6 +138,7 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
   live, verified address layer again** (every URL below probed with a field-list read
   and a returnCountOnly count). Each recovered one is now an onboarding decision
   (licence + city-tune pass), not a search problem:
+  - Closed, in the archive: simcoe, oxford, haldimand, middlesex, cobourg, west-parry-sound.
   - [ ] Belleville — **still nothing** (re-probed 2026-10-30: 71 services, no address layer,
         Parcels carry ROLL/ParcelID only). Old server's services root is empty (and its
         TLS cert is broken); the city now has an AGOL org (`BellevilleGIS`, hub
@@ -118,6 +156,9 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
   on the way: LIO's Address Point data class is NOT on the open GeoHub (only ORN
   road ranges); it sits behind OGDE licensing, so no provincial layer can cover
   these municipalities.
+  - Closed, in the archive: perth, halton-hills, prince-edward-county, innisfil/collingwood,
+    north-bay, stratford, amherstburg, haliburton, lanark, timmins, grey, owen sound,
+    brockville, and the CGIS SLIMS source type (built 2026-10-31).
   - [ ] Essex County — still nothing county-wide (re-probed 2026-10-30: hub 120 datasets,
         cwserver OpenData 5 services). Amherstburg, tecumseh and leamington are tracked.
         **Kingsville tracked 2026-10-30, gated (10,269 rows); ask drafted 10-31.** Was: the county org's `MESH_WFL1/FeatureServer/0`
@@ -129,6 +170,7 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
   - [ ] Kenora — still nothing: city org live (13 public services), no address or
         parcel-address layer. Re-probed 2026-10-30: unchanged.
 - [ ] Special cases — need a decision, not a search:
+  - Closed, in the archive: norfolk, sault-ste-marie, amherstburg.
   - [ ] **City of Peterborough** — licence CHANGED (checked 2026-08-20): the Address
         item now carries custom "Open Data Terms of Use" instead of the old blanket
         proprietary label — but the grant is to "copy and use the **unmodified** Open
@@ -139,6 +181,10 @@ portals (geohub.lio.gov.on.ca), or email the GIS department.
         longer the easy answer it was.
 
 ## 3. Licence review
+
+Closed: the 2026-08-20 hunt of all 15 unidentified licences (open, none, and the restrictive
+sdg / renfrew / peterborough-county gate) and the custom-terms read:
+[TODO-archive/2026-11-27-s3-licence-review.md](TODO-archive/2026-11-27-s3-licence-review.md).
 
 - [ ] NEW follow-ups out of the review: ~~decide the sdg / renfrew /
   peterborough-county publishing question~~ (decided + implemented 2026-08-20 —
@@ -190,6 +236,19 @@ two items after the review wait on it: a style change found there should land be
 
 ## 4. Periodic / ops chores
 
+Closed and history (backups deleted 2026-10-23, the flaky-sources plan built 2026-10-16,
+kingston, the retracted frozen list, the 2026-08-20 tuning pass, the 2026-09-08 render fix):
+[TODO-archive/2026-11-27-s4-ops.md](TODO-archive/2026-11-27-s4-ops.md).
+
+- [ ] **Leftover store backups in the home folder** (as of 2026-10-23):
+  `ontario-db-backup-2026-10-16-*`, `-2026-10-20-*` and `-2026-10-23-*`, droppable once a few
+  clean imports land on top. The list and the restore note are in the archive.
+- [ ] **Source reliability review 2026-10-16** — every failed vault pull over 90 days,
+  bucketed (down, chronic, one-offs, frozen). Never ticked; the one bucket needing a hand was
+  west-parry-sound, re-pointed 2026-10-16 (§2). Buckets in the archive.
+- [ ] **Observe the failure-reporting split — review 2026-08-17.** Never ticked; its open
+  question (escalate a city failing N days?) was decided and built 2026-10-16: N = 3, then
+  a `source-down` issue. The checklist is in the archive.
 - [ ] **Re-probe `skipped.toml` quarterly** — endpoints come back or migrate
   (5 of 5 originally-dead cities were eventually recovered via ArcGIS Online).
 - [ ] **Revisit Orangeville and Hanover as their own datasets, around 2027-10.** Both
@@ -217,18 +276,35 @@ two items after the review wait on it: a style change found there should land be
 - [ ] **Watch the daily scheduled task** — check `logs/` and that the site commit/push
   ran. `addressvault report` is the first command (per-city-per-day: checked, unchanged,
   failed, or no attempt); `health.py --blocks --runs` is the project-side second.
+  Older status notes (2026-07-31, 2026-10-16) are in the archive.
 - [ ] **A Windows Update restart skips the day silently — diagnosed 2026-08-12, left
   unfixed by choice.** Found while checking why 08-12 had no run at all: no `runs.csv`
   row, zero lines in `update.log`, no vault snapshots pulled, and the task itself
   reporting `LastRunTime = 08-11 12:00` with `NextRunTime = 08-13 12:00`.
+  The cause (`LogonType: Interactive`) and the fix options that don't wake the machine are
+  in the archive.
 - [ ] **Watch for more `index.lock` publish failures — observing, deliberately not fixed.**
   The manually-triggered 08-12 run updated all 42 cities cleanly and then lost the publish
   to a 0-byte `.git/index.lock`: `git add docs` failed, so nothing was staged, committed or
   pushed, and the run ended `publish-failed` with the site a day stale. Recovered by hand
   the same evening (`e22515ad`) — the lock was removed and the run's own `docs/` output
   committed unmodified.
+  Unchanged until there are more cases (someone was running git in the repo during that one
+  run). The reasoning is in the archive.
 
 ## 5. Hand to coding agent when convenient
 
+Closed (the diff-boundary render fix 2026-10-19, streaming import, null literals, touching
+spans, lambton era replay, the August normalize fixes and pull guards):
+[TODO-archive/2026-11-27-s5-code-fixes.md](TODO-archive/2026-11-27-s5-code-fixes.md).
+
 Code fixes found during the audits. Every one of them changes payload hashes → a
 one-time "modified" spike, so batch them:
+
+- [ ] **Audit what the importer's dedupe drops, per city (found 2026-10-20).** Never ticked.
+  All 78 pulls swept 2026-10-23. sdg, windsor and ajax were fixed, and the deterministic
+  tie-break and muskoka's key change landed 2026-10-24. Left open: durham's 11 hidden
+  addresses (MXADDRESSCODE shared by unit/suffix siblings), to report upstream rather than
+  re-key 253k rows. The full item is in the archive.
+- Parked: an incremental render (only the pages whose content changed). Nothing forces it
+  since the 2026-10-19 diff fix brought the render under two minutes (archive §4 and §5).
